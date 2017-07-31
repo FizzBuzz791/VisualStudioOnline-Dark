@@ -1,0 +1,53 @@
+Snowden.Reconcilor.Bhpbio.BlockInitialLoad.exe L:\Reconcilor_BHPBIO\Data
+
+WB : Newman   MW : Newman     YD : Yandi
+AC : AreaC    JB : Jimblebar  18 : OB18
+25 : OB23/25  NM : Yarrie     YR : Yarrie
+NH : Newman-Hub
+
+/destinationConnection:"Data Source=Reconcilor1\Sql2005;Initial Catalog=ReconcilorBHPBIODev;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;"
+
+** site independant
+/importName:BlockInsertUpdate /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @DateFrom:"1-Apr-2009" @DateTo: @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays:
+/importName:BlockDelete /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @DateFrom:"1-Apr-2009" @DateTo: @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays:
+/importName:PortBalance /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @DateTo:30-JUN-2009 @DateFrom:01-MAR-2009 @DateFromLookbackDays: @DateFromAbsoluteMinimum:
+/importName:PortBlending /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @DateTo:30-JUN-2009 @DateFrom:01-APR-2009 @DateFromLookbackDays: @DateFromAbsoluteMinimum:
+/importName:Shipping /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @DateTo:30-JUN-2009 @DateFrom:01-APR-2009 @DateFromLookbackDays: @DateFromAbsoluteMinimum:
+/importname:"Recon Movements" /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @DateFrom:01-APR-2009 @DateFromAbsoluteMinimum: @DateTo: @DateFromLookbackDays:
+/importName:"MET Balancing" /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @DateTo:30-JUN-2009 @DateFrom:01-APR-2009 @DateFromLookbackDays: @DateFromAbsoluteMinimum:01-APR-2009
+
+** areac (AC)
+/importName:Stockpile /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:AC
+/importName:Haulage /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:AC @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays:
+/importName:"Stockpile Adjustment" /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:AC @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays:
+/importName:Production /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:AC @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays:
+
+** jimblebar (JB)
+/importName:Stockpile /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:JB /loaddata:L:\Reconcilor_BHPBIO\Data\Stockpile.xml
+/importName:Haulage /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:JB @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays:
+/importName:"Stockpile Adjustment" /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:JB @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\StockpileAdjustment.xml
+/importName:Production /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:JB @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\Production.xml
+
+** newman (WB)
+/importName:Stockpile /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:WB /loaddata:L:\Reconcilor_BHPBIO\Data\Stockpile.xml
+/importName:Haulage /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:WB @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\Haulage.xml
+/importName:"Stockpile Adjustment" /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:WB @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\StockpileAdjustment.xml
+/importName:Production /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:WB @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\Production.xml
+
+** ob18 (18)
+/importName:Stockpile /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:18 /loaddata:L:\Reconcilor_BHPBIO\Data\Stockpile.xml
+/importName:Haulage /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:18 @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\Haulage.xml
+/importName:"Stockpile Adjustment" /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:18 @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\StockpileAdjustment.xml
+/importName:Production /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:18 @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\Production.xml
+
+** ob23/25 (25)
+/importName:Stockpile /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:25 /loaddata:L:\Reconcilor_BHPBIO\Data\Stockpile.xml
+/importName:Haulage /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:25 @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\Haulage.xml
+/importName:"Stockpile Adjustment" /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:25 @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\StockpileAdjustment.xml
+/importName:Production /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:25 @DateFrom:"1-Apr-2009" @DateTo:"30-Jun-2009" @DateFromAbsoluteMinimum:"01-Apr-2009" @DateFromLookbackDays: /loaddata:L:\Reconcilor_BHPBIO\Data\Production.xml
+
+** site independant
+/importname:Blocks /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:"AreaC" @Pit:"EE"
+/importname:Blocks /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:"AreaC" @Pit:"CW"
+/importname:Blocks /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:"AreaC" @Pit:"XX"
+/importname:Blocks /destinationConnection:"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109;" @Site:"AreaC" @Pit:"CE"

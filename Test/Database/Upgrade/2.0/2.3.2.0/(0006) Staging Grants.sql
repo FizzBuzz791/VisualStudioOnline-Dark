@@ -1,0 +1,15 @@
+GRANT EXECUTE ON Staging.DeleteRequiredImportJobs TO BhpbioGenericManager
+GO
+GRANT EXECUTE ON Staging.GetChangedDataEntrySummaryForImportChangeTrigger TO BhpbioGenericManager
+GO
+GRANT EXECUTE ON Staging.GetImportChangeTriggerRelatedKeyValueMappings TO BhpbioGenericManager
+GO
+GRANT EXECUTE ON Staging.GetImportChangeTriggers TO BhpbioGenericManager
+GO
+GRANT EXECUTE ON Staging.InsertRequiredImportJob TO BhpbioGenericManager
+GO
+GRANT EXECUTE ON Staging.PivotTable TO BhpbioGenericManager
+GO
+GRANT EXECUTE ON Staging.PurgeChangedDataRegister TO BhpbioGenericManager
+GO
+GO

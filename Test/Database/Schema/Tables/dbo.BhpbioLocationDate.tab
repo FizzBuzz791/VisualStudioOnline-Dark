@@ -1,0 +1,43 @@
+﻿If Object_id('dbo.BhpbioLocationDate') Is Not Null 
+     Drop Table dbo.BhpbioLocationDate
+GO 
+
+CREATE TABLE [dbo].[BhpbioLocationDate](
+	[Location_Id]			INT			NOT NULL,
+	[Period_Order]			INT			NOT NULL,
+	[Location_Type_Id]		TINYINT		NOT NULL,
+	[Parent_Location_Id]	INT			NULL,
+	[Start_Date]			DATETIME	NOT NULL,
+	[End_Date]				DATETIME	NULL,
+	[Is_Override]			BIT			NOT NULL,
+	[Date_Created]			DATETIME	NOT NULL,
+	CONSTRAINT [PK_LOCATION_DATE] PRIMARY KEY CLUSTERED 
+(
+	Location_Id, Period_Order
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_BhpbioLocationDate_LocationType] ON [BhpbioLocationDate] 
+(
+	Location_Type_Id ASC,
+	Parent_Location_Id ASC,
+	Location_Id ASC
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_BhpbioLocationDate_LocationDate] ON [BhpbioLocationDate] 
+(
+	Location_Id ASC,
+	Start_Date ASC,
+	End_Date ASC
+) Include (Location_Type_Id, Parent_Location_Id)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_BhpbioLocationDate_ParentLocationDate] ON [BhpbioLocationDate] 
+(
+	Parent_Location_Id ASC,
+	Start_Date ASC,
+	End_Date ASC
+) Include (Location_Type_Id, Location_Id)
+GO

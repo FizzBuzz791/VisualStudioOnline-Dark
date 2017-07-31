@@ -1,0 +1,19 @@
+﻿IF OBJECT_ID('dbo.BhpbioReportColor') IS NOT NULL 
+     DROP TABLE dbo.BhpbioReportColor
+GO 
+
+CREATE TABLE dbo.BhpbioReportColor
+(
+	TagId VARCHAR(63) COLLATE Database_Default NOT NULL,
+	Description VARCHAR(255) COLLATE Database_Default NULL,
+	IsVisible BIT,
+	Color VARCHAR(255) COLLATE Database_Default NULL,
+	LineStyle VARCHAR(50) NULL,
+	MarkerShape VARCHAR(50) NULL,
+	CONSTRAINT PK_BhpbioReportColor PRIMARY KEY CLUSTERED
+	(
+		TagId
+	) ON [Primary]
+	
+) ON [Primary]
+GO

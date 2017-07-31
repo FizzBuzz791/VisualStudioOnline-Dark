@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <!-- Update this property to include the paths you wish this solution to reference. Seperate multiple locations with a semi-colon. -->
+    <!--<DependencyReferencePath>L:\Consulting_Toolkit\Snowden.Consulting.IntegrationService\Specific\0.8.0.5\Debug;L:\Reconcilor_Core\Test\Specific\6.5.1.2\x86\Debug;L:\Consulting_Toolkit\Snowden.Consulting.DataStaging\Specific\0.8.0.6\Debug</DependencyReferencePath>-->
+    
+
+    <!--<OutputPath>C:\Source\Bin\BhpbioPandIA</OutputPath>-->
+  </PropertyGroup>
+  <!-- Do not change! Update the Common and WiX project references to include new location(s). -->
+  <PropertyGroup>
+    <ReferencePath>$(ReferencePath);$(DependencyReferencePath)</ReferencePath>
+    <ReferencePaths>$(ReferencePaths);$(DependencyReferencePath)</ReferencePaths>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StockpileAdjustmentSource" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StockpileAdjustmentSource" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="StockpileAdjustmentSource" msprop:Generator_DataSetName="StockpileAdjustmentSource" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="StockpileAdjustment" msprop:Generator_UserTableName="StockpileAdjustment" msprop:Generator_RowDeletedName="StockpileAdjustmentRowDeleted" msprop:Generator_RowChangedName="StockpileAdjustmentRowChanged" msprop:Generator_RowClassName="StockpileAdjustmentRow" msprop:Generator_RowChangingName="StockpileAdjustmentRowChanging" msprop:Generator_RowEvArgName="StockpileAdjustmentRowChangeEvent" msprop:Generator_RowEvHandlerName="StockpileAdjustmentRowChangeEventHandler" msprop:Generator_TableClassName="StockpileAdjustmentDataTable" msprop:Generator_TableVarName="tableStockpileAdjustment" msprop:Generator_RowDeletingName="StockpileAdjustmentRowDeleting" msprop:Generator_TablePropName="StockpileAdjustment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Mine" msprop:Generator_UserColumnName="Mine" msprop:Generator_ColumnPropNameInRow="Mine" msprop:Generator_ColumnVarNameInTable="columnMine" msprop:Generator_ColumnPropNameInTable="MineColumn" type="xs:string" />
+              <xs:element name="StockpileName" msprop:Generator_UserColumnName="StockpileName" msprop:Generator_ColumnVarNameInTable="columnStockpileName" msprop:Generator_ColumnPropNameInRow="StockpileName" msprop:Generator_ColumnPropNameInTable="StockpileNameColumn" type="xs:string" />
+              <xs:element name="StockpileAdjustmentDate" msdata:DateTimeMode="Unspecified" msprop:Generator_UserColumnName="StockpileAdjustmentDate" msprop:Generator_ColumnVarNameInTable="columnStockpileAdjustmentDate" msprop:Generator_ColumnPropNameInRow="StockpileAdjustmentDate" msprop:Generator_ColumnPropNameInTable="StockpileAdjustmentDateColumn" type="xs:dateTime" />
+              <xs:element name="StockpileAdjustmentShift" msprop:Generator_UserColumnName="StockpileAdjustmentShift" msprop:Generator_ColumnVarNameInTable="columnStockpileAdjustmentShift" msprop:Generator_ColumnPropNameInRow="StockpileAdjustmentShift" msprop:Generator_ColumnPropNameInTable="StockpileAdjustmentShiftColumn" type="xs:string" />
+              <xs:element name="StockpileAdjustmentType" msprop:Generator_UserColumnName="StockpileAdjustmentType" msprop:Generator_ColumnVarNameInTable="columnStockpileAdjustmentType" msprop:Generator_ColumnPropNameInRow="StockpileAdjustmentType" msprop:Generator_ColumnPropNameInTable="StockpileAdjustmentTypeColumn" type="xs:string" />
+              <xs:element name="StockpileAdjustmentTonnes" msprop:Generator_UserColumnName="StockpileAdjustmentTonnes" msprop:Generator_ColumnVarNameInTable="columnStockpileAdjustmentTonnes" msprop:Generator_ColumnPropNameInRow="StockpileAdjustmentTonnes" msprop:Generator_ColumnPropNameInTable="StockpileAdjustmentTonnesColumn" type="xs:double" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="StockpileAdjustmentGrade" msprop:Generator_UserTableName="StockpileAdjustmentGrade" msprop:Generator_RowDeletedName="StockpileAdjustmentGradeRowDeleted" msprop:Generator_RowChangedName="StockpileAdjustmentGradeRowChanged" msprop:Generator_RowClassName="StockpileAdjustmentGradeRow" msprop:Generator_RowChangingName="StockpileAdjustmentGradeRowChanging" msprop:Generator_RowEvArgName="StockpileAdjustmentGradeRowChangeEvent" msprop:Generator_RowEvHandlerName="StockpileAdjustmentGradeRowChangeEventHandler" msprop:Generator_TableClassName="StockpileAdjustmentGradeDataTable" msprop:Generator_TableVarName="tableStockpileAdjustmentGrade" msprop:Generator_RowDeletingName="StockpileAdjustmentGradeRowDeleting" msprop:Generator_TablePropName="StockpileAdjustmentGrade">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Mine" msprop:Generator_UserColumnName="Mine" msprop:Generator_ColumnVarNameInTable="columnMine" msprop:Generator_ColumnPropNameInRow="Mine" msprop:Generator_ColumnPropNameInTable="MineColumn" type="xs:string" />
+              <xs:element name="StockpileName" msprop:Generator_UserColumnName="StockpileName" msprop:Generator_ColumnVarNameInTable="columnStockpileName" msprop:Generator_ColumnPropNameInRow="StockpileName" msprop:Generator_ColumnPropNameInTable="StockpileNameColumn" type="xs:string" />
+              <xs:element name="StockpileAdjustmentDate" msdata:DateTimeMode="Unspecified" msprop:Generator_UserColumnName="StockpileAdjustmentDate" msprop:Generator_ColumnVarNameInTable="columnStockpileAdjustmentDate" msprop:Generator_ColumnPropNameInRow="StockpileAdjustmentDate" msprop:Generator_ColumnPropNameInTable="StockpileAdjustmentDateColumn" type="xs:dateTime" />
+              <xs:element name="StockpileAdjustmentShift" msprop:Generator_UserColumnName="StockpileAdjustmentShift" msprop:Generator_ColumnVarNameInTable="columnStockpileAdjustmentShift" msprop:Generator_ColumnPropNameInRow="StockpileAdjustmentShift" msprop:Generator_ColumnPropNameInTable="StockpileAdjustmentShiftColumn" type="xs:string" />
+              <xs:element name="StockpileAdjustmentType" msprop:Generator_UserColumnName="StockpileAdjustmentType" msprop:Generator_ColumnVarNameInTable="columnStockpileAdjustmentType" msprop:Generator_ColumnPropNameInRow="StockpileAdjustmentType" msprop:Generator_ColumnPropNameInTable="StockpileAdjustmentTypeColumn" type="xs:string" />
+              <xs:element name="GradeName" msprop:Generator_UserColumnName="GradeName" msprop:Generator_ColumnVarNameInTable="columnGradeName" msprop:Generator_ColumnPropNameInRow="GradeName" msprop:Generator_ColumnPropNameInTable="GradeNameColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="31" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GradeValue" msprop:Generator_UserColumnName="GradeValue" msprop:Generator_ColumnVarNameInTable="columnGradeValue" msprop:Generator_ColumnPropNameInRow="GradeValue" msprop:Generator_ColumnPropNameInTable="GradeValueColumn" type="xs:float" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//StockpileAdjustment" />
+      <xs:field xpath="StockpileAdjustmentType" />
+      <xs:field xpath="StockpileAdjustmentShift" />
+      <xs:field xpath="StockpileAdjustmentDate" />
+      <xs:field xpath="StockpileName" />
+      <xs:field xpath="Mine" />
+    </xs:unique>
+    <xs:unique name="StockpileAdjustmentGrade_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//StockpileAdjustmentGrade" />
+      <xs:field xpath="GradeName" />
+      <xs:field xpath="StockpileAdjustmentType" />
+      <xs:field xpath="StockpileAdjustmentShift" />
+      <xs:field xpath="StockpileAdjustmentDate" />
+      <xs:field xpath="StockpileName" />
+      <xs:field xpath="Mine" />
+    </xs:unique>
+    <xs:keyref name="FK_StockpileAdjustment_StockpileAdjustmentGrade" refer="Constraint1" msprop:rel_Generator_UserRelationName="FK_StockpileAdjustment_StockpileAdjustmentGrade" msprop:rel_Generator_RelationVarName="relationFK_StockpileAdjustment_StockpileAdjustmentGrade" msprop:rel_Generator_UserChildTable="StockpileAdjustmentGrade" msprop:rel_Generator_UserParentTable="StockpileAdjustment" msprop:rel_Generator_ParentPropName="StockpileAdjustmentRowParent" msprop:rel_Generator_ChildPropName="GetStockpileAdjustmentGradeRows" msdata:AcceptRejectRule="Cascade">
+      <xs:selector xpath=".//StockpileAdjustmentGrade" />
+      <xs:field xpath="StockpileAdjustmentType" />
+      <xs:field xpath="StockpileAdjustmentShift" />
+      <xs:field xpath="StockpileAdjustmentDate" />
+      <xs:field xpath="StockpileName" />
+      <xs:field xpath="Mine" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

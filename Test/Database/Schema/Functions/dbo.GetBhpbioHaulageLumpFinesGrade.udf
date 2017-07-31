@@ -1,0 +1,34 @@
+﻿If Object_Id('dbo.GetBhpbioHaulageLumpFinesGrade') Is Not Null
+	Drop Function dbo.GetBhpbioHaulageLumpFinesGrade
+Go
+
+Create Function dbo.GetBhpbioHaulageLumpFinesGrade(
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME
+)
+Returns @HaulageLumpFines Table
+(
+	HaulageRawId Int Not Null,
+	ProductSize Varchar(5) Not Null,
+	GradeId SmallInt Not Null,
+	GradeValue Float Not Null,
+	
+	PRIMARY KEY (HaulageRawId, ProductSize, GradeId)
+)
+As
+Begin
+	Insert Into @HaulageLumpFines (HaulageRawId, ProductSize, GradeId, GradeValue)
+	Select LFG.HaulageRawId, 'LUMP', GradeId, LumpValue
+	From BhpbioHaulageLumpFinesGrade LFG
+	Inner Join Haulage H 
+		On H.Haulage_Raw_Id = LFG.HaulageRawId
+	Where H.Haulage_Date Between @iDateFrom And @iDateTo
+	Union All
+	Select LFG.HaulageRawId, 'FINES', GradeId, FinesValue
+	From BhpbioHaulageLumpFinesGrade LFG
+	Inner Join Haulage H 
+		On H.Haulage_Raw_Id = LFG.HaulageRawId
+	Where H.Haulage_Date Between @iDateFrom And @iDateTo
+	
+	Return
+End

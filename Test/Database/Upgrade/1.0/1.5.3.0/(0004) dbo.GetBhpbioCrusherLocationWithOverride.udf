@@ -1,0 +1,105 @@
+﻿IF Object_Id('dbo.GetBhpbioCrusherLocationWithOverride') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioCrusherLocationWithOverride
+GO
+
+CREATE FUNCTION dbo.GetBhpbioCrusherLocationWithOverride
+(
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME
+)
+RETURNS @CrusherLocation TABLE
+(
+	Crusher_Id VARCHAR(31) NOT NULL,
+	Location_Id INT NOT NULL,
+	Location_Type_Id INT NOT NULL,
+	IncludeStart DATETIME NOT NULL,
+	IncludeEnd DATETIME NOT NULL,	
+	
+	Primary KEY (Crusher_Id, Location_Id, IncludeStart, IncludeEnd)
+)
+BEGIN
+	Declare @GlobalStartDate DateTime
+	Declare @GlobalEndDate DateTime
+	Declare @CreateDate DateTime
+		
+	SET @GlobalStartDate = '1900-01-01'
+	SET @GlobalEndDate = '2050-12-31'  
+	SET @CreateDate = GETDATE()	
+	
+	DECLARE @CrusherLocationWorking TABLE
+	(
+		Crusher_Id VARCHAR(31) NOT NULL,
+		Period_Order INT NOT NULL,
+		Location_Id INT NOT NULL,
+		Location_Type_Id INT NOT NULL,
+		IncludeStart DATETIME NOT NULL,
+		IncludeEnd DATETIME NOT NULL,	
+	
+		Primary KEY (Crusher_Id, Period_Order, IncludeStart)	
+	)
+	
+	-- Combine CrusherLocation and BhpbioCrusherLocationOverride tables
+	INSERT INTO @CrusherLocationWorking
+	(
+		Crusher_Id, Period_Order, Location_Id, Location_Type_Id, IncludeStart, IncludeEnd
+	)
+
+	SELECT	Crusher_Id, 0 AS Period_Order, Location_Id, Location_Type_Id, 
+			@GlobalStartDate AS IncludeStart, @GlobalEndDate AS End_Date
+	FROM	CrusherLocation
+	UNION ALL
+	SELECT DISTINCT	Crusher_Id, ROW_NUMBER() OVER (PARTITION BY Crusher_Id ORDER BY FromMonth) AS Period_Order,
+			Location_Id, Location_Type_Id, FromMonth AS IncludeStart, ToMonth AS IncludeEnd
+	FROM	BhpbioCrusherLocationOverride
+
+	-- correct overlapping date ranges (force end date prior to start date of next period)
+	UPDATE	CLW1 SET IncludeEnd = DATEADD(DAY, -1, CLW2.IncludeStart)
+	FROM	@CrusherLocationWorking CLW1
+	INNER JOIN @CrusherLocationWorking CLW2 
+		ON	CLW2.Crusher_Id = CLW1.Crusher_Id
+		AND	CLW2.Period_Order = CLW1.Period_Order + 1
+	  AND CLW2.IncludeStart < CLW1.IncludeEnd
+
+	-- fill any gaps the above update may have created - subsequent to overridden periods
+	INSERT INTO @CrusherLocationWorking
+	(
+	  Crusher_Id, Location_Id, Location_Type_Id, IncludeEnd, Period_Order, IncludeStart
+	)
+	SELECT CLW.Crusher_Id, CL.Location_Id, CL.Location_Type_Id, @GlobalEndDate, CLW.Period_Order + 1, DATEADD(DAY, 1, CLW.IncludeEnd)
+	FROM @CrusherLocationWorking CLW
+	INNER JOIN CrusherLocation CL ON CL.Crusher_Id = CLW.Crusher_Id 
+	INNER JOIN (
+	  SELECT CLW3.Crusher_Id, MAX(CLW3.Period_Order) As Final_Period_Order, MAX(CLW3.IncludeEnd) As Final_IncludeEnd
+	  FROM @CrusherLocationWorking CLW3
+	  GROUP BY CLW3.Crusher_Id
+	  HAVING MAX(CLW3.IncludeEnd) < @GlobalEndDate
+	) FCL ON FCL.Crusher_Id = CLW.Crusher_Id AND CLW.IncludeEnd = FCL.Final_IncludeEnd
+
+	
+	-- fill any gaps the above update may have created - between overridden periods
+	INSERT INTO @CrusherLocationWorking
+	(
+	  Crusher_Id, Location_Id, Location_Type_Id, IncludeEnd, Period_Order, IncludeStart
+	)
+	SELECT CLW.Crusher_Id, CL.Location_Id, CL.Location_Type_Id, DATEADD(DAY, -1, CLW2.IncludeStart), CLW.Period_Order, DATEADD(DAY, 1, CLW.IncludeEnd)
+	FROM @CrusherLocationWorking CLW
+	INNER JOIN @CrusherLocationWorking CLW2 ON CLW.Crusher_Id = CLW2.Crusher_Id AND CLW.Period_Order + 1 = CLW2.Period_Order
+	INNER JOIN CrusherLocation CL ON CLW.Crusher_Id = CL.Crusher_Id 
+	WHERE CLW.Period_Order > 0
+	AND DATEADD(DAY, 1, CLW.IncludeEnd) < CLW2.IncludeStart
+	
+	INSERT INTO @CrusherLocation 
+	(
+	  Crusher_Id, Location_Id, Location_Type_Id, IncludeEnd, IncludeStart
+	)	
+  SELECT Crusher_Id, Location_Id, Location_Type_Id, 
+    CASE WHEN IncludeEnd > @iDateTo THEN @iDateTo ELSE IncludeEnd END, 
+    CASE WHEN IncludeStart < @iDateFrom THEN @iDateFrom ELSE IncludeStart END
+  FROM @CrusherLocationWorking
+  WHERE IncludeStart < @iDateTo
+  AND IncludeEnd > @iDateFrom
+
+
+	RETURN
+END
+GO

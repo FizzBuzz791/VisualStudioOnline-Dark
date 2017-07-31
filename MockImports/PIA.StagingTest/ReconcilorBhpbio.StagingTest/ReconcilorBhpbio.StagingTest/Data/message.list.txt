@@ -1,0 +1,11 @@
+﻿#
+# Each line is the path of an xml file that represents a single BlockOut or ReblockOut message
+#
+# By default it looks for the xml files in the same directory as this file
+#
+test.insert.xml
+test.delete.xml
+test.update.xml
+
+
+

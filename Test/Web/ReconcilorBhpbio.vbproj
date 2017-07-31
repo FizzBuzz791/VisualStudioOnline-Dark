@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{677ABE31-5654-42E2-AD36-6464B5D9F183}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ReconcilorBhpbio</RootNamespace>
+    <AssemblyName>ReconcilorBhpbio</AssemblyName>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)\Snowden.snk</AssemblyOriginatorKeyFile>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Prefer32bit>false</Prefer32bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Snowden.Common, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Snowden.Common.1.4.10.4\lib\Snowden.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Snowden.Common.Export, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Snowden.Common.Export.1.4.10.4\lib\Snowden.Common.Export.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Snowden.Common.Import, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Snowden.Common.Import.1.4.10.5\lib\Snowden.Common.Import.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core, Version=6.5.0.8, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.WebDevelopment, Version=6.5.0.8, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.WebDevelopment.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.Website, Version=6.5.0.8, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.Website.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="Snowden.Reconcilor" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\Assembly\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+    <Content Include="css\reconcilorbhpbio.css" />
+    <Content Include="css\spiffyCal_v2_0_RC1.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\tabpane.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="images\Approval\ApprovalF2.gif" />
+    <Content Include="images\Approval\ApprovalF25.gif" />
+    <Content Include="images\Approval\ApprovalF3.gif" />
+    <Content Include="images\Approval\ApprovalMMCE.gif" />
+    <Content Include="images\chart.GIF" />
+    <Content Include="images\HeaderImageRightTestPortBlending.gif" />
+    <Content Include="images\faceDisabled.gif" />
+    <Content Include="images\faceGreen.gif" />
+    <Content Include="images\faceGreenDisabled.gif" />
+    <Content Include="images\faceOrange.gif" />
+    <Content Include="images\faceOrangeDisabled.gif" />
+    <Content Include="images\faceRed.gif" />
+    <Content Include="images\faceRedDisabled.gif" />
+    <Content Include="images\HeaderImageLeft.gif" />
+    <Content Include="images\HeaderImageRightProd.gif" />
+    <Content Include="images\HeaderImageRightTest.gif" />
+    <Content Include="images\Help.gif" />
+    <Content Include="images\homepageImageAreaC.gif" />
+    <Content Include="images\homepageImageNJV.gif" />
+    <Content Include="images\homepageImageYandi.gif" />
+    <Content Include="images\homepageImageYarrie.gif" />
+    <Content Include="images\homescreenMap.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ico_white.png" />
+    <Content Include="images\information.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\linestyle_dash.gif" />
+    <Content Include="images\linestyle_dashdot.gif" />
+    <Content Include="images\linestyle_dashdotdot.gif" />
+    <Content Include="images\linestyle_dot.gif" />
+    <Content Include="images\linestyle_solid.gif" />
+    <Content Include="images\luna\tab.active.background.png" />
+    <Content Include="images\luna\tab.active.left.png" />
+    <Content Include="images\luna\tab.active.right.png" />
+    <Content Include="images\luna\tab.background.png" />
+    <Content Include="images\luna\tab.hover.background.png" />
+    <Content Include="images\luna\tab.hover.left.png" />
+    <Content Include="images\luna\tab.hover.right.png" />
+    <Content Include="images\luna\tab.left.png" />
+    <Content Include="images\luna\tab.right.png" />
+    <Content Include="images\marker_circle.gif" />
+    <Content Include="images\marker_cross.gif" />
+    <Content Include="images\marker_diamond.gif" />
+    <Content Include="images\marker_horizontalLine.gif" />
+    <Content Include="images\marker_invertedTriangle.gif" />
+    <Content Include="images\marker_marble.gif" />
+    <Content Include="images\marker_none.gif" />
+    <Content Include="images\marker_rect.gif" />
+    <Content Include="images\marker_square.gif" />
+    <Content Include="images\marker_triangle.gif" />
+    <Content Include="images\marker_verticalLine.gif" />
+    <Content Include="images\marker_x.gif" />
+    <Content Include="images\none.gif" />
+    <Content Include="images\outlieranalysis.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\outlieranalysischart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\outlieranalysishighlight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\PDF.gif" />
+    <Content Include="images\rcico.png" />
+    <Content Include="images\recalc.gif" />
+    <Content Include="images\reports\BhpbioBenchErrorByAttributeReport.png" />
+    <Content Include="images\reports\BhpbioBenchErrorByLocationReport.png" />
+    <Content Include="images\reports\BhpbioBlastByBlastReconciliationReport.png" />
+    <Content Include="images\reports\BhpbioBlockoutSummaryReport.png" />
+    <Content Include="images\reports\BhpbioDensityAnalysisReport.png" />
+    <Content Include="images\reports\BhpbioDensityReconciliationReport.png" />
+    <Content Include="images\reports\BhpbioDesignationAttributeReport.png" />
+    <Content Include="images\reports\BhpbioErrorContributionContextReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3GeometOverviewReconContributionReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3GeometReconciliationAttributeReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3OverviewReconContributionReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3OverviewReconReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3ProductReconContributionReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3ReconciliationAttributeReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3ReconciliationComparisonReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3ReconciliationLocationComparisonReport.png" />
+    <Content Include="images\reports\BhpbioF1F2F3ReconciliationProductAttributeReport.png" />
+    <Content Include="images\reports\BhpbioFactorAnalysisReport.png" />
+    <Content Include="images\reports\BhpbioFactorsByLocationVsShippingTargetsReport.png" />
+    <Content Include="images\reports\BhpbioFactorsVsShippingTargetsReport.png" />
+    <Content Include="images\reports\BhpbioFactorsVsTimeDensityReport.png" />
+    <Content Include="images\reports\BhpbioFactorsVsTimeMoistureReport.png" />
+    <Content Include="images\reports\BhpbioFactorsVsTimeProductReport.png" />
+    <Content Include="images\reports\BhpbioFactorsVsTimeResourceClassificationReport.png" />
+    <Content Include="images\reports\BhpbioFactorsVsTimeVolumeReport.png" />
+    <Content Include="images\reports\BhpbioForwardErrorContributionContextReport.png" />
+    <Content Include="images\reports\BhpbioHUBProductReconciliationReport.png" />
+    <Content Include="images\reports\BhpbioLiveVersusSummaryReport.png" />
+    <Content Include="images\reports\BhpbioModelComparisonReport.png" />
+    <Content Include="images\reports\BhpbioMonthlySiteReconciliationReport.png" />
+    <Content Include="images\reports\BhpbioMovementRecoveryReport.png" />
+    <Content Include="images\reports\BhpbioProductReconciliationReport.png" />
+    <Content Include="images\reports\BhpbioProductSupplyChainMonitoringReport.png" />
+    <Content Include="images\reports\BhpbioQuarterlyHubReconciliationReport.png" />
+    <Content Include="images\reports\BhpbioQuarterlySiteReconciliationReport.png" />
+    <Content Include="images\reports\BhpbioReconciliationRangeReport.png" />
+    <Content Include="images\reports\BhpbioRecoveryAnalysisReport.png" />
+    <Content Include="images\reports\BhpbioRiskProfileReport.png" />
+    <Content Include="images\reports\BhpbioSampleCoverageReport.png" />
+    <Content Include="images\reports\BhpbioSupplyChainMoistureReport.png" />
+    <Content Include="images\reports\BhpbioSupplyChainMonitoringReport.png" />
+    <Content Include="images\reports\BhpbioYearlyReconciliationReport.png" />
+    <Content Include="images\reports\Bhpbio_Core_Haulage_vs_Plant_Report.png" />
+    <Content Include="images\reports\Bhpbio_Core_Stockpile_Balance_Report.png" />
+    <Content Include="images\reports\BhpbioF1F2F3HUBGeometReconciliationReport.png" />
+    <Content Include="images\reports\F1F2F3HUBReconciliationReport.png" />
+    <Content Include="images\reports\tickGreen.gif" />
+    <Content Include="images\reports\tickOrange.gif" />
+    <Content Include="images\stockpiles\DummyFile.txt" />
+    <Content Include="images\tabs\Approval.gif" />
+    <Content Include="images\tabs\ApprovalOn.gif" />
+    <Content Include="images\tabs\Blastblock.gif" />
+    <Content Include="images\tabs\BlastblockOn.gif" />
+    <Content Include="images\viewF1F2F3graphs.gif" />
+    <Content Include="images\WAIOHomescreen.gif" />
+    <Content Include="js\BhpbioAnalysis.js" />
+    <Content Include="js\BhpbioCommon.js" />
+    <Content Include="js\BhpbioHome.js" />
+    <Content Include="js\BhpbioLocationControl.js" />
+    <Content Include="js\BhpbioPort.js" />
+    <Content Include="js\BhpbioPurge.js" />
+    <Content Include="js\BhpbioReports.js" />
+    <Content Include="js\BhpbioStockpiles.js" />
+    <Content Include="js\BhpbioUtilities.js" />
+    <Content Include="js\CustomFieldsConfiguration.js" />
+    <Content Include="js\LocationPicker.js" />
+    <Content Include="js\BhpbioApproval.js" />
+    <Content Include="js\tabpane.js" />
+    <Content Include="Reports.asmx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Assembly\Version.vb">
+      <Link>Version.vb</Link>
+    </Compile>
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Exports\CleanMe" />
+    <Content Include="Files\BHPBIO\HelpDocumentation\RECONCILOR BHPBIO Training Guide.pdf" />
+    <Content Include="Files\BHPBIO\HelpDocumentation\Reconcilor BHPBIO User Guide.pdf" />
+    <Content Include="Files\BHPBIO\HelpDocumentation\Reconcilor BHPBIO User Manual.pdf" />
+    <None Include="$(SolutionDir)\Snowden.snk">
+      <Link>Snowden.snk</Link>
+    </None>
+    <Content Include="Files\PowerPointContentMockWebServiceFiles\AutomaticContentSelectionMode_9_F1F2_Compact.csv" />
+    <Content Include="Files\PowerPointContentMockWebServiceFiles\AutomaticContentSelectionMode_9_F1F2_Expanded.csv" />
+    <Content Include="Files\PowerPointContentMockWebServiceFiles\AutomaticContentSelectionMode_9_F15RFSTM_Compact.csv" />
+    <Content Include="Files\PowerPointContentMockWebServiceFiles\AutomaticContentSelectionMode_9_F15RFSTM_Expanded.csv" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\PublishProfiles\reconcilor2.pubxml" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Assembly\Snowden.Reconcilor.Bhpbio.Notification\Snowden.Reconcilor.Bhpbio.vbproj">
+      <Project>{D267E738-80DB-465C-A2F3-509E0DA1C3DD}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Assembly\Snowden.Reconcilor.Bhpbio.Report\Snowden.Reconcilor.Bhpbio.Report.vbproj">
+      <Project>{BB0D1F66-81DF-4746-9E59-72D4A3F52E8E}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Report</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Assembly\Snowden.Reconcilor.Bhpbio.WebDevelopment\Snowden.Reconcilor.Bhpbio.WebDevelopment.vbproj">
+      <Project>{3FAFC067-C85B-4927-88D5-51C479A9CB39}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.WebDevelopment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Assembly\Snowden.Reconcilor.Bhpbio.Website\Snowden.Reconcilor.Bhpbio.Website.vbproj">
+      <Project>{8BE9FF0B-405E-47AD-B15D-CCAA44433294}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Website</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="BeforeBuild">
+    <PropertyGroup>
+      <CoreFolder>..\..\Libraries\PublishedWebsites\Reconcilor</CoreFolder>
+      <WebOutputDestinationFolder>$(WebProjectOutputDir)\</WebOutputDestinationFolder>
+      <ProjectDestinationFolder>$(ProjectDir)</ProjectDestinationFolder>
+    </PropertyGroup>
+    <ItemGroup>
+      <CopyCoreFiles Include="$(CoreFolder)\**\*.*" Exclude="@(Content ->'$(CoreFolder)\%(RelativeDir)%(Filename)%(Extension)');$(CoreFolder)\bin\**;$(CoreFolder)\obj\**" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CopyCoreFiles)" SkipUnchangedFiles="True" DestinationFiles="@(CopyCoreFiles ->'$(ProjectDestinationFolder)%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(CopyCoreFiles)" SkipUnchangedFiles="True" DestinationFiles="@(CopyCoreFiles ->'$(WebOutputDestinationFolder)%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2609</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/ReconcilorBhpbio</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

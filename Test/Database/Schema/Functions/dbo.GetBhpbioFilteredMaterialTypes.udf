@@ -1,0 +1,87 @@
+﻿IF Object_Id('dbo.GetBhpbioFilteredMaterialTypes') IS NOT NULL
+	DROP FUNCTION dbo.GetBhpbioFilteredMaterialTypes
+GO
+
+CREATE FUNCTION [dbo].[GetBhpbioFilteredMaterialTypes]
+(
+	@iIsHighGrade BIT,
+	@iSpecificMaterialTypeId INTEGER
+)
+RETURNS @MaterialType TABLE
+(
+	MaterialTypeId INT NOT NULL
+	PRIMARY KEY (MaterialTypeId)
+)
+WITH ENCRYPTION
+AS
+BEGIN
+	
+	-- Only Designation types are to be considered
+	DECLARE @MaterialCategory VARCHAR(31)
+	SET @MaterialCategory = 'Designation'
+	
+	-- insert the Identifiers of MaterialTypes that match the supplied criteria
+	INSERT INTO @MaterialType
+	(
+		MaterialTypeId
+	)
+	SELECT mt.Material_Type_Id
+	FROM dbo.MaterialType mt
+		INNER JOIN dbo.GetMaterialsByCategory(@MaterialCategory) mc
+			ON (mc.MaterialTypeId = mt.Material_Type_Id)
+		INNER JOIN dbo.MaterialType rmt
+			ON (rmt.Material_Type_Id = mc.RootMaterialTypeId)
+		LEFT JOIN dbo.GetBhpbioReportHighGrade() AS brhg
+			ON (brhg.MaterialTypeId = rmt.Material_Type_Id)
+	WHERE (@iSpecificMaterialTypeId IS NULL
+			OR mt.Material_Type_Id = @iSpecificMaterialTypeId
+			OR rmt.Material_Type_Id = @iSpecificMaterialTypeId)
+		AND ((@iIsHighGrade = 0 AND brhg.MaterialTypeId IS NULL)
+			OR (@iIsHighGrade = 1 AND brhg.MaterialTypeId IS NOT NULL)
+			OR (@iIsHighGrade IS NULL))
+	
+	-- the WHERE clause above can be read as
+	-- where
+	--   (
+	--   there is no specific type specified, 
+	--   or the row is an exact match to the specified type
+	--   or the row is related to the specified type
+	--   )
+	-- AND
+	--   (
+	--   we are looking for High Grade types only and the row is a High Grade type
+	--   or we are looking for NON-High Grade types only and the row is NOT a High Grade type
+	--   or we are not concerned at all with the High Grade filter
+	--   )
+	
+	RETURN
+END
+GO
+
+/*
+
+-- returns set of high grade material types
+SELECT * FROM dbo.GetBhpbioFilteredMaterialTypes(	@iIsHighGrade = 1,
+													@iSpecificMaterialTypeId = null)
+													
+-- returns a specific material type (and related types ) only
+SELECT * FROM dbo.GetBhpbioFilteredMaterialTypes(	@iIsHighGrade = null,
+													@iSpecificMaterialTypeId = 6
+			
+
+*/
+
+
+/*
+<TAG Name="Data Dictionary" FunctionName="dbo.GetBhpbioFilteredMaterialTypes">
+ <Function>
+	Gets a table of Material Types that are either classified as High Grade (if high grade flag used) or otherwise are related to a specific material type
+			
+	Pass: 
+			@iIsHighGrade: If 1, only high grade types are included
+			@iSpecificMaterialTypeId: if specified, only material types that match this type exactly or are related to this type (child types) wll be returned
+	
+	Returns: Table of material types that match supplied filter
+ </Function>
+</TAG>
+*/

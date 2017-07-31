@@ -1,0 +1,43 @@
+﻿If Object_Id('dbo.GetBhpbioHaulageLumpFinesPercent') Is Not Null
+	Drop Function dbo.GetBhpbioHaulageLumpFinesPercent
+Go
+
+Create Function dbo.GetBhpbioHaulageLumpFinesPercent(
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME
+)
+Returns @HaulageLumpFines Table
+(
+	HaulageId Int Not Null,
+	ProductSize Varchar(5) Not Null,
+	[Percent] Float Not Null,
+	
+	PRIMARY KEY (HaulageId, ProductSize)
+)
+As
+Begin
+	-- note that we only return a percentage if a grade is also present, this to prevent the use
+	-- of 'legacy' MQ2 data where the l/f percent breakdown is questionable
+	Insert Into @HaulageLumpFines (HaulageId, ProductSize, [Percent])
+	Select HV.Haulage_Id, 'LUMP', HV.Field_Value / 100
+	From HaulageValue HV
+	Inner Join Haulage H
+		On H.Haulage_Id = HV.Haulage_Id
+	Inner Join BhpbioHaulageLumpFinesGrade LFG 
+		On H.Haulage_Raw_Id = LFG.HaulageRawId
+		And LFG.GradeId = 1
+	Where H.Haulage_Date Between @iDateFrom And @iDateTo
+	And Haulage_Field_Id = 'LumpPercent'
+	Union All
+	Select HV.Haulage_Id, 'FINES', (100 - HV.Field_Value) / 100
+	From HaulageValue HV
+	Inner Join Haulage H
+		On H.Haulage_Id = HV.Haulage_Id
+	Inner Join BhpbioHaulageLumpFinesGrade LFG 
+		On H.Haulage_Raw_Id = LFG.HaulageRawId
+		And LFG.GradeId = 1
+	Where H.Haulage_Date Between @iDateFrom And @iDateTo
+	And Haulage_Field_Id = 'LumpPercent'
+	
+	Return
+End

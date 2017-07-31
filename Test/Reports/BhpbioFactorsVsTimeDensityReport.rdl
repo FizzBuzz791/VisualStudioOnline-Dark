@@ -1,0 +1,895 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Subreport Name="Subreport1">
+        <ReportName>BhpbioFactorsVsTimeReport</ReportName>
+        <Parameters>
+          <Parameter Name="LocationId">
+            <Value>=Parameters!LocationId.Value</Value>
+          </Parameter>
+          <Parameter Name="DateBreakdown">
+            <Value>=Parameters!DateBreakdown.Value</Value>
+          </Parameter>
+          <Parameter Name="DateFrom">
+            <Value>=Parameters!DateFrom.Value</Value>
+          </Parameter>
+          <Parameter Name="DateTo">
+            <Value>=Parameters!DateTo.Value</Value>
+          </Parameter>
+          <Parameter Name="Factors">
+            <Value>=Parameters!Factors.Value</Value>
+          </Parameter>
+          <Parameter Name="Attributes">
+            <Value>=Parameters!Attributes_with_Volume_H2O.Value</Value>
+          </Parameter>
+          <Parameter Name="IncludeLumpFines">
+            <Value>false</Value>
+          </Parameter>
+          <Parameter Name="ReportType">
+            <Value>Density</Value>
+          </Parameter>
+          <Parameter Name="CompleteReport">
+            <Value>=Parameters!CompleteReport.Value</Value>
+          </Parameter>
+          <Parameter Name="WithoutHeaderFooter">
+            <Value>=Parameters!WithoutHeaderFooter.Value</Value>
+          </Parameter>
+          <Parameter Name="OnlyGraphs">
+            <Value>=Parameters!OnlyGraphs.Value</Value>
+          </Parameter>
+          <Parameter Name="OnlyTables">
+            <Value>=Parameters!OnlyTables.Value</Value>
+          </Parameter>
+          <Parameter Name="DesignationMaterialTypeId">
+            <Value>=Parameters!DesignationMaterialTypeId.Value</Value>
+          </Parameter>
+        </Parameters>
+        <Top>0.10583cm</Top>
+        <Height>3.34021cm</Height>
+        <Width>19.9cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Subreport>
+      <Textbox Name="Textbox15">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>NOTE:</Value>
+                <Style>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>Red</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>3.48132cm</Top>
+        <Left>0.25979cm</Left>
+        <Height>0.74111cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox16">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>* Each  factor marked with an asterix has been calculated using 'all materials'. Most other factors are calculated for  HG material only. </Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>To calculate F2* Density the total tonnage hauled from blastblocks, according to MQ2 haulage records, is divided by the pit depleted volume.  This gives a measured density which is divided by the estimated density from the Grade Control Model.</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>To Calculate the Recovery Factor (RF*) Density, the total tonnage hauled from blastblocks, according to MQ2 haulage records, is divided by the pit depleted volume.  This gives a measured density which is divided by the estimated density from the Mining Model.</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox16</rd:DefaultName>
+        <Top>4.36354cm</Top>
+        <Left>0.25979cm</Left>
+        <Height>2.87541cm</Height>
+        <Width>19.25cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <Height>7.55273cm</Height>
+    <Style />
+  </Body>
+  <Width>19.9cm</Width>
+  <Page>
+    <PageHeader>
+      <Height>2.06374cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Image Name="image1">
+          <Source>External</Source>
+          <Value>ReportHeaderImageLeft.gif</Value>
+          <Sizing>FitProportional</Sizing>
+          <Height>1.93122cm</Height>
+          <Width>5.34392cm</Width>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Factors Vs Time Report - Density</Value>
+                  <Style>
+                    <FontFamily>verdana</FontFamily>
+                    <FontSize>14pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Left>5.3792cm</Left>
+          <Height>0.75875cm</Height>
+          <Width>10.10867cm</Width>
+          <ZIndex>1</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox2">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Date From:</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>SemiBold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox2</rd:DefaultName>
+          <Top>0.85576cm</Top>
+          <Left>5.3792cm</Left>
+          <Height>0.54708cm</Height>
+          <Width>2.00611cm</Width>
+          <ZIndex>2</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox3">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Date To:</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>SemiBold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>1.40284cm</Top>
+          <Left>5.3792cm</Left>
+          <Height>0.54625cm</Height>
+          <Width>2.00611cm</Width>
+          <ZIndex>3</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Format(CDate(Parameters!DateFrom.Value), "d-MMM-yy")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox4</rd:DefaultName>
+          <Top>0.85576cm</Top>
+          <Left>7.38531cm</Left>
+          <Height>0.54708cm</Height>
+          <Width>1.84295cm</Width>
+          <ZIndex>4</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox5">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Format(CDate(Parameters!DateTo.Value), "d-MMM-yy")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox5</rd:DefaultName>
+          <Top>1.43812cm</Top>
+          <Left>7.38531cm</Left>
+          <Height>0.51098cm</Height>
+          <Width>1.84295cm</Width>
+          <ZIndex>5</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox6">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Location:</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>SemiBold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox6</rd:DefaultName>
+          <Top>0.85576cm</Top>
+          <Left>9.22826cm</Left>
+          <Height>0.54708cm</Height>
+          <Width>1.76358cm</Width>
+          <ZIndex>6</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox7">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=First(Fields!GetLocationCommentByDateResult.Value, "LocationNameData")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox7</rd:DefaultName>
+          <Top>0.85576cm</Top>
+          <Left>10.99184cm</Left>
+          <Height>0.54708cm</Height>
+          <Width>3.23201cm</Width>
+          <ZIndex>7</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Sources:</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>SemiBold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox8</rd:DefaultName>
+          <Top>0.85576cm</Top>
+          <Left>14.25913cm</Left>
+          <Height>0.54708cm</Height>
+          <Width>1.5411cm</Width>
+          <ZIndex>8</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox9">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Replace(Replace(Replace(Parameters!Factors.Value, ",", ", "), "F15", "F1.5"), "F25", "F2.5")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox9</rd:DefaultName>
+          <Top>0.85576cm</Top>
+          <Left>15.80023cm</Left>
+          <Height>0.54708cm</Height>
+          <Width>4cm</Width>
+          <ZIndex>9</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox11">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Attributes:</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>SemiBold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox11</rd:DefaultName>
+          <Top>1.43813cm</Top>
+          <Left>9.22826cm</Left>
+          <Height>0.51097cm</Height>
+          <Width>1.76358cm</Width>
+          <ZIndex>10</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox12">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Variables!DefaultAttribute.Value + IIF(Parameters!Attributes_with_Volume_H2O.Value &lt;&gt; "", ", ", "") + Replace(Parameters!Attributes_with_Volume_H2O.Value, ",", ", ")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox12</rd:DefaultName>
+          <Top>1.43812cm</Top>
+          <Left>10.99184cm</Left>
+          <Height>0.51097cm</Height>
+          <Width>8.80839cm</Width>
+          <ZIndex>11</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Line Name="Line4">
+          <Top>1.9491cm</Top>
+          <Height>0cm</Height>
+          <Width>19.9cm</Width>
+          <ZIndex>12</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Line>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageFooter>
+      <Height>1.21708cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Rectangle Name="rectangle5">
+          <ReportItems>
+            <Image Name="image3">
+              <Source>External</Source>
+              <Value>Reconcilor_logo1.jpg</Value>
+              <Sizing>Fit</Sizing>
+              <Top>0.16117cm</Top>
+              <Left>15.80023cm</Left>
+              <Height>0.625cm</Height>
+              <Width>3.625cm</Width>
+              <Style />
+            </Image>
+            <Textbox Name="textbox32">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>= "Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
+                      <Style>
+                        <FontFamily>Verdana</FontFamily>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.22367cm</Top>
+              <Left>6.75cm</Left>
+              <Height>0.5cm</Height>
+              <Width>7.39658cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="textbox33">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>= "Report Generated: " + Format(Now(), "dd MMM yyyy, HH:mm")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.22367cm</Top>
+              <Height>0.5cm</Height>
+              <Width>6.75cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Top>0.17639cm</Top>
+          <Height>0.94734cm</Height>
+          <Width>19.80023cm</Width>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Rectangle>
+        <Line Name="Line2">
+          <Top>0.10583cm</Top>
+          <Height>0cm</Height>
+          <Width>19.9cm</Width>
+          <ZIndex>1</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Line>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>0.5cm</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
+    <TopMargin>0.5cm</TopMargin>
+    <BottomMargin>0.5cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="WebService">
+      <DataSourceReference>WebService</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>60177381-d428-444a-80d0-ebbbdf32e020</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="LocationNameData">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="startDate">
+            <Value>=Parameters!DateFrom.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetLocationCommentByDate&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetLocationCommentByDate"&gt;
+    &lt;Parameters&gt;
+   &lt;Parameter Name="locationId" Type="integer"&gt;
+	&lt;DefaultValue&gt;8&lt;/DefaultValue&gt;
+   &lt;/Parameter&gt;
+   &lt;Parameter Name="startDate" Type="date"&gt;
+	&lt;DefaultValue&gt;2013-01-01&lt;/DefaultValue&gt;
+   &lt;/Parameter&gt;
+   &lt;/Parameters&gt; 
+    &lt;/Method&gt;
+     &lt;ElementPath IgnoreNamespaces="true"&gt;GetLocationCommentByDateResponse{GetLocationCommentByDateResult}
+&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="GetLocationCommentByDateResult">
+          <DataField>GetLocationCommentByDateResult</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="LocationId">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>8</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Location Id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateBreakdown">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>QUARTER</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Date Breakdown</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateFrom">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>01/01/2013 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Date From</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateTo">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>01/01/2014 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Date To</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DesignationMaterialTypeId">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>Designation</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Factors">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>F1,F15,F2</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Factors</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Attributes_with_Volume_H2O">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Tonnes,Fe</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Attributes</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CompleteReport">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>true</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Complete Report</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="WithoutHeaderFooter">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Without Header / Footer</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="OnlyGraphs">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Only Graphs</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="OnlyTables">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Only Tables</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>en-AU</Language>
+  <Variables>
+    <Variable Name="DefaultAttribute">
+      <Value>="Density"</Value>
+    </Variable>
+  </Variables>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>2adc2d14-5ea3-462c-b9cb-7dccd9cb1dea</rd:ReportID>
+</Report>

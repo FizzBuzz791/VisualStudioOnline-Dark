@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 14" name="Reconcilor">
+  <DataContextMoniker Name="/ReconcilorDataContext" />
+  <nestedChildShapes>
+    <classShape Id="bd5e61e7-4b36-439a-a068-dcee493673dc" absoluteBounds="4.625, 9.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ReconcilorDataContext/ChangedDataEntry" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f6b25519-8b0a-4e99-8565-832d0ad83952" absoluteBounds="4.64, 10.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7c4073e2-9bcd-4aea-9e7f-4c7c6d9b775a" absoluteBounds="4.625, 12.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ReconcilorDataContext/ChangedDataEntryRelatedKeyValue" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6dd7c711-c0b5-4789-ab48-747b2c8de4c7" absoluteBounds="4.64, 12.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.625 : 11.3285953776042); (5.625 : 12.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ReconcilorDataContext/ChangedDataEntry/ChangedDataEntry_ChangedDataEntryRelatedKeyValue" />
+      <nodes>
+        <classShapeMoniker Id="bd5e61e7-4b36-439a-a068-dcee493673dc" />
+        <classShapeMoniker Id="7c4073e2-9bcd-4aea-9e7f-4c7c6d9b775a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f72af68a-240c-4238-b351-bbbf17d841f3" absoluteBounds="2, 0.625, 2, 4.2708154296875">
+      <DataClassMoniker Name="/ReconcilorDataContext/StageBlock" />
+      <nestedChildShapes>
+        <elementListCompartment Id="41b9f595-93a3-4c4b-93e3-02a2460fe19e" absoluteBounds="2.015, 1.085, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="615e0eae-66b1-4a5c-9cb3-4bad80f6192e" absoluteBounds="2.125, 6.25, 2, 1.9631982421875">
+      <DataClassMoniker Name="/ReconcilorDataContext/StageBlockPoint" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c07641a9-1b71-4e1a-a843-ceb3dee075fb" absoluteBounds="2.14, 6.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.0625 : 4.8958154296875); (3.0625 : 6.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReconcilorDataContext/StageBlock/StageBlock_StageBlockPoint" />
+      <nodes>
+        <classShapeMoniker Id="f72af68a-240c-4238-b351-bbbf17d841f3" />
+        <classShapeMoniker Id="615e0eae-66b1-4a5c-9cb3-4bad80f6192e" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bccc9f7f-ff11-4a05-8a4c-932a6738f645" absoluteBounds="6, 5.875, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/ReconcilorDataContext/StageBlockModelGrade" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cb48688d-2731-447f-8138-d49ca7c5e5ae" absoluteBounds="6.015, 6.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="619e76d6-ba81-4596-a15a-73a89a3056e0" absoluteBounds="6.375, 1.125, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/ReconcilorDataContext/StageBlockModel" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c93a53c3-504a-44b6-b442-8c491b71088b" absoluteBounds="6.39, 1.585, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.1875 : 4.04970540364583); (7.1875 : 5.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReconcilorDataContext/StageBlockModel/StageBlockModel_StageBlockModelGrade" />
+      <nodes>
+        <classShapeMoniker Id="619e76d6-ba81-4596-a15a-73a89a3056e0" />
+        <classShapeMoniker Id="bccc9f7f-ff11-4a05-8a4c-932a6738f645" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4 : 2.58735270182292); (6.375 : 2.58735270182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReconcilorDataContext/StageBlock/StageBlock_StageBlockModel" />
+      <nodes>
+        <classShapeMoniker Id="f72af68a-240c-4238-b351-bbbf17d841f3" />
+        <classShapeMoniker Id="619e76d6-ba81-4596-a15a-73a89a3056e0" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

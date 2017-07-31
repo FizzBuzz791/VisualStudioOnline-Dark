@@ -1,0 +1,29 @@
+﻿IF Object_Id('dbo.BhpbioMetBalancing') IS NOT NULL
+	DROP TABLE dbo.BhpbioMetBalancing
+GO
+
+CREATE TABLE dbo.BhpbioMetBalancing
+(
+	BhpbioMetBalancingId INT NOT NULL IDENTITY(1, 1),
+	SiteCode VARCHAR(7) COLLATE DATABASE_DEFAULT NOT NULL,
+	CalendarDate DATETIME NOT NULL,
+	StartDate DATETIME NOT NULL,
+	EndDate DATETIME NOT NULL,
+	PlantName VARCHAR(31) COLLATE DATABASE_DEFAULT NOT NULL,
+	StreamName VARCHAR(31) COLLATE DATABASE_DEFAULT NOT NULL,
+	Weightometer VARCHAR(31) COLLATE DATABASE_DEFAULT NULL,
+	DryTonnes FLOAT NULL,
+	WetTonnes FLOAT NULL,
+	SplitCycle FLOAT NULL,
+	SplitPlant FLOAT NULL,
+	ProductSize VARCHAR(5) NULL,
+
+	CONSTRAINT PK_BhpbioMetBalancing PRIMARY KEY NONCLUSTERED
+		(BhpbioMetBalancingId),
+
+	CONSTRAINT UQ_BhpbioMetBalancing UNIQUE CLUSTERED
+		(SiteCode, CalendarDate, PlantName, StreamName, ProductSize)
+)
+GO
+CREATE NonClustered INDEX IX_BhpbioMetBalancing_01 ON dbo.BhpbioMetBalancing ( CalendarDate , Weightometer , WetTonnes )
+GO

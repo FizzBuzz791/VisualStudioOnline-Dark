@@ -1,0 +1,12 @@
+﻿LocationId,LocationType,Factor,Mode,Attribute
+9,Newman,Main,F15Factor,Expanded,SiO2
+9,Newman,Main,F15Factor,Expanded,Al2O3
+9,Newman,Main,F15Factor,Expanded,LOI
+28424,WB,SubLocation,F15Factor,Expanded,Tonnes
+28424,WB,SubLocation,F15Factor,Expanded,SiO2
+28438,30,SubLocation,F15Factor,Expanded,SiO2
+32272,29,SubLocation,F15Factor,Expanded,Tonnes
+137037,35,SubLocation,F15Factor,Expanded,Tonnes
+9,Newman,Main,RFSTM,Expanded,Tonnes
+9,Newman,Main,RFSTM,Expanded,P
+9,Newman,Main,RFSTM,Expanded,Al2O3

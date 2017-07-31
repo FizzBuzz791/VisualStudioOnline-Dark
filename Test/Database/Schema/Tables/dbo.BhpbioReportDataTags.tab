@@ -1,0 +1,21 @@
+﻿If Object_id('dbo.BhpbioReportDataTags') Is Not Null 
+     Drop Table dbo.BhpbioReportDataTags
+Go 
+
+CREATE TABLE dbo.BhpbioReportDataTags
+(
+	TagId VARCHAR(63) COLLATE Database_Default NOT NULL,
+	TagGroupId VARCHAR(124) COLLATE Database_Default NOT NULL,
+	TagGroupLocationTypeId TINYINT NULL,
+	OtherMaterialTypeId INT NULL,
+	ApprovalOrder INTEGER NOT NULL DEFAULT (3),
+	
+	CONSTRAINT PK_BHPBIOREPORTDATATAGS PRIMARY KEY CLUSTERED
+		(TagId),
+	CONSTRAINT FK_BhpbioReportDataTags_TagGroupLocationTypeId FOREIGN KEY
+		(TagGroupLocationTypeId) REFERENCES dbo.LocationType (Location_Type_Id),
+	CONSTRAINT FK_BhpbioReportDataTags_OtherMaterialType FOREIGN KEY
+		(OtherMaterialTypeId) REFERENCES dbo.MaterialType (Material_Type_Id),
+
+)
+GO

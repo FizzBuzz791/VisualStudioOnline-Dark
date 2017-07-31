@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Standard Import for Snowden Database projects.
+  Add <Import Project="$(MSBuildExtensionsPath)\Snowden.Bcd.Database.targets" /> to your project files.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="Snowden.Bcd.Tasks.targets" />
+
+  <Target Name="BeforeBuild">
+    <PropertyGroup>
+      <SolutionVersion Condition=" '$(SolutionVersion)'=='' " >$(Quality)</SolutionVersion>
+    </PropertyGroup>
+    
+    <!-- This will need to be changed so it builds somewhere other than Reconcilor1 -->
+    <BuildDatabase2 Name="$(AssemblyName)"
+                    ProjectFolder="$(ProjectDir)"
+                    OutputFolder="$(outdir)"
+                    Version="$(SolutionVersion)" ReferencePaths="$(ReferencePath)"
+                    ServerInstance="localhost\SQL2008R2" />
+  </Target>
+  <Target Name="BeforeClean">
+    <CleanDatabase2 Name="$(AssemblyName)"
+                    OutputFolder="$(outdir)" />
+  </Target>
+</Project>

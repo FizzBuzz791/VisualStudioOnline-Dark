@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:i0="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MT/v1.0" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="MaterialTrackerWebService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MT/v1.0" location="http://abarmouta.snowdenau.com/ImportWebServices/MaterialTrackerWebService.svc?wsdl=wsdl0" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_IM_MT_DS" type="i0:IM_MT_DS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="retrievePortBalances">
+      <soap:operation soapAction="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MQ2/v1.0/retrievePortBalances" style="document" />
+      <wsdl:input name="retrievePortBalancesRequest1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="retrievePortBalancesResponse1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveShipping">
+      <soap:operation soapAction="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MQ2/v1.0/retrieveShipping" style="document" />
+      <wsdl:input name="retrieveShippingRequest1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="retrieveShippingResponse1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveMETBalancing">
+      <soap:operation soapAction="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MQ2/v1.0/retrieveMETBalancing" style="document" />
+      <wsdl:input name="retrieveMETBalancingRequest1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="retrieveMETBalancingResponse1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePortBlending">
+      <soap:operation soapAction="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MQ2/v1.0/retrievePortBlending" style="document" />
+      <wsdl:input name="retrievePortBlendingRequest1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="retrievePortBlendingResponse1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MaterialTrackerWebService">
+    <wsdl:port name="BasicHttpBinding_IM_MT_DS" binding="tns:BasicHttpBinding_IM_MT_DS">
+      <soap:address location="http://abarmouta.snowdenau.com/ImportWebServices/MaterialTrackerWebService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,8 @@
+﻿LocationId,LocationType,Factor,Mode,Attribute
+9,Newman,Main,F15Factor,Compact,Ben
+9,Newman,Main,F15Factor,Compact,Fe
+9,Newman,Main,F15Factor,Compact,SiO2
+9,Newman,Main,RFSTM,Compact,P
+9,Newman,Main,RFSTM,Compact,SiO2
+9,Newman,Main,RFSTM,Compact,Al2O3
+9,Newman,Main,RFSTM,Compact,LOI

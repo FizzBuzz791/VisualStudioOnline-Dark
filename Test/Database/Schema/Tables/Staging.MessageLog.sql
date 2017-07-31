@@ -1,0 +1,44 @@
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'Staging')
+BEGIN
+    -- Have to use 'exec' or the query fails
+    EXEC( 'CREATE SCHEMA Staging' );
+	EXEC( 'ALTER AUTHORIZATION ON SCHEMA::Staging TO [dbo]' );
+END
+Go
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [Staging].[MessageLog] (
+	[Id] BIGINT IDENTITY(1,1) NOT NULL,
+	[Message] NTEXT NULL,
+	[MessageReceivedDateTime] DATETIME NOT NULL,
+	[MessageType] [varchar](50) NOT NULL,
+	[DataKey] VARCHAR(50) NULL, 
+    [MessageTimestamp] DATETIME NULL, 
+    CONSTRAINT [PK_MessageLog] PRIMARY KEY NONCLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 80) ON [PRIMARY],
+ 
+) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX IX_Staging_MessageLog_MessageTypeDataKey ON Staging.MessageLog
+(
+	[MessageType] ASC,
+	[DataKey] ASC
+)
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+

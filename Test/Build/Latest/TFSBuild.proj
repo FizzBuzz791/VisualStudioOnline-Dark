@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(MSBuildExtensionsPath)\Snowden\Snowden.Build.TeamFoundation.targets" />
+
+  <ProjectExtensions>
+    <!-- Team Foundation Build Version - DO NOT CHANGE -->
+    <ProjectFileVersion>2</ProjectFileVersion>
+    <!-- Backwards compatibility. See Comments -->
+    <Description></Description>
+    <!-- Backwards compatibility. See Comments -->
+    <BuildMachine>UNKNOWN</BuildMachine>
+  </ProjectExtensions>
+
+  <!-- Project Settings -->
+  <PropertyGroup>
+    <TfsVersion />
+    <TFSVersionType>Latest</TFSVersionType>
+    <RunTest>false</RunTest>
+    <RunCodeAnalysis>Never</RunCodeAnalysis>
+  </PropertyGroup>
+  
+  <!-- Solutions to Build -->
+  <ItemGroup>
+    <SolutionToBuild Include="$(BuildProjectFolderPath)/../../ReconcilorBhpbio.sln">
+      <Targets></Targets>
+      <Properties></Properties>
+    </SolutionToBuild>
+  </ItemGroup>
+
+  <!-- Configurations to Build -->
+  <ItemGroup>
+    <ConfigurationToBuild Include="Debug|x86">
+      <FlavorToBuild>Debug</FlavorToBuild>
+      <PlatformToBuild>x86</PlatformToBuild>
+    </ConfigurationToBuild>
+    <ConfigurationToBuild Include="Debug|Any CPU">
+      <FlavorToBuild>Debug</FlavorToBuild>
+      <PlatformToBuild>Any CPU</PlatformToBuild>
+    </ConfigurationToBuild>
+    <ConfigurationToBuild Include="Debug|x86">
+      <FlavorToBuild>Release</FlavorToBuild>
+      <PlatformToBuild>x86</PlatformToBuild>
+    </ConfigurationToBuild>
+    <ConfigurationToBuild Include="Debug|Any CPU">
+      <FlavorToBuild>Release</FlavorToBuild>
+      <PlatformToBuild>Any CPU</PlatformToBuild>
+    </ConfigurationToBuild>
+  </ItemGroup>
+
+  <!-- Snowden Custom Compile Steps -->
+  <Target Name="BeforeCompile">
+    <!--<CallTarget Targets="CopyReports" />-->
+  </Target>
+
+  <!-- Snowden Custom Compile Steps -->
+  <Target Name="AfterCompile">
+    <!-- Place any compile steps here, such as build Manifest -->
+    <CallTarget Targets="CopyReports" />
+    <!--<CallTarget Targets="CopyWixIncludes" />-->
+  </Target>
+
+  <!-- Copy Reports -->
+  <Target Name="CopyReports">
+    <PropertyGroup>
+      <ReportsSource>$(BuildProjectFolderPath)\Reports\</ReportsSource>
+      <ReportsDest>$(BinariesRoot)\Reports\</ReportsDest>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ReportFiles Include="$(ReportsSource)*.*"
+        Exclude="$(ReportsSource)*.rptproj;$(ReportsSource)*.vspscc;$(ReportsSource)*.vssscc;$(ReportsSource)*.sln" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ReportFiles)"
+          DestinationFolder="$(ReportsDest)" />
+  </Target>
+
+
+
+</Project>

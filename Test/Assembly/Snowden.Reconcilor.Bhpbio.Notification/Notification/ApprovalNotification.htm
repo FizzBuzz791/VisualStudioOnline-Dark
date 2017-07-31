@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>{Name}</title>
+    <style type="text/css">
+        body 
+        {
+            margin: 0px;
+            background-color: #F5F7F8;
+            font-family: Arial, Sans-Serif;
+            font-size: 12px;
+            color: black;
+        }
+        a 
+        {	
+            color: #294158;	
+        }
+        td.contentHeader
+        {
+            color: #294158;
+            font-weight:600;
+            font-size: 13px;
+            border-style: none;
+        }
+        td.contentLeft, td.contentRight
+        {
+            color: Black;
+            font-weight: normal;
+            font-size: 12px;
+            vertical-align: middle;
+            border-style: solid;
+            border-width: thin;
+            border-color: Silver; 
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+        td.contentLeft
+        {
+            text-align: center;
+        }
+        td.contentRight
+        {
+            text-align: left;
+        }
+    </style>
+</head>
+<body >
+
+    <p>
+        This is an automated notification message that has been sent by Reconcilor.&nbsp; 
+        You have received this message as you have been configured by (or on behalf of) 
+        the notification&#39;s owner to receive system notifications as they occur.</p>
+    <p>
+        Notifications are typically raised whenever they exceed a given threshold or 
+        critical values in the system change; further information about the notification 
+        is shown below.&nbsp; If you have any questions you may need to discuss these 
+        with the owner.</p>
+    <hr />
+    <br />
+    <table style="border-collapse: collapse;">
+        <tr>
+            <td class="contentHeader" colspan="2">
+                Information about this notification</td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Type
+            </td>
+            <td class="contentRight">
+                {Type}
+            </td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Name
+            </td>
+            <td class="contentRight">
+                {Name}
+            </td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Description
+            </td>
+            <td class="contentRight">
+                {Description}
+            </td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Owner
+            </td>
+            <td class="contentRight">
+                {Owner}
+            </td>
+        </tr>
+   </table>
+   <br />
+        <table style="border-collapse: collapse;">
+        <tr>
+            <td class="contentHeader" colspan="2">
+                Approval Information</td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Tag Group
+            </td>
+            <td class="contentRight">
+                {ApprovalAttribute}
+            </td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Approval Period
+            </td>
+            <td class="contentRight">
+                {ApprovalPeriod}
+            </td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Approval Date
+            </td>
+            <td class="contentRight">
+                {CalculatedApprovalDate}
+            </td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Location
+            </td>
+            <td class="contentRight">
+                {Location}
+            </td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                Notification Expiration Time
+            </td>
+            <td class="contentRight">
+                {NotificationExpiryDate}
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table style="border-collapse: collapse;">
+        <tr>
+            <td class="contentHeader" colspan="1">
+                More Information
+            </td>
+        </tr>
+        <tr>
+            <td class="contentLeft">
+                {EmailMessage}
+            </td>
+        </tr>
+    </table>
+    <br />
+    <hr />
+    This notification was generated at <b>{CurrentTime}</b> by a subscription set up by <b>{Owner}</b>.
+    {SystemMessages}
+</body>
+</html>

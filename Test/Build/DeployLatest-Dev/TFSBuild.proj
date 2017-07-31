@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(MSBuildExtensionsPath)\Snowden\Snowden.Build.TeamFoundation.targets" />
+
+  <ProjectExtensions>
+    <!-- Team Foundation Build Version - DO NOT CHANGE. Backwards compatibility. See Comments -->
+    <ProjectFileVersion>2</ProjectFileVersion>
+    <Description></Description>
+    <BuildMachine>UNKNOWN</BuildMachine>
+  </ProjectExtensions>
+
+  <!-- Project Settings -->
+  <PropertyGroup>
+    <TfsVersion />
+    <TFSVersionType>Latest</TFSVersionType>
+    <RunTest>false</RunTest>
+    <RunCodeAnalysis>Never</RunCodeAnalysis>
+    <SkipDropBuild>true</SkipDropBuild>
+  </PropertyGroup>
+  
+  <!-- Solutions to Build -->
+  <ItemGroup>
+    <SolutionToBuild Include="$(BuildProjectFolderPath)/../../ReconcilorBhpbio.sln">
+      <Targets></Targets>
+      <Properties></Properties>
+    </SolutionToBuild>
+  </ItemGroup>
+
+  <!-- Configurations to Build -->
+  <ItemGroup>
+    <ConfigurationToBuild Include="Release|Any CPU">
+      <FlavorToBuild>Release</FlavorToBuild>
+      <PlatformToBuild>Any CPU</PlatformToBuild>
+    </ConfigurationToBuild>
+  </ItemGroup>
+
+  <!-- Snowden Custom Compile Steps -->
+  <Target Name="BeforeCompile">
+    <!-- Place any compile steps here, such as build Manifest -->
+    <SqlBuildManifest TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+     BuildUri="$(BuildUri)"
+     BuildManifestName="Reconcilor.Database"
+     SourceFolder="$(LineFolder)\Database"
+     DestinationFolder="$(BinariesRoot)\Database"
+     ManifestFile="Build Manifest.txt"
+     FailOnErrors="True"
+     />
+
+    <!--<CallTarget Targets="CopyReports" />-->
+  </Target>
+
+  <Target Name="AfterCompile">
+    <CallTarget Targets="DeployIT" />
+  </Target>
+  
+  <!-- Copy Reports -->
+  <Target Name="CopyReports">
+    <PropertyGroup>
+      <ReportsSource>$(SolutionRoot)\$(Branch)\$(Line)\Reports\**\</ReportsSource>
+      <ReportsDest>$(BinariesRoot)\Reports\</ReportsDest>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ReportFiles Include="$(ReportsSource)*.*" 
+        Exclude="$(ReportsSource)*.rptproj;$(ReportsSource)*.vspscc;$(ReportsSource)*.vssscc;$(ReportsSource)*.sln" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ReportFiles)"
+          DestinationFiles="@(ReportFiles ->'$(ReportsDest)%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <!-- Deploy to Integration Test Environment -->
+  <Target Name="DeployIT"> <!--  Condition="'$(IsDesktopBuild)' != 'true'" -->
+    <!-- Deployment Settings -->
+    <PropertyGroup>
+      <SiteName>ReconcilorBhpbioDev</SiteName>
+      <SQLServer>Reconcilor1\SQL2005</SQLServer>
+      <SQLDatabase>$(SiteName)</SQLDatabase>
+      <WebSource>$(BinariesRoot)\Release\_PublishedWebsites\ReconcilorBhpbio\</WebSource>
+      <WebDestination>\\reconcilor1\Site\ReconcilorBhpbioDev\</WebDestination>
+      <ReportingServicesUrl>http://reconcilor1/ReportServerSQL2005/ReportService2005.asmx</ReportingServicesUrl>
+      <CoreReports>L:\Reconcilor_Core\Test\6.1\Reports\Core_Reports\</CoreReports>
+      <TargetReportPath>/Reconcilor/$(SiteName)</TargetReportPath>
+      <SettingAbsoluteURL>/Reconcilor/$(SiteName)</SettingAbsoluteURL>
+      <SettingReportingServer>Reconcilor1</SettingReportingServer>
+      <SettingReportingInstance>Sql2005</SettingReportingInstance>
+      <SettingSiteName>$(SiteName)</SettingSiteName>
+    </PropertyGroup>
+
+    <!-- Database Deployment -->
+    
+    <DeployDatabase TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+      BuildUri="$(BuildUri)"
+      Server="$(SQLServer)"
+      Database="$(SQLDatabase)"
+      CreateDatabase="True"
+      AuthenticatedLogin="True"
+      RecreateDatabaseIfExists="True"
+      SqlFile="$(BinariesRoot)\Database\Build.sql"
+          />
+
+    <DeployDatabase TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+      BuildUri="$(BuildUri)"
+      Server="$(SQLServer)"
+      Database="$(SQLDatabase)"
+      AuthenticatedLogin="True"
+      SqlScript=
+      "
+        ALTER DATABASE $(SQLDatabase) SET RECOVERY SIMPLE
+        UPDATE dbo.Setting SET Value = '$(SettingAbsoluteURL)' WHERE Setting_Id = 'ABSOLUTE_PATH'
+        UPDATE dbo.Setting SET Value = '$(SettingSiteName)' WHERE Setting_Id = 'SITE_NAME'
+        UPDATE dbo.Setting SET Value = '$(SettingReportingInstance)' WHERE Setting_Id = 'REPORTING_SERVICES_INSTANCE'
+        UPDATE dbo.Setting SET Value = '$(SettingReportingServer)' WHERE Setting_Id = 'REPORTING_SERVICES_SERVER'
+      "
+      />
+
+    <!-- Reporting Deployment -->
+    <DeployReportingServices TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+      BuildUri="$(BuildUri)"
+      Url="$(ReportingServicesUrl)"
+      ReportDirectory="$(CoreReports)"
+      TargetPath="$(TargetReportPath)"
+      DataSourceName="dsCore"
+      DataSourceServer="$(SQLServer)"
+      DataSourceDatabase="$(SQLDatabase)"
+      DataSourceAuthenticatedLogin="False"
+      DataSourceUsername="RECONCILORREPORT"
+      DataSourcePassword="LongI5land"
+      />
+    
+
+    <!-- Web Deployment -->
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
+      Message="Dropping Web to location $(WebDestination)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+
+    <RemoveDir Directories="$(WebDestination)" ContinueOnError="true" />
+
+    <ItemGroup>
+      <WebFiles Include="$(WebSource)\**\*.*" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(WebFiles)"
+      DestinationFiles="@(WebFiles ->'$(WebDestination)%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="True"
+          />
+
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
+           Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true'" />
+
+    <ModifyAppConfig TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+      BuildUri="$(BuildUri)"
+      ConfigFile ="$(WebDestination)Web.config"
+      Section="appSettings"
+      Key="connectionString"
+      Value="Server=$(SQLServer);Database=$(SQLDatabase);User=RECONCILORUI;Password=Vap0rware;"
+      Encrypt="False"
+          />
+
+    <!-- Run the imports -->
+    <PropertyGroup>
+      <ImportPath>$(BinariesRoot)\Release\</ImportPath>
+      <ImportExe>$(ImportPath)Snowden.Reconcilor.Bhpbio.Import.exe</ImportExe>
+      <DataPath>L:\Reconcilor_BHPBIO\Data\</DataPath>
+      <!--<Conn>"Data Source=CSMPER-SQL17\SQL2005TST1,2449;Initial Catalog=ReconcilorBHPBIO;UId=ReconcilorImport;Pwd=452_Deutsches_Haus_109; "</Conn>-->
+      <Conn>"Data Source=$(SQLServer);Initial Catalog=$(SQLDatabase);Trusted_Connection=yes;"</Conn>
+    </PropertyGroup>
+    
+    <BuildStep Message="Running Snowden.Reconcilor.Bhpbio.BlockInitialLoad.exe" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+    <Exec Command='$(ImportPath)Snowden.Reconcilor.Bhpbio.BlockInitialLoad.exe "L:\Reconcilor_BHPBIO\Data" $(Conn)' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+    <Message Text="Snowden.Reconcilor.Bhpbio.BlockInitialLoad.exe Finished" />
+
+    <PropertyGroup>
+      <ImportId>BlockInsertUpdate</ImportId>
+    </PropertyGroup>
+    <BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:AC @DateFrom:"1-Apr-2008" @DateTo:"30-Jun-2008" @DateFromAbsoluteMinimum:"01-Apr-2008" @DateFromLookbackDays: /loaddata:$(DataPath)BlockInsertUpdate.xml > $(ImportId)' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+    <Message Text="Import $(ImportId) Finished" />
+
+    <PropertyGroup>
+      <ImportId>BlockDelete</ImportId>
+    </PropertyGroup>
+    <BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:AC @DateFrom:"1-Apr-2008" @DateTo:"30-Jun-2008" @DateFromAbsoluteMinimum:"01-Apr-2008" @DateFromLookbackDays: /loaddata:$(DataPath)BlockDelete.xml > $(ImportId) ' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+    <Message Text="Import $(ImportId) Finished" />
+
+    <PropertyGroup>
+      <ImportId>Stockpile</ImportId>
+    </PropertyGroup>
+    <BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:AC /loaddata:$(DataPath)Stockpile.xml  > $(ImportId)' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+    <Message Text="Import $(ImportId) Finished" />
+
+    <PropertyGroup>
+      <ImportId>Haulage</ImportId>
+    </PropertyGroup>
+    <BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:AC @DateFrom:"1-Apr-2008" @DateTo:"30-Jun-2008" @DateFromAbsoluteMinimum:"01-Apr-2008" @DateFromLookbackDays: /loaddata:$(DataPath)Haulage.xml  > $(ImportId)' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+    <Message Text="Import $(ImportId) Finished" />
+
+    <PropertyGroup>
+      <ImportId>"Stockpile Adjustment"</ImportId>
+    </PropertyGroup>
+    <BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:AC @DateFrom:"1-Apr-2008" @DateTo:"30-Jun-2008" @DateFromAbsoluteMinimum:"01-Apr-2008" @DateFromLookbackDays: /loaddata:$(DataPath)StockpileAdjustment.xml  > $(ImportId)' ContinueOnError="true">
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+    <Message Text="Import $(ImportId) Finished" />
+
+    <PropertyGroup>
+      <ImportId>Blocks</ImportId>
+    </PropertyGroup>
+    <BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:"AreaC" @Pit:"EE" > $(ImportId)' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:"AreaC" @Pit:"CW" >> $(ImportId)' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:"AreaC" @Pit:"XX" >> $(ImportId)' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @Site:"AreaC" @Pit:"CE" >> $(ImportId)' ContinueOnError="true" >
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+    <Message Text="Import $(ImportId) Finished" />
+
+	<PropertyGroup>
+	  <ImportId>"Recon Movements"</ImportId>
+	</PropertyGroup>
+	<BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+	  <Output TaskParameter="Id" PropertyName="StepId" />
+	</BuildStep>
+	<Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @DateFrom:01-MAR-2008 @DateFromAbsoluteMinimum: @DateTo: @DateFromLookbackDays: /loaddata:$(DataPath)ReconMovements.xml  > $(ImportId)' ContinueOnError="true">
+	  <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+	</Exec>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+	<Message Text="Import $(ImportId) Finished" />
+
+	<PropertyGroup>
+	  <ImportId>Production</ImportId>
+	</PropertyGroup>
+	<BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+	  <Output TaskParameter="Id" PropertyName="StepId" />
+	</BuildStep>
+	  <Message Importance="high" Text='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @DateFrom:"01-APR-2008" @DateFromAbsoluteMinimum: @DateTo:"30-JUN-2008" @DateFromLookbackDays: @Site:AC /loaddata:$(DataPath)Production.xml  > $(ImportId)' />
+	<Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @DateFrom:"01-APR-2008" @DateFromAbsoluteMinimum: @DateTo:"30-JUN-2008" @DateFromLookbackDays: @Site:AC /loaddata:$(DataPath)Production.xml  > $(ImportId)' ContinueOnError="true">
+	  <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+	</Exec>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+	<Message Text="Import $(ImportId) Finished" />
+
+	<!--
+	<PropertyGroup>
+		<ImportId>"Met Balancing"</ImportId>
+	</PropertyGroup>
+	<BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+		<Output TaskParameter="Id" PropertyName="StepId" />
+	</BuildStep>
+	<Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @DateTo:30-JUN-2008 @DateFrom:01-APR-2008 @DateFromLookbackDays: @DateFromAbsoluteMinimum: /loaddata:$(DataPath)MetBalancing.xml > $(ImportId)' ContinueOnError="true">
+		<Output TaskParameter="exitcode" ItemName="exitcodes"/>
+	</Exec>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+	<Message Text="Import $(ImportId) Finished" />
+	-->
+	  
+	<PropertyGroup>
+		<ImportId>Shipping</ImportId>
+	</PropertyGroup>
+	<BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+		<Output TaskParameter="Id" PropertyName="StepId" />
+	</BuildStep>
+	<Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @DateFrom:"01-APR-2008" @DateFromAbsoluteMinimum: @DateTo:"30-JUN-2008" @DateFromLookbackDays: /loaddata:$(DataPath)Shipping.xml  > $(ImportId)' ContinueOnError="true">
+		<Output TaskParameter="exitcode" ItemName="exitcodes"/>
+	</Exec>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+	<Message Text="Import $(ImportId) Finished" />
+
+	<PropertyGroup>
+		<ImportId>PortBalance</ImportId>
+	</PropertyGroup>
+	<BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+		<Output TaskParameter="Id" PropertyName="StepId" />
+	</BuildStep>
+	<Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @DateFrom:"01-APR-2008" @DateFromAbsoluteMinimum: @DateTo:"30-JUN-2008" @DateFromLookbackDays: /loaddata:$(DataPath)PortBalance.xml > $(ImportId)' ContinueOnError="true">
+		<Output TaskParameter="exitcode" ItemName="exitcodes"/>
+	</Exec>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+	<Message Text="Import $(ImportId) Finished" />
+
+	<PropertyGroup>
+		<ImportId>PortBlending</ImportId>
+	</PropertyGroup>
+	<BuildStep Message="Running Import $(ImportId)" TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Condition="'$(IsDesktopBuild)' != 'true'">
+		<Output TaskParameter="Id" PropertyName="StepId" />
+	</BuildStep>
+	<Exec Command='$(ImportExe) /importName:$(ImportId) /destinationConnection:$(Conn) @DateFrom:"01-APR-2008" @DateFromAbsoluteMinimum: @DateTo:"30-JUN-2008" @DateFromLookbackDays: /loaddata:$(DataPath)PortBlending.xml > $(ImportId)' ContinueOnError="true">
+		<Output TaskParameter="exitcode" ItemName="exitcodes"/>
+	</Exec>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Failed" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &gt; 0"/>
+	<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true' And '%(exitcodes.identity)' &lt;= 0"/>
+	<Message Text="Import $(ImportId) Finished" />
+  </Target>
+</Project>

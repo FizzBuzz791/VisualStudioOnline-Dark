@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Reports", "Reports.rptproj", "{BE814287-22EE-48EE-A3F9-FBDE37D933ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		FAT|Default = FAT|Default
+		Production|Default = Production|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.Debug|Default.ActiveCfg = Debug
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.Debug|Default.Build.0 = DebugLocal
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.Debug|Default.Deploy.0 = DebugLocal
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.DebugLocal|Default.Build.0 = DebugLocal
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.DebugLocal|Default.Deploy.0 = DebugLocal
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.FAT|Default.ActiveCfg = FAT
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.FAT|Default.Build.0 = FAT
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.FAT|Default.Deploy.0 = FAT
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.Production|Default.ActiveCfg = Production
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.Production|Default.Build.0 = Production
+		{BE814287-22EE-48EE-A3F9-FBDE37D933ED}.Production|Default.Deploy.0 = Production
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://sptfsdb:8080/tfs/technologies
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Reports.rptproj
+		SccLocalPath1 = .
+	EndGlobalSection
+EndGlobal

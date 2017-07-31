@@ -1,0 +1,35 @@
+IF OBJECT_ID('dbo.BhpbioImportReconciliationMovement') IS NOT NULL 
+     DROP TABLE dbo.BhpbioImportReconciliationMovement
+Go 
+
+CREATE TABLE dbo.BhpbioImportReconciliationMovement
+(
+	BlockNumber VARCHAR(4) COLLATE DATABASE_DEFAULT NOT NULL,
+	BlockName VARCHAR(5) COLLATE DATABASE_DEFAULT NOT NULL,
+	Site VARCHAR(9) COLLATE DATABASE_DEFAULT NOT NULL,
+	Orebody VARCHAR(2) COLLATE DATABASE_DEFAULT NOT NULL,
+	Pit VARCHAR(10) COLLATE DATABASE_DEFAULT NOT NULL,
+	Bench VARCHAR(4) COLLATE DATABASE_DEFAULT NOT NULL,
+	PatternNumber VARCHAR(4) COLLATE DATABASE_DEFAULT NOT NULL,
+	DateFrom DATETIME NOT NULL,
+	BlockLocationId INT NULL,
+	DateTo DATETIME NULL,
+	LastModifiedDate DATETIME NULL,
+	LastModifiedUser VARCHAR(50) COLLATE DATABASE_DEFAULT NULL,
+	MinedPercentage FLOAT,
+	
+	CONSTRAINT PK_BhpbioImportReconciliationMovement PRIMARY KEY CLUSTERED
+	(
+		BlockNumber, BlockName, Site, Orebody, Pit, Bench, PatternNumber, DateFrom
+	)
+)
+GO
+
+CREATE NONCLUSTERED INDEX IX_BhpbioImportReconciliationMovement_BlockLocationId
+	ON dbo.BhpbioImportReconciliationMovement (BlockLocationId)
+GO
+
+CREATE NONCLUSTERED INDEX IX_BhpbioImportReconciliationMovement_DateFromDateToBlockLocationId
+	ON dbo.BhpbioImportReconciliationMovement (DateFrom, DateTo, BlockLocationId)
+GO
+

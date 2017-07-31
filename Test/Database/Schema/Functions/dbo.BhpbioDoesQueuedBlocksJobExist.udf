@@ -1,0 +1,57 @@
+﻿IF OBJECT_ID('dbo.BhpbioDoesQueuedBlocksJobExist') IS NOT NULL 
+     DROP FUNCTION dbo.BhpbioDoesQueuedBlocksJobExist
+Go 
+
+CREATE FUNCTION dbo.BhpbioDoesQueuedBlocksJobExist
+(
+	@iImportId INT,
+	@iSite VARCHAR(31),
+	@iPit VARCHAR(31),
+	@iBench VARCHAR(31)
+)
+
+RETURNS BIT
+AS 
+BEGIN
+	DECLARE @Exists BIT
+		
+	IF EXISTS (SELECT *
+				FROM dbo.Import I
+					INNER JOIN dbo.ImportJob IJ
+						ON (IJ.ImportID = I.ImportID)
+					INNER JOIN dbo.ImportJobParameter IJP_S
+						ON (IJ.ImportJobId = IJP_S.ImportJobId)
+					INNER JOIN dbo.ImportParameter IP_S
+						ON (IJP_S.ImportParameterID = IP_S.ImportParameterID
+							AND IP_S.ParameterName = 'Site')
+					INNER JOIN dbo.ImportJobParameter IJP_P
+						ON (IJ.ImportJobId = IJP_P.ImportJobId)
+					INNER JOIN dbo.ImportParameter IP_P
+						ON (IJP_P.ImportParameterID = IP_P.ImportParameterID
+							AND IP_P.ParameterName = 'Pit')
+					INNER JOIN dbo.ImportJobParameter IJP_B
+						ON (IJ.ImportJobId = IJP_B.ImportJobId)
+					INNER JOIN dbo.ImportParameter IP_B
+						ON (IJP_B.ImportParameterID = IP_B.ImportParameterID
+							AND IP_B.ParameterName = 'Bench')
+					INNER JOIN dbo.ImportJobStatus IJS
+						ON (IJS.ImportJobStatusId = IJ.ImportJobStatusId
+							AND IJS.ImportJobStatusName = 'QUEUED')
+				WHERE I.ImportID = @iImportId
+					AND IJP_S.ParameterValue = @iSite
+					AND IJP_P.ParameterValue = @iPit
+					AND IJP_B.ParameterValue = ISNULL(@iBench, IJP_B.ParameterValue))
+		BEGIN
+			SET @Exists = 1
+		END
+		ELSE
+		BEGIN
+			SET @Exists = 0
+		END
+	
+	RETURN @Exists
+END
+GO
+
+GRANT EXECUTE ON dbo.BhpbioDoesQueuedBlocksJobExist TO BhpbioGenericManager
+GO

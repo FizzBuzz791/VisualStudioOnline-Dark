@@ -1,0 +1,33 @@
+﻿IF OBJECT_ID('dbo.BhpbioImportStockpile') IS NOT NULL 
+     DROP VIEW dbo.BhpbioImportStockpile
+GO
+
+CREATE VIEW dbo.BhpbioImportStockpile
+AS
+SELECT r.ImportSyncRowId,
+	r.SourceRow.value('(//StockpileSource/Stockpile/StockpileName)[1]', 'VARCHAR(255)') AS StockpileName,
+	r.SourceRow.value('(//StockpileSource/Stockpile/Mine)[1]', 'VARCHAR(255)') AS Mine,
+	r.SourceRow.value('(//StockpileSource/Stockpile/StockpileGroup)[1]', 'VARCHAR(255)') AS StockpileGroup,
+	r.SourceRow.value('(//StockpileSource/Stockpile/MaterialType)[1]', 'VARCHAR(255)') AS MaterialType,
+	r.SourceRow.value('(//StockpileSource/Stockpile/Description)[1]', 'VARCHAR(255)') AS Description,
+	r.SourceRow.value('(//StockpileSource/Stockpile/StartTonnes)[1]', 'FLOAT') AS StartTonnes,
+	r.SourceRow.value('(//StockpileSource/Stockpile/StartDate)[1]', 'DATETIME') AS StartDate,
+	r.SourceRow.value('(//StockpileSource/Stockpile/StartShift)[1]', 'CHAR(1)') AS StartShift,
+	r.SourceRow.value('(//StockpileSource/Stockpile/EndDate)[1]', 'DATETIME') AS EndDate,
+	r.SourceRow.value('(//StockpileSource/Stockpile/EndShift)[1]', 'CHAR(1)') AS EndShift,
+	r.SourceRow.value('(//StockpileSource/Stockpile/StockpileAlgorithm)[1]', 'VARCHAR(255)') AS StockpileAlgorithm,
+	r.SourceRow.value('(//StockpileSource/Stockpile/IsVisible)[1]', 'BIT') As IsVisible,
+	r.SourceRow.value('(//StockpileSource/Stockpile/IsInReports)[1]', 'BIT') AS IsInReports,
+	r.RootImportSyncRowId, r.IsCurrent
+FROM dbo.ImportSyncRow AS r
+	INNER JOIN dbo.Import AS i
+		ON (r.ImportId = i.ImportId)
+	INNER JOIN dbo.ImportSyncTable AS t
+		ON (r.ImportSyncTableId = t.ImportSyncTableId)
+WHERE i.ImportName = 'Stockpile'
+	AND t.Name = 'Stockpile'
+GO
+
+GRANT SELECT ON dbo.BhpbioImportStockpile TO CoreReporting
+GO
+ 

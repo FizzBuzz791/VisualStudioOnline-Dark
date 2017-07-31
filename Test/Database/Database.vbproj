@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{c252feb5-a946-4202-b1d4-9916a0590387};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CDB1BCD0-A736-4CB1-8A98-156F6FECBFA3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <MyType>Empty</MyType>
+    <AssemblyName>ReconcilorBhpbio</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <RootNamespace>ReconcilorBhpbio</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\Source\tfs\Reconcilor_BHPBIO\Branch-2.3.0.0\Test\Backup1\Database\</UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DeployCode>false</DeployCode>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Assembly\Version.vb">
+      <Link>Version.vb</Link>
+    </Compile>
+    <None Include="Upgrade\1.1.19.0\%280001%29 Shipping.sql" />
+    <None Include="Upgrade\1.2.0.0\BhpbioLocationStockpileConfiguration.sql" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <None Include="Upgrade\1.5.3.0\%280009%29 Update StockpileBhpbioStockpileLocationOverride.sql" />
+    <None Include="Upgrade\1.5.2.0\%280003%29 Yandi Crusher Reconfiguration.sql" />
+    <None Include="Upgrade\1.5.2.0\%280002%29 Proc dbo.CalcYandiVirtualFlow.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioFactorExclusionFilter.tab" />
+    <None Include="Schema\Functions\dbo.GetBhpbioExcludeHubLocation.udf" />
+    <None Include="Upgrade\1.5.1.0\%280003%29 Func dbo.GetBhpbioExcludeHubLocation.sql" />
+    <None Include="Upgrade\1.5.1.0\%280001%29 Table Scripts.sql" />
+    <None Include="Upgrade\1.5.0.16\%280002%29 Proc dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.0.16\%280003%29 Proc dbo.GetBhpbioReportDataReview.sql" />
+    <None Include="Schema\Procedures\dbo.ClearBhpbioStockpileDeletionState.prc" />
+    <None Include="Schema\Procedures\dbo.AddBhpbioStockpileDeletionState.prc" />
+    <Content Include="Upgrade\1.5.0.6\%280001%29 Add Table dbo.BhpbioStockpileDeletion.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioStockpileDeletion.tab" />
+    <None Include="Upgrade\1.4.0.0\%280001%29 Recalc User Haulage.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Upgrade\1.1.0.0\Pre\%280002%29 Location.sql" />
+    <Content Include="Upgrade\1.1.0.0\Pre\%280003%29 UIListing.sql" />
+    <Content Include="Upgrade\1.1.0.0\Pre\%280004%29 Reports.sql" />
+    <Content Include="Upgrade\1.2.0.0\BhpbioReportColor.sql" />
+    <Content Include="Upgrade\1.2.0.0\DropRedundantProcs.sql" />
+    <Content Include="ReconcilorBhpbio.manifest.xml" />
+    <Content Include="UtilityScripts\Approvals\Readme.txt" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataSitePostCrusherStockpileDelta.prc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\dbo.AuditType.sql" />
+    <None Include="Data\dbo.AuditTypeGroup.sql" />
+    <None Include="Data\dbo.BhpbioDefaultLumpFinesRatios.sql" />
+    <None Include="Data\dbo.BhpbioPurgeRequestStatus.sql" />
+    <None Include="Data\dbo.BhpbioSummaryEntryType.sql" />
+    <None Include="Data\dbo.BhpbioThreshold.sql" />
+    <None Include="Data\dbo.BhpbioThresholdType.sql" />
+    <None Include="Data\dbo.Report.sql" />
+    <None Include="Data\dbo.SecurityRole.sql" />
+    <None Include="Data\dbo.SecurityOption.sql" />
+    <None Include="Data\dbo.SecurityOptionGroup.sql" />
+    <None Include="Data\dbo.SecurityRoleOption.sql" />
+    <None Include="Data\dbo.UserInterfaceListingField.sql" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportActualX.sql" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportHaulageBreakdown.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioWeightometerSampleWithProductSize.sql" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportHauledBlockLocations.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportReconBlockLocations.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioHaulageLumpFinesGrade.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioHaulageLumpFinesPercent.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioDefaultLumpFinesRatios.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioCrusherLocationWithOverride.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioLocationChildMap.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioWeightometerLocationWithOverride.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportLocationWithOverride.UDF" />
+    <None Include="Schema\Functions\dbo.GetBhpbioExcludeStockpile.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioFilteredMaterialTypes.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioFloatOptionalAbsolute.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioIntCollection.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportLocationBreakdownWithOverride.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioSummaryGradeBreakdown.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioSummaryTonnesBreakdown.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioSummaryTonnesByLocation.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioWeightometerSampleSourceActualC.sql" />
+    <None Include="Schema\Functions\dbo.GetParentLocationByLocationType.sql" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportModelBlockLocations.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDigblockDetailList.sql" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioDataExceptionDismissAll.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDataExceptionFilteredList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDataExceptionTypeFilteredList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioPitListWithBlockCounts.sql" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSummaryOMHauledFromBlock.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataActualM.sql" />
+    <None Include="Schema\Procedures\dbo.BhpbioCopyWeightometerSample.sql" />
+    <None Include="Schema\Procedures\dbo.CalcWhalebackVirtualFlowC2.prc" />
+    <None Include="Schema\Procedures\dbo.CalcWhalebackVirtualFlowOHP4.sql" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioModelBlockLumpFinesInformation.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioMetBalancingGrade.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioPortBalanceGrade.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioShippingNominationItemParcel.prc" />
+    <None Include="Schema\Procedures\dbo.AddBhpbioShippingNominationItemParcel.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioBlastblockDataExportReport.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSampleCoverageReport.sql" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioMissingSampleDataException.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataActualDirectFeed.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataBenchErrorByLocation.sql" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioOMHauledFromBlock.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioShippingNominationItemParcel.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioBlastBlockLumpPercent.PRC" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioBlastBlockLumpFinesGrade.PRC" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioHaulageLumpFinesGrade.PRC" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataTagsDetailed.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioOreForRail.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataOreForRail.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioLumpFinesRecord.sql" />
+    <None Include="Schema\Procedures\dbo.CorrectBhpbioProductionWeightometerAndDestinationAssignments.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioLumpFinesRecord.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDefaultLumpFinesList.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDefaultLumpFinesRecord.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioLocationParentHeirarchyWithOverride.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioLocationListWithOverride.prc" />
+    <None Include="Schema\Procedures\dbo.AddBhpbioPurgeRequest.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioCustomMessage.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioLocationChildrenNameWithOverride.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioLocationNameWithOverride.prc" />
+    <None Include="Schema\Procedures\dbo.PurgeBhpbioData.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioCustomMessage.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSummaryActualY.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSummaryAdditionalHaulageRelated.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSummaryDataRelatedToApproval.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSummaryEntry.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSummaryModelMovement.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSummaryOMToStockpile.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioApprovalDataRaw.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioApprovalDigblockListApprovedData.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioApprovalDigblockListLiveData.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioCustomMessages.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioLatestPurgeableMonth.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioLatestPurgedMonth.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioNotificationInstanceApproval.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioPurgeRequests.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataTags.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSummaryIdForMonth.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioAllOtherMovementsApproved.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioAllF1Approved.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioApprovalOtherMovementDate.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioApprovalPitMovedDate.prc" />
+    <None Include="Schema\Procedures\dbo.SaveBhpbioNotificationInstanceApproval.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioActualBeneProduct.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioActualC.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioActualY.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioActualZ.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioAdditionalHaulageRelated.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioDataRelatedToApproval.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioModelMovement.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioOMToStockpile.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioPortBlendedAdjustment.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioPortStockpileDelta.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioPostCrusherStockpileDelta.prc" />
+    <None Include="Schema\Procedures\dbo.SummariseBhpbioShippingTransaction.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioLocationDate.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioPurgeRequests.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioStockpileLocationDate.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportLocationBreakdownWithNames.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioLocationListWithOverrideAndDates.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioHaulageLumpFinesGrade.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioBlastBlockLumpFinesGrade.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioBlastBlockLumpPercent.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioCrusherLocationOverride.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioWeightometerDataExceptionExemption.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioWeightometerGroupWeightometer.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioWeightometerLocationOverride.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioCustomMessage.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioDefaultLumpFines.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioLocationDate.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioLocationOverride.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioNotificationInstanceApproval.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioPortBalanceGrade.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioPurgeRequest.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioPurgeRequestStatus.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioShippingNominationItemParcel.TAB" />
+    <None Include="Schema\Tables\dbo.BhpbioShippingNominationItemParcelGrade.TAB" />
+    <None Include="Schema\Tables\dbo.BhpbioStockpileLocationDate.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioStockpileLocationOverride.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioSummary.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioSummaryEntry.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioSummaryEntryGrade.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioSummaryEntryType.tab" />
+    <None Include="Schema\Views\dbo.BhpbioApprovalStatusByMonth.viw" />
+    <None Include="Upgrade\1.0.0.0\0001 - BhpbioReportDataHistorical.sql" />
+    <None Include="Upgrade\1.0.0.0\0002 - BhpbioReportDataTags.sql" />
+    <None Include="Upgrade\1.1.0.0\Post\%280001%29 Security.sql" />
+    <None Include="Upgrade\1.1.0.0\Pre\%280001%29 Security.sql" />
+    <None Include="Upgrade\1.1.18.0\%280001%29 PitCodeChanges.sql" />
+    <None Include="Upgrade\1.1.18.0\%280002%29 MET Balancing.sql" />
+    <None Include="Upgrade\1.1.24.0\PortBalance.sql" />
+    <None Include="Upgrade\1.3.0.0\dbo.GraphThresholds.sql" />
+    <None Include="Upgrade\1.3.0.0\dbo.UserInterfaceListingField.sql" />
+    <None Include="Upgrade\1.2.0.0\Import - Haulage.sql" />
+    <None Include="Upgrade\1.2.0.0\Import - Production.sql" />
+    <None Include="Upgrade\1.2.0.0\NJVCrusher.sql" />
+    <None Include="Upgrade\1.2.0.0\NJVStockpile.sql" />
+    <None Include="Upgrade\1.2.0.0\NJVWeightometer.sql" />
+    <None Include="Upgrade\1.2.0.0\StockpileField.sql" />
+    <None Include="Upgrade\1.1.28.0\HistoricalData.sql" />
+    <None Include="Upgrade\1.1.33.0\01DeleteOldBlocksFromHolding.sql" />
+    <None Include="Upgrade\1.1.33.0\02DeleteDuplicateBlocksOrebody23.sql" />
+    <None Include="Upgrade\1.1.33.0\03DeleteValidationFailuresBlockedBefore1Jan08.sql" />
+    <None Include="Upgrade\1.1.33.0\YandiICPtoLoadloutWeightometer.sql" />
+    <None Include="Upgrade\1.2.0.0\UserInterfaceListingTab.sql" />
+    <None Include="Schema\Procedures\dbo.AddBhpbioMaterialTypeLocation.prc" />
+    <None Include="Schema\Procedures\dbo.AddBhpbioMetBalancing.prc" />
+    <None Include="Schema\Procedures\dbo.AddBhpbioPortBalance.prc" />
+    <None Include="Schema\Procedures\dbo.AddBhpbioPortBlending.prc" />
+    <None Include="Schema\Procedures\dbo.AddBhpbioShippingNominationItem.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioStockpileLocationConfiguration.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioAnalysisVariance.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioBlastBlockHolding.PRC" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioBlastBlockModelGradeHolding.PRC" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioBlastBlockModelHolding.PRC" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioBlastBlockPointHolding.PRC" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioReportColor.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioReportThreshold.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioShippingNomination.prc" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioShippingNominationItemParcelGrade.prc" />
+    <None Include="Schema\Procedures\dbo.AddUpdateDeleteBhpbioPortBlendingGrade.prc" />
+    <None Include="Schema\Procedures\dbo.ApproveBhpbioApprovalData.prc" />
+    <None Include="Schema\Procedures\dbo.ApproveBhpbioApprovalDigblock.prc" />
+    <None Include="Schema\Procedures\dbo.BhpbioDataExceptionStockpileGroupLocationMissing.prc" />
+    <None Include="Schema\Procedures\dbo.BhpbioResolveBasic.prc" />
+    <None Include="Schema\Procedures\dbo.BhpbioTryDeleteLocation.prc" />
+    <None Include="Schema\Procedures\dbo.CalcNjvVirtualFlow.prc" />
+    <None Include="Schema\Procedures\dbo.CalcVirtualFlow.prc" />
+    <None Include="Schema\Procedures\dbo.CalcWhalebackVirtualFlowBene.prc" />
+    <None Include="Schema\Procedures\dbo.CalcYandiVirtualFlow.prc" />
+    <None Include="Schema\Procedures\dbo.DbaBhpbioBlockInitialLoadClearInvalid.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioAnalysisVariance.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioBlastBlockHolding.PRC" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioMaterialTypeLocationAll.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioMetBalancing.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioPortBalance.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioPortBlending.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioReconciliationMovementStage.PRC" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioReportThreshold.prc" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioShippingNominationItem.prc" />
+    <None Include="Schema\Procedures\dbo.DoesBhpbioQueuedBlocksJobExist.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioAnalysisVarianceList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioApprovalData.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioApprovalDigblockList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioApprovalOtherMaterial.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioBlastBlockHoldingMQ2PitCode.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioBlastByBlastReconciliation.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDataExceptionCount.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDataExceptionList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDigblockHaulageGradeOverRange.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDigblockModelBlockGradeOverPeriod.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDigblockPolygonList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDigblockPolygonWithinRangeAndBench.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioDigblockReconciledGradeOverPeriod.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioGradeRecoveryReport.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioHaulageCorrectionList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioHaulageCorrectionListFilter.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioHaulageManagementList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioHaulageManagementListFilter.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioHaulageVsPlantReport.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioHoldingBenches.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioHoldingModelBlocks.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioImportsRunningQueuedCount.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioLocationRoot.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioMaterialLookup.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioMaterialTypeLocationList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioModelComparisonReport.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioMovementRecoveryReport.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioNoHaulageErrors.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioPortBalance.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioPortBlending.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioProductionEntity.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioProductionWeightometer.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioRecalcLogicHistoryTransactionLevel0.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReconciliationMovements.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioRecoveryAnalysisReport.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportAttributeProperties.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportBaseDataAsGrades.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportBaseDataAsTonnes.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportColorList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataActualBeneProduct.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataActualExpitToStockpile.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataActualMineProduction.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataActualStockpileToCrusher.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataBlockModel.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataBlockModelTotal.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataHistorical.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataPortBlendedAdjustment.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataPortOreShipped.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataPortStockpileDelta.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportDataReview.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportFactorProperties.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportThresholdList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioReportThresholdTypeList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioShippingNomination.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioStockpileBalanceReport.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioStockpileLocationConfiguration.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioStockpileList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioStockpileListByGroups.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioUserLocation.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioUserLocationList.prc" />
+    <None Include="Schema\Procedures\dbo.GetBhpMaterialTypeList.PRC" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioShippingNominationItemById.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioApprovalAllBlockLocationDate.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioApprovalBlock.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioApprovalBlockDate.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioApprovalBlockLocationDate.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioApprovalLocation.prc" />
+    <None Include="Schema\Procedures\dbo.ResolveBhpbioLocationByName.prc" />
+    <None Include="Schema\Procedures\dbo.IsBhpbioUserInLocation.prc" />
+    <None Include="Schema\Procedures\dbo.IsDigblockTreeUserSettingAvailable.prc" />
+    <None Include="Schema\Procedures\dbo.SetDigblockTreeUserDefaults.prc" />
+    <None Include="Schema\Procedures\dbo.UnapproveBhpbioApprovalData.prc" />
+    <None Include="Schema\Procedures\dbo.UnapproveBhpbioApprovalDigblock.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioDataExceptionLocations.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioMetBalancing.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioPortBalance.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioPortBlending.prc" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioReconciliationMovement.PRC" />
+    <None Include="Schema\Procedures\dbo.UpdateBhpbioShippingNominationItem.prc" />
+    <None Include="Schema\Tables\dbo.BhpbioAnalysisVariance.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioApprovalData.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioApprovalDigblock.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioBlastBlockHolding.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioBlastBlockModelGradeHolding.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioBlastBlockModelHolding.TAB" />
+    <None Include="Schema\Tables\dbo.BhpbioBlastBlockPointHolding.TAB" />
+    <None Include="Schema\Tables\dbo.BhpbioDataExceptionLocation.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioImportReconciliationMovement.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioImportReconciliationMovementStage.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioMetBalancing.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioMetBalancingGrade.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioPortBalance.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioPortBlending.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioPortBlendingGrade.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioProductionResolutionBasic.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioReportColor.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioReportDataHistorical.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioReportDataTags.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioReportThreshold.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioReportThresholdType.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioSecurityRoleLocation.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioShippingNomination.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioShippingNominationItem.tab" />
+    <None Include="Schema\Tables\dbo.BhpbioStockpileGroupDesignation.TAB" />
+    <None Include="Schema\Tables\dbo.BhpbioLocationStockpileConfiguration.tab" />
+    <None Include="Schema\Functions\dbo.BhpbioDoesQueuedBlocksJobExist.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioDataExceptionLocationIgnoreList.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportActualC.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportActualY.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportActualZ.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportBreakdown.UDF" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportHighGrade.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportLocation.UDF" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportLocationBreakdown.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioReportModel.udf" />
+    <None Include="Schema\Functions\dbo.GetBhpbioWeightometerSampleSource.udf" />
+    <None Include="Schema\Views\dbo.BhpbioImportBlock.viw" />
+    <None Include="Schema\Views\dbo.BhpbioImportHaulage.viw" />
+    <None Include="Schema\Views\dbo.BhpbioImportHaulageGrade.viw" />
+    <None Include="Schema\Views\dbo.BhpbioImportHaulageNotes.viw" />
+    <None Include="Schema\Views\dbo.BhpbioImportHaulageValue.viw" />
+    <None Include="Schema\Views\dbo.BhpbioImportProductionTransaction.viw" />
+    <None Include="Schema\Views\dbo.BhpbioImportStockpile.viw" />
+    <None Include="Schema\Views\dbo.BhpbioImportStocpkileAdjustment.viw" />
+    <None Include="Upgrade\1.4.0.0\%280002%29 Code.sql" />
+    <None Include="Upgrade\1.4.2.0\%280002%29 ENH-2136 Updates.sql" />
+    <None Include="Upgrade\1.4.2.0\%280001%29 ENH-2136-REQ-80 Updates.sql" />
+    <None Include="Upgrade\1.4.3.10\%280001%29 Updates.sql" />
+    <None Include="Upgrade\1.4.3.13\%280001%29 Bene Product.sql" />
+    <None Include="Upgrade\1.4.3.14\%280001%29 BhpbioApprovalData Index.sql" />
+    <None Include="Upgrade\1.4.4.10\%280001%29 UpdateBhpbioDataExceptionLocations.sql" />
+    <None Include="Upgrade\1.4.4.3\%280001%29 CalcWhalebackVirtualFlow.sql" />
+    <None Include="Upgrade\1.4.4.4\%280001%29 RGP5 Crusher Rename.sql" />
+    <None Include="Upgrade\1.4.4.4\%280002%29 RGP5 OHP3 Crusher Addition.sql" />
+    <None Include="Upgrade\1.4.4.5\%280001%29 GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.4.4.8\%280001%29 Table Scripts.sql" />
+    <None Include="Upgrade\1.4.4.8\%280002%29 View Scripts.sql" />
+    <None Include="Upgrade\1.4.4.8\%280003%29 Function Scripts.sql" />
+    <None Include="Upgrade\1.4.4.8\%280004%29 Stored Procedure Scripts.sql" />
+    <None Include="Upgrade\1.4.4.8\%280005%29 Data Population Scripts.sql" />
+    <None Include="Upgrade\1.4.4.8\%280006%29 UI Listing Update for Approvals.sql" />
+    <None Include="Upgrade\1.4.4.9\%280001%29 GetBhpbioReportDataHistorical.sql" />
+    <None Include="Upgrade\1.5.0.10\%280001%29 Crusher enhancements.sql" />
+    <None Include="Upgrade\1.5.0.15\%280032%29 Func dbo.GetBhpbioReportModel.sql" />
+    <None Include="Upgrade\1.5.0.16\%280001%29 Proc dbo.GetBhpbioBlastByBlastReconciliation.sql" />
+    <None Include="Upgrade\1.5.0.16\%280004%29 Proc dbo.GetBhpbioStockpileBalanceReport.sql" />
+    <None Include="Upgrade\1.5.0.17\%280002%29 Stored Procedure Grant Scripts.sql" />
+    <None Include="Upgrade\1.5.0.17\%280001%29 Proc dbo.GetBhpbioLocationParentHeirarchyWithOverride.sql" />
+    <None Include="Upgrade\1.5.0.17\%280003%29 Func dbo.GetBhpbioReportActualC.sql" />
+    <None Include="Upgrade\1.5.0.19\%280003%29 DeleteBhpbioSummaryEntry.sql" />
+    <None Include="Upgrade\1.5.1.0\%280002%29 Data Population Scripts.sql" />
+    <None Include="Upgrade\1.5.1.0\%280009%29 Func dbo.GetBhpbioReportActualC.sql" />
+    <None Include="Upgrade\1.5.1.0\%280010%29 Func dbo.GetBhpbioReportActualY.sql" />
+    <None Include="Upgrade\1.5.1.0\%280011%29 Func dbo.GetBhpbioReportActualZ.sql" />
+    <None Include="Upgrade\1.5.1.0\%280013%29 Proc dbo.GetBhpbioHaulageVsPlantReport.sql" />
+    <None Include="Upgrade\1.5.1.0\%280016%29 Proc dbo.GetBhpbioReportDataActualBeneProduct.sql" />
+    <None Include="Upgrade\1.5.1.0\%280017%29 Proc dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.1.0\%280018%29 Proc dbo.GetBhpbioReportDataReview.sql" />
+    <None Include="Upgrade\1.5.1.0\%280019%29 Proc dbo.GetBhpbioReportDataSitePostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.1.0\%280021%29 Proc dbo.SummariseBhpbioActualBeneProduct.sql" />
+    <None Include="Upgrade\1.5.1.0\%280022%29 Proc dbo.SummariseBhpbioActualC.sql" />
+    <None Include="Upgrade\1.5.1.0\%280023%29 Proc dbo.SummariseBhpbioActualY.sql" />
+    <None Include="Upgrade\1.5.1.0\%280036%29 Proc dbo.GetBhpbioHaulageManagementList.sql" />
+    <None Include="Upgrade\1.5.1.0\%280024%29 Proc dbo.SummariseBhpbioActualZ.sql" />
+    <None Include="Upgrade\1.5.1.0\%280037%29 Proc dbo.GetBhpbioHaulageManagementListFilter.sql" />
+    <None Include="Upgrade\1.5.1.0\%280025%29 Proc dbo.SummariseBhpbioOMToStockpile.sql" />
+    <None Include="Upgrade\1.5.1.0\%280026%29 Proc dbo.SummariseBhpbioPostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.1.0\%280027%29 Proc dbo.GetBhpbioReportDataPortOreShipped.sql" />
+    <None Include="Upgrade\1.5.1.0\%280029%29 Proc dbo.SummariseBhpbioShippingTransaction.sql" />
+    <None Include="Upgrade\1.5.1.0\%280030%29 Proc dbo.GetBhpbioReportDataPortStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.1.0\%280031%29 Proc dbo.SummariseBhpbioPortStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.1.0\%280032%29 Proc dbo.GetBhpbioReportDataPortBlendedAdjustment.sql" />
+    <None Include="Upgrade\1.5.1.0\%280033%29 Proc dbo.SummariseBhpbioPortBlendedAdjustment.sql" />
+    <None Include="Upgrade\1.5.1.0\%280034%29 Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <None Include="Upgrade\1.5.0.19\%280001%29 Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <None Include="Upgrade\1.5.0.19\%280002%29 Add Jimblebar Security Role.sql" />
+    <None Include="Upgrade\1.5.0.1\%280001%29 PurgeBhpbioData.sql" />
+    <None Include="Upgrade\1.5.0.3\%280001%29 Upgrade GetBhpbioApprovalOtherMaterial.sql" />
+    <None Include="Upgrade\1.5.0.3\%280002%29 Add ReportDataTag for Other Movements Blend Grade.sql" />
+    <None Include="Upgrade\1.5.0.4\%280001%29 PurgeBhpbioData.sql" />
+    <Content Include="Upgrade\1.5.0.6\%280002%29 dbo.AddBhpbioStockpileDeletionState.sql" />
+    <Content Include="Upgrade\1.5.0.6\%280003%29 dbo.ClearBhpbioStockpileDeletionState.sql" />
+    <Content Include="Upgrade\1.5.0.5\%280001%29 Update Summary Table Indexes.sql" />
+    <Content Include="Upgrade\1.5.0.6\%280004%29 PopulateStockpileDeletionTable.sql" />
+    <None Include="Upgrade\1.5.0.9\%280001%29 Add columns to Nomination table.sql" />
+    <None Include="Upgrade\1.5.0.9\%280002%29 Update UserInterfaceListingField.sql" />
+    <None Include="Upgrade\1.5.0.9\%280003%29 dbo.GetBhpbioShippingTransaction.sql" />
+    <None Include="Upgrade\1.5.0.9\%280004%29 dbo.UserInterfaceListingField.sql" />
+    <None Include="Upgrade\1.5.0.9\%280005%29 dbo.AddBhpbioShippingTransactionNomination.sql" />
+    <None Include="Upgrade\1.5.0.9\%280006%29 dbo.UpdateBhpbioShippingTransactionNomination.sql" />
+    <None Include="Upgrade\1.5.0.15\%280001%29 Index Scripts.sql" />
+    <None Include="Upgrade\1.5.0.15\%280002%29 Table Scripts.sql" />
+    <None Include="Upgrade\1.5.0.15\%280004%29 Proc dbo.UpdateBhpbioStockpileLocationDate.sql" />
+    <None Include="Upgrade\1.5.0.15\%280006%29 Func dbo.GetBhpbioReportActualC.sql" />
+    <None Include="Upgrade\1.5.0.15\%280007%29 Func dbo.GetBhpbioReportActualY.sql" />
+    <None Include="Upgrade\1.5.0.15\%280005%29 Data Population Scripts.sql" />
+    <None Include="Upgrade\1.5.0.15\%280009%29 Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <None Include="Upgrade\1.5.0.15\%280008%29 Func dbo.GetBhpbioReportActualZ.sql" />
+    <None Include="Upgrade\1.5.0.15\%280003%29 Proc dbo.UpdateBhpbioLocationDate.sql" />
+    <None Include="Upgrade\1.5.0.15\%280010%29 Proc dbo.GetBhpbioLocationNameWithOverride.sql" />
+    <None Include="Upgrade\1.5.0.15\%280011%29 Proc dbo.GetBhpbioLocationChildrenNameWithOverride.sql" />
+    <None Include="Upgrade\1.5.0.15\%280012%29 Proc dbo.GetBhpbioApprovalDigblockListApprovedData.sql" />
+    <None Include="Upgrade\1.5.0.15\%280013%29 Proc dbo.GetBhpbioApprovalDigblockListLiveData.sql" />
+    <None Include="Upgrade\1.5.0.15\%280014%29 Proc dbo.GetBhpbioApprovalOtherMaterial.sql" />
+    <None Include="Upgrade\1.5.0.15\%280015%29 Proc dbo.GetBhpbioReportDataActualBeneProduct.sql" />
+    <None Include="Upgrade\1.5.0.15\%280016%29 Proc dbo.GetBhpbioReportDataBlockModel.sql" />
+    <None Include="Upgrade\1.5.0.15\%280017%29 Proc dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.0.15\%280018%29 Proc dbo.GetBhpbioReportDataPortBlendedAdjustment.sql" />
+    <None Include="Upgrade\1.5.0.15\%280019%29 Proc dbo.GetBhpbioReportDataPortOreShipped.sql" />
+    <None Include="Upgrade\1.5.0.15\%280020%29 Proc dbo.GetBhpbioReportDataPortStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.0.15\%280021%29 Proc dbo.GetBhpbioReportDataSitePostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.0.15\%280022%29 Proc dbo.GetBhpbioLocationListWithOverride.sql" />
+    <None Include="Upgrade\1.5.0.15\%280023%29 Proc dbo.GetBhpbioLocationParentHeirarchyWithOverride.sql" />
+    <None Include="Upgrade\1.5.0.15\%280024%29 Proc dbo.GetBhpbioHaulageManagementList.sql" />
+    <None Include="Upgrade\1.5.0.15\%280025%29 Proc dbo.GetBhpbioHaulageManagementListFilter.sql" />
+    <None Include="Upgrade\1.5.0.15\%280026%29 Proc dbo.GetBhpbioProductionEntity.sql" />
+    <None Include="Upgrade\1.5.0.15\%280027%29 Proc dbo.GetBhpbioReportDataReview.sql" />
+    <None Include="Upgrade\1.5.0.15\%280028%29 Proc dbo.GetBhpbioStockpileBalanceReport.sql" />
+    <None Include="Upgrade\1.5.0.15\%280029%29 Proc dbo.GetBhpbioStockpileList.sql" />
+    <None Include="Upgrade\1.5.0.15\%280030%29 Proc dbo.GetBhpbioStockpileListByGroups.sql" />
+    <None Include="Upgrade\1.5.0.15\%280031%29 Proc dbo.SummariseBhpbioPostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.1.0\%280004%29 Func dbo.GetBhpbioExcludeStockpile.sql" />
+    <None Include="Upgrade\1.5.1.0\%280038%29 Proc dbo.GetBhpbioApprovalDigblockList.sql" />
+    <None Include="Upgrade\1.5.1.0\%280040%29 Proc dbo.IsBhpbioUserInLocation.sql" />
+    <None Include="Upgrade\1.5.1.0\%280039%29 Proc dbo.GetBhpbioApprovalDigblockListLiveData.sql" />
+    <None Include="Upgrade\1.5.2.0\%280001%29 AC-C3 and YR-CT Crushers.sql" />
+    <None Include="Upgrade\1.5.2.1\%280001%29 Update dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.2.1\%280002%29 Update dbo.SummariseBhpbioPostCrusherStockpileDelta.sql" />
+    <None Include="Upgrade\1.5.2.1\%280003%29 Update dbo.GetBhpbioReportDataPortBlendedAdjustment.sql" />
+    <None Include="Upgrade\1.5.2.2\%280001%29 Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <None Include="Upgrade\1.5.2.3\%280001%29 Create OB24 Crusher.sql" />
+    <None Include="Upgrade\1.5.2.3\%280002%29 Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <None Include="Upgrade\1.5.2.3\%280003%29 Func dbo.GetBhpbioReportLocationWithOverride.UDF" />
+    <None Include="Upgrade\1.5.2.3\%280004%29 Func dbo.IsBhpbioAllF1Approved.prc" />
+    <None Include="Upgrade\1.5.2.3\%280005%29 Func dbo.IsBhpbioAllOtherMovementsApproved.prc" />
+    <None Include="Upgrade\1.5.2.3\%280006%29 Func dbo.IsBhpbioApprovalAllBlockLocationDate.prc" />
+    <None Include="Upgrade\1.5.2.3\%280007%29 Func dbo.IsBhpbioApprovalBlockLocationDate.prc" />
+    <None Include="Upgrade\1.5.2.3\%280008%29 Func dbo.IsBhpbioApprovalOtherMovementDate.prc" />
+    <None Include="Upgrade\1.5.2.3\%280009%29 Func dbo.IsBhpbioApprovalPitMovedDate.prc" />
+    <None Include="Upgrade\2.0.0.0\%280001%29 Upgrade Schema to Core 6.4.sql" />
+    <None Include="Upgrade\2.0.0.0\%280002%29 Refactor Shipping Schema.sql" />
+    <None Include="Upgrade\2.0.0.0\%280004%29 Port Balance Fields.sql" />
+    <None Include="Upgrade\2.0.0.0\%280005%29 Sample Notes Field Metadata.sql" />
+    <None Include="Upgrade\2.0.0.0\%280006%29 Update BhpbioPortBlending Table.sql" />
+    <None Include="Upgrade\2.0.0.0\%280007%29 Default Lump Fines.sql" />
+    <None Include="Upgrade\2.0.0.0\%280008%29 Upgrade BhpbioSummaryEntry Table.sql" />
+    <None Include="Upgrade\2.0.0.0\%280009%29 Add Blast Block Lump Fines Tables.sql" />
+    <None Include="Upgrade\2.0.0.0\%280010%29 Add Haulage Lump Fines Tables.sql" />
+    <None Include="Upgrade\2.0.0.0\%280011%29 Add UserInterfaceListingFields for Port Tab.sql" />
+    <None Include="Upgrade\2.0.0.0\%280015%29 Alter Blast Block Import Holding Tables.sql" />
+    <None Include="Upgrade\2.0.0.0\%280013%29 Add Report tags.sql" />
+    <None Include="Upgrade\2.0.0.0\%280012%29 Extend BhpbioReportDataTagsTable.sql" />
+    <None Include="Upgrade\1.5.3.0\%280006%29 dbo.CorrectBhpbioProductionWeightometerAndDestinationAssignments.sql" />
+    <None Include="Upgrade\1.5.3.0\%280007%29 Update dbo.GetBhpbioProductionEntity.sql" />
+    <None Include="Upgrade\1.5.3.0\%280008%29 Update dbo.GetBhpbioProductionWeightometer.sql" />
+    <None Include="Upgrade\1.5.3.0\%280003%29 Add location override records.sql" />
+    <None Include="Upgrade\1.5.3.0\%280002%29 dbo.BhpbioWeightometerLocationOverride.tab" />
+    <None Include="Upgrade\1.5.3.0\%280001%29 dbo.BhpbioCrusherLocationOverride.tab" />
+    <None Include="Upgrade\1.5.3.0\%280004%29 dbo.GetBhpbioCrusherLocationWithOverride.udf" />
+    <None Include="Upgrade\1.5.3.0\%280005%29 dbo.GetBhpbioWeightometerLocationWithOverride.udf" />
+    <None Include="Upgrade\1.5.3.0\%280010%29 dbo.GetBhpbioReportActualC.udf" />
+    <None Include="Upgrade\1.5.3.0\%280011%29 dbo.GetBhpbioReportActualZ.udf" />
+    <None Include="Upgrade\1.5.3.0\%280012%29 dbo.GetBhpbioWeightometerSampleSource.udf" />
+    <None Include="Upgrade\1.5.3.0\%280013%29 dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.prc" />
+    <None Include="Upgrade\1.5.3.0\%280014%29 dbo.GetBhpbioReportDataReview.prc" />
+    <None Include="Upgrade\1.5.3.0\%280015%29 dbo.SummariseBhpbioActualC.prc" />
+    <None Include="Upgrade\1.5.3.0\%280016%29 dbo.SummariseBhpbioActualZ.prc" />
+    <None Include="Upgrade\1.5.3.0\%280017%29 dbo.SummariseBhpbioPostCrusherStockpileDelta.prc" />
+    <None Include="Upgrade\1.5.3.0\%280020%29 dbo.GetBhpbioReportActualY.udf" />
+    <None Include="Upgrade\1.5.3.0\%280018%29 Update dbo.GetBhpbioApprovalData.sql" />
+    <None Include="Upgrade\1.5.3.0\%280019%29 Add dbo.GetBhpbioLocationChildMap.sql" />
+    <None Include="Upgrade\1.5.4.0\%280003%29 Update Jimblebar Location Override.sql" />
+    <None Include="Upgrade\1.5.4.0\%280005%29 dbo.IsBhpbioAllF1Approved.prc" />
+    <None Include="Upgrade\1.5.4.0\%280002%29 dbo.BhpbioApprovalStatusByMonth.viw" />
+    <None Include="Upgrade\1.5.4.0\%280001%29 dbo.UpdateBhpbioLocationDate.prc" />
+    <None Include="Upgrade\1.5.4.0\%280004%29 dbo.GetBhpbioReportDataHistorical.prc" />
+    <None Include="Upgrade\2.0.0.0\%280014%29 GetBhpbioReportDataTagsDetailed.sql" />
+    <None Include="Upgrade\2.0.0.0\%280017%29 Fix Haulage Raw and Haulage Field Definitions.sql" />
+    <None Include="Upgrade\2.0.0.0\%280018%29 Import Metadata Fixes %28Excludes Shipping%29.sql" />
+    <None Include="Upgrade\2.0.0.0\%280016%29 MET Balancing Fields.sql" />
+    <None Include="Upgrade\2.0.0.0\%280020%29 DeleteBhpbioModelBlockLumpFinesInformation.sql" />
+    <None Include="Upgrade\2.0.0.0\%280021%29 GetBhpbioHoldingModelBlocks.sql" />
+    <None Include="Upgrade\2.0.0.0\%280022%29 Shipping Import Metadata.sql" />
+    <None Include="Upgrade\2.0.0.0\%280023%29 Migrate Digblock Movement Detail.sql" />
+    <None Include="Upgrade\2.0.0.0\%280024%29 New Approval Data Index.sql" />
+    <None Include="Upgrade\2.0.18.0\%280001%29 Correct Shipping Constraints.sql" />
+    <None Include="Upgrade\2.0.18.0\%280002%29 Correct Shipping Nomination Sync Data.sql" />
+    <None Include="Upgrade\2.0.18.0\%280003%29 Correct Shipping Nomination Parcel Sync Data.sql" />
+    <None Include="Upgrade\2.0.19.0\%280001%29 Correct PostCrusher Approval Data Tags.sql" />
+    <None Include="Upgrade\2.0.20.0\%280001%29 BhpbioLocationStockpileConfiguration changes to Support Jimblebar.sql" />
+    <None Include="Upgrade\2.0.21.0\%280002%29 Add new WB Weightometers.sql" />
+    <None Include="Upgrade\2.0.21.0\%280001%29 Rename WB Weightometers.sql" />
+    <None Include="Upgrade\2.0.21.0\%280003%29 Add new 25-C2 Weightometer.sql" />
+    <None Include="Upgrade\2.0.24.0\%280001%29 Correct Transaction and Transaction Grade Sync ProductSize Data.sql" />
+    <None Include="Upgrade\2.0.24.0\%280002%29 Correct Weightometer Sample Notes Product Size.sql" />
+    <None Include="Upgrade\2.0.26.0\%280001%29 Jimblebar OHP1 Configuration.sql" />
+    <None Include="Upgrade\2.2.13.0\%280002%29 Correct BeneFinesToSYard Weightometer Type.sql" />
+    <None Include="Upgrade\2.2.13.0\%280003%29 Rename WB-OHP5 to NH-OHP5.sql" />
+    <None Include="Upgrade\2.2.13.0\%280004%29 Correct OHP4 Weightometer Locations.sql" />
+    <None Include="Upgrade\2.2.13.0\%280005%29 Correct OHP4 Weightometer Types.sql" />
+    <None Include="Upgrade\z2.1.10.0\%280001%29 Create OHP5 Crusher.sql" />
+    <None Include="Upgrade\2.1.9.0\%280001%29 Change Weightometer Type of WB-C2OutFlow.sql" />
+    <None Include="Upgrade\2.1.9.0\%280002%29 Add New Weightometers WB-C2OutFlow-Corrected and WB-C2OutFlow-CorrectedBCOnly.sql" />
+    <None Include="Upgrade\2.1.9.0\%280003%29 Delete CalcWhalebackVirtualFlow due to recreation with new name CalcWhalebackVirtualFlowBene.sql" />
+    <None Include="Upgrade\2.1.9.0\%280004%29 Delete WeightometerFlowPeriod for WB-C2OutFlow.sql" />
+    <None Include="Upgrade\2.1.9.0\%280005%29 Create System Setting to Control the Date frrom which the WB-C2 Back Calculation will apply.sql" />
+    <None Include="Upgrade\2.1.9.0\%280006%29 Create New Data Exception Type for Missing Samples.sql" />
+    <None Include="Upgrade\2.1.9.0\%280007%29 Create System Setting to Limit Time Range when Identifying Missing Sample Data Exceptions.sql" />
+    <None Include="Upgrade\2.1.9.0\%280008%29 Populate the Weightometer Exemption table.sql" />
+    <None Include="Upgrade\2.1.9.0\%280009%29 Create New Data Exception Type for Insufficient Sample Information to perform Back Calculation.sql" />
+    <None Include="Upgrade\2.1.9.0\%280012%29 Perform historical back calculations for WB-C2OutFlow and redirect DataTransactionTonnesFlow.sql" />
+    <None Include="Upgrade\2.1.0.0\%280001%29 STGM Block Model.sql" />
+    <None Include="Upgrade\2.1.0.0\%280002%29 Data Export Report Security.sql" />
+    <None Include="Upgrade\2.1.0.0\%280003%29 Update UserInterfaceListtingField.sql" />
+    <None Include="Upgrade\2.1.0.0\%280006%29 Update BlastBlockModel Import.sql" />
+    <None Include="Upgrade\2.1.0.0\%280004%29 Upgrade BhpbioSummaryEntry Table.sql" />
+    <None Include="Upgrade\2.1.0.0\%280005%29 Add F15 to Approvals.sql" />
+    <None Include="Upgrade\2.1.0.0\%280007%29 Add OverviewReconContribution Report.sql" />
+    <None Include="Upgrade\2.1.0.0\%280008%29 Add User Settings.sql" />
+    <None Include="Upgrade\2.1.0.0\%280009%29 New colour.sql" />
+    <None Include="Upgrade\2.1.0.0\%280010%29 F3+F25 Approval Security.sql" />
+    <None Include="Upgrade\2.1.2.0\%280001%29 Correct Transaction and Transaction Grade Sync Data.sql" />
+    <None Include="Upgrade\2.2.0.0\%280001%29 Add new Reports.sql" />
+    <None Include="Upgrade\2.1.5.0\%280001%29 Correct Approval Data Tag Grouping.sql" />
+    <None Include="Upgrade\2.1.6.0\%280001%29 Change Blastblock approval column.sql" />
+    <None Include="Upgrade\2.2.0.0\%280002%29 Add H2O.sql" />
+    <None Include="Upgrade\2.2.0.0\%280003%29 Update Summary tables for Volume.sql" />
+    <None Include="Upgrade\2.2.0.0\%280004%29 Add Report Colour Attributes.sql" />
+    <None Include="Upgrade\2.2.0.0\%280005%29 Update Grade Sort Order.sql" />
+    <None Include="Upgrade\2.2.0.0\%280006%29 Add New Report Thresholds.sql" />
+    <None Include="Upgrade\2.2.0.0\%280007%29 Invert Density Values.sql" />
+    <None Include="Upgrade\2.1.7.0\%280001%29 Remove Approval Tags No Longer Needed.sql" />
+    <None Include="Upgrade\2.1.8.0\%280001%29 New Report Colours.sql" />
+    <None Include="Upgrade\2.1.9.0\%280010%29 Create BhpbioWeightometerGroupWeightometer Table.sql" />
+    <None Include="Upgrade\2.1.9.0\%280011%29 Populate new WeightometerGroups and relate via BhpbioWeightometerGroupWeightometer.sql" />
+    <None Include="Upgrade\2.1.9.1\%280001%29 Update Missing Samples Data Exception Type Description.sql" />
+    <None Include="Upgrade\2.1.9.1\%280002%29 Populate the Weightometer Exemption table.sql" />
+    <None Include="Upgrade\2.1.9.4\%280001%29 Create System Setting Weightometer Tonnes Significant.sql" />
+    <None Include="Upgrade\2.2.10.0\%280001%29 BhpbioBlastBlockModelGradeHolding Nullable GradeValue.sql" />
+    <None Include="Upgrade\2.2.07.1\%280001%29 Add mssing H2O to Digblock Grade.sql" />
+    <None Include="Upgrade\2.2.09.0\%280001%29 Set Attribute Colors.sql" />
+    <None Include="Upgrade\2.2.10.0\%280002%29 Add missing report colors.sql" />
+    <None Include="Upgrade\2.2.10.5\%280001%29 Fill missing threshold values.sql" />
+    <None Include="Upgrade\2.2.10.5\%280002%29 Hide Sample Coverage Report.sql" />
+    <None Include="Upgrade\2.2.11.0\%280001%29 Clear Monthly approval table.sql" />
+    <None Include="Upgrade\2.2.12.0\%280001%29 Update Live vs Approved Thresholds.sql" />
+    <None Include="Upgrade\2.2.12.0\%280002%29 Calculate Historic Volume Summary Data.sql" />
+    <None Include="Upgrade\2.2.13.0\%280001%29 Correct WeightometerFlowPeriod BeneOreRaw.sql" />
+    <None Include="Upgrade\2.2.15.3\%280001%29 Correct WeightometerFlowPeriod for 25-C2.sql" />
+    <None Include="UtilityScripts\Deployment\%282.2.15.3-0001%29 Correct WFP samples based off Source.sql" />
+    <None Include="UtilityScripts\Deployment\%282.2.0.0-0001%29 Correct Block Volume Sync Data.sql" />
+    <None Include="Upgrade\2.2.0.0\%280008%29 Recalc Grades.sql" />
+    <None Include="Upgrade\2.2.0.0\%280009%29 Upgrade BhpbioShippingNominationItem.sql" />
+    <None Include="Upgrade\2.2.0.0\%280010%29 Increase BhpbioBlastBlockModelGradeHolding GradeName Length.sql" />
+    <None Include="Upgrade\2.2.0.0\%280011%29 Fix BhpbioPortBalance table contraint.sql" />
+    <None Include="Upgrade\2.2.0.0\%280012%29 Update UserInterfaceListing Order for Port.sql" />
+    <None Include="Upgrade\2.2.0.0\%280013%29 Add H2O to Stockpile Screen.sql" />
+    <None Include="Upgrade\2.2.0.0\%280014%29 Update UserInterfaceListings.sql" />
+    <None Include="Upgrade\2.2.0.0\%280015%29 Update Live and Approved Thresholds.sql" />
+    <None Include="Upgrade\z2.1.10.0\%280002%29 Create OHP4 Weightometers.sql" />
+    <None Include="Upgrade\z2.1.10.0\%280003%29 Add Data Exceptions.sql" />
+    <None Include="UtilityScripts\Approvals\ApprovalUtilityScript.sql" />
+    <None Include="UtilityScripts\Approvals\AutoApproveMissingApprovals.sql" />
+    <None Include="UtilityScripts\Approvals\RemoveLumpAndFinesApprovalsAndSummaryDataPriorToCutoff.sql" />
+    <None Include="UtilityScripts\Approvals\Unapprove.sql" />
+    <None Include="UtilityScripts\Approvals\DetermineApprovalStatus.sql" />
+    <None Include="UtilityScripts\Approvals\SummariseHistoryForApprovals.sql" />
+    <None Include="UtilityScripts\Testing\2.1.9.0\Alter SampleSource for Test Data.sql" />
+    <None Include="UtilityScripts\Testing\2.1.9.0\Clear Insufficient Samples Exceptions.sql" />
+    <None Include="UtilityScripts\Testing\2.1.9.0\Clear Missing Sample Exceptions.sql" />
+    <None Include="UtilityScripts\Testing\2.1.9.0\Insert Insufficient Samples Data Exception.sql" />
+    <None Include="UtilityScripts\Testing\2.1.9.0\Insert Missing Sample Data Exception.sql" />
+    <None Include="UtilityScripts\Testing\2.1.9.0\Restore SampleSource for Test Data.sql" />
+    <None Include="UtilityScripts\Testing\CorrectDuplicateCurrentSyncRowsForModelBlock.sql" />
+    <None Include="UtilityScripts\Testing\Performance test script.sql" />
+    <None Include="UtilityScripts\Testing\H2O Populate.sql" />
+    <None Include="UtilityScripts\Testing\STGM Populate.sql" />
+    <None Include="UtilityScripts\Testing\Test data script.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
+    <Folder Include="Upgrade\1.2.0.0\Post Import\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />  
+  <Import Project="$(MSBuildExtensionsPath)\Snowden\Snowden.Bcd.Database.targets" />
+</Project>

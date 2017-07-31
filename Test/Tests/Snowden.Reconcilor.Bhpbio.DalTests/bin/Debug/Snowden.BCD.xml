@@ -1,0 +1,3729 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Snowden.Bcd
+</name>
+</assembly>
+<members>
+<member name="T:Snowden.Bcd.Version">
+	<summary>
+ This needs to be set specifically!
+ This is the only project that won't support automatic labelling and version setting
+ because it contains the code internally to do this.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.IManifestFileList.Files">
+	<summary>
+ Returns a list of files.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestBuildError.#ctor(System.String)">
+	<summary>
+ Creates a new instance of the error class with the specified error.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestBuildError.#ctor(System.String,System.Collections.Generic.IEnumerable{Snowden.Bcd.Database2.ManifestBuildError})">
+	<summary>
+ Creates a new instance of the error class with the specified error and child errors.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestBuildError.ErrorMessage">
+	<summary>
+ Gets the error message text.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestBuildError.ChildErrors">
+	<summary>
+ Provides access to the child errors.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.ManifestBuildError">
+	<summary>
+ Contains build errors.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestSecurityDatabaseRoleMember.DatabaseRoleName">
+	<summary>
+ Gets/sets the role name.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestSecurityDatabaseRoleMember.UserName">
+	<summary>
+ Gets/sets the username.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.ManifestSecurityDatabaseRoleMember">
+	<summary>
+ Manages User/Role relationships.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.GetReportingServicesPath(System.String,System.String)">
+	<summary>
+ Returns a Reporting Services path for the provided item and parent.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.GetNtfsPath(System.String,System.String)">
+	<summary>
+ Returns a Windows path for the provided filename and file path.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.GetFileName(System.String)">
+	<summary>
+ Strip the extension from a filename.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.GetDefinitionFromDisk(System.String)">
+	<summary>
+ Retrieves a Byte Array of the file on disk.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreateDataSourceDefinition(System.String,System.String)">
+	<summary>
+ Creates a definition with connection string
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreateDataSourceDefinition(System.String,System.String,System.String,System.String)">
+	<summary>
+ Creates a definition with stored username and password
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreateDataSource(System.String,System.String,Snowden.Bcd.ReportService2005.DataSourceDefinition,Snowden.Bcd.ReportService2005.Property[])">
+	<summary>
+ CreateDataSource without the overwrite property.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreatePath(System.String,Snowden.Bcd.ReportService2005.Property[]@)">
+	<summary>
+ Creates the whole path if required.
+ </summary>
+	<param name="Path"></param>
+	<param name="props"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreateResourceFromDisk(System.String,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<summary>
+ Creates a resource file from disk.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreateReportFromDisk(System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<summary>
+ Creates the report from disk.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.SetAllReportDataSources(System.String,System.String)">
+	<summary>
+ Set all the data sources in a report
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.SetReportDataSource(System.String,System.String,System.String)">
+	<summary>
+ Set one the data sources in report.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreateReportFromDisk(System.String,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<summary>
+ Create The report form disk and assign the data source.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreateModel(System.String,System.String,System.Byte[],Snowden.Bcd.ReportService2005.Property[])">
+	<summary>
+ Create model using the overwrite.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.CreateModelFromDisk(System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<summary>
+ Create model from disk.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.DeploySqlDataSource(System.String,System.String,System.String)">
+	<summary>
+ Creates a SQL data source making sure the path is created first.
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingAssistant.DeployXmlDataSource(System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Creates a XML data source making sure the path is created first.
+ </summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.DataDictionary_AddColumnProperty">
+	<summary>
+  Looks up a localized string similar to -- %TABLE%.%COLUMN% - Description
+If Exists (Select 1 From ::fn_ListExtendedProperty('DD_Description', 'user', 'dbo', 'TABLE', '%TABLE%', 'COLUMN', '%COLUMN%'))
+Begin
+	Exec dbo.sp_DropExtendedProperty
+		@name = 'DD_Description',
+		@level0type = 'user',
+		@level0name = 'dbo',
+		@level1type = 'TABLE',
+		@level1name = '%TABLE%',
+		@level2type = 'COLUMN',
+		@level2name = '%COLUMN%'
+End
+
+Exec dbo.sp_AddExtendedProperty
+	@name = 'DD_Description',
+	@value = '%DESCRIPTION%',
+	@level0type = 'user',
+ [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.DataDictionary_AddFunctionParamProperty">
+	<summary>
+  Looks up a localized string similar to -- %FUNCTION%.%PARAMETER% - Description
+If Exists (Select 1 From ::fn_ListExtendedProperty('DD_Description', 'user', 'dbo', 'FUNCTION', '%FUNCTION%', 'PARAMETER', '%PARAMETER%'))
+Begin
+	Exec dbo.sp_DropExtendedProperty
+		@name = 'DD_Description',
+		@level0type = 'user',
+		@level0name = 'dbo',
+		@level1type = 'FUNCTION',
+		@level1name = '%FUNCTION%',
+		@level2type = 'PARAMETER',
+		@level2name = '%PARAMETER%'
+End
+
+Exec dbo.sp_AddExtendedProperty
+	@name = 'DD_Description',
+	@value = '%DESCRIPTIO [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.DataDictionary_AddFunctionProperty">
+	<summary>
+  Looks up a localized string similar to -- %FUNCTION% - Description
+If Exists (Select 1 From ::fn_ListExtendedProperty('DD_Description', 'user', 'dbo', 'FUNCTION', '%FUNCTION%', Default, Default))
+Begin
+	Exec dbo.sp_DropExtendedProperty
+		@name = 'DD_Description',
+		@level0type = 'user',
+		@level0name = 'dbo',
+		@level1type = 'FUNCTION',
+		@level1name = '%FUNCTION%',
+		@level2type = Null,
+		@level2name = Null
+End
+
+Exec dbo.sp_AddExtendedProperty
+	@name = 'DD_Description',
+	@value = '%DESCRIPTION%',
+	@level0type = 'user',
+	@level0 [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.DataDictionary_AddProcedureParamProperty">
+	<summary>
+  Looks up a localized string similar to -- %PROCEDURE%.%PARAMETER% - Description
+If Exists (Select 1 From ::fn_ListExtendedProperty('DD_Description', 'user', 'dbo', 'PROCEDURE', '%PROCEDURE%', 'PARAMETER', '%PARAMETER%'))
+Begin
+	Exec dbo.sp_DropExtendedProperty
+		@name = 'DD_Description',
+		@level0type = 'user',
+		@level0name = 'dbo',
+		@level1type = 'PROCEDURE',
+		@level1name = '%PROCEDURE%',
+		@level2type = 'PARAMETER',
+		@level2name = '%PARAMETER%'
+End
+
+Exec dbo.sp_AddExtendedProperty
+	@name = 'DD_Description',
+	@value = '%DESCR [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.DataDictionary_AddProcedureProperty">
+	<summary>
+  Looks up a localized string similar to -- %PROCEDURE% - Description
+If Exists (Select 1 From ::fn_ListExtendedProperty('DD_Description', 'user', 'dbo', 'PROCEDURE', '%PROCEDURE%', Default, Default))
+Begin
+	Exec dbo.sp_DropExtendedProperty
+		@name = 'DD_Description',
+		@level0type = 'user',
+		@level0name = 'dbo',
+		@level1type = 'PROCEDURE',
+		@level1name = '%PROCEDURE%',
+		@level2type = Null,
+		@level2name = Null
+End
+
+Exec dbo.sp_AddExtendedProperty
+	@name = 'DD_Description',
+	@value = '%DESCRIPTION%',
+	@level0type = 'user',
+	@l [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.DataDictionary_AddTableProperty">
+	<summary>
+  Looks up a localized string similar to -- %TABLE% - Description
+If Exists (Select 1 From ::fn_ListExtendedProperty('DD_Description', 'user', 'dbo', 'TABLE', '%TABLE%', Default, Default))
+Begin
+	Exec dbo.sp_DropExtendedProperty
+		@name = 'DD_Description',
+		@level0type = 'user',
+		@level0name = 'dbo',
+		@level1type = 'TABLE',
+		@level1name = '%TABLE%',
+		@level2type = Null,
+		@level2name = Null
+End
+
+Exec dbo.sp_AddExtendedProperty
+	@name = 'DD_Description',
+	@value = '%DESCRIPTION%',
+	@level0type = 'user',
+	@level0name = 'dbo',
+ [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Bcd.My.Resources.Resources.ManagementInterface">
+	<summary>
+  Looks up a localized string similar to CREATE SCHEMA {Schema}
+GO
+
+CREATE TABLE {Schema}.Configuration
+(
+	InterfaceVersion VARCHAR(31) COLLATE DATABASE_DEFAULT NOT NULL 
+)
+GO
+
+INSERT INTO {Schema}.Configuration
+	(InterfaceVersion)
+SELECT '1.0'
+GO
+
+If Object_Id('{Schema}.GetConfiguration') IS NOT NULL
+	DROP PROCEDURE {Schema}.GetConfiguration
+GO
+
+CREATE PROCEDURE {Schema}.GetConfiguration
+WITH ENCRYPTION
+AS
+BEGIN
+	SELECT InterfaceVersion
+	FROM {Schema}.Configuration
+END
+GO
+
+CREATE TABLE {Schema}.Version
+(
+	VersionId IN [rest of string was truncated]";.
+</summary>
+</member><member name="T:Snowden.Bcd.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.#ctor">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListSecureMethodsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateBatchCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CancelBatchCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ExecuteBatchCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetSystemPropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteItemCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.MoveItemCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListChildrenCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListDependentItemsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetPropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetPropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemTypeCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateFolderCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateReportCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportDefinitionCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportDefinitionCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateResourceCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetResourceContentsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetResourceContentsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportParametersCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportParametersCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateLinkedReportCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportLinkCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportLinkCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetRenderResourceCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetExecutionOptionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetExecutionOptionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetCacheOptionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetCacheOptionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.UpdateReportExecutionSnapshotCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.FlushCacheCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListJobsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CancelJobCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateDataSourceCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetDataSourceContentsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetDataSourceContentsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.EnableDataSourceCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.DisableDataSourceCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetItemDataSourcesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemDataSourcesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemDataSourcePromptsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateReportHistorySnapshotCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportHistoryOptionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportHistoryOptionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportHistoryLimitCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportHistoryLimitCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListReportHistoryCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteReportHistorySnapshotCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.FindItemsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateScheduleCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteScheduleCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetSchedulePropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetSchedulePropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListScheduledReportsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListSchedulesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.PauseScheduleCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ResumeScheduleCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateSubscriptionCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateDataDrivenSubscriptionCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetSubscriptionPropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetDataDrivenSubscriptionPropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetSubscriptionPropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetDataDrivenSubscriptionPropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteSubscriptionCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.PrepareQueryCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetExtensionSettingsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ValidateExtensionSettingsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListSubscriptionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListSubscriptionsUsingDataSourceCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListExtensionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListEventsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.FireEventCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListTasksCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListRolesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateRoleCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteRoleCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetRolePropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetRolePropertiesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPoliciesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetSystemPoliciesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetPoliciesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetPoliciesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.InheritParentSecurityCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPermissionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetPermissionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.LogonUserCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.LogoffCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.CreateModelCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelDefinitionCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelDefinitionCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelPerspectivesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetUserModelCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelItemChildrenCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelItemPermissionsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelItemPoliciesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelItemPoliciesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.InheritModelItemParentSecurityCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.RemoveAllModelItemPoliciesCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelDrillthroughReportsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelDrillthroughReportsCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.GenerateModelCompleted">
+	<remarks/>
+</member><member name="E:Snowden.Bcd.ReportService2005.ReportingService2005.RegenerateModelCompleted">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSecureMethods">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSecureMethodsAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSecureMethodsAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateBatch">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateBatchAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateBatchAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CancelBatch">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CancelBatchAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CancelBatchAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ExecuteBatch">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ExecuteBatchAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ExecuteBatchAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemProperties(Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPropertiesAsync(Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPropertiesAsync(Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSystemProperties(Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSystemPropertiesAsync(Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSystemPropertiesAsync(Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteItem(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteItemAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteItemAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.MoveItem(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.MoveItemAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.MoveItemAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListChildren(System.String,System.Boolean)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListChildrenAsync(System.String,System.Boolean)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListChildrenAsync(System.String,System.Boolean,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListDependentItems(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListDependentItemsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListDependentItemsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetProperties(System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetPropertiesAsync(System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetPropertiesAsync(System.String,Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetProperties(System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetPropertiesAsync(System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetPropertiesAsync(System.String,Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemType(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemTypeAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemTypeAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateFolder(System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateFolderAsync(System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateFolderAsync(System.String,System.String,Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateReport(System.String,System.String,System.Boolean,System.Byte[],Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateReportAsync(System.String,System.String,System.Boolean,System.Byte[],Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateReportAsync(System.String,System.String,System.Boolean,System.Byte[],Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportDefinition(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportDefinitionAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportDefinitionAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportDefinition(System.String,System.Byte[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportDefinitionAsync(System.String,System.Byte[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportDefinitionAsync(System.String,System.Byte[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateResource(System.String,System.String,System.Boolean,System.Byte[],System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateResourceAsync(System.String,System.String,System.Boolean,System.Byte[],System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateResourceAsync(System.String,System.String,System.Boolean,System.Byte[],System.String,Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetResourceContents(System.String,System.Byte[],System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetResourceContentsAsync(System.String,System.Byte[],System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetResourceContentsAsync(System.String,System.Byte[],System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetResourceContents(System.String,System.String@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetResourceContentsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetResourceContentsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportParameters(System.String,System.String,System.Boolean,Snowden.Bcd.ReportService2005.ParameterValue[],Snowden.Bcd.ReportService2005.DataSourceCredentials[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportParametersAsync(System.String,System.String,System.Boolean,Snowden.Bcd.ReportService2005.ParameterValue[],Snowden.Bcd.ReportService2005.DataSourceCredentials[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportParametersAsync(System.String,System.String,System.Boolean,Snowden.Bcd.ReportService2005.ParameterValue[],Snowden.Bcd.ReportService2005.DataSourceCredentials[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportParameters(System.String,Snowden.Bcd.ReportService2005.ReportParameter[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportParametersAsync(System.String,Snowden.Bcd.ReportService2005.ReportParameter[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportParametersAsync(System.String,Snowden.Bcd.ReportService2005.ReportParameter[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateLinkedReport(System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateLinkedReportAsync(System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateLinkedReportAsync(System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportLink(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportLinkAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportLinkAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportLink(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportLinkAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportLinkAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetRenderResource(System.String,System.String,System.String@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetRenderResourceAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetRenderResourceAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetExecutionOptions(System.String,Snowden.Bcd.ReportService2005.ExecutionSettingEnum,Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetExecutionOptionsAsync(System.String,Snowden.Bcd.ReportService2005.ExecutionSettingEnum,Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetExecutionOptionsAsync(System.String,Snowden.Bcd.ReportService2005.ExecutionSettingEnum,Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetExecutionOptions(System.String,Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetExecutionOptionsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetExecutionOptionsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetCacheOptions(System.String,System.Boolean,Snowden.Bcd.ReportService2005.ExpirationDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetCacheOptionsAsync(System.String,System.Boolean,Snowden.Bcd.ReportService2005.ExpirationDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetCacheOptionsAsync(System.String,System.Boolean,Snowden.Bcd.ReportService2005.ExpirationDefinition,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetCacheOptions(System.String,Snowden.Bcd.ReportService2005.ExpirationDefinition@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetCacheOptionsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetCacheOptionsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.UpdateReportExecutionSnapshot(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.UpdateReportExecutionSnapshotAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.UpdateReportExecutionSnapshotAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FlushCache(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FlushCacheAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FlushCacheAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListJobs">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListJobsAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListJobsAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CancelJob(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CancelJobAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CancelJobAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateDataSource(System.String,System.String,System.Boolean,Snowden.Bcd.ReportService2005.DataSourceDefinition,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateDataSourceAsync(System.String,System.String,System.Boolean,Snowden.Bcd.ReportService2005.DataSourceDefinition,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateDataSourceAsync(System.String,System.String,System.Boolean,Snowden.Bcd.ReportService2005.DataSourceDefinition,Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetDataSourceContents(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetDataSourceContentsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetDataSourceContentsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetDataSourceContents(System.String,Snowden.Bcd.ReportService2005.DataSourceDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetDataSourceContentsAsync(System.String,Snowden.Bcd.ReportService2005.DataSourceDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetDataSourceContentsAsync(System.String,Snowden.Bcd.ReportService2005.DataSourceDefinition,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.EnableDataSource(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.EnableDataSourceAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.EnableDataSourceAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DisableDataSource(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DisableDataSourceAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DisableDataSourceAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetItemDataSources(System.String,Snowden.Bcd.ReportService2005.DataSource[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetItemDataSourcesAsync(System.String,Snowden.Bcd.ReportService2005.DataSource[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetItemDataSourcesAsync(System.String,Snowden.Bcd.ReportService2005.DataSource[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemDataSources(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemDataSourcesAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemDataSourcesAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemDataSourcePrompts(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemDataSourcePromptsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetItemDataSourcePromptsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateReportHistorySnapshot(System.String,Snowden.Bcd.ReportService2005.Warning[]@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateReportHistorySnapshotAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateReportHistorySnapshotAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportHistoryOptions(System.String,System.Boolean,System.Boolean,Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportHistoryOptionsAsync(System.String,System.Boolean,System.Boolean,Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportHistoryOptionsAsync(System.String,System.Boolean,System.Boolean,Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportHistoryOptions(System.String,System.Boolean@,Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportHistoryOptionsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportHistoryOptionsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportHistoryLimit(System.String,System.Boolean,System.Int32)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportHistoryLimitAsync(System.String,System.Boolean,System.Int32)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetReportHistoryLimitAsync(System.String,System.Boolean,System.Int32,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportHistoryLimit(System.String,System.Boolean@,System.Int32@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportHistoryLimitAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetReportHistoryLimitAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListReportHistory(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListReportHistoryAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListReportHistoryAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteReportHistorySnapshot(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteReportHistorySnapshotAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteReportHistorySnapshotAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FindItems(System.String,Snowden.Bcd.ReportService2005.BooleanOperatorEnum,Snowden.Bcd.ReportService2005.SearchCondition[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FindItemsAsync(System.String,Snowden.Bcd.ReportService2005.BooleanOperatorEnum,Snowden.Bcd.ReportService2005.SearchCondition[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FindItemsAsync(System.String,Snowden.Bcd.ReportService2005.BooleanOperatorEnum,Snowden.Bcd.ReportService2005.SearchCondition[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateSchedule(System.String,Snowden.Bcd.ReportService2005.ScheduleDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateScheduleAsync(System.String,Snowden.Bcd.ReportService2005.ScheduleDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateScheduleAsync(System.String,Snowden.Bcd.ReportService2005.ScheduleDefinition,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteSchedule(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteScheduleAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteScheduleAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetScheduleProperties(System.String,System.String,Snowden.Bcd.ReportService2005.ScheduleDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSchedulePropertiesAsync(System.String,System.String,Snowden.Bcd.ReportService2005.ScheduleDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSchedulePropertiesAsync(System.String,System.String,Snowden.Bcd.ReportService2005.ScheduleDefinition,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetScheduleProperties(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSchedulePropertiesAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSchedulePropertiesAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListScheduledReports(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListScheduledReportsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListScheduledReportsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSchedules">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSchedulesAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSchedulesAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.PauseSchedule(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.PauseScheduleAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.PauseScheduleAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ResumeSchedule(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ResumeScheduleAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ResumeScheduleAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateSubscription(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValue[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateSubscriptionAsync(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValue[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateSubscriptionAsync(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValue[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateDataDrivenSubscription(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,Snowden.Bcd.ReportService2005.DataRetrievalPlan,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateDataDrivenSubscriptionAsync(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,Snowden.Bcd.ReportService2005.DataRetrievalPlan,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateDataDrivenSubscriptionAsync(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,Snowden.Bcd.ReportService2005.DataRetrievalPlan,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSubscriptionProperties(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValue[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSubscriptionPropertiesAsync(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValue[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSubscriptionPropertiesAsync(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValue[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetDataDrivenSubscriptionProperties(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,Snowden.Bcd.ReportService2005.DataRetrievalPlan,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetDataDrivenSubscriptionPropertiesAsync(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,Snowden.Bcd.ReportService2005.DataRetrievalPlan,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetDataDrivenSubscriptionPropertiesAsync(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings,Snowden.Bcd.ReportService2005.DataRetrievalPlan,System.String,System.String,System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSubscriptionProperties(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings@,System.String@,Snowden.Bcd.ReportService2005.ActiveState@,System.String@,System.String@,System.String@,Snowden.Bcd.ReportService2005.ParameterValue[]@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSubscriptionPropertiesAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSubscriptionPropertiesAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetDataDrivenSubscriptionProperties(System.String,Snowden.Bcd.ReportService2005.ExtensionSettings@,Snowden.Bcd.ReportService2005.DataRetrievalPlan@,System.String@,Snowden.Bcd.ReportService2005.ActiveState@,System.String@,System.String@,System.String@,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[]@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetDataDrivenSubscriptionPropertiesAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetDataDrivenSubscriptionPropertiesAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteSubscription(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteSubscriptionAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteSubscriptionAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.PrepareQuery(Snowden.Bcd.ReportService2005.DataSource,Snowden.Bcd.ReportService2005.DataSetDefinition,System.Boolean@,System.String[]@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.PrepareQueryAsync(Snowden.Bcd.ReportService2005.DataSource,Snowden.Bcd.ReportService2005.DataSetDefinition)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.PrepareQueryAsync(Snowden.Bcd.ReportService2005.DataSource,Snowden.Bcd.ReportService2005.DataSetDefinition,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetExtensionSettings(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetExtensionSettingsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetExtensionSettingsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ValidateExtensionSettings(System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ValidateExtensionSettingsAsync(System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ValidateExtensionSettingsAsync(System.String,Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSubscriptions(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSubscriptionsAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSubscriptionsAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSubscriptionsUsingDataSource(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSubscriptionsUsingDataSourceAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListSubscriptionsUsingDataSourceAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListExtensions(Snowden.Bcd.ReportService2005.ExtensionTypeEnum)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListExtensionsAsync(Snowden.Bcd.ReportService2005.ExtensionTypeEnum)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListExtensionsAsync(Snowden.Bcd.ReportService2005.ExtensionTypeEnum,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListEvents">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListEventsAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListEventsAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FireEvent(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FireEventAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.FireEventAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListTasks(Snowden.Bcd.ReportService2005.SecurityScopeEnum)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListTasksAsync(Snowden.Bcd.ReportService2005.SecurityScopeEnum)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListTasksAsync(Snowden.Bcd.ReportService2005.SecurityScopeEnum,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListRoles(Snowden.Bcd.ReportService2005.SecurityScopeEnum)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListRolesAsync(Snowden.Bcd.ReportService2005.SecurityScopeEnum)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListRolesAsync(Snowden.Bcd.ReportService2005.SecurityScopeEnum,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateRole(System.String,System.String,Snowden.Bcd.ReportService2005.Task[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateRoleAsync(System.String,System.String,Snowden.Bcd.ReportService2005.Task[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateRoleAsync(System.String,System.String,Snowden.Bcd.ReportService2005.Task[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteRole(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteRoleAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.DeleteRoleAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetRoleProperties(System.String,System.String@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetRolePropertiesAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetRolePropertiesAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetRoleProperties(System.String,System.String,Snowden.Bcd.ReportService2005.Task[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetRolePropertiesAsync(System.String,System.String,Snowden.Bcd.ReportService2005.Task[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetRolePropertiesAsync(System.String,System.String,Snowden.Bcd.ReportService2005.Task[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPolicies">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPoliciesAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPoliciesAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSystemPolicies(Snowden.Bcd.ReportService2005.Policy[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSystemPoliciesAsync(Snowden.Bcd.ReportService2005.Policy[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetSystemPoliciesAsync(Snowden.Bcd.ReportService2005.Policy[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetPolicies(System.String,System.Boolean@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetPoliciesAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetPoliciesAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetPolicies(System.String,Snowden.Bcd.ReportService2005.Policy[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetPoliciesAsync(System.String,Snowden.Bcd.ReportService2005.Policy[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetPoliciesAsync(System.String,Snowden.Bcd.ReportService2005.Policy[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.InheritParentSecurity(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.InheritParentSecurityAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.InheritParentSecurityAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPermissions">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPermissionsAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetSystemPermissionsAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetPermissions(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetPermissionsAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetPermissionsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.LogonUser(System.String,System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.LogonUserAsync(System.String,System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.LogonUserAsync(System.String,System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.Logoff">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.LogoffAsync">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.LogoffAsync(System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateModel(System.String,System.String,System.Byte[],Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateModelAsync(System.String,System.String,System.Byte[],Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CreateModelAsync(System.String,System.String,System.Byte[],Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelDefinition(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelDefinitionAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelDefinitionAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelDefinition(System.String,System.Byte[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelDefinitionAsync(System.String,System.Byte[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelDefinitionAsync(System.String,System.Byte[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelPerspectives(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelPerspectivesAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelPerspectivesAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetUserModel(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetUserModelAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetUserModelAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelItemChildren(System.String,System.String,System.Boolean)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelItemChildrenAsync(System.String,System.String,System.Boolean)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelItemChildrenAsync(System.String,System.String,System.Boolean,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelItemPermissions(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelItemPermissionsAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelItemPermissionsAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelItemPolicies(System.String,System.String,System.Boolean@)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelItemPoliciesAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GetModelItemPoliciesAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelItemPolicies(System.String,System.String,Snowden.Bcd.ReportService2005.Policy[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelItemPoliciesAsync(System.String,System.String,Snowden.Bcd.ReportService2005.Policy[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelItemPoliciesAsync(System.String,System.String,Snowden.Bcd.ReportService2005.Policy[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.InheritModelItemParentSecurity(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.InheritModelItemParentSecurityAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.InheritModelItemParentSecurityAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.RemoveAllModelItemPolicies(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.RemoveAllModelItemPoliciesAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.RemoveAllModelItemPoliciesAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelDrillthroughReports(System.String,System.String,Snowden.Bcd.ReportService2005.ModelDrillthroughReport[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelDrillthroughReportsAsync(System.String,System.String,Snowden.Bcd.ReportService2005.ModelDrillthroughReport[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.SetModelDrillthroughReportsAsync(System.String,System.String,Snowden.Bcd.ReportService2005.ModelDrillthroughReport[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelDrillthroughReports(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelDrillthroughReportsAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.ListModelDrillthroughReportsAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GenerateModel(System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GenerateModelAsync(System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[])">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.GenerateModelAsync(System.String,System.String,System.String,Snowden.Bcd.ReportService2005.Property[],System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.RegenerateModel(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.RegenerateModelAsync(System.String)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.RegenerateModelAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:Snowden.Bcd.ReportService2005.ReportingService2005.CancelAsync(System.Object)">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ReportingService2005">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ServerInfoHeader.ReportServerVersionNumber">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ServerInfoHeader.ReportServerEdition">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ServerInfoHeader.ReportServerVersion">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ServerInfoHeader.ReportServerDateTime">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ServerInfoHeader.AnyAttr">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ServerInfoHeader">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelDrillthroughReport.Path">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelDrillthroughReport.Type">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ModelDrillthroughReport">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.DrillthroughType.Detail">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.DrillthroughType.List">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DrillthroughType">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelItem.ID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelItem.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelItem.Type">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelItem.Description">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelItem.ModelItems">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ModelItem">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ModelItemTypeEnum.Model">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ModelItemTypeEnum.EntityFolder">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ModelItemTypeEnum.FieldFolder">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ModelItemTypeEnum.Entity">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ModelItemTypeEnum.Attribute">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ModelItemTypeEnum.Role">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ModelItemTypeEnum">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelPerspective.ID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelPerspective.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelPerspective.Description">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ModelPerspective">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelCatalogItem.Model">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelCatalogItem.Description">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ModelCatalogItem.Perspectives">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ModelCatalogItem">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Policy.GroupUserName">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Policy.Roles">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Policy">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Role.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Role.Description">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Role">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Task.TaskID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Task.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Task.Description">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Task">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Event.Type">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Event">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Extension.ExtensionType">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Extension.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Extension.LocalizedName">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Extension.Visible">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Extension.IsModelGenerationSupported">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Extension">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ExtensionTypeEnum.Delivery">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ExtensionTypeEnum.Render">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ExtensionTypeEnum.Data">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ExtensionTypeEnum.All">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ExtensionTypeEnum">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.SubscriptionID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.Owner">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.Path">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.VirtualPath">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.Report">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.DeliverySettings">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.Description">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.Status">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.Active">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.LastExecuted">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.LastExecutedSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.ModifiedBy">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.ModifiedDate">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.EventType">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Subscription.IsDataDriven">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Subscription">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionSettings.Extension">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionSettings.ParameterValues">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ExtensionSettings">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ParameterFieldReference.ParameterName">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ParameterFieldReference.FieldAlias">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ParameterFieldReference">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ParameterValueOrFieldReference">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ParameterValue.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ParameterValue.Value">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ParameterValue.Label">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ParameterValue">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.DeliveryExtensionRemoved">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.DeliveryExtensionRemovedSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.SharedDataSourceRemoved">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.SharedDataSourceRemovedSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.MissingParameterValue">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.MissingParameterValueSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.InvalidParameterValue">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.InvalidParameterValueSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.UnknownReportParameter">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ActiveState.UnknownReportParameterSpecified">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ActiveState">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.DisplayName">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.Required">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.RequiredSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.ReadOnly">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.Value">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.Error">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.Encrypted">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.IsPassword">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ExtensionParameter.ValidValues">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ExtensionParameter">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ValidValue.Label">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ValidValue.Value">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ValidValue">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.QueryDefinition.CommandType">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.QueryDefinition.CommandText">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.QueryDefinition.Timeout">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.QueryDefinition.TimeoutSpecified">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.QueryDefinition">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Field.Alias">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Field.Name">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Field">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.Fields">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.Query">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.CaseSensitivity">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.CaseSensitivitySpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.Collation">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.AccentSensitivity">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.AccentSensitivitySpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.KanatypeSensitivity">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.KanatypeSensitivitySpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.WidthSensitivity">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.WidthSensitivitySpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSetDefinition.Name">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DataSetDefinition">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.SensitivityEnum.True">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.SensitivityEnum.False">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.SensitivityEnum.Auto">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SensitivityEnum">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataRetrievalPlan.Item">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataRetrievalPlan.DataSet">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DataRetrievalPlan">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.Extension">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.ConnectString">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.UseOriginalConnectString">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.OriginalConnectStringExpressionBased">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.CredentialRetrieval">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.WindowsCredentials">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.ImpersonateUser">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.ImpersonateUserSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.Prompt">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.UserName">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.Password">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.Enabled">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceDefinition.EnabledSpecified">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DataSourceDefinition">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.CredentialRetrievalEnum.Prompt">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.CredentialRetrievalEnum.Store">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.CredentialRetrievalEnum.Integrated">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.CredentialRetrievalEnum.None">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CredentialRetrievalEnum">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DataSourceDefinitionOrReference">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.InvalidDataSourceReference">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceReference.Reference">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DataSourceReference">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.ScheduleID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.Definition">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.Description">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.Creator">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.NextRunTime">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.NextRunTimeSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.LastRunTime">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.LastRunTimeSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.ReferencesPresent">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Schedule.State">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Schedule">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ScheduleDefinition.StartDateTime">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ScheduleDefinition.EndDate">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ScheduleDefinition.EndDateSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ScheduleDefinition.Item">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ScheduleDefinition">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DailyRecurrence.DaysInterval">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DailyRecurrence">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.RecurrencePattern">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthlyDOWRecurrence.WhichWeek">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthlyDOWRecurrence.WhichWeekSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthlyDOWRecurrence.DaysOfWeek">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthlyDOWRecurrence.MonthsOfYear">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.MonthlyDOWRecurrence">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.WeekNumberEnum.FirstWeek">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.WeekNumberEnum.SecondWeek">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.WeekNumberEnum.ThirdWeek">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.WeekNumberEnum.FourthWeek">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.WeekNumberEnum.LastWeek">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.WeekNumberEnum">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DaysOfWeekSelector.Sunday">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DaysOfWeekSelector.Monday">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DaysOfWeekSelector.Tuesday">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DaysOfWeekSelector.Wednesday">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DaysOfWeekSelector.Thursday">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DaysOfWeekSelector.Friday">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DaysOfWeekSelector.Saturday">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DaysOfWeekSelector">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.January">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.February">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.March">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.April">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.May">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.June">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.July">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.August">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.September">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.October">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.November">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthsOfYearSelector.December">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.MonthsOfYearSelector">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthlyRecurrence.Days">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MonthlyRecurrence.MonthsOfYear">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.MonthlyRecurrence">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.WeeklyRecurrence.WeeksInterval">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.WeeklyRecurrence.WeeksIntervalSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.WeeklyRecurrence.DaysOfWeek">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.WeeklyRecurrence">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.MinuteRecurrence.MinutesInterval">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.MinuteRecurrence">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ScheduleDefinitionOrReference">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.NoSchedule">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ScheduleReference.ScheduleID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ScheduleReference.Definition">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ScheduleReference">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ScheduleStateEnum.Ready">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ScheduleStateEnum.Running">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ScheduleStateEnum.Paused">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ScheduleStateEnum.Expired">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ScheduleStateEnum.Failing">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ScheduleStateEnum">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportHistorySnapshot.HistoryID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportHistorySnapshot.CreationDate">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportHistorySnapshot.Size">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ReportHistorySnapshot">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourcePrompt.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourcePrompt.DataSourceID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourcePrompt.Prompt">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DataSourcePrompt">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSource.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSource.Item">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DataSource">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.JobID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.Path">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.Description">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.Machine">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.User">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.StartDateTime">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.Action">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.Type">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Job.Status">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Job">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobActionEnum.Render">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobActionEnum.SnapshotCreation">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobActionEnum.ReportHistoryCreation">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobActionEnum.ExecuteQuery">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.JobActionEnum">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobTypeEnum.User">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobTypeEnum.System">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.JobTypeEnum">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobStatusEnum.New">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobStatusEnum.Running">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.JobStatusEnum.CancelRequested">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.JobStatusEnum">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ExpirationDefinition">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.TimeExpiration.Minutes">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.TimeExpiration">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ScheduleExpiration.Item">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ScheduleExpiration">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.Type">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.TypeSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.Nullable">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.NullableSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.AllowBlank">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.AllowBlankSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.MultiValue">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.MultiValueSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.QueryParameter">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.QueryParameterSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.Prompt">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.PromptUser">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.PromptUserSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.Dependencies">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.ValidValuesQueryBased">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.ValidValuesQueryBasedSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.ValidValues">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.DefaultValuesQueryBased">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.DefaultValuesQueryBasedSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.DefaultValues">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.State">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.StateSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ReportParameter.ErrorMessage">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ReportParameter">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterTypeEnum.Boolean">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterTypeEnum.DateTime">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterTypeEnum.Integer">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterTypeEnum.Float">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterTypeEnum.String">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ParameterTypeEnum">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterStateEnum.HasValidValue">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterStateEnum.MissingValidValue">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterStateEnum.HasOutstandingDependencies">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ParameterStateEnum.DynamicValuesUnavailable">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ParameterStateEnum">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceCredentials.DataSourceName">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceCredentials.UserName">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.DataSourceCredentials.Password">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DataSourceCredentials">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Warning.Code">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Warning.Severity">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Warning.ObjectName">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Warning.ObjectType">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Warning.Message">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Warning">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.ID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.Path">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.VirtualPath">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.Type">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.Size">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.SizeSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.Description">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.Hidden">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.HiddenSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.CreationDate">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.CreationDateSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.ModifiedDate">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.ModifiedDateSpecified">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.CreatedBy">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.ModifiedBy">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.MimeType">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.ExecutionDate">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CatalogItem.ExecutionDateSpecified">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CatalogItem">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemTypeEnum.Unknown">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemTypeEnum.Folder">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemTypeEnum.Report">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemTypeEnum.Resource">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemTypeEnum.LinkedReport">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemTypeEnum.DataSource">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemTypeEnum.Model">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ItemTypeEnum">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Property.Name">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.Property.Value">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.Property">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.SearchCondition.Condition">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.SearchCondition.ConditionSpecified">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SearchCondition">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ConditionEnum.Contains">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ConditionEnum.Equals">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ConditionEnum">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.BatchHeader.BatchID">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.BatchHeader.AnyAttr">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.BatchHeader">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ItemNamespaceHeader.ItemNamespace">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ItemNamespaceHeader.AnyAttr">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ItemNamespaceHeader">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemNamespaceEnum.PathBased">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ItemNamespaceEnum.GUIDBased">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ItemNamespaceEnum">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ExecutionSettingEnum.Live">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.ExecutionSettingEnum.Snapshot">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ExecutionSettingEnum">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.BooleanOperatorEnum.And">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.BooleanOperatorEnum.Or">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.BooleanOperatorEnum">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.SecurityScopeEnum.System">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.SecurityScopeEnum.Catalog">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.SecurityScopeEnum.Model">
+	<remarks/>
+</member><member name="F:Snowden.Bcd.ReportService2005.SecurityScopeEnum.All">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SecurityScopeEnum">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListSecureMethodsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListSecureMethodsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListSecureMethodsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateBatchCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CreateBatchCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateBatchCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CancelBatchCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ExecuteBatchCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSystemPropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSystemPropertiesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSystemPropertiesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetSystemPropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DeleteItemCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.MoveItemCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListChildrenCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListChildrenCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListChildrenCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListDependentItemsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListDependentItemsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListDependentItemsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetPropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetPropertiesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetPropertiesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetPropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetItemTypeCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetItemTypeCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetItemTypeCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateFolderCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateReportCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CreateReportCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateReportCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportDefinitionCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportDefinitionCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportDefinitionCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetReportDefinitionCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.SetReportDefinitionCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetReportDefinitionCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateResourceCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetResourceContentsCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetResourceContentsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetResourceContentsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetResourceContentsCompletedEventArgs.MimeType">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetResourceContentsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportParametersCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportParametersCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportParametersCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetReportParametersCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateLinkedReportCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportLinkCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportLinkCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportLinkCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetReportLinkCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetRenderResourceCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetRenderResourceCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetRenderResourceCompletedEventArgs.MimeType">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetRenderResourceCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetExecutionOptionsCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetExecutionOptionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetExecutionOptionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetExecutionOptionsCompletedEventArgs.Item">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetExecutionOptionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetCacheOptionsCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetCacheOptionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetCacheOptionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetCacheOptionsCompletedEventArgs.Item">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetCacheOptionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.UpdateReportExecutionSnapshotCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.FlushCacheCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListJobsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListJobsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListJobsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CancelJobCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CancelJobCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CancelJobCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateDataSourceCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetDataSourceContentsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataSourceContentsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetDataSourceContentsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetDataSourceContentsCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.EnableDataSourceCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DisableDataSourceCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetItemDataSourcesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetItemDataSourcesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetItemDataSourcesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetItemDataSourcesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetItemDataSourcePromptsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetItemDataSourcePromptsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetItemDataSourcePromptsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateReportHistorySnapshotCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CreateReportHistorySnapshotCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CreateReportHistorySnapshotCompletedEventArgs.Warnings">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateReportHistorySnapshotCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetReportHistoryOptionsCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportHistoryOptionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportHistoryOptionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportHistoryOptionsCompletedEventArgs.KeepExecutionSnapshots">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportHistoryOptionsCompletedEventArgs.Item">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportHistoryOptionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetReportHistoryLimitCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportHistoryLimitCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportHistoryLimitCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportHistoryLimitCompletedEventArgs.IsSystem">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetReportHistoryLimitCompletedEventArgs.SystemLimit">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetReportHistoryLimitCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListReportHistoryCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListReportHistoryCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListReportHistoryCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DeleteReportHistorySnapshotCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.FindItemsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.FindItemsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.FindItemsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateScheduleCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CreateScheduleCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateScheduleCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DeleteScheduleCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetSchedulePropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSchedulePropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSchedulePropertiesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSchedulePropertiesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListScheduledReportsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListScheduledReportsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListScheduledReportsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListSchedulesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListSchedulesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListSchedulesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.PauseScheduleCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ResumeScheduleCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateSubscriptionCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CreateSubscriptionCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateSubscriptionCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateDataDrivenSubscriptionCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CreateDataDrivenSubscriptionCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateDataDrivenSubscriptionCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetSubscriptionPropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetDataDrivenSubscriptionPropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs.ExtensionSettings">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs.Description">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs.Active">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs.Status">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs.EventType">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs.MatchData">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs.Parameters">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSubscriptionPropertiesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.ExtensionSettings">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.DataRetrievalPlan">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.Description">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.Active">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.Status">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.EventType">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.MatchData">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs.Parameters">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetDataDrivenSubscriptionPropertiesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DeleteSubscriptionCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.PrepareQueryCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.PrepareQueryCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.PrepareQueryCompletedEventArgs.Changed">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.PrepareQueryCompletedEventArgs.ParameterNames">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.PrepareQueryCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetExtensionSettingsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetExtensionSettingsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetExtensionSettingsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ValidateExtensionSettingsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ValidateExtensionSettingsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ValidateExtensionSettingsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListSubscriptionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListSubscriptionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListSubscriptionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListSubscriptionsUsingDataSourceCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListSubscriptionsUsingDataSourceCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListSubscriptionsUsingDataSourceCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListExtensionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListExtensionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListExtensionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListEventsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListEventsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListEventsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.FireEventCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListTasksCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListTasksCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListTasksCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListRolesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListRolesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListRolesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateRoleCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.DeleteRoleCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetRolePropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetRolePropertiesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetRolePropertiesCompletedEventArgs.Description">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetRolePropertiesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetRolePropertiesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSystemPoliciesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSystemPoliciesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSystemPoliciesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetSystemPoliciesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetPoliciesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetPoliciesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetPoliciesCompletedEventArgs.InheritParent">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetPoliciesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetPoliciesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.InheritParentSecurityCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSystemPermissionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetSystemPermissionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetSystemPermissionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetPermissionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetPermissionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetPermissionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.LogonUserCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.LogoffCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateModelCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.CreateModelCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.CreateModelCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetModelDefinitionCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetModelDefinitionCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetModelDefinitionCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetModelDefinitionCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.SetModelDefinitionCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetModelDefinitionCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListModelPerspectivesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListModelPerspectivesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListModelPerspectivesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetUserModelCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetUserModelCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetUserModelCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListModelItemChildrenCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListModelItemChildrenCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListModelItemChildrenCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetModelItemPermissionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetModelItemPermissionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetModelItemPermissionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetModelItemPoliciesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetModelItemPoliciesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GetModelItemPoliciesCompletedEventArgs.InheritParent">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GetModelItemPoliciesCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetModelItemPoliciesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.InheritModelItemParentSecurityCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.RemoveAllModelItemPoliciesCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.SetModelDrillthroughReportsCompletedEventHandler">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListModelDrillthroughReportsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.ListModelDrillthroughReportsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.ListModelDrillthroughReportsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GenerateModelCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.GenerateModelCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.GenerateModelCompletedEventArgs">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.RegenerateModelCompletedEventHandler">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.ReportService2005.RegenerateModelCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:Snowden.Bcd.ReportService2005.RegenerateModelCompletedEventArgs">
+	<remarks/>
+</member><member name="P:Snowden.Bcd.Database2.ManifestExcludes.Excludes">
+	<summary>
+ Used for serialisation.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestExcludes.Files">
+	<summary>
+ Returns a list of files managed by the excludes.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestExcludes.Manifest">
+	<summary>
+ Gets/sets the manifest associated this group is associated with.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestExcludes.AddFile(System.String)">
+	<summary>
+ Adds an exclude file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestExcludes.AddFolder(System.String,System.String,System.Boolean)">
+	<summary>
+ Adds an exclude folder.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.ManifestExcludes">
+	<summary>
+ Holds a set of Exclude entries as either folders or files.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.#ctor(Snowden.Bcd.Database2.DeployerConfiguration,Snowden.Bcd.Database2.Deployment,Snowden.Bcd.Database2.DeployerLog)">
+	<summary>
+ Creates a new instance of a deployer class.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployer.Mode">
+	<summary>
+ Returns the currently configured deployer mode.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.SetMode(System.Nullable{Snowden.Bcd.Database2.DeployerMode})">
+	<summary>
+ Sets the deployment mode.
+ Changes to the mode invalidates the last check results.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployer.Checks">
+	<summary>
+ Provides access to the pre-deployment Checks management object.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployer.Connected">
+	<summary>
+ Returns whether the connection is connected.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployer.GetConnection">
+	<summary>
+ Returns a copy of the connection, maintaining independence from the primary connection.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployer.ManagementInterface">
+	<summary>
+ Provides access to the database version interface.
+ This allows you to access version information.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.SetServerLogin(System.String)">
+	<summary>
+ Sets the server login username. For trusted connections leave this blank.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.SetServerPassword(System.Security.SecureString)">
+	<summary>
+ Sets the password. Only used if a username is set.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.Open">
+	<summary>
+ Connects to the target server.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.InitialiseDatabase">
+	<summary>
+ Connects to the target database.
+ Depending on the mode specified it will create the requested database.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.FinaliseDatabase">
+	<summary>
+ Finalises the database after all activities have completed.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.InfoMessage(System.Object,System.Data.SqlClient.SqlInfoMessageEventArgs)">
+	<summary>
+ Logs information messages via an event handler.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.ServerMessage(System.Object,Microsoft.SqlServer.Management.Common.ServerMessageEventArgs)">
+	<summary>
+ Logs server messages via an event handler.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.StatementMessage(System.Object,Microsoft.SqlServer.Management.Common.StatementEventArgs)">
+	<summary>
+ Logs statement messages via an event handler.
+ </summary>
+	<remarks>
+ for now - don't bother log anything for this
+ we have potential for ALL statements to be logged... this is potentially overkill!
+ </remarks>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.TryDrop">
+	<summary>
+ Tries to drops the database.
+ This can be useful if there is an existing database that you want to remove or
+ you simply wish to perform a build-and-drop to see if it builds.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.Close">
+	<summary>
+ Closes the open management connection.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.Deploy">
+	<summary>
+ Deploys the build to the database.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.DeployNormal">
+	<summary>
+ Executes all deployment scripts.
+ Will run through the entire set even if errors are encountered.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.DeployUpgrade">
+	<summary>
+ Deploys each upgrade script set iteratively.
+ Will abort the upgrade process if an upgrade script set fails.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.RunScript(Microsoft.SqlServer.Management.Smo.Database,Snowden.Bcd.Database2.DeployerLogSource,System.String)">
+	<summary>
+ Tries to execute the given statement and suppresses the raising of exceptions.
+ Returns true if the script succeeds, false if it fails.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.GetCurrentDatabaseName(Microsoft.SqlServer.Management.Smo.Database)">
+	<summary>
+ Returns the current database name.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployer.ManageSecurity(Microsoft.SqlServer.Management.Common.ServerConnection,System.String,Snowden.Bcd.Database2.Deployment,Snowden.Bcd.Database2.DeployerConfiguration)">
+	<summary>
+ Creates or updates the requested logins.
+ Must have successfully passed all checks.
+ </summary>
+	<remarks>
+ The non-delete requirement comes from the fact that DBAs are free to modify logins.
+ </remarks>
+</member><member name="T:Snowden.Bcd.Database2.Deployer">
+	<summary>
+ Performs the deployment against the target database.
+ </summary>
+	<remarks>
+ Implements SMO as this provides clean programmitic access to server management tasks.
+ Note: all CRITICAL errors are stored in the error log.
+ All FATAL errors are managed via exceptions.
+ </remarks>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUtilities.CreateDatabase(Microsoft.SqlServer.Management.Smo.Server,Snowden.Bcd.Database2.DeployerConfiguration,Snowden.Bcd.Database2.DeploymentOptions)">
+	<summary>
+ Creates and returns the requested database.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUtilities.SetOptions(Microsoft.SqlServer.Management.Smo.Database,Snowden.Bcd.Database2.DeploymentOptions)">
+	<summary>
+ Sets the functional database options.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUtilities.CheckOptions(Microsoft.SqlServer.Management.Smo.Database,Snowden.Bcd.Database2.DeploymentOptions,Snowden.Bcd.Database2.DeployerLog)">
+	<summary>
+ Checks that the database options match the requested settings.
+ Logs any differences as errors.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUtilities.GetSecureString(System.String)">
+	<summary>
+ Creates a secure string from a provided string.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUtilities.IsValidLogin(System.String,System.String,System.Security.SecureString)">
+	<summary>
+ Determines whether the Sql Login presented is valid.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUtilities.ClearSchema(Microsoft.SqlServer.Management.Common.ServerConnection,System.String,System.String)">
+	<summary>
+ Cleans all user objects from the database.
+ Can only be run when in "RedeployNew" mode.
+ </summary>
+	<remarks>
+ Objects dropped: Schema, Table, Trigger, View, Function, Procedure.
+ </remarks>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUtilities.EncryptCode(Microsoft.SqlServer.Management.Common.ServerConnection,System.String,System.String)">
+	<summary>
+ Encrypts all user objects that can have it set.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUtilities.TryKillAllProcesses(Microsoft.SqlServer.Management.Smo.Server,System.String)">
+	<summary>
+ Drops all user connections at the target database.
+ Will make several attempts if problems are encountered.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.DeploymentScript">
+	<summary>
+ Contains a simple; each script is stored as a name and content pair.
+ </summary>
+	<remarks>
+ The script is compressed in memory to save on allocation space.
+ </remarks>
+</member><member name="P:Snowden.Bcd.Database2.IManifestError.GetErrors">
+	<summary>
+ Returns an error report.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestUpgrade.Entries">
+	<summary>
+ Used for serialisation only.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestUpgrade.Version">
+	<summary>
+ Gets/sets the version of the upgrade.
+ Used for serialisation.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestUpgrade.Manifest">
+	<summary>
+ Gets/sets the manifest associated this group is associated with.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestUpgrade.GetErrors">
+	<summary>
+ Returns an error report for the manifest.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestUpgrade.Files">
+	<summary>
+ Returns a list of upgrade script files.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestUpgrade.AddReference(System.String,System.String)">
+	<summary>
+ Adds an upgrade reference.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestUpgrade.InsertReference(System.Int32,System.String,System.String)">
+	<summary>
+ Inserts a script file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestUpgrade.RemoveReference(System.String,System.String)">
+	<summary>
+ Removes a script file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestUpgrade.AddScript(System.String)">
+	<summary>
+ Adds a script file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestUpgrade.InsertScript(System.Int32,System.String)">
+	<summary>
+ Inserts a script file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestUpgrade.RemoveScript(System.String)">
+	<summary>
+ Removes a script file.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.ManifestUpgrade">
+	<summary>
+ Holds a set up upgrade steps.
+ </summary>
+	<remarks>
+ Currently only contains the following items:
+ 1) Script
+ 2) UpgradeReference
+ 
+ It has been identified that the following items should probably exist but don't.
+ These include:
+ 1) AlterOption (for changing database options)
+ 2) AlterUser (for adding/removing users)
+ 4) AlterRole (for adding/removing roles)
+ 5) AlterRoleMembership (for adding/removing user/role relationships)
+ In reality users/roles are modifiable by end users.
+ For now these must be scripted manually and are not checked.
+ </remarks>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.SmtpConfiguration.NewSmtpConfiguration">
+	<summary>
+ Creates a new instance of an Smtp Configuration object.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.SmtpConfiguration.SaveSmtpConfiguration(System.String,System.Xml.XmlDocument,Snowden.Bcd.ProductConfiguration.SmtpConfiguration)">
+	<summary>
+ Saves the configuration to the xml document.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.SmtpConfiguration.DeleteSmtpConfiguration(System.String,System.Xml.XmlDocument)">
+	<summary>
+ Deletes the requested key from the configuration file.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.SmtpConfiguration.GetSmtpConfiguration(System.String,System.Xml.XmlDocument)">
+	<summary>
+ Gets the requested key from the configuration file.
+ If it does not exist the "null" is returned.
+ </summary>
+</member><member name="E:Snowden.Bcd.Database2.DeployerLog.MessageAddedEvent">
+	<summary>
+ Fires anytime a message is added.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerLog.ErrorCount">
+	<summary>
+ Returns the number of error messages.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerLog.InformationCount">
+	<summary>
+ Returns the number of information messages.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerLog.TraceCount">
+	<summary>
+ Returns the number of trace messages.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerLog.Messages">
+	<summary>
+ Also used for serialisation.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerLog.Suppress">
+	<summary>
+ Whether logging of messages is suppressed.
+ When suppressed new messages won't be added to the log.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerLog.RaiseTraceEvents">
+	<summary>
+ If true then trace events will be raised in the log.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerLog.RaiseInformationEvents">
+	<summary>
+ If true then information events will be raised in the log.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerLog.RaiseErrorEvents">
+	<summary>
+ If true then error events will be raised in the log.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerLog.AddMessage(Snowden.Bcd.Database2.DeployerLogSource,Snowden.Bcd.Database2.DeployerLogMessageType,System.String)">
+	<summary>
+ Adds a message to the message list.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerLog.MessageAdded(Snowden.Bcd.Database2.DeployerLogMessage)">
+	<summary>
+ Raises the event.
+ Typically run on a separate thread from the caller.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerLog.Save(System.String)">
+	<summary>
+ Saves the deployer's log file to the specified path.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerLog.SaveWithDefaultName(System.String)">
+	<summary>
+ Saves the deployer's log file to the specified folder, automatically generating the filename.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeploymentSecurityDatabaseRoleMember.DatabaseRoleName">
+	<summary>
+ Gets/sets the role name.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeploymentSecurityDatabaseRoleMember.UserName">
+	<summary>
+ Gets/sets the username.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.DeploymentSecurityDatabaseRoleMember">
+	<summary>
+ Manages User/Role relationships.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentUpgrade.AddScript(System.String,System.String)">
+	<summary>
+ Adds a new deployment script.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentUpgrade.AddScripts(System.Collections.Generic.IEnumerable{Snowden.Bcd.Database2.DeploymentScript})">
+	<summary>
+ Adds all provided scripts.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestExcludeFolder.Folders(System.String,System.Boolean)">
+	<summary>
+ Gets a list of folders under the current folder.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.FileExtension">
+	<summary>
+ Returns the standard manifest file extension.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.Name">
+	<summary>
+ Gets/sets the name of the manifest.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.FileVersion">
+	<summary>
+ Gets/sets the version number of the manifest file.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.References">
+	<summary>
+ Used for serialisation only.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.Options">
+	<summary>
+ Gets the database options. Setting is used for serialisation only.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.Security">
+	<summary>
+ Gets the security configuration.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.ScriptGroups">
+	<summary>
+ Used only for serialisation purposes.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.Upgrades">
+	<summary>
+ Used only for serialisation purposes.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.Excludes">
+	<summary>
+ Provides access to the Excludes.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.Reference(System.String)">
+	<summary>
+ Returns the requested reference.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.ScriptGroup(Snowden.Bcd.Database2.ManifestScriptGroupType)">
+	<summary>
+ Returns the requested script group.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.Upgrade(System.String)">
+	<summary>
+ Returns the requested Upgrade.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.RootFolder">
+	<summary>
+ Gets/sets the root folder for the Manifest.
+ This determines the "root" from where all relative file references are resolved.
+ All scripts are stored as relative references.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.GeneratePath">
+	<summary>
+ Generates a file name.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.ReferencePaths">
+	<summary>
+ Returns a list of reference paths.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.GetErrors">
+	<summary>
+ Returns an error report for the manifest.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Manifest.GetUnmanagedFiles(System.String,System.Collections.Generic.IList{System.String})">
+	<summary>
+ Provides a list of files under the root folder that are not managed by the manifest.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.PostDeserialise">
+	<summary>
+ Ensures all groups/entries are aware of their parent Manifest container.
+ This is required as entries have relationships with each other (through references).
+ Also, relative references are relative to the "root folder"
+ This is only a post deserialisation step.
+ 
+ This could be better done by attaching an event handler to the lists (when inserts/updates) occur.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.AddScriptGroup(Snowden.Bcd.Database2.ManifestScriptGroupType)">
+	<summary>
+ Adds a script group.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.RemoveScriptGroup(Snowden.Bcd.Database2.ManifestScriptGroupType)">
+	<summary>
+ Removes the specified script group type.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.AddUpgrade(System.String)">
+	<summary>
+ Adds an upgrade.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.RemoveUpgrade(System.String)">
+	<summary>
+ Removes the specified upgrade.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.AddReference(System.String,System.String)">
+	<summary>
+ Adds a reference.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.RemoveReference(System.String)">
+	<summary>
+ Removes the specified reference.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.Save">
+	<summary>
+ Saves the current manifest to the specified root folder based on the name provided.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.Save(System.String)">
+	<summary>
+ Saves the current manifest to the specified path.
+ Note this is not exposed as we need to control the file name generation.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.Save(System.IO.Stream)">
+	<summary>
+ Saves the current manifest to the specified stream.
+ Note this is generally used for testing purposes only.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.Load(System.String)">
+	<summary>
+ Loads the requested manifest file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.Load(System.IO.Stream)">
+	<summary>
+ Loads the requested manifest content for the given stream.
+ Note this is generally used for testing purposes only.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.LoadLegacy(System.String)">
+	<summary>
+ Loads an "old school" manifest project.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.LoadDirectory(System.String)">
+	<summary>
+ Loads a directory and generates a manifest file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Manifest.LoadLegacyUpgrades(Snowden.Bcd.Database2.Manifest,System.String)">
+	<summary>
+ The upgrades are stored within the file system itself.
+ Walks through the file system and converts accordingly.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.Manifest">
+	<summary>
+ Encapsulates the manifest file.
+ </summary>
+</member><member name="T:Snowden.Bcd.INotifierList`1">
+	<summary>
+ Provides a generic interface to allow WPF data binding and supports IList.
+ NOT USED IN THE END - HERE FOR REFERENCE.
+ </summary>
+</member><member name="T:Snowden.Bcd.NotifierList`1">
+	<summary>
+ Provides a generic implementation to allow WPF data binding and supports IList.
+ Not using ObservableCollection as it doesn't serialise/deserialise!
+ </summary>
+</member><member name="M:Snowden.Bcd.ReportingServices2.ReportingService.ValidServer">
+	<summary>
+ Ping the server to see if enough permissions exist.
+ </summary>
+</member><member name="P:Snowden.Bcd.TextEncryptionDes.EncryptionKey">
+	<summary>
+ Gets or sets the encryption key.
+ </summary>
+	<value>The encryption key.</value>
+</member><member name="M:Snowden.Bcd.TextEncryptionDes.#ctor(System.String)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="encryptionKey">The encryption key.</param>
+</member><member name="M:Snowden.Bcd.TextEncryptionDes.EncryptText(System.String)">
+	<summary>
+ Encrypts the text.
+ </summary>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Bcd.TextEncryptionDes.DecryptText(System.String)">
+	<summary>
+ Decrypts the text.
+ </summary>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Bcd.TextEncryptionDes.EncryptText(System.String,System.String)">
+	<summary>
+ Encrypts the text.
+ </summary>
+	<param name="value">The value.</param>
+	<param name="Key">The key.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Bcd.TextEncryptionDes.DecryptText(System.String,System.String)">
+	<summary>
+ Decrypts the text.
+ </summary>
+	<param name="value">The value.</param>
+	<param name="Key">The key.</param>
+	<returns></returns>
+</member><member name="T:Snowden.Bcd.TextEncryptionDes">
+	<summary>
+ Class to encrypt/decrypt text using DES algorithm.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database1.BuildManifestLog.HasErrorMessages">
+ Returns true if there are any error messages.
+
+</member><member name="M:Snowden.Bcd.Database1.BuildManifestLog.GetErrorItems">
+ Returns all the error messages in a log.
+
+</member><member name="M:Snowden.Bcd.Database1.BuildManifestLog.WriteToDisk(System.String,System.String)">
+ Writes the log to disk
+
+</member><member name="M:Snowden.Bcd.Database1.BuildManifestLog.GetLog">
+ Obtains the log of all the build items.
+
+</member><member name="M:Snowden.Bcd.Database1.BuildManifestLog.GetLog(System.Nullable{Snowden.Bcd.Database1.BuildManifestLogItem.LogItemType})">
+ Obtains the log of the request type.
+
+</member><member name="P:Snowden.Bcd.Database2.Builder.VersionText">
+	<summary>
+ Gets/sets the version text.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Builder.OutputFolder">
+	<summary>
+ Gets/sets the output path of the build outputs.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Builder.Check">
+	<summary>
+ Forces a build check to occur against the manifest.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Snowden.Bcd.Database2.Builder.GetErrorReport">
+	<summary>
+ Returns an error report. If there are no errors then it returns nothing.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Builder.GetErrorReport(System.Collections.Generic.IList{Snowden.Bcd.Database2.ManifestBuildError},System.Int16)">
+	<summary>
+ Recursively builds an error report.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Builder.Build">
+	<summary>
+ Performs the "building" of the manifest.
+ If successful returns a deployment instance.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.Builder">
+	<summary>
+ Manages the Building of Manifest files into Database files.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestExclude.Manifest">
+	<summary>
+ Provides a reference to the underlying manifest.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestExclude.Files">
+	<summary>
+ Returns a list of files referenced by this exclude entry.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestExclude.GetErrors">
+	<summary>
+ Returns a list of errors associated with this entry.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestScriptGroup.ScriptGroupType">
+	<summary>
+ Gets/sets the Type for the script group.
+ Used for serialisation.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestScriptGroup.Scripts">
+	<summary>
+ Used for serialisation only.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestScriptGroup.Manifest">
+	<summary>
+ Gets/sets the manifest associated this group is associated with.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestScriptGroup.GetErrors">
+	<summary>
+ Returns an error report for the manifest.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestScriptGroup.Files">
+	<summary>
+ Returns a list of script file references.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestScriptGroup.AddScript(Snowden.Bcd.Database2.ManifestScriptType,System.String)">
+	<summary>
+ Adds a script file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestScriptGroup.InsertScript(System.Int32,Snowden.Bcd.Database2.ManifestScriptType,System.String)">
+	<summary>
+ Inserts a script file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestScriptGroup.RemoveScript(Snowden.Bcd.Database2.ManifestScriptType,System.String)">
+	<summary>
+ Removes a script file.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestSecurityEntry.Manifest">
+	<summary>
+ Gets/sets the manifest.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestUpgradeReference.GetErrors">
+	<summary>
+ Checks for errors for this particular upgrade reference.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Snowden.Bcd.Database2.ManifestUpgradeReference.GetDeploymentScripts">
+	<summary>
+ Returns the upgrade script content for the specified reference.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database1.ManageDatabase.CreateDatabase(System.String,System.String,System.Boolean)">
+	<summary>
+ Creates the database, drops it first if it is to be recreated.
+ </summary>
+	<param name="data"></param>
+	<param name="log"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Bcd.Database1.ManageDatabase.DeployScript(System.String)">
+	<summary>
+ Deploy a sql script string.
+ </summary>
+	<param name="script">SQL batch to run</param>
+</member><member name="M:Snowden.Bcd.Database1.ManageDatabase.DeployFile(System.String)">
+	<summary>
+ Deploy a sql script file.
+ </summary>
+	<param name="file">Path to the file to run.</param>
+</member><member name="P:Snowden.Bcd.Database2.DeployerCheck.GetReport">
+	<summary>
+ Provides a textual report
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerCheck.LogResult">
+	<summary>
+ Writes the check result to the log.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerUser.FromDatabaseUser(Snowden.Bcd.ProductConfiguration.DatabaseUser)">
+	<summary>
+ Returns a DeployerLogin from the provided DatabaseUser.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestEntry.GetErrors">
+	<summary>
+ Returns all errors encountered.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestEntry.GetDeploymentScripts">
+	<summary>
+ Returns the entry's content.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestEntry.Manifest">
+	<summary>
+ Provides a reference to the underlying manifest.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.ManifestEntry">
+	<summary>
+ Base type for Entries that produce deployment outputs.
+ This may need to do more later; for now it's an empty stub.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.#ctor(Microsoft.SqlServer.Management.Common.ServerConnection,System.String)">
+	<summary>
+ Creates a new instance of the Management Interface class.
+ The connection provided is opened/closed repeatedly as calls are made so disposal is not required.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.#ctor(System.String,System.String,System.String,System.String)">
+	<summary>
+ Creates a new instance of the Management Interface class.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.#ctor(System.String,System.String)">
+	<summary>
+ Creates a new instance of the Management Interface class.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.#ctor(Snowden.Bcd.ProductConfiguration.DatabaseConfiguration,System.String)">
+	<summary>
+ Creates a new instance of the Management Interface class.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManagementInterface.GetVersion">
+	<summary>
+ Returns the current version from the database version interface.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.SetVersion(Snowden.Bcd.ComponentVersion)">
+	<summary>
+ Sets the database version.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.Clear">
+	<summary>
+ Clears all product and version information from the management interface.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.RegisterProduct(System.String,System.String)">
+	<summary>
+ Registers a product against the database, noting the schema that it manages.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.GetProduct">
+	<summary>
+ Returns a product entry and the schema it manages, which are registered against this database.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManagementInterface.GetState">
+	<summary>
+ Determines a summary of the database and interface state.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.IsInterfaceSupported(Microsoft.SqlServer.Management.Common.ServerConnection,System.String)">
+	<summary>
+ Determines whether the database version interface is a supported version.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.CreateInterface">
+	<summary>
+ Implements the version interface against the target database.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManagementInterface.DropInterface">
+	<summary>
+ Removes the interface from the target database.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.ManagementInterface">
+	<summary>
+ Provides version information to the requested database.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestScript.GetErrors">
+	<summary>
+ Returns a summary of errors with this script.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestScript.GetDeploymentScripts">
+	<summary>
+ Returns the file's content.
+ </summary>
+	<Exception>
+ Problems accessing the file will raise file exceptions as expected.
+ </Exception>
+</member><member name="T:Snowden.Bcd.Database2.ManifestScript">
+	<summary>
+ Basic entry class in a manifest. The content is loaded at deserialization or on request.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.Name">
+	<summary>
+ Gets/sets the database username
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.ServerInstance">
+	<summary>
+ Gets/sets the server instance
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.Users">
+	<summary>
+ Returns the users collection.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.AddDatabaseUser(System.String)">
+	<summary>
+ Adds the requested username to the users collection.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.GenerateSqlClientConnectionString(System.String)">
+	<summary>
+ Generates a SqlClient compliant connection string for the requested user.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.NewDatabaseConfiguration">
+	<summary>
+ Creates a new instance of a database configuration.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.SaveDatabaseConfiguration(System.String,System.Xml.XmlDocument,Snowden.Bcd.ProductConfiguration.DatabaseConfiguration)">
+	<summary>
+ Saves the configuration to the XmlDocument provided.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.DeleteDatabaseConfiguration(System.String,System.Xml.XmlDocument)">
+	<summary>
+ Deletes the requested key from the configuration file.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.DatabaseConfiguration.GetDatabaseConfiguration(System.String,System.Xml.XmlDocument)">
+	<summary>
+ Gets the requested key from the configuration file.
+ If it does not exist the "null" is returned.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeploymentScriptGroup.ScriptGroupType">
+	<summary>
+ Used for serialisation only.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeploymentScriptGroup.Scripts">
+	<summary>
+ Used for serialisation only.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentScriptGroup.AddScript(System.String,System.String)">
+	<summary>
+ Adds a new deployment script.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentScriptGroup.AddScripts(System.Collections.Generic.IEnumerable{Snowden.Bcd.Database2.DeploymentScript})">
+	<summary>
+ Adds all provided scripts.
+ </summary>
+</member><member name="M:Snowden.Bcd.Extensions.FormatSql(System.String)">
+	<summary>
+ Sanitises the given SQL string.
+ </summary>
+</member><member name="M:Snowden.Bcd.Extensions.SuffixDirectoryChar(System.String)">
+	<summary>
+ Ensures the path is suffixed with the "\" character.
+ </summary>
+</member><member name="M:Snowden.Bcd.Extensions.CommentOutSql(System.String)">
+	<summary>
+ Comments the given SQL script.
+ </summary>
+</member><member name="M:Snowden.Bcd.Extensions.ReadAttribute(System.Xml.XmlNode,System.String)">
+	<summary>
+ Returns the value of the given attribute; if the attribute cannot be found
+ or the node is not an attribute then raises an XmlException.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.Product.NewProduct">
+	<summary>
+ Creates a new instance of a Product setting object.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.Product.SaveProduct(System.Xml.XmlDocument,Snowden.Bcd.ProductConfiguration.Product)">
+	<summary>
+ Saves the product to the xml document.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.Product.DeleteProduct(System.Xml.XmlDocument)">
+	<summary>
+ Deletes the product from the configuration file.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.Product.GetProduct(System.Xml.XmlDocument)">
+	<summary>
+ Gets the product from the configuration file.
+ If it does not exist then "null" is returned.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.ManifestOption">
+	<summary>
+ Holds an option as a simple key/value pair.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.DatabaseUser.Name">
+	<summary>
+ Gets/sets the database user name.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.DatabaseUser.MappingType">
+	<summary>
+ Gets/sets the mapping type.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.DatabaseUser.ServerLogin">
+	<summary>
+ Gets/sets the server login.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.DatabaseUser.Password">
+	<summary>
+ Gets/sets the server login's password.
+ Only valid for Standard mappings.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.DatabaseUser.EncryptPassword">
+	<summary>
+ Gets/sets the setting which determines whether the saved password needs to be encrpyted.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database1.DeployDatabase.CreateDatabase(System.String,System.String,System.Boolean)">
+	<summary>
+ Creates the database, drops it first if it is to be recreated.
+ </summary>
+	<param name="data"></param>
+	<param name="log"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Bcd.Database1.DeployDatabase.DeployScript(System.String)">
+	<summary>
+ Deploy a sql script string.
+ </summary>
+	<param name="script">SQL batch to run</param>
+</member><member name="M:Snowden.Bcd.Database1.DeployDatabase.DeployFile(System.String)">
+	<summary>
+ Deploy a sql script file.
+ </summary>
+	<param name="file">Path to the file to run.</param>
+</member><member name="P:Snowden.Bcd.Database2.DeployerConfiguration.GetErrorReport">
+	<summary>
+ Provides a simple error report of any errors encountered.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerConfiguration.AddLogin(System.String,Snowden.Bcd.Database2.DeployerUserType,System.String,System.String)">
+	<summary>
+ Adds the requested login.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerConfiguration.AddLogin(Snowden.Bcd.Database2.DeployerUser)">
+	<summary>
+ Adds the requested login.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerConfiguration.GetUser(System.String)">
+	<summary>
+ Gets the user based on the database user name.
+ If no user exists then "nothing" is returned.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerConfiguration.FromDatabaseConfiguration(Snowden.Bcd.ProductConfiguration.DatabaseConfiguration)">
+	<summary>
+ Returns a DeployerConfiguration from the given DatabaseConfiguration.
+ Defaults to DeployNew and EncryptCode.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentOptions.Merge(Snowden.Bcd.Database2.DeploymentOptions)">
+	<summary>
+ Merges the provided options into the existing options.
+ This is typically a build-time operation.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.DeploymentOptions">
+	<summary>
+ Contains a summary of database options that must be applied.
+ If any/all of these are unset then the server default is assumed.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestOptions.Options">
+	<summary>
+ Used for serialisation.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestOptions.Manifest">
+	<summary>
+ Gets/sets the manifest associated this group is associated with.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestOptions.GetErrors">
+	<summary>
+ Collects a list of errors for these options.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestOptions.AddOption(System.String,System.String)">
+	<summary>
+ Adds the requested option.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestOptions.RemoveOption(System.String)">
+	<summary>
+ Removes the requested option.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestOptions.ConvertToDeploymentOptions(Snowden.Bcd.Database2.ManifestOptions)">
+	<summary>
+ Converts a given ManifestOptions class into a DeploymentOptions class.
+ Must contain valid entries; if there are invalid entries then an exception will be thrown.
+ </summary>
+	<remarks>
+ This has been done as a shared so there's no temptation to walk references!
+ </remarks>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.ConfigurationManager.EncryptionKey">
+	<summary>
+ Provides a standard encryption key.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.ConfigurationManager.File">
+	<summary>
+ Gets the underlying XML Document.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.Save">
+	<summary>
+ Saves the configuration to the file specified.
+ If a file exists it will be overwritten.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.Open">
+	<summary>
+ Open the configuration file specified.
+ If the file does not exist then a new instance will be created.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.GetDatabaseConfiguration(System.String)">
+	<summary>
+ Gets the database configuration for the specified key.
+ If it does not exist then "nothing" is returned.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.ApplyDatabaseConfiguration(System.String,Snowden.Bcd.ProductConfiguration.DatabaseConfiguration)">
+	<summary>
+ Saves the database configuration for the specified key.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.DeleteDatabaseConfiguration(System.String)">
+	<summary>
+ Deletes the database configuration for the specified key.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.ConfigurationManager.NewDatabaseConfiguration">
+	<summary>
+ Returns a new instance of a database configuration.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.GetSmtpConfiguration(System.String)">
+	<summary>
+ Gets the Smtp configuration for the specified key.
+ If it does not exist then "nothing" is returned.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.ApplySmtpConfiguration(System.String,Snowden.Bcd.ProductConfiguration.SmtpConfiguration)">
+	<summary>
+ Saves the Smtp configuration for the specified key.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.DeleteSmtpConfiguration(System.String)">
+	<summary>
+ Deletes the Smtp configuration for the specified key.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.ConfigurationManager.NewSmtpConfiguration">
+	<summary>
+ Returns a new instance of a smtp configuration.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.ConfigurationManager.GetProduct">
+	<summary>
+ Gets the Product information.
+ If it does not exist then "nothing" is returned.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.ApplyProduct(Snowden.Bcd.ProductConfiguration.Product)">
+	<summary>
+ Saves the Product information.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.DeleteProduct">
+	<summary>
+ Deletes the Product information.
+ </summary>
+</member><member name="P:Snowden.Bcd.ProductConfiguration.ConfigurationManager.NewProduct">
+	<summary>
+ Returns a new empty Product information object.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.ResolvePath(System.Configuration.Configuration,System.String)">
+	<summary>
+ Resolves a path based on whether it is absolute or relative; a relative path
+ will be resolved as relative to the configuration file provided.
+ </summary>
+</member><member name="M:Snowden.Bcd.ProductConfiguration.ConfigurationManager.ResolvePath(System.String,System.String)">
+	<summary>
+ Resolves a path based on whether it is absolute or relative; a relative path
+ will be resolved as relative to the configuration file provided.
+ </summary>
+</member><member name="T:Snowden.Bcd.ProductConfiguration.ConfigurationManager">
+	<summary>
+ Manages a configuration file for a suite of projects within a product.
+ This allows control of global settings that can be referenced by the individual projects.
+ Stores in an open XML DOM format that allows full customisation of its output.
+ Currently provides some database management capabilities.
+ </summary>
+</member><member name="M:Snowden.Bcd.ComponentVersion.NullDatabaseVersion">
+	<summary>
+ Returns a null database version instance.
+ </summary>
+</member><member name="T:Snowden.Bcd.ComponentVersion">
+	<summary>
+ Stores version information.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.FileExtensionBinary">
+	<summary>
+ Returns the standard file extension used for the deployment file.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.FileExtensionXml">
+	<summary>
+ Returns the standard file extension used for the deployment file.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.OtherArtifactsSubfolder">
+	<summary>
+ The subfolder used to store other artefacts.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.OtherArtifactsSubfolder(System.String)">
+	<summary>
+ Determines whether the specified folder is an "other artefacts" subfolder
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.Name">
+	<summary>
+ Gets/sets the name of the manifest.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.VersionText">
+	<summary>
+ Gets/sets the version of the database.
+ This defaults to "*".
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.FileVersion">
+	<summary>
+ Gets/sets the version number of the deployment file.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.ScriptGroup(Snowden.Bcd.Database2.DeploymentScriptGroupType)">
+	<summary>
+ Returns the requested script group.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.Upgrade(System.String)">
+	<summary>
+ Returns the requested Upgrade.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.OutputFolder">
+	<summary>
+ Gets/sets the output folder for saving.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.Version">
+	<summary>
+ Returns the version information details.
+ This will only provide valid results if the version has been explicitly set at build time.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.Deployment.NewestUpgradeVersion">
+	<summary>
+ Returns the newest upgrade version stored within the upgrade scripts collection.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployment.AddScriptGroup(Snowden.Bcd.Database2.DeploymentScriptGroupType)">
+	<summary>
+ Adds a script group.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployment.AddUpgrade(System.String)">
+	<summary>
+ Adds the specified upgrade.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployment.Save(Snowden.Bcd.Database2.DeploymentSaveOption)">
+	<summary>
+ Saves the current deployment to the default folder.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployment.Save(System.String,Snowden.Bcd.Database2.DeploymentSaveOption)">
+	<summary>
+ Saves the current deployment to the specified folder.
+ The file name is automatically generated.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployment.Save(System.IO.Stream,System.Boolean)">
+	<summary>
+ Saves the current deployment to the specified stream.
+ </summary>
+	<remarks>
+ GZip is used as it natively provides CRC to protect against corruption/modification.
+ Uses TripleDES encryption for best encryption.
+ </remarks>
+</member><member name="M:Snowden.Bcd.Database2.Deployment.SaveScripts">
+	<summary>
+ Saves a set of loose development scripts to the output folder.
+ Creates the following outputs:
+ 1. Full.sql - the full build script (to build a new database)
+ 2. Data.sql - the data population scripts
+ 3. Schema.sql - the schema scripts
+ 4. Code.sql - the code scripts
+ 5. Upgrade (1.2.34.0).sql - upgrade script representative of the specified version
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployment.Load(System.String)">
+	<summary>
+ Loads the requested deployment file.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.Deployment.Load(System.IO.Stream)">
+	<summary>
+ Loads the requested deployment content.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeploymentSecurityEntry.Script">
+	<summary>
+ Gets the script content.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestReference.AbsolutePath">
+	<summary>
+ The path to the folder (not the file).
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestReference.Manifest">
+	<summary>
+ Gets/sets the manifest reference.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestReference.GetErrors">
+	<summary>
+ Checks for errors for this particular upgrade reference.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Snowden.Bcd.Database2.ManifestReference.Deployment">
+	<summary>
+ Loads the deployment classes into memory for the requested reference.
+ </summary>
+	<remarks>
+ Lazy loads the reference into memory as a singleton instance.
+ Determines the reference based on the Reference Paths configured.
+ </remarks>
+</member><member name="P:Snowden.Bcd.Database2.ManifestReference.GetDeploymentPaths">
+	<summary>
+ Returns a list of possible deployment paths to be validated.
+ The list is ordered in terms of (1) Reference Path Order, and (2) Absolute Path
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestReference.TryGetDeployment">
+	<summary>
+ Get the deployment based on the configured folders.
+ If no valid deployment was found then returns nothing.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerChecks.ChecksSuccessful">
+	<summary>
+ Returns whether the report card returns all ok.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerChecks.GetReportCard">
+	<summary>
+ Returns the current report card.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeployerChecks.GetReportText">
+	<summary>
+ Returns the current report card in a simple log format.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.Run">
+	<summary>
+ Runs the checks and generates the report card.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.SetCheckResult(System.String,System.Boolean,System.String)">
+	<summary>
+ Sets the check result for a given check.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.LogCheckResults">
+	<summary>
+ Writes all check results to the log.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckCurrentCredentialsValid">
+	<summary>
+ Check that the current credentials are valid.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckExistingLoginType">
+	<summary>
+ If there are existing Logins, check that their types are correct.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckExistingLoginUser">
+	<summary>
+ If there is an existing Login, check that the referenced user in the target database is the same
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.IsValidConnectionDatabaseAndUsers(System.Collections.Generic.IEnumerable{Snowden.Bcd.Database2.DeploymentSecurityUser})">
+	<summary>
+ When checking for existing users login, we need to make sure there is a database, there is a connection, and
+ that there are actually users who need to be tested against.  This function makes suer tha 
+ </summary>
+	<param name="users"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckExistingUsersLogin">
+	<summary>
+ For each User that will be deployed, check to see if the associated Login is (or will be) mapped correctly
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckReferencedUsersExist">
+	<summary>
+ Check the User referenced by the Login doesn't exist or won't exist
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckStandardLoginCredentials">
+	<summary>
+ For logins that *do* exist, if it is a Sql server standard login then check it is usable
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckCurrentCredentialsCreateLogin">
+	<summary>
+ For logins that don't exist, ensure the existing account has the necessary permissions to create them
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckRoleAssignmentUser">
+	<summary>
+ Check that the Role Assignment maps to an existing user or a user that will be created.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckRoleAssignmentRole">
+	<summary>
+ Check that the Role Assignment maps to an existing role or a role that will be created.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckCurrentCredentialsCreateDatabase">
+	<summary>
+ If the database doesn't exist, does the current account have permission to create it?
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckCurrentCredentialsDatabasePermissions">
+	<summary>
+ If the database does exist, does the current Login have permission to create objects?
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckDatabaseVersionInterfaceExists">
+	<summary>
+ Check the Version Interface on the target database.
+ Only required for upgrade scenarios!
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckModeDatabaseMismatch">
+	<summary>
+ Is the mode "deploy new" but the database already exists?
+ Is the mode "redeploy new" or "upgrade" but the database doesn't exist?
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckDatabaseVersion">
+	<summary>
+ Check the version of the target database.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeployerChecks.CheckRegisteredProductName">
+	<summary>
+ Check the name registered against the target database.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.DeployerChecks">
+	<summary>
+ Creates an error report for the given deployment.
+ </summary>
+	<remarks>
+ There are a lot of checks that get run here for when a deployment occurs.
+ It is designed as a 'report card' that should be easily presented to a User Interface.
+ The idea is that it should be easily extensible should new checks need to be added.
+ </remarks>
+</member><member name="P:Snowden.Bcd.Database2.ManagementInterfaceDatabaseState.DatabaseExists">
+	<summary>
+ Returns true if the database exists.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManagementInterfaceDatabaseState.IsAccessible">
+	<summary>
+ Returns true if the database is accessible to this user.
+ If the database doesn't exist the "nothing" is returned.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManagementInterfaceDatabaseState.InterfaceExists">
+	<summary>
+ Returns true if the management interface exists.
+ If the database doesn't exist or is not accessible to this user then "nothing" is returned.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManagementInterfaceDatabaseState.CanCreateInterface">
+	<summary>
+ Returns true if the management interface can be created.
+ If the database doesn't exist, is not accessible to this user or already exists then "nothing" is returned.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManagementInterfaceDatabaseState.IsSupportedInterface">
+	<summary>
+ Returns true if the management interface is supported.
+ If the interface doesn't exist then "nothing" is returned.
+ </summary>
+</member><member name="T:Snowden.Bcd.Database2.ManagementInterfaceDatabaseState">
+	<summary>
+ Provides a summary of the current database state.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.DeploymentSecurity.Entries">
+	<summary>
+ Used for serialisation.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentSecurity.AddUser(System.String)">
+	<summary>
+ Adds the requested user.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentSecurity.AddDatabaseRole(System.String)">
+	<summary>
+ Adds the requested database role.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentSecurity.AddDatabaseRoleMember(System.String,System.String)">
+	<summary>
+ Adds the requested database role membership.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentSecurity.UserExists(System.String)">
+	<summary>
+ Determines if the requested username already exists.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.DeploymentSecurity.DatabaseRoleExists(System.String)">
+	<summary>
+ Determines if the requested database role name already exists.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestSecurity.Manifest">
+	<summary>
+ Gets/sets the manifest.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestSecurity.Entries">
+	<summary>
+ Used for serialisation.
+ </summary>
+</member><member name="P:Snowden.Bcd.Database2.ManifestSecurity.GetErrors">
+	<summary>
+ Returns a report of manifest errors.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestSecurity.AddUser(System.String)">
+	<summary>
+ Adds the requested user.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestSecurity.AddDatabaseRole(System.String)">
+	<summary>
+ Adds the requested database role.
+ </summary>
+</member><member name="M:Snowden.Bcd.Database2.ManifestSecurity.AddDatabaseRoleMember(System.String,System.String)">
+	<summary>
+ Adds the requested database role membership.
+ </summary>
+</member>
+</members>
+</doc>

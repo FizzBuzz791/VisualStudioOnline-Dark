@@ -1,0 +1,27 @@
+﻿If Object_id('dbo.BhpbioApprovalData') Is Not Null 
+     Drop Table dbo.BhpbioApprovalData
+Go 
+
+CREATE TABLE dbo.BhpbioApprovalData
+(
+	TagId VARCHAR(63) COLLATE Database_Default NOT NULL,
+	LocationId INT NOT NULL,
+	ApprovedMonth DATETIME NOT NULL,
+	UserId INT NULL,
+	SignoffDate DATETIME NULL,
+	
+	CONSTRAINT PK_BHPBIOAPPROVALDATA PRIMARY KEY CLUSTERED
+		(TagId,	ApprovedMonth, LocationId),
+	CONSTRAINT FK_BHPBIOAPPROVALDATA_BHPBIOREPORTDATATAGS FOREIGN KEY (TagId)
+		REFERENCES dbo.BhpbioReportDataTags (TagId),
+	CONSTRAINT FK_BhpbioApprovalData_User FOREIGN KEY (UserId)
+		REFERENCES dbo.SecurityUser (UserId),
+	CONSTRAINT FK_BHPBIOAPPROVALDATA_LOCATION FOREIGN KEY (LocationId)
+		REFERENCES dbo.Location (Location_Id)
+)
+GO
+
+CREATE NONCLUSTERED INDEX IX_BhpbioApprovalData_LocationId ON dbo.BhpbioApprovalData (LocationId)
+GO
+CREATE NonClustered INDEX IX_BhpbioApprovalData_01 ON dbo.BhpbioApprovalData ( ApprovedMonth ) INCLUDE ( TagId , LocationId , UserId )
+GO

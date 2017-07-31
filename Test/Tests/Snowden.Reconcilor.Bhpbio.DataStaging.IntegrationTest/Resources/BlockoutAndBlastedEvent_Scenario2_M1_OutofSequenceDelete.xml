@@ -1,0 +1,47 @@
+﻿<?xml version="1.0"?>
+<BlockOutAndBlastedEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.snowden.com/Blastholes/v1.0">
+  <Timestamp xmlns="">2015-03-21T13:52:53.7642126+08:00</Timestamp>
+  <IsReblockOut xmlns="">true</IsReblockOut>
+  <SourceModelDetail xmlns="">
+    <ModelFile />
+    <ModelType>GRADE_CONTROL</ModelType>
+  </SourceModelDetail>
+  <PatternDetails xmlns="">
+    <PatternGUID>af1743ff-4c38-f846-abc2-051de605dd90</PatternGUID>
+    <PatternNumber>3151</PatternNumber>
+    <Name>0210</Name>
+    <SiteId>INTEGTEST_2</SiteId>
+    <OrebodyId>AC</OrebodyId>
+    <PitId_Log>CW</PitId_Log>
+    <PitId_Phy>778</PitId_Phy>
+    <PitId_MQ2>CW</PitId_MQ2>
+    <Bench>0653</Bench>
+    <DateCreated>1990-01-01T00:00:00</DateCreated>
+    <DateAccepted>0001-01-01T00:00:00</DateAccepted>
+    <AcceptedByUserName />
+    <ApprovedByUserName />
+    <BlastID>FGFFF4100</BlastID>
+    <BlastStatus>E</BlastStatus>
+    <BlastStatusChangeDateTime>2015-02-20T10:07:20</BlastStatusChangeDateTime>
+    <ExternalLocationID>TEST LOCATION JAMES</ExternalLocationID>
+    <JVOwner />
+    <Block>
+      <Name>1</Name>
+      <BlockGUID>b3543171-b363-4f88-a403-3cee9420dd4d</BlockGUID>
+      <BlockNumber>0</BlockNumber>
+      <GeoType>N3</GeoType>
+      <DateBlocked>2005-08-28T00:00:00</DateBlocked>
+      <Stratigraphy>N3</Stratigraphy>
+      <StratNum>0</StratNum>
+
+      <Centroid>
+        <Easting>48421.76</Easting>
+        <Northing>162797.81</Northing>
+        <PointNumber>0</PointNumber>
+        <ToeRL>642.5</ToeRL>
+      </Centroid>
+
+      <ChangeState>DELETED</ChangeState>
+    </Block>
+      </PatternDetails>
+</BlockOutAndBlastedEvent>

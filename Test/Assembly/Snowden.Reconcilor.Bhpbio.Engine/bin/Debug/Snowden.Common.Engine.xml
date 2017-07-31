@@ -1,0 +1,247 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Snowden.Common.Engine
+</name>
+</assembly>
+<members>
+<member name="T:Snowden.Common.Engine.Configuration.SettingCollection">
+	<summary>
+ Manages the Settings element within the application configuration file.
+ Provides for a collection of Setting elements.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Snowden.Common.Engine.Configuration.Setting">
+	<summary>
+ Manages the Setting element within the application configuration file.
+ Stores simple key/value pairs for simple settings.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Snowden.Common.Engine.Configuration.Engine">
+	<summary>
+ Manages the Engine element within the application configuration file.
+ Provides for a collection of Agents.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Snowden.Common.Engine.Configuration.AgentCollection">
+	<summary>
+ Manages the Agents element within the application configuration file.
+ Provides for a collection of Agent elements.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Snowden.Common.Engine.Configuration.Agent">
+	<summary>
+ Manages the Agent element within the application configuration file.
+ Provides configuration settings for the agent element.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Engine.IAgent.Initialise(System.String,System.String,System.TimeSpan,System.String,Snowden.Common.Engine.Extensibility.DependencyFactories,System.TimeSpan,System.Collections.Generic.IDictionary{System.String,System.String},Snowden.Bcd.ProductConfiguration.ConfigurationManager)">
+	<summary>
+ Initialises properties on agent.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.IAgent.Execute">
+	<summary>
+ The execution action of the agent.  This is run in a separate thread.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.IAgent.RequestStop">
+	<summary>
+ Performs a synchronous stop request.
+ This flags the CloseRequested request and then waits for the configured timeout period.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.IAgent.BeginRequestStop">
+	<summary>
+ Begins an asynchronous stop request.
+ This flags the CloseRequested request and then waits for the configured timeout period.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.IAgent.EndRequestStop">
+	<summary>
+ Ends an asynchronous stop request.
+ This flags the CloseRequested request and then waits for the configured timeout period.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.IAgent.RequestStart">
+	<summary>
+ Requests that the agent starts up a thread and begins its operations.
+ </summary>
+</member><member name="T:Snowden.Common.Engine.ImportAgent">
+	<summary>
+ Provides access to the Import Agent.
+ </summary>
+	<remarks>
+ Note that most of the code in here is legacy; it is currently too heavily coupled
+ and will require migration of most of this code out of here into the Import namespace.
+ A "coordinator" class should be created within the imports with most of this moving over there.
+ For the sake of a step in the right direction this has been quickly ported and quickly defect corrected.
+ </remarks>
+</member><member name="M:Snowden.Common.Engine.Extensibility.AgentFactory.#ctor">
+	<summary>
+ Default constructor.
+ </summary>
+	<remarks>Sets the Base Type to IAgent.</remarks>
+</member><member name="M:Snowden.Common.Engine.Extensibility.AgentFactory.Create(System.String,System.String,System.String,System.TimeSpan,Snowden.Common.Engine.Extensibility.DependencyFactories,System.TimeSpan,System.Collections.Generic.IDictionary{System.String,System.String},Snowden.Bcd.ProductConfiguration.ConfigurationManager)">
+	<summary>
+ Creates a new instance of a required IAgent based class.
+ </summary>
+	<param name="name">The name of the type required.</param>
+	<param name="configurationSettings">
+ The configuration settings that are applicable.
+ If no settings are available either an empty dictionary or "nothing" is acceptable.
+ </param>
+	<returns>An instance of the requested IAgent.</returns>
+	<remarks></remarks>
+</member><member name="T:Snowden.Common.Engine.Extensibility.AgentFactory">
+	<summary>
+ Using the Dependency Factory, provides instances of IAgent compatible classes
+ that have been previously registered.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Engine.Extensibility.DependencyFactories.AgentFactory">
+	<summary>
+ Provides access to the Agent factory.
+ </summary>
+	<value></value>
+	<returns>The agent factory, which provides access to create new IAgent instances.</returns>
+</member><member name="M:Snowden.Common.Engine.Extensibility.DependencyFactories.ConfigureAgentFactory(Snowden.Common.Engine.Extensibility.AgentFactory)">
+	<summary>
+ Agent types are registered here in a strongly typed sense.
+ </summary>
+	<param name="factory"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Engine.Extensibility.DependencyFactories.CreateInstance(System.String)">
+	<summary>
+ Creates an instance of the Dependency Factory based on application configuration settings.
+ </summary>
+	<param name="configurationValue">The "value" string from the application configuration setting.</param>
+	<returns>An instance of the Dependency Factory (or valid subclass).</returns>
+	<remarks></remarks>
+</member><member name="T:Snowden.Common.Engine.Extensibility.DependencyFactories">
+	<summary>
+ Provides controlled access to the dependency factories.
+ This is the main entry point for consumers of these factories.
+ </summary>
+	<remarks>
+ This is implemeted through a facade pattern to provide controlled
+ access to a larger subsystem.  Make further utility style optimisations and helpers here.
+ </remarks>
+</member><member name="M:Snowden.Common.Engine.Engine.#ctor">
+	<summary>
+ Creates an instance of the engine.
+ </summary>
+	<remarks>
+ Also creates the dependency factory and the product configuration object.
+ </remarks>
+</member><member name="M:Snowden.Common.Engine.Engine.Initialise">
+	<summary>
+ Instatiates agents with the settings defined in the application configuration file.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.Engine.DatabaseCompatible(Snowden.Bcd.ProductConfiguration.ConfigurationManager,Snowden.Bcd.ProductConfiguration.DatabaseConfiguration,System.String)">
+	<summary>
+ Determines whether the database is version compatible with the application.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.Engine.RequestStart">
+	<summary>
+ Iterate through agent list and request their start up.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.Engine.RequestStop">
+	<summary>
+ Iterate through agents and request their closure.
+ </summary>
+</member><member name="T:Snowden.Common.Engine.Engine">
+	<summary>
+ Manages all instances of Agents that are supplied.
+ </summary>
+	<remarks>
+ Always keep the connection closed when not in use.
+ Note: There is no "protection" implemented through this solution as everything runs in the same process.
+ Implementation of App Domains may need to occur at a later date?
+ </remarks>
+</member><member name="P:Snowden.Common.Engine.Agent.SupportServices">
+	<summary>
+ Support service for agents to consume.
+ </summary>
+	<remarks>
+ This is exposed for the Agent's thread (as opposed to the Engine's thread).
+ </remarks>
+</member><member name="P:Snowden.Common.Engine.Agent.ProductConfiguration">
+	<summary>
+ Provides access to the product configuration.
+ </summary>
+</member><member name="P:Snowden.Common.Engine.Agent.StopRequested">
+	<summary>
+ Whether or not a request to close has been passed through.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Engine.Agent.InstanceName">
+	<summary>
+ Name of the agent.
+ </summary>
+</member><member name="P:Snowden.Common.Engine.Agent.DependencyFactories">
+	<summary>
+ Provides access to all registered dependency factories.
+ </summary>
+</member><member name="P:Snowden.Common.Engine.Agent.ConfigurationSettings">
+	<summary>
+ Provides access to thebasic key/value pair configuration settings.
+ </summary>
+	<value>The configuration settings dictionary.</value>
+</member><member name="M:Snowden.Common.Engine.Agent.RequestStart">
+	<summary>
+ Requests that the agent starts up a thread and begins its operations.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Engine.Agent.BeginRequestStop">
+	<summary>
+ Initiates the stop operation for the agent.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Engine.Agent.EndRequestStop">
+	<summary>
+ Waits for the stop request to complete.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Engine.Agent.RequestStop">
+	<summary>
+ Performs the stop request.  This flags the CloseRequested request and then waits for the configured timeout period.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Engine.Agent.WrappedExecute">
+	<summary>
+ Runs the user supplied execution, however catches and logs errors that may occur.
+ Runs on a separate thread from the main thread.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.Agent.Execute">
+	<summary>
+ Executes the Agents.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Engine.Agent.Initialise(System.String,System.String,System.TimeSpan,System.String,Snowden.Common.Engine.Extensibility.DependencyFactories,System.TimeSpan,System.Collections.Generic.IDictionary{System.String,System.String},Snowden.Bcd.ProductConfiguration.ConfigurationManager)">
+	<summary>
+ Initialises all properties on the agent.
+ If you wish to allow further options/configuration settings to be loaded
+ then override this class remembering to call the original base class.
+ </summary>
+	<param name="instanceName">The name of the agent's instance.</param>
+	<param name="agentType">The agent's type.</param>
+	<param name="stopTimeout">The timeout before a ThreadAbortException is raised on a shutdown request.</param>
+	<param name="managementConnectionString">The connection string required for the management connection.</param>
+	<param name="dependencyFactories">The dependency factories to provide to the agent.</param>
+	<param name="configurationSettings">Key/value pairs indicating simple configuration settings.</param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Engine.Agent.Sleep(System.TimeSpan)">
+	<summary>
+ Forces a polled sleep; will terminate early if a CloseRequest was detected.
+ </summary>
+</member><member name="M:Snowden.Common.Engine.Agent.GetConnectionString(System.String,System.String)">
+	<summary>
+ Returns a connection string for the given product configuration key/user combo.
+ </summary>
+</member><member name="T:Snowden.Common.Engine.Agent">
+	<summary>
+ Abstract agent class that encapsulates some form of asynchronus process
+ </summary>
+	<remarks>
+ Always keep connections closed when not in use.
+ </remarks>
+</member>
+</members>
+</doc>

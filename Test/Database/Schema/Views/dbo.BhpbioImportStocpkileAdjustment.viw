@@ -1,0 +1,26 @@
+﻿IF OBJECT_ID('dbo.BhpbioImportStockpileAdjustment') IS NOT NULL 
+     DROP VIEW dbo.BhpbioImportStockpileAdjustment
+GO
+
+CREATE VIEW dbo.BhpbioImportStockpileAdjustment
+AS
+SELECT r.ImportSyncRowId,
+	r.SourceRow.value('(//StockpileAdjustmentSource/StockpileAdjustment/Mine)[1]', 'VARCHAR(MAX)') AS Mine,
+	r.SourceRow.value('(//StockpileAdjustmentSource/StockpileAdjustment/StockpileName)[1]', 'VARCHAR(MAX)') AS StockpileName,
+	Cast(r.SourceRow.value('(//StockpileAdjustmentSource/StockpileAdjustment/StockpileAdjustmentDate)[1]', 'VARCHAR(MAX)') AS Datetime) AS StockpileAdjustmentDate,
+	r.SourceRow.value('(//StockpileAdjustmentSource/StockpileAdjustment/StockpileAdjustmentShift)[1]', 'VARCHAR(MAX)') AS StockpileAdjustmentShift,
+	r.SourceRow.value('(//StockpileAdjustmentSource/StockpileAdjustment/StockpileAdjustmentType)[1]', 'VARCHAR(MAX)') AS StockpileAdjustmentType,
+	r.SourceRow.value('(//StockpileAdjustmentSource/StockpileAdjustment/StockpileAdjustmentTonnes)[1]', 'FLOAT') AS StockpileAdjustmentTonnes,
+	r.RootImportSyncRowId, r.IsCurrent
+FROM dbo.ImportSyncRow AS r
+	INNER JOIN dbo.Import AS i
+		ON (r.ImportId = i.ImportId)
+	INNER JOIN dbo.ImportSyncTable AS t
+		ON (r.ImportSyncTableId = t.ImportSyncTableId)
+WHERE i.ImportName = 'Stockpile Adjustment'
+	AND t.Name = 'StockpileAdjustment'
+GO
+
+GRANT SELECT ON dbo.BhpbioImportStockpileAdjustment TO CoreReporting
+GO
+

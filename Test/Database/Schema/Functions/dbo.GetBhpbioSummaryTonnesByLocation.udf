@@ -1,0 +1,73 @@
+﻿IF OBJECT_ID('dbo.GetBhpbioSummaryTonnesByLocation') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioSummaryTonnesByLocation
+GO
+
+CREATE FUNCTION dbo.GetBhpbioSummaryTonnesByLocation
+(
+	@iSummaryId INTEGER,
+	@iSummaryEntryTypeName VARCHAR(30),
+	@iMaterialTypeId INTEGER
+)
+RETURNS @SummaryTonnes TABLE
+(
+	LocationId INT NOT NULL,
+	ModelFilename VARCHAR(200) NULL,
+	Tonnes FLOAT,
+	Volume FLOAT,
+	PRIMARY KEY (LocationId)
+)
+WITH ENCRYPTION
+AS
+BEGIN
+	
+	-- Insert a sum of Tonnes against each LocationId in the summary table
+	-- based on the supplied criteria
+	INSERT INTO @SummaryTonnes
+	(
+		LocationId,
+		ModelFilename,
+		Tonnes,
+		Volume
+	)
+	SELECT se.LocationId, MIN(se.ModelFilename), SUM(se.Tonnes), SUM(se.Volume)
+	FROM dbo.BhpbioSummaryEntry se
+		INNER JOIN dbo.BhpbioSummaryEntryType bset 
+			ON bset.SummaryEntryTypeId = se.SummaryEntryTypeId
+	WHERE se.SummaryId = @iSummaryId
+		AND (
+				@iMaterialTypeId IS NULL
+				OR se.MaterialTypeId = @iMaterialTypeId
+			)
+		AND bset.Name = @iSummaryEntryTypeName
+		AND se.ProductSize = 'TOTAL'
+	GROUP BY se.LocationId
+	
+	RETURN
+END
+GO
+
+/*
+
+-- returns summary tonnes
+SELECT * FROM dbo.GetBhpbioSummaryTonnesByLocation(@iSummaryId = 1, 
+												 @iSummaryEntryTypeName = 'GradeControlModelMovement',
+												 @iMaterialTypeId = NULL)
+
+*/
+
+
+/*
+<TAG Name="Data Dictionary" FunctionName="dbo.GetBhpbioSummaryTonnesByLocation">
+ <Function>
+	Gets a table of Tonnes by Location for a particular Summary and Summary Entry Type
+	
+			
+	Pass: 
+			@iSummaryId : Identifies the summary to return data for
+			@iSummaryEntryTypeName: The type of summary entry data to return a tonnes value for
+			@iMaterialTypeId: An optional MaterialTypeId used to filter the results
+	
+	Returns: Table of Tonnes for each Location based on criteria
+ </Function>
+</TAG>
+*/	

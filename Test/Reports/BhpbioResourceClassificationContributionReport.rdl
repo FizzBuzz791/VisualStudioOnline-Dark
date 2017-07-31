@@ -1,0 +1,2491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="WebService">
+      <DataSourceReference>WebService</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>0a84f058-0af7-4113-9272-5b59ca68f278</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="GetBhpbioResourceClassificationData">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="dateBreakdown">
+            <Value>=Parameters!DateBreakdown.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="dateFrom">
+            <Value>=Parameters!StartDate.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="dateTo">
+            <Value>=Parameters!EndDate.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="includeSublocations">
+            <Value>=True</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="reportContext">
+            <Value>=Parameters!ReportContext.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="returnEmptyDataSet">
+            <Value>=Parameters!ReturnEmptyReport.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetBhpbioResourceClassificationData&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetBhpbioResourceClassificationData"&gt;
+    &lt;Parameters&gt;
+     &lt;Parameter Name="locationId" Type="integer" /&gt;
+     &lt;Parameter Name="dateFrom" Type="date" /&gt;
+     &lt;Parameter Name="dateTo" Type="date" /&gt;
+     &lt;Parameter Name="dateBreakdown" Type="string" /&gt;
+     &lt;Parameter Name="includeSublocations" Type="boolean" /&gt;
+     &lt;Parameter Name="reportContext" Type="string" /&gt;
+   &lt;/Parameters&gt; 
+   &lt;/Method&gt;
+   &lt;ElementPath IgnoreNamespaces="true"&gt;GetBhpbioResourceClassificationDataResponse{}/GetBhpbioResourceClassificationDataResult/diffgram{}/DocumentElement{}/Values{LocationId,LocationName,LocationType,TagId,ReportTagId,Type,DisplayType,ProductSize,MaterialTypeId,ResourceClassification,Description,Tonnes,Volume,Fe,P,SiO2,Al2O3,LOI,H2O,Approved,PresentationValid,PresentationEditable,CalendarDate,DateFrom,DateTo,rowOrder,id,FeDifference,PDifference,SiO2Difference,Al2O3Difference,LOIDifference,H2ODifference,PresentationColor, GradeControlValue, TonnesDifference, VolumeDifference, ContributionColour,ResourceClassificationDescription}&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="LocationId">
+          <DataField>LocationId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LocationName">
+          <DataField>LocationName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LocationType">
+          <DataField>LocationType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TagId">
+          <DataField>TagId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ReportTagId">
+          <DataField>ReportTagId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DisplayType">
+          <DataField>DisplayType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProductSize">
+          <DataField>ProductSize</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MaterialTypeId">
+          <DataField>MaterialTypeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ResourceClassification">
+          <DataField>ResourceClassification</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Tonnes">
+          <DataField>Tonnes</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Volume">
+          <DataField>Volume</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Fe">
+          <DataField>Fe</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="P">
+          <DataField>P</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SiO2">
+          <DataField>SiO2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Al2O3">
+          <DataField>Al2O3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LOI">
+          <DataField>LOI</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="H2O">
+          <DataField>H2O</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Approved">
+          <DataField>Approved</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PresentationValid">
+          <DataField>PresentationValid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PresentationEditable">
+          <DataField>PresentationEditable</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CalendarDate">
+          <DataField>CalendarDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DateFrom">
+          <DataField>DateFrom</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DateTo">
+          <DataField>DateTo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="rowOrder">
+          <DataField>rowOrder</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FeDifference">
+          <DataField>FeDifference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PDifference">
+          <DataField>PDifference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SiO2Difference">
+          <DataField>SiO2Difference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Al2O3Difference">
+          <DataField>Al2O3Difference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LOIDifference">
+          <DataField>LOIDifference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="H2ODifference">
+          <DataField>H2ODifference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PresentationColor">
+          <DataField>PresentationColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GradeControlValue">
+          <DataField>GradeControlValue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TonnesDifference">
+          <DataField>TonnesDifference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VolumeDifference">
+          <DataField>VolumeDifference</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ContributionColour">
+          <DataField>ContributionColour</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ResourceClassificationDescription">
+          <DataField>ResourceClassificationDescription</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!ReportTagId.Value &lt;&gt; "F15Factor" OrElse Parameters!f15Required.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue DataType="Boolean">=True</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="GetFAttributes">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetFAttributes&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetFAttributes"&gt;
+   &lt;/Method&gt;
+   &lt;ElementPath IgnoreNamespaces="true"&gt;GetFAttributesResponse{}/GetFAttributesResult/diffgram{}/DocumentElement{}/Attributes&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="rowOrder">
+          <DataField>rowOrder</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LocationId">
+          <DataField>LocationId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LocationName">
+          <DataField>LocationName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ThresholdTypeId">
+          <DataField>ThresholdTypeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FieldId">
+          <DataField>FieldId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FieldName">
+          <DataField>FieldName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LowThreshold">
+          <DataField>LowThreshold</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HighThreshold">
+          <DataField>HighThreshold</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AbsoluteThreshold">
+          <DataField>AbsoluteThreshold</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DisplayPrecision">
+          <DataField>DisplayPrecision</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DisplayFormat">
+          <DataField>DisplayFormat</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HighThresholdColor">
+          <DataField>HighThresholdColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MediumThresholdColor">
+          <DataField>MediumThresholdColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LowThresholdColor">
+          <DataField>LowThresholdColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="GetAttributes">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetAttributes&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetAttributes"&gt;
+   &lt;/Method&gt;
+   &lt;ElementPath IgnoreNamespaces="true"&gt;GetAttributesResponse{}/GetAttributesResult/diffgram{}/DocumentElement{}/Attributes&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="rowOrder">
+          <DataField>rowOrder</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AttributeId">
+          <DataField>AttributeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AttributeName">
+          <DataField>AttributeName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderNo">
+          <DataField>OrderNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Units">
+          <DataField>Units</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DisplayPrecision">
+          <DataField>DisplayPrecision</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DisplayFormat">
+          <DataField>DisplayFormat</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GradeTypeId">
+          <DataField>GradeTypeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IsVisible">
+          <DataField>IsVisible</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AttributeColor">
+          <DataField>AttributeColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Chart Name="Chart9">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart9_CategoryGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!ResourceClassification.Value</GroupExpression>
+                      <GroupExpression>=Fields!ResourceClassificationDescription.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!ResourceClassification.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!ResourceClassificationDescription.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>Tonnes</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="Series">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(CDbl(Fields!Tonnes.Value))</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
+                        <Label>#PERCENT</Label>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <Style>
+                        <Border>
+                          <Color>DimGray</Color>
+                          <Width>0.5pt</Width>
+                        </Border>
+                        <Color>=First(Fields!ContributionColour.Value)</Color>
+                      </Style>
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                      <ChartItemInLegend>
+                        <LegendText>=Fields!ResourceClassificationDescription.Value</LegendText>
+                      </ChartItemInLegend>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Shape</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <CustomProperties>
+                    <CustomProperty>
+                      <Name>PieLabelStyle</Name>
+                      <Value>Outside</Value>
+                    </CustomProperty>
+                  </CustomProperties>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <ChartThreeDProperties>
+                  <ProjectionMode>Perspective</ProjectionMode>
+                  <Shading>Simple</Shading>
+                  <WallThickness>15</WallThickness>
+                  <Clustered>true</Clustered>
+                </ChartThreeDProperties>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                  <BackgroundColor>WhiteSmoke</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Default">
+                <Caption>Resource Classification Tonnes Contribution 
+(Mining Model)</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontWeight>Bold</FontWeight>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                </Style>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>BrightPastel</Palette>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>No Data Available</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <DataSetName>GetBhpbioResourceClassificationData</DataSetName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=CInt(Fields!LocationId.Value)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Integer">=Parameters!LocationId.Value</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=Fields!ResourceClassification.Value = "ResourceClassificationTotal"</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Boolean">=False</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=Fields!TagId.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>F1MiningModel</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <Height>7.48453cm</Height>
+            <Width>23.17905cm</Width>
+            <Visibility>
+              <Hidden>=Parameters!OnlyTables.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Color>LightGrey</Color>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+          <Tablix Name="table2">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>10cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.52cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.52646cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.52646cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.52646cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.55291cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.52645cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.52645cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.63492cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox1</rd:DefaultName>
+                          <ZIndex>20</ZIndex>
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox2</rd:DefaultName>
+                          <ZIndex>19</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox50">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox50</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox3</rd:DefaultName>
+                          <ZIndex>18</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox4</rd:DefaultName>
+                          <ZIndex>17</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox5</rd:DefaultName>
+                          <ZIndex>16</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox7</rd:DefaultName>
+                          <ZIndex>15</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox12">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox12</rd:DefaultName>
+                          <ZIndex>14</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox18">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox18</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.63492cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox40">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!LocationType.Value) + ": " + First(Fields!LocationName.Value)</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>13</ZIndex>
+                          <Style>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <BackgroundColor>White</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox41">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="Tonnes " + "(kTonnes)"</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>12</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BackgroundColor>SandyBrown</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox51">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value EvaluationMode="Constant">Volume</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox51</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BackgroundColor>SandyBrown</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox42">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="Fe "+ Lookup("Fe", Fields!AttributeName.Value, Fields!Units.Value, "GetAttributes")</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>11</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BackgroundColor>SandyBrown</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox43">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="P "+ Lookup("P", Fields!AttributeName.Value, Fields!Units.Value, "GetAttributes")</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>10</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BackgroundColor>SandyBrown</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox44">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="SiO2 "+ Lookup("SiO2", Fields!AttributeName.Value, Fields!Units.Value, "GetAttributes")</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>9</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BackgroundColor>SandyBrown</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox45">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="Al2O3 "+ Lookup("Al2O3", Fields!AttributeName.Value, Fields!Units.Value, "GetAttributes")</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>8</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BackgroundColor>SandyBrown</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox46">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="LOI "+ Lookup("LOI", Fields!AttributeName.Value, Fields!Units.Value, "GetAttributes")</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>7</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BackgroundColor>SandyBrown</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox19">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="H2O "+ Lookup("H2O", Fields!AttributeName.Value, Fields!Units.Value, "GetAttributes")</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox19</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BackgroundColor>SandyBrown</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Description_1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIF(
+	Fields!ResourceClassification.Value = "ResourceClassificationTotal",
+	Fields!Description.Value,
+	"      " + Fields!ResourceClassificationDescription.Value
+)</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Description_1</rd:DefaultName>
+                          <ZIndex>6</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>=IIF(
+	Fields!ResourceClassification.Value = "ResourceClassificationTotal" AndAlso Fields!PresentationColor.Value &lt;&gt; "Black", 
+	Fields!PresentationColor.Value, 
+	"White"
+)</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="rectangle1">
+                          <ReportItems>
+                            <Image Name="image2">
+                              <Source>External</Source>
+                              <Value>=Variables!TonnesFace.Value</Value>
+                              <Sizing>Fit</Sizing>
+                              <Top>0.05cm</Top>
+                              <Left>1.25cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>0.5cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                            <Textbox Name="textbox14">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=CDbl(Fields!Tonnes.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>N2</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>textbox14</rd:DefaultName>
+                              <Height>0.6cm</Height>
+                              <Width>1.25cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <DataElementOutput>ContentsOnly</DataElementOutput>
+                          <ZIndex>5</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle16">
+                          <ReportItems>
+                            <Textbox Name="textbox36">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(Variables!HasVolume.Value, CDbl(Fields!Volume.Value), Variables!Blank.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>N2</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Height>0.6cm</Height>
+                              <Width>0.9cm</Width>
+                              <Style>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Image Name="image21">
+                              <Source>External</Source>
+                              <Value>=Variables!VolumeFace.Value</Value>
+                              <Sizing>Fit</Sizing>
+                              <Top>0.05cm</Top>
+                              <Left>0.9cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>0.49735cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Visibility>
+                                <Hidden>=Not Variables!HasVolume.Value</Hidden>
+                              </Visibility>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="rectangle6">
+                          <ReportItems>
+                            <Image Name="image8">
+                              <Source>External</Source>
+                              <Value>=Variables!FeFace.Value</Value>
+                              <Sizing>Fit</Sizing>
+                              <Top>0.05cm</Top>
+                              <Left>0.9cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>0.49735cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                            <Textbox Name="textbox17">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=CDbl(Fields!Fe.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>N3</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Height>0.6cm</Height>
+                              <Width>0.9cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <DataElementOutput>ContentsOnly</DataElementOutput>
+                          <ZIndex>4</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="rectangle2">
+                          <ReportItems>
+                            <Image Name="image4">
+                              <Source>External</Source>
+                              <Value>=Variables!PFace.Value</Value>
+                              <Sizing>Fit</Sizing>
+                              <Top>0.05cm</Top>
+                              <Left>0.9cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>0.5cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                            <Textbox Name="textbox26">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=CDbl(Fields!P.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>N2</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Height>0.6cm</Height>
+                              <Width>0.9cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <DataElementOutput>ContentsOnly</DataElementOutput>
+                          <ZIndex>3</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="rectangle3">
+                          <ReportItems>
+                            <Image Name="image5">
+                              <Source>External</Source>
+                              <Value>=Variables!SiO2Face.Value</Value>
+                              <Sizing>Fit</Sizing>
+                              <Top>0.05cm</Top>
+                              <Left>0.9cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>0.51721cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                            <Textbox Name="textbox27">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=CDbl(Fields!SiO2.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>N2</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Height>0.6cm</Height>
+                              <Width>0.9cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <DataElementOutput>ContentsOnly</DataElementOutput>
+                          <ZIndex>2</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="rectangle4">
+                          <ReportItems>
+                            <Image Name="image6">
+                              <Source>External</Source>
+                              <Value>=Variables!Al2O3Face.Value</Value>
+                              <Sizing>Fit</Sizing>
+                              <Top>0.05cm</Top>
+                              <Left>0.9cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>0.5cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                            <Textbox Name="textbox28">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=CDbl(Fields!Al2O3.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>N2</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Height>0.6cm</Height>
+                              <Width>0.9cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <DataElementOutput>ContentsOnly</DataElementOutput>
+                          <ZIndex>1</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="rectangle5">
+                          <ReportItems>
+                            <Image Name="image7">
+                              <Source>External</Source>
+                              <Value>=Variables!LOIFace.Value</Value>
+                              <Sizing>Fit</Sizing>
+                              <Top>0.05cm</Top>
+                              <Left>0.9cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>0.5cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                            <Textbox Name="textbox29">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=CDbl(Fields!LOI.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>N2</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Height>0.55cm</Height>
+                              <Width>0.9cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <DataElementOutput>ContentsOnly</DataElementOutput>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle15">
+                          <ReportItems>
+                            <Textbox Name="textbox37">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(Variables!HasMoisture.Value, CDbl(Fields!H2O.Value), "n/a")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>N2</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.025cm</Top>
+                              <Height>0.55cm</Height>
+                              <Width>0.9cm</Width>
+                              <Style>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Image Name="image22">
+                              <Source>External</Source>
+                              <Value>=Variables!H2OFace.Value</Value>
+                              <Sizing>Fit</Sizing>
+                              <Top>0.075cm</Top>
+                              <Left>0.9cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>0.5cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Visibility>
+                                <Hidden>=Not Variables!HasMoisture.Value</Hidden>
+                              </Visibility>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember>
+                  <Visibility>
+                    <Hidden>=IIF(Parameters!includeH2O.Value,False, True)</Hidden>
+                  </Visibility>
+                </TablixMember>
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="table2_Group1">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!LocationId.Value</GroupExpression>
+                      <GroupExpression>=Fields!LocationName.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=IIF(Fields!LocationId.Value = Parameters!LocationId.Value, 0, 1)</Value>
+                    </SortExpression>
+                    <SortExpression>
+                      <Value>=Fields!LocationName.Value</Value>
+                    </SortExpression>
+                    <SortExpression>
+                      <Value>=Fields!LocationId.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=iif(Fields!ProductSize.Value="TOTAL",False,True)</Hidden>
+                      </Visibility>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <KeepTogether>true</KeepTogether>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <KeepTogether>true</KeepTogether>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="table2_Details_Group">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!TagId.Value</GroupExpression>
+                          <GroupExpression>=Fields!ResourceClassification.Value</GroupExpression>
+                        </GroupExpressions>
+                        <DataElementName>Detail</DataElementName>
+                        <Variables>
+                          <Variable Name="TonnesFace">
+                            <Value>=Choose(
+	Code.GetFactorResultIndex(Fields!Tonnes.Value, Fields!TonnesDifference.Value,
+		Lookup(Fields!ReportTagId.Value &amp; "Tonnes",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!AbsoluteThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "Tonnes",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!LowThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "Tonnes",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!HighThreshold.Value, "GetFAttributes")				
+	),
+	"faceDisabled.gif",
+	"faceGreen.gif",
+	"faceOrange.gif",
+	"faceRed.gif"
+)</Value>
+                          </Variable>
+                          <Variable Name="PFace">
+                            <Value>=Choose(
+	Code.GetFactorResultIndex(Fields!P.Value, Fields!PDifference.Value,
+		Lookup(Fields!ReportTagId.Value &amp; "P",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!AbsoluteThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "P",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!LowThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "P",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!HighThreshold.Value, "GetFAttributes")				
+	),
+	"faceDisabled.gif",
+	"faceGreen.gif",
+	"faceOrange.gif",
+	"faceRed.gif"
+)</Value>
+                          </Variable>
+                          <Variable Name="SiO2Face">
+                            <Value>=Choose(
+	Code.GetFactorResultIndex(Fields!SiO2.Value, Fields!SiO2Difference.Value,
+		Lookup(Fields!ReportTagId.Value &amp; "SiO2",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!AbsoluteThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "SiO2",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!LowThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "SiO2",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!HighThreshold.Value, "GetFAttributes")				
+	),
+	"faceDisabled.gif",
+	"faceGreen.gif",
+	"faceOrange.gif",
+	"faceRed.gif"
+)</Value>
+                          </Variable>
+                          <Variable Name="Al2O3Face">
+                            <Value>=Choose(
+	Code.GetFactorResultIndex(Fields!Al2O3.Value, Fields!Al2O3Difference.Value,
+		Lookup(Fields!ReportTagId.Value &amp; "Al2O3",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!AbsoluteThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "Al2O3",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!LowThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "Al2O3",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!HighThreshold.Value, "GetFAttributes")				
+	),
+	"faceDisabled.gif",
+	"faceGreen.gif",
+	"faceOrange.gif",
+	"faceRed.gif"
+)</Value>
+                          </Variable>
+                          <Variable Name="LOIFace">
+                            <Value>=Choose(
+	Code.GetFactorResultIndex(Fields!LOI.Value, Fields!LOIDifference.Value,
+		Lookup(Fields!ReportTagId.Value &amp; "LOI",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!AbsoluteThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "LOI",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!LowThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "LOI",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!HighThreshold.Value, "GetFAttributes")				
+	),
+	"faceDisabled.gif",
+	"faceGreen.gif",
+	"faceOrange.gif",
+	"faceRed.gif"
+)</Value>
+                          </Variable>
+                          <Variable Name="FeFace">
+                            <Value>=Choose(
+	Code.GetFactorResultIndex(Fields!Fe.Value, Fields!FeDifference.Value,
+		Lookup(Fields!ReportTagId.Value &amp; "Fe",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!AbsoluteThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "Fe",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!LowThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "Fe",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!HighThreshold.Value, "GetFAttributes")				
+	),
+	"faceDisabled.gif",
+	"faceGreen.gif",
+	"faceOrange.gif",
+	"faceRed.gif"
+)</Value>
+                          </Variable>
+                          <Variable Name="HasVolume">
+                            <Value>=IIF((Fields!ReportTagId.Value = "F1Factor" OR Fields!ReportTagId.Value = "F15Factor") And Fields!ProductSize.Value = "TOTAL", True, False)</Value>
+                          </Variable>
+                          <Variable Name="VolumeFace">
+                            <Value>=Choose(
+	Code.GetFactorResultIndex(Fields!Volume.Value, Fields!VolumeDifference.Value,
+		Lookup(Fields!ReportTagId.Value &amp; "Volume",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!AbsoluteThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "Volume",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!LowThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "Volume",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!HighThreshold.Value, "GetFAttributes")				
+	),
+	"faceDisabled.gif",
+	"faceGreen.gif",
+	"faceOrange.gif",
+	"faceRed.gif"
+)</Value>
+                          </Variable>
+                          <Variable Name="H2OFace">
+                            <Value>=Choose(
+	Code.GetFactorResultIndex(Fields!H2O.Value, Fields!H2ODifference.Value,
+		Lookup(Fields!ReportTagId.Value &amp; "H2O",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!AbsoluteThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "H2O",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!LowThreshold.Value, "GetFAttributes"),
+		Lookup(Fields!ReportTagId.Value &amp; "H2O",(Fields!ThresholdTypeId.Value + Fields!FieldName.Value), Fields!HighThreshold.Value, "GetFAttributes")				
+	),
+	"faceDisabled.gif",
+	"faceGreen.gif",
+	"faceOrange.gif",
+	"faceRed.gif"
+)</Value>
+                          </Variable>
+                          <Variable Name="HasMoisture">
+                            <Value>=Fields!ProductSize.Value = "TOTAL" Or Fields!ReportTagId.Value = "F25Factor" Or Fields!ReportTagId.Value = "F3Factor"</Value>
+                          </Variable>
+                        </Variables>
+                      </Group>
+                      <TablixMembers>
+                        <TablixMember />
+                      </TablixMembers>
+                      <DataElementName>Detail_Collection</DataElementName>
+                      <DataElementOutput>Output</DataElementOutput>
+                      <KeepTogether>true</KeepTogether>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>GetBhpbioResourceClassificationData</DataSetName>
+            <PageBreak>
+              <BreakLocation>End</BreakLocation>
+            </PageBreak>
+            <Filters>
+              <Filter>
+                <FilterExpression>=IIF(Fields!TagId.Value = "F1Factor" OrElse Fields!TagId.Value = "F15Factor", True,False)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Boolean">true</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>= IIF(String.Format("{0}",Fields!ProductSize.Value) = "TOTAL"  OrElse String.IsNullOrEmpty(Fields!ProductSize.Value), True, False)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>=True</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=Fields!PresentationValid.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>True</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <Top>8.04112cm</Top>
+            <Left>0.47386cm</Left>
+            <Height>1.86984cm</Height>
+            <Width>22.70519cm</Width>
+            <ZIndex>1</ZIndex>
+            <Visibility>
+              <Hidden>=Parameters!OnlyGraphs.Value</Hidden>
+            </Visibility>
+            <Style>
+              <FontSize>8pt</FontSize>
+            </Style>
+          </Tablix>
+          <Subreport Name="ContributionReportF1">
+            <ReportName>BhpbioErrorContributionByGradeReport</ReportName>
+            <Parameters>
+              <Parameter Name="LocationId">
+                <Value>=Parameters!LocationId.Value</Value>
+              </Parameter>
+              <Parameter Name="ProductTypeId">
+                <Value>-1</Value>
+              </Parameter>
+              <Parameter Name="StartDate">
+                <Value>=Parameters!StartDate.Value</Value>
+              </Parameter>
+              <Parameter Name="EndDate">
+                <Value>=Parameters!EndDate.Value</Value>
+              </Parameter>
+              <Parameter Name="f15Required">
+                <Value>=Parameters!f15Required.Value</Value>
+              </Parameter>
+              <Parameter Name="f25Required">
+                <Value>=False</Value>
+              </Parameter>
+              <Parameter Name="ByResourceClassification">
+                <Value>=True</Value>
+              </Parameter>
+              <Parameter Name="ReportContext">
+                <Value>=Parameters!ReportContext.Value</Value>
+              </Parameter>
+              <Parameter Name="lumpFinesBreakdown">
+                <Value>=False</Value>
+              </Parameter>
+              <Parameter Name="ReturnEmptyReport">
+                <Value>=Parameters!ReturnEmptyReport.Value</Value>
+              </Parameter>
+              <Parameter Name="includeH2O">
+                <Value>=Parameters!includeH2O.Value</Value>
+              </Parameter>
+              <Parameter Name="OnlyGraphs">
+                <Value>=Parameters!OnlyGraphs.Value</Value>
+              </Parameter>
+              <Parameter Name="OnlyTables">
+                <Value>=Parameters!OnlyTables.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Top>10.21435cm</Top>
+            <Left>0.47386cm</Left>
+            <Height>1.5cm</Height>
+            <Width>22.70519cm</Width>
+            <ZIndex>2</ZIndex>
+            <Visibility>
+              <Hidden>=Parameters!SuppressSubReport.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Subreport>
+        </ReportItems>
+        <Height>4.66667in</Height>
+        <Style />
+      </Body>
+      <Width>9.22563in</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>2cm</LeftMargin>
+        <RightMargin>2cm</RightMargin>
+        <TopMargin>2cm</TopMargin>
+        <BottomMargin>2cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="LocationId">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>9</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LocationId</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateBreakdown">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>MONTH</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DateBreakdown</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="StartDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>08/01/2015 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>StartDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EndDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>08/31/2015 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>EndDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CompleteReport">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>true</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Complete Report</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="WithoutHeaderFooter">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>With Header / Footer</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="OnlyGraphs">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Only Graphs</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="OnlyTables">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Only Tables</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="f15Required">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>f15Required</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="includeH2O">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Include H2O</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ReportContext">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Standard</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Approval Status</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>Standard</Value>
+            <Label>Approved</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>LiveOnly</Value>
+            <Label>Live</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>ApprovalListing</Value>
+            <Label>Combined</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="ReturnEmptyReport">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ReturnEmptyReport</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SuppressSubReport">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>hidefield</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>7</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationId</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DateBreakdown</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>StartDate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>EndDate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>CompleteReport</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>WithoutHeaderFooter</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>OnlyGraphs</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>OnlyTables</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>f15Required</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>includeH2O</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>ReportContext</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>ReturnEmptyReport</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>SuppressSubReport</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Code>
+    Function GetFactorResultIndex(ByVal relative As Double, IsAbsolute As Boolean, LowThreshold As Double, HighThreshold As Double) As String
+    Return GetFactorResultIndex(relative, relative, IsAbsolute, LowThreshold, HighThreshold)
+    End Function
+
+    ' This can be used with the 'Choose' statement in the SSRS expressions to make it easy
+    ' to convert the index to a face image, color, etc
+    Function GetFactorResultIndex(ByVal relative As Double, ByVal absolute As Double, IsAbsolute As Boolean, LowThreshold As Double, HighThreshold As Double) As String
+    Dim resultString as String = Nothing
+    Dim resultIndex as Integer = Nothing
+
+    If IsAbsolute And absolute = 0 Then
+    resultString = "NoData"
+    ElseIf Not IsAbsolute And relative = 0 Then
+    resultString = "NoData"
+    Else
+    resultString = GetFactorResult(relative, absolute, IsAbsolute, LowThreshold, HighThreshold)
+    End If
+
+    Select Case resultString
+    ' return indexes starting from 1, as this is what CHOOSE needs
+    Case "NoData": resultIndex = 1
+    Case "Low": resultIndex = 2
+    Case "Medium": resultIndex = 3
+    Case "High": resultIndex = 4
+    End Select
+
+    return resultIndex
+    End Function
+
+    Function GetFactorResult(ByVal relative As Double, ByVal absolute As Double, IsAbsolute As Boolean, LowThreshold As Double, HighThreshold As Double) As String
+
+    Dim result As String
+
+    If IsAbsolute Then
+    If Math.Abs(absolute) &lt; LowThreshold Then
+    result = "Low"
+    ElseIf Math.Abs(absolute) &gt; LowThreshold And Math.Abs(absolute) &lt;  HighThreshold   Then
+    result = "Medium"
+    Else
+    result = "High"
+    End If
+    Else
+
+    LowThreshold = LowThreshold / 100.0
+    HighThreshold = HighThreshold / 100.0
+
+    If Math.Abs(1 - relative) &lt;  LowThreshold  Then
+    result = "Low"
+    ElseIf Math.Abs(1 - relative) &gt;  LowThreshold  And Math.Abs(1 - relative) &lt; HighThreshold  Then
+    result = "Medium"
+    Else
+    result = "High"
+    End If
+
+    End If
+
+    Return result
+    End Function
+
+    ' Converts F15Factor to F1.5 and so on
+    Function TagIdToShortName(ByVal reportTagId as String) as String
+    Return reportTagId.Replace("Factor", "").Replace("F15", "F1.5").Replace("F25", "F2.5")
+    End Function
+  </Code>
+  <Variables>
+    <Variable Name="Blank">
+      <Value>="n/a"</Value>
+    </Variable>
+    <Variable Name="HideBelowPercent">
+      <Value>=CDbl(0.02)</Value>
+    </Variable>
+  </Variables>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>96eb252e-b573-442d-bc4b-83988cd9cbc0</rd:ReportID>
+</Report>

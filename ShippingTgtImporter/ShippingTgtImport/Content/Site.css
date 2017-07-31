@@ -1,0 +1,60 @@
+﻿html {
+    background: rgb(45, 57, 81); 
+}
+
+body {
+    padding-top: 80px;    
+    height: 100%;      
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;    
+    display: initial;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar {
+    background-color: rgb(45, 57, 81);    
+}
+
+.logo,img {
+    display: inline-block;       
+    width: 255px; 
+}
+
+.title {
+    display: inline-block;
+    margin-left: 40px;
+    vertical-align: sub;
+}
+
+.footer {
+    height: 100%;          
+    background-color: rgb(45, 57, 81);
+}
+
+    .footer p {
+        padding-left: 15px;
+    }
+
+.wrapper2 {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}

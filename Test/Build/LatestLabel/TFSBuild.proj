@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <Import Project="$(MSBuildExtensionsPath)\Snowden\Snowden.Build.TeamFoundation.targets" />
+
+  <ProjectExtensions>
+    <!-- Team Foundation Build Version - DO NOT CHANGE -->
+    <ProjectFileVersion>2</ProjectFileVersion>
+    <!-- Backwards compatibility. See Comments -->
+    <Description></Description>
+    <!-- Backwards compatibility. See Comments -->
+    <BuildMachine>UNKNOWN</BuildMachine>
+  </ProjectExtensions>
+
+  <!-- Project Settings -->
+  <PropertyGroup>
+    <TfsVersion />
+    <TFSVersionType>LatestLabel</TFSVersionType>
+    <RunTest>false</RunTest>
+    <RunCodeAnalysis>Never</RunCodeAnalysis>
+    <IncrementalGet>True</IncrementalGet>
+  </PropertyGroup>
+
+  <!-- Solutions to Build -->
+  <ItemGroup>
+    <SolutionToBuild Include="$(BuildProjectFolderPath)/../../ReconcilorBhpbio.sln">
+      <Targets></Targets>
+      <Properties></Properties>
+    </SolutionToBuild>
+  </ItemGroup>
+
+  <!-- Configurations to Build -->
+  <ItemGroup>
+    <ConfigurationToBuild Include="Debug|x86">
+      <FlavorToBuild>Debug</FlavorToBuild>
+      <PlatformToBuild>x86</PlatformToBuild>
+    </ConfigurationToBuild>
+    <ConfigurationToBuild Include="Debug|Any CPU">
+      <FlavorToBuild>Debug</FlavorToBuild>
+      <PlatformToBuild>Any CPU</PlatformToBuild>
+    </ConfigurationToBuild>
+    <ConfigurationToBuild Include="Debug|x86">
+      <FlavorToBuild>Release</FlavorToBuild>
+      <PlatformToBuild>x86</PlatformToBuild>
+    </ConfigurationToBuild>
+    <ConfigurationToBuild Include="Debug|Any CPU">
+      <FlavorToBuild>Release</FlavorToBuild>
+      <PlatformToBuild>Any CPU</PlatformToBuild>
+    </ConfigurationToBuild>
+  </ItemGroup>
+
+  <!-- Copy Reports -->
+  <Target Name="CopyReports">
+    <PropertyGroup>
+      <ReportsSource>$(LineFolder)\Reports\**\</ReportsSource>
+      <ReportsDest>$(BinariesRoot)\Reports\</ReportsDest>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ReportFiles Include="$(ReportsSource)*.*" 
+        Exclude="$(ReportsSource)*.rptproj;$(ReportsSource)*.vspscc;$(ReportsSource)*.vssscc;$(ReportsSource)*.sln" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ReportFiles)"
+          DestinationFiles="@(ReportFiles ->'$(ReportsDest)%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+</Project>

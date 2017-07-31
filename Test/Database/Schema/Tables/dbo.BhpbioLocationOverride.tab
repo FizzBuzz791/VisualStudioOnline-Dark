@@ -1,0 +1,63 @@
+﻿If Object_id('dbo.BhpbioLocationOverride') Is Not Null 
+     Drop Table dbo.BhpbioLocationOverride
+GO 
+
+CREATE TABLE [dbo].[BhpbioLocationOverride](
+	[Location_Override_Id]	INT IDENTITY(1,1) NOT NULL,
+	[Location_Id]			INT			NOT NULL,
+	[Location_Type_Id]		TINYINT		NOT NULL,
+	[Parent_Location_Id]	INT			NULL,
+	[FromMonth]				DATETIME	NULL,
+	[ToMonth]				DATETIME	NULL,
+ CONSTRAINT [PK_LOCATION_OVERRIDE] PRIMARY KEY CLUSTERED 
+(
+	[Location_Override_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'DD_Description', @value=N'The unique identifier of this location override.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BhpbioLocationOverride', @level2type=N'COLUMN',@level2name=N'Location_Override_Id'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'DD_Description', @value=N'The location identifer to provide overriden hierarchy mappings.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BhpbioLocationOverride', @level2type=N'COLUMN',@level2name=N'Location_Id'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'DD_Description', @value=N'The type of location as defined in LocationType.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BhpbioLocationOverride', @level2type=N'COLUMN',@level2name=N'Location_Type_Id'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'DD_Description', @value=N'If this location is a non-root member of a hierarchy, then the parent is listed here.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BhpbioLocationOverride', @level2type=N'COLUMN',@level2name=N'Parent_Location_Id'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'DD_Description', @value=N'The starting month that a location is re-parented for.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BhpbioLocationOverride', @level2type=N'COLUMN',@level2name=N'FromMonth'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'DD_Description', @value=N'The ending month that a location is re-parented for.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BhpbioLocationOverride', @level2type=N'COLUMN',@level2name=N'ToMonth'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'DD_Description', @value=N'Stores date centric override of hierarchical location information.  Contains entries for period of time that a location is re-parented' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BhpbioLocationOverride'
+GO
+
+ALTER TABLE [dbo].[BhpbioLocationOverride]  WITH CHECK ADD  CONSTRAINT [FK1_BHPBIOLOCATIONOVERRIDE] FOREIGN KEY([Location_Id])
+REFERENCES [dbo].[Location] ([Location_Id])
+GO
+
+ALTER TABLE [dbo].[BhpbioLocationOverride] CHECK CONSTRAINT [FK1_BHPBIOLOCATIONOVERRIDE]
+GO
+
+ALTER TABLE [dbo].[BhpbioLocationOverride]  WITH CHECK ADD  CONSTRAINT [FK2_BHPBIOLOCATIONOVERRIDE] FOREIGN KEY([Location_Type_Id])
+REFERENCES [dbo].[LocationType] ([Location_Type_Id])
+GO
+
+ALTER TABLE [dbo].[BhpbioLocationOverride] CHECK CONSTRAINT [FK2_BHPBIOLOCATIONOVERRIDE]
+GO
+
+ALTER TABLE [dbo].[BhpbioLocationOverride]  WITH CHECK ADD  CONSTRAINT [FK3_BHPBIOLOCATIONOVERRIDE] FOREIGN KEY([Parent_Location_Id])
+REFERENCES [dbo].[Location] ([Location_Id])
+GO
+
+ALTER TABLE [dbo].[BhpbioLocationOverride] CHECK CONSTRAINT [FK3_BHPBIOLOCATIONOVERRIDE]
+GO

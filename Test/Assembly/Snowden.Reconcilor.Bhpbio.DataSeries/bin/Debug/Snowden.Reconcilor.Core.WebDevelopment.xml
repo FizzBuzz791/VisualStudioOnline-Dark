@@ -1,0 +1,84 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Snowden.Reconcilor.Core.WebDevelopment
+</name>
+</assembly>
+<members>
+<member name="P:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.SideNavigationBoxes.SideNavigationBox.GetItemCollection">
+	<summary>
+ Returns a copy of the currently registered items.
+ Typically used for debugging purposes.
+ </summary>
+	<remarks>The copying is by design; this forces controlled access to the collection.</remarks>
+</member><member name="P:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.SideNavigationBoxes.SideNavigationBox.Container">
+	<summary>
+ Provides access to the Container Div.
+ </summary>
+</member><member name="P:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.SideNavigationBoxes.SideNavigationBox.Content">
+	<summary>
+ Provides access to the Content Div.
+ </summary>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.ReconcilorTable.GetUserInterfaceList(Snowden.Reconcilor.Core.Database.DalBaseObjects.IUtility,System.String)">
+	<summary>
+ Returns the user interface columns.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.ReconcilorTable.GetUserInterfaceColumns(Snowden.Reconcilor.Core.Database.DalBaseObjects.IUtility,System.String)">
+	<summary>
+ Returns the user interface columns to be used by the UseColumns and Reconcilor Table control.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.WebpageTemplates.ReconcilorBasePage.WriteRequestXmlParameterElement(System.Xml.XmlWriter@,System.String,System.String)">
+	<summary>
+ Write out a parameter node (as used by the GetRequestXml method)
+ </summary>
+	<param name="writer">writer to be used to write the xml</param>
+	<param name="key">key associated with the parameter</param>
+	<param name="value">value of the parameter</param>
+	<remarks>this method is used by the GetRequestXml method</remarks>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.WebpageTemplates.ReconcilorBasePage.GetRequestXml">
+	<summary>
+ Get XML that represents details of the request
+ </summary>
+	<returns>an xml string</returns>
+	<remarks>This function is used to generate logging data (and possibly other uses)</remarks>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.WebpageTemplates.ReconcilorBasePage.ResizeContainer">
+	<summary>
+ Resizes the main container divs automatically based on the content.  AJAX friendly.
+ Calls the underlying "ResizeContainer" in JavaScript.
+ </summary>
+</member><member name="P:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.SideNavigationBoxes.AdhocSideNavigation.Container">
+	<summary>
+ Provides access to the Container Div.
+ </summary>
+</member><member name="P:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.SideNavigationBoxes.AdhocSideNavigation.Content">
+	<summary>
+ Provides access to the Content Div.
+ </summary>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.PolygonMapper.AdjustMarginForScaleLabels">
+	<summary>
+ Adjust the margins if required to accommodate scale labels
+ </summary>
+	<remarks>This is required when coordinates to be displayed are larger then can fit within space allowed by default margins</remarks>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.PolygonMapper.GetYLabelString(System.Int32)">
+	<summary>
+ Get a label for displaying y values on scalee
+ </summary>
+	<param name="Coord">coordinate used to generate labels</param>
+	<returns>generated label</returns>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.PolygonMapper.GetXLabelString(System.Int32)">
+	<summary>
+ Get a label for displaying x values on scalee
+ </summary>
+	<param name="Coord">coordinate used to generate labels</param>
+	<returns>generated label</returns>
+</member><member name="M:Snowden.Reconcilor.Core.WebDevelopment.ExceptionExtensions.GetFriendlyMessage(System.Data.SqlClient.SqlException)">
+	<summary>
+ Gets the friendly message from known sql exceptions, by removing the first portion of the message which has the word error in it.
+ </summary>
+	<returns>User Friendly Message</returns>
+</member>
+</members>
+</doc>

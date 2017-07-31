@@ -1,0 +1,34 @@
+﻿If Object_id('dbo.BhpbioReportThreshold') Is Not Null 
+     Drop Table dbo.BhpbioReportThreshold
+Go 
+
+CREATE TABLE dbo.BhpbioReportThreshold
+(
+	LocationId INT NOT NULL,
+	FieldId SMALLINT NOT NULL,
+	ThresholdTypeId VARCHAR(31) COLLATE DATABASE_DEFAULT NOT NULL,
+	LowThreshold FLOAT NOT NULL,
+	HighThreshold FLOAT NOT NULL,
+	AbsoluteThreshold BIT NOT NULL DEFAULT(0),
+	CONSTRAINT PK_BhpbioReportThreshold PRIMARY KEY CLUSTERED
+	(
+		LocationId, ThresholdTypeId, FieldId
+	) ON [Primary],
+	CONSTRAINT FK_BhpbioReportThreshold_BhpbioReportThresholdType FOREIGN KEY
+	(
+		ThresholdTypeId
+	)
+	REFERENCES dbo.BhpbioReportThresholdType
+	(
+		ThresholdTypeId
+	),
+	CONSTRAINT FK_BhpbioReportThreshold_Location FOREIGN KEY
+	(
+		LocationId
+	)
+	REFERENCES dbo.Location
+	(
+		Location_Id
+	)
+) ON [Primary]
+GO

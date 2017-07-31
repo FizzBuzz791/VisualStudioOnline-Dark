@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.bhpbilliton.com/waio/F1F2F3DataService" elementFormDefault="qualified" targetNamespace="http://www.bhpbilliton.com/waio/F1F2F3DataService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="RetrieveReconciliationBlocksRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StartDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EndDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RetrieveReconciliationBlocksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Status" type="tns:Status" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FetchReconciliationBlocksResponse" type="tns:FetchReconciliationBlocksResponseType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Status">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StatusMessage" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="StatusFlag" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FetchReconciliationBlocksResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FetchReconciliationBlocksResult" type="tns:ArrayOfBlockType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfBlockType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Block" type="tns:BlockType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BlockType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Number" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GeoType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MQ2PitCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BlockedDate" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BlastedDate" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Pattern" type="tns:Pattern" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Model" type="tns:ModelType" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Polygon" type="tns:PolygonType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Movement" type="tns:BlockMovementType" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedDate" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedUser" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Pattern">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Site" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Orebody" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Pit" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Bench" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ModelType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Filename" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="OreType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Volume" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Tonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LumpPercentAsShipped" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LumpPercentAsDropped" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Density" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedUser" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedDate" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Grade" type="tns:Grade" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Grade">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GeometType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SampleValue" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="HeadValue" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FinesValue" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LumpValue" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PolygonType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Point" type="tns:PointType" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Centroid" type="tns:CentroidType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PointType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Number" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Easting" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Northing" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RL" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CentroidType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Easting" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Northing" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RL" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BlockMovementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DateFrom" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DateTo" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedDate" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedUser" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MinedPercentage" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RetrieveReconciliationDeletedBlocksRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StartDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EndDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RetrieveReconciliationDeletedBlocksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Status" type="tns:Status" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FetchReconciliationDeletedBlocksResponse" type="tns:FetchReconciliationDeletedBlocksResponseType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="FetchReconciliationDeletedBlocksResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FetchReconciliationDeletedBlocksResult" type="tns:ArrayOfBlockType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RetrieveReconciliationMovementsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StartDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EndDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RetrieveReconciliationMovementsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Status" type="tns:Status" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FetchReconciliationMovementsResponse" type="tns:FetchReconciliationMovementsResponseType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="FetchReconciliationMovementsResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FetchReconciliationMovementsResult" type="tns:ArrayOfBlockType" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

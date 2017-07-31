@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ReconcilorBhpbioV64" Class="ReconcilorDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=RECONCILOR2\SQL2005;Initial Catalog=ReconcilorBhpbioV64;Integrated Security=True" SettingsObjectName="ReconcilorBhpbio.StagingTest.Properties.Settings" SettingsPropertyName="ReconcilorBhpbioV64ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="Staging.ChangedDataEntry" Member="ChangedDataEntries">
+    <Type Name="ChangedDataEntry">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ChangeAppliedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MessageTimestamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ChangeTypeId" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Association Name="ChangedDataEntry_ChangedDataEntryRelatedKeyValue" Member="ChangedDataEntryRelatedKeyValues" ThisKey="Id" OtherKey="ChangedDataEntryId" Type="ChangedDataEntryRelatedKeyValue" />
+    </Type>
+  </Table>
+  <Table Name="Staging.ChangedDataEntryRelatedKeyValue" Member="ChangedDataEntryRelatedKeyValues">
+    <Type Name="ChangedDataEntryRelatedKeyValue">
+      <Column Name="Id" AutoSync="Never" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ChangedDataEntryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangeKey" Member="ChangeKeyId" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="TextValue" Type="System.String" DbType="NVarChar(120)" CanBeNull="true" />
+      <Association Name="ChangedDataEntry_ChangedDataEntryRelatedKeyValue" Member="ChangedDataEntry" ThisKey="ChangedDataEntryId" OtherKey="Id" Type="ChangedDataEntry" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Staging.StageBlock" Member="StageBlocks">
+    <Type Name="StageBlock">
+      <Column Name="BlockId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlockExternalSystemId" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="BlockNumber" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="BlockName" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
+      <Column Name="BlockFullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LithologyTypeName" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="BlockedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="BlastedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Site" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="Orebody" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="Pit" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="Bench" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="PatternNumber" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="AlternativePitCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CentroidX" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CentroidY" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CentroidZ" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LastMessageTimestamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="StageBlock_StageBlockPoint" Member="StageBlockPoints" ThisKey="BlockId" OtherKey="BlockId" Type="StageBlockPoint" />
+      <Association Name="StageBlock_StageBlockModel" Member="StageBlockModels" ThisKey="BlockId" OtherKey="BlockId" Type="StageBlockModel" />
+    </Type>
+  </Table>
+  <Table Name="Staging.StageBlockPoint" Member="StageBlockPoints">
+    <Type Name="StageBlockPoint">
+      <Column Name="BlockId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BlockExternalSystemId" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="X" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Y" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Z" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="StageBlock_StageBlockPoint" Member="StageBlock" ThisKey="BlockId" OtherKey="BlockId" Type="StageBlock" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Staging.StageBlockModelGrade" Member="StageBlockModelGrades">
+    <Type Name="StageBlockModelGrade">
+      <Column Name="BlockId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BlockModelName" Type="System.String" DbType="VarChar(31) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaterialTypeName" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GradeName" Type="System.String" DbType="VarChar(31) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BlockExternalSystemId" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="GradeValue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LumpValue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FinesValue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="StageBlockModel_StageBlockModelGrade" Member="StageBlockModel" ThisKey="BlockId,BlockModelName,MaterialTypeName" OtherKey="BlockId,BlockModelName,MaterialTypeName" Type="StageBlockModel" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Staging.StageBlockModel" Member="StageBlockModels">
+    <Type Name="StageBlockModel">
+      <Column Name="BlockId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BlockModelName" Type="System.String" DbType="VarChar(31) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaterialTypeName" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BlockExternalSystemId" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="OpeningVolume" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="OpeningTonnes" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="OpeningDensity" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="LastModifiedUser" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LumpPercent" Type="System.Decimal" DbType="Decimal(7,4)" CanBeNull="true" />
+      <Column Name="ModelFilename" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="StageBlockModel_StageBlockModelGrade" Member="StageBlockModelGrades" ThisKey="BlockId,BlockModelName,MaterialTypeName" OtherKey="BlockId,BlockModelName,MaterialTypeName" Type="StageBlockModelGrade" />
+      <Association Name="StageBlock_StageBlockModel" Member="StageBlock" ThisKey="BlockId" OtherKey="BlockId" Type="StageBlock" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

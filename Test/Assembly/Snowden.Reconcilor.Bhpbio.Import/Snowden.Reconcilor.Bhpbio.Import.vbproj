@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C982CEA3-6991-42C8-880E-0BBA8CD6A77A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <StartupObject>Snowden.Reconcilor.Bhpbio.Import.ModMain</StartupObject>
+    <RootNamespace>Snowden.Reconcilor.Bhpbio.Import</RootNamespace>
+    <AssemblyName>Snowden.Reconcilor.Bhpbio.Import</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Console</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)\Snowden.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <DefineConstants>DUMMY_LOAD_SOURCE</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>+!Microsoft.Design#CA1002;-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <DefineConstants>
+    </DefineConstants>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Snowden.Common, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.1.4.10.4\lib\Snowden.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Common.Import, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.Import.1.4.10.5\lib\Snowden.Common.Import.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core, Version=6.5.0.8, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.Import, Version=6.5.0.8, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.Import.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\Microsoft.NET\Framework\v3.0\Windows Communication Foundation\System.ServiceModel.dll</HintPath>
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Version.vb">
+      <Link>Version.vb</Link>
+    </Compile>
+    <Compile Include="Helpers\CodeTranslationHelper.vb" />
+    <Compile Include="Helpers\DataTypesExtensions.vb" />
+    <Compile Include="Helpers\GeneralHelper.vb" />
+    <Compile Include="Helpers\LocationDataCachedHelper.vb" />
+    <Compile Include="Helpers\LocationDataUncachedHelper.vb" />
+    <Compile Include="Helpers\modMain.vb" />
+    <Compile Include="Helpers\ParameterHelper.vb" />
+    <Compile Include="Helpers\ReferenceDataCachedHelper.vb" />
+    <Compile Include="Helpers\WebServicesFactory.vb" />
+    <Compile Include="Helpers\XmlReaderExtensions.vb" />
+    <Compile Include="Helpers\ImportQueueRequest.vb" />
+    <Compile Include="Import\ReconBlockInsertUpdate.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\BlockModel.vb" />
+    <Compile Include="ConfigurationSettings.vb" />
+    <Compile Include="Import\Haulage.vb" />
+    <Compile Include="Import\PortBalances.vb" />
+    <Compile Include="Import\PortBlending.vb" />
+    <Compile Include="Import\MetBalancing.vb" />
+    <Compile Include="Import\Production.vb" />
+    <Compile Include="Import\Shipping.vb" />
+    <Compile Include="Main.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PayloadType.vb" />
+    <Compile Include="Schemas\BlastBlockInsertUpdateLoadSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BlastBlockInsertUpdateLoadSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\BlastBlockInsertUpdateLoadSource.vb">
+      <DependentUpon>BlastBlockInsertUpdateLoadSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Import\ReconciliationMovement.vb" />
+    <Compile Include="Schemas\BlockModelSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BlockModelSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\BlockModelSource.vb">
+      <DependentUpon>BlockModelSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\HaulageSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HaulageSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\HaulageSource.vb">
+      <DependentUpon>HaulageSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\MetBalancingSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MetBalancingSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\MetBalancingSource.vb">
+      <DependentUpon>MetBalancingSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\PortBalanceSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PortBalanceSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\PortBalanceSource.vb">
+      <DependentUpon>PortBalanceSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\PortBlendingSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PortBlendingSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\PortBlendingSource.vb">
+      <DependentUpon>PortBlendingSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\ProductionSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductionSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\ProductionSource.vb">
+      <DependentUpon>ProductionSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\ReconciliationMovementSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReconciliationMovementSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\ReconciliationMovementSource.vb">
+      <DependentUpon>ReconciliationMovementSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\ShippingSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\ShippingSource.vb">
+      <DependentUpon>ShippingSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\StockpileAdjustmentSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockpileAdjustmentSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\StockpileAdjustmentSource.vb">
+      <DependentUpon>StockpileAdjustmentSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Schemas\StockpileSource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockpileSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\BlastholesService\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MaterialTrackerService\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MQ2Service\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Import\Stockpile.vb" />
+    <Compile Include="Import\StockpileAdjustment.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Design.cd" />
+    <None Include="$(SolutionDir)\Snowden.snk">
+      <Link>Snowden.snk</Link>
+    </None>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Schemas\BlastBlockInsertUpdateLoadSource.xsc">
+      <DependentUpon>BlastBlockInsertUpdateLoadSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\BlastBlockInsertUpdateLoadSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BlastBlockInsertUpdateLoadSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\ReconciliationMovementSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReconciliationMovementSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Database\Snowden.Reconcilor.Bhpbio.Database.vbproj">
+      <Project>{FB0D8BFC-A134-4303-995F-90BC802C0842}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Database</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BlastholesService\" />
+    <WCFMetadataStorage Include="Service References\MaterialTrackerService\" />
+    <WCFMetadataStorage Include="Service References\MQ2Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schemas\BlastBlockInsertUpdateLoadSource.xsc">
+      <DependentUpon>BlastBlockInsertUpdateLoadSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\BlastBlockInsertUpdateLoadSource.xss">
+      <DependentUpon>BlastBlockInsertUpdateLoadSource.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schemas\ReconciliationMovementSource.xsc">
+      <DependentUpon>ReconciliationMovementSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\ReconciliationMovementSource.xss">
+      <DependentUpon>ReconciliationMovementSource.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schemas\BlockModelSource.xsc">
+      <DependentUpon>BlockModelSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\BlockModelSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BlockModelSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\BlockModelSource.xss">
+      <DependentUpon>BlockModelSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\HaulageSource.xsc">
+      <DependentUpon>HaulageSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\HaulageSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HaulageSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\HaulageSource.xss">
+      <DependentUpon>HaulageSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\MetBalancingSource.xsc">
+      <DependentUpon>MetBalancingSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\MetBalancingSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MetBalancingSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\MetBalancingSource.xss">
+      <DependentUpon>MetBalancingSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\PortBalanceSource.xsc">
+      <DependentUpon>PortBalanceSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\PortBalanceSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PortBalanceSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\PortBalanceSource.xss">
+      <DependentUpon>PortBalanceSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\PortBlendingSource.xsc">
+      <DependentUpon>PortBlendingSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\PortBlendingSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PortBlendingSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\PortBlendingSource.xss">
+      <DependentUpon>PortBlendingSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\ProductionSource.xsc">
+      <DependentUpon>ProductionSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\ProductionSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProductionSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\ProductionSource.xss">
+      <DependentUpon>ProductionSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\ShippingSource.xsc">
+      <DependentUpon>ShippingSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\ShippingSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ShippingSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\ShippingSource.xss">
+      <DependentUpon>ShippingSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\StockpileAdjustmentSource.xsc">
+      <DependentUpon>StockpileAdjustmentSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\StockpileAdjustmentSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockpileAdjustmentSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\StockpileAdjustmentSource.xss">
+      <DependentUpon>StockpileAdjustmentSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\StockpileSource.xsc">
+      <DependentUpon>StockpileSource.xsd</DependentUpon>
+    </None>
+    <None Include="Schemas\StockpileSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockpileSource.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\StockpileSource.xss">
+      <DependentUpon>StockpileSource.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BlastholesService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BlastholesService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BlastholesService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Service References\BlastholesService\Snowden.Reconcilor.Bhpbio.Import.BlastholesService.RetrieveReconciliationBlocksResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BlastholesService\Snowden.Reconcilor.Bhpbio.Import.BlastholesService.RetrieveReconciliationDeletedBlocksResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BlastholesService\Snowden.Reconcilor.Bhpbio.Import.BlastholesService.RetrieveReconciliationMovementsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MQ2Service\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MQ2Service\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MQ2Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MaterialTrackerService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MaterialTrackerService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MaterialTrackerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Service References\MaterialTrackerService\Snowden.Reconcilor.Bhpbio.Import.MaterialTrackerService.RetrieveMETBalancingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MaterialTrackerService\Snowden.Reconcilor.Bhpbio.Import.MaterialTrackerService.RetrievePortBalancesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MaterialTrackerService\Snowden.Reconcilor.Bhpbio.Import.MaterialTrackerService.RetrievePortBlendingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MaterialTrackerService\Snowden.Reconcilor.Bhpbio.Import.MaterialTrackerService.RetrieveShippingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MQ2Service\MQ2WebService.wsdl" />
+    <None Include="Service References\MQ2Service\MQ2WebService.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MQ2Service\MQ2WebService.disco" />
+    <None Include="Service References\MQ2Service\MQ2WebService1.wsdl" />
+    <None Include="Service References\MQ2Service\Snowden.Reconcilor.Bhpbio.Import.MQ2Service.RetrieveHaulageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MQ2Service\Snowden.Reconcilor.Bhpbio.Import.MQ2Service.RetrieveProductionMovementsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MQ2Service\Snowden.Reconcilor.Bhpbio.Import.MQ2Service.RetrieveStockpileAdjustmentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MQ2Service\Snowden.Reconcilor.Bhpbio.Import.MQ2Service.RetrieveStockpilesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BlastholesService\BlastholesWebService.disco" />
+    <None Include="Service References\BlastholesService\BlastholesWebService.wsdl" />
+    <None Include="Service References\BlastholesService\BlastholesWebService.xsd" />
+    <None Include="Service References\BlastholesService\BlastholesWebService1.wsdl" />
+    <None Include="Service References\MaterialTrackerService\MaterialTrackerWebService.wsdl" />
+    <None Include="Service References\MaterialTrackerService\MaterialTrackerWebService1.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MaterialTrackerService\MaterialTrackerWebService.disco" />
+    <None Include="Service References\MaterialTrackerService\MaterialTrackerWebService2.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CommandLineParameters.txt" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

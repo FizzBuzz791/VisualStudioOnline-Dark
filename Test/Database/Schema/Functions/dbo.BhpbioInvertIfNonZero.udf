@@ -1,0 +1,19 @@
+﻿IF OBJECT_ID('dbo.BhpbioInvertIfNonZero') IS NOT NULL 
+     DROP FUNCTION dbo.BhpbioInvertIfNonZero
+Go 
+
+CREATE FUNCTION dbo.BhpbioInvertIfNonZero
+(
+	@iValue float
+)
+RETURNS float
+AS 
+BEGIN
+	RETURN CASE WHEN @iValue = 0 THEN 0 ELSE 1/@iValue END
+END
+GO
+
+GRANT EXECUTE ON dbo.BhpbioInvertIfNonZero TO BhpbioGenericManager
+GO
+
+

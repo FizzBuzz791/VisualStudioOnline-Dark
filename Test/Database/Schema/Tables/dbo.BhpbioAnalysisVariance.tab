@@ -1,0 +1,16 @@
+﻿If Object_id('dbo.BhpbioAnalysisVariance') Is Not Null 
+     Drop Table dbo.BhpbioAnalysisVariance
+Go 
+
+CREATE TABLE dbo.BhpbioAnalysisVariance
+(
+	LocationId INT NOT NULL,
+	VarianceType CHAR(1) NOT NULL,
+	Percentage FLOAT NOT NULL,
+	Color VARCHAR(255) COLLATE Database_Default NULL,
+	CONSTRAINT PK_BHPBIOANALYSISVARIANCE PRIMARY KEY CLUSTERED
+	(
+		LocationId, VarianceType
+	) ON [Primary]
+) ON [Primary]
+GO

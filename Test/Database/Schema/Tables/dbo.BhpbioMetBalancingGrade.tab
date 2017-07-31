@@ -1,0 +1,20 @@
+﻿IF Object_Id('dbo.BhpbioMetBalancingGrade') IS NOT NULL
+	DROP TABLE dbo.BhpbioMetBalancingGrade
+GO
+
+CREATE TABLE dbo.BhpbioMetBalancingGrade
+(
+	BhpbioMetBalancingId INT NOT NULL,
+	GradeId SMALLINT NOT NULL,
+	GradeValue FLOAT
+
+	CONSTRAINT PK_BhpbioMetBalancingGrade PRIMARY KEY
+		(BhpbioMetBalancingId, GradeId),
+
+	CONSTRAINT FK_BhpbioMetBalancingGrade_Grade FOREIGN KEY
+		(GradeId) REFERENCES dbo.Grade (Grade_Id),
+
+	CONSTRAINT FK_BhpbioMetBalancingGrade_BhpbioMetBalancing FOREIGN KEY
+		(BhpbioMetBalancingId) REFERENCES dbo.BhpbioMetBalancing (BhpbioMetBalancingId)
+)
+GO

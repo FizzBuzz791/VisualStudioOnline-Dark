@@ -1,0 +1,24 @@
+﻿IF OBJECT_ID('dbo.BhpbioPortBalance') IS NOT NULL
+	DROP TABLE dbo.BhpbioPortBalance
+GO
+
+CREATE TABLE dbo.BhpbioPortBalance
+(
+	BhpbioPortBalanceId INT IDENTITY,
+	HubLocationId INT NOT NULL,
+	BalanceDate DATETIME NOT NULL,
+	Tonnes FLOAT NOT NULL,
+	Product VARCHAR(30) NULL,
+	ProductSize VARCHAR(5) NULL,
+
+	CONSTRAINT PK_BhpbioPortBalance
+		PRIMARY KEY (BhpbioPortBalanceId),
+		
+	CONSTRAINT UQ_BhpbioPortBalance_Candidate
+		UNIQUE (HubLocationId, BalanceDate, Product, ProductSize),
+		
+	CONSTRAINT FK_BhpbioPortBalance_Location
+		FOREIGN KEY (HubLocationId)
+		REFERENCES dbo.Location (Location_Id)		
+)
+GO

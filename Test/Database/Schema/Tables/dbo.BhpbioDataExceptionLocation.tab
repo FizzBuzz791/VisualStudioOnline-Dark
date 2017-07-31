@@ -1,0 +1,17 @@
+﻿ IF Object_Id('dbo.BhpbioDataExceptionLocation') IS NOT NULL
+	DROP TABLE dbo.BhpbioDataExceptionLocation
+GO
+
+CREATE TABLE dbo.BhpbioDataExceptionLocation
+(
+	DataExceptionId INT,
+	LocationId INT,
+	CONSTRAINT PK_BhpbioDataExceptionLocation PRIMARY KEY NONCLUSTERED
+		(DataExceptionId, LocationId),
+	
+	CONSTRAINT FK_BhpbioDataExceptionLocation_Location
+		FOREIGN KEY (LocationId)
+		REFERENCES dbo.Location (Location_Id)		
+		
+)
+GO

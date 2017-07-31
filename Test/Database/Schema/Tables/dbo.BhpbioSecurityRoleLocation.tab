@@ -1,0 +1,17 @@
+﻿If Object_id('dbo.BhpbioSecurityRoleLocation') Is Not Null 
+     Drop Table dbo.BhpbioSecurityRoleLocation
+Go 
+
+CREATE TABLE dbo.BhpbioSecurityRoleLocation 
+(
+	RoleId VARCHAR(31) COLLATE Database_Default NOT NULL,
+	LocationId INT NOT NULL,
+	
+	CONSTRAINT PK_BHPBIOSECURITYROLELOCATION PRIMARY KEY CLUSTERED
+		(RoleId, LocationId),
+	CONSTRAINT FK_BHPBIOSECURITYROLELOCATION_SECURITYROLE FOREIGN KEY (RoleId)
+		REFERENCES dbo.SecurityRole (RoleId),
+	CONSTRAINT FK_BHPBIOSECURITYROLELOCATION_LOCATION FOREIGN KEY (LocationId)
+		REFERENCES dbo.Location (Location_Id)
+)
+GO

@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>BhpBio Shipping Target Import Tool</h1>
+    <p class="lead">Use this tool import BHPBio Shipping Targets</p>
+    <h2>Select Plant File (*.xlsx / *.xls)</h2>
+    @using (Html.BeginForm("Importexcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table>
+            <tr><td>Excel file</td><td><input type="file" id="FileUpload1" name="FileUpload1"  /></td></tr>
+            <br />
+            <tr><td></td><td><br /><input type="checkbox" id="chkSQL" name="chkSQL" value="checked" checked="checked" /> Generate Dynamic SQL File instead</td></tr>
+            <tr><td></td><td><br /><input type="submit" id="Submit" name="Submit" value="Submit" class="btn btn-primary btn-lg" /></td></tr>
+        </table>
+    }
+    @{ Html.RenderPartial("_Alerts"); }
+    
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        @*<h2><img src="~/Img/snowdenlogo.jpg" alt="" /></h2>*@
+        <p>
+           
+        </p>
+        @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>*@
+    </div>
+    @*<div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>*@
+</div>

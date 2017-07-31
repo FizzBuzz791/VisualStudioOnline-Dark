@@ -1,0 +1,25 @@
+﻿If Object_id('dbo.BhpbioReportDataHistorical') Is Not Null 
+     Drop Table dbo.BhpbioReportDataHistorical
+Go 
+
+CREATE TABLE dbo.BhpbioReportDataHistorical
+(
+	TagId VARCHAR(63) COLLATE Database_Default NOT NULL,
+	LocationId INT NOT NULL,
+	MaterialTypeId INT NULL,
+	CalendarDate DATETIME NOT NULL,
+	DateFrom DATETIME NOT NULL,
+	DateTo DATETIME NOT NULL,
+	DateBreakdown VARCHAR(31) COLLATE Database_Default NOT NULL,
+	Tonnes FLOAT NULL,
+	Fe FLOAT NULL,
+	P FLOAT NULL,
+	SiO2 FLOAT NULL,
+	Al2O3 FLOAT NULL,
+	LOI FLOAT NULL/*,
+	CONSTRAINT PK_BHPBIOREPORTDATAHISTORICAL PRIMARY KEY CLUSTERED
+	(
+		TagId, LocationId, MaterialTypeId, CalendarDate, DateBreakdown
+	)*/
+)
+GO

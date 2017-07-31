@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D25247E0-6BEA-4EF0-899D-A297DA0307CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Snowden.Reconcilor.Bhpbio.Engine</RootNamespace>
+    <AssemblyName>Snowden.Reconcilor.Bhpbio.Engine</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Snowden.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Snowden.Common, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.1.4.10.4\lib\Snowden.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Common.Engine, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.Engine.1.4.10.4\lib\Snowden.Common.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Common.Import, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.Import.1.4.10.4\lib\Snowden.Common.Import.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Consulting.DataSeries.Processing">
+      <HintPath>..\..\..\Libraries\Snowden.Consulting.DataSeries\Snowden.Consulting.DataSeries.Processing.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core">
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auditor\AgentAuditor.cs" />
+    <Compile Include="BulkApprovalAgent.cs" />
+    <Compile Include="DataSeriesProcessingAgent.cs" />
+    <Compile Include="PurgeAgent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Database\Snowden.Reconcilor.Bhpbio.Database.vbproj">
+      <Project>{FB0D8BFC-A134-4303-995F-90BC802C0842}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.DataSeries\Snowden.Reconcilor.Bhpbio.DataSeries.csproj">
+      <Project>{8d1080e1-d18e-4239-b7c3-3c6605ffd4d5}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.DataSeries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.DataStaging\Snowden.Reconcilor.Bhpbio.DataStaging.csproj">
+      <Project>{57bbd096-7ed4-45bd-8142-84142c65368d}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.DataStaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Report\Snowden.Reconcilor.Bhpbio.Report.vbproj">
+      <Project>{BB0D1F66-81DF-4746-9E59-72D4A3F52E8E}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Report</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Snowden.snk" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

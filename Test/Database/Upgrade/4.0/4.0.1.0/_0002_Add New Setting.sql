@@ -1,0 +1,1 @@
+﻿INSERT INTO Setting VALUES ('BHPBIO_APPROVALASSESSMENT_MOREINFORMATION','Link to the Quick Reference guide for errors','STRING',1,'http://www.google.com.au',NULL)

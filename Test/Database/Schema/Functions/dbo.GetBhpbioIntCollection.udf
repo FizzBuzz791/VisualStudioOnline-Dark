@@ -1,0 +1,44 @@
+﻿IF Object_Id('dbo.GetBhpbioIntCollection') IS NOT NULL
+	DROP FUNCTION dbo.GetBhpbioIntCollection
+GO
+
+CREATE FUNCTION dbo.GetBhpbioIntCollection
+(
+	@iText VARCHAR(1000)
+)
+RETURNS @Values TABLE
+(
+	Value INT NOT NULL
+)
+WITH ENCRYPTION
+AS 
+BEGIN
+	DECLARE @Index INT, @Value VARCHAR(10)
+	SET @iText = RTRIM(LTRIM(@iText))
+	IF ISNULL(@iText,'') != ''
+	BEGIN
+		WHILE @iText IS NOT NULL AND LEN(@iText) > 0
+		BEGIN
+			SET @Index = CHARINDEX(',',@iText)
+			IF @Index > 0
+			BEGIN
+				SET @Value = SUBSTRING(@iText,0,@Index)
+				SET @iText = SUBSTRING(@iText,@Index + 1,1000)
+			END
+			ELSE
+			BEGIN
+				SET @Value = @iText
+				SET @iText = NULL
+			END
+			IF ISNUMERIC(@Value) = 1
+			BEGIN
+				INSERT @Values 
+				SELECT CONVERT(INT,@Value)
+				WHERE NOT EXISTS (SELECT * FROM @Values WHERE Value = CONVERT(INT,@Value))
+				
+			END
+		END
+	END
+	RETURN
+END
+GO

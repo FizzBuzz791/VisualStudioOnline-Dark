@@ -1,0 +1,53 @@
+-- REINSTATE OBSOLETE INDEXES
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_WEIGHTOMETER_SAMPLE__WEIGHTOMETER_SAMPLE_DATE')
+	DROP INDEX IX_WEIGHTOMETER_SAMPLE__WEIGHTOMETER_SAMPLE_DATE ON dbo.WeightometerSample
+GO
+/****** Object:  Index [IX_WEIGHTOMETER_SAMPLE__WEIGHTOMETER_SAMPLE_DATE]    Script Date: 22/09/2015 14:02:13 ******/
+CREATE NONCLUSTERED INDEX [IX_WEIGHTOMETER_SAMPLE__WEIGHTOMETER_SAMPLE_DATE] ON [dbo].[WeightometerSample]
+(
+	[Weightometer_Sample_Date] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80) ON [PRIMARY]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_WEIGHTOMETER_SAMPLE__WEIGHTOMETER_Id')
+	DROP INDEX IX_WEIGHTOMETER_SAMPLE__WEIGHTOMETER_Id ON dbo.WeightometerSample
+GO
+CREATE NONCLUSTERED INDEX [IX_WEIGHTOMETER_SAMPLE__WEIGHTOMETER_Id] ON [dbo].[WeightometerSample]
+(
+	[Weightometer_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80) ON [PRIMARY]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_ImportJob_01')
+	DROP INDEX IX_ImportJob_01 ON dbo.ImportJob
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_ImportSyncRow_01')
+	DROP INDEX IX_ImportSyncRow_01 ON dbo.ImportSyncRow
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_DataException_01')
+	DROP INDEX IX_DataException_01 ON dbo.DataException
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_WeightometerSample_01')
+	DROP INDEX IX_WeightometerSample_01 ON dbo.WeightometerSample
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_WeightometerSample_02')
+	DROP INDEX IX_WeightometerSample_02 ON dbo.WeightometerSample
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_WeightometerSample_03')
+	DROP INDEX IX_WeightometerSample_03 ON dbo.WeightometerSample
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_DATA_TRANSACTION_TONNES_FLOW_DESTINATION__CRUSHER')
+	DROP INDEX IX_DATA_TRANSACTION_TONNES_FLOW_DESTINATION__CRUSHER ON dbo.DataTransactionTonnesFlow
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_BhpbioMetBalancing_01')
+	DROP INDEX IX_BhpbioMetBalancing_01 ON dbo.BhpbioMetBalancing
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_BhpbioApprovalData_01')
+	DROP INDEX IX_BhpbioApprovalData_01 ON dbo.BhpbioApprovalData
+GO

@@ -1,0 +1,23 @@
+IF OBJECT_ID('dbo.BhpbioShippingNominationItemParcelGrade') IS NOT NULL
+	DROP TABLE dbo.BhpbioShippingNominationItemParcelGrade
+GO
+
+CREATE TABLE [dbo].[BhpbioShippingNominationItemParcelGrade]
+(
+	[BhpbioShippingNominationItemParcelId] [int] NOT NULL,
+	[GradeId] [smallInt] NOT NULL,
+	[GradeValue] [float] NOT NULL,
+
+	CONSTRAINT PK_BhpbioShippingNominationParcelGrade
+		PRIMARY KEY CLUSTERED (BhpbioShippingNominationItemParcelId ASC, GradeId ASC),
+		
+	CONSTRAINT FK_BhpbioShippingNominationParcelGrade_NominationParcel
+		FOREIGN KEY(BhpbioShippingNominationItemParcelId)
+		REFERENCES dbo.BhpbioShippingNominationItemParcel (BhpbioShippingNominationItemParcelId),
+		
+	CONSTRAINT FK_BhpbioShippingNominationItemParcelGrade_GradeId
+		FOREIGN KEY(GradeId)
+		REFERENCES dbo.Grade (Grade_Id)
+)
+
+GO

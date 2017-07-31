@@ -1,0 +1,19 @@
+IF OBJECT_ID('dbo.BhpbioPurgeRequestStatus') IS NOT NULL
+	DROP TABLE dbo.BhpbioPurgeRequestStatus
+GO
+
+CREATE TABLE dbo.BhpbioPurgeRequestStatus
+(
+	PurgeRequestStatusId SMALLINT NOT NULL,
+	Name VARCHAR(50) COLLATE DATABASE_DEFAULT NOT NULL,
+	IsReadyForApproval BIT NOT NULL,
+	IsReadyForPurging BIT NOT NULL,
+	IsFinalStatePositive BIT NOT NULL,
+	IsFinalStateNegative BIT NOT NULL,
+	CONSTRAINT PK_BhpbioPurgeRequestStatus PRIMARY KEY CLUSTERED 
+	(
+		PurgeRequestStatusId ASC
+	) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO

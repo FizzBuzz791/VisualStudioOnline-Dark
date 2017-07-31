@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="2cb1b08e-8627-4923-9066-7b50f6ee6ae6" ChangeDateTime="07/22/2015 02:09:47">
+    <Property Name="ElementName" Value="[Staging].[StageBlock].[BlockId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Staging].[StageBlock]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a04e3c8a-5dc3-4df2-af33-c610eab1757f" ChangeDateTime="07/22/2015 02:10:27">
+    <Property Name="ElementName" Value="[Staging].[StageBlock].[BlockExternalSystemId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Staging].[StageBlock]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Message" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9a5f6ff4-6f3b-439d-a361-8722b8e14a44" ChangeDateTime="07/22/2015 02:10:36">
+    <Property Name="ElementName" Value="[Staging].[StageBlock].[FlitchExternalSystemId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Staging].[StageBlock]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReceivedDateTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d1e37453-d2c3-4207-937e-52d8d954729e" ChangeDateTime="07/22/2015 02:11:01">
+    <Property Name="ElementName" Value="[Staging].[StageBlock].[PatternExternalSystemId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Staging].[StageBlock]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MessageType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5f066181-61d4-4464-8d8f-aae7e154362f" ChangeDateTime="07/22/2015 02:11:49">
+    <Property Name="ElementName" Value="[Staging].[StageBlock].[ReceivedDateTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Staging].[StageBlock]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MessageDateTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ac2fdbad-9f44-45d0-81a7-556ea0555503" ChangeDateTime="07/22/2015 02:12:36">
+    <Property Name="ElementName" Value="[Staging].[StageBlock].[MessageDateTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Staging].[StageBlock]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MessageReceivedDateTime" />
+  </Operation>
+</Operations>

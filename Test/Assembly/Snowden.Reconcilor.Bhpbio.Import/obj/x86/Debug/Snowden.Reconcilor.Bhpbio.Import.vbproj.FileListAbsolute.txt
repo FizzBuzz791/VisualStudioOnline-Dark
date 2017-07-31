@@ -1,0 +1,17 @@
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Import.exe.config
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Import.exe
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Import.pdb
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Common.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Common.Import.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Database.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Core.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Core.Import.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Core.Domain.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Core.Engine.exe
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Database.pdb
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Database.xml
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Import.vbprojResolveAssemblyReference.cache
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Import.Resources.resources
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Import.vbproj.GenerateResource.Cache
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Import.exe
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Import\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Import.pdb

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BlockOutEvent>
+  <!--
+	    	<xsd:element name="Timestamp" type="xsd:dateTime" />
+    		<xsd:element name="IsReblockOut" type="xsd:boolean" />
+    		<xsd:element name="ResponsibleUserName" type="xsd:string" />
+    		<xsd:element name="SourceModelDetail" type="Q1:SourceModelDescriptorType"/>
+    		<xsd:element name="PatternDetail" type="Q1:PatternType" />
+    		-->
+
+  <Timestamp>2014-01-02T14:25:25Z</Timestamp>
+  <IsReblockOut>false</IsReblockOut>
+  <ResponsibleUserName>downergroup\nathan.reed</ResponsibleUserName>
+
+  <SourceModelDetail>
+    <!--
+	    	  <xsd:element maxOccurs="1" minOccurs="1" name="ModelFile" type="xsd:string"/>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="ModelType" type="xsd:string"/>
+	    		-->
+    <ModelType>Grade Control</ModelType>
+    <ModelFile>20140101-test.txt</ModelFile>
+  </SourceModelDetail>
+
+  <PatternDetail>
+    <!--
+	    	  <xsd:element name="PatternNumber" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="SiteId" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="OrebodyId" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="0" name="PitId_Log" type="xsd:string" />
+				  <xsd:element name="PitId_Phy" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+				  <xsd:element name="PitId_MQ2" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="PushbackId" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="Bench" type="xsd:string" />
+				  <xsd:element name="ExternalLocationID" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+				  <xsd:element name="PatternGUID" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="DateCreated" type="xsd:dateTime" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="DateAccepted" type="xsd:dateTime" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="AcceptedByUserName" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="ApprovedByUserName" type="xsd:string" />
+
+				  <xsd:element maxOccurs="unbounded" minOccurs="1" name="Block" type="Q1:BlockType" />
+    			-->
+
+    <PatternNumber>0820</PatternNumber>
+    <Name>0820</Name>
+    <SiteId>OB18</SiteId>
+    <OrebodyId>18</OrebodyId>
+    <PitId_Log>SP</PitId_Log>
+    <PitId_Phy>SP</PitId_Phy>
+    <PitId_MQ2>18SP</PitId_MQ2>
+    <PushbackId></PushbackId>
+    <Bench>0599</Bench>
+    <ExternalLocationID>5</ExternalLocationID>
+    <PatternGUID>f3fb318c-463d-4e40-93f9-83569adc3317</PatternGUID>
+    <DateCreated>2014-07-03 00:00:00</DateCreated>
+    <DateAccepted>2014-07-03 08:00:00</DateAccepted>
+    <AcceptedByUserName>Nathan.Reed</AcceptedByUserName>
+    <ApprovedByUserName>Gary.Pattenden</ApprovedByUserName>
+
+   
+    <Block>
+      <Name>A02</Name>
+      <BlockGUID>343A603D-F7E4-42C9-892C-49FA02DB5409</BlockGUID>
+      <BlockNumber>2</BlockNumber>
+      <GeoType>D2</GeoType>
+      <DateBlasted>2014-07-05 00:00:00</DateBlasted>
+      <DateBlocked>2014-07-06 00:00:00</DateBlocked>
+      <Stratigraphy></Stratigraphy>
+      <StratNum></StratNum>
+      <ChangeState>delete</ChangeState>
+     
+    </Block>
+  </PatternDetail>
+
+</BlockOutEvent>

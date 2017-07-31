@@ -1,0 +1,139 @@
+.dynamic-tab-pane-control .tab-pane {
+	margin-right: -2px;
+	position: relative;
+}
+
+.dynamic-tab-pane-control .tab-row {
+    z-index: 1;
+    white-space: nowrap;
+    height: 20px;
+}
+
+    .dynamic-tab-pane-control .tab-row A {
+        font: 11px Tahoma;
+        cursor: default;
+        color: black;
+        text-decoration: none;
+    }
+
+    /* This is needed because it's easier than fixing core to use the tab-header stuff. */
+    .dynamic-tab-pane-control .tab-row .tab {
+        display: inline;
+        z-index: 1;
+        float: left;
+        margin: 0 -1px 1px 1px;
+        font: 11px Tahoma;
+        overflow: hidden;
+        cursor: default;
+        white-space: nowrap;
+        position: relative;
+        height: 25px;
+        text-align: center;
+        background: url(../images/luna/tab.png) no-repeat;
+        padding-top: 2px;
+        width: 90px;
+    }
+
+        /* This is needed because it's easier than fixing core to use the tab-header stuff. */
+        .dynamic-tab-pane-control .tab-row .tab.selected {
+            background: url(../images/luna/tab.active.png) no-repeat !important;
+            z-index: 3;
+            height: 17px;
+            margin-left: 0; /* Seems odd, makes a difference though.. */
+        }
+
+        /* This is needed because it's easier than fixing core to use the tab-header stuff. */
+        .dynamic-tab-pane-control .tab-row .tab.hover {
+            background: url(../images/luna/tab.hover.png) no-repeat !important;
+        }
+
+    .dynamic-tab-pane-control .tab-row .tab-header {
+	    display: inline;
+	    z-index: 1;
+	    float: left;
+	    margin: 0 -1px 1px 1px;
+	    font: 11px Tahoma;
+	    overflow: hidden;
+	    cursor: default;
+	    white-space: nowrap;
+	    position: relative;
+	    height: 25px;
+	    text-align: center;
+    }
+
+        .dynamic-tab-pane-control .tab-row .tab-header #left {
+            width: 3px;
+            background: url(../images/luna/tab.left.png) no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 110%;
+        }
+
+        .dynamic-tab-pane-control .tab-row .tab-header #middle {
+            background-image: url(../images/luna/tab.background.png);
+            height: 110%;
+            margin: 0 3px 0 3px;
+            padding-left: 12px; /* Account for the space on the right, reserved for the approval image/tick. */
+            padding-top: 3px; /* Stops the approval image cutting into the orange "selected" highlight. */
+        }
+
+        .dynamic-tab-pane-control .tab-row .tab-header #right {
+            width: 3px;
+            background: url(../images/luna/tab.right.png) no-repeat;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 110%;
+        }
+
+        .dynamic-tab-pane-control .tab-row .tab-header.selected {
+            padding: 2px 0 0 0;
+            z-index: 3;
+            border-bottom-width: 0;
+            margin: 1px -3px -3px 0;
+            font: 11px Tahoma;
+            top: -2px;
+            height: 18px !important;
+        }
+
+            .dynamic-tab-pane-control .tab-row .tab-header.selected #left {
+                background: url(../images/luna/tab.active.left.png) no-repeat;
+            }
+
+            .dynamic-tab-pane-control .tab-row .tab-header.selected #middle {
+                background-image: url(../images/luna/tab.active.background.png);
+                /* Doesn't like absolute, so the follow dirty hack is needed instead. */
+                position: relative;
+                top: -2px;
+                padding-top: 2px;
+            }
+
+            .dynamic-tab-pane-control .tab-row .tab-header.selected #right {
+                background: url(../images/luna/tab.active.right.png) no-repeat;
+            }
+
+        .dynamic-tab-pane-control .tab-row .tab-header.hover #left {
+            background: url(../images/luna/tab.hover.left.png) no-repeat;
+        }
+
+        .dynamic-tab-pane-control .tab-row .tab-header.hover #middle {
+            background-image: url(../images/luna/tab.hover.background.png);
+        }
+
+        .dynamic-tab-pane-control .tab-row .tab-header.hover #right {
+            background: url(../images/luna/tab.hover.right.png) no-repeat;
+        }
+
+.dynamic-tab-pane-control .tab-page {
+	clear: both;
+	border: 1px solid rgb(145,155,156);
+	padding: 2px 10px;
+	z-index: 2;
+	background: rgb(252,252,254);
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#fffcfcfe, EndColorStr=#fff4f3ee, GradientType=0);
+	font: 11px Tahoma;
+	color: black;
+	position: relative;
+	top: -2px;
+}

@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportWebServices", "ImportWebServices\ImportWebServices.csproj", "{0131425B-2035-4470-961F-B289011617A1}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{62109C33-9617-4CEA-9130-5E34A6D53804}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockImportDAL", "MockImportDAL\MockImportDAL.csproj", "{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateBlastholesData", "GenerateBlastholesData\GenerateBlastholesData.csproj", "{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconcilorBhpbio.StagingTest", "PIA.StagingTest\ReconcilorBhpbio.StagingTest\ReconcilorBhpbio.StagingTest\ReconcilorBhpbio.StagingTest.csproj", "{C5779564-5189-4D22-926A-4F781FD6BBFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0131425B-2035-4470-961F-B289011617A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0131425B-2035-4470-961F-B289011617A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
+		{62109C33-9617-4CEA-9130-5E34A6D53804}.Release|x86.ActiveCfg = Release|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Debug|x86.Build.0 = Debug|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}.Release|x86.ActiveCfg = Release|Any CPU
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Debug|x86.ActiveCfg = Debug|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Debug|x86.Build.0 = Debug|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Release|Any CPU.ActiveCfg = Release|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Release|x86.ActiveCfg = Release|x86
+		{E696D1AF-EE2B-4BD0-9E16-C7099D0854F5}.Release|x86.Build.0 = Release|x86
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C5779564-5189-4D22-926A-4F781FD6BBFB}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://sptfsdb:8080/tfs/technologies
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ImportWebServices\\ImportWebServices.csproj
+		SccProjectName1 = ImportWebServices
+		SccLocalPath1 = ImportWebServices
+		SccProjectUniqueName2 = MockImportDAL\\MockImportDAL.csproj
+		SccProjectName2 = MockImportDAL
+		SccLocalPath2 = MockImportDAL
+		SccProjectUniqueName3 = GenerateBlastholesData\\GenerateBlastholesData.csproj
+		SccProjectName3 = GenerateBlastholesData
+		SccLocalPath3 = GenerateBlastholesData
+		SccProjectUniqueName4 = Database\\Database.sqlproj
+		SccProjectName4 = Database
+		SccLocalPath4 = Database
+		SccProjectUniqueName5 = PIA.StagingTest\\ReconcilorBhpbio.StagingTest\\ReconcilorBhpbio.StagingTest\\ReconcilorBhpbio.StagingTest.csproj
+		SccProjectName5 = PIA.StagingTest/ReconcilorBhpbio.StagingTest/ReconcilorBhpbio.StagingTest
+		SccLocalPath5 = PIA.StagingTest\\ReconcilorBhpbio.StagingTest\\ReconcilorBhpbio.StagingTest
+	EndGlobalSection
+EndGlobal

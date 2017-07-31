@@ -1,0 +1,611 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Snowden.Reconcilor.Bhpbio.Database
+</name>
+</assembly>
+<members>
+<member name="T:Snowden.Reconcilor.Bhpbio.Database.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Database.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Database.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IApproval.GetBhpbioOutliersForLocation(System.String,System.DateTime,System.DateTime,System.Int32,System.String,System.String,System.Decimal,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Get a datatable of outliers for a set of criteria
+ </summary>
+ <param name="analysisGroup">An analysis group to be matched (if any)</param>
+ <param name="startDate">start date from which to find outliers</param>
+ <param name="endDate">end date up to which to find outliers</param>
+ <param name="locationId">location Id to find outliers for</param>
+ <param name="productSize">product size (or null for any) to find outliers for</param>
+ <param name="attribute">an attribute to be matched</param>
+ <param name="minimumDeviation">the minimum deviation in terms of standard deviations to filter outliers</param>
+ <param name="includeDirectSubLocations">if true, outliers on direct sub-locations will be included</param>
+ <param name="includeAllSubLocations">if true, outliers on all sub-locations will be included</param>
+ <param name="excludeTotalMaterialDuplicates">Exclude total material outliers that are effectively duplicates of material type specific outliers</param>
+ <returns>A datatable with outlier results</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IApproval.GetBhpbioOutlierCountByAnalysisGroupForLocation(System.DateTime,System.DateTime,System.Int32,System.String,System.String,System.Decimal,System.Boolean,System.Boolean)">
+ <summary>
+ Get a count of outliers by analysis group for a given location 
+ </summary>
+ <param name="startDate">start date from which to find outliers</param>
+ <param name="endDate">end date up to which to find outliers</param>
+ <param name="locationId">location Id to find outliers for</param>
+ <param name="productSize">product size (or null for any) to find outliers for</param>
+ <param name="attribute">attribute representing (0 for tonnes, a grade Id, or Nothing for all)</param>
+ <param name="minimumDeviation">the minimum deviation in terms of standard deviations to filter outliers</param>
+ <param name="includeDirectSubLocations">if true, outliers on direct sub-locations will be included</param>
+ <param name="includeAllSubLocations">if true, outliers on all sub-locations will be included</param>
+ <returns>A DataTable returning a record for each analysis group along with a count of matched outliers</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IApproval.GetBhpbioOutlierAnalysisPoints(System.Int32,System.DateTime,System.DateTime)">
+ <summary>
+ Get a a set of points for a series within a date range
+ </summary>
+ <param name="seriesId">Id of the series to return outlier information for</param>
+ <param name="dateFrom">start date from which points are to be returned</param>
+ <param name="dateTo">end date to which points are to be returend</param>
+ <returns>A datatable with series points</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IApproval.GetBhpbioOutlierAnalysisSeriesAttributes(System.Int32)">
+ <summary>
+ Get attributes for the outlier series
+ </summary>
+ <param name="seriesId">Id of the series to return outlier attributes for</param>
+ <returns>A datatable with attributes</returns>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IPurge">
+ <summary>
+ Interface used to perform Purge operations
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IPurge.IsMonthPurged(System.DateTime)">
+ <summary>
+ Checks whether a month has been purged or not
+ </summary>
+ <param name="month">the Month to be checked</param>
+ <returns>true if purged, false otherwise</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IPurge.AddPurgeRequest(System.DateTime,System.Int32,System.Int32@)">
+ <summary>
+ Adds the purge request.
+ </summary>
+ <param name="month">The month.</param>
+ <param name="userId">The user id.</param>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IPurge.GetPurgeRequests(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Boolean)">
+ <summary>
+ Gets the purge requests.
+ </summary>
+ <param name="readyForApproval">The ready for approval.</param>
+ <param name="readyForPurging">The ready for purging.</param>
+ <param name="latestRequestPerMonthOnly">If true, only the latest request for each month will be returned</param>
+ <returns>The set of purge requests that meet the criteria</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IPurge.UpdatePurgeRequests(System.Collections.Generic.IEnumerable{System.Int32},Snowden.Reconcilor.Bhpbio.Database.Dtos.PurgeRequestState,System.Nullable{System.Int32})">
+ <summary>
+ Updates the purge requests.
+ </summary>
+ <param name="requests">The requests.</param>
+ <param name="state">The state.</param>
+ <param name="approvingUser">The approving user.</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IPurge.GetLatestPurgeableMonth">
+ <summary>
+ Gets the latest purgeable month.
+ This function returns the latest month that can be chosen to be purged. 
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IPurge.PurgeData(System.Int32)">
+ <summary>
+ Purge data as specified by a purge request
+ </summary>
+ <param name="request">Identifies the request to perform.</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IRecalc.AddBhpbioDataRetrievalQueueEntriesForRecalcHistory(System.Int32)">
+ <summary>
+ Adds queue entries to the Data Series Processing queue as required based on recalc history
+ </summary>
+ <param name="lookbackMinutes">A lookback minutes value indicating how far back in recalc history to look</param>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IShippingTarget">
+ <summary>
+ Interface supporting by DAL objects used for Shipping Target operations
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IShippingTarget.GetBhpbioShippingTargets(System.Nullable{System.Int32},System.Nullable{System.DateTime})">
+ <summary>
+ Get a list of shipping target values in a layout that suits user interface display
+ </summary>
+ <param name="productTypeId">optional product type filter</param>
+ <param name="activeInMonth">optional month filter</param>
+ <returns>all shipping target periods that match filter criteria with their associated valuesin a denormalised form suited for display</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IShippingTarget.AddBhpbioShippingTarget(System.Int32,System.DateTime,System.Int32)">
+ <summary>
+ Add a new shipping target period
+ </summary>
+ <param name="producTypeId">identifies the type of product the shipping target relates to</param>
+ <param name="effectiveFrom">specifies the month the target relates to</param>
+ <param name="userId">specifies the related user Id</param>
+ <returns>The Id of the new shipping target</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IShippingTarget.UpdateBhpbioShippingTarget(System.Int32,System.Int32,System.DateTime,System.Int32)">
+ <summary>
+ Update a shipping target modified date and user
+ </summary>
+ <param name="shippingTargetPeriodId">Identifies the shipping target to be updated</param>
+ <param name="userId">identifies the user responsible for the update</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IShippingTarget.AddOrUpdateBhpbioShippingTargetValue(System.Int32,System.Int32,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double})">
+ <summary>
+ Add or update the upper, target , a lower control values assocaited with a target period and attribute combination
+ </summary>
+ <param name="shippingTargetPeriodId">Identifies the shipping target period to be updated</param>
+ <param name="attributeId">the attribute of the shipping target value to be updated</param>
+ <param name="upper">optional upper control</param>
+ <param name="target">optional target</param>
+ <param name="lower">optional lower control</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IShippingTarget.DeleteBhpbioShippingTarget(System.Int32)">
+ <summary>
+ Delete a shipping target and all associated values
+ </summary>
+ <param name="shippingTargetPeriodId">Identifies the shipping target to be deleted</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IShippingTarget.DeleteBhpbioShippingTargetValues(System.Int32)">
+ <summary>
+ Delete the values of a shipping target
+ </summary>
+ <param name="shippingTargetPeriodId">Identifies the shipping target whose values are to be deleted</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IStockpile.GetStockpileList(System.Int16,System.String,System.String,System.Int16,System.Int32,System.Int32,System.Int16,System.DateTime,System.DateTime,System.Int32,System.Int32,System.Int16,System.DateTime,System.DateTime)">
+ <summary>
+ Returns a list of stockpile records.
+ </summary>
+ <param name="groupByStockpileGroups">The group by stockpile groups.</param>
+ <param name="stockpileGroupId">The stockpile group id. Max length of 31.</param>
+ <param name="stockpileName">Name of the stockpile. Max length of 31.</param>
+ <param name="isVisible">True or False.</param>
+ <param name="materialTypeId">The material type id.</param>
+ <param name="sortType">Type of the sort.</param>
+ <param name="includeGrades">True or False.</param>
+ <param name="startDate">Filter on Stockpile Build Start Date</param>
+ <param name="endDate">Filter on Stockpile Build Start Date</param>
+ <param name="gradeVisibility">Determines what grades to show, null for all, true for visible, false for invisible.</param>
+ <param name="transactionStartDate">Includes all transactions from this date</param>
+ <param name="transactionEndDate">Filters the stockpile list down to stockpiles with transactions before/including this date, and after transaction start date</param>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IUtility.GetBhpbioDataExceptionFilteredList(System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Int32,System.Nullable{System.Int32})">
+ <summary>
+ Returns a list of data exceptions that match the specified filter conditions
+ </summary>
+ <param name="includeActive">If true, active data exceptions will be included in the filter</param>
+ <param name="includeDismissed">If true, dismissed data exceptions will be included in the filter</param>
+ <param name="includeResolved">If true, resolved data exceptions will be included in the filter</param>
+ <param name="dateFrom">If specified, only data exceptions with a date on or after this value will be returned</param>
+ <param name="dateTo">If specified, only data exceptions with a date on or prior to this value will be returned</param>
+ <param name="dataExceptionTypeId">If specified, only data exceptions with the type Id specified will match the filter</param>
+ <param name="descriptionContains">If specified, only data exceptions with a short or long description that contains the description text will match the filter</param>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IUtility.UpdateBhpbioDataExceptionDismissAll(System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Int32,System.Nullable{System.Int32})">
+ <summary>
+ Dismisses a list of data exceptions that match the specified filter conditions
+ </summary>
+ <param name="includeActive">If true, active data exceptions will be included in the filter</param>
+ <param name="includeDismissed">If true, dismissed data exceptions will be included in the filter</param>
+ <param name="includeResolved">If true, resolved data exceptions will be included in the filter</param>
+ <param name="dateFrom">If specified, only data exceptions with a date on or after this value will be returned</param>
+ <param name="dateTo">If specified, only data exceptions with a date on or prior to this value will be returned</param>
+ <param name="dataExceptionTypeId">If specified, only data exceptions with the type Id specified will match the filter</param>
+ <param name="descriptionContains">If specified, only data exceptions with a short or long description that contains the description text will match the filter</param>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IUtility.GetBhpbioDataExceptionTypeFilteredList(System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32})">
+ <summary>
+ Returns a list of  data exception types.
+ </summary>
+ <param name="includeActive">If true, active data exceptions will be included in the filter</param>
+ <param name="includeDismissed">If true, dismissed data exceptions will be included in the filter</param>
+ <param name="includeResolved">If true, resolved data exceptions will be included in the filter</param>
+ <param name="dateFrom">If specified, only data exceptions with a date on or after this value will be returned</param>
+ <param name="dateTo">If specified, only data exceptions with a date on or prior to this value will be returned</param>
+ <param name="dataExceptionTypeId">If specified, only data exceptions with the type Id specified will match the filter</param>
+ <param name="descriptionContains">If specified, only data exceptions with a short or long description that contains the description text will match the filter</param>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IUtility.LogMessage(System.DateTime,System.Nullable{System.DateTime},System.String,System.String,System.String)">
+ <summary>
+ Log the receipt of a message
+ </summary>
+ <param name="receivedDateTime">date and time of receipt</param>
+ <param name="messageTimestamp">timestamp from the message</param>
+ <param name="messageBody">the content of the message</param>
+ <param name="messageType">the type of message</param>
+ <param name="dataKey">a key portion of data from the message</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IBhpbioBlock.AddBhpbioStageBlockModelGrade(System.Int32,System.String,System.String,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double})">
+ <summary>
+ Add a grade value to a stage block model
+ </summary>
+ <param name="modelBlockId">The Id of the model block that should have a grade appended</param>
+ <param name="geometType">Identify the source of geomet data for this row</param>
+ <param name="analyteName">The name of the analyte/grade</param>
+ <param name="romValue">The head value</param>
+ <param name="lumpValue">The lump value if any</param>
+ <param name="finesValue">The fines value if any</param>
+ <remarks>any of the grade values may be null</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IBhpbioBlock.DeleteBhpbioStageBlock(System.DateTime,System.String)">
+ <summary>
+ Delete a stage block
+ </summary>
+ <param name="timestamp">Timestamp of the message containing the delete command</param>
+ <param name="blockExternalSystemId">Identifier for the block</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IBhpbioBlock.AddBhpbioStageBlockPoint(System.Int32,System.Double,System.Double,System.Double,System.Int32)">
+ <summary>
+ Add a stage block point
+ </summary>
+ <param name="blockId">Internal identifier for the Block</param>
+ <param name="x">Easting (x) value</param>
+ <param name="y">Northing (y) value</param>
+ <param name="z">ToeRL (z) value</param>
+ <param name="pointNumber">A number used to order the point</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IBhpbioBlock.DeleteBhpbioStageBlockPoints(System.Int32)">
+ <summary>
+ Delete all stage block poiints associated with a Block
+ </summary>
+ <param name="blockId">the internal identifer of the Block whose points are to be deleted</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IBhpbioBlock.AddOrUpdateBhpbioStageBlockIfLatest(System.DateTime,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.DateTime,System.Double,System.Double,System.Double,System.Nullable{System.Int32}@,System.Boolean@)">
+ <summary>
+ Add or update a block in the staging area, only if the timestamp provided is the latest seen for the Block
+ </summary>
+ <param name="timestamp">timestamp associated with the data to be saged</param>
+ <param name="blockExternalSystemId">the external identifer of the Block to be added or updated</param>
+ <param name="blockNumber">the number of the block</param>
+ <param name="blockName">the name of the block</param>
+ <param name="lithologyType">the lithologyType (or geoType) of the Block</param>
+ <param name="flitchExternalSystemId">Identifies the flitch of the Block</param>
+ <param name="patternExternalSystemId">Identifies the pattern of the block</param>
+ <param name="dateBlocked">the datetime the block was blocked out</param>
+ <param name="centroidX">Easting (x) of the blocks centre</param>
+ <param name="centroidY">Northing (y)of the blocks centre</param>
+ <param name="centroidZ">ToeRL (z) of the blocks centre</param>
+ <param name="blockId">reference parameter set to the internal Id of the Block</param>
+ <param name="isLatest">reference parameter set true if this data was the latest for the Block</param>
+ <remarks>This procedure call will take no action of the timestamp is not the latest seen for the Block</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IBhpbioBlock.AddBhpbioStageBlockModel(System.String,System.Int32,System.String,System.Double,System.Double,System.Double,System.String,System.DateTime,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32}@)">
+ <summary>
+ Add block model record for a Block
+ </summary>
+ <param name="modelType">the type of model</param>
+ <param name="blockId">the internal identifier for the Block</param>
+ <param name="materialCode">material code</param>
+ <param name="volume">volume</param>
+ <param name="tonnes">tonnes within this model block</param>
+ <param name="density">density</param>
+ <param name="lastModifiedUserName">the name of the user responsbile for last update</param>
+ <param name="lastModifiedDateTime">the date and time of last update</param>
+ <param name="modelFileName">the filename associated with this model data</param>
+ <param name="lumpPercentAsShipped">the percentage of lump material</param>
+ <param name="lumpPercentAsDropped">the percentage of lump material</param>
+ <param name="modelBlockId">reference parameter set to the id of the model block record on add</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects.IBhpbioBlock.DeleteBhpbioStageBlockModels(System.Int32,System.String)">
+ <summary>
+ Delete all model blocks (and associated grades) associated with the specified Block and model type
+ </summary>
+ <param name="blockId">Intenral Id of the block</param>
+ <param name="modelType">the type of the model whose data should be removed</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalBhpbioBlock.AddBhpbioStageBlockModelGrade(System.Int32,System.String,System.String,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double})">
+ <summary>
+ Add a grade value to a stage block model
+ </summary>
+ <param name="modelBlockId">The Id of the model block that should have a grade appended</param>
+ <param name="geometType">The name of the geomet type</param>
+ <param name="gradeName">The name of the analyte/grade</param>
+ <param name="romValue">The head value</param>
+ <param name="lumpValue">The lump value if any</param>
+ <param name="finesValue">The fines value if any</param>
+ <remarks>any of the grade values may be null</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalBhpbioBlock.DeleteBhpbioStageBlock(System.DateTime,System.String)">
+ <summary>
+ Delete a stage block
+ </summary>
+ <param name="timestamp">Timestamp of the message containing the delete command</param>
+ <param name="blockExternalSystemId">Identifier for the block</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalBhpbioBlock.AddBhpbioStageBlockPoint(System.Int32,System.Double,System.Double,System.Double,System.Int32)">
+ <summary>
+ Add a stage block point
+ </summary>
+ <param name="blockId">Identifier for the Block</param>
+ <param name="x">Easting (x) value</param>
+ <param name="y">Northing (y) value</param>
+ <param name="z">ToeRL (z) value</param>
+ <param name="pointNumber">A number used to order the point</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalBhpbioBlock.DeleteBhpbioStageBlockPoints(System.Int32)">
+ <summary>
+ Delete all stage block points associated with a Block
+ </summary>
+ <param name="blockId">the internal identifer of the Block whose points are to be deleted</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalBhpbioBlock.AddOrUpdateBhpbioStageBlockIfLatest(System.DateTime,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.DateTime,System.Double,System.Double,System.Double,System.Nullable{System.Int32}@,System.Boolean@)">
+ <summary>
+ Add or update a block in the staging area, only if the timestamp provided is the latest seen for the Block
+ </summary>
+ <param name="timestamp">timestamp associated with the data to be saged</param>
+ <param name="blockExternalSystemId">the external identifer of the Block to be added or updated</param>
+ <param name="blockName">the name of the block</param>
+ <param name="blockNumber">the number of the block</param>
+ <param name="lithologyType">the geoType (or lithology) of the Block</param>
+ <param name="flitchExternalSystemId">Identifies the flitch of the Block</param>
+ <param name="patternExternalSystemId">Identifies the pattern of the block</param>
+ <param name="dateBlocked">the datetime the block was blocked out</param>
+ <param name="centroidX">Easting (x) of the blocks centre</param>
+ <param name="centroidY">Northing (y)of the blocks centre</param>
+ <param name="centroidZ">ToeRL (z) of the blocks centre</param>
+ <param name="blockId">The block Id corresponding to the blockExternalSystemId</param>
+ <param name="isLatest">reference parameter set true if this data was the latest for the Block</param>
+ <remarks>This procedure call will take no action of the timestamp is not the latest seen for the Block</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalBhpbioBlock.AddBhpbioStageBlockModel(System.String,System.Int32,System.String,System.Double,System.Double,System.Double,System.String,System.DateTime,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32}@)">
+ <summary>
+ Add block model record for a Block
+ </summary>
+ <param name="modelType">the type of model</param>
+ <param name="blockId">the internal identifier for the Block</param>
+ <param name="materialCode">material code</param>
+ <param name="volume">volume</param>
+ <param name="tonnes">tonnes within this model block</param>
+ <param name="density">density</param>
+ <param name="lastModifiedUserName">the name of the user responsbile for last update</param>
+ <param name="lastModifiedDateTime">the date and time of last update</param>
+ <param name="modelFileName">the filename associated with this model data</param>
+ <param name="lumpPercentAsShipped">the percentage of lump material - AsShipped</param>
+ <param name="lumpPercentAsDropped">the percentage of lump material - AsDropped</param>
+ <param name="modelBlockId">reference parameter set to the id of the model block record on add</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalBhpbioBlock.DeleteBhpbioStageBlockModels(System.Int32,System.String)">
+ <summary>
+ Delete all model blocks (and associated grades) associated with the specified Block and model type
+ </summary>
+ <param name="blockId">Internal Id of the block</param>
+ <param name="modelType">the type of the model whose data should be removed</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalApproval.GetBhpbioOutliersForLocation(System.String,System.DateTime,System.DateTime,System.Int32,System.String,System.String,System.Decimal,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Get a datatable of outliers for a set of criteria
+ </summary>
+ <param name="analysisGroup">An analysis group to be matched (if any)</param>
+ <param name="startDate">start date from which to find outliers</param>
+ <param name="endDate">end date up to which to find outliers</param>
+ <param name="locationId">location Id to find outliers for</param>
+ <param name="productSize">product size (or null for any) to find outliers for</param>
+ <param name="attribute">an attribute to be matched</param>
+ <param name="minimumDeviation">the minimum deviation in terms of standard deviations to filter outliers</param>
+ <param name="includeDirectSubLocations">if true, outliers on direct sub-locations will be included</param>
+ <param name="includeAllSubLocations">if true, outliers on all sub-locations will be included</param>
+ <param name="excludeTotalMaterialDuplicates">Exclude total material outliers that are effectively duplicates of material type specific outliers</param>
+ <returns>A datatable with outlier results</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalApproval.GetBhpbioOutlierAnalysisPoints(System.Int32,System.DateTime,System.DateTime)">
+ <summary>
+ Get a a set of points for a series within a date range
+ </summary>
+ <param name="seriesId">Id of the series to return outlier information for</param>
+ <param name="dateFrom">start date from which points are to be returned</param>
+ <param name="dateTo">end date to which points are to be returend</param>
+ <returns>A datatable with series points</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalApproval.GetBhpbioOutlierAnalysisSeriesAttributes(System.Int32)">
+ <summary>
+ Get attributes for the outlier series
+ </summary>
+ <param name="seriesId">Id of the series to return outlier attributes for</param>
+ <returns>A datatable with attributes</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalApproval.GetBhpbioOutlierCountByAnalysisGroupForLocation(System.DateTime,System.DateTime,System.Int32,System.String,System.String,System.Decimal,System.Boolean,System.Boolean)">
+ <summary>
+ Get a count of outliers by analysis group for a given location 
+ </summary>
+ <param name="startDate">start date from which to find outliers</param>
+ <param name="endDate">end date up to which to find outliers</param>
+ <param name="locationId">location Id to find outliers for</param>
+ <param name="productSize">product size (or null for any) to find outliers for</param>
+ <param name="attribute">attribute representing (0 for tonnes, a grade Id, or Nothing for all)</param>
+ <param name="minimumDeviation">the minimum deviation in terms of standard deviations to filter outliers</param>
+ <param name="includeDirectSubLocations">if true, outliers on direct sub-locations will be included</param>
+ <param name="includeAllSubLocations">if true, outliers on all sub-locations will be included</param>
+ <returns>A DataTable returning a record for each analysis group along with a count of matched outliers</returns>
+</member>
+<member name="F:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalPurge.PurgeTimeoutSeconds">
+ <summary>
+ Constant used to control the timeout for the purge operation
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalPurge.IsMonthPurged(System.DateTime)">
+ <summary>
+ Checks whether a month has been purged or not
+ </summary>
+ <param name="month">the Month to be checked</param>
+ <returns>true if purged, false otherwise</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalPurge.PurgeData(System.Int32)">
+ <summary>
+ Purges data
+ </summary>
+ <param name="request">The purge request to perform</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalPurge.GetLatestPurgeMonth">
+ <summary>
+ Gets the latest purge month.
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalPurge.GetLatestPurgeableMonth">
+ <summary>
+ Gets the latest purgeable month.
+ This function returns the latest month that can be chosen to be purged.
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalPurge.AddPurgeRequest(System.DateTime,System.Int32,System.Int32@)">
+ <summary>
+ Adds the purge request.
+ </summary>
+ <param name="month">The month.</param>
+ <param name="userId">The user id.</param>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalPurge.UpdatePurgeRequests(System.Collections.Generic.IEnumerable{System.Int32},Snowden.Reconcilor.Bhpbio.Database.Dtos.PurgeRequestState,System.Nullable{System.Int32})">
+ <summary>
+ Updates the purge requests.
+ </summary>
+ <param name="requests">The requests.</param>
+ <param name="state">The state.</param>
+ <param name="approvingUser">The approving user.</param>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalPurge.GetPurgeRequests(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Boolean)">
+ <summary>
+ Gets the purge requests.
+ </summary>
+ <param name="readyForApproval">The ready for approval.</param>
+ <param name="readyForPurging">The ready for purging.</param>
+ <param name="latestRequestPerMonthOnly">If true, only the latest request for each month will be returned</param>
+ <returns>The set of requests meeting the criteria</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalRecalc.AddBhpbioDataRetrievalQueueEntriesForRecalcHistory(System.Int32)">
+ <summary>
+ Adds queue entries to the Data Series Processing queue as required based on recalc history
+ </summary>
+ <param name="lookbackMinutes">A lookback minutes value indicating how far back in recalc history to look</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalReport.GetBhpbioReportDataHistorical(System.DateTime,System.DateTime,System.String,System.Int32,System.Boolean)">
+ <summary>
+ Returns historical data for a period and location. Used by the reporting system.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalReport.GetBhpbioReportDataBlockModelBlockOuts(System.DateTime,System.DateTime,System.Int32,System.Boolean,System.String)">
+ <summary>
+ Returns block design data aggregated to the pattern level, and filtered by the blockout date
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalReport.GetBhpbioReportDataReview(System.String,System.Nullable{System.Int32},System.DateTime,System.DateTime,System.String)">
+ <summary>
+ Returns raw data based on a tag/CalcId. To be used by the Approval Review screen.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalReport.GetBhpbioReportDataBlockModelTotal(System.Int32,System.Boolean)">
+ <summary>
+ Returns block model total's for the F1 figures. Used only in the Blast by Blast Recon Report.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalReport.GetBhpbioResourceClassificationByLocation(System.Int32,System.DateTime,System.DateTime)">
+ <summary>
+ Returns a breakdown of the design tonnes under the given location by resource classification
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalReport.GetBhpbioResourceClassificationByLocation(System.Int32,System.DateTime)">
+ <summary>
+ Returns a breakdown of the design tonnes under the given location by resource classification
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalReport.GetBhpbioResourceClassificationByLocation(System.Int32,System.DateTime,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+ <summary>
+ Returns a breakdown of the design tonnes under the given location by resource classification
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalReport.AddDataInclusionParameters(System.Boolean,System.Boolean)">
+ <summary>
+ Added parameters used to specify data inclusion options
+ </summary>
+ <param name="includeLiveData">if true, live data is to be included</param>
+ <param name="includeApprovedData">if true, approved data is to be included</param>
+ <remarks>This is a helper method used to initialise parameters for data inclusion</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalShippingTarget.GetBhpbioShippingTargets(System.Nullable{System.Int32},System.Nullable{System.DateTime})">
+ <summary>
+ Get a list of shipping target values in a layout that suits user interface display
+ </summary>
+ <param name="productTypeId">optional product type filter</param>
+ <param name="activeInMonth">optional month filter</param>
+ <returns>all shipping target periods that match filter criteria with their associated valuesin a denormalised form suited for display</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalShippingTarget.AddBhpbioShippingTarget(System.Int32,System.DateTime,System.Int32)">
+ <summary>
+ Add a new shipping target period
+ </summary>
+ <param name="producTypeId">identifies the type of product the shipping target relates to</param>
+ <param name="effectiveFrom">specifies the month the target relates to</param>
+ <param name="userId">specifies the related user Id</param>
+ <returns>The Id of the new shipping target</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalShippingTarget.UpdateBhpbioShippingTarget(System.Int32,System.Int32,System.DateTime,System.Int32)">
+ <summary>
+ Update a shipping target modified date and user
+ </summary>
+ <param name="shippingTargetPeriodId">Identifies the shipping target to be updated</param>
+ <param name="userId">identifies the user responsible for the update</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalShippingTarget.AddOrUpdateBhpbioShippingTargetValue(System.Int32,System.Int32,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double})">
+ <summary>
+ Add or update the upper, target , a lower control values assocaited with a target period and attribute combination
+ </summary>
+ <param name="shippingTargetPeriodId">Identifies the shipping target period to be updated</param>
+ <param name="attributeId">the attribute of the shipping target value to be updated</param>
+ <param name="upper">optional upper control</param>
+ <param name="target">optional target</param>
+ <param name="lower">optional lower control</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalShippingTarget.DeleteBhpbioShippingTarget(System.Int32)">
+ <summary>
+ Delete a shipping target and all associated values
+ </summary>
+ <param name="shippingTargetPeriodId">Identifies the shipping target to be deleted</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalShippingTarget.DeleteBhpbioShippingTargetValues(System.Int32)">
+ <summary>
+ Delete the values of a shipping target
+ </summary>
+ <param name="shippingTargetPeriodId">Identifies the shipping target whose values are to be deleted</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalUtility.LogMessage(System.DateTime,System.Nullable{System.DateTime},System.String,System.String,System.String)">
+ <summary>
+ Log the receipt of a message
+ </summary>
+ <param name="receivedDateTime">date and time of receipt</param>
+ <param name="messageTimestamp">timestamp from the message</param>
+ <param name="messageBody">the content of the message</param>
+ <param name="messageType">the type of message</param>
+ <param name="dataKey">a key portion of data from the message</param>
+ <remarks>Typically used to log integration messages</remarks>
+</member>
+</members>
+</doc>

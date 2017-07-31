@@ -1,0 +1,49 @@
+﻿IF Object_Id('dbo.GetBhpbioReportHauledBlockLocations') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioReportHauledBlockLocations
+GO
+
+CREATE FUNCTION dbo.GetBhpbioReportHauledBlockLocations
+(
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME
+)
+RETURNS @BlockLocation TABLE
+(
+	DigblockId VARCHAR(31),
+	PitLocationId INT NULL,
+	
+	PRIMARY KEY (DigblockId)
+)
+AS
+BEGIN
+	-- retrieve starting set of digblocks based on those with haulage movements over
+	-- the given period
+	INSERT INTO @BlockLocation (
+		DigblockId,
+		PitLocationId
+	)
+	SELECT DISTINCT
+		h.Source_Digblock_Id,
+		pit.Location_Id
+	FROM Haulage h
+		INNER JOIN DigblockLocation dl 
+			ON dl.Digblock_Id = h.Source_Digblock_Id
+		INNER JOIN BhpbioLocationDate AS block
+			ON block.Location_Id = dl.Location_Id
+			AND ( h.Haulage_Date BETWEEN block.Start_Date AND block.End_Date)
+		INNER JOIN BhpbioLocationDate blast 
+			ON blast.Location_Id = block.Parent_Location_Id
+			AND ( h.Haulage_Date BETWEEN blast.Start_Date AND blast.End_Date)
+		INNER JOIN BhpbioLocationDate bench 
+			ON bench.Location_Id = blast.Parent_Location_Id
+			AND ( h.Haulage_Date BETWEEN bench.Start_Date AND bench.End_Date)
+		INNER JOIN BhpbioLocationDate pit 
+			ON pit.Location_Id = bench.Parent_Location_Id
+			AND ( h.Haulage_Date BETWEEN pit.Start_Date AND pit.End_Date)
+	WHERE h.Haulage_Date BETWEEN @iDateFrom AND @iDateTo
+		AND h.Haulage_State_Id IN ('N', 'A')
+		AND h.Child_Haulage_Id IS NULL
+			
+	RETURN
+END
+GO

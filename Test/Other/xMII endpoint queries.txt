@@ -1,0 +1,196 @@
+WSDL: http://csmper-xmiitest/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MQ2/Service/Production_GET/Production_GET
+Endpoint: http://csmper-xmiitest/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MQ2/Service/Production_GET/Production_GET
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xmii="http://www.sap.com/xMII">
+<soapenv:Header/>
+<soapenv:Body>
+<xmii:XacuteRequest>
+<xmii:LoginName>reconcilor</xmii:LoginName>
+<xmii:LoginPassword>reconc!l0r</xmii:LoginPassword>
+<xmii:InputParams>
+<xmii:StartDate>2009-04-01T00:00:00</xmii:StartDate>
+<xmii:EndDate>2009-04-15T00:00:00</xmii:EndDate>
+<xmii:MineSiteCode>AC</xmii:MineSiteCode>
+<xmii:LastModifiedStartDate></xmii:LastModifiedStartDate>
+<xmii:LastModifiedEndDate></xmii:LastModifiedEndDate>
+</xmii:InputParams>
+</xmii:XacuteRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+Endpoint: http://csmper-xmiiqa/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MQ2/Service/Haulage_GET/Haulage_GET
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xmii="http://www.sap.com/xMII">
+<soapenv:Header/><soapenv:Body>
+<xmii:XacuteRequest>
+<xmii:LoginName>reconcilor</xmii:LoginName>
+<xmii:LoginPassword>reconc!l0r</xmii:LoginPassword>
+<xmii:InputParams>
+<xmii:StartDate>2009-04-01T00:00:00</xmii:StartDate>
+<xmii:EndDate>2009-04-30T00:00:00</xmii:EndDate>
+<xmii:MineSiteCode>AC</xmii:MineSiteCode>
+<xmii:LastModifiedStartDate></xmii:LastModifiedStartDate>
+<xmii:LastModifiedEndDate></xmii:LastModifiedEndDate>
+</xmii:InputParams>
+</xmii:XacuteRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+WSDL: http://csmper-xmiiqa/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_SNOWDEN/Service/ReconMovements_GET/ReconMovements_GET
+Endpoint: http://csmper-xmiiqa/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_SNOWDEN/Service/ReconMovements_GET/ReconMovements_GET
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xmii="http://www.sap.com/xMII">
+<soapenv:Header/>
+<soapenv:Body>
+<xmii:XacuteRequest>
+<xmii:LoginName>reconcilor</xmii:LoginName>
+<xmii:LoginPassword>reconc!l0r</xmii:LoginPassword>
+<xmii:InputParams>
+<xmii:StartDate>2009-04-01T00:00:00</xmii:StartDate>
+<xmii:EndDate>2009-04-15T00:00:00</xmii:EndDate>
+</xmii:InputParams>
+</xmii:XacuteRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+WSDL: http://csmper-xmiitest/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MQ2/Service/Stockpiles_GET/Stockpiles_GET
+Endpoint: http://csmper-xmiitest/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MQ2/Service/Stockpiles_GET/Stockpiles_GET
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xmii="http://www.sap.com/xMII">
+<soapenv:Header/>
+<soapenv:Body>
+<xmii:XacuteRequest>
+<xmii:LoginName>reconcilor</xmii:LoginName>
+<xmii:LoginPassword>reconc!l0r</xmii:LoginPassword>
+<xmii:InputParams>
+<xmii:MineSiteCode>AC</xmii:MineSiteCode>
+</xmii:InputParams>
+</xmii:XacuteRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+WSDL: http://csmper-xmiitest/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MES/Service/Shipping_GET/Shipping_GET
+Endpoint: http://csmper-xmiitest/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MES/Service/Shipping_GET/Shipping_GET
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xmii="http://www.sap.com/xMII">
+<soapenv:Header/>
+<soapenv:Body>
+<xmii:XacuteRequest>
+<xmii:LoginName>reconcilor</xmii:LoginName>
+<xmii:LoginPassword>reconc!l0r</xmii:LoginPassword>
+<xmii:InputParams>
+<xmii:StartDate>2009-04-01T00:00:00</xmii:StartDate>
+<xmii:EndDate>2009-06-01T00:00:00</xmii:EndDate>
+</xmii:InputParams>
+</xmii:XacuteRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+WSDL: http://csmper-xmiiqa/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MES/Service/PortBalances_GET/PortBalances_GET
+Endpoint: http://csmper-xmiiqa/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MES/Service/PortBalances_GET/PortBalances_GET
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xmii="http://www.sap.com/xMII">
+<soapenv:Header/>
+<soapenv:Body>
+<xmii:XacuteRequest>
+<xmii:LoginName>reconcilor</xmii:LoginName>
+<xmii:LoginPassword>reconc!l0r</xmii:LoginPassword>
+<xmii:InputParams>
+<xmii:StartDate>2009-01-01T00:00:00</xmii:StartDate>
+</xmii:InputParams>
+</xmii:XacuteRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+
+WSDL: http://csmper-xmiiqa/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MES/Service/PortBlending_GET/PortBlending_GET
+Endpoint: http://csmper-xmiiqa/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MES/Service/PortBlending_GET/PortBlending_GET
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xmii="http://www.sap.com/xMII">
+<soapenv:Header/>
+<soapenv:Body>
+<xmii:XacuteRequest>
+<xmii:LoginName>reconcilor</xmii:LoginName>
+<xmii:LoginPassword>reconc!l0r</xmii:LoginPassword>
+<xmii:InputParams>
+<xmii:StartDate>2009-01-01T00:00:00</xmii:StartDate>
+<xmii:EndDate>2009-04-01T00:00:00</xmii:EndDate>
+</xmii:InputParams>
+</xmii:XacuteRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+WSDL: http://csmper-xmiiqa/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MES/Service/METBalancing_GET/METBalancing_GET
+Endpoint: http://csmper-xmiiqa/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MES/Service/METBalancing_GET/METBalancing_GET
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xmii="http://www.sap.com/xMII">
+<soapenv:Header/>
+<soapenv:Body>
+<xmii:XacuteRequest>
+<xmii:LoginName>reconcilor</xmii:LoginName>
+<xmii:LoginPassword>reconc!l0r</xmii:LoginPassword>
+<xmii:InputParams>
+<xmii:StartDate>2009-04-01T00:00:00</xmii:StartDate>
+<xmii:EndDate>2009-04-08T00:00:00</xmii:EndDate>
+</xmii:InputParams>
+</xmii:XacuteRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+WSDL: http://csmper-xmiitest/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_SNOWDEN/Service/ReconBlocks_GET/ReconBlocks_GET
+Endpoint: http://csmper-xmiitest/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_SNOWDEN/Service/ReconBlocks_GET/ReconBlocks_GET
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<XacuteRequest xmlns="http://www.sap.com/xMII">
+<LoginName>reconcilor</LoginName>
+<LoginPassword>reconc!l0r</LoginPassword>
+<InputParams>
+<EndDate>2009-08-19T00:00:00.023</EndDate>
+<StartDate>2009-08-17T00:00:00.023</StartDate>
+</InputParams>
+</XacuteRequest>
+</s:Body>
+</s:Envelope>
+
+
+WSDL: http://csmper-xmiitest/Lighthammer/WSDLGen/BHPB/CSM/IRO/40_Integration/BHPB_CSM_SNOWDEN/Service/ReconDeletedBlocks_GET/ReconDeletedBlocks_GET
+Endpoint: http://csmper-xmiitest/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_SNOWDEN/Service/ReconDeletedBlocks_GET/ReconDeletedBlocks_GET
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<XacuteRequest xmlns="http://www.sap.com/xMII">
+<LoginName>reconcilor</LoginName>
+<LoginPassword>reconc!l0r</LoginPassword>
+<InputParams>
+<EndDate>2009-10-31T00:00:00.023</EndDate>
+<StartDate>2009-04-01T00:00:00.023</StartDate>
+</InputParams>
+</XacuteRequest>
+</s:Body>
+</s:Envelope>
+
+
+Endpoint: http://csmper-xmiitest/Lighthammer/SOAPRunner/BHPB/CSM/IRO/40_Integration/BHPB_CSM_MQ2/Service/StockpileAdjustment_GET/StockpileAdjustment_GET
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<XacuteRequest xmlns="http://www.sap.com/xMII">
+<LoginName>reconcilor</LoginName>
+<LoginPassword>reconc!l0r</LoginPassword>
+<InputParams>
+	<EndDate>2009-04-16T00:00:00</EndDate>
+	<MineSiteCode>AC</MineSiteCode>
+	<StartDate>2009-04-01T00:00:00</StartDate>
+</InputParams>
+</XacuteRequest>
+</s:Body>
+</s:Envelope>

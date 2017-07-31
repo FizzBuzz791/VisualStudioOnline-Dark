@@ -1,0 +1,2170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="WebService">
+      <DataSourceReference>WebService</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>c7894790-4fd7-420b-8706-5fc769386a37</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="FData">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="dateFrom">
+            <Value>=Parameters!DateFrom.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="dateTo">
+            <Value>=Parameters!DateTo.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="dateBreakdown">
+            <Value>=Parameters!DateBreakdown.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="attributes">
+            <Value>=Parameters!Attributes.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="factor">
+            <Value>=Parameters!SingleSource.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="locations">
+            <Value>=Parameters!LocationIds.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="lumpFinesBreakdown">
+            <Value>=Parameters!lumpFinesBreakdown.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="reportContext">
+            <Value>=Parameters!ReportContext.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+&lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetF1F2F3ReconciliationComparisonReport&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetF1F2F3ReconciliationComparisonReport"&gt;
+    &lt;Parameters&gt;
+     &lt;Parameter Name="locationId" Type="integer" /&gt;
+     &lt;Parameter Name="dateFrom" Type="string" /&gt;
+     &lt;Parameter Name="dateTo" Type="string" /&gt;
+     &lt;Parameter Name="dateBreakdown" Type="string" /&gt;
+     &lt;Parameter Name="attributes" Type="string" /&gt;
+     &lt;Parameter Name="factor" Type="string" /&gt;
+     &lt;Parameter Name="locations" Type="string" /&gt;
+     &lt;Parameter Name="lumpFinesBreakdown" Type="boolean" /&gt;
+     &lt;Parameter Name="reportContext" Type="string" /&gt;
+   &lt;/Parameters&gt; 
+   &lt;/Method&gt;
+   &lt;ElementPath IgnoreNamespaces="true"&gt;GetF1F2F3ReconciliationComparisonReportResponse{}/GetF1F2F3ReconciliationComparisonReportResult/diffgram{}/DocumentElement{}/Values{TagId,ReportTagId,CalcId,Type,Description,CalculationDepth,InError,ProductSize,CalendarDate,DateFrom,DateTo,Attribute,AttributeValue,RootCalcId,PresentationEditable,PresentationLocked,PresentationValid,PresentationColor,DateText,PresentationAttributePrecision,FactorDescription,rowOrder,id}&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="TagId">
+          <DataField>TagId</DataField>
+        </Field>
+        <Field Name="CalcId">
+          <DataField>CalcId</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+        </Field>
+        <Field Name="CalculationDepth">
+          <DataField>CalculationDepth</DataField>
+        </Field>
+        <Field Name="InError">
+          <DataField>InError</DataField>
+        </Field>
+        <Field Name="CalendarDate">
+          <DataField>CalendarDate</DataField>
+        </Field>
+        <Field Name="DateFrom">
+          <DataField>DateFrom</DataField>
+        </Field>
+        <Field Name="DateTo">
+          <DataField>DateTo</DataField>
+        </Field>
+        <Field Name="LocationId">
+          <DataField>LocationId</DataField>
+        </Field>
+        <Field Name="Attribute">
+          <DataField>Attribute</DataField>
+        </Field>
+        <Field Name="AttributeValue">
+          <DataField>AttributeValue</DataField>
+        </Field>
+        <Field Name="DateText">
+          <DataField>DateText</DataField>
+        </Field>
+        <Field Name="PresentationColor">
+          <DataField>PresentationColor</DataField>
+        </Field>
+        <Field Name="PresentationAttributePrecision">
+          <DataField>PresentationAttributePrecision</DataField>
+        </Field>
+        <Field Name="FactorDescription">
+          <DataField>FactorDescription</DataField>
+        </Field>
+        <Field Name="rowOrder">
+          <DataField>rowOrder</DataField>
+        </Field>
+        <Field Name="id">
+          <DataField>id</DataField>
+        </Field>
+        <Field Name="CustomSortNumber">
+          <Value>=IIF(Fields!Attribute.Value = "Tonnes", 0, IIF(Fields!Attribute.Value= "Fe", 1 , IIF(Fields!Attribute.Value = "P", 2 , IIF(Fields!Attribute.Value = "SiO2", 3 , IIF(Fields!Attribute.Value = "Al2O3", 4 , IIF(Fields!Attribute.Value = "LOI", 5, 6))))))</Value>
+        </Field>
+        <Field Name="ReportTagId">
+          <DataField>ReportTagId</DataField>
+        </Field>
+        <Field Name="ProductSize">
+          <DataField>ProductSize</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="AttributesXMLConvert">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="xml">
+            <Value>=Parameters!Attributes.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="elementId">
+            <Value>Attribute</Value>
+          </QueryParameter>
+          <QueryParameter Name="attributeName">
+            <Value>name</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/ConvertXmlToCsv&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="ConvertXmlToCsv"&gt;
+    &lt;Parameters&gt;
+     &lt;Parameter Name="xml" Type="string" /&gt;
+     &lt;Parameter Name="elementId" Type="string"/&gt;
+     &lt;Parameter Name="attributeName" Type="string"/&gt;
+   &lt;/Parameters&gt; 
+   &lt;/Method&gt;
+     &lt;ElementPath IgnoreNamespaces="true"&gt;ConvertXmlToCsvResponse{ConvertXmlToCsvResult}&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ConvertXmlToCsvResult">
+          <DataField>ConvertXmlToCsvResult</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Location">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="startDate">
+            <Value>=Parameters!DateFrom.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetLocationCommentByDate&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetLocationCommentByDate"&gt;
+    &lt;Parameters&gt;
+   &lt;Parameter Name="locationId" Type="integer" /&gt;
+   &lt;Parameter Name="startDate" Type="date" /&gt;
+   &lt;/Parameters&gt; 
+    &lt;/Method&gt;
+     &lt;ElementPath IgnoreNamespaces="true"&gt;GetLocationCommentByDateResponse{GetLocationCommentByDateResult}
+&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="GetLocationCommentByDateResult">
+          <DataField>GetLocationCommentByDateResult</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="GetAttributes">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetAttributes&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetAttributes"&gt;
+   &lt;/Method&gt;
+   &lt;ElementPath IgnoreNamespaces="true"&gt;GetAttributesResponse{}/GetAttributesResult/diffgram{}/DocumentElement{}/Attributes&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="AttributeId">
+          <DataField>AttributeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AttributeName">
+          <DataField>AttributeName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderNo">
+          <DataField>OrderNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Units">
+          <DataField>Units</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DisplayPrecision">
+          <DataField>DisplayPrecision</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DisplayFormat">
+          <DataField>DisplayFormat</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GradeTypeId">
+          <DataField>GradeTypeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IsVisible">
+          <DataField>IsVisible</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="rowOrder">
+          <DataField>rowOrder</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ConvertLocationComment">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="startDate">
+            <Value>=Parameters!DateFrom.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetLocationCommentByDate&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetLocationCommentByDate"&gt;
+    &lt;Parameters&gt;
+   &lt;Parameter Name="locationId" Type="integer" /&gt;
+   &lt;Parameter Name="startDate" Type="date" /&gt;
+   &lt;/Parameters&gt; 
+    &lt;/Method&gt;
+     &lt;ElementPath IgnoreNamespaces="true"&gt;GetLocationCommentByDateResponse{GetLocationCommentByDateResult}
+&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="GetLocationCommentByDateResult">
+          <DataField>GetLocationCommentByDateResult</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="GraphThresholds">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="thresholdTypeId">
+            <Value>="GraphThreshold"</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+&lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetBhpbioReportThresholdList&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetBhpbioReportThresholdList"&gt;
+    &lt;Parameters&gt;
+     &lt;Parameter Name="locationId" Type="integer" /&gt;
+     &lt;Parameter Name="thresholdTypeId" Type="String" /&gt;
+   &lt;/Parameters&gt; 
+   &lt;/Method&gt;
+   &lt;ElementPath IgnoreNamespaces="true"&gt;GetBhpbioReportThresholdListResponse{}/GetBhpbioReportThresholdListResult/diffgram{}/DocumentElement{}/ReportThresholdList&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="LocationId">
+          <DataField>LocationId</DataField>
+        </Field>
+        <Field Name="LocationName">
+          <DataField>LocationName</DataField>
+        </Field>
+        <Field Name="ThresholdTypeId">
+          <DataField>ThresholdTypeId</DataField>
+        </Field>
+        <Field Name="FieldId">
+          <DataField>FieldId</DataField>
+        </Field>
+        <Field Name="FieldName">
+          <DataField>FieldName</DataField>
+        </Field>
+        <Field Name="LowThreshold">
+          <DataField>LowThreshold</DataField>
+        </Field>
+        <Field Name="HighThreshold">
+          <DataField>HighThreshold</DataField>
+        </Field>
+        <Field Name="AbsoluteThreshold">
+          <DataField>AbsoluteThreshold</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="LocationComment2">
+      <Query>
+        <DataSourceName>WebService</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="startDate">
+            <Value>=Parameters!DateFrom.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetLocationComment2ByDate&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetLocationComment2ByDate"&gt;
+    &lt;Parameters&gt;
+   &lt;Parameter Name="locationId" Type="integer" /&gt;
+   &lt;Parameter Name="startDate" Type="date" /&gt;
+   &lt;/Parameters&gt; 
+    &lt;/Method&gt;
+     &lt;ElementPath IgnoreNamespaces="true"&gt;GetLocationComment2ByDateResponse{GetLocationComment2ByDateResult}
+&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="GetLocationComment2ByDateResult">
+          <DataField>GetLocationComment2ByDateResult</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Rectangle Name="rectangle1">
+            <ReportItems>
+              <Textbox Name="textbox28">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>= "Date From:"  </Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Left>2.5cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.25cm</Width>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox21">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>= "Date To: "</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.5cm</Top>
+                <Left>2.5cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.25cm</Width>
+                <ZIndex>1</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox15">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Format(CDATE(Parameters!DateFrom.Value), "dd-MMM-yy")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <Format>d</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Left>4.25cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.75cm</Width>
+                <ZIndex>2</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox13">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Format(CDATE(Parameters!DateTo.Value), "dd-MMM-yy")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <Format>d</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.5cm</Top>
+                <Left>4.25cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.75cm</Width>
+                <ZIndex>3</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox1">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>="Date Breakdown: "</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Left>6.5cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.25cm</Width>
+                <ZIndex>4</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox11">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>="Location: "</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.5cm</Top>
+                <Left>6.5cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.25cm</Width>
+                <ZIndex>5</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox16">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!DateBreakdown.Value</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <Format>d</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Left>8.75cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.75cm</Width>
+                <ZIndex>6</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox17">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!GetLocationCommentByDateResult.Value, "Location")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <Format>d</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.5cm</Top>
+                <Left>8.75cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.75cm</Width>
+                <ZIndex>7</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox18">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>="Attributes: "</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>textbox18</rd:DefaultName>
+                <Left>11.5cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.75cm</Width>
+                <ZIndex>8</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF(First(Fields!ConvertXmlToCsvResult.Value, "AttributesXMLConvert") = ""
+ OR first(Fields!ConvertXmlToCsvResult.Value, "AttributesXMLConvert") = nothing,
+	True, False)</Hidden>
+                </Visibility>
+                <DataElementOutput>NoOutput</DataElementOutput>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox19">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>="Factors:"</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.5cm</Top>
+                <Left>11.5cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.75cm</Width>
+                <ZIndex>9</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox20">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!ConvertXmlToCsvResult.Value, "AttributesXMLConvert")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>textbox20</rd:DefaultName>
+                <Left>13.25cm</Left>
+                <Height>0.5cm</Height>
+                <Width>5.25cm</Width>
+                <ZIndex>10</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="ConvertBlocksModelsAndActualsXmlToCsvResult_1">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!FactorDescription.Value, "FData")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>ConvertBlocksModelsAndActualsXmlToCsvResult_1</rd:DefaultName>
+                <Top>0.5cm</Top>
+                <Left>13.25cm</Left>
+                <Height>0.5cm</Height>
+                <Width>5.25cm</Width>
+                <ZIndex>11</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Line Name="line2">
+                <Top>1.25cm</Top>
+                <Height>0cm</Height>
+                <Width>19.95cm</Width>
+                <ZIndex>12</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                </Style>
+              </Line>
+            </ReportItems>
+            <DataElementOutput>ContentsOnly</DataElementOutput>
+            <Top>0.25cm</Top>
+            <Height>1.5cm</Height>
+            <Width>19.95cm</Width>
+            <Visibility>
+              <Hidden>=IIF(Parameters!CompleteReport.Value = "True", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <TopBorder>
+                <Color>Black</Color>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Width>1pt</Width>
+              </BottomBorder>
+            </Style>
+          </Rectangle>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>19.51309cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>8.43181cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle2">
+                          <ReportItems>
+                            <Chart Name="chart1">
+                              <ChartCategoryHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Group Name="chart1_CategoryGroup1">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!DateText.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <Label />
+                                    <DataElementOutput>Output</DataElementOutput>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartCategoryHierarchy>
+                              <ChartSeriesHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Group Name="chart1_SeriesGroup1">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!Description.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <ChartMembers>
+                                      <ChartMember>
+                                        <Label>Date Text</Label>
+                                      </ChartMember>
+                                      <ChartMember>
+                                        <Label>Attribute Value</Label>
+                                      </ChartMember>
+                                      <ChartMember>
+                                        <Label>Date Text</Label>
+                                      </ChartMember>
+                                      <ChartMember>
+                                        <Label>Date Text</Label>
+                                      </ChartMember>
+                                    </ChartMembers>
+                                    <Label />
+                                    <DataElementOutput>Output</DataElementOutput>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartSeriesHierarchy>
+                              <ChartData>
+                                <ChartSeriesCollection>
+                                  <ChartSeries Name="Series1">
+                                    <ChartDataPoints>
+                                      <ChartDataPoint>
+                                        <ChartDataPointValues>
+                                          <Y>=Iif(Fields!DateText.Value &lt;&gt; ""
+	AND (Fields!ReportTagId.Value = "F1Factor" 
+	OR Fields!ReportTagId.Value  = "F15Factor"
+  OR Fields!ReportTagId.Value  = "F2Factor"
+  OR Fields!ReportTagId.Value  = "F3Factor"
+  OR Fields!ReportTagId.Value  = "F25Factor"), Lookup(Fields!Attribute.Value,Fields!FieldName.Value, Fields!HighThreshold.Value, "GraphThresholds"), nothing)</Y>
+                                        </ChartDataPointValues>
+                                        <ChartDataLabel>
+                                          <Style />
+                                        </ChartDataLabel>
+                                        <Style>
+                                          <Border>
+                                            <Width>2.25pt</Width>
+                                          </Border>
+                                          <Color>Red</Color>
+                                        </Style>
+                                        <ChartMarker>
+                                          <Type>Square</Type>
+                                          <Size>2pt</Size>
+                                          <Style />
+                                        </ChartMarker>
+                                      </ChartDataPoint>
+                                    </ChartDataPoints>
+                                    <Type>Line</Type>
+                                    <Style />
+                                    <ChartEmptyPoints>
+                                      <Style />
+                                      <ChartMarker>
+                                        <Style />
+                                      </ChartMarker>
+                                      <ChartDataLabel>
+                                        <Style />
+                                      </ChartDataLabel>
+                                    </ChartEmptyPoints>
+                                    <ChartItemInLegend>
+                                      <Hidden>true</Hidden>
+                                    </ChartItemInLegend>
+                                    <ValueAxisName>Primary</ValueAxisName>
+                                    <CategoryAxisName>Primary</CategoryAxisName>
+                                    <ChartSmartLabel>
+                                      <CalloutLineColor>Black</CalloutLineColor>
+                                      <MinMovingDistance>0pt</MinMovingDistance>
+                                    </ChartSmartLabel>
+                                  </ChartSeries>
+                                  <ChartSeries Name="DataSeries">
+                                    <ChartDataPoints>
+                                      <ChartDataPoint>
+                                        <ChartDataPointValues>
+                                          <Y>=Iif(CDBL(Fields!AttributeValue.Value) = 0.0, Nothing,
+CDBL(Fields!AttributeValue.Value)
+/ IIF(Fields!ReportTagId.Value = "F1Factor" 
+  OR Fields!ReportTagId.Value  = "F15Factor"
+  OR Fields!ReportTagId.Value  = "F2Factor"
+  OR Fields!ReportTagId.Value  = "F3Factor"
+  OR Fields!ReportTagId.Value  = "F25Factor",
+  1.0,
+  IIF(Fields!Attribute.Value = "Tonnes", 1000.0, 1.0)))</Y>
+                                        </ChartDataPointValues>
+                                        <ChartDataLabel>
+                                          <Style />
+                                        </ChartDataLabel>
+                                        <Style>
+                                          <Border>
+                                            <Width>2.25pt</Width>
+                                          </Border>
+                                          <Color>=Fields!PresentationColor.Value</Color>
+                                        </Style>
+                                        <ChartMarker>
+                                          <Type>Diamond</Type>
+                                          <Size>6pt</Size>
+                                          <Style />
+                                        </ChartMarker>
+                                      </ChartDataPoint>
+                                    </ChartDataPoints>
+                                    <Type>Line</Type>
+                                    <Style />
+                                    <ChartEmptyPoints>
+                                      <Style />
+                                      <ChartMarker>
+                                        <Style />
+                                      </ChartMarker>
+                                      <ChartDataLabel>
+                                        <Style />
+                                      </ChartDataLabel>
+                                    </ChartEmptyPoints>
+                                    <ChartItemInLegend>
+                                      <LegendText>=Fields!Description.Value</LegendText>
+                                      <Hidden>=IIF(Fields!Description.Value Is Nothing Or Len(Fields!Description.Value) = 0, True, False)</Hidden>
+                                    </ChartItemInLegend>
+                                    <ValueAxisName>Primary</ValueAxisName>
+                                    <CategoryAxisName>Primary</CategoryAxisName>
+                                    <ChartSmartLabel>
+                                      <CalloutLineColor>Black</CalloutLineColor>
+                                      <MinMovingDistance>0pt</MinMovingDistance>
+                                    </ChartSmartLabel>
+                                  </ChartSeries>
+                                  <ChartSeries Name="Series3">
+                                    <ChartDataPoints>
+                                      <ChartDataPoint>
+                                        <ChartDataPointValues>
+                                          <Y>=Iif(Fields!DateText.Value &lt;&gt; "" 
+	AND (Fields!ReportTagId.Value = "F1Factor" 
+  OR Fields!ReportTagId.Value  = "F15Factor"
+  OR Fields!ReportTagId.Value  = "F2Factor"
+  OR Fields!ReportTagId.Value  = "F3Factor"
+  OR Fields!ReportTagId.Value  = "F25Factor"), Lookup(Fields!Attribute.Value,Fields!FieldName.Value, Fields!LowThreshold.Value, "GraphThresholds"), nothing)</Y>
+                                        </ChartDataPointValues>
+                                        <ChartDataLabel>
+                                          <Style />
+                                        </ChartDataLabel>
+                                        <Style>
+                                          <Border>
+                                            <Width>2.25pt</Width>
+                                          </Border>
+                                          <Color>Red</Color>
+                                        </Style>
+                                        <ChartMarker>
+                                          <Type>Square</Type>
+                                          <Size>2pt</Size>
+                                          <Style />
+                                        </ChartMarker>
+                                      </ChartDataPoint>
+                                    </ChartDataPoints>
+                                    <Type>Line</Type>
+                                    <Style />
+                                    <ChartEmptyPoints>
+                                      <Style />
+                                      <ChartMarker>
+                                        <Style />
+                                      </ChartMarker>
+                                      <ChartDataLabel>
+                                        <Style />
+                                      </ChartDataLabel>
+                                    </ChartEmptyPoints>
+                                    <ChartItemInLegend>
+                                      <Hidden>true</Hidden>
+                                    </ChartItemInLegend>
+                                    <ValueAxisName>Primary</ValueAxisName>
+                                    <CategoryAxisName>Primary</CategoryAxisName>
+                                    <ChartSmartLabel>
+                                      <CalloutLineColor>Black</CalloutLineColor>
+                                      <MinMovingDistance>0pt</MinMovingDistance>
+                                    </ChartSmartLabel>
+                                  </ChartSeries>
+                                  <ChartSeries Name="Series4">
+                                    <ChartDataPoints>
+                                      <ChartDataPoint>
+                                        <ChartDataPointValues>
+                                          <Y>=First(Fields!DateText.Value, "FData")</Y>
+                                        </ChartDataPointValues>
+                                        <ChartDataLabel>
+                                          <Style />
+                                        </ChartDataLabel>
+                                        <Style>
+                                          <Border>
+                                            <Width>2.25pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <ChartMarker>
+                                          <Size>6pt</Size>
+                                          <Style />
+                                        </ChartMarker>
+                                      </ChartDataPoint>
+                                    </ChartDataPoints>
+                                    <Type>Line</Type>
+                                    <Style />
+                                    <ChartEmptyPoints>
+                                      <Style />
+                                      <ChartMarker>
+                                        <Style />
+                                      </ChartMarker>
+                                      <ChartDataLabel>
+                                        <Style />
+                                      </ChartDataLabel>
+                                    </ChartEmptyPoints>
+                                    <ChartItemInLegend>
+                                      <Hidden>true</Hidden>
+                                    </ChartItemInLegend>
+                                    <ValueAxisName>Primary</ValueAxisName>
+                                    <CategoryAxisName>Primary</CategoryAxisName>
+                                    <ChartSmartLabel>
+                                      <CalloutLineColor>Black</CalloutLineColor>
+                                      <MinMovingDistance>0pt</MinMovingDistance>
+                                    </ChartSmartLabel>
+                                  </ChartSeries>
+                                </ChartSeriesCollection>
+                              </ChartData>
+                              <ChartAreas>
+                                <ChartArea Name="Default">
+                                  <ChartCategoryAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Style>
+                                        <Border>
+                                          <Style>None</Style>
+                                          <Width>0.75pt</Width>
+                                        </Border>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>=IIF(Parameters!DateBreakdown.Value = "MONTH", "Month", "Quarter")</Caption>
+                                        <Style />
+                                      </ChartAxisTitle>
+                                      <Margin>False</Margin>
+                                      <Interval>1</Interval>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                            <Width>0.75pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <Interval>NaN</Interval>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                            <Width>0.75pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <Interval>NaN</Interval>
+                                        <IntervalOffset>-1</IntervalOffset>
+                                      </ChartMinorGridLines>
+                                      <ChartMajorTickMarks>
+                                        <Enabled>True</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                            <Width>0.75pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <Interval>NaN</Interval>
+                                      </ChartMajorTickMarks>
+                                      <ChartMinorTickMarks>
+                                        <Type>None</Type>
+                                      </ChartMinorTickMarks>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <PreventFontShrink>true</PreventFontShrink>
+                                      <PreventFontGrow>true</PreventFontGrow>
+                                      <IncludeZero>false</IncludeZero>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartCategoryAxes>
+                                  <ChartValueAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Style>
+                                        <Border>
+                                          <Style>None</Style>
+                                          <Width>0.75pt</Width>
+                                        </Border>
+                                        <Format>="N" &amp; IIF(Fields!Type.Value = 0, "2", Fields!PresentationAttributePrecision.Value)</Format>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>=Iif(Fields!ReportTagId.Value = "F1Factor" Or Fields!ReportTagId.Value = "F15Factor" OR Fields!ReportTagId.Value  = "F2Factor" OR Fields!ReportTagId.Value  = "F3Factor" OR Fields!ReportTagId.Value  = "F25Factor", "Factor", IIF(Fields!Attribute.Value = "Tonnes", "KTonnes", "%"))</Caption>
+                                        <Style />
+                                      </ChartAxisTitle>
+                                      <Margin>True</Margin>
+                                      <Interval>=Iif(Fields!ReportTagId.Value = "F1Factor" OR Fields!ReportTagId.Value = "F15Factor" Or Fields!ReportTagId.Value = "F15Factor" OR Fields!ReportTagId.Value  = "F2Factor" OR Fields!ReportTagId.Value  = "F3Factor" OR Fields!ReportTagId.Value  = "F25Factor", Iif(Fields!Attribute.Value.tolower = "fe", 0.01, 0.1), IIF(Count(Fields!ReportTagId.Value) = 0 , 0, Code.CalculateGraphAxis("Step", Fields!Attribute.Value, Fields!PresentationAttributePrecision.Value, Min(CDbl(Fields!AttributeValue.Value)), Max(CDbl(Fields!AttributeValue.Value)))))</Interval>
+                                      <ChartMajorGridLines>
+                                        <Enabled>True</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                            <Width>0.75pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <Interval>=Iif(Fields!ReportTagId.Value = "F1Factor" OR Fields!ReportTagId.Value = "F15Factor" Or Fields!ReportTagId.Value = "F15Factor" OR Fields!ReportTagId.Value  = "F2Factor" OR Fields!ReportTagId.Value  = "F3Factor" OR Fields!ReportTagId.Value  = "F25Factor", Iif(Fields!Attribute.Value.tolower = "fe", 0.01, 0.1), IIF(Count(Fields!ReportTagId.Value) = 0 , 0, Code.CalculateGraphAxis("Step", Fields!Attribute.Value, Fields!PresentationAttributePrecision.Value, Min(CDbl(Fields!AttributeValue.Value)), Max(CDbl(Fields!AttributeValue.Value)))))</Interval>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                            <Width>0.75pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <Interval>NaN</Interval>
+                                      </ChartMinorGridLines>
+                                      <ChartMajorTickMarks>
+                                        <Enabled>True</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                            <Width>0.75pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <Interval>=Iif(Fields!ReportTagId.Value = "F1Factor" OR Fields!ReportTagId.Value = "F15Factor" Or Fields!ReportTagId.Value = "F15Factor" OR Fields!ReportTagId.Value  = "F2Factor" OR Fields!ReportTagId.Value  = "F3Factor" OR Fields!ReportTagId.Value  = "F25Factor", Iif(Fields!Attribute.Value.tolower = "fe", 0.01, 0.1), IIF(Count(Fields!ReportTagId.Value) = 0 , 0, Code.CalculateGraphAxis("Step", Fields!Attribute.Value, Fields!PresentationAttributePrecision.Value, Min(CDbl(Fields!AttributeValue.Value)), Max(CDbl(Fields!AttributeValue.Value)))))</Interval>
+                                      </ChartMajorTickMarks>
+                                      <ChartMinorTickMarks>
+                                        <Enabled>True</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                            <Width>0.75pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <Interval>NaN</Interval>
+                                      </ChartMinorTickMarks>
+                                      <Scalar>true</Scalar>
+                                      <Minimum>=Iif(Fields!ReportTagId.Value = "F1Factor" OR Fields!ReportTagId.Value = "F15Factor" OR Fields!ReportTagId.Value  = "F2Factor" OR Fields!ReportTagId.Value  = "F3Factor" OR Fields!ReportTagId.Value  = "F25Factor", Iif(Fields!Attribute.Value.tolower = "fe", 0.97, 0.7), IIF(Count(Fields!ReportTagId.Value) = 0 , 0, Code.CalculateGraphAxis("Min", Fields!Attribute.Value, Fields!PresentationAttributePrecision.Value, Min(Iif(CDbl(Fields!AttributeValue.Value) = 0.0, Nothing,CDbl(Fields!AttributeValue.Value))), Max(CDbl(Fields!AttributeValue.Value)))))</Minimum>
+                                      <Maximum>=Iif(Fields!ReportTagId.Value = "F1Factor" OR Fields!ReportTagId.Value = "F15Factor" OR Fields!ReportTagId.Value  = "F2Factor" OR Fields!ReportTagId.Value  = "F3Factor" OR Fields!ReportTagId.Value  = "F25Factor", Iif(Fields!Attribute.Value.tolower = "fe", 1.03, 1.3), IIF(Count(Fields!ReportTagId.Value) = 0 , 0, Code.CalculateGraphAxis("Max", Fields!Attribute.Value, Fields!PresentationAttributePrecision.Value, Min(CDbl(Fields!AttributeValue.Value)), Max(CDbl(Fields!AttributeValue.Value)))))</Maximum>
+                                      <PreventFontShrink>true</PreventFontShrink>
+                                      <PreventFontGrow>true</PreventFontGrow>
+                                      <IncludeZero>false</IncludeZero>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartValueAxes>
+                                  <ChartThreeDProperties>
+                                    <ProjectionMode>Perspective</ProjectionMode>
+                                    <Shading>Simple</Shading>
+                                    <WallThickness>15</WallThickness>
+                                    <Clustered>true</Clustered>
+                                  </ChartThreeDProperties>
+                                  <Style>
+                                    <Border>
+                                      <Style>Solid</Style>
+                                      <Width>0.75pt</Width>
+                                    </Border>
+                                    <BackgroundColor>LightGrey</BackgroundColor>
+                                  </Style>
+                                </ChartArea>
+                              </ChartAreas>
+                              <ChartLegends>
+                                <ChartLegend Name="ChartLegend1">
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                  <ChartLegendTitle>
+                                    <Caption />
+                                    <Style>
+                                      <FontSize>8pt</FontSize>
+                                      <FontWeight>Bold</FontWeight>
+                                      <TextAlign>Center</TextAlign>
+                                    </Style>
+                                  </ChartLegendTitle>
+                                  <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                                  <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+                                </ChartLegend>
+                              </ChartLegends>
+                              <ChartTitles>
+                                <ChartTitle Name="Title1">
+                                  <Caption>= IIF(Fields!ReportTagId.Value = "F1Factor" 
+  OR Fields!ReportTagId.Value  = "F15Factor"
+  OR Fields!ReportTagId.Value  = "F2Factor"
+  OR Fields!ReportTagId.Value  = "F3Factor"
+  OR Fields!ReportTagId.Value  = "F25Factor",
+  Fields!Attribute.Value,
+  IIF(Fields!Attribute.Value = "Tonnes", "KTonnes", Fields!Attribute.Value))
+  &amp; " for " &amp; First(Fields!GetLocationComment2ByDateResult.Value, "LocationComment2")
++ IIF(Parameters!lumpFinesBreakdown.Value=True, " - " + Fields!ProductSize.Value,"")</Caption>
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextAlign>General</TextAlign>
+                                    <VerticalAlign>Top</VerticalAlign>
+                                  </Style>
+                                </ChartTitle>
+                              </ChartTitles>
+                              <DynamicHeight>=IIF(Parameters!IsPPT.Value, "10cm", Nothing)</DynamicHeight>
+                              <ChartBorderSkin>
+                                <Style>
+                                  <BackgroundColor>Gray</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <Color>White</Color>
+                                </Style>
+                              </ChartBorderSkin>
+                              <ChartNoDataMessage Name="NoDataMessage">
+                                <Caption>No Data Available</Caption>
+                                <Style>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <TextAlign>General</TextAlign>
+                                  <VerticalAlign>Top</VerticalAlign>
+                                </Style>
+                              </ChartNoDataMessage>
+                              <DataSetName>FData</DataSetName>
+                              <Top>0.25135cm</Top>
+                              <Left>0.2717cm</Left>
+                              <Height>7.92909cm</Height>
+                              <Width>18.8711cm</Width>
+                              <CustomProperties>
+                                <CustomProperty>
+                                  <Name>__Upgraded2005__</Name>
+                                  <Value>__Upgraded2005__</Value>
+                                </CustomProperty>
+                              </CustomProperties>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                              </Style>
+                            </Chart>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!ProductSize.Value</GroupExpression>
+                      <GroupExpression>=Fields!Attribute.Value</GroupExpression>
+                      <GroupExpression>=IIF(Fields!ReportTagId.Value = "F1Factor" 
+  OR Fields!ReportTagId.Value = "F15Factor" 
+  OR Fields!ReportTagId.Value  = "F2Factor"
+  OR Fields!ReportTagId.Value  = "F3Factor"
+  OR Fields!ReportTagId.Value  = "F25Factor",
+  1,
+  0)</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>FData</DataSetName>
+            <Top>1.92639cm</Top>
+            <Left>0.24345cm</Left>
+            <Height>8.43181cm</Height>
+            <Width>19.51309cm</Width>
+            <ZIndex>1</ZIndex>
+            <Visibility>
+              <Hidden>=Parameters!OnlyTables.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox61">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Note:</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value> - Unless explicitly stated otherwise, or shown in the context of a factor, all displayed Geology, Mining, Short Term and Grade Control model estimates are as-dropped (AD).</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox61</rd:DefaultName>
+            <Top>10.46403cm</Top>
+            <Left>0.24345cm</Left>
+            <Height>1.68479cm</Height>
+            <Width>9.5cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>12.26288cm</Height>
+        <Style>
+          <BackgroundColor>=IIF(Parameters!ReportContext.Value = "Standard", "Transparent", "#fcf5d1")</BackgroundColor>
+          <BackgroundImage>
+            <Source>External</Source>
+            <Value>=IIF(Parameters!ReportContext.Value = "Standard", Nothing, "Watermark.png")</Value>
+            <MIMEType>image/png</MIMEType>
+            <BackgroundRepeat>RepeatY</BackgroundRepeat>
+          </BackgroundImage>
+        </Style>
+      </Body>
+      <Width>20cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.53968cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Rectangle Name="rectangle2">
+              <ReportItems>
+                <Image Name="image1">
+                  <Source>External</Source>
+                  <Value>ReportHeaderImageLeft.gif</Value>
+                  <Sizing>FitProportional</Sizing>
+                  <Top>0.26984cm</Top>
+                  <Height>1.93122cm</Height>
+                  <Width>5.34392cm</Width>
+                  <Style />
+                </Image>
+                <Textbox Name="textbox10">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>F1F2F3 Reconciliation Comparison</Value>
+                          <Style>
+                            <FontFamily>Verdana</FontFamily>
+                            <FontSize>14pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.62873cm</Top>
+                  <Left>5.52031cm</Left>
+                  <Height>0.66401cm</Height>
+                  <Width>10.25cm</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Line Name="line3">
+                  <Top>2.26984cm</Top>
+                  <Height>0cm</Height>
+                  <Width>19.95cm</Width>
+                  <ZIndex>2</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>Solid</Style>
+                    </Border>
+                  </Style>
+                </Line>
+                <Textbox Name="textbox14">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=IIF(Parameters!ReportContext.Value = "Standard", "", "DRAFT RESULTS ONLY")</Value>
+                          <Style>
+                            <FontFamily>Verdana</FontFamily>
+                            <FontSize>14pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                            <Color>Red</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <LeftIndent>0cm</LeftIndent>
+                      <HangingIndent>0cm</HangingIndent>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>1.43385cm</Top>
+                  <Left>12.20529cm</Left>
+                  <Height>0.6596cm</Height>
+                  <Width>7.55125cm</Width>
+                  <ZIndex>3</ZIndex>
+                  <Visibility>
+                    <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+                  </Visibility>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+              </ReportItems>
+              <DataElementOutput>ContentsOnly</DataElementOutput>
+              <Height>2.53968cm</Height>
+              <Width>19.95cm</Width>
+              <Visibility>
+                <Hidden>=IIF(Parameters!CompleteReport.Value = "True", False, True)</Hidden>
+              </Visibility>
+              <Style />
+            </Rectangle>
+          </ReportItems>
+          <Style>
+            <BackgroundColor>White</BackgroundColor>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>1.67063cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Rectangle Name="rectangle5">
+              <ReportItems>
+                <Image Name="image3">
+                  <Source>External</Source>
+                  <Value>Reconcilor_logo1.jpg</Value>
+                  <Sizing>Fit</Sizing>
+                  <Top>0.95734cm</Top>
+                  <Left>16cm</Left>
+                  <Height>0.625cm</Height>
+                  <Width>3.625cm</Width>
+                  <Style />
+                </Image>
+                <Textbox Name="textbox32">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>= "Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
+                          <Style>
+                            <FontFamily>Verdana</FontFamily>
+                            <FontSize>8pt</FontSize>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.95734cm</Top>
+                  <Left>8cm</Left>
+                  <Height>0.5cm</Height>
+                  <Width>4.44907cm</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="textbox33">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>= "Report Generated: " + Format(Now(), "MMM dd, yyyy")</Value>
+                          <Style>
+                            <FontSize>8pt</FontSize>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.95734cm</Top>
+                  <Left>0.25cm</Left>
+                  <Height>0.5cm</Height>
+                  <Width>6.75cm</Width>
+                  <ZIndex>2</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Line Name="line1">
+                  <Top>0.20734cm</Top>
+                  <Height>0cm</Height>
+                  <Width>19.95cm</Width>
+                  <ZIndex>3</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>Solid</Style>
+                    </Border>
+                  </Style>
+                </Line>
+                <Textbox Name="textbox5">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>="Location: "</Value>
+                          <Style>
+                            <FontSize>7pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.45734cm</Top>
+                  <Left>7cm</Left>
+                  <Height>0.50265cm</Height>
+                  <Width>1.75cm</Width>
+                  <ZIndex>4</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="textbox12">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>= "Date From:"  </Value>
+                          <Style>
+                            <FontSize>7pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>textbox12</rd:DefaultName>
+                  <Top>0.45734cm</Top>
+                  <Left>0.25cm</Left>
+                  <Height>0.5cm</Height>
+                  <Width>1.75cm</Width>
+                  <ZIndex>5</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="textbox4">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>= "Date To: "</Value>
+                          <Style>
+                            <FontSize>7pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.45734cm</Top>
+                  <Left>3.75cm</Left>
+                  <Height>0.5cm</Height>
+                  <Width>1.5cm</Width>
+                  <ZIndex>6</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="textbox23">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=Format(CDate(Parameters!InternalDateFrom.Value), "dd-MMM-yy")</Value>
+                          <Style>
+                            <FontSize>7pt</FontSize>
+                            <Format>##-###-##</Format>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>textbox23</rd:DefaultName>
+                  <Top>0.45734cm</Top>
+                  <Left>2cm</Left>
+                  <Height>0.5cm</Height>
+                  <Width>1.75cm</Width>
+                  <ZIndex>7</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="textbox25">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=Format(CDate(Parameters!InternalDateTo.Value), "dd-MMM-yy")</Value>
+                          <Style>
+                            <FontSize>7pt</FontSize>
+                            <Format>##-###-##</Format>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.45734cm</Top>
+                  <Left>5.25cm</Left>
+                  <Height>0.5cm</Height>
+                  <Width>1.75cm</Width>
+                  <ZIndex>8</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="textbox27">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=Parameters!InternalLocation.Value</Value>
+                          <Style>
+                            <FontSize>7pt</FontSize>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>textbox27</rd:DefaultName>
+                  <Top>0.45734cm</Top>
+                  <Left>8.75cm</Left>
+                  <Height>0.5cm</Height>
+                  <Width>2.53968cm</Width>
+                  <ZIndex>9</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+              </ReportItems>
+              <DataElementOutput>ContentsOnly</DataElementOutput>
+              <Height>1.58234cm</Height>
+              <Width>19.95cm</Width>
+              <Visibility>
+                <Hidden>=IIF(Parameters!CompleteReport.Value = "True", False, True)</Hidden>
+              </Visibility>
+              <Style />
+            </Rectangle>
+          </ReportItems>
+          <Style>
+            <BackgroundColor>White</BackgroundColor>
+          </Style>
+        </PageFooter>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>0.5cm</LeftMargin>
+        <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
+        <ColumnSpacing>1cm</ColumnSpacing>
+        <Style>
+          <BackgroundColor>White</BackgroundColor>
+        </Style>
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="LocationId">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>8</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Location Filter</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LocationIds">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>&lt;Locations&gt;&lt;Location id="9" /&gt;&lt;Location id="10" /&gt;&lt;Location id="11" /&gt;&lt;/Locations&gt;</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Locations</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateBreakdown">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>MONTH</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Date Breakdown</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateFrom">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>1-Jan-2013</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Date From</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateTo">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>31-Mar-2013</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Date To</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SingleSource">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>F1Factor</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Source</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Attributes">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>&lt;Attributes&gt;&lt;Attribute id="0" name="Tonnes"/&gt;&lt;Attribute id="1" name="Fe"/&gt;&lt;Attribute id="2" name="P"/&gt;&lt;Attribute id="3" name="SiO2"/&gt;&lt;Attribute id="4" name="Al2O3"/&gt;&lt;Attribute id="5" name="LOI"/&gt;&lt;/Attributes&gt;</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Attributes</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="InternalDateFrom">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Parameters!DateFrom.Value</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+    </ReportParameter>
+    <ReportParameter Name="InternalDateTo">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Parameters!DateTo.Value</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+    </ReportParameter>
+    <ReportParameter Name="InternalLocation">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>ConvertLocationComment</DataSetName>
+          <ValueField>GetLocationCommentByDateResult</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ConvertLocationComment</DataSetName>
+          <ValueField>GetLocationCommentByDateResult</ValueField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="CompleteReport">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>true</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Complete Report</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="WithoutHeaderFooter">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Without Header / Footer</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="OnlyGraphs">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Only Graphs</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="OnlyTables">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Only Tables</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lumpFinesBreakdown">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Include Breakdown of Lumps and Fines</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="IsPPT">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>hidefield</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ReportContext">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Standard</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Approval Status</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>Standard</Value>
+            <Label>Approved</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>LiveOnly</Value>
+            <Label>Live</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>ApprovalListing</Value>
+            <Label>Combined</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>5</NumberOfColumns>
+      <NumberOfRows>7</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationId</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>4</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationIds</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DateBreakdown</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>4</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DateFrom</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>DateTo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>4</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>SingleSource</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>Attributes</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>InternalDateFrom</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>InternalDateTo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>InternalLocation</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>4</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>CompleteReport</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>WithoutHeaderFooter</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>4</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>OnlyGraphs</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>OnlyTables</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>4</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>lumpFinesBreakdown</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>IsPPT</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>4</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>ReportContext</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Code>
+Function GetQuarter(ByVal month as String) As String
+
+Dim quarter as String
+
+  Select Case month.tolower
+        Case "jan"
+              quarter = 3
+        Case "apr"
+              quarter = 4
+        Case "jul"
+              quarter = 1
+        Case "oct"
+              quarter = 2
+         Case Else
+	quarter = 0
+     End Select
+
+return quarter
+
+End Function
+
+Function CalculateGraphAxis(ByVal AxisRequest As String, ByVal FieldName As String, ByVal AttributePrecision As Double, ByVal MinValueString As String, ByVal MaxValueString As String) As Double
+	Dim Diff As Double
+	Dim LogDiff As Double
+	Dim FloorLogDiff As Double
+	Dim SigDiff As Double
+	Dim SigMin As Double
+	Dim MinMultiplier As Double
+	Dim MinValue As Double
+	Dim MaxValue AS Double
+	
+	Dim GraphStep As Double
+	Dim GraphMin As Double
+	Dim GraphMax As Double
+	Dim closeToZero As Double = 0.000000000000000000000000000000000000000000000001
+	
+	Dim Result As Double
+
+	If MinValueString Is Nothing Then
+		MinValue = 0.0
+	Else
+		MinValue = CDbl(MinValueString)
+	End If
+	
+	If MaxValueString Is Nothing Then
+		MaxValue = 0.0
+	Else
+		MaxValue = CDbl(MaxValueString)
+	End If
+	
+	If Not FieldName Is Nothing AndAlso FieldName.tolower = "tonnes" Then
+		MaxValue =MaxValue / 1000
+		MinValue =MinValue / 1000
+	End If
+
+	Diff = MaxValue - MinValue
+	
+	If Diff &gt; 0.0 Then
+		LogDiff = Math.Log10(Diff)
+		FloorLogDiff = Convert.ToInt32(Math.Floor(LogDiff))
+		
+		FloorLogDiff = FloorLogDiff - 1
+		If FloorLogDiff &lt; AttributePrecision*-1 And AttributePrecision &gt; 0 Then
+			FloorLogDiff = AttributePrecision*-1
+		End If
+		
+		If MinValue &lt;&gt; 0 Then
+			SigMin = Convert.ToInt32(Math.Floor(Math.Log10(Abs(MinValue))))
+			SigMin = SigMin - 1
+		Else
+			SigMin = 0
+		End If
+		
+		If SigMin &gt; 0 Then
+			MinMultiplier = 10 ^ SigMin
+		Else If SigMin &lt; 0 Then
+			MinMultiplier = 1/(10^(Abs(SigMin)))
+		Else 
+			MinMultiplier = 1
+		End If
+		
+
+
+		'SigDiff = 10 ^ (FloorLogDiff - 1)
+		If FloorLogDiff &gt; 0 Then
+			SigDiff = 10 ^ FloorLogDiff
+		Else If FloorLogDiff &lt; 0 Then
+			SigDiff = 1/(10^(Abs(FloorLogDiff)))
+		Else 
+			SigDiff = 1
+		End If
+		
+		If Convert.ToInt32(Math.Floor(Diff / (1*SigDiff))) &lt;= 10 Then
+			GraphStep = 1*SigDiff
+		Else If Convert.ToInt32(Math.Floor(Diff / (5*SigDiff))) &lt;= 10 Then
+			GraphStep = 5*SigDiff
+		Else If Convert.ToInt32(Math.Floor(Diff / (10*SigDiff))) &lt;= 10 Then
+			GraphStep = 10*SigDiff
+		Else If Convert.ToInt32(Math.Floor(Diff / (25*SigDiff))) &lt;= 10 Then
+			GraphStep = 25*SigDiff
+		Else If Convert.ToInt32(Math.Floor(Diff / (50*SigDiff))) &lt;= 10 Then
+			GraphStep = 50*SigDiff
+		Else If Convert.ToInt32(Math.Floor(Diff / (100*SigDiff))) &gt;= 1 Then
+			GraphStep = 100*SigDiff
+		Else
+			GraphStep = 1 * SigDiff
+		End If
+		
+		GraphMin = (Convert.ToInt32(Math.Floor(MinValue / GraphStep)) - 2)*GraphStep
+		If GraphMin &lt; 0 And MinValue &gt;= 0 Then
+			GraphMin = 0
+		End If
+		
+		GraphMax = GraphMin + GraphStep * (Convert.ToInt32((MaxValue - GraphMin) / GraphStep) + 2)
+		
+		If AxisRequest = "Step" Then
+			Result = GraphStep
+		Else If AxisRequest = "Min" Then
+			Result = GraphMin
+		Else If AxisRequest = "Max" Then
+			Result = GraphMax
+		Else
+			Result = 0.0
+		End If
+	Else
+		Result = Nothing
+	End If
+	
+	CalculateGraphAxis = Result
+End Function
+</Code>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>4d53f334-9de4-4b92-b82c-dd0af4ff1a09</rd:ReportID>
+</Report>

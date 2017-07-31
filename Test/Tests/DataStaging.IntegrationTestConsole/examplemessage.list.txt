@@ -1,0 +1,9 @@
+﻿#
+# Each line is the path of an xml file that represents a singlemessage
+#
+# By default it looks for the xml files using a relative path from the directory of this file
+#
+..\..\..\Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest\Resources\BlockoutAndBlastedEvent_Scenario1_M1_BlocksCreated.xml
+..\..\..\Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest\Resources\BlockoutAndBlastedEvent_Scenario1_M2_BlocksCreatedUpdatedDeleted.xml
+..\..\..\Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest\Resources\BlockoutAndBlastedEvent_Scenario1_M3_OutOfSequenceUpdate.xml
+..\..\..\Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest\Resources\BlockoutAndBlastedEvent_Scenario1_M4_BlocksNoChange.xml

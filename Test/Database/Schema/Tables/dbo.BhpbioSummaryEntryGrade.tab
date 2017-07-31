@@ -1,0 +1,50 @@
+﻿IF OBJECT_ID('dbo.BhpbioSummaryEntryGrade') IS NOT NULL
+	DROP TABLE dbo.BhpbioSummaryEntryGrade
+GO
+
+CREATE TABLE dbo.BhpbioSummaryEntryGrade
+(
+	SummaryEntryGradeId INT NOT NULL IDENTITY(1,1),
+	SummaryEntryId INT NOT NULL,
+	GradeId SMALLINT NOT NULL,
+	GradeValue REAL NOT NULL,
+	
+	CONSTRAINT PK_BhpbioSummaryEntryGrade
+		PRIMARY KEY NONCLUSTERED (SummaryEntryGradeId),
+		
+	CONSTRAINT FK_BhpbioSummaryEntryGrade_BhpbioSummaryEntry
+		FOREIGN KEY (SummaryEntryId)
+		REFERENCES dbo.BhpbioSummaryEntry (SummaryEntryId)
+		ON DELETE CASCADE,
+		
+	CONSTRAINT FK_BhpbioSummaryEntryGrade_Grade
+		FOREIGN KEY (GradeId)
+		REFERENCES dbo.Grade (Grade_Id)
+		ON DELETE CASCADE
+)
+GO
+
+CREATE UNIQUE CLUSTERED INDEX UQ_BHPBIOSUMMARYENTRYGRADE_01 ON dbo.BhpbioSummaryEntryGrade (SummaryEntryId ASC, GradeId ASC)
+GO
+
+/*
+<TAG Name="Data Dictionary" TableName="dbo.BhpbioSummaryEntryGrade">
+	<Table>
+		This table associates a grade value with a summary entry
+	</Table>
+	<Columns>
+		<Column Name="SummaryEntryGradeId">
+			Uniquely identifies the summary entry grade row
+		</Column>
+		<Column Name="SummaryEntryId">
+			Identifies the summary entrythis grade value relates to
+		</Column>
+		<Column Name="GradeId">
+			Identifies the grade this entry relates to
+		</Column>
+		<Column Name="GradeValue">
+			The value of the grade associated with the entry
+		</Column>
+	</Columns>
+</TAG>
+*/

@@ -1,0 +1,30 @@
+#ShippingTargetLayout {
+    margin-bottom: 8px;
+}
+
+.left-pad {
+    padding-left: 12px;
+}
+
+#thresholdFactorSelect {
+    width: 74%;
+}
+
+.queuing fieldset {
+    border-style: solid;
+    border-color: orange;
+}
+
+.pending fieldset {
+    border-style: solid;
+    border-color: blue;
+}
+
+.complete fieldset {
+    border-style: solid;
+    border-color: green;
+}
+
+#ApprovalGroupBox legend {
+    font-weight: bold;
+}

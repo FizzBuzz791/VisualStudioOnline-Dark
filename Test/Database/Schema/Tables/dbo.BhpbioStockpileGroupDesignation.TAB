@@ -1,0 +1,24 @@
+﻿IF OBJECT_ID('dbo.BhpbioStockpileGroupDesignation') IS NOT NULL
+	DROP TABLE dbo.BhpbioStockpileGroupDesignation
+GO
+
+CREATE TABLE dbo.BhpbioStockpileGroupDesignation
+(
+	StockpileGroupId VARCHAR(31) COLLATE DATABASE_DEFAULT NOT NULL,
+	MaterialTypeId INT NOT NULL,
+	
+	CONSTRAINT PK_BhpbioStockpileGroupDesignation PRIMARY KEY NONCLUSTERED
+		(StockpileGroupId),
+		
+	CONSTRAINT UQ_BhpbioStockpileGroupDesignation UNIQUE CLUSTERED
+		(MaterialTypeId, StockpileGroupId),
+	
+	CONSTRAINT FK_BhpbioStockpileGroupDesignation_MaterialType
+		FOREIGN KEY (MaterialTypeId)
+		REFERENCES dbo.MaterialType (Material_Type_ID),
+		
+	CONSTRAINT FK_BhpbioStockpileGroupDesignation_StockpileGroup
+		FOREIGN KEY (StockpileGroupId)
+		REFERENCES dbo.StockpileGroup (Stockpile_Group_ID)
+)
+GO

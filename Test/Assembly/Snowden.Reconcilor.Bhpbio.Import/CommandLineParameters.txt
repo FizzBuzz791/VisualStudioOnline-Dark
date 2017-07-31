@@ -1,0 +1,43 @@
+﻿----------------- Haulage Sync Import ----------------------------
+/importname:Haulage /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:1-Aug-13 @DateTo:31-Aug-13 @DateFromAbsoluteMinimum:1-Jun-10 @DateFromLookbackDays:"" @Site:"WB"
+
+----------------- MET Balancing Sync Import -----------------------
+/ImportName:"Met Balancing" /DestinationConnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:1-Aug-13 @DateTo:31-Aug-13 @DateFromAbsoluteMinimum:1-Jun-10 @DateFromLookbackDays:""
+
+----------------- Production (weightometer) Sync Import -------------------
+/ImportName:Production /DestinationConnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:1-Aug-13 @DateTo:31-Aug-13 @Site:WB @DateFromAbsoluteMinimum:1-Jun-10 @DateFromLookbackDays:""
+
+----------------- Port Balance Sync Import ------------------------
+/ImportName
+:PortBalance /DestinationConnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:1-Aug-13 @DateTo:31-Aug-13 @DateFromAbsoluteMinimum:1-Jun-10 @DateFromLookbackDays:""
+
+----------------- Port Blending Sync Import ------------------------
+/ImportName:PortBlending /DestinationConnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:1-Aug-13 @DateTo:31-Aug-13 @DateFromAbsoluteMinimum:1-Jun-10 @DateFromLookbackDays:""
+
+
+---------------- Stockpile Sync Import ---------------------------
+/importname:Stockpile /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @Site:"WB"
+
+---------------- Stockpile Adjustment Sync Import ---------------------------
+/importname:"Stockpile Adjustment" /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:"1-Aug-13" @DateTo:"30-Aug-13" @DateFromAbsoluteMinimum:"1-Jun-10" @DateFromLookbackDays:"" @Site:"WB"
+
+---------------- ReconBlockInsertUpdate ------------------------------------------
+/importname:"ReconBlockInsertUpdate" /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:"1-Jul-14" @DateTo:"10-Jul-14" @DateFromAbsoluteMinimum:"1-Jun-10"  @DateFromLookbackDays:
+/importname:"ReconBlockInsertUpdate" /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:"1-Jul-14" @DateTo:"10-Jul-14" @DateFromAbsoluteMinimum:"1-Jun-10"  @DateFromLookbackDays:
+
+---------------- BlockDelete ------------------------------------------
+/importname:"BlockDelete" /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:"1-Jul-14" @DateTo:"07-Jul-14" @DateFromAbsoluteMinimum:"1-Jun-10" @DateFromLookbackDays:""
+
+---------------- BlockModel------------------------------------------
+/importname:"Blocks" /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @Pit:"35" @Site:"NEWMAN" @Bench:"0616"
+/importname:"Blocks" /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @Pit:"18SP" @Site:"OB18" @Bench:"0551"
+/importname:"Blocks" /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @Pit:"18SP" @Site:"OB18" @Bench:"0554"
+
+---------------- Reconciliation Movements Load ------------------------------
+/ImportName:"Recon Movements" /DestinationConnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:1-Jun-16 @DateTo:10-Jun-16 @DateFromAbsoluteMinimum:1-Jun-10 @DateFromLookbackDays:""
+
+---------------- Shipping Sync Import ----------------------------------
+/importname:Shipping /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:"1-Aug-13" @DateTo:"30-Sep-13" @DateFromAbsoluteMinimum:"1-Jun-10" @DateFromLookbackDays:""
+
+
+Snowden.Reconcilor.Bhpbio.Import.exe /importname:"ReconBlockInsertUpdate" /destinationconnection:"Server=AUCANDWNWAP002\SQL2008R2;Database=ReconcilorBhpbioV403Test;Integrated Security=SSPI;" @DateFrom:"1-Jul-14" @DateTo:"10-Jul-14" @DateFromAbsoluteMinimum:"1-Jun-10"  @DateFromLookbackDays: 

@@ -1,0 +1,1057 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Snowden.Common.Import
+</name>
+</assembly>
+<members>
+<member name="T:Snowden.Common.Import.CommonSyncValidate.ImportSyncValidateDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncValidate.ImportSyncValidateFieldDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncValidate.ImportSyncValidateRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncValidate.ImportSyncValidateFieldRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncValidate.ImportSyncValidateRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncValidate.ImportSyncValidateFieldRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncValidate">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncException.ImportSyncExceptionDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncException.ImportSyncExceptionRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncException.ImportSyncExceptionRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncException">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncConflict.ImportSyncConflictDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncConflict.ImportSyncConflictFieldDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncConflict.ImportSyncConflictRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncConflict.ImportSyncConflictFieldRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncConflict.ImportSyncConflictRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncConflict.ImportSyncConflictFieldRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSyncConflict">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncQueueDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncChangedFieldDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncRowDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncRelationshipDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncQueueRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncChangedFieldRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncRowRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncRelationshipRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncQueueRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncChangedFieldRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncRowRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync.ImportSyncRelationshipRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Snowden.Common.Import.CommonSync">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="P:Snowden.Common.Import.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Snowden.Common.Import.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:Snowden.Common.Import.My.Resources.Resources.CommonSync">
+	<summary>
+  Looks up a localized string similar to &lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xs:schema id="CommonSync" targetNamespace="http://tempuri.org/CommonSync.xsd" xmlns:mstns="http://tempuri.org/CommonSync.xsd" xmlns="http://tempuri.org/CommonSync.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified"&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource"&gt;
+ [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Common.Import.My.Resources.Resources.CommonSyncConflict">
+	<summary>
+  Looks up a localized string similar to &lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xs:schema id="CommonSyncConflict" targetNamespace="http://tempuri.org/CommonSyncConflict.xsd" xmlns:mstns="http://tempuri.org/CommonSyncConflict.xsd" xmlns="http://tempuri.org/CommonSyncConflict.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified"&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:appinfo source="urn:schemas-mi [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Common.Import.My.Resources.Resources.CommonSyncException">
+	<summary>
+  Looks up a localized string similar to &lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xs:schema id="CommonSyncException" targetNamespace="http://tempuri.org/CommonSyncException.xsd" xmlns:mstns="http://tempuri.org/CommonSyncException.xsd" xmlns="http://tempuri.org/CommonSyncException.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified"&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:appinfo source="urn:schema [rest of string was truncated]";.
+</summary>
+</member><member name="P:Snowden.Common.Import.My.Resources.Resources.CommonSyncValidate">
+	<summary>
+  Looks up a localized string similar to &lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xs:schema id="CommonSyncValidate" targetNamespace="http://tempuri.org/CommonSyncValidate.xsd" xmlns:mstns="http://tempuri.org/CommonSyncValidate.xsd" xmlns="http://tempuri.org/CommonSyncValidate.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified"&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:appinfo source="urn:schemas-mi [rest of string was truncated]";.
+</summary>
+</member><member name="T:Snowden.Common.Import.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:Snowden.Common.Import.SyncImportXmlHelper.#ctor">
+	<summary>
+ Default Constructor
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportXmlHelper.EncodeXmlFragment(System.Data.DataRow,System.Data.DataColumnCollection,System.String,System.String)">
+	<summary>
+ Experimental only, do not use!
+ </summary>
+	<param name="row"></param>
+	<param name="columns"></param>
+	<returns>An XML formed string containing the columns of the row passed in.</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportXmlHelper.DecodeXmlFragment(System.String,System.String,System.String)">
+	<summary>
+ This method converts an XML fragment into a datarow, maintaining the schema associated with it.
+ </summary>
+	<param name="schema"></param>
+	<param name="tableName"></param>
+	<param name="xmlFragment"></param>
+	<returns>A datarow created from the XML fragment passed in</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportXmlHelper.DecodeXmlFragmentSchemaless(System.String,System.String,System.String)">
+	<summary>
+ Decodes the specified xmlFragment into a datarow implying the schema from the xmlFragment
+ </summary>
+	<param name="xmlFragment"></param>
+	<param name="tableName"></param>
+	<param name="dataSetName"></param>
+	<returns>A datarow representing the XML fragment passed in</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.#ctor(Snowden.Common.Import.Data.SyncImport)">
+	<summary>
+ Default Constructor
+ </summary>
+	<param name="syncImport"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.LoadSource">
+	<summary>
+ Loads the source data.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.RunCompare">
+	<summary>
+ Runs the compare phase.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.Run">
+	<summary>
+ Runs the Sync Import Comparer
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.ValidateSchemas">
+	<summary>
+ Performs schema validation between the source and destination schemas
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.SaveSourceSchema">
+	<summary>
+ Saves the source schema .xsd file to the path name specified.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.SaveSourceData">
+	<summary>
+ Saves the source data in xml form to the path name specified
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.LoadSourceXML(System.Data.DataSet@,System.IO.StringReader@)">
+	<summary>
+ Performs an alternate load source.
+ This is based on pulling the data from an external XML file
+ the XML will be validated against the current schema,
+ matching the filters must be carefully performed by the developer,
+ or they'll get some funny results!
+ </summary>
+	<param name="returnSourceSet"></param>
+	<param name="sourceSchema"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.LoadSourcePurgeData(System.Data.DataSet@,System.IO.StringReader)">
+	<summary>
+ Constructs an empty dataset that conforms to the schema.
+ This method will purge all data from the destination database but will leave the
+ sync tables populated with the full history
+ </summary>
+	<param name="sourceDataSet"></param>
+	<param name="sourceSchema"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueCheckUpdates(System.Int32,System.Data.DataTable,System.Data.DataTable,System.Data.DataColumn[],System.Data.DataTable,System.Data.DataTable)">
+	<summary>
+ For the update process, we want to loop through all of the keys on the source side
+ once the matching destination record is found, the attributes can be compared
+ </summary>
+	<param name="countSource"></param>
+	<param name="sourceTable"></param>
+	<param name="destinationTableFiltered"></param>
+	<param name="sourcePK"></param>
+	<param name="syncTableQueue"></param>
+	<param name="destinationTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueCheckDeletes(System.Int32,System.Data.DataTable,System.Data.DataTable,System.Data.DataColumn[],System.Data.DataTable,System.Data.DataTable)">
+	<summary>
+ For the delete process, we want to loop through all of the keys on the destination side
+ if a matching source record cannot be found, mark it for deletion
+ </summary>
+	<param name="countDestination"></param>
+	<param name="sourceTable"></param>
+	<param name="destinationTableFiltered"></param>
+	<param name="sourcePK"></param>
+	<param name="syncTableQueue"></param>
+	<param name="destinationTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueCheckInserts(System.Int32,System.Data.DataTable,System.Data.DataTable,System.Data.DataColumn[],System.Data.DataTable)">
+	<summary>
+ for the insert process, we want to loop through all of the keys on the source side
+ if a matching destination record cannot be found, mark it for insert
+ </summary>
+	<param name="countSource"></param>
+	<param name="sourceTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueBuildFilterString(System.Data.DataRow,System.Data.DataColumn[])">
+	<summary>
+ Constructs a filter/comparison string based on the keys described by the constraint
+ the comparison determines its operation by the various data types
+ </summary>
+	<param name="searchRow"></param>
+	<param name="constraint"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueUpdateCheck(System.Data.DataRow,System.Data.DataRow,System.Data.DataColumn[],System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Compare every column defined by the constraint, for the given rows
+ return the names of the columns that fail comparison
+ </summary>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="constraint"></param>
+	<param name="returnChangedFieldsList"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueUpdate(System.Data.DataRow,System.Data.DataRow,System.Collections.Generic.List{System.String},System.Data.DataTable)">
+	<summary>
+ Creates an update record in the sync queue, a new record in the ImportSyncRow
+ table and sets the IsUpdated flag on the previous row to 1. Modifies any 
+ existing relationships and creates any new relationships that are required.
+ </summary>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="changedFieldsList"></param>
+	<param name="syncTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueUpdateRelation(System.Int64)">
+	<summary>
+ Set all rows which have this importSyncRowId as a parent or a child to isCurrent = 0
+ Invalidating the relationship
+ </summary>
+	<param name="importSyncRowId"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueAddRelation(System.Data.DataRow,System.Data.DataRow)">
+	<summary>
+ Using the Source lookup HashTable, and the datarelationships recorded
+ in the source dataset, adds relationships to the ImportSyncRelationship table.
+ </summary>
+	<param name="sourceRow"></param>
+	<param name="syncDataRow"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueDelete(System.Data.DataRow,System.Data.DataTable)">
+	<summary>
+ Raises a delete event in the ImportSyncQueue and marks the record as deleted.
+ </summary>
+	<param name="destinationRow"></param>
+	<param name="syncTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueuePreloadLookupTable">
+	<summary>
+ Preloads the Source Lookup table with any rows that have currently been loaded.
+ Creates a hash lookup from the sourceRow to its associated 'common' DataRow
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueInsert(System.Data.DataRow,System.Data.DataTable)">
+	<summary>
+ Creates a new importSyncRow datarow and raises an insert event.
+ </summary>
+	<param name="sourceRow"></param>
+	<param name="syncTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueRefactorConsecutiveUpdates(System.Data.DataTable,System.Collections.Generic.Dictionary{System.Int64,System.Collections.Generic.List{System.String}})">
+	<summary>
+ 1. Find all consecutive updates, and merge these into a single update statement
+ 2. The latest update event will contain the merged list of changed columns
+ 3. A long list of updates will "bubble" together - essentially creating a single entry
+ </summary>
+	<param name="analysisTable"></param>
+	<param name="changedFieldsList"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueRefactorInsertsThenDeletes(System.Data.DataTable)">
+	<summary>
+ 1. Find all insert statements, that ultimately end with a delete
+ 2. Delete the leading insert, the end delete, and everything in between
+ </summary>
+	<param name="analysisTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueRefactorInsertsThenUpdates(System.Data.DataTable)">
+	<summary>
+ 1. Find all insert statements, that are followed by updates
+ 2. Delete the leading insert, and convert the succeeding update to an insert
+ </summary>
+	<param name="analysisTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueRefactorConsecutiveDeletes(System.Data.DataTable)">
+	<summary>
+ 1. find all delete statements, that have updates preceeding
+ 2. delete all preceeding updates, so only the delete is left
+ </summary>
+	<param name="analysisTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueRefactorDataChain(System.Data.DataTable)">
+	<summary>
+ 1. Refactor the Data Chain
+   (compress up I/U/D events for multiple versions of the same record)
+ </summary>
+	<param name="syncTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.BuildSyncQueueRefactorDataHierarchy(System.Data.DataTable)">
+	<summary>
+ 2. Refactor Data Hierarchy
+   (reorders sync events based on parent/child relationships)
+   Note - requires a refactored data chain to operate correctly.
+ </summary>
+	<param name="syncTable"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.LoadDestination(System.Data.DataSet,System.Data.DataSet@)">
+	<summary>
+ 'opens a datareader against the destination data table
+ each row is queried for inclusion into the destination dataset
+ uses the internal schema, loads the data based on partition
+ </summary>
+	<param name="syncData"></param>
+	<param name="destinationCache"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportComparer.LoadDestinationBuildKeyTable(System.Data.DataTable,System.Data.DataTable@)">
+	<summary>
+ Create the keys table based on the source schema
+ </summary>
+	<param name="sourceTable"></param>
+	<param name="returnKeyTable"></param>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Import.Data.SyncImport.QuickOptions">
+	<summary>
+ Returns summarised options
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Import.Data.SyncImport.ImportSyncTableList">
+	<summary>
+ Returns the ImportSyncTableList. Containing the TableName, ImportSyncTableId as a KeyValued Pair
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Import.Data.SyncImport.CanGenerateSourceSchema">
+	<summary>
+ Defines whether or not this import can generate its own source schema
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Import.Data.SyncImport.ImportSyncDal">
+	<summary>
+ Returns the ImportSyncDal opject
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Import.Data.SyncImport.SourceSchema">
+	<summary>
+ Returns the SourceSchema string.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Import.Data.SyncImport.DestinationSchema">
+	<summary>
+ Returns the DestinationSchema string.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.#ctor">
+	<summary>
+ Create a new import. The default constructor specifies that the import can not generate
+ it's own source schema.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.LoadSource(System.IO.StringReader)">
+	<summary>
+ Creates a populated datasetconforming to the sourceSchema
+ </summary>
+	<param name="sourceSchema"></param>
+	<returns>A dataset containing the source data.</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.PreCompare">
+	<summary>
+ Defines a user defined sub to run before the compare phase
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.PostCompare">
+	<summary>
+ Defines a user defined sub to run after the compare phase
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.LoadDestinationRow(System.String,System.Data.DataRow)">
+	<summary>
+ Determines if the destination row should be included in the destination data to be synced against.
+ </summary>
+	<param name="tableName"></param>
+	<param name="keyRows"></param>
+	<returns>True or false, whether or not the row will be compared against.</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ProcessPrepareData(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,Snowden.Common.Import.Database.ImportSync)">
+	<summary>
+ Method for doing any data resolutions, prepreparing source/destination rows
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ProcessValidate(System.String,System.Data.DataRow,System.Data.DataRow,System.Data.DataTable,System.Data.DataTable,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable,Snowden.Common.Import.Database.ImportSync)">
+	<summary>
+ Defines a user defined sub to validate the sourceRow data.
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="importSyncValidate"></param>
+	<param name="importSyncValidateField"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ProcessConflict(System.String,System.Data.DataRow,System.Data.DataRow,System.Data.DataTable,System.Data.DataTable,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable,Snowden.Common.Import.Database.ImportSync)">
+	<summary>
+ Defines a user defined sub to check if the sourceRow has conflicts.
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="importSyncConflict"></param>
+	<param name="importSyncConflictField"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ProcessInsert(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable,Snowden.Common.Import.Database.ImportSync)">
+	<summary>
+ Defines a user defined sub to insert the sourceRow into the target system.
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ProcessUpdate(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable,Snowden.Common.Import.Database.ImportSync)">
+	<summary>
+ Defines a user defined sub to update the sourceRow if it already exists in the target system.
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ProcessDelete(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable,Snowden.Common.Import.Database.ImportSync)">
+	<summary>
+ Defines a user defined sub to delete associated destinationRow in the target system.
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.PreProcess(Snowden.Common.Import.Database.ImportSync)">
+	<summary>
+ Defines a sub to run before the process phase.
+ </summary>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.PostProcess(Snowden.Common.Import.Database.ImportSync)">
+	<summary>
+ Defines a sub to run after the process phase.
+ </summary>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.Run(System.Boolean@)">
+	<summary>
+ Runs the import.
+ </summary>
+	<returns>An exception if raised.</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ValidateSchemaOptions(System.Collections.Generic.IDictionary{System.String,System.String},System.Text.StringBuilder)">
+	<summary>
+ Validates sync import specific options responsible for the source data and schema.
+ </summary>
+	<param name="options"> Options to validate</param>
+	<param name="validationMessage"> List of validation errors</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ValidateOptions(System.Collections.Generic.IDictionary{System.String,System.String},System.Text.StringBuilder)">
+	<summary>
+ Validates the Sync Import allowed options.
+ </summary>
+	<param name="options"> Options to validate</param>
+	<param name="validationMessage"> List of validation errors</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.LoadOptionsSummarise(System.Collections.Generic.IDictionary{System.String,System.String})">
+	<summary>
+ Loads the quick options.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.LoadParameters(System.Collections.Generic.IDictionary{System.String,System.String})">
+	<summary>
+ Loads the parameters from the command-line
+ </summary>
+	<param name="parameters"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.GetImportSyncRows">
+	<summary>
+ Gets Import SyncRows relevant for this import
+ </summary>
+	<returns>A Data Reader to the sync rows</returns>
+	<remarks>This method can be overriden for efficient filtering as required</remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.GetNextSyncQueueEntry(System.Int64,System.Int16)">
+	<summary>
+ Gets Import SyncRows relevant for this import
+ </summary>
+	<returns>A Data Reader to the sync rows</returns>
+	<remarks>This method can be overriden for efficient filtering as required</remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.LoadSourceSchema">
+	<summary>
+ Looks for the schema file if it is available, loading it, otherwise setting it to nothing
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.ResetSourceSchema(System.String)">
+	<summary>
+ Hook to reset the source schema for dynamically appending columns in your imports.
+ Use only for imports that must have dynamic columns appended to the schema after 
+ or during the load source. This is important because LoadDestinationSchema
+ will always use the SourceSchema property.
+ </summary>
+	<param name="sourceSchema"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.LoadDestinationSchema">
+	<summary>
+ Builds the destination schema
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.LoadDestinationSchema_Build(System.String)">
+	<summary>
+ Appends destination columns to the given source schema
+ </summary>
+	<param name="sourceSchema"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.LoadSourceTableNames">
+	<summary>
+ Loads the source table ids and names from the database into the ImportSyncTableList
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImport.SetupDataAccessObjects">
+	<summary>
+ Method to setup data access objects
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Snowden.Common.Import.Data.SyncImportProcessor.SyncImport">
+	<summary>
+ A reference back to the 'underlying' SyncImport object
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.#ctor(Snowden.Common.Import.Data.SyncImport)">
+	<summary>
+ Default Constructor
+ </summary>
+	<param name="syncImport"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.Run(System.Boolean@)">
+	<summary>
+ Runs the Sync Import processor
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.GetImportSyncRow(System.Int64,System.String,System.Data.DataSet,System.Data.DataTable)">
+	<summary>
+ Retrieves the importSyncRow
+ </summary>
+	<param name="importSyncRowId"></param>
+	<param name="tableName"></param>
+	<param name="importDestinationDataset"></param>
+	<param name="importRawDestination"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.GetImportSyncRelatedRows(System.Data.DataSet,System.Int64,System.Boolean)">
+	<summary>
+ Retrieves the parent or child rows related to the importSyncRowId and imports them into the destinationDataSet
+ </summary>
+	<param name="destinationDataSet"></param>
+	<param name="importSyncRowId"></param>
+	<param name="getChildRows"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.Process(System.Boolean@)">
+	<summary>
+ Processes the Sync-Queue
+ 1. Retrieves the next sync queue entry.
+ 2. For each sync queue entry
+   a. Retrieve the data row
+   b. Retrieve any parent rows.
+   c. Retrieve any child rows.
+   d. Check to see if the parent or child records are in the pending state and determine if a conflict may arise from this
+   e. Perform standard validation checks, recording any validation failures.
+   f. Perform standard conflict checks, recording any conflict failures.
+   g. Run insert/update/delete overriden methods.
+   h. Update the sync queue entry recording the time the record was processed and the import job id if applicable.
+ </summary>
+	<remarks>
+ To do: refactor in a bulk/import method
+ create separate control/process connections
+ </remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.Process_Validate(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable,System.Boolean@)">
+	<summary>
+ 1. Call the user's routine
+ 2. Write the results back into the data-store
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<param name="returnValidates"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.Process_Conflict(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable,System.Boolean@)">
+	<summary>
+ 1. Checks for pre-existing conflict conditions with parent and child rows stuck in pending state.
+ 2. Call the user's routine
+ 3. Write the results back into the data-store
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<param name="returnConflicts"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.Process_Insert(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable)">
+	<summary>
+ Calls the user's routine
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.Process_Update(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable)">
+	<summary>
+ Calls the user's routine
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.Process_Delete(System.String,System.Data.DataRow,System.Data.DataRow,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration,System.Data.DataRow,System.Data.DataTable)">
+	<summary>
+ Calls the user's routine
+ </summary>
+	<param name="dataTableName"></param>
+	<param name="sourceRow"></param>
+	<param name="destinationRow"></param>
+	<param name="syncAction"></param>
+	<param name="syncQueueRow"></param>
+	<param name="syncQueueChangedFields"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.GetFirstSyncQueueEntry(System.Int64@,System.String@,System.Int64@,System.Int64@,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration@,System.Data.DataTable@,System.Data.DataTable@,Snowden.Common.Import.Database.ImportSync@)">
+	<summary>
+ Retrieves the first sync queue entry.
+ </summary>
+	<param name="currentSyncTablePrimaryKey"></param>
+	<param name="returnDataTableName"></param>
+	<param name="returnDataTablePrimaryKey"></param>
+	<param name="currentSyncTableOrderNo"></param>
+	<param name="returnSyncAction"></param>
+	<param name="returnChangedFields"></param>
+	<param name="returnSyncTableEntry"></param>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.SyncImportProcessor.GetNextSyncQueueEntry(System.Int64@,System.String@,System.Int64@,System.Int64@,Snowden.Common.Import.Data.SyncImportSyncActionEnumeration@,System.Data.DataTable@,System.Data.DataTable@,Snowden.Common.Import.Database.ImportSync@)">
+	<summary>
+ Retrieves the next sync queue entry.
+ </summary>
+	<param name="currentSyncTablePrimaryKey"></param>
+	<param name="returnDataTableName"></param>
+	<param name="returnDataTablePrimaryKey"></param>
+	<param name="currentSyncTableOrderNo"></param>
+	<param name="returnSyncAction"></param>
+	<param name="returnChangedFields"></param>
+	<param name="returnSyncTableEntry"></param>
+	<param name="importSyncDal"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportDataHelper.#ctor">
+	<summary>
+ Default Constructor
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportDataHelper.AddImportSyncConflict(System.Data.DataTable,System.Int64,System.String,System.String)">
+	<summary>
+ Adds an import sync conflict message to the conflict table for the specified queue id.
+ </summary>
+	<param name="importSyncConflict"></param>
+	<param name="importSyncQueueId"></param>
+	<param name="userMessage"></param>
+	<param name="internalMessage"></param>
+	<returns>The ImportSyncConflictId of the row that was just inserted.</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportDataHelper.AddImportSyncValidate(System.Data.DataTable,System.Int64,System.String,System.String)">
+	<summary>
+ Adds an import sync validate message to the validate table for the specified queue id.
+ </summary>
+	<param name="importSyncValidate"></param>
+	<param name="importSyncQueueId"></param>
+	<param name="userMessage"></param>
+	<param name="internalMessage"></param>
+	<returns>The importSyncValidateId of the row that was just inserted.</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportDataHelper.AddImportSyncValidateField(System.Data.DataTable,System.Int64,System.String)">
+	<summary>
+ Adds a field to the field listing associated with the ImportSyncValidateId
+ </summary>
+	<param name="importSyncValidateField"></param>
+	<param name="importSyncValidateId"></param>
+	<param name="validateField"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportDataHelper.AddImportSyncConflictField(System.Data.DataTable,System.Int64,System.String)">
+	<summary>
+ Adds a field to the field listing associated with the ImportSyncConflictId
+ </summary>
+	<param name="importSyncConflictField"></param>
+	<param name="importSyncConflictId"></param>
+	<param name="conflictField"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportDataHelper.AddImportSyncValidateFields(System.Data.DataTable,System.Int64,Microsoft.VisualBasic.Collection)">
+	<summary>
+ Adds the fields passed in in the generic list to the field listing associated with the ImportSyncValidateId
+ </summary>
+	<param name="importSyncValidateField"></param>
+	<param name="importSyncValidateId"></param>
+	<param name="validateField"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.SyncImportDataHelper.AddImportSyncConflictFields(System.Data.DataTable,System.Int64,Microsoft.VisualBasic.Collection)">
+	<summary>
+ Adds the fields passed in in the generic list to the field listing associated with the ImportSyncConflictId
+ </summary>
+	<param name="importSyncConflictField"></param>
+	<param name="importSyncConflictId"></param>
+	<param name="conflictField"></param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.LoadImport.PreProcess">
+	<summary>
+ Event that takes place before the load import processes data.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.LoadImport.PostProcess">
+	<summary>
+ Event that takes place after the load import processes data. 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.LoadImport.LoadSource">
+	<summary>
+ Method that loads data from the import source. 
+ This is a virtual method and must be overriden.
+ </summary>
+	<returns>The number of records loaded</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.LoadImport.ProcessData">
+	<summary>
+ Method that processes the source data and imports the data into the destination. 
+ This is a virtual method and must be overriden.
+ </summary>
+	<returns>The number of records processed</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.LoadImport.SetupDataAccessObjects">
+	<summary>
+ Method to setup data access objects
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.LoadImport.ProcessPrepareData">
+	<summary>
+ Method for doing any data resolutions, prepreparing source/destination rows
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.LoadImport.Run(System.Boolean@)">
+	<summary>
+ Runs the load type import and returns the exceptions raised
+ </summary>
+	<returns>Any exceptions that were raised. Null if there were no exceptions.</returns>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Import.Data.LoadImport.LoadOptionsSummarise(System.Collections.Generic.IDictionary{System.String,System.String})">
+	<summary>
+ Loads the quick options.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Snowden.Common.Import.Data.LoadImport">
+	<summary>
+ The load import is a lightweight import framework that allows you to completely control what happens
+ during the load source and processing phases. This import will log records loaded and records processed
+ into the import audit tables.1
+ </summary>
+	<remarks>
+ This import is best for all sized datasets and most suitable for batch operations.
+ 
+ Standard Commandline options:
+ /importname:(import_name) - the import's name
+ /test - sets the connection string to test (from prod)
+ </remarks>
+</member><member name="M:Snowden.Common.Import.Database.ImportSync.GetImportSyncRowsInDateRange(System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.String,System.DateTime,System.DateTime)">
+	<summary>
+ This method retrieves sync rows that are within a specified date range (based on xml data)
+ </summary>
+	<param name="importId">Id of the import the request is related to (used to filter sync rows)</param>
+	<param name="importSyncTableId">Id of the sync table the import is related to (used to filter rows)</param>
+	<param name="isCurrent">IsCurrent flag to be matched (if null than all values of IsCurrent will be matched)</param>
+	<param name="isUpdated">isUpdated flag to be matched (if null than all values of IsCurrent will be matched)</param>
+	<param name="isDeleted">isDeleted flag to be matched (if null than all values of IsCurrent will be matched)</param>
+	<param name="xPathDateQuery">The xpath query used to retrieve the Date value from the date column</param>
+	<param name="fromDate">The beginning of the date range to select rows within</param>
+	<param name="toDate">The end of the date range to select rows within</param>
+	<returns>The set of matching sync rows</returns>
+	<remarks>This method can perform a more restrictive retrieval than the GetImportSyncRows.  This can be a performance benefit.</remarks>
+</member><member name="M:Snowden.Common.Import.Database.IImportSync.GetImportSyncRowsInDateRange(System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.String,System.DateTime,System.DateTime)">
+	<summary>
+ This method retrieves sync rows that are within a specified date range (based on xml data)
+ </summary>
+	<param name="importId">Id of the import the request is related to (used to filter sync rows)</param>
+	<param name="importSyncTableId">Id of the sync table the import is related to (used to filter rows)</param>
+	<param name="isCurrent">IsCurrent flag to be matched (if null than all values of IsCurrent will be matched)</param>
+	<param name="isUpdated">isUpdated flag to be matched (if null than all values of IsCurrent will be matched)</param>
+	<param name="isDeleted">isDeleted flag to be matched (if null than all values of IsCurrent will be matched)</param>
+	<param name="xPathDateQuery">The xpath query used to retrieve the Date value from the date column</param>
+	<param name="fromDate">The beginning of the date range to select rows within</param>
+	<param name="toDate">The end of the date range to select rows within</param>
+	<returns>The set of matching sync rows</returns>
+	<remarks>This method can perform a more restrictive retrieval than the GetImportSyncRows.  This can be a performance benefit.
+ An example xPathDateQuery value is: "/HaulageSource[1]/Haulage[1]/HaulageDate[1]"
+ </remarks>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.GetImportJobList(System.Int32,System.Int16,System.Int16,System.DateTime,System.DateTime)">
+	<summary>
+ Get a list of import jobs
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.GetImportJobStatusHistory(System.Int32)">
+	<summary>
+ View the status history for a job
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.GetImportJobImportHistoryLatestInternalMessage(System.Int32)">
+	<summary>
+ Get the latest internal message for an import job.
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.AddImportJob(System.Int16,System.Int16)">
+	<summary>
+ Create a new import job
+ When adding, this will:
+ 1. Create the job record with the parameters specified
+ 2. Copy the default parameters to the new job
+ 3. Set the initial job status
+ 4. Add the status to the Job Status History table
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.UpdateImportJobStatus(System.Int32,System.Int16,System.Int16)">
+	<summary>
+ Change the status of a job
+ This will:
+ 1. Change the job status
+ 2. Add a new entry to the Job Status History table
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.UpdateImportJobPriority(System.Int32,System.Int16,System.Int16)">
+	<summary>
+ Modifies the job's priority
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.UpdateImportJobParameter(System.Int32,System.Int32,System.String)">
+	<summary>
+ Updates an individual import parameter
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.GetImportJobStatusList(System.Int16)">
+	<summary>
+ Get the job status list
+ </summary>
+</member><member name="P:Snowden.Common.Import.Database.IImportJobManager.NextImportJob">
+	<summary>
+ Get the next import job waiting in the job queue
+ If nothing is available, no records will be returned
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.GetImportJobParameters(System.Int32)">
+	<summary>
+ Return the parameters for the import job
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.GetImportHistorySync(System.Int32)">
+	<summary>
+ View the job history for a sync job
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.GetImportHistoryLoad(System.Int32)">
+	<summary>
+ View the job history for a load job
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistoryStarting(System.Int32@,System.Int32,System.Int32,System.String,System.DateTime)">
+	<summary>
+ Set the job history - starting
+ Creates a new record, initialises the table with defaults
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistoryCompleted(System.Int32,System.DateTime,System.Int16,System.String)">
+	<summary>
+ Set the job history - completed
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistorySyncPrepareStarting(System.Int32,System.DateTime)">
+	<summary>
+ Set the sync job history - prepare phase - starting
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistorySyncPrepareCompleted(System.Int32,System.DateTime)">
+	<summary>
+ Set the sync job history - prepare phase - completed
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistorySyncCompareStarting(System.Int32,System.DateTime)">
+	<summary>
+ Set the sync job history - compare phase - starting
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistorySyncCompareCompleted(System.Int32,System.DateTime,System.Int32,System.Int32,System.Int32)">
+	<summary>
+ Set the sync job history - compare phase - completed
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistorySyncProcessStarting(System.Int32,System.DateTime)">
+	<summary>
+ Set the sync job history - process phase - starting
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistorySyncProcessCompleted(System.Int32,System.DateTime,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+	<summary>
+ Set the sync job history - process phase - completed
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistoryLoadPrepareStarting(System.Int32,System.DateTime)">
+	<summary>
+ Set the load job history - load phase - starting
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistoryLoadPrepareCompleted(System.Int32,System.DateTime,System.Int32)">
+	<summary>
+ Set the load job history - load phase - completed
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistoryLoadProcessStarting(System.Int32,System.DateTime)">
+	<summary>
+ Set the load job history - process phase - starting
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.SetImportHistoryLoadProcessCompleted(System.Int32,System.DateTime,System.Int32)">
+	<summary>
+ Set the load job history - process phase - completed
+ </summary>
+</member><member name="M:Snowden.Common.Import.Database.IImportJobManager.DeleteImportJob(System.Int32)">
+	<summary>
+ Deletes an import job.
+ </summary>
+</member>
+</members>
+</doc>

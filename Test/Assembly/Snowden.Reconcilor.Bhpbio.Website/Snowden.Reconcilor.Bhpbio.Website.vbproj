@@ -1,0 +1,785 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8BE9FF0B-405E-47AD-B15D-CCAA44433294}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Snowden.Reconcilor.Bhpbio.Website</RootNamespace>
+    <AssemblyName>Snowden.Reconcilor.Bhpbio.Website</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)\Snowden.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Website.xml</DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Website.xml</DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Website.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>+!Microsoft.Design#CA2210;+!Microsoft.Design#CA1040;+!Microsoft.Design#CA1005;+!Microsoft.Design#CA1021;+!Microsoft.Design#CA1010;+!Microsoft.Design#CA1011;+!Microsoft.Design#CA1009;+!Microsoft.Design#CA1050;+!Microsoft.Design#CA1026;+!Microsoft.Design#CA1019;+!Microsoft.Design#CA1047;+!Microsoft.Design#CA1000;+!Microsoft.Design#CA1048;+!Microsoft.Design#CA1002;+!Microsoft.Design#CA1061;+!Microsoft.Design#CA1006;+!Microsoft.Design#CA1046;+!Microsoft.Design#CA1065;+!Microsoft.Design#CA1038;+!Microsoft.Design#CA1008;+!Microsoft.Design#CA1028;+!Microsoft.Design#CA1064;+!Microsoft.Design#CA1004;+!Microsoft.Design#CA1035;+!Microsoft.Design#CA1063;+!Microsoft.Design#CA1032;+!Microsoft.Design#CA1023;+!Microsoft.Design#CA1033;+!Microsoft.Design#CA1039;+!Microsoft.Design#CA1016;+!Microsoft.Design#CA1014;+!Microsoft.Design#CA1017;+!Microsoft.Design#CA1018;+!Microsoft.Design#CA1027;+!Microsoft.Design#CA1059;+!Microsoft.Design#CA1060;+!Microsoft.Design#CA1013;+!Microsoft.Design#CA1036;+!Microsoft.Design#CA1044;+!Microsoft.Design#CA1041;+!Microsoft.Design#CA1025;+!Microsoft.Design#CA1052;+!Microsoft.Design#CA1057;+!Microsoft.Design#CA1058;+!Microsoft.Design#CA1001;+!Microsoft.Design#CA1049;+!Microsoft.Design#CA1054;+!Microsoft.Design#CA1056;+!Microsoft.Design#CA1055;+!Microsoft.Design#CA1030;+!Microsoft.Design#CA1003;+!Microsoft.Design#CA1007;+!Microsoft.Design#CA1043;-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309;+!Microsoft.Naming#CA1702;+!Microsoft.Naming#CA1700;+!Microsoft.Naming#CA1701;+!Microsoft.Naming#CA1703</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Website.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ChartFX.WebForms">
+      <HintPath>..\..\..\Libraries\ChartFX\ChartFX.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.WebForms.Adornments">
+      <HintPath>..\..\..\Libraries\ChartFX\ChartFX.WebForms.Adornments.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.WebForms.Annotation">
+      <HintPath>..\..\..\Libraries\ChartFX\ChartFX.WebForms.Annotation.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.WebForms.Base">
+      <HintPath>..\..\..\Libraries\ChartFX\ChartFX.WebForms.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.WebForms.Data">
+      <HintPath>..\..\..\Libraries\ChartFX\ChartFX.WebForms.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.WebForms.Dhtml">
+      <HintPath>..\..\..\Libraries\ChartFX\ChartFX.WebForms.Dhtml.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=3.1.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EPPlus\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Bcd, Version=1.0.19.0, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Bcd.1.0.19\lib\Snowden.Bcd.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Snowden.Common, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.1.4.10.4\lib\Snowden.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Common.Export, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.Export.1.4.10.4\lib\Snowden.Common.Export.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Common.Import, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.Import.1.4.10.5\lib\Snowden.Common.Import.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Common.Web, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.Web.1.4.10.4\lib\Snowden.Common.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Consulting.DataSeries.DataAccess">
+      <HintPath>..\..\..\Libraries\Snowden.Consulting.DataSeries\Snowden.Consulting.DataSeries.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core">
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.Globalisation">
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.Globalisation.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.WebDevelopment, Version=6.5.0.2, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.WebDevelopment.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.Website">
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.Website.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Version.vb">
+      <Link>Version.vb</Link>
+    </Compile>
+    <Compile Include="Analysis\BlastblockDataExport.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\BlastblockDataExportbyOreType.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\OutlierAnalysisFilter.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\OutlierAnalysisGrid.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\OutlierAnalysisAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ProdReconciliationExport.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ReconciliationDataExport.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\DigblockSpatialAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\DigblockSpatialAdministrationLegend.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\DigblockSpatialRender.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\DigblockSpatialVarianceSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\DigblockSpatialVarianceView.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\DigblockSpatialVarianceViewSetup.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\DigblockSpatialView.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\RecalcLogicList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalBulk.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalBulkSubmit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalCheck.vb" />
+    <Compile Include="Approval\ApprovalSummary.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalDataList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalDataListData.vb" />
+    <Compile Include="Approval\ApprovalDataListNode.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalFactorListTabPage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalNavigator.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalProgress.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalResourceClassification.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalDataReview.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalDataUpdate.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalDigblockList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalData.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalDigblockUpdate.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalItem.vb" />
+    <Compile Include="Approval\ApprovalOther.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalOtherList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalOtherListData.vb" />
+    <Compile Include="Approval\ApprovalOtherListNode.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalFactorList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalAssessmentList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalSummaryList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\ApprovalTree.vb" />
+    <Compile Include="Extensibility\OutlierHelper.vb" />
+    <Compile Include="Extensibility\FactorFormatHelper.vb" />
+    <Compile Include="Reports\GetAnnualReport.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\GetBlastblockOreTypeDataExportReport.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\YearlyReconciliationReport.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultDepositDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultDepositSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultOutlierSeriesConfiguration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultOutlierSeriesConfigurationList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultOutlierSeriesConfigurationEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultOutlierSeriesConfigurationSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultDepositEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultDepositAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultDepositList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultshippingTargetDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultShippingTargetSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultshippingTargetEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultshippingTargetList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultShippingTargetsAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultProductTypeSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultProductTypeEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultProductTypeDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultProductTypeList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultProductTypeAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportMessage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportMessageGroupingExportXml.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportMessageGrouping.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportJobDetail.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DataExceptionListDismissAll.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\DefaultApproval.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Depletions\DepletionDigblockDetails.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Digblocks\DigblockHaulageList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Digblocks\DigblockPolygonMapper.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Digblocks\DigblockTreeViewGetNode.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extensibility\IUserSecurityExtensions.vb" />
+    <Compile Include="Home\HomeList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Internal\LocationPickerTree.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Internal\LocationPickerTreeNode.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Digblocks\DefaultDigblocks.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Digblocks\DigblockDetails.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Digblocks\DigblockList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Digblocks\DigblockTreeview.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GlobalSuppressions.vb" />
+    <Compile Include="Extensibility\PageHandlerFactory.vb" />
+    <Compile Include="Home\DefaultHome.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Port\DefaultPort.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Port\PortBalancesList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Port\PortListBase.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Port\PortBlendingList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Port\PortShippingList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReconcilorExceptionBar.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\DefaultReports.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\GetBlastblockDataExportReport.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\GetLocationsByLocationType.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\GetReconciliationDataExportReport.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\GetSourceForLocationType.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\GetStockpilesByLocation.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportsRun.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportsStandardRender.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportsView.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\DefaultStockpiles.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileDetails.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileDetailsTabActivity.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileDetailsTabAttribute.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileDetailsTabBalance.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileDetailsTabCharting.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileDetailsTabGenealogy.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileManualAdjustmentAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileManualAdjustmentEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileManualAdjustmentList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileSurveyAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stockpiles\StockpileSurveyList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsLocationColorsDetails.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsLocationColors.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsLocationColorsDetailsSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsMessages.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsMessagesDetails.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsMessagesDetailsActivate.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsMessagesDetailsDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsMessagesDetailsEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsMessagesDetailsSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsStockpileDetailsSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsStockpileDetails.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsStockpile.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsColors.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsColorsSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsConfiguration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsLocations.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsLocationsDetails.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomFieldsLocationsDetailsSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DataExceptionAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DataExceptionGetNode.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DataExceptionList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultLumpFinesAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultLumpFinesDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultLumpFinesEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultLumpFinesList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultLumpFinesSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultUtilities.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\EventViewer.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\GetHaulageAdministrationDestinationByLocation.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\GetHaulageAdministrationSourceByLocation.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\GetHaulageCorrectionDestinationByLocation.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\GetHaulageCorrectionSourceByLocation.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\HaulageAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\HaulageAdministrationDetails.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\HaulageAdministrationList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\HaulageCorrection.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\HaulageCorrectionList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\HaulageCorrectionNameResolution.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\HelpDocumentation.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Internal\ImageHandler.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\LocationFilterLoad.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\MonthlyApprovalAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\NotificationAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\NotificationAdministrationDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\NotificationAdministrationList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\PurgeAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\PurgeAdministrationAdd.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\PurgeAdministrationApprove.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\PurgeAdministrationCancel.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\PurgeAdministrationList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\PurgeAdministrationSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\RecalcLogViewer.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceBhpbioMaterialTypeLocationList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceInterfaceListingList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceMaterialHierarchyAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceMaterialHierarchyEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceMaterialHierarchyList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceMaterialHierarchySave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceStockpileGroupAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceStockpileGroupDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceStockpileGroupEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\MonthlyApprovalList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceStockpileGroupSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ReferenceStockpileGroupStockpileList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ResolveURLExtension.vb" />
+    <Compile Include="Utilities\RoleOptionEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Internal\StockpileImageLoader.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Internal\StockpileImageLoaderPage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\SystemSettingsEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\SystemSettingsList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\WeightometerSampleEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\WeightometerSampleAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\WeightometerSampleList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(SolutionDir)\Snowden.snk">
+      <Link>Snowden.snk</Link>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Database\Snowden.Reconcilor.Bhpbio.Database.vbproj">
+      <Project>{FB0D8BFC-A134-4303-995F-90BC802C0842}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Notification\Snowden.Reconcilor.Bhpbio.vbproj">
+      <Project>{D267E738-80DB-465C-A2F3-509E0DA1C3DD}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Report\Snowden.Reconcilor.Bhpbio.Report.vbproj">
+      <Project>{BB0D1F66-81DF-4746-9E59-72D4A3F52E8E}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Report</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.WebDevelopment\Snowden.Reconcilor.Bhpbio.WebDevelopment.vbproj">
+      <Project>{3FAFC067-C85B-4927-88D5-51C479A9CB39}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.WebDevelopment</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

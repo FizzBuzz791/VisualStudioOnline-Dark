@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{82E8E8C5-62F6-448B-8643-A81424ECFE15}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Snowden.Reconcilor.Bhpbio.Report.IntegrationTest</RootNamespace>
+    <AssemblyName>Snowden.Reconcilor.Bhpbio.Report.IntegrationTest</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Report.IntegrationTest.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Report.IntegrationTest.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NSubstitute.2.0.3\lib\net40\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Snowden.Bcd, Version=1.0.19.0, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Bcd.1.0.19\lib\Snowden.Bcd.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Snowden.Common, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.1.4.10.4\lib\Snowden.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core, Version=6.5.1.2, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GetLocationDepositCommentTests.vb" />
+    <Compile Include="IntegrationTestsHelper.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="F1F2F3Tests.vb" />
+    <Compile Include="CalcTests.vb" />
+    <Compile Include="ReportDefinitions\ColorHelperTests.vb" />
+    <Compile Include="ReportDefinitions\AutomaticContentSelectionModeTests.vb" />
+    <Compile Include="ReportDefinitions\AttributeHelperTests.vb" />
+    <Compile Include="ReportDefinitions\CombinationOfInterestIdentifierTests.vb" />
+    <Compile Include="TestHelpers\AttributeHelperTestsHelper.vb" />
+    <Compile Include="BhpbioDataTableConverterTests.vb" />
+    <Compile Include="WebServiceFixture.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Assembly\Snowden.Reconcilor.Bhpbio.Database\Snowden.Reconcilor.Bhpbio.Database.vbproj">
+      <Project>{fb0d8bfc-a134-4303-995f-90bc802c0842}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Snowden.Reconcilor.Bhpbio.Report\Snowden.Reconcilor.Bhpbio.Report.vbproj">
+      <Project>{BB0D1F66-81DF-4746-9E59-72D4A3F52E8E}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Report</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

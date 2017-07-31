@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.ReportDisplayParameter" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAhAAAAQQAAAAAAgAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Data\ReportDisplayParameter.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.ReportColour" Collapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAEAAQAAAAAAAAgAAAAAAAAEKAAA=</HashCode>
+      <FileName>Data\ReportColour.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.ApprovalData" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAQAAgAIAAAAAAAAAQAAAAAAgAABA=</HashCode>
+      <FileName>Data\ApprovalData.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.BlockModels" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\BlockModels.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.DateBreakdown" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAACRAAAAABAAAAAAAIAAEABCAAAAAAgACA=</HashCode>
+      <FileName>Data\DateBreakdown.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.FactorList" Collapsed="true">
+    <Position X="15.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\FactorList.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.FactorLocation" Collapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAABAAAAAAEQAAAAAAAAAA=</HashCode>
+      <FileName>Data\FactorLocation.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.GradeProperties" Collapsed="true">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAQBAAQAAAAAAQEAAAAAA=</HashCode>
+      <FileName>Data\GradeProperties.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.Location" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAACAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Location.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Data.MaterialType" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\MaterialType.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.StockpileToCrusher" Collapsed="true">
+    <Position X="25.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAACBAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\StockpileToCrusher.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.BeneProduct" Collapsed="true">
+    <Position X="32.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAACBAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\BeneProduct.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.BeneRatio" Collapsed="true">
+    <Position X="14.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAAAABAAQBAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\BeneRatio.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.Calculation" Collapsed="true">
+    <Position X="24.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAGAkAQACBAAAAQQBkGAAAQBgAAAgAEAAEAA=</HashCode>
+      <FileName>Calc\Calculation.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationBasic" Collapsed="true">
+    <Position X="33.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAACAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Calc\CalculationBasic.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationModel" Collapsed="true">
+    <Position X="7.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAEgAAAA=</HashCode>
+      <FileName>Calc\CalculationModel.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.ExpitToOreStockpile" Collapsed="true">
+    <Position X="34.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAACBAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\ExPitToOreStockpile.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.F1" Collapsed="true">
+    <Position X="16.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAAAABAAQBAAAAgAEAAAAA=</HashCode>
+      <FileName>Calc\F1.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.F2" Collapsed="true">
+    <Position X="21" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAAAABAAQBAAAAgAEAAAAA=</HashCode>
+      <FileName>Calc\F2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.F3" Collapsed="true">
+    <Position X="43.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAAAABAAQBAAAAgAEAAAAA=</HashCode>
+      <FileName>Calc\F3.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.MineProductionActuals" Collapsed="true">
+    <Position X="27.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAACBAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\MineProductionActuals.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.MineProductionExpitEquivalent" Collapsed="true">
+    <Position X="12" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAAAABAAQBAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\MineProductionExpitEquivalent.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.MiningModelCrusherEquivalent" Collapsed="true">
+    <Position X="18.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAAAABAAQBAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\MiningModelCrusherEquivalent.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.MiningModelShippingEquivalent" Collapsed="true">
+    <Position X="23.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAAAABAAQBAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\MiningModelShippingEquivalent.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.ModelGeology" Collapsed="true">
+    <Position X="9.75" Y="11.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAABAAABAAAAgAEgAAAA=</HashCode>
+      <FileName>Calc\ModelGeology.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.ModelGradeControl" Collapsed="true">
+    <Position X="4.75" Y="11.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAABAAABAAAAAAEgAAAA=</HashCode>
+      <FileName>Calc\ModelGradeControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.ModelMining" Collapsed="true">
+    <Position X="7.25" Y="11.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAABAAABAAAAAAEgAAAA=</HashCode>
+      <FileName>Calc\ModelMining.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.PortBlendedAdjustment" Collapsed="true">
+    <Position X="36.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAACBAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\PortBlendedAdjustment.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.PortOreShipped" Collapsed="true">
+    <Position X="39" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAACBAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\PortOreShipped.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.PortStockpileDelta" Collapsed="true">
+    <Position X="41.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAACBAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\PortStockpileDelta.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Calc.PostCrusherStockpileDelta" Collapsed="true">
+    <Position X="30" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAACBAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Calc\PostCrusherStockpileDelta.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.ActualBeneProduct" Collapsed="true">
+    <Position X="13.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\ActualBeneProduct.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.PortStockpileDelta" Collapsed="true">
+    <Position X="20" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\PortStockpileDelta.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.ActualExpitToStockpile" Collapsed="true">
+    <Position X="26.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\ActualExpitToStockpile.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.ActualMineProduction" Collapsed="true">
+    <Position X="33.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\ActualMineProduction.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.ActualPostCrusherStockpileDelta" Collapsed="true">
+    <Position X="15.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\ActualPostCrusherStockpileDelta.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.ActualStockpileToCrusher" Collapsed="true">
+    <Position X="22.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\ActualStockpileToCrusher.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.BlockModel" Collapsed="true">
+    <Position X="29" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\BlockModel.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.DataCache" Collapsed="true">
+    <Position X="23.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAIAgCKAEQQAAAAAAAAAAAAAABAAgAAAAAAAAAQA=</HashCode>
+      <FileName>Cache\DataCache.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.Historical" Collapsed="true">
+    <Position X="17.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\Historical.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.PortBlendedAdjustment" Collapsed="true">
+    <Position X="24.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\PortBlendedAdjustment.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowden.Reconcilor.Bhpbio.Report.Cache.PortOreShipped" Collapsed="true">
+    <Position X="31.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\PortOreShipped.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

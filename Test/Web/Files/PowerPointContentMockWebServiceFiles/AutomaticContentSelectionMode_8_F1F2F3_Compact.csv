@@ -1,0 +1,9 @@
+﻿LocationId,LocationType,Factor,Mode,Attribute
+8,NJVMain,F1Factor,Compact,Tonnes
+8,NJVMain,F1Factor,Compact,SiO2
+8,NJVMain,F2Factor,Compact,Tonnes
+8,NJVMain,F2Factor,Compact,P
+8,NJVMain,F2Factor,Compact,Al2O3
+8,NJVMain,F3Factor,Compact,
+8,NJVMain,F3Factor,Compact,P
+8,NJVMain,F3Factor,Compact,Al2O3

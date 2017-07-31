@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3FAFC067-C85B-4927-88D5-51C479A9CB39}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Snowden.Reconcilor.Bhpbio.WebDevelopment</RootNamespace>
+    <AssemblyName>Snowden.Reconcilor.Bhpbio.WebDevelopment</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)\Snowden.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.WebDevelopment.xml</DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.WebDevelopment.xml</DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.WebDevelopment.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.WebDevelopment.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Snowden.Common, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.1.4.10.4\lib\Snowden.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Common.Web, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.Web.1.4.10.4\lib\Snowden.Common.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core">
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.WebDevelopment, Version=6.5.1.2, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.WebDevelopment.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.Website">
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.Website.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\FFactorTable.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\FilterBoxes\Analysis\DigblockSpatialFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Approval\ApprovalFilter.vb" />
+    <Compile Include="Controls\FilterBoxes\Digblocks\MiningTabFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Digblocks\DigblockFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Report\AnnualReportFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Stockpiles\StockpileDetailsFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Stockpiles\StockpileFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Home\HomeFilter.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\FilterBoxes\Port\PortFilter.vb" />
+    <Compile Include="Controls\FilterBoxes\Utilities\DataExceptionFilter.vb" />
+    <Compile Include="Controls\FilterBoxes\Utilities\HaulageAdministrationFilter.vb" />
+    <Compile Include="Controls\FilterBoxes\Utilities\HaulageCorrectionFilter.vb" />
+    <Compile Include="Controls\FilterBoxes\Utilities\ImportsFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Utilities\WeightometerSampleFilter.vb" />
+    <Compile Include="Controls\Inputs\LocationPicker.vb" />
+    <Compile Include="Controls\Inputs\MonthFilter.vb" />
+    <Compile Include="Controls\FilterBoxes\SiteFilter.vb" />
+    <Compile Include="Controls\Inputs\HubSelectList.vb" />
+    <Compile Include="Controls\Inputs\PitSelectList.vb" />
+    <Compile Include="Controls\Inputs\ProductPicker.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\BhpbioApprovalSummarySideNavigationItem.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\DepositSideNavigation.vb" />
+    <Compile Include="Controls\TabPage.vb" />
+    <Compile Include="Controls\VersionedScriptTag.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\ApprovalSideNavigation.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\ShippingTargetSideNavigation.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\ProductTypeSideNavigation.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\PortSideNavigation.vb" />
+    <Compile Include="GlobalSuppressions.vb" />
+    <Compile Include="WebpageTemplates\ApprovalAjaxTemplate.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebpageTemplates\ApprovalTemplate.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="WebpageTemplates\HomeTemplate.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebpageTemplates\PortTemplate.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Version.vb">
+      <Link>Version.vb</Link>
+    </Compile>
+    <Compile Include="Controls\FilterBoxes\Analysis\DataExportFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Approval\ApprovalF1F2F3Filter.vb" />
+    <Compile Include="Controls\FilterBoxes\Digblocks\TransactionsFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Stockpiles\StockpileManualAdjustmentFilterBox.vb" />
+    <Compile Include="Controls\FilterBoxes\Utilities\DefaultLumpFinesFilter.vb" />
+    <Compile Include="Controls\FilterBoxes\Utilities\EventViewerFilter.vb" />
+    <Compile Include="Controls\FilterBoxes\Utilities\RecalcLogViewerFilter.vb" />
+    <Compile Include="Controls\Inputs\MonthQuarterFilter.vb" />
+    <Compile Include="Controls\NotificationParts\ApprovalNotificationData.vb" />
+    <Compile Include="Controls\NotificationParts\ApprovalNotificationUI.vb" />
+    <Compile Include="Controls\ReconcilorLocationSelector.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\AnalysisSideNavigation.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\CustomFieldsSideNavigation.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\PurgeAdministrationSideNavigation.vb" />
+    <Compile Include="Extensibility\DependencyFactories.vb" />
+    <Compile Include="WebpageTemplates\PurgeAdministrationTemplate.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <None Include="$(SolutionDir)\Snowden.snk">
+      <Link>Snowden.snk</Link>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>Controls\CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Database\Snowden.Reconcilor.Bhpbio.Database.vbproj">
+      <Project>{FB0D8BFC-A134-4303-995F-90BC802C0842}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Notification\Snowden.Reconcilor.Bhpbio.vbproj">
+      <Project>{D267E738-80DB-465C-A2F3-509E0DA1C3DD}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

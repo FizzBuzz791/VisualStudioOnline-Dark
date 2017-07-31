@@ -1,0 +1,37 @@
+IF OBJECT_ID('dbo.BhpbioShippingNominationItemParcelGrade') IS NOT NULL
+	DROP TABLE dbo.BhpbioShippingNominationItemParcelGrade
+GO
+
+IF OBJECT_ID('dbo.BhpbioShippingNominationItemParcel') IS NOT NULL
+	DROP TABLE dbo.BhpbioShippingNominationItemParcel
+GO
+
+CREATE TABLE [dbo].[BhpbioShippingNominationItemParcel]
+(
+	[BhpbioShippingNominationItemParcelId] [int] IDENTITY(1,1) NOT NULL,
+	[BhpbioShippingNominationItemId] [int] NOT NULL,
+	[HubLocationId] [int] NOT NULL,
+	HubProduct VARCHAR(63) COLLATE DATABASE_DEFAULT NULL,
+	HubProductSize VARCHAR(5) COLLATE DATABASE_DEFAULT NULL,
+	[Tonnes] [float] NOT NULL,
+	
+	CONSTRAINT [PK_BhpbioShippingNominationItemParcel]
+		PRIMARY KEY NONCLUSTERED ([BhpbioShippingNominationItemParcelId] ASC),
+	
+	CONSTRAINT [IX__BhpbioShippingNominationItemParcel_HubProduct]
+		UNIQUE (BhpbioShippingNominationItemId ASC, HubProduct ASC),
+		
+	CONSTRAINT [FK_BhpbioShippingNominationParcel_Nomination]
+		FOREIGN KEY([BhpbioShippingNominationItemId])
+		REFERENCES dbo.BhpbioShippingNominationItem ([BhpbioShippingNominationItemId]),
+
+	CONSTRAINT FK_BhpbioShippingNominationParcel_HubLocationId_Location
+		FOREIGN KEY (HubLocationId)
+		REFERENCES dbo.Location (Location_Id)
+		
+)
+
+CREATE CLUSTERED INDEX [IX__BhpbioShippingNominationItemParcel_HubLocation]
+	ON BhpbioShippingNominationItemParcel ([BhpbioShippingNominationItemId] ASC, HubLocationId ASC)	
+GO
+

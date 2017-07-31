@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fe70e1a7-0e0b-464c-8906-335cf9cc42dd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://abarmouta.snowdenau.com/ImportWebServices/MaterialTrackerWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MaterialTrackerWebService.wsdl" MetadataType="Wsdl" ID="362f5be3-8d75-4263-b707-36934899f368" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MaterialTrackerWebService.svc?wsdl" />
+    <MetadataFile FileName="MaterialTrackerWebService1.wsdl" MetadataType="Wsdl" ID="f854bef6-6563-490e-a8d1-a12a4b84d1c1" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MaterialTrackerWebService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="MaterialTrackerWebService.disco" MetadataType="Disco" ID="2fc9f1d9-ad61-4d2e-8874-9faacc64037a" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MaterialTrackerWebService.svc?disco" />
+    <MetadataFile FileName="MaterialTrackerWebService2.xsd" MetadataType="Schema" ID="2a9d2f09-61b3-4adc-a883-2eaa37ee983b" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MaterialTrackerWebService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

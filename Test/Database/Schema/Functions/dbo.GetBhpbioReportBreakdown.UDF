@@ -1,0 +1,99 @@
+﻿IF OBJECT_ID('dbo.GetBhpbioReportBreakdown') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioReportBreakdown
+Go 
+
+CREATE FUNCTION dbo.GetBhpbioReportBreakdown
+(
+	@iBreakDown VARCHAR(31),
+	@iStartDate DATETIME,
+	@iEndDate DATETIME,
+	@iValidateStartDate BIT
+)
+RETURNS @ReportDate TABLE
+(
+	DateFrom DATETIME,
+	DateTo DATETIME,
+	CalendarDate DATETIME,	
+	PRIMARY KEY CLUSTERED (CalendarDate),
+	UNIQUE NONCLUSTERED (DateFrom, DateTo)
+)
+BEGIN
+	DECLARE @SystemStartDate DATETIME
+	DECLARE @Step INT
+	DECLARE @Interval VARCHAR(31)
+	DECLARE @StartDate DATETIME
+	DECLARE @EndDate DATETIME
+	
+	SET @SystemStartDate = dbo.GetSystemStartDate()
+	
+	IF @iBreakDown = 'QUARTER'
+	BEGIN
+		SET @Step = 3
+		SET @Interval = 'MONTH'
+		SET @StartDate = @iStartDate
+		SET @EndDate = @iEndDate
+	END
+	ELSE IF @iBreakDown = 'MONTH'
+	BEGIN
+		SET @Step = 1
+		SET @Interval = @iBreakDown
+		SET @StartDate = @iStartDate
+		SET @EndDate = @iEndDate
+	END
+	ELSE IF @iBreakDown = 'YEAR'
+	BEGIN
+		SET @Step = 1
+		SET @Interval = @iBreakDown
+		SET @StartDate = @iStartDate
+		SET @EndDate = @iEndDate
+	END
+	ELSE
+	BEGIN
+		SET @Step = 1
+		SET @Interval = NULL
+		SET @StartDate = @iStartDate
+		SET @EndDate = @iEndDate
+	END
+	
+	IF @Interval IS NULL
+	BEGIN
+		INSERT INTO @ReportDate
+			(DateFrom, DateTo, CalendarDate)
+		SELECT @StartDate, @EndDate, @StartDate
+	END 
+	ELSE
+	BEGIN
+	
+		INSERT INTO @ReportDate
+			(DateFrom, DateTo, CalendarDate)
+		Select This_Date,
+			Case @Interval
+				When 'QUARTER' Then DateAdd(Day, -1, DateAdd(Month, @Step, This_Date))
+				When 'MONTH' Then DateAdd(Day, -1, DateAdd(Month, @Step, This_Date))
+				When 'YEAR' Then DateAdd(Day, -1, DateAdd(Year, @Step, This_Date))
+				Else Null
+			End,
+			This_Date
+		From dbo.GetDateList(@StartDate, @EndDate, @Interval, @Step)
+		Group By This_Date
+	END
+	
+	IF @iValidateStartDate = 1 AND @StartDate < @SystemStartDate
+	BEGIN
+		-- Delete any records where the end date is before
+		DELETE RD
+		FROM @ReportDate AS RD
+		WHERE RD.DateTo < @SystemStartDate
+
+		UPDATE RD
+		SET RD.DateFrom = @SystemStartDate
+		FROM @ReportDate AS RD
+		WHERE RD.DateFrom < @SystemStartDate AND RD.DateTo > @SystemStartDate
+	END
+
+	RETURN
+END
+GO
+
+--select * from dbo.GetBhpbioReportBreakdown(NULL, '2008-01-01', '2008-03-31', 1)
+--select * from dbo.GetBhpbioReportBreakdown('YEAR', '1997-01-01', '2008-12-31', 1)

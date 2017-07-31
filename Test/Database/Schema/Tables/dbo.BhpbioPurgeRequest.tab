@@ -1,0 +1,25 @@
+IF OBJECT_ID('dbo.BhpbioPurgeRequest') IS NOT NULL
+	DROP TABLE dbo.BhpbioPurgeRequest
+GO
+
+CREATE TABLE dbo.BhpbioPurgeRequest
+(
+	PurgeRequestId INT IDENTITY(1,1) NOT NULL,
+	PurgeMonth DATETIME NOT NULL,
+	PurgeRequestStatusId SMALLINT NOT NULL,
+	RequestingUserId INT NOT NULL,
+	ApprovingUserId INT NULL,
+	LastStatusChangeDateTime DATETIME NOT NULL,
+	CONSTRAINT PK_BhpbioPurgeRequest PRIMARY KEY CLUSTERED 
+	(
+		PurgeRequestId ASC
+	) ON [PRIMARY],
+	CONSTRAINT FK_BhpbioPurgeRequest_RequestingUser FOREIGN KEY (RequestingUserId)
+		REFERENCES dbo.SecurityUser (UserId),
+	CONSTRAINT FK_BhpbioPurgeRequest_ApprovingUser FOREIGN KEY (ApprovingUserId)
+		REFERENCES dbo.SecurityUser (UserId),
+	CONSTRAINT FK_BhpbioPurgeRequest_PurgeRequestStatus FOREIGN KEY (PurgeRequestStatusId)
+		REFERENCES dbo.BhpbioPurgeRequestStatus (PurgeRequestStatusId)
+) ON [PRIMARY]
+
+GO

@@ -1,0 +1,23 @@
+IF OBJECT_ID('dbo.BhpbioWeightometerDataExceptionExemption') IS NOT NULL
+	DROP TABLE dbo.BhpbioWeightometerDataExceptionExemption
+GO
+
+CREATE TABLE dbo.BhpbioWeightometerDataExceptionExemption
+(
+	Data_Exception_Type_Id INT NOT NULL,
+	Weightometer_Id VARCHAR(31) COLLATE DATABASE_DEFAULT NOT NULL,
+	[Start_Date] DATETIME NOT NULL,
+	End_Date DATETIME NULL
+
+	CONSTRAINT PK_BhpbioWeightometerDataExceptionExemption
+		PRIMARY KEY (Data_Exception_Type_Id, Weightometer_Id),
+		
+	CONSTRAINT FK_PK_BhpbioWeightometerDataExceptionExemption_DataExceptionType
+		FOREIGN KEY (Data_Exception_Type_Id)
+		REFERENCES dbo.DataExceptionType (Data_Exception_Type_Id),
+		
+	CONSTRAINT FK_PK_BhpbioWeightometerDataExceptionExemption_Weightometer
+		FOREIGN KEY (Weightometer_Id)
+		REFERENCES dbo.Weightometer (Weightometer_Id)		
+)
+GO

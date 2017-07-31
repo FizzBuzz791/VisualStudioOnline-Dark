@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BlockOutEvent>
+  <!--
+	    	<xsd:element name="Timestamp" type="xsd:dateTime" />
+    		<xsd:element name="IsReblockOut" type="xsd:boolean" />
+    		<xsd:element name="ResponsibleUserName" type="xsd:string" />
+    		<xsd:element name="SourceModelDetail" type="Q1:SourceModelDescriptorType"/>
+    		<xsd:element name="PatternDetail" type="Q1:PatternType" />
+    		-->
+
+  <Timestamp>2014-01-01T14:25:25Z</Timestamp>
+  <IsReblockOut>false</IsReblockOut>
+  <ResponsibleUserName>downergroup\nathan.reed</ResponsibleUserName>
+
+  <SourceModelDetail>
+    <!--
+	    	  <xsd:element maxOccurs="1" minOccurs="1" name="ModelFile" type="xsd:string"/>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="ModelType" type="xsd:string"/>
+	    		-->
+    <ModelType>Grade Control</ModelType>
+    <ModelFile>20140101-test.txt</ModelFile>
+  </SourceModelDetail>
+
+  <PatternDetail>
+    <!--
+	    	  <xsd:element name="PatternNumber" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="SiteId" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="OrebodyId" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="0" name="PitId_Log" type="xsd:string" />
+				  <xsd:element name="PitId_Phy" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+				  <xsd:element name="PitId_MQ2" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="PushbackId" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="Bench" type="xsd:string" />
+				  <xsd:element name="ExternalLocationID" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+				  <xsd:element name="PatternGUID" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="DateCreated" type="xsd:dateTime" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="DateAccepted" type="xsd:dateTime" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="AcceptedByUserName" type="xsd:string" />
+				  <xsd:element maxOccurs="1" minOccurs="1" name="ApprovedByUserName" type="xsd:string" />
+
+				  <xsd:element maxOccurs="unbounded" minOccurs="1" name="Block" type="Q1:BlockType" />
+    			-->
+
+    <PatternNumber>0820</PatternNumber>
+    <Name>0820</Name>
+    <SiteId>OB18</SiteId>
+    <OrebodyId>18</OrebodyId>
+    <PitId_Log>SP</PitId_Log>
+    <PitId_Phy>SP</PitId_Phy>
+    <PitId_MQ2>18SP</PitId_MQ2>
+    <PushbackId></PushbackId>
+    <Bench>0599</Bench>
+    <ExternalLocationID>5</ExternalLocationID>
+    <PatternGUID>f3fb318c-463d-4e40-93f9-83569adc3317</PatternGUID>
+    <DateCreated>2014-07-03 00:00:00</DateCreated>
+    <DateAccepted>2014-07-03 08:00:00</DateAccepted>
+    <AcceptedByUserName>Nathan.Reed</AcceptedByUserName>
+    <ApprovedByUserName>Gary.Pattenden</ApprovedByUserName>
+
+    <Block>
+      <!--
+	    		<xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string" />
+					<xsd:element name="BlockGUID" type="xsd:string" maxOccurs="1" minOccurs="1" />
+					<xsd:element name="BlockNumber" type="xsd:int" maxOccurs="1" minOccurs="1" />
+					<xsd:element maxOccurs="1" minOccurs="1" name="GeoType"	type="xsd:string" />
+					<xsd:element maxOccurs="1" minOccurs="1" name="DateBlasted" type="xsd:dateTime" />
+					<xsd:element maxOccurs="1" minOccurs="1" name="DateBlocked"	type="xsd:dateTime"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="Stratigraphy" type="xsd:string" />
+					<xsd:element maxOccurs="1" minOccurs="1" name="StratNum" type="xsd:int" />
+					<xsd:element maxOccurs="1" minOccurs="0" name="ChangeState"	type="xsd:string" />
+
+					<xsd:element maxOccurs="unbounded" minOccurs="1" name="ModelBlock" type="Q1:ModelBlockType" />
+					<xsd:element maxOccurs="1" minOccurs="1" name="Centroid" type="Q1:MiningPointType" />
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="PolygonPoint" type="Q1:MiningPointType" />
+					-->
+      <Name>A01</Name>
+      <BlockGUID>0778acc9-539a-4ab0-b15c-2fd67d393795</BlockGUID>
+      <BlockNumber>1</BlockNumber>
+      <GeoType>D1</GeoType>
+      <DateBlasted>2014-07-03 00:00:00</DateBlasted>
+      <DateBlocked>2014-07-04 00:00:00</DateBlocked>
+      <Stratigraphy></Stratigraphy>
+      <StratNum></StratNum>
+      <ChangeState>INSERT</ChangeState>
+
+      <ModelBlock>
+        <!--
+						<xsd:element maxOccurs="1" minOccurs="1" name="ModelType" type="xsd:string" />
+						<xsd:element name="Designation" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="Tonnes" type="xsd:double" />
+						<xsd:element maxOccurs="1" minOccurs="1" name="Volume" type="xsd:double" />
+						<xsd:element name="Density" type="xsd:double" maxOccurs="1" minOccurs="1" />
+						<xsd:element maxOccurs="1" minOccurs="1" name="OreType" type="xsd:string" />
+						<xsd:element name="MaterialCode" type="xsd:string" maxOccurs="1" minOccurs="1" />
+						<xsd:element maxOccurs="1" minOccurs="1" name="LastModifiedUserName" type="xsd:string" />
+						<xsd:element maxOccurs="1" minOccurs="1" name="LastModifiedDateTime" type="xsd:dateTime" />
+
+						<xsd:element maxOccurs="unbounded" minOccurs="1" name="GradeSet" type="Q1:GradeSetType" />
+				-->
+        <ModelType>Grade Control</ModelType>
+        <Designation>HG</Designation>
+        <Tonnes>150</Tonnes>
+        <Volume>270</Volume>
+        <Density>2.70</Density>
+        <OreType>HG</OreType>
+        <MaterialCode>HG</MaterialCode>
+        <LastModifiedUserName>UserTest20characters</LastModifiedUserName>
+        <LastModifiedDateTime>2014-07-09 08:00:00</LastModifiedDateTime>
+
+        <GradeSet>
+          <!--
+							<xsd:element maxOccurs="1" minOccurs="1" name="GradeSetType" type="xsd:string"/>
+							<xsd:element maxOccurs="unbounded" minOccurs="1" name="QualitySet" type="Q1:QualityType"/>
+					-->
+          <GradeSetType>In-Situ</GradeSetType>
+          <QualitySet>
+            <!--
+								<xsd:element maxOccurs="1" minOccurs="1" name="QualityType" type="xsd:string"/>
+								<xsd:element maxOccurs="1" minOccurs="1" name="QualityTypeSplitPercentae" type="xsd:double"/>
+								<xsd:element maxOccurs="unbounded" minOccurs="0" name="Analytes" type="Q1:AnalyteType"/>
+								-->
+            <QualityType>Head</QualityType>
+            <QualityTypeSplitPercentage>1.0</QualityTypeSplitPercentage>
+
+            <!--
+									<xsd:element maxOccurs="1" minOccurs="1" name="AnalyteName" type="xsd:string"/>
+									<xsd:element maxOccurs="1" minOccurs="1" name="Value" type="xsd:double"/>
+						-->
+            <Analytes>
+              <AnalyteName>Fe</AnalyteName>
+              <Value>65.0</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>P</AnalyteName>
+              <Value>0.1</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>SiO2</AnalyteName>
+              <Value>5.2</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>Al2O3</AnalyteName>
+              <Value>3.5</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>LOI</AnalyteName>
+              <Value>2.6</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>H2O</AnalyteName>
+              <Value>8.54</Value>
+            </Analytes>
+          </QualitySet>
+
+        </GradeSet>
+
+        <GradeSet>
+          <!--
+							<xsd:element maxOccurs="1" minOccurs="1" name="GradeSetType" type="xsd:string"/>
+							<xsd:element maxOccurs="unbounded" minOccurs="1" name="QualitySet" type="Q1:QualityType"/>
+					-->
+          <GradeSetType>As-Shipped</GradeSetType>
+          
+          <QualitySet>
+            <QualityType>Lump</QualityType>
+            <QualityTypeSplitPercentage>0.65</QualityTypeSplitPercentage>
+
+            <Analytes>
+              <AnalyteName>Fe</AnalyteName>
+              <Value>70.0</Value>
+            </Analytes>
+          </QualitySet>
+
+          <QualitySet>
+            <QualityType>Fines</QualityType>
+            <QualityTypeSplitPercentage>0.45</QualityTypeSplitPercentage>
+
+            <Analytes>
+              <AnalyteName>Fe</AnalyteName>
+              <Value>60.0</Value>
+            </Analytes>
+          </QualitySet>
+          
+        </GradeSet>
+
+      </ModelBlock>
+
+      <Centroid>
+        <!--
+						<xsd:element maxOccurs="1" minOccurs="1" name="Easting" type="xsd:double"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="Northing" type="xsd:double"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="PointNumber" type="xsd:int"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="ToeRL" type="xsd:double"/>
+				-->
+        <Easting>31100</Easting>
+        <Northing>32100</Northing>
+        <PointNumber>1</PointNumber>
+        <ToeRL>33100</ToeRL>
+      </Centroid>
+
+      <!--
+						<xsd:element maxOccurs="1" minOccurs="1" name="Easting" type="xsd:double"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="Northing" type="xsd:double"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="PointNumber" type="xsd:int"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="ToeRL" type="xsd:double"/>
+			-->
+      <PolygonPoint>
+        <Easting>31105</Easting>
+        <Northing>32109</Northing>
+        <PointNumber>1</PointNumber>
+        <ToeRL>33100</ToeRL>
+      </PolygonPoint>
+      <PolygonPoint>
+        <Easting>31104</Easting>
+        <Northing>32108</Northing>
+        <PointNumber>2</PointNumber>
+        <ToeRL>33100</ToeRL>
+      </PolygonPoint>
+      <PolygonPoint>
+        <Easting>31103</Easting>
+        <Northing>32107</Northing>
+        <PointNumber>3</PointNumber>
+        <ToeRL>33100</ToeRL>
+      </PolygonPoint>
+    </Block>
+
+    <Block>
+      <Name>A02</Name>
+      <BlockGUID>343A603D-F7E4-42C9-892C-49FA02DB5409</BlockGUID>
+      <BlockNumber>2</BlockNumber>
+      <GeoType>D2</GeoType>
+      <DateBlasted>2014-07-05 00:00:00</DateBlasted>
+      <DateBlocked>2014-07-06 00:00:00</DateBlocked>
+      <Stratigraphy></Stratigraphy>
+      <StratNum></StratNum>
+      <ChangeState>INSERT</ChangeState>
+
+      <ModelBlock>
+        <ModelType>Grade Control</ModelType>
+        <Designation>HG</Designation>
+        <Tonnes>700</Tonnes>
+        <Volume>354</Volume>
+        <Density>2.75</Density>
+        <OreType>HG</OreType>
+        <MaterialCode>HG</MaterialCode>
+        <LastModifiedUserName>Nathan.Reed</LastModifiedUserName>
+        <LastModifiedDateTime>2014-07-09 08:00:00</LastModifiedDateTime>
+
+        <GradeSet>
+          <GradeSetType>In-Situ</GradeSetType>
+          <QualitySet>
+            <QualityType>Head</QualityType>
+            <QualityTypeSplitPercentage>1.0</QualityTypeSplitPercentage>
+
+            <Analytes>
+              <AnalyteName>Fe</AnalyteName>
+              <Value>66.5</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>P</AnalyteName>
+              <Value>0.15</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>SiO2</AnalyteName>
+              <Value>5.25</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>Al2O3</AnalyteName>
+              <Value>3.55</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>LOI</AnalyteName>
+              <Value>2.65</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>H2O</AnalyteName>
+              <Value>8.545</Value>
+            </Analytes>
+          </QualitySet>
+
+        </GradeSet>
+
+      </ModelBlock>
+
+      <Centroid>
+        <!--
+						<xsd:element maxOccurs="1" minOccurs="1" name="Easting" type="xsd:double"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="Northing" type="xsd:double"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="PointNumber" type="xsd:int"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="ToeRL" type="xsd:double"/>
+				-->
+        <Easting>31200</Easting>
+        <Northing>32120</Northing>
+        <PointNumber>1</PointNumber>
+        <ToeRL>33200</ToeRL>
+      </Centroid>
+
+      <!--
+						<xsd:element maxOccurs="1" minOccurs="1" name="Easting" type="xsd:double"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="Northing" type="xsd:double"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="PointNumber" type="xsd:int"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="ToeRL" type="xsd:double"/>
+			-->
+      <PolygonPoint>
+        <Easting>31205</Easting>
+        <Northing>32209</Northing>
+        <PointNumber>1</PointNumber>
+        <ToeRL>33200</ToeRL>
+      </PolygonPoint>
+      <PolygonPoint>
+        <Easting>31204</Easting>
+        <Northing>32208</Northing>
+        <PointNumber>2</PointNumber>
+        <ToeRL>33200</ToeRL>
+      </PolygonPoint>
+      <PolygonPoint>
+        <Easting>31203</Easting>
+        <Northing>32207</Northing>
+        <PointNumber>3</PointNumber>
+        <ToeRL>33200</ToeRL>
+      </PolygonPoint>
+    </Block>
+  </PatternDetail>
+
+</BlockOutEvent>

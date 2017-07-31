@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="aa4d3c28-63a5-4c21-b38b-b9e0dd0eb327" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://abarmouta.snowdenau.com/ImportWebServices/BlastholesWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BlastholesWebService.disco" MetadataType="Disco" ID="f1487c76-c1b0-4165-947d-e7f272ba6dc1" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/BlastholesWebService.svc?disco" />
+    <MetadataFile FileName="BlastholesWebService.wsdl" MetadataType="Wsdl" ID="d334fb75-e026-40a8-8335-dd8aa3a84457" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/BlastholesWebService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="BlastholesWebService1.wsdl" MetadataType="Wsdl" ID="46334dc6-cb89-4a19-9ab4-847698912fc2" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/BlastholesWebService.svc?wsdl" />
+    <MetadataFile FileName="BlastholesWebService.xsd" MetadataType="Schema" ID="c82b5363-3c07-4e37-bd7f-ad489bb9a8ab" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/BlastholesWebService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

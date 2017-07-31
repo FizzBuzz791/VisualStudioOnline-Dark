@@ -1,0 +1,1293 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Snowden.Common
+</name>
+</assembly>
+<members>
+<member name="M:Snowden.Common.Support.SupportServices.#ctor(System.String)">
+	<summary>
+ Creates a new instance of the support services class.
+ </summary>
+	<param name="connectionString">The connection string to the target database.</param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Support.SupportServices.#ctor(Snowden.Common.Database.DataAccessBaseObjects.IDataAccessConnection)">
+	<summary>
+ Creates a new instance of the support services class.
+ </summary>
+	<param name="connection">The connection to the target database.</param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Support.SupportServices.Log(Snowden.Common.Support.LogType,System.String,System.String,System.String,System.Exception)">
+	<summary>
+ Creates a log entry based on the provided connection string.
+ </summary>
+	<param name="logType">The type of log entry to create.</param>
+	<param name="component">The component that raised the log message. This is currently free text.</param>
+	<param name="description">An english description of the issue.</param>
+	<param name="details">The details; typically as XML.</param>
+	<param name="exception">The exception being raised, if relevant.</param>
+	<returns>The log entry's id.</returns>
+</member><member name="M:Snowden.Common.Support.SupportServices.TraceLog(Snowden.Common.Support.LogType,System.String,System.String,System.String,System.Exception,System.Nullable{System.Int64})">
+	<summary>
+ Logs to the trace listeners.
+ </summary>
+</member><member name="M:Snowden.Common.Support.SupportServices.Log(Snowden.Common.Support.LogType,System.String,System.String,System.String,System.Exception,System.String)">
+	<summary>
+ Creates a log entry based on the provided connection string.
+ </summary>
+	<param name="logType">The type of log entry to create.</param>
+	<param name="component">The component that raised the log message. This is currently free text.</param>
+	<param name="description">An english description of the issue.</param>
+	<param name="details">The details; typically as XML.</param>
+	<param name="exception">The exception being raised, if relevant.</param>
+	<param name="connectionString">The connection string to the database that contains the support log.</param>
+	<returns>The log entry's id.</returns>
+</member><member name="T:Snowden.Common.Support.SupportServices">
+	<summary>
+ Provides access to the support services.
+ </summary>
+	<remarks>
+ Right now this only supports simple logging services but has a very big and bright future!
+ There are a LOT of extensions that can be made to this class.
+ The main thing is that the connection might be "flaky" so for now the connections are created on the fly.
+ Future revisions will likley require a lot more robustness inbuilt.
+ </remarks>
+</member><member name="M:Snowden.Common.Support.IDalSupport.AddLog(System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Adds an entry to the log table.
+ </summary>
+	<param name="logTypeName">The log type name; values can be Information, Warning and Error.</param>
+	<param name="component">The name of the component.</param>
+	<param name="description">A short, friendly error description.</param>
+	<param name="details">A long, detailed description of the error.</param>
+	<param name="exception">The relevant exception dump.</param>
+	<returns>If successfully logged, the new log entry's id.</returns>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.UserSecurity.GetSetting(System.String)">
+	<summary>
+ Provides the setting's value for the provided setting name, for this particular user.
+ Please use GetSetting2 for improved behaviour.
+ </summary>
+	<param name="name">The name of the setting.</param>
+	<returns>
+ The setting value; if the setting does not exist then an empty string is returned.
+ </returns>
+	<remarks>
+ This should be marked as obsolete however this would "spam" the VS08 warning windows.
+ </remarks>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.UserSecurity.GetSetting2(System.String)">
+	<summary>
+ Provides the setting's value for the provided setting name, for this particular user.
+ </summary>
+	<param name="name">The name of the setting.</param>
+	<returns>
+ The setting value; if the setting does not exist then "nothing" is returned.
+ </returns>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.UserSecurity.GetSetting(System.String,System.String)">
+	<summary>
+ Provides the setting's value for the provided setting name, for this particular user.
+ </summary>
+	<param name="name">The name of the setting.</param>
+	<param name="defaultValue">The default value when the setting does not exist.</param>
+	<returns>
+ The setting value; if the setting does not exist then the default is returned.
+ </returns>
+</member><member name="T:Snowden.Common.Security.RoleBasedSecurity.SqlDalRoleBasedSecurity">
+	<summary>
+ SQL Data Access Layer role based security class.
+ </summary>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.IUserSecurity.SetStale">
+	<summary>
+ Lets the User Security instance know that some underlying data has changed.
+ </summary>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.IUserSecurity.SetStale(System.DateTime)">
+	<summary>
+ Lets the User Security instance know that some underlying data has changed on the date/time specified.
+ </summary>
+	<param name="lastChanged">The date/time that the underlying data was changed.</param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.IUserSecurity.GetSetting(System.String)">
+	<summary>
+ Provides the setting's value for the provided setting name, for this particular user.
+ Please use GetSetting2 for improved behaviour.
+ </summary>
+	<param name="name">The name of the setting.</param>
+	<returns>
+ The setting value; if the setting does not exist then an empty string is returned.
+ </returns>
+	<remarks>
+ This should be marked as obsolete however this would "spam" the VS08 warning windows.
+ </remarks>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.IUserSecurity.GetSetting2(System.String)">
+	<summary>
+ Provides the setting's value for the provided setting name, for this particular user.
+ </summary>
+	<param name="name">The name of the setting.</param>
+	<returns>
+ The setting value; if the setting does not exist then "nothing" is returned.
+ </returns>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.IUserSecurity.GetSetting(System.String,System.String)">
+	<summary>
+ Provides the setting's value for the provided setting name, for this particular user.
+ </summary>
+	<param name="name">The name of the setting.</param>
+	<param name="defaultValue">The default value when the setting does not exist.</param>
+	<returns>
+ The setting value; if the setting does not exist then the default is returned.
+ </returns>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.IDalRoleBasedSecurity.GetUser(System.Int32)">
+	<summary>
+ Returns extended information for the requested user.
+ </summary>
+	<param name="userId">The user's id.</param>
+	<returns>Provides the following tables: User, UserRole, GroupRole.</returns>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.IDalRoleBasedSecurity.ClearUserSetting(System.Int32,System.String)">
+	<summary>
+ Clears the setting for the user.
+ </summary>
+	<param name="userId">The User's Id.</param>
+	<param name="settingType">The setting type.  Null will clear all settings.</param>
+</member><member name="M:Snowden.Common.Security.RoleBasedSecurity.IDalRoleBasedSecurity.GetUserGroups(System.Int32)">
+	<returns>Returns GroupId/GroupName pairs for the specified user.</returns>
+</member><member name="T:Snowden.Common.Security.RoleBasedSecurity.IDalRoleBasedSecurity">
+	<summary>
+ Interface for all role based security classes.
+ </summary>
+</member><member name="P:Snowden.Common.Security.Crypto.TextEncryptionDes.EncryptionKey">
+	<summary>
+ Gets or sets the encryption key.
+ </summary>
+	<value>The encryption key.</value>
+</member><member name="M:Snowden.Common.Security.Crypto.TextEncryptionDes.#ctor(System.String)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="encryptionKey">The encryption key.</param>
+</member><member name="M:Snowden.Common.Security.Crypto.TextEncryptionDes.EncryptText(System.String)">
+	<summary>
+ Encrypts the text.
+ </summary>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.Crypto.TextEncryptionDes.DecryptText(System.String)">
+	<summary>
+ Decrypts the text.
+ </summary>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.Crypto.TextEncryptionDes.EncryptText(System.String,System.String)">
+	<summary>
+ Encrypts the text.
+ </summary>
+	<param name="value">The value.</param>
+	<param name="Key">The key.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.Crypto.TextEncryptionDes.DecryptText(System.String,System.String)">
+	<summary>
+ Decrypts the text.
+ </summary>
+	<param name="value">The value.</param>
+	<param name="Key">The key.</param>
+	<returns></returns>
+</member><member name="T:Snowden.Common.Security.Crypto.TextEncryptionDes">
+	<summary>
+ Class to encrypt/decrypt text using DES algorithm.
+ </summary>
+</member><member name="M:Snowden.Common.Security.Crypto.HashChecks.#ctor">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+</member><member name="M:Snowden.Common.Security.Crypto.HashChecks.HashFileSha512(System.String)">
+	<summary>
+ Hashes the file.
+ </summary>
+	<param name="fullPathName">Full path of the file.</param>
+	<returns></returns>
+</member><member name="T:Snowden.Common.Security.Crypto.HashChecks">
+	<summary>
+ Class to Hash/Encrypt files.
+ </summary>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.#ctor">
+	<summary>
+ Prevent instantiation.
+ </summary>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.IsValidNTGroup(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Checks whether the group is valid in the domain.
+ </summary>
+	<param name="ntAccountName">The full Windows Account Name in the format of domain\group or group@domain.</param>
+	<returns>
+		<c>true</c> if valid; otherwise, <c>false</c>.
+ </returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.IsValidNTUser(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Checks whether the user is valid in the domain.
+ </summary>
+	<param name="ntAccountName">The full Windows Account Name in the format of domain\user or user@domain.</param>
+	<returns>
+		<c>true</c> if valid; otherwise, <c>false</c>.
+ </returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetSid(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the sid of the user.
+ </summary>
+	<param name="ntAccountName">The full Windows Account Name in the format of domain\userOrgroup or userOrgroup@Domain.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetEmailAddress(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the user email address.
+ </summary>
+	<param name="ntAccountName">The full Windows Account Name in the format of domain\user or user@domain.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetGroupName(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the name of the windows group.
+ </summary>
+	<param name="ntAccountName">The full Windows Account Name in the format of domain\group or group@domain.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetUserFirstName(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the first name of the user.
+ </summary>
+	<param name="ntAccountName">The full Windows Account Name in the format of domain\user or user@domain.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetUserLastName(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the last name of the user.
+ </summary>
+	<param name="ntAccountName">The full Windows Account Name in the format of domain\user or user@domain.</param>
+	<param name="credentials">The credentials used when querying.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetDirectoryEntry(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the directory entry.
+ </summary>
+	<param name="domain">The domain.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetDirectorySearcherDomain(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the directory searcher domain.
+ </summary>
+	<param name="domain">The domain.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetDirectoryEntry(System.String,System.Boolean,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the directory entry.
+ </summary>
+	<param name="domain">The domain.</param>
+	<param name="getConfigurationContext">True or False.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.GetDomainNamingContext(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Gets the domain naming context.
+ </summary>
+	<param name="domain">The domain.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Security.ActiveDirectoryHelper.IsValidNTDomain(System.String,Snowden.Common.Security.ActiveDirectoryHelper.NetworkCredentials)">
+	<summary>
+ Checks whether the domain is valid.
+ </summary>
+	<param name="domain">The domain name.</param>
+	<returns>
+		<c>true</c> if valid; otherwise, <c>false</c>.
+ </returns>
+</member><member name="T:Snowden.Common.Security.ActiveDirectoryHelper">
+	<summary>
+ Helper class to maintain Active Directory Users and Groups.
+ </summary>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccessConnection.AllowAutoDispose">
+	<summary>
+ Determines whether the connection object is automatically disposed when an associated DAL is closed.
+ In the case where connections are shared between DALs this behaviour may result in DAL objects
+ missing their connection.
+ </summary>
+	<value>Whether to also automatically dispose the connection on DAL disposal.</value>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccessConnection.TransactionOpen">
+	<summary>
+ Returns true if the transaction is open.
+ </summary>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccessConnection.ConnectionOpen">
+	<summary>
+ Returns true if the connection is open.
+ </summary>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccessConnection.RepairTimeout">
+	<summary>
+ Gets/sets the repair timeout.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccessConnection.BeginTransaction(System.Data.IsolationLevel)">
+	<summary>
+ Begins a new transaction.
+ If a transaction is already open then an error is raised.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccessConnection.CommitTransaction">
+	<summary>
+ Commits an existing transaction.
+ If there is no active transaction then an error is raised.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccessConnection.Connect">
+	<summary>
+ Connects to the target database.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccessConnection.TryRepair(System.Data.Common.DbException)">
+	<summary>
+ Attempts to repair a connection based on the error provided.
+ Returns true if repaired, false if not.
+ Will throw exceptions when critical situations are encountered.
+ </summary>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.Connection">
+	<summary>
+ Gets or sets the connection.
+ </summary>
+	<value>The connection.</value>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ConnectionString">
+	<summary>
+ Gets or sets the connection string.
+ </summary>
+	<value>The connection string.</value>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.CommandText">
+	<summary>
+ Gets or sets the command text.
+ </summary>
+	<value>The command text.</value>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.CommandTimeout">
+	<summary>
+ Gets or sets the command timeout.
+ </summary>
+	<value>The command timeout.</value>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.CommandType">
+	<summary>
+ Gets or sets the type of the command.
+ </summary>
+	<value>The type of the command.</value>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ParameterCollection">
+	<summary>
+ Gets the parameter collection.
+ </summary>
+	<value>The parameter collection.</value>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.Status">
+	<summary>
+ Gets the connection status.
+ </summary>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.Transaction">
+	<summary>
+ Gets or sets the transaction.
+ </summary>
+	<value>The transaction.</value>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.GetCommand">
+	<summary>
+ Returns the command object w/ the connection specifically attached
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.BeginTransaction">
+	<summary>
+ Begins the transaction.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.BeginTransaction(System.Data.IsolationLevel)">
+	<summary>
+ Begins the transaction.
+ </summary>
+	<param name="isolationLevel">The isolation level.</param>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.CommitTransaction">
+	<summary>
+ Commits the transaction.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.Connect">
+	<summary>
+ Connects this instance.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.Disconnect">
+	<summary>
+ Disconnects this instance.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ExecuteDataSet">
+	<summary>
+ Returns a data set.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ExecuteDataTable">
+	<summary>
+ Returns a data table.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ExecuteXmlReader">
+	<summary>
+ Returns a xmlreader for obtaining data in xml format.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.FillDataTable(System.Data.DataSet,System.String)">
+	<summary>
+ Fills a data table in the provided dataset
+ </summary>
+	<param name="data">Dataset that the table belongs to.</param>
+	<param name="tableName">Name of the table that will be filled.</param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ExecuteNonQuery">
+	<summary>
+ Executes the non query.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ExecuteScalar">
+	<summary>
+ DO NOT USE.  THIS IS NOW OBSOLETE - USE ExecuteScalar2.
+ </summary>
+	<returns></returns>
+	<remarks>
+ This has been used widely - unfortunately there is a serious defect in
+ situations where NO records are returned and the "Nothing" casts to Zero on ints,
+ empty strings, etc.
+ </remarks>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ExecuteScalar2">
+	<summary>
+ Executes scalar.
+ </summary>
+	<returns>Returns the scalar value.  If no results are available then DBNull is returned.</returns>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.SetParameterOutputValues">
+	<summary>
+ Sets the parameter output values.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ProcessParameters">
+	<summary>
+ Processes the parameters.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.RollbackTransaction">
+	<summary>
+ Rolls back the transaction.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess.ShareTransaction(Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess)">
+	<summary>
+ Shares the current connection (and implicitly - the tranasction).
+ </summary>
+	<param name="dataAccess">The data access object that the transaction will be given to.</param>
+</member><member name="T:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDataAccess">
+	<summary>
+ Class for accessing SQL Server Data.
+ </summary>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase.DataAccess">
+	<summary>
+ Gets the data access.
+ </summary>
+	<value>The data access.</value>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase.#ctor">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase.#ctor(System.String)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="connectionString">The connection string.</param>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase.#ctor(System.Data.IDbConnection)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="databaseConnection">The connection object.</param>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase.#ctor(Snowden.Common.Database.DataAccessBaseObjects.IDataAccessConnection)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="dataAccessConnection">The connection object.</param>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase.Dispose">
+	<summary>
+ Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase.Dispose(System.Boolean)">
+	<summary>
+ Releases unmanaged and - optionally - managed resources
+ </summary>
+	<param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase.Finalize">
+	<summary>
+ Allows an <see cref="T:System.Object"/> to attempt to free resources and perform other cleanup operations before the <see cref="T:System.Object"/> is reclaimed by garbage collection.
+ </summary>
+</member><member name="T:Snowden.Common.Database.SqlDataAccessBaseObjects.SqlDalBase">
+	<summary>
+ Base class for SQL Data Access Layer classes.
+ </summary>
+</member><member name="P:Snowden.Common.Database.SqlDataAccessBaseObjects.ISqlDal.DataAccess">
+	<summary>
+ Gets the data access object.
+ </summary>
+	<value>The data access.</value>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.ISqlDal.Dispose">
+	<summary>
+ Releases unmanaged and - optionally - managed resources
+ </summary>
+</member><member name="M:Snowden.Common.Database.SqlDataAccessBaseObjects.ISqlDal.Dispose(System.Boolean)">
+	<summary>
+ Releases unmanaged and - optionally - managed resources
+ </summary>
+	<param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+</member><member name="T:Snowden.Common.Database.SqlDataAccessBaseObjects.ISqlDal">
+	<summary>
+ Interface for SQL Data Access Layer objects
+ </summary>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccessConnection.ConnectionOpen">
+	<summary>
+ Returns true if the connection is open.
+ </summary>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccessConnection.AllowAutoDispose">
+	<summary>
+ Determines whether the connection object is automatically disposed when an associated DAL is closed.
+ In the case where connections are shared between DALs this behaviour may result in DAL objects
+ missing their connection.
+ </summary>
+	<value>Whether to also automatically dispose the connection on DAL disposal.</value>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.Connection">
+	<summary>
+ Gets or sets the connection.
+ </summary>
+	<value>The connection.</value>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ConnectionString">
+	<summary>
+ Gets or sets the connection string.
+ </summary>
+	<value>The connection string.</value>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.CommandText">
+	<summary>
+ Gets or sets the command text.
+ </summary>
+	<value>The command text.</value>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.CommandTimeout">
+	<summary>
+ Gets or sets the command timeout.
+ </summary>
+	<value>The command timeout.</value>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.CommandType">
+	<summary>
+ Gets or sets the type of the command.
+ </summary>
+	<value>The type of the command.</value>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ParameterCollection">
+	<summary>
+ Gets the parameter collection.
+ </summary>
+	<value>The parameter collection.</value>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.Status">
+	<summary>
+ Gets the status.
+ </summary>
+	<value>The status.</value>
+</member><member name="P:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.Transaction">
+	<summary>
+ Gets or sets the transaction.
+ </summary>
+	<value>The transaction.</value>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.BeginTransaction">
+	<summary>
+ Begins the transaction.
+ </summary>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.BeginTransaction(System.Data.IsolationLevel)">
+	<summary>
+ Begins the transaction.
+ </summary>
+	<param name="isolationLevel">The isolation level.</param>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.CommitTransaction">
+	<summary>
+ Commits the transaction.
+ </summary>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.Connect">
+	<summary>
+ Connects this instance.
+ </summary>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.Disconnect">
+	<summary>
+ Disconnects this instance.
+ </summary>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ExecuteDataSet">
+	<summary>
+ Returns a data set.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ExecuteDataTable">
+	<summary>
+ Returns a data table.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ExecuteNonQuery">
+	<summary>
+ Executes the non query.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ExecuteScalar">
+	<summary>
+ DO NOT USE.  THIS IS NOW OBSOLETE - USE ExecuteScalar2.
+ </summary>
+	<returns></returns>
+	<remarks>
+ This has been used widely - unfortunately there is a serious defect in
+ situations where NO records are returned and the "Nothing" casts to Zero on ints,
+ empty strings, etc.
+ </remarks>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ExecuteScalar2">
+	<summary>
+ Executes scalar.
+ </summary>
+	<returns>Returns the scalar value.  If no results are available then DBNull is returned.</returns>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.SetParameterOutputValues">
+	<summary>
+ Sets the parameter output values.
+ </summary>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ProcessParameters">
+	<summary>
+ Processes the parameters.
+ </summary>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.RollbackTransaction">
+	<summary>
+ Rolls back the transaction.
+ </summary>
+</member><member name="M:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess.ShareTransaction(Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess)">
+	<summary>
+ Shares the current connection (and implicitly - the tranasction).
+ </summary>
+	<param name="dataAccess">The data access object that the transaction will be given to.</param>
+</member><member name="T:Snowden.Common.Database.OracleDataAccessBaseObjects.OracleDataAccess">
+	<summary>
+ Class for accessing Oracle Server Data.
+ </summary>
+</member><member name="P:Snowden.Common.OracleDataAccessBaseObjects.OracleDalBase.DataAccess">
+	<summary>
+ Gets the data access.
+ </summary>
+	<value>The data access.</value>
+</member><member name="M:Snowden.Common.OracleDataAccessBaseObjects.OracleDalBase.#ctor">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+</member><member name="M:Snowden.Common.OracleDataAccessBaseObjects.OracleDalBase.#ctor(System.String)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="connectionString">The connection string.</param>
+</member><member name="M:Snowden.Common.OracleDataAccessBaseObjects.OracleDalBase.Dispose">
+	<summary>
+ Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+ </summary>
+</member><member name="M:Snowden.Common.OracleDataAccessBaseObjects.OracleDalBase.Dispose(System.Boolean)">
+	<summary>
+ Releases unmanaged and - optionally - managed resources
+ </summary>
+	<param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+</member><member name="M:Snowden.Common.OracleDataAccessBaseObjects.OracleDalBase.Finalize">
+	<summary>
+ Allows an <see cref="T:System.Object"/> to attempt to free resources and perform other cleanup operations before the <see cref="T:System.Object"/> is reclaimed by garbage collection.
+ </summary>
+</member><member name="T:Snowden.Common.OracleDataAccessBaseObjects.OracleDalBase">
+	<summary>
+ Base class for Oracle Data Access Layer classes.
+ </summary>
+</member><member name="P:Snowden.Common.OracleDataAccessBaseObjects.IOracleDal.DataAccess">
+	<summary>
+ Gets the data access object.
+ </summary>
+	<value>The data access.</value>
+</member><member name="M:Snowden.Common.OracleDataAccessBaseObjects.IOracleDal.Dispose">
+	<summary>
+ Releases unmanaged and - optionally - managed resources
+ </summary>
+</member><member name="M:Snowden.Common.OracleDataAccessBaseObjects.IOracleDal.Dispose(System.Boolean)">
+	<summary>
+ Releases unmanaged and - optionally - managed resources
+ </summary>
+	<param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+</member><member name="T:Snowden.Common.OracleDataAccessBaseObjects.IOracleDal">
+	<summary>
+ Interface for SQL Data Access Layer objects
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataHelper.Pivot(System.Data.DataRelation,System.Data.DataRelation,System.String,System.String,System.String)">
+	<summary>
+ Pivots by creating a new matrix table, copying in values from the child table.
+ </summary>
+	<param name="parentChildRelation">The relationship between the Parent and Child tables.</param>
+	<param name="matrixChildRelation">The relationship between the Matrix and Child tables.</param>
+	<param name="matrixColumnName">The column name within the matrix table that contains the column names to pivot into the result table.</param>
+	<param name="childValueColumnName">The column name within the child table that contains the values.</param>
+	<param name="matrixColumnOrder">The column within the matrix table to order by, such that the result table has the columns in the correct order.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.SelectDistinct(System.Data.DataTable,System.String,System.Boolean,System.String[])">
+	<summary>
+ Selects distinct records.
+ </summary>
+	<param name="sourceTable">The source table.</param>
+	<param name="filter">The filter.</param>
+	<param name="sort">True or False.</param>
+	<param name="fieldNames">The field names.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.FieldValuesAreEqual(System.Object[],System.Data.DataRow,System.String[])">
+	<summary>
+ Checks if field values are equal.
+ </summary>
+	<param name="lastValues">The last values.</param>
+	<param name="currentRow">The current row.</param>
+	<param name="fieldNames">The field names.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.CreateRowClone(System.Data.DataRow,System.Data.DataRow,System.String[])">
+	<summary>
+ Creates the row clone.
+ </summary>
+	<param name="sourceRow">The source row.</param>
+	<param name="newRow">The new row.</param>
+	<param name="fieldNames">The field names.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.SetLastValues(System.Object[],System.Data.DataRow,System.String[])">
+	<summary>
+ Sets the last values.
+ </summary>
+	<param name="lastValues">The last values.</param>
+	<param name="sourceRow">The source row.</param>
+	<param name="fieldNames">The field names.</param>
+</member><member name="M:Snowden.Common.Database.DataHelper.ParseSqlString(System.String)">
+	<summary>
+ Parses the SQL string.
+ </summary>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.PrimaryKeyContains(System.Data.DataColumn[],System.String)">
+	<summary>
+ Checks if the field is part of the primary key.
+ </summary>
+	<param name="primaryKey">The primary key.</param>
+	<param name="columnName">Name of the column.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.CheckDataSetConstraints(System.Data.DataSet)">
+	<summary>
+ Checks the dataset constraints.
+ </summary>
+	<param name="errors">The error data set.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.AddTableColumn(System.Data.DataTable,System.String,System.Type,System.String)">
+	<summary>
+ Adds a column to a data table but checks if it exists first
+ </summary>
+	<param name="table">The datatable to append column</param>
+	<param name="columnName">Name of the column</param>
+	<param name="columnType">Data Type to append to the column</param>
+	<param name="expression">Expression to add to the column</param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Object)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Int32)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Int64)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Int16)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.String)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Char)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.DateTime)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Double)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Single)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Decimal)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.IfDBNull(System.Object,System.Boolean)">
+	<summary>
+ Checks if the input is null.
+ </summary>
+	<param name="input">The input.</param>
+	<param name="outputIfNull">The output if null.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.BuildSelectClause(System.Data.DataRow,System.Data.DataColumnCollection)">
+	<summary>
+ Builds the select clause.
+ </summary>
+	<param name="selectedRow">The selected row.</param>
+	<param name="selectedColumns">The selected columns.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.BuildSelectClause(System.Data.DataRow,System.Data.DataColumn[])">
+	<summary>
+ Builds the select clause.
+ </summary>
+	<param name="selectedRow">The selected row.</param>
+	<param name="selectedColumns">The selected columns.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.BuildSelectClause(System.Data.DataRow,System.String[])">
+	<summary>
+ Builds the select clause.
+ </summary>
+	<param name="selectedRow">The selected row.</param>
+	<param name="selectedColumns">The selected columns.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.GetFieldList(System.Data.DataTable,System.Data.DataColumn[])">
+	<summary>
+ Returns a list of fields.
+ </summary>
+	<param name="table">The table.</param>
+	<param name="columns">The columns.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataHelper.GetFieldList(System.Data.DataTable,System.String[])">
+	<summary>
+ Returns a list of fields.
+ </summary>
+	<param name="table">The table.</param>
+	<param name="columns">The columns.</param>
+	<returns></returns>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.IDataAccessConnection.AllowAutoDispose">
+	<summary>
+ Determines whether the connection object is automatically disposed when an associated DAL is closed.
+ In the case where connections are shared between DALs this behaviour may result in DAL objects
+ missing their connection.
+ </summary>
+	<value>Whether to also automatically dispose the connection on DAL disposal.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Item(System.Int32)">
+	<summary>
+ Gets or sets the element at the specified index.
+ </summary>
+	<value></value>
+	<returns>The element at the specified index.</returns>
+	<exception cref="T:System.ArgumentOutOfRangeException">
+		<paramref name="index"/> is less than zero.-or-<paramref name="index"/> is equal to or greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"/>. </exception>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Item(System.String)">
+	<summary>
+ Gets or sets the element at the specified index.
+ </summary>
+	<value></value>
+	<returns>The element at the specified index.</returns>
+	<exception cref="T:System.ArgumentOutOfRangeException">
+		<paramref name="index"/> is less than zero.-or-<paramref name="index"/> is equal to or greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"/>. </exception>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Add(System.String)">
+	<summary>
+ Adds an item with the specified name.
+ </summary>
+	<param name="name">The name.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Add(System.String,System.Object)">
+	<summary>
+ Adds an item with the specified name and value.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Add(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,System.Object)">
+	<summary>
+ Adds an item with the specified name, type and value.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Add(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,System.Int16,System.Object)">
+	<summary>
+ Adds an item with the specified name, type, length and value.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="length">The length.</param>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Add(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,System.Byte,System.Byte,System.Object)">
+	<summary>
+ Adds an item with the specified name, type, scale and value.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="precision">The precision.</param>
+	<param name="scale">The scale.</param>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Add(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,Snowden.Common.Database.DataAccessBaseObjects.CommandDirection,System.Object)">
+	<summary>
+ Adds an item with the specified name, type, direction and value.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="direction">The direction.</param>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Add(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,Snowden.Common.Database.DataAccessBaseObjects.CommandDirection,System.Int16,System.Object)">
+	<summary>
+ Adds an item with the specified name, type, direction, length and value.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="direction">The direction.</param>
+	<param name="length">The length.</param>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Add(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,Snowden.Common.Database.DataAccessBaseObjects.CommandDirection,System.Byte,System.Byte,System.Object)">
+	<summary>
+ Adds an item with the specified name, type, direction, precision, scale and value.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="direction">The direction.</param>
+	<param name="precision">The precision.</param>
+	<param name="scale">The scale.</param>
+	<param name="value">The value.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Contains(Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter)">
+	<summary>
+ Determines whether the parameter exists.
+ </summary>
+	<param name="parameter">The parameter.</param>
+	<returns>
+		<c>true</c> if exists; otherwise, <c>false</c>.
+ </returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Contains(System.String)">
+	<summary>
+ Determines whether the parameter with the specified name exists.
+ </summary>
+	<param name="name">The name.</param>
+	<returns>
+		<c>true</c> if exists; otherwise, <c>false</c>.
+ </returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.IndexOf(Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter)">
+	<summary>
+ Returns the index of specified parameter.
+ </summary>
+	<param name="parameter">The parameter.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.IndexOf(System.String)">
+	<summary>
+ Returns the index of specified parameter matching the specified name. 
+ </summary>
+	<param name="name">The name.</param>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Remove(Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter)">
+	<summary>
+ Removes the specified parameter.
+ </summary>
+	<param name="parameter">The parameter.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Remove(System.String)">
+	<summary>
+ Removes the parameter matching the specified name.
+ </summary>
+	<param name="name">The name.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection.Sort">
+	<summary>
+ Sorts this instance.
+ </summary>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameterCollection">
+	<summary>
+ Base class for a collection of data access parameters
+ </summary>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.DataType">
+	<summary>
+ Gets or sets the type of the data.
+ </summary>
+	<value>The type of the data.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.Direction">
+	<summary>
+ Gets or sets the direction.
+ </summary>
+	<value>The direction.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.DoNotSetValue">
+	<summary>
+ Determines if a value for the parameter should not be set.
+ </summary>
+	<value><c>true</c> if ignored; otherwise, <c>false</c>.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.IsNullValue">
+	<summary>
+ Determines if a value for the parameter is null.
+ </summary>
+	<value>
+		<c>true</c> if null; otherwise, <c>false</c>.
+ </value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.Length">
+	<summary>
+ Gets or sets the length.
+ </summary>
+	<value>The length.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.Name">
+	<summary>
+ Gets or sets the name.
+ </summary>
+	<value>The name.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.Precision">
+	<summary>
+ Gets or sets the precision.
+ </summary>
+	<value>The precision.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.Scale">
+	<summary>
+ Gets or sets the scale.
+ </summary>
+	<value>The scale.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.Value">
+	<summary>
+ Gets or sets the value.
+ </summary>
+	<value>The value.</value>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.#ctor(System.String)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="name">The name.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.#ctor(System.String,System.Object)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="value">The value.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.#ctor(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,System.Object)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="value">The value.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.#ctor(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,System.Int16,System.Object)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="length">The length.</param>
+	<param name="value">The value.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.#ctor(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,System.Byte,System.Byte,System.Object)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="precision">The precision.</param>
+	<param name="scale">The scale.</param>
+	<param name="value">The value.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.#ctor(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,Snowden.Common.Database.DataAccessBaseObjects.CommandDirection,System.Object)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="direction">The direction.</param>
+	<param name="value">The value.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.#ctor(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,Snowden.Common.Database.DataAccessBaseObjects.CommandDirection,System.Int16,System.Object)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="direction">The direction.</param>
+	<param name="length">The length.</param>
+	<param name="value">The value.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.#ctor(System.String,Snowden.Common.Database.DataAccessBaseObjects.CommandDataType,Snowden.Common.Database.DataAccessBaseObjects.CommandDirection,System.Byte,System.Byte,System.Object)">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+	<param name="name">The name.</param>
+	<param name="dataType">Type of the data.</param>
+	<param name="direction">The direction.</param>
+	<param name="precision">The precision.</param>
+	<param name="scale">The scale.</param>
+	<param name="value">The value.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.SetDefaultCommandType">
+	<summary>
+ Sets the default type of the command.
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter.CheckValues">
+	<summary>
+ Checks the values.
+ </summary>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.DataAccessParameter">
+	<summary>
+ Base class for data access parameters.
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessLayerBase`1.#ctor">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessLayerBase`1.DataAccess">
+	<summary>
+ Gets the data access.
+ </summary>
+	<value>The data access.</value>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.DataAccessLayerBase`1">
+	<summary>
+ Base class to derive other classes from to access data from different sources.
+ </summary>
+	<typeparam name="TDataAccess">The type of data to access.</typeparam>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.DoNotSetValues">
+	<summary>
+ Non Inheritable. System Do Not Set Values.
+ </summary>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.NullValues">
+	<summary>
+ Non Inheritable. System Null Values.
+ </summary>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.ConnectionObjectStatus">
+	<summary>
+ Connection Status Enumeration.
+ </summary>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.CommandObjectType">
+	<summary>
+ Command Object Type Enumeration.
+ </summary>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.CommandDataType">
+	<summary>
+ Command Data Type Enumeration.
+ </summary>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.CommandDirection">
+	<summary>
+ Command Direction Enumeration.
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.#ctor">
+	<summary>
+ Initializes a new instance of the class.
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.Dispose">
+	<summary>
+ Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.Dispose(System.Boolean)">
+	<summary>
+ Releases unmanaged and - optionally - managed resources
+ </summary>
+	<param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.Finalize">
+	<summary>
+ Allows an <see cref="T:System.Object"/> to attempt to free resources and perform other cleanup operations before the <see cref="T:System.Object"/> is reclaimed by garbage collection.
+ </summary>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.CommandText">
+	<summary>
+ Gets or sets the command text.
+ </summary>
+	<value>The command text.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.CommandTimeout">
+	<summary>
+ Gets or sets the command timeout.
+ </summary>
+	<value>The command timeout.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.CommandType">
+	<summary>
+ Gets or sets the type of the command.
+ </summary>
+	<value>The type of the command.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ConnectionString">
+	<summary>
+ Gets or sets the underlying connection string.
+ Note: use DataAccessConnection for general connection manipulation between DALs.
+ </summary>
+	<value>The connection string.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.DatabaseConnection">
+	<summary>
+ Gets or sets the underlying database connection.
+ Note: use DataAccessConnection for general connection manipulation between DALs.
+ </summary>
+	<value>The connection string.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.DataAccessConnection">
+	<summary>
+ Provides the Data Access Layer managed connection.
+ This is the preferred method of interacting with the database connection.
+ </summary>
+	<value>The connection object.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ParameterCollection">
+	<summary>
+ Gets the parameter collection.
+ </summary>
+	<value>The parameter collection.</value>
+</member><member name="P:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.Status">
+	<summary>
+ Gets the status.
+ </summary>
+	<value>The status.</value>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.Connect">
+	<summary>
+ Connects this instance.
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.Disconnect">
+	<summary>
+ Disconnects this instance.
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ExecuteDataSet">
+	<summary>
+ Execute query and return a dataset.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ExecuteDataTable">
+	<summary>
+ Execute query and return a data table.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.FillDataTable(System.Data.DataSet,System.String)">
+	<summary>
+ Fills a data table in the provided dataset
+ </summary>
+	<param name="data">Dataset that the table belongs to.</param>
+	<param name="tableName">Name of the table that will be filled.</param>
+	<remarks></remarks>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ExecuteNonQuery">
+	<summary>
+ Executes query.
+ </summary>
+	<returns></returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ExecuteScalar">
+	<summary>
+ DO NOT USE.  THIS IS NOW OBSOLETE - USE ExecuteScalar2.
+ </summary>
+	<returns></returns>
+	<remarks>
+ This has been used widely - unfortunately there is a serious defect in
+ situations where NO records are returned and the "Nothing" casts to Zero on ints,
+ empty strings, etc.
+ </remarks>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ExecuteScalar2">
+	<summary>
+ Executes scalar.
+ </summary>
+	<returns>Returns the scalar value.  If no results are available then DBNull is returned.</returns>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ExecuteDataReader">
+	<summary>
+ Returns a datareader for forward only stream access of data.
+ </summary>
+</member><member name="M:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase.ExecuteXmlReader">
+	<summary>
+ Returns a xmlreader for obtaining data in xml format.
+ </summary>
+</member><member name="T:Snowden.Common.Database.DataAccessBaseObjects.DataAccessBase">
+	<summary>
+ Base class to derive other classes from to access data from different sources.
+ </summary>
+</member>
+</members>
+</doc>

@@ -1,0 +1,156 @@
+#spiffycalendar {
+	z-index: 15;
+	filter: progid:DXImageTransform.Microsoft.Shadow(Color=#ff919899, Strength=5, Direction=135);
+	left: 0px;
+	visibility: hidden;
+	position: absolute;
+	top: 0px;
+	background-color: black;
+}
+.cal-SymbolBtn {
+	font-size: 8pt;
+	font-family: Webdings;
+	outline-style: none;
+	outline-width: 0px;
+}
+.cal-BtnLink {
+	outline-style: none;
+	outline-width: 0px;
+}
+A.cal-DayLink {
+	font-weight: normal;
+	font-size: 8pt;
+	color: black;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: none;
+}
+A.cal-DayLink:hover {
+	font-weight: bold;
+	font-size: 8pt;
+	color: #0d418e;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: #dce5f1;
+	text-decoration: none;
+}
+A.cal-DayLink:active {
+	font-weight: normal;
+	font-size: 8pt;
+	color: #0d418e;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: none;
+}
+.cal-TextBox {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	font-size: 11px;
+	border-bottom-width: 1px;
+	color: #000000;
+	font-family: tahoma,sans-serif;
+	background-color: #dce8f3;
+	border-right-width: 1px;
+}
+.cal-TextBoxInvalid {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	font-size: 11px;
+	border-bottom-width: 1px;
+	color: red;
+	font-family: tahoma,sans-serif;
+	background-color: #dce8f3;
+	border-right-width: 1px;
+}
+.cal-TextBoxDisabled {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	font-size: 11px;
+	border-bottom-width: 1px;
+	color: gray;
+	font-family: tahoma,sans-serif;
+	background-color: #dce8f3;
+	border-right-width: 1px;
+}
+.cal-ComboBox {
+	font-weight: normal;
+	font-size: 8pt;
+	color: #474747;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: #d8e2eb;
+}
+.cal-Today {
+	font-weight: bold;
+	font-size: 8pt;
+	color: red;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: none;
+}
+.cal-Day {
+	font-weight: normal;
+	font-size: 8pt;
+	color: black;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: none;
+}
+A.cal-TodayLink {
+	font-weight: bold;
+	font-size: 8pt;
+	color: red;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: none;
+}
+A.cal-TodayLink:hover {
+	font-weight: bold;
+	font-size: 8pt;
+	color: #0d418e;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: none;
+}
+A.cal-TodayLink:active {
+	font-weight: bold;
+	font-size: 8pt;
+	color: #0d418e;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: none;
+}
+.cal-GreyDate {
+	font-weight: normal;
+	font-size: 8pt;
+	color: #999999;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: #e9eff5;
+	text-decoration: none;
+}
+.cal-GreyInvalidDate {
+	font-weight: normal;
+	font-size: 8pt;
+	color: #999999;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: #e9eff5;
+	text-decoration: line-through;
+}
+.cal-DayCell {
+	font-weight: normal;
+	font-size: 8pt;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: white;
+}
+.cal-HeadCell {
+	font-weight: bold;
+	font-size: 8pt;
+	color: black;
+	font-family: Verdana, Arial, sans-serif;
+	background-color: #b3c4d3;
+}
+.cal-Table {
+	border-right: #1f4a71 1px solid;
+	border-top: #1f4a71 1px solid;
+	border-left: #1f4a71 1px solid;
+	border-bottom: #1f4a71 1px solid;
+	background-color: #1f4a71;
+}

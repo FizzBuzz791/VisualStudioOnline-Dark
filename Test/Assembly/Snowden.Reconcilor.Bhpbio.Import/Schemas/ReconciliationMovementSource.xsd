@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReconciliationMovementSource" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReconciliationMovementSource" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReconciliationMovementSource" msprop:Generator_UserDSName="ReconciliationMovementSource">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ReconciliationMovement" msprop:Generator_UserTableName="ReconciliationMovement" msprop:Generator_RowEvArgName="ReconciliationMovementRowChangeEvent" msprop:Generator_TableVarName="tableReconciliationMovement" msprop:Generator_TablePropName="ReconciliationMovement" msprop:Generator_RowDeletingName="ReconciliationMovementRowDeleting" msprop:Generator_RowChangingName="ReconciliationMovementRowChanging" msprop:Generator_RowDeletedName="ReconciliationMovementRowDeleted" msprop:Generator_RowEvHandlerName="ReconciliationMovementRowChangeEventHandler" msprop:Generator_TableClassName="ReconciliationMovementDataTable" msprop:Generator_RowChangedName="ReconciliationMovementRowChanged" msprop:Generator_RowClassName="ReconciliationMovementRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BlockNumber" msprop:Generator_ColumnVarNameInTable="columnBlockNumber" msprop:Generator_ColumnPropNameInRow="BlockNumber" msprop:Generator_ColumnPropNameInTable="BlockNumberColumn" msprop:Generator_UserColumnName="BlockNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BlockName" msprop:Generator_ColumnVarNameInTable="columnBlockName" msprop:Generator_ColumnPropNameInRow="BlockName" msprop:Generator_ColumnPropNameInTable="BlockNameColumn" msprop:Generator_UserColumnName="BlockName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Site" msprop:Generator_ColumnVarNameInTable="columnSite" msprop:Generator_ColumnPropNameInRow="Site" msprop:Generator_ColumnPropNameInTable="SiteColumn" msprop:Generator_UserColumnName="Site">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Orebody" msprop:Generator_ColumnVarNameInTable="columnOrebody" msprop:Generator_ColumnPropNameInRow="Orebody" msprop:Generator_ColumnPropNameInTable="OrebodyColumn" msprop:Generator_UserColumnName="Orebody">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Pit" msprop:Generator_ColumnVarNameInTable="columnPit" msprop:Generator_ColumnPropNameInRow="Pit" msprop:Generator_ColumnPropNameInTable="PitColumn" msprop:Generator_UserColumnName="Pit">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Bench" msprop:Generator_ColumnVarNameInTable="columnBench" msprop:Generator_ColumnPropNameInRow="Bench" msprop:Generator_ColumnPropNameInTable="BenchColumn" msprop:Generator_UserColumnName="Bench">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PatternNumber" msprop:Generator_ColumnVarNameInTable="columnPatternNumber" msprop:Generator_ColumnPropNameInRow="PatternNumber" msprop:Generator_ColumnPropNameInTable="PatternNumberColumn" msprop:Generator_UserColumnName="PatternNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DateFrom" msdata:DateTimeMode="Unspecified" msprop:Generator_ColumnVarNameInTable="columnDateFrom" msprop:Generator_ColumnPropNameInRow="DateFrom" msprop:Generator_ColumnPropNameInTable="DateFromColumn" msprop:Generator_UserColumnName="DateFrom" type="xs:dateTime" />
+              <xs:element name="DateTo" msdata:DateTimeMode="Unspecified" msprop:Generator_ColumnVarNameInTable="columnDateTo" msprop:Generator_ColumnPropNameInRow="DateTo" msprop:Generator_ColumnPropNameInTable="DateToColumn" msprop:Generator_UserColumnName="DateTo" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="LastModifiedDate" msdata:DateTimeMode="Unspecified" msprop:Generator_ColumnVarNameInTable="columnLastModifiedDate" msprop:Generator_ColumnPropNameInRow="LastModifiedDate" msprop:Generator_ColumnPropNameInTable="LastModifiedDateColumn" msprop:Generator_UserColumnName="LastModifiedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="LastModifiedUser" msprop:Generator_ColumnVarNameInTable="columnLastModifiedUser" msprop:Generator_ColumnPropNameInRow="LastModifiedUser" msprop:Generator_ColumnPropNameInTable="LastModifiedUserColumn" msprop:Generator_UserColumnName="LastModifiedUser" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MinedPercentage" msprop:Generator_ColumnVarNameInTable="columnMinedPercentage" msprop:Generator_ColumnPropNameInRow="MinedPercentage" msprop:Generator_ColumnPropNameInTable="MinedPercentageColumn" msprop:Generator_UserColumnName="MinedPercentage" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//ReconciliationMovement" />
+      <xs:field xpath="BlockNumber" />
+      <xs:field xpath="BlockName" />
+      <xs:field xpath="Site" />
+      <xs:field xpath="Orebody" />
+      <xs:field xpath="Pit" />
+      <xs:field xpath="Bench" />
+      <xs:field xpath="PatternNumber" />
+      <xs:field xpath="DateFrom" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

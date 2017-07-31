@@ -1,0 +1,17 @@
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.pdb
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.xml
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Common.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Database.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Core.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Core.WebDevelopment.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Common.Import.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Core.Globalisation.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Database.pdb
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\bin\x86\Debug\Snowden.Reconcilor.Bhpbio.Database.xml
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.vbprojResolveAssemblyReference.cache
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.Resources.resources
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.vbproj.GenerateResource.Cache
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.dll
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.xml
+C:\TFS\Reconciler_BHPBIO_4\Branch-4.0.0.0\Test\Assembly\Snowden.Reconcilor.Bhpbio.Report\obj\x86\Debug\Snowden.Reconcilor.Bhpbio.Report.pdb

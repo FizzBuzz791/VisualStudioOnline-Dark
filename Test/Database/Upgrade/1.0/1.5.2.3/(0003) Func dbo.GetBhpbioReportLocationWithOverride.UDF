@@ -1,0 +1,39 @@
+﻿IF OBJECT_ID('dbo.GetBhpbioReportLocationWithOverride') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioReportLocationWithOverride
+Go 
+
+CREATE FUNCTION dbo.GetBhpbioReportLocationWithOverride
+(
+	@iLocationId INT,
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME
+)
+RETURNS @Location TABLE
+(
+	LocationId INT
+	PRIMARY KEY (LocationId)
+)
+BEGIN
+	-- IMPORTANT: this function only to be used in scenarios where DateFrom and DateTo represent a single reporting month
+	-- (i.e. cannot span multiple months), in all other cases please use function GetBhpbioReportLocationBreakdownWithOverride
+
+	DECLARE @LocationId INT
+	
+	SET @LocationId = @iLocationId
+
+	-- works around for defects where the UI sentinels are passed through to here
+	IF @LocationId = NULL OR @LocationId <= 0
+	BEGIN
+		SELECT @LocationId = Location_Id
+		FROM Location
+		WHERE Name = 'WAIO'
+	END
+
+	-- when the LocationId is NULL then the full subtree is returned anyway
+	INSERT INTO @Location
+		(LocationId)
+	SELECT LocationId
+	FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@LocationId, 1, NULL, @iDateFrom, @iDateTo)
+	
+	RETURN
+END

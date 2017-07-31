@@ -1,0 +1,38 @@
+﻿IF OBJECT_ID('dbo.BhpbioSummaryEntryType') IS NOT NULL
+	DROP TABLE dbo.BhpbioSummaryEntryType
+GO
+CREATE TABLE dbo.BhpbioSummaryEntryType
+(
+	SummaryEntryTypeId INT NOT NULL,
+	Name VARCHAR (30) NOT NULL,
+	AssociatedBlockModelId INTEGER NULL,
+	
+	CONSTRAINT PK_BhpbioSummaryEntryType
+		PRIMARY KEY (SummaryEntryTypeId),
+		
+	CONSTRAINT UQ_BhpbioSummaryEntryType_Name
+		UNIQUE (Name),
+		
+	CONSTRAINT FK_BhpbioSummaryEntryType_BlockModel
+		FOREIGN KEY (AssociatedBlockModelId)
+		REFERENCES dbo.BlockModel (Block_Model_Id)
+)
+GO
+/*
+<TAG Name="Data Dictionary" TableName="dbo.BhpbioSummaryEntryType">
+	<Table>
+		This table contains the set of entry types that may be stored in the BhpbioSummaryEntry table
+	</Table>
+	<Columns>
+		<Column Name="BhpbioSummaryEntryType">
+			Uniquely identifies the entry type
+		</Column>
+		<Column Name="Name">
+			A name describing the entry type
+		</Column>
+		<Column Name="AssociatedBlockModelId">
+			Identifies the block model associated with this summary entry type
+		</Column>
+	</Columns>
+</TAG>
+*/

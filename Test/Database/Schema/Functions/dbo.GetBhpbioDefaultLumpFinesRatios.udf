@@ -1,0 +1,121 @@
+﻿If Object_Id('dbo.GetBhpbioDefaultLumpFinesRatios') Is Not Null
+	Drop Function dbo.GetBhpbioDefaultLumpFinesRatios
+Go
+
+Create Function dbo.GetBhpbioDefaultLumpFinesRatios
+(
+	@iLocationId Int = Null,
+	@iTransactionDate Datetime = Null,
+	@iIncludeTotal Bit = Null
+)
+Returns @DefaultRatios Table
+(
+	LocationId Int,
+	StartDate Datetime,
+	EndDate Datetime,
+	ProductSize Varchar(5),
+	[Percent] Decimal(5, 4)
+)
+As
+Begin
+	DECLARE @GlobalEndDate DateTime
+
+	SET @GlobalEndDate = '2050-12-31'
+
+	If @iLocationId Is Not Null And @iTransactionDate Is Not Null
+	Begin
+		If Not Exists
+		(
+			Select 1 From dbo.Location Where Location_Id = @iLocationId
+		)
+		Begin
+			--	Raiserror('Location was not found.', 16, 1)
+			--Since functions are not allowed to Raiserror, do this instead:
+			Insert Into @DefaultRatios ([Percent])
+			Select Cast('Error: Location id ' + @iLocationId + ' was invalid.' As Int)
+			
+			Return
+		End
+		
+		If Not Exists
+		(
+			Select 1
+			From dbo.BhpbioDefaultLumpFines
+			Where LocationId = @iLocationId
+				And StartDate <= @iTransactionDate
+		)
+		Begin
+			--	Raiserror('Default ratio was not found.', 16, 1)
+			--Since functions are not allowed to Raiserror, do this instead:
+			Insert Into @DefaultRatios ([Percent])
+			Select Cast('Error: Default ratio for location id ' + @iLocationId + ' was not found.' As Int)
+			
+			Return
+		End
+		
+		Insert Into @DefaultRatios
+		(
+			LocationId, ProductSize, StartDate, EndDate, [Percent]
+		)
+		Select Top 1 @iLocationId, 'LUMP', @iTransactionDate, @iTransactionDate, LumpPercent
+		From dbo.BhpbioDefaultLumpFines
+		Where LocationId = @iLocationId
+			And StartDate <= @iTransactionDate
+		Order By StartDate Desc
+	End
+	Else -- return everything
+	Begin
+		Insert Into @DefaultRatios
+		(
+			LocationId, StartDate, EndDate, ProductSize, [Percent]
+		)
+		Select f.LocationId,
+			f.StartDate,
+			ISNULL(Dateadd(Second, -1, a.StartDate), @GlobalEndDate) As EndDate,
+			'LUMP',
+			f.LumpPercent
+		From
+		(
+			Select *,
+			Row_Number() Over 
+			(
+				Partition By LocationId
+				Order By StartDate
+			) As OrderNo
+			From dbo.BhpbioDefaultLumpFines
+		) As f
+		Left Outer Join
+		(
+			Select LocationId,
+				StartDate,
+				Row_Number() Over 
+				(
+					Partition By LocationId
+					Order By StartDate
+				) As OrderNo
+			From dbo.BhpbioDefaultLumpFines
+		) As a
+			On (f.LocationId = a.LocationId
+				And f.OrderNo = (a.OrderNo - 1))
+				
+	End
+	
+	-- include FINES ratio
+	Insert Into @DefaultRatios
+	(
+		LocationId, StartDate, EndDate, ProductSize, [Percent]
+	)
+	Select LocationId, StartDate, EndDate, 'FINES', 1 - [Percent]
+	From @DefaultRatios
+
+	-- include TOTAL product size if requested
+	If (@iIncludeTotal = 1)
+		Insert Into @DefaultRatios
+		(
+		LocationId, StartDate, EndDate, ProductSize, [Percent]
+		)
+		Select LocationId, StartDate, EndDate, 'TOTAL', 1
+		From @DefaultRatios
+		Where ProductSize = 'LUMP'
+	Return
+End

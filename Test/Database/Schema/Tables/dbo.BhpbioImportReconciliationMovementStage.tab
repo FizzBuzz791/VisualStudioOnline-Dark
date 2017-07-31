@@ -1,0 +1,24 @@
+IF OBJECT_ID('dbo.BhpbioImportReconciliationMovementStage') IS NOT NULL 
+     DROP TABLE dbo.BhpbioImportReconciliationMovementStage
+Go 
+
+CREATE TABLE dbo.BhpbioImportReconciliationMovementStage
+(
+	BlockNumber VARCHAR(4) COLLATE DATABASE_DEFAULT NOT NULL,
+	BlockName VARCHAR(5) COLLATE DATABASE_DEFAULT NOT NULL,
+	Site VARCHAR(9) COLLATE DATABASE_DEFAULT NOT NULL,
+	Orebody VARCHAR(2) COLLATE DATABASE_DEFAULT NOT NULL,
+	Pit VARCHAR(10) COLLATE DATABASE_DEFAULT NOT NULL,
+	Bench VARCHAR(4) COLLATE DATABASE_DEFAULT NOT NULL,
+	PatternNumber VARCHAR(4) COLLATE DATABASE_DEFAULT NOT NULL,
+	DateFrom DATETIME NOT NULL,
+	DateTo DATETIME NULL,
+	LastModifiedDate DATETIME NULL,
+	LastModifiedUser VARCHAR(50) COLLATE DATABASE_DEFAULT NULL,
+	MinedPercentage FLOAT
+)
+GO
+
+-- note that the select permission is also required for SqlBulkCopy
+GRANT SELECT, INSERT ON dbo.BhpbioImportReconciliationMovementStage TO CommonImportManager
+GO

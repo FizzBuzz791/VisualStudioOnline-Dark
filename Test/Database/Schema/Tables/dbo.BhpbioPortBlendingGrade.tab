@@ -1,0 +1,22 @@
+﻿IF OBJECT_ID('dbo.BhpbioPortBlendingGrade') IS NOT NULL
+	DROP TABLE dbo.BhpbioPortBlendingGrade
+GO
+
+CREATE TABLE dbo.BhpbioPortBlendingGrade
+(
+	BhpbioPortBlendingId INT NOT NULL,
+	GradeId SMALLINT NOT NULL,
+	GradeValue REAL NOT NULL,
+
+	CONSTRAINT PK_BhpbioPortBlendingGrade
+		PRIMARY KEY (BhpbioPortBlendingId, GradeId),
+
+	CONSTRAINT FK_BhpbioPortBlendingGrade_BhpbioPortBlending
+		FOREIGN KEY (BhpbioPortBlendingId)
+		REFERENCES dbo.BhpbioPortBlending (BhpbioPortBlendingId),
+		
+	CONSTRAINT FK_BhpbioPortBlendingGrade_Grade
+		FOREIGN KEY (GradeId)
+		REFERENCES dbo.Grade (Grade_Id)
+)
+GO

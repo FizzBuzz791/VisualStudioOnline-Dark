@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StockpileSource" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StockpileSource" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="StockpileSource" msprop:Generator_DataSetName="StockpileSource" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Stockpile" msprop:Generator_UserTableName="Stockpile" msprop:Generator_RowDeletedName="StockpileRowDeleted" msprop:Generator_RowChangedName="StockpileRowChanged" msprop:Generator_RowClassName="StockpileRow" msprop:Generator_RowChangingName="StockpileRowChanging" msprop:Generator_RowEvArgName="StockpileRowChangeEvent" msprop:Generator_RowEvHandlerName="StockpileRowChangeEventHandler" msprop:Generator_TableClassName="StockpileDataTable" msprop:Generator_TableVarName="tableStockpile" msprop:Generator_RowDeletingName="StockpileRowDeleting" msprop:Generator_TablePropName="Stockpile">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StockpileName" msprop:Generator_UserColumnName="StockpileName" msprop:Generator_ColumnPropNameInRow="StockpileName" msprop:Generator_ColumnVarNameInTable="columnStockpileName" msprop:Generator_ColumnPropNameInTable="StockpileNameColumn" type="xs:string" />
+              <xs:element name="Mine" msprop:Generator_UserColumnName="Mine" msprop:Generator_ColumnVarNameInTable="columnMine" msprop:Generator_ColumnPropNameInRow="Mine" msprop:Generator_ColumnPropNameInTable="MineColumn" type="xs:string" />
+              <xs:element name="StockpileGroup" msprop:Generator_UserColumnName="StockpileGroup" msprop:Generator_ColumnVarNameInTable="columnStockpileGroup" msprop:Generator_ColumnPropNameInRow="StockpileGroup" msprop:Generator_ColumnPropNameInTable="StockpileGroupColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="MaterialType" msprop:Generator_UserColumnName="MaterialType" msprop:Generator_ColumnPropNameInRow="MaterialType" msprop:Generator_ColumnVarNameInTable="columnMaterialType" msprop:Generator_ColumnPropNameInTable="MaterialTypeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Description" msprop:Generator_UserColumnName="Description" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="StartTonnes" msprop:Generator_UserColumnName="StartTonnes" msprop:Generator_ColumnVarNameInTable="columnStartTonnes" msprop:Generator_ColumnPropNameInRow="StartTonnes" msprop:Generator_ColumnPropNameInTable="StartTonnesColumn" type="xs:double" />
+              <xs:element name="StartDate" msdata:DateTimeMode="Unspecified" msprop:Generator_UserColumnName="StartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="StartShift" msprop:Generator_UserColumnName="StartShift" msprop:Generator_ColumnPropNameInRow="StartShift" msprop:Generator_ColumnVarNameInTable="columnStartShift" msprop:Generator_ColumnPropNameInTable="StartShiftColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="EndDate" msdata:DateTimeMode="Unspecified" msprop:Generator_UserColumnName="EndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndShift" msprop:Generator_UserColumnName="EndShift" msprop:Generator_ColumnPropNameInRow="EndShift" msprop:Generator_ColumnVarNameInTable="columnEndShift" msprop:Generator_ColumnPropNameInTable="EndShiftColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="StockpileAlgorithm" msprop:Generator_UserColumnName="StockpileAlgorithm" msprop:Generator_ColumnPropNameInRow="StockpileAlgorithm" msprop:Generator_ColumnVarNameInTable="columnStockpileAlgorithm" msprop:Generator_ColumnPropNameInTable="StockpileAlgorithmColumn" type="xs:string" />
+              <xs:element name="IsVisible" msprop:Generator_UserColumnName="IsVisible" msprop:Generator_ColumnPropNameInRow="IsVisible" msprop:Generator_ColumnVarNameInTable="columnIsVisible" msprop:Generator_ColumnPropNameInTable="IsVisibleColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="IsInReports" msprop:Generator_UserColumnName="IsInReports" msprop:Generator_ColumnPropNameInRow="IsInReports" msprop:Generator_ColumnVarNameInTable="columnIsInReports" msprop:Generator_ColumnPropNameInTable="IsInReportsColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="StockpileType" msprop:Generator_UserColumnName="StockpileType" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnStockpileType" msprop:Generator_ColumnPropNameInTable="StockpileTypeColumn" msprop:Generator_ColumnPropNameInRow="StockpileType" type="xs:string" minOccurs="0" />
+              <xs:element name="ProductSize" msprop:Generator_UserColumnName="ProductSize" msprop:Generator_ColumnPropNameInRow="ProductSize" msprop:Generator_ColumnVarNameInTable="columnProductSize" msprop:Generator_ColumnPropNameInTable="ProductSizeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint2" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//Stockpile" />
+      <xs:field xpath="StockpileName" />
+      <xs:field xpath="Mine" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

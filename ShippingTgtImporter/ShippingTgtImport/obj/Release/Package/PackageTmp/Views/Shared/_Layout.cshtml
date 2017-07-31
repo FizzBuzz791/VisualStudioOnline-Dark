@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> @ViewBag.Title - Kinross Plant Export Tool</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="logo">
+                    <img src="~/Content/snowden master logo-reverse-02.jpg" alt="Snowden" />
+                </div>
+                <div class="title">
+                    <h3><font color="white">Kinross Plant Export Tool</font></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content wrapper">
+        @RenderBody()
+        <div class="push"></div>
+    </div>
+    <div class="footer">
+        <footer>
+            <hr />
+            <font color="white"> <p>@DateTime.Now.Year - Snowden - All Rights Reserved</p></font>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

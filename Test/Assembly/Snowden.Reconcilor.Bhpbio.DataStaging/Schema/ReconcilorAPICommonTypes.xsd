@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.snowden.com/Reconcilor/v1.0/GeologyCommonDataTypes_Snowden"
+	xmlns:Q1="http://www.snowden.com/Reconcilor/v1.0/GeologyCommonDataTypes_Snowden">
+	<xsd:complexType name="BlockType">
+		<xsd:annotation>
+			<xsd:documentation>A Block belonging to the portion of a Pattern
+				whose are is defined by an associated Polygon.
+
+				Each Block may be
+				represented in multiple models, having different sets
+				of grade
+				values, ore type classification, tonnes and volume in each
+				model.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Name"
+				type="xsd:string" />
+			<xsd:element name="BlockGUID" type="xsd:string"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="BlockNumber" type="xsd:int" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+			<xsd:element name="FlitchGUID" type="xsd:string"
+				maxOccurs="1" minOccurs="0"></xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="GeoType"
+				type="xsd:string" />
+
+			<xsd:element maxOccurs="1" minOccurs="1" name="DateBlocked"
+				type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>
+						This may not be needed as this is the same as
+						the Timestamp on the BlockOutEvent
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Stratigraphy"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="StratNum"
+				type="xsd:int" />
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="ModelBlock"
+				type="Q1:ModelBlockType" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Centroid"
+				type="Q1:MiningPointType" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="PolygonPoint" type="Q1:MiningPointType" />
+			<xsd:element maxOccurs="1" minOccurs="0" name="ChangeState"
+				type="xsd:string" />
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+	<xsd:complexType name="PatternDetailsType">
+		<xsd:annotation>
+			<xsd:documentation>The pattern that is the subject of the Block out
+				or Re-Block out event</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="PatternGUID" type="xsd:string"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+
+			<xsd:element name="PatternNumber" type="xsd:string"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Name"
+				type="xsd:string" />
+
+			<xsd:element maxOccurs="1" minOccurs="1" name="SiteId"
+				type="xsd:string" />
+			<xsd:element name="MQ2SiteCode" type="xsd:string" maxOccurs="1" minOccurs="1"></xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="OrebodyId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0" name="PitId_Log"
+				type="xsd:string" />
+			<xsd:element name="PitId_Phy" type="xsd:string"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="PitId_MQ2" type="xsd:string"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+
+			<xsd:element maxOccurs="1" minOccurs="1" name="Bench"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="DateCreated"
+				type="xsd:dateTime" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="DateAccepted"
+				type="xsd:dateTime" />
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="AcceptedByUserName" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="ApprovedByUserName" type="xsd:string" />
+			<xsd:element name="BlastID" type="xsd:string" maxOccurs="1"
+				minOccurs="0">
+			</xsd:element>
+			<xsd:element name="BlastStatus" type="xsd:string"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="BlastStatusChangeDateTime"
+				type="xsd:dateTime" maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="ExternalLocationID" type="xsd:string"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="JVOwner" type="xsd:string" maxOccurs="1"
+				minOccurs="0">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="1"
+				name="Block" type="Q1:BlockType" />
+
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ModelBlockType">
+		<xsd:annotation>
+			<xsd:documentation>A representation of a Block within a specific
+				Model Type</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="ModelType"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Tonnes"
+				type="xsd:double" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Volume"
+				type="xsd:double" />
+			<xsd:element name="Density" type="xsd:double" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="OreType"
+				type="xsd:string" />
+			<xsd:element name="Designation" type="xsd:string"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="MaterialCode" type="xsd:string"
+				maxOccurs="1" minOccurs="1"></xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="LastModifiedUserName" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="LastModifiedDateTime" type="xsd:dateTime" />
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="GradeSet"
+				type="Q1:GradeSetType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GradeValueType">
+		<xsd:annotation>
+			<xsd:documentation>Represents a Grade Value for a Grade identified by
+				Name.
+
+				One of:
+
+				Density, Al2O3, SiO3, Fe, P, LOI, MnO, Mn, CaO, TiO2,
+				K2O, S, Friability
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="GradeName"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="GradeValue"
+				type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SourceModelDescriptorType">
+		<xsd:annotation>
+			<xsd:documentation>Information about a specific Model used to provide
+				information for a particular Model Type.
+
+				Only 1 model per Model Type.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+
+			<xsd:element maxOccurs="1" minOccurs="1" name="ModelFile"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="ModelType"
+				type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GradeSetType">
+		<xsd:annotation>
+			<xsd:documentation>Represents a set of grade values where all values
+				are of a specific type (In-Situ, As-Dropped, As-Shipped...)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="GradeSetType"
+				type="xsd:string" />
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="QualitySet"
+				type="Q1:QualityType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="MiningBlockType">
+		<xsd:annotation>
+			<xsd:documentation>Identifies Mining blocks of homogenous grade and
+				mineability</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="BenchId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="BlockName"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="BlockStatus"
+				type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Block status is not passed to the P&amp;IA
+						system but is internal to the P&amp;IA system which must track the
+						status of the block.
+						SFR-078
+						Blast Block Status updated by FMS
+						system
+						Values: "Dug Out", "Blasted"</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="DateBlasted"
+				type="xsd:dateTime" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="DateBlockled"
+				type="xsd:dateTime" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="DateModified"
+				type="xsd:dateTime" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Density"
+				type="xsd:double" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Designation"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="ExpectedTonnes"
+				type="xsd:double" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="GeoType"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="OrebodyId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="PatternId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="PitId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="PushbackId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="SiteId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="SwellFactor"
+				type="xsd:double" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Volume"
+				type="xsd:double" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Material"
+				type="xsd:string" />
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="ADGrade"
+				type="Q1:GradeSetType">
+				<xsd:annotation>
+					<xsd:documentation>As dropped grade. Site Geologist responsibility.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="ASGrade"
+				type="Q1:GradeSetType">
+				<xsd:annotation>
+					<xsd:documentation>As shipped grade. Site Geologist responsibility.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="1"
+				name="MiningPoint" type="Q1:MiningPointType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MiningPointType">
+		<xsd:annotation>
+			<xsd:documentation>Toe Elevation = Depth of hole</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Easting"
+				type="xsd:double" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Northing"
+				type="xsd:double" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="PointNumber"
+				type="xsd:int" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="ToeRL"
+				type="xsd:double" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QualityType">
+		<xsd:annotation>
+			<xsd:documentation>Head, Lump, Fine</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="QualityType"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="QualityTypeSplitPercentage" type="xsd:double" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Analytes"
+				type="Q1:AnalyteType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AnalyteType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="AnalyteName"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="Value"
+				type="xsd:double" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

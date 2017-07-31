@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BlockModelSource" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BlockModelSource" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="BlockModelSource" msprop:Generator_UserDSName="BlockModelSource">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BlastModelBlockWithPointAndGrade" msprop:Generator_UserTableName="BlastModelBlockWithPointAndGrade" msprop:Generator_RowEvArgName="BlastModelBlockWithPointAndGradeRowChangeEvent" msprop:Generator_TableVarName="tableBlastModelBlockWithPointAndGrade" msprop:Generator_TablePropName="BlastModelBlockWithPointAndGrade" msprop:Generator_RowDeletingName="BlastModelBlockWithPointAndGradeRowDeleting" msprop:Generator_RowChangingName="BlastModelBlockWithPointAndGradeRowChanging" msprop:Generator_RowDeletedName="BlastModelBlockWithPointAndGradeRowDeleted" msprop:Generator_RowEvHandlerName="BlastModelBlockWithPointAndGradeRowChangeEventHandler" msprop:Generator_TableClassName="BlastModelBlockWithPointAndGradeDataTable" msprop:Generator_RowChangedName="BlastModelBlockWithPointAndGradeRowChanged" msprop:Generator_RowClassName="BlastModelBlockWithPointAndGradeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Site" msprop:Generator_ColumnVarNameInTable="columnSite" msprop:Generator_ColumnPropNameInRow="Site" msprop:Generator_ColumnPropNameInTable="SiteColumn" msprop:Generator_UserColumnName="Site">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Orebody" msprop:Generator_ColumnVarNameInTable="columnOrebody" msprop:Generator_ColumnPropNameInRow="Orebody" msprop:Generator_ColumnPropNameInTable="OrebodyColumn" msprop:Generator_UserColumnName="Orebody">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Pit" msprop:Generator_ColumnVarNameInTable="columnPit" msprop:Generator_ColumnPropNameInRow="Pit" msprop:Generator_ColumnPropNameInTable="PitColumn" msprop:Generator_UserColumnName="Pit">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Bench" msprop:Generator_ColumnVarNameInTable="columnBench" msprop:Generator_ColumnPropNameInRow="Bench" msprop:Generator_ColumnPropNameInTable="BenchColumn" msprop:Generator_UserColumnName="Bench">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PatternNumber" msprop:Generator_ColumnVarNameInTable="columnPatternNumber" msprop:Generator_ColumnPropNameInRow="PatternNumber" msprop:Generator_ColumnPropNameInTable="PatternNumberColumn" msprop:Generator_UserColumnName="PatternNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BlockName" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="BlockName" msprop:Generator_ColumnVarNameInTable="columnBlockName" msprop:Generator_ColumnPropNameInTable="BlockNameColumn" msprop:Generator_UserColumnName="BlockName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="14" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ModelName" msprop:Generator_ColumnVarNameInTable="columnModelName" msprop:Generator_ColumnPropNameInRow="ModelName" msprop:Generator_ColumnPropNameInTable="ModelNameColumn" msprop:Generator_UserColumnName="ModelName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="31" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ModelOreType" msprop:Generator_ColumnVarNameInTable="columnModelOreType" msprop:Generator_ColumnPropNameInRow="ModelOreType" msprop:Generator_ColumnPropNameInTable="ModelOreTypeColumn" msprop:Generator_UserColumnName="ModelOreType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BlockExternalSystemId" msprop:Generator_ColumnVarNameInTable="columnBlockExternalSystemId" msprop:Generator_ColumnPropNameInRow="BlockExternalSystemId" msprop:Generator_ColumnPropNameInTable="BlockExternalSystemIdColumn" msprop:Generator_UserColumnName="BlockExternalSystemId" type="xs:string" minOccurs="0" />
+              <xs:element name="ModelFilename" msprop:Generator_ColumnVarNameInTable="columnModelFilename" msprop:Generator_ColumnPropNameInRow="ModelFilename" msprop:Generator_ColumnPropNameInTable="ModelFilenameColumn" msprop:Generator_UserColumnName="ModelFilename" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BlockNumber" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="BlockNumber" msprop:Generator_ColumnVarNameInTable="columnBlockNumber" msprop:Generator_ColumnPropNameInTable="BlockNumberColumn" msprop:Generator_UserColumnName="BlockNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GeoType" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="GeoType" msprop:Generator_ColumnVarNameInTable="columnGeoType" msprop:Generator_ColumnPropNameInTable="GeoTypeColumn" msprop:Generator_UserColumnName="GeoType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BlockedDate" msdata:DateTimeMode="Unspecified" msprop:Generator_ColumnVarNameInTable="columnBlockedDate" msprop:Generator_ColumnPropNameInRow="BlockedDate" msprop:Generator_ColumnPropNameInTable="BlockedDateColumn" msprop:Generator_UserColumnName="BlockedDate" type="xs:dateTime" />
+              <xs:element name="BlastedDate" msdata:DateTimeMode="Unspecified" msprop:Generator_ColumnVarNameInTable="columnBlastedDate" msprop:Generator_ColumnPropNameInRow="BlastedDate" msprop:Generator_ColumnPropNameInTable="BlastedDateColumn" msprop:Generator_UserColumnName="BlastedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CentroidEasting" msprop:Generator_ColumnVarNameInTable="columnCentroidEasting" msprop:Generator_ColumnPropNameInRow="CentroidEasting" msprop:Generator_ColumnPropNameInTable="CentroidEastingColumn" msprop:Generator_UserColumnName="CentroidEasting" type="xs:double" minOccurs="0" />
+              <xs:element name="CentroidNorthing" msprop:Generator_ColumnVarNameInTable="columnCentroidNorthing" msprop:Generator_ColumnPropNameInRow="CentroidNorthing" msprop:Generator_ColumnPropNameInTable="CentroidNorthingColumn" msprop:Generator_UserColumnName="CentroidNorthing" type="xs:double" minOccurs="0" />
+              <xs:element name="CentroidRL" msprop:Generator_ColumnVarNameInTable="columnCentroidRL" msprop:Generator_ColumnPropNameInRow="CentroidRL" msprop:Generator_ColumnPropNameInTable="CentroidRLColumn" msprop:Generator_UserColumnName="CentroidRL" type="xs:double" minOccurs="0" />
+              <xs:element name="ModelTonnes" msprop:Generator_ColumnVarNameInTable="columnModelTonnes" msprop:Generator_ColumnPropNameInRow="ModelTonnes" msprop:Generator_ColumnPropNameInTable="ModelTonnesColumn" msprop:Generator_UserColumnName="ModelTonnes" type="xs:double" minOccurs="0" />
+              <xs:element name="LastModifiedUser" msprop:Generator_ColumnVarNameInTable="columnLastModifiedUser" msprop:Generator_ColumnPropNameInRow="LastModifiedUser" msprop:Generator_ColumnPropNameInTable="LastModifiedUserColumn" msprop:Generator_UserColumnName="LastModifiedUser" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastModifiedDate" msdata:DateTimeMode="Unspecified" msprop:Generator_ColumnVarNameInTable="columnLastModifiedDate" msprop:Generator_ColumnPropNameInRow="LastModifiedDate" msprop:Generator_ColumnPropNameInTable="LastModifiedDateColumn" msprop:Generator_UserColumnName="LastModifiedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Point" msprop:Generator_ColumnVarNameInTable="columnPoint" msprop:Generator_ColumnPropNameInRow="Point" msprop:Generator_ColumnPropNameInTable="PointColumn" msprop:Generator_UserColumnName="Point" type="xs:string" minOccurs="0" />
+              <xs:element name="Grade" msprop:Generator_ColumnVarNameInTable="columnGrade" msprop:Generator_ColumnPropNameInRow="Grade" msprop:Generator_ColumnPropNameInTable="GradeColumn" msprop:Generator_UserColumnName="Grade" type="xs:string" minOccurs="0" />
+              <xs:element name="ModelLumpPercentAsShipped" msprop:Generator_ColumnVarNameInTable="columnModelLumpPercentAsShipped" msprop:Generator_ColumnPropNameInRow="ModelLumpPercentAsShipped" msprop:Generator_ColumnPropNameInTable="ModelLumpPercentAsShippedColumn" msprop:Generator_UserColumnName="ModelLumpPercentAsShipped" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ModelLumpPercentAsDropped" msprop:Generator_ColumnVarNameInTable="columnModelLumpPercentAsDropped" msprop:Generator_ColumnPropNameInRow="ModelLumpPercentAsDropped" msprop:Generator_ColumnPropNameInTable="ModelLumpPercentAsDroppedColumn" msprop:Generator_UserColumnName="ModelLumpPercentAsDropped" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ModelVolume" msprop:Generator_ColumnVarNameInTable="columnModelVolume" msprop:Generator_ColumnPropNameInRow="ModelVolume" msprop:Generator_ColumnPropNameInTable="ModelVolumeColumn" msprop:Generator_UserColumnName="ModelVolume" type="xs:double" minOccurs="0" />
+              <xs:element name="ResourceClassification" msprop:Generator_ColumnVarNameInTable="columnResourceClassification" msprop:Generator_ColumnPropNameInRow="ResourceClassification" msprop:Generator_ColumnPropNameInTable="ResourceClassificationColumn" msprop:Generator_UserColumnName="ResourceClassification" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//BlastModelBlockWithPointAndGrade" />
+      <xs:field xpath="Site" />
+      <xs:field xpath="Orebody" />
+      <xs:field xpath="Pit" />
+      <xs:field xpath="Bench" />
+      <xs:field xpath="PatternNumber" />
+      <xs:field xpath="BlockName" />
+      <xs:field xpath="ModelName" />
+      <xs:field xpath="ModelOreType" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,36 @@
+﻿IF OBJECT_ID('dbo.GetBhpbioReportLocation') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioReportLocation
+Go 
+
+CREATE FUNCTION dbo.GetBhpbioReportLocation
+(
+	@iLocationId INT
+)
+RETURNS @Location TABLE
+(
+	LocationId INT
+	PRIMARY KEY (LocationId)
+)
+BEGIN
+	DECLARE @LocationId INT
+	
+	SET @LocationId = @iLocationId
+
+	-- works around for defects where the UI sentinels are passed through to here
+	IF @LocationId <= 0
+	BEGIN
+		SET @LocationId = NULL
+	END
+
+	-- when the LocationId is NULL then the full subtree is returned anyway
+	INSERT INTO @Location
+		(LocationId)
+	SELECT @LocationId
+	WHERE @LocationId IS NOT NULL
+	UNION ALL
+	SELECT Location_Id
+	FROM dbo.GetLocationChildLocationList(@LocationId)
+	WHERE Location_ID IS NOT NULL
+	
+	RETURN
+END

@@ -1,0 +1,17 @@
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BhpbioBlastBlockLumpPercent]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[BhpbioBlastBlockLumpPercent]
+	(
+		[ModelBlockId] [int] NOT NULL,
+		[SequenceNo] [int] NOT NULL,
+		[LumpPercent] [decimal](7,6) NOT NULL,
+		[GeometType] [varchar](15) NOT NULL DEFAULT ('NA'),
+		
+		CONSTRAINT [PK_BhpbioBlastBlockLumpPercent]
+			PRIMARY KEY CLUSTERED ([ModelBlockId] ASC, [SequenceNo] ASC, GeometType),
+
+		CONSTRAINT FK__BhpbioBlastBlockLumpPercent__MODEL_BLOCK FOREIGN KEY (ModelBlockId)
+			REFERENCES dbo.ModelBlock (Model_Block_Id)
+	)
+END
+GO

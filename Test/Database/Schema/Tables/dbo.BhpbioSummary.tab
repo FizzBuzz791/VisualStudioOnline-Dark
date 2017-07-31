@@ -1,0 +1,37 @@
+﻿IF OBJECT_ID('dbo.BhpbioSummary') IS NOT NULL
+	DROP TABLE dbo.BhpbioSummary
+GO
+
+CREATE TABLE dbo.BhpbioSummary
+(
+	SummaryId INT NOT NULL IDENTITY(1,1),
+	SummaryMonth DATETIME NOT NULL,
+	
+	CONSTRAINT PK_BhpbioSummary
+		PRIMARY KEY NONCLUSTERED (SummaryId),
+		
+	CONSTRAINT UQ_BhpbioSummary_SummaryMonth 
+		UNIQUE NONCLUSTERED (SummaryMonth),
+)
+GO
+CREATE UNIQUE CLUSTERED INDEX UQ_BHPBIOSUMMARY_01 ON dbo.BhpbioSummary 
+(
+	SummaryMonth ASC,
+	SummaryId ASC
+)
+GO
+/*
+<TAG Name="Data Dictionary" TableName="dbo.BhpbioSummary">
+	<Table>
+		Represents a set of summary data, and describes the period the summary covers
+	</Table>
+	<Columns>
+		<Column Name="SummaryId">
+			Uniquely identifies the summary
+		</Column>
+		<Column Name="SummaryMonth">
+			Describes the month the summary is for.  This is a DateTime field but only the Year and Month are relevant
+		</Column>
+	</Columns>
+</TAG>
+*/

@@ -1,0 +1,117 @@
+IF OBJECT_ID('dbo.GetBhpbioSummaryGradeBreakdown') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioSummaryGradeBreakdown
+GO
+
+CREATE FUNCTION dbo.GetBhpbioSummaryGradeBreakdown
+(
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME,
+	@iDateBreakdown VARCHAR(31),
+	@iSummaryEntryTypeName VARCHAR(31),
+	@iIgnoreMaterialTypes BIT,
+	@iUseAbsoluteTonnesAtIndividualRows BIT,
+	@iUseAbsoluteTonnesAtGradeSummary BIT
+)
+RETURNS @SummaryGrades TABLE
+(
+	CalendarDate DATETIME NOT NULL,
+	DateFrom DATETIME NOT NULL,
+	DateTo DATETIME NOT NULL,
+	LocationId INT NOT NULL,
+	ParentLocationId INT NULL,
+	MaterialTypeId INT NULL,
+	ProductSize VARCHAR(5) NULL,
+	GradeId INTEGER NOT NULL,
+	GradeValue FLOAT,
+	Tonnes FLOAT
+)
+WITH ENCRYPTION
+AS
+BEGIN
+	-- Find the summary entry type based on the supplied name
+	DECLARE @summaryEntryTypeId INTEGER
+			
+	SELECT @summaryEntryTypeId = bset.SummaryEntryTypeId 
+	FROM dbo.BhpbioSummaryEntryType bset
+	WHERE bset.Name = @iSummaryEntryTypeName	
+	
+	-- Insert the summary data into the result table
+	INSERT INTO @SummaryGrades
+	(
+		CalendarDate,
+		DateFrom,
+		DateTo,
+		LocationId,
+		ParentLocationId,
+		MaterialTypeId,
+		ProductSize,
+		GradeId,
+		GradeValue,
+		Tonnes
+	)
+	SELECT	B.CalendarDate AS CalendarDate, 
+			B.DateFrom, 
+			B.DateTo,
+			bse.LocationId,
+			l.Parent_Location_Id,
+			CASE WHEN @iIgnoreMaterialTypes = 1 THEN NULL ELSE bse.MaterialTypeId END,
+			bse.ProductSize,
+			bseg.GradeId,
+			-- get a sum of tonnes by grade...(calculating absolute value at pre-summed or post summed value as appropriate)
+			dbo.GetBhpbioFloatOptionalAbsolute(
+				SUM(bseg.GradeValue * dbo.GetBhpbioFloatOptionalAbsolute(bse.Tonnes, @iUseAbsoluteTonnesAtIndividualRows))
+				,@iUseAbsoluteTonnesAtGradeSummary)
+			/  -- divide by sum of tonnes... (taking absolute value as appropriate)
+			dbo.GetBhpbioFloatOptionalAbsolute(
+				SUM(dbo.GetBhpbioFloatOptionalAbsolute(bse.Tonnes, @iUseAbsoluteTonnesAtIndividualRows))
+				,@iUseAbsoluteTonnesAtGradeSummary
+			),
+			SUM(bse.Tonnes) AS Tonnes
+	FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B
+		INNER JOIN dbo.BhpbioSummary s WITH (NOLOCK)
+			ON s.SummaryMonth >= B.DateFrom AND s.SummaryMonth < B.DateTo
+		INNER JOIN dbo.BhpbioSummaryEntry AS bse WITH (NOLOCK)
+			ON bse.SummaryId = s.SummaryId
+			AND bse.SummaryEntryTypeId = @summaryEntryTypeId
+		INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg WITH (NOLOCK)
+			ON bseg.SummaryEntryId = bse.SummaryEntryId
+		INNER JOIN Location l WITH (NOLOCK)
+			ON l.Location_Id = bse.LocationId
+	GROUP BY B.CalendarDate, B.DateFrom, B.DateTo, bse.LocationId, l.Parent_Location_Id, CASE WHEN @iIgnoreMaterialTypes = 1 THEN NULL ELSE bse.MaterialTypeId END, bseg.GradeId, bse.ProductSize
+	HAVING SUM(ABS(bse.Tonnes)) > 0
+	RETURN
+END
+GO
+
+/*
+
+-- returns summary tonnes
+SELECT * FROM dbo.GetBhpbioSummaryGradeBreakdown(	@iDateFrom = '2009-11-01',
+													@iDateTo = '2009-11-30', 
+													@iDateBreakdown = null,
+													@iSummaryEntryTypeName = 'GradeControlModelMovement',
+													@iIgnoreMaterialTypes = 1,
+													@iUseAbsoluteTonnesAtIndividualRows = 0,
+													@iUseAbsoluteTonnesAtGradeSummary = 0)
+
+*/
+
+
+/*
+<TAG Name="Data Dictionary" FunctionName="dbo.GetBhpbioSummaryGradeBreakdown">
+ <Function>
+	Gets a table of Grades by Location, time period and optionallty material type for a specified type of summary data
+			
+	Pass: 
+			@iDateFrom: Specifies the from date of the query
+			@iDateTo: Specifies the to date of the query
+			@iDateBreakdown: Specifies the type of reporting date breakdown being retrieved
+			@iSummaryEntryTypeName: Specifies the summary type that tonnes values should be retrieved for
+			@iIgnoreMaterialTypes: If 1, the material of different types will be summed together
+			@iUseAbsoluteTonnesAtIndividualRows: If 1, absolute tonnage values will be used for each line item being rolled up
+			@iUseAbsoluteTonnesAtGradeSummary: If 1, absolute values for the summarised rows will be used
+	
+	Returns: Table of Grade values for each Location based on criteria
+ </Function>
+</TAG>
+*/	

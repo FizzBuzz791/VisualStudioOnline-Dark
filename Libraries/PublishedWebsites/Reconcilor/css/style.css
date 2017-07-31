@@ -1,0 +1,519 @@
+/* body
+--------------------------------------------------*/
+body {
+	margin: 0px;
+	background-color: #F5F7F8;
+	font-family: Tahoma, Sans-Serif;
+	font-size: 11px;
+	color: black;
+}
+
+a {
+	color: #294158;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #294158;
+	text-decoration: none;
+}
+
+form {
+	display: inline;
+}
+
+img {
+	border: none;
+}
+
+table {
+	border: 0px;
+	border-collapse: collapse;
+}
+
+.tabs_spacer {
+	width: 20px;
+	clear: left;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
+.hide_inline {
+	display: none;
+}
+
+.show_inline {
+	display: inline;
+}
+
+.largeHeaderText {
+	color: #294158;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.smallHeaderText {
+	color: #294158;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+/* IE6.0 Fix for Stockpile Tab filter boxes */
+.stockpileTabFilter {
+	width: auto !important;
+	width: 85%;
+}
+
+/* graphic header styles
+--------------------------------------------------*/
+#Content {
+	margin: 0px auto;
+	text-align: left;
+}
+
+#header {
+	padding-left: 0px;
+	padding-right: 0px;
+	height: 45px;
+	text-align: center;
+	background: url(../images/HeaderBackground.gif);
+}
+
+#overflowDiv
+{
+	position: absolute;
+	display: inline;
+}
+
+#overflowHeader
+{
+	background: url(../images/HeaderBackground.gif);
+}
+
+#overflowTabs 
+{
+	background: url(../images/tabs/TabBackground.gif);	
+}
+
+#headerCentre {
+	position: relative;
+}
+
+#headerRight {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	text-align: center;
+	font-size: 24px;
+	font-family: Tahoma, Sans-Serif;
+	color:Red;
+}
+
+#headerLeft 
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+/*** IE6 Fix **
+* html #headerLeft {
+	left: 160px;
+}*/
+
+#tabs {
+	height: 52px;
+	text-align: center;
+	background: url(../images/tabs/TabBackground.gif);
+}
+
+#tabs table {
+	position: relative;
+	z-index: 1;
+}
+
+#tabRow {
+	padding-top: 5px;
+	vertical-align: top;
+}
+
+#tabUnderbar {
+	text-align: left;
+	vertical-align: top;
+}
+
+#infoBarContent {
+	text-align: center;
+}
+
+.infoBarLine {
+	height: 1px;
+	width: 100%;
+	background-color: #CCCCCC;
+}
+
+/* container
+--------------------------------------------------*/
+
+#container {
+	margin: 0 auto;
+	text-align: left;
+}
+
+#container_content 
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+#container_small 
+{
+	margin: 0 auto;
+	text-align: left;
+}
+
+#container_small_content {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+/* Left Side Nav Layout
+--------------------------------------------------*/
+#sidenav_layout_top {
+	text-align: center;
+}
+
+#sidenav_layout_size 
+{
+	width: 900px;
+	padding: 0px 0px 0px 0px !important;
+}
+
+#sidenav_layout_nav_container {
+	/*float: left;*/
+}
+
+#sidenav_layout_content_container {
+	/*float: left;*/
+}
+
+#sidenav_layout_spacer {
+	width: 15px;
+	/*float: left;*/
+}
+
+/* Left Side Nav
+--------------------------------------------------*/
+.sideNav {
+	border: 0;
+	background: #C1CDD9;
+	text-align: left;
+	filter: progid:DXImageTransform.Microsoft.Shadow(Color=#FF919899, Strength=2, Direction=135) progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#DCE8F3, EndColorStr=#C1CDD9, GradientType=0);
+}
+
+.sideNavHeader {
+	width: 100%;
+	background: url(../images/gripgrayback.gif) repeat-x;
+}
+
+/* having the left & right headers "float" allows the two to overlap visually */
+
+.sideNavHeaderLeft {
+	font-weight: bold;
+	float: left;
+	background: inherit;
+}
+
+.sideNavHeaderRight {
+	float: right;
+}
+
+.sideNavContent {
+	border: 1px solid rgb( 145, 155, 156 );
+	padding: 5px 0px 8px 0px;
+}
+
+.sideNavImageAlign {
+	vertical-align: middle;
+}
+
+.sideNavItem {
+	padding: 4px 2px 4px 5px;
+}
+
+/* Webpage Control styles
+--------------------------------------------------*/
+.groupBox {
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#00F5F7F8, EndColorStr=#FFF4F3EE, GradientType=0);
+}
+
+.groupBoxNoTitle {
+	border: 1px solid rgb( 208, 208, 191 );
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#00F5F7F8, EndColorStr=#FFF4F3EE, GradientType=0);	
+}
+
+.groupBoxInner {
+	padding: 5px 5px 5px 5px;
+	white-space: normal;
+	line-height: 20px;
+}
+
+.inputButton {
+	border-right: buttonshadow 1px solid;
+	border-top: #AFC4D5 1px solid;
+	font-size: 13px;
+	background: #D6E7EF;
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#FFDCE8F3, EndColorStr=#FFA4B4C3, GradientType=0);
+	border-left: #AFC4D5 1px solid;
+	cursor: hand;
+	color: #142C41;
+	border-bottom: #104A7B 1px solid;
+	text-decoration: none;
+}
+
+.inputButtonSmall {
+	border-right: buttonshadow 1px solid;
+	border-top: #AFC4D5 1px solid;
+	font-size: 11px;
+	background: #BDCCD9 url(../images/inputButtonSmallBackground.gif);
+	border-left: #AFC4D5 1px solid;
+	cursor: hand;
+	color: #142C41;
+	border-bottom: #104A7B 1px solid;
+	text-decoration: none;
+}
+
+.inputText {
+	border: 1px;
+	font-size: 11px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#FFDCE8F3, EndColorStr=#FFCAD6E1, GradientType=0);
+}
+
+.selectBox {
+	font-size: 11px;
+	color: #000000;
+	background-color: #D8E3EF;
+	vertical-align: middle;
+}
+
+/* Reconcilor Table styles
+--------------------------------------------------*/
+.cnt {
+	text-align: center;
+}
+
+.hand {
+	cursor: pointer;
+}
+
+.lft {
+	text-align: left;
+}
+
+.rgt {
+	text-align: right;
+}
+
+.ReconcilorTableInnerDiv {
+	padding: 0px;
+	margin: 0px;
+}
+
+.ReconcilorTableOuterDivCollapse {
+	overflow: auto;
+	padding: 0px;
+	margin: 0px;
+}
+
+.ReconcilorTableOuterDivExpand {
+	overflow: visible;
+	padding: 0px;
+	margin: 0px;
+}
+
+.ReconcilorTableBody {
+	border: 0px;
+	line-height: 18px;
+}
+
+.ReconcilorTableHeader {
+	border: 0px;
+	height: 30px;
+	line-height: 12px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#00DCE8F3, EndColorStr=#FFC1CDD9, GradientType=1);
+	width: 100%;
+	border-bottom: 1px solid ThreeDShadow;
+}
+
+.ReconcilorTableHeaderNoFilter {
+	border: 0px;
+	height: 30px;
+	line-height: 12px;
+	width: 100%;
+	border-bottom: 1px solid ThreeDShadow;
+}
+
+.ReconcilorTableOuter {
+	border: 1px solid ThreeDShadow;
+}
+
+
+.NotificationsTableHeader 
+{
+    text-align: center;
+	height: 20px;
+	line-height: 12px;
+	font-weight: normal;
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#00DCE8F3, EndColorStr=#FFC1CDD9, GradientType=1);
+	width: 280px;
+    border: 1px solid ThreeDShadow;
+}
+
+.NotificationsTable
+{
+    border: 1px solid ThreeDShadow;
+}
+
+.NotificationsTableEmail
+{
+    text-align: left;
+    padding-left: 5px;
+}
+
+.NotificationsTableRemoveEmail
+{
+    text-align: right;
+    padding-right: 5px;
+}
+.ReconcilorTableGroupRow {
+	color: #808080;
+	font-weight: bold;
+	border-bottom: solid 1px #D6D5D9;
+	text-align: left;
+}
+
+.ReconcilorTableTotalRow {
+	font-weight: bold;
+	border-top: solid 1px #D6D5D9;
+	text-align: right;
+}
+
+.ReconcilorTableBalanceRow {
+	font-weight: bold;
+	border-top: solid 1px #D6D5D9;
+	border-bottom: solid 1px #D6D5D9;
+	text-align: right;
+}
+
+.definitionsDiv 
+{
+	border: solid 1px rgb( 208, 208, 191 );
+}
+
+/* Reconcilor FilterBox styles
+--------------------------------------------------*/
+.FilterBoxOuterTable {
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#F5F7F8, EndColorStr=#fff4f3ee, GradientType=0);
+}
+
+/* Exception header styles */
+.ExceptionHeaderHasErrors
+{
+	color: red;
+	font-weight: bold;
+}
+
+ExceptionHeader
+{
+	color: Black;
+	font-weight: normal;
+}
+
+.requiredField 
+{
+	background: url(../images/asterisk.gif) no-repeat;
+	background-position: right;
+}
+
+/* Variance Table - Depletions */
+
+.varianceTable 
+{
+	width: 100%;
+}
+
+.varianceTable .header 
+{
+	font-weight: bold;
+}
+
+.simpleTable
+{
+	border-top: 1px solid ThreeDShadow;
+	border-left: 1px solid ThreeDShadow;
+	border-right: 1px solid ThreeDShadow;
+	border-bottom: 1px solid ThreeDShadow;
+}
+
+.simpleTable td
+{
+	background: rgb(252,252,254);
+    color: Black;
+	border: 0px;
+	line-height: 18px;
+    padding: auto auto auto auto;
+	font-family: Tahoma;
+	font-size: 11px;
+    font-weight: normal;
+}
+
+.simpleTable th
+{
+	background:#E5EAEF;
+    color: Black;
+	border: 0px;
+	height: 30px;
+    line-height: 18px;
+    padding: auto auto auto auto;
+    font-family: Tahoma;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.rawDataTable
+{
+}
+
+.rawDataTable td
+{
+    background: #EAEAEA;
+    color: Black;
+    height: auto;
+    line-height: normal;
+    padding: 1px 5px 1px 5px;
+    font-family: Courier New;
+    font-size: 11px;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.rawDataTable th
+{
+    background: #EAEAEA;
+    color: Black;
+    height: auto;
+    line-height: normal;
+    padding: 1px 5px 1px 5px;
+    font-family: Courier New;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+}

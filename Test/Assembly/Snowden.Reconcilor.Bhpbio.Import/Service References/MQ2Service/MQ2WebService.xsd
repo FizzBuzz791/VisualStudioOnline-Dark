@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.bhpbilliton.com/waio/F1F2F3DataService" elementFormDefault="qualified" targetNamespace="http://www.bhpbilliton.com/waio/F1F2F3DataService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="RetrieveHaulageRequest" type="tns:RetrieveHaulageRequest" />
+  <xs:complexType name="RetrieveHaulageRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MineSiteCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EndDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RetrieveHaulageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Status" type="tns:Status" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Haulage" type="tns:ArrayOfHaulageTransactionType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Status">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StatusMessage" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="StatusFlag" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfHaulageTransactionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Transaction" type="tns:HaulageTransactionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HaulageTransactionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Location" type="tns:Location" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TransactionDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Source" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SourceMineSite" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DestinationMineSite" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SourceLocationType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Destination" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DestinationType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Type" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BestTonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="HauledTonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="AerialSurveyTonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GroundSurveyTonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LumpPercent" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Grade" type="tns:Grade" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Location">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Mine" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Grade">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SampleValue" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="HeadValue" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FinesValue" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LumpValue" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RetrieveProductionMovementsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MineSiteCode" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StartDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EndDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RetrieveProductionMovementsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Status" type="tns:Status" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Production" type="tns:ArrayOfProdMovesTransactionType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfProdMovesTransactionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Transaction" type="tns:ProdMovesTransactionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProdMovesTransactionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Location" type="tns:Location" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TransactionDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Source" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SourceType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SourceMineSite" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Destination" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DestinationType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DestinationMineSite" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Type" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Tonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ProductSize" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SampleSource" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SampleTonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Grade" type="tns:Grade" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RetrieveStockpilesRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MineSiteCode" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RetrieveStockpilesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Status" type="tns:Status" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Stockpiles" type="tns:ArrayOfStockpileType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfStockpileType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Stockpile" type="tns:StockpileType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StockpileType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Location" type="tns:Location" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BusinessId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StockpileType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="OreType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Type" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Active" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ProductSize" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RetrieveStockpileAdjustmentsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MineSiteCode" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StartDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EndDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RetrieveStockpileAdjustmentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Status" type="tns:Status" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StockpileAdjustment" type="tns:ArrayOfAdjustmentType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfAdjustmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Adjustment" type="tns:AdjustmentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AdjustmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Location" type="tns:Location" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="StockpileID" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="AdjustmentType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="AdjustmentDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Tonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FinesPercent" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LumpPercent" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Bcm" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Grade" type="tns:Grade" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,95 @@
+IF OBJECT_ID('dbo.GetBhpbioSummaryTonnesBreakdown') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioSummaryTonnesBreakdown
+GO
+
+CREATE FUNCTION dbo.GetBhpbioSummaryTonnesBreakdown
+(
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME,
+	@iDateBreakdown VARCHAR(31),
+	@iSummaryEntryTypeName VARCHAR(31),
+	@iIgnoreMaterialTypes BIT
+)
+RETURNS @SummaryTonnes TABLE
+(
+	CalendarDate DATETIME,
+	DateFrom DATETIME,
+	DateTo DATETIME,
+	LocationId INT NOT NULL,
+	ParentLocationId INT NULL,
+	MaterialTypeId INT NULL,
+	ProductSize VARCHAR(5) NOT NULL,
+	Tonnes FLOAT
+)
+WITH ENCRYPTION
+AS
+BEGIN
+	-- Find the summary entry type based on the supplied summary entry type name
+	DECLARE @summaryEntryTypeId INTEGER
+			
+	SELECT @summaryEntryTypeId = bset.SummaryEntryTypeId 
+	FROM dbo.BhpbioSummaryEntryType bset
+	WHERE bset.Name = @iSummaryEntryTypeName
+	
+	-- Insert the summary data into the results table
+	INSERT INTO @SummaryTonnes
+	(
+		CalendarDate,
+		DateFrom,
+		DateTo,
+		LocationId,
+		ParentLocationId,
+		MaterialTypeId,
+		ProductSize,
+		Tonnes
+	)
+	SELECT	B.CalendarDate AS CalendarDate, 
+			B.DateFrom, 
+			B.DateTo,
+			bse.LocationId,
+			l.Parent_Location_Id,
+			CASE WHEN @iIgnoreMaterialTypes = 1 THEN NULL ELSE bse.MaterialTypeId END,
+			bse.ProductSize,
+			SUM(bse.Tonnes) AS Tonnes
+	FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B
+		INNER JOIN dbo.BhpbioSummary s WITH (NOLOCK)
+			ON s.SummaryMonth >= B.DateFrom AND s.SummaryMonth < B.DateTo
+		INNER JOIN dbo.BhpbioSummaryEntry AS bse WITH (NOLOCK)
+			ON bse.SummaryId = s.SummaryId
+			AND bse.SummaryEntryTypeId = @summaryEntryTypeId
+		INNER JOIN Location l WITH (NOLOCK)
+			ON l.Location_Id = bse.LocationId
+	GROUP BY B.CalendarDate, B.DateFrom, B.DateTo, bse.LocationId, l.Parent_Location_Id, CASE WHEN @iIgnoreMaterialTypes = 1 THEN NULL ELSE bse.MaterialTypeId END, bse.ProductSize
+
+	RETURN
+END
+GO
+
+/*
+
+-- returns summary tonnes
+SELECT * FROM dbo.GetBhpbioSummaryTonnesBreakdown(	@iDateFrom = '2009-11-01',
+													@iDateTo = '2009-11-30', 
+													@iDateBreakdown = null,
+													@iSummaryEntryTypeName = 'GradeControlModelMovement',
+													@iIgnoreMaterialTypes = 1)
+
+*/
+
+
+/*
+<TAG Name="Data Dictionary" FunctionName="dbo.GetBhpbioSummaryTonnesBreakdown">
+ <Function>
+	Gets a table of Tonnes by Location, time period and optionallty material type for a specified type of summary data
+			
+	Pass: 
+			@iDateFrom: Specifies the from date of the query
+			@iDateTo: Specifies the to date of the query
+			@iDateBreakdown: Specifies the type of reporting date breakdown being retrieved
+			@iSummaryEntryTypeName: Specifies the summary type that tonnes values should be retrieved for
+			@iIgnoreMaterialTypes: If 1, the material of different types will be summed together
+	
+	Returns: Table of Tonnes for each Location based on criteria
+ </Function>
+</TAG>
+*/	

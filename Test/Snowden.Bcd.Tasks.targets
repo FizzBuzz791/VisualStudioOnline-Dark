@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Snowden Build, Configuration & Deployment
+	Used by MSBuild for custom tasks.
+	
+	Contains the following sections:
+	
+	1. Database
+	   Includes Building and Deployment.
+	   Supports Database1 (formerly SqlBuildManifest) and Database2.
+	   Note that Database1 is obsolete and will not be fully supported going forward.
+	
+	2. Reporting Services
+	   For deploying Reporting Services.
+	   
+	3. Utility
+	   General tasks that don't fall into the other categories.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <SnowdenBcdMSBuildLibrary>..\Libraries\Snowden.BCD.1.0.20\Snowden.Bcd.MSBuild.dll</SnowdenBcdMSBuildLibrary>
+  </PropertyGroup>
+   
+  <!-- 
+    *** Database ***
+    Note: SqlBuildManifest = BuildDatabase1, name provided for compatibility only
+    Note: DeployDatabase = DeployDatabase1, name provided for compatibility only
+  -->
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.BuildDatabase1" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.SqlBuildManifest" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.DeployDatabase1" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.DeployDatabase" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.BuildDatabase2" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.DeployDatabase2" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.CleanDatabase2" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  
+  <!--
+    *** Reporting Services ***
+    Note: DeployReportingServices2 is not yet implemented
+  -->
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.DeployReportingServices" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.DeployReportingServices1" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+
+  <!--
+    Utility
+  -->
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.GetTfsProperties" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.NetworkDrive" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.GenerateVersionFile" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+  <UsingTask TaskName="Snowden.Bcd.MSBuild.ModifyAppConfig" AssemblyFile="$(SnowdenBcdMSBuildLibrary)"/>
+</Project>

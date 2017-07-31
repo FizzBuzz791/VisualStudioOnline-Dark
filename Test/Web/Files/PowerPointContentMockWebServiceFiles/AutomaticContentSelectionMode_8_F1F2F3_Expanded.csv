@@ -1,0 +1,12 @@
+﻿LocationId,LocationType,Factor,Mode,Attribute
+8,NJV,Main,F1Factor,Expanded,Tonnes
+8,NJV,Main,F1Factor,Expanded,SiO2
+11,Eastern Ridge,SubLocation,F1Factor,Expanded,Tonnes
+11,Eastern Ridge,SubLocation,F1Factor,Expanded,SiO2
+9,Newman,SubLocation,F1Factor,Expanded,SiO2
+10,OB18,SubLocation,F1Factor,Expanded,Tonnes
+8,NJV,Main,F2Factor,Expanded,Tonnes
+8,NJV,Main,F2Factor,Expanded,P
+8,NJV,Main,F2Factor,Expanded,Al2O3
+8,NJV,Main,F3Factor,Expanded,Fe
+8,NJV,Main,F3Factor,Expanded,Al2O3

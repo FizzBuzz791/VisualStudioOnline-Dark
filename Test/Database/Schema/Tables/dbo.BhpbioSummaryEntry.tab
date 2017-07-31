@@ -1,0 +1,82 @@
+﻿IF OBJECT_ID('dbo.BhpbioSummaryEntry') IS NOT NULL
+	DROP TABLE dbo.BhpbioSummaryEntry
+GO
+
+CREATE TABLE dbo.BhpbioSummaryEntry
+(
+	SummaryEntryId INT NOT NULL IDENTITY(1,1),
+	SummaryId INT NOT NULL,
+	SummaryEntryTypeId INT NOT NULL,
+	LocationId INT NOT NULL,
+	MaterialTypeId INT NULL,
+	ProductSize VARCHAR(5) NOT NULL Default('TOTAL'),
+	Tonnes FLOAT NOT NULL,
+	Volume FLOAT NULL,	
+	ModelFilename VARCHAR(200) NULL,
+	[GeometType] [varchar](15) NOT NULL DEFAULT ('NA'),
+
+	CONSTRAINT PK_BhpbioSummaryEntry
+		PRIMARY KEY NONCLUSTERED (SummaryEntryId),
+		
+	CONSTRAINT FK_BhpbioSummaryEntry_BhpbioSummary
+		FOREIGN KEY (SummaryId)
+		REFERENCES dbo.BhpbioSummary (SummaryId)
+		ON DELETE CASCADE,
+		
+	CONSTRAINT FK_BhpbioSummaryEntry_BhpbioSummaryEntryType
+		FOREIGN KEY (SummaryEntryTypeId)
+		REFERENCES dbo.BhpbioSummaryEntryType (SummaryEntryTypeId)
+		ON DELETE CASCADE,
+		
+	CONSTRAINT FK_BhpbioSummaryEntry_MaterialType
+		FOREIGN KEY (MaterialTypeId)
+		REFERENCES dbo.MaterialType (Material_Type_Id)
+		ON DELETE CASCADE
+)
+GO
+CREATE UNIQUE CLUSTERED INDEX UQ_BHPBIOSUMMARYENTRY_01 ON dbo.BhpbioSummaryEntry 
+(
+	SummaryEntryTypeId ASC,
+	SummaryId ASC,
+	MaterialTypeId ASC,
+	LocationId ASC,
+	ProductSize ASC,
+	[GeometType] ASC
+)
+GO
+CREATE NONCLUSTERED INDEX IX_BHPBIOSUMMARYENTRY_02 ON dbo.BhpbioSummaryEntry 
+(
+	SummaryId ASC,
+	LocationId ASC,
+	SummaryEntryTypeId ASC,
+	SummaryEntryId ASC
+)
+GO
+
+/*
+<TAG Name="Data Dictionary" TableName="dbo.BhpbioSummaryEntry">
+	<Table>
+		A summary entry which may represent a movement, a balance or a delta dependant on the type of the summary entry
+	</Table>
+	<Columns>
+		<Column Name="SummaryEntryId">
+			Uniquely identifies the row
+		</Column>
+		<Column Name="SummaryId">
+			Identifies the summary set this entry is a part of
+		</Column>
+		<Column Name="SummaryEntryTypeId">
+			Specifies the type of entry represented
+		</Column>
+		<Column Name="LocationId">
+			Identifies the Location associated with the entry.
+		</Column>
+		<Column Name="MaterialTypeId">
+			Identifies the type of material the entry relates to
+		</Column>
+		<Column Name="Tonnes">
+			The amount of material in tonnes
+		</Column>
+	</Columns>
+</TAG>
+*/

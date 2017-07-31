@@ -1,0 +1,14 @@
+﻿IF OBJECT_ID('dbo.BhpbioReportThresholdType') IS NOT NULL 
+     DROP TABLE dbo.BhpbioReportThresholdType
+GO 
+
+CREATE TABLE dbo.BhpbioReportThresholdType
+(
+	ThresholdTypeId VARCHAR(31) COLLATE DATABASE_DEFAULT NOT NULL,
+	Description VARCHAR(31) COLLATE DATABASE_DEFAULT NOT NULL
+	CONSTRAINT PK_BhpbioReportThresholdType PRIMARY KEY CLUSTERED
+	(
+		ThresholdTypeId
+	) ON [Primary]
+) ON [Primary]
+GO

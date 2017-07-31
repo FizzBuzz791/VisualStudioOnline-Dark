@@ -1,0 +1,273 @@
+
+IF Object_Id('dbo.GetBhpbioReportHaulageBreakdown') IS NOT NULL
+	DROP FUNCTION dbo.GetBhpbioReportHaulageBreakdown
+GO
+
+CREATE FUNCTION dbo.GetBhpbioReportHaulageBreakdown
+(
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME,
+	@iDateBreakdown VARCHAR(31),
+	@iLocationId INT,
+	@iGetChildLocations BIT,
+	@iIncludeLiveData BIT,
+	@iIncludeApprovedData BIT
+)
+RETURNS @H TABLE
+(
+	CalendarDate DATETIME NOT NULL,
+	HaulageType VARCHAR(31) NOT NULL,
+	DateFrom DATETIME NOT NULL,
+	DateTo DATETIME NOT NULL,
+	DesignationMaterialTypeId INT NOT NULL,
+	LocationId INT NULL,
+	ProductSize VARCHAR(5) NOT NULL,
+	Attribute SMALLINT NULL,
+	Value FLOAT NULL
+)
+WITH ENCRYPTION
+AS
+BEGIN
+	DECLARE @OtherIntermediate TABLE
+	(
+		CalendarDate DATETIME NOT NULL,
+		DateFrom DATETIME NOT NULL,
+		DateTo DATETIME NOT NULL,
+		HaulageType VARCHAR(31) NOT NULL,	
+		DesignationMaterialTypeId INT NOT NULL,
+		LocationId INT NULL,
+		ProductSize VARCHAR(5) NULL,
+		Attribute INT NULL,
+		Value FLOAT NULL,
+		AssociatedTonnes FLOAT NULL
+	)
+
+	DECLARE @Haulage TABLE
+	(
+		CalendarDate DATETIME NOT NULL,
+		HaulageId INT NOT NULL,
+		DateFrom DATETIME NOT NULL,
+		DateTo DATETIME NOT NULL,
+		LocationId INT NULL,
+		ProductSize VARCHAR(5) NOT NULL,
+		Tonnes FLOAT NOT NULL,
+		SourceDesignationMaterialTypeId INT NOT NULL,	
+		DestinationDesignationMaterialTypeId INT NOT NULL,
+		HaulageType VARCHAR(31) NOT NULL,
+		PRIMARY KEY (HaulageId, ProductSize)
+	)
+	
+	DECLARE @Location TABLE
+	(
+		LocationId INT NOT NULL,
+		ParentLocationId INT NULL,
+		IncludeStart DATETIME NOT NULL,
+		IncludeEnd DATETIME NOT NULL
+	    PRIMARY KEY (LocationId, IncludeStart)
+	)
+	
+	DECLARE @HighGradeMaterialTypeId INT
+	DECLARE @BeneFeedMaterialTypeId INT
+	DECLARE @MaterialCategory VARCHAR(31)
+	SET @MaterialCategory = 'Designation'
+
+	-- set the material types
+	-- movements through the crusher must be reported as [High Grade] and [Bene Feed] only
+	SET @HighGradeMaterialTypeId =
+		(
+			SELECT Material_Type_Id
+			FROM dbo.MaterialType
+			WHERE Abbreviation = 'High Grade'
+				AND Material_Category_Id = 'Designation'
+		)
+
+	SET @BeneFeedMaterialTypeId =
+		(
+			SELECT Material_Type_Id
+			FROM dbo.MaterialType
+			WHERE Abbreviation = 'Bene Feed'
+				AND Material_Category_Id = 'Designation'
+		)	
+		
+
+	-- setup the Locations
+	INSERT INTO @Location
+		(LocationId, ParentLocationId, IncludeStart, IncludeEnd)
+	SELECT LocationId, ParentLocationId, IncludeStart, IncludeEnd
+	FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@iLocationId, @iGetChildLocations, NULL, @iDateFrom, @iDateTo)
+	
+	
+	IF @iIncludeLiveData = 1
+	BEGIN
+	
+		-- retrieve the list of Haulage Records to be used in the calculations
+		INSERT INTO @Haulage
+			(CalendarDate, DateFrom, DateTo, HaulageId, LocationId, ProductSize, Tonnes, SourceDesignationMaterialTypeId, 
+				DestinationDesignationMaterialTypeId, HaulageType)
+		SELECT DISTINCT rd.CalendarDate, rd.DateFrom, rd.DateTo, h.Haulage_Id, l.LocationId, defaultlf.ProductSize, 
+			ISNULL(haulagelf.[Percent], defaultlf.[Percent]) * h.Tonnes As Tonnes,
+			MT.Material_Type_Id As SourceDesignationMaterialTypeId, 
+			ISNULL(destinationStockpile.MaterialTypeId,
+				CASE WHEN W.Weightometer_Id IS NOT NULL 
+					THEN @BeneFeedMaterialTypeId 
+					ELSE @HighGradeMaterialTypeId END
+				) as DestinationDesignationMaterialTypeId,
+			CASE WHEN h.Destination_Stockpile_Id IS NOT NULL
+				THEN 'Stockpile'
+				ELSE (CASE WHEN h.Destination_Crusher_Id IS NOT NULL
+					THEN 'Crusher'
+					ELSE 'Mill'
+					END)
+				END AS DestinationType
+		FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1) AS rd
+			INNER JOIN dbo.Haulage AS h
+				ON (h.Haulage_Date BETWEEN rd.DateFrom AND rd.DateTo)
+			INNER JOIN dbo.GetBhpbioReportHauledBlockLocations(@iDateFrom, @iDateTo) dl
+				ON (dl.DigblockId = h.Source_Digblock_Id)
+			INNER JOIN @Location AS l
+				ON (l.LocationId = dl.PitLocationId and h.haulage_date between l.IncludeStart and l.IncludeEnd)
+			INNER JOIN dbo.GetBhpbioDefaultLumpFinesRatios(null, null, 1) defaultlf
+				ON dl.PitLocationId = defaultlf.LocationId
+				AND h.Haulage_Date BETWEEN defaultlf.StartDate AND defaultlf.EndDate
+			LEFT JOIN dbo.GetBhpbioHaulageLumpFinesPercent(@iDateFrom, @iDateTo) haulagelf
+				ON H.Haulage_Id = haulagelf.HaulageId
+				AND defaultlf.ProductSize = haulagelf.ProductSize				
+			INNER JOIN Digblock d
+				ON h.Source_Digblock_Id = d.Digblock_Id
+			--Get source material type
+			INNER JOIN dbo.GetMaterialsByCategory(@MaterialCategory) AS MC
+				ON (MC.MaterialTypeId = d.Material_Type_Id)
+			INNER JOIN dbo.MaterialType AS MT WITH (NOLOCK)
+				ON (MC.RootMaterialTypeId = MT.Material_Type_Id)
+			---- Get destination stockpile material type
+			LEFT JOIN
+				(
+					SELECT sl2.Stockpile_Id, sgd2.MaterialTypeId
+					FROM dbo.BhpbioStockpileGroupDesignation AS sgd2
+						INNER JOIN dbo.StockpileGroupStockpile AS sgs2
+							ON (sgs2.Stockpile_Group_Id = sgd2.StockpileGroupId)
+						INNER JOIN dbo.StockpileLocation AS sl2
+							ON (sl2.Stockpile_Id = sgs2.Stockpile_Id)
+				) AS destinationStockpile
+				ON (destinationStockpile.Stockpile_Id = h.Destination_Stockpile_Id)
+						
+			LEFT JOIN dbo.WeightometerFlowPeriodView AS WFPV
+				ON (WFPV.Source_Crusher_Id = h.Destination_Crusher_Id
+					AND WFPV.Destination_Mill_Id IS NOT NULL
+					AND (rd.DateTo > WFPV.Start_Date Or WFPV.Start_Date IS NULL)
+					AND (rd.DateFrom < WFPV.End_Date Or WFPV.End_Date IS NULL))
+			LEFT JOIN dbo.Weightometer AS W
+					ON (W.Weightometer_Id = WFPV.Weightometer_Id)
+			LEFT OUTER JOIN 
+				(Select bad.TagId, bad.ApprovedMonth, bad.LocationId,  brdt.OtherMaterialTypeId
+					From BhpbioApprovalData bad
+						LEFT JOIN dbo.BhpbioReportDataTags brdt
+							ON brdt.TagId = bad.TagId
+					Where bad.TagId like 'Other%'
+				)  AS RS1 
+					ON (RS1.OtherMaterialTypeId = MT.Material_Type_Id
+						AND RS1.LocationId = dl.PitLocationId
+						AND RS1.ApprovedMonth BETWEEN l.IncludeStart AND l.IncludeEnd
+						AND RS1.ApprovedMonth = dbo.GetDateMonth(h.Haulage_Date))
+			LEFT OUTER JOIN 
+				(Select bad.TagId, bad.ApprovedMonth, bad.LocationId
+					From BhpbioApprovalData bad
+					Where bad.TagId like 'F1Factor'
+				)  AS RS2 
+					ON (RS2.LocationId = dl.PitLocationId
+						AND RS2.ApprovedMonth BETWEEN l.IncludeStart AND l.IncludeEnd
+						AND RS2.ApprovedMonth = dbo.GetDateMonth(h.Haulage_Date))
+		WHERE h.Haulage_State_Id IN ('N', 'A')
+			-- don't include lump/fines portion if zero percent
+			AND ISNULL(haulagelf.[Percent], defaultlf.[Percent]) > 0
+			AND h.Child_Haulage_Id IS NULL
+			AND h.Source_Digblock_Id IS NOT NULL
+			-- And either there is no associated Other Movements approval for the data AND there is no associated F1Factor approval, 
+				-- or there is but we are not retrieving approved data in this call
+			AND ((RS1.TagId IS NULL AND RS2.TagId IS NULL) OR @iIncludeApprovedData = 0)
+			
+		-- return the TONNES values for individual lump and fines
+		INSERT INTO @OtherIntermediate
+			(CalendarDate, DateFrom, DateTo, HaulageType, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value)
+		SELECT CalendarDate, DateFrom, DateTo, 
+			CASE WHEN HaulageType = 'Crusher' THEN 'HauledToCrusher'
+			ELSE CASE WHEN HaulageType = 'Stockpile'
+				THEN 'HauledTo' + replace(mt2.Abbreviation,'-','') + 'Stockpile'
+				ELSE 'HauledOther'
+				END
+				END As HaulageType, 
+			SourceDesignationMaterialTypeId, 
+			ProductSize, LocationId, 0, 
+			SUM(Tonnes) AS Tonnes
+		FROM @Haulage h
+			Inner Join dbo.MaterialType As mt
+				on mt.Material_Type_Id = h.DestinationDesignationMaterialTypeId
+			Inner Join dbo.MaterialType as mt2
+				on mt.Parent_Material_Type_Id = mt2.Material_Type_Id
+		GROUP BY CalendarDate, DateFrom, DateTo, HaulageType, SourceDesignationMaterialTypeId, LocationId, ProductSize, mt2.Abbreviation
+		ORDER BY CalendarDate, DateFrom, DateTo, HaulageType, SourceDesignationMaterialTypeId
+	
+	
+	END
+	
+	-- if including approved data
+	IF @iIncludeApprovedData = 1
+	BEGIN
+	
+		DECLARE @BhpbioSummaryEntryType TABLE
+		(
+			SummaryEntryTypeId INT NOT NULL,
+			Name VARCHAR(30) NOT NULL,
+			PRIMARY KEY (SummaryEntryTypeId)
+		)
+		
+		-- obtain the SummaryEntryTypeId
+		-- this is required because the summary data is placed in a general summary storage table
+		INSERT INTO @BhpbioSummaryEntryType
+		SELECT bset.SummaryEntryTypeId, bset.Name
+		FROM dbo.BhpbioSummaryEntryType bset
+		WHERE bset.Name in ('HauledToNonOreStockpile', 'HauledToOreStockpile','HauledToCrusher')
+		
+
+		-- return the TONNES values for individual lump and fines
+		INSERT INTO @OtherIntermediate
+			(CalendarDate, DateFrom, DateTo, HaulageType, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value)
+		SELECT	B.CalendarDate, 
+				B.DateFrom, 
+				B.DateTo,
+				bset.Name,
+				bse.MaterialTypeId,
+				bse.ProductSize,
+				bse.LocationId,
+				0 As Attribute,
+				SUM(bse.Tonnes) AS Tonnes
+		FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B
+			INNER JOIN dbo.BhpbioSummary s WITH (NOLOCK)
+				ON s.SummaryMonth >= B.DateFrom AND s.SummaryMonth < B.DateTo
+			INNER JOIN dbo.BhpbioSummaryEntry AS bse WITH (NOLOCK)
+				ON bse.SummaryId = s.SummaryId
+			INNER JOIN @Location AS l
+				ON (l.LocationId = bse.LocationId and s.SummaryMonth between l.IncludeStart and l.IncludeEnd)
+			INNER JOIN @BhpbioSummaryEntryType As bset
+				ON bse.SummaryEntryTypeId = bset.SummaryEntryTypeId
+		GROUP BY B.CalendarDate, B.DateFrom, B.DateTo, bset.Name, bse.MaterialTypeId, bse.ProductSize, bse.LocationId
+
+
+	END
+	
+	--insert tonnes into the combined table
+	INSERT INTO @H
+		(CalendarDate, HaulageType, DateFrom, DateTo, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value)
+	SELECT oi.CalendarDate, oi.HaulageType, oi.DateFrom, oi.DateTo, oi.DesignationMaterialTypeId, oi.ProductSize,
+		oi.LocationId, oi.Attribute, SUM(oi.Value)
+	FROM @OtherIntermediate AS oi
+	--WHERE oi.Attribute = 0
+	GROUP BY  oi.CalendarDate, oi.HaulageType, oi.DateFrom, oi.DateTo, oi.DesignationMaterialTypeId, oi.LocationId, oi.Attribute, oi.ProductSize
+
+	
+	RETURN
+	
+END
+--Go
+--select * from GetBhpbioReportHaulageBreakdown('2014-01-01', '2014-01-31', NULL, 32272, 0,1,1)
+

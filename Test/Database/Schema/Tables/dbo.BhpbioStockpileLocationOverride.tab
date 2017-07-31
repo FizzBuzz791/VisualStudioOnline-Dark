@@ -1,0 +1,58 @@
+﻿/****** Object:  Table [dbo].[BhpbioStockpileLocationOverride]    ******/
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK1_STOCKPILE_LOCATION_OVERRIDE]') AND parent_object_id = OBJECT_ID(N'[dbo].[BhpbioStockpileLocationOverride]'))
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride] DROP CONSTRAINT [FK1_STOCKPILE_LOCATION_OVERRIDE]
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK2_STOCKPILE_LOCATION_OVERRIDE]') AND parent_object_id = OBJECT_ID(N'[dbo].[BhpbioStockpileLocationOverride]'))
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride] DROP CONSTRAINT [FK2_STOCKPILE_LOCATION_OVERRIDE]
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK3_STOCKPILE_LOCATION_OVERRIDE]') AND parent_object_id = OBJECT_ID(N'[dbo].[BhpbioStockpileLocationOverride]'))
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride] DROP CONSTRAINT [FK3_STOCKPILE_LOCATION_OVERRIDE]
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BhpbioStockpileLocationOverride]') AND type in (N'U'))
+DROP TABLE [dbo].[BhpbioStockpileLocationOverride]
+GO
+
+
+
+CREATE TABLE [dbo].[BhpbioStockpileLocationOverride](
+	[Stockpile_Location_Override_Id]	INT IDENTITY(1,1) NOT NULL,
+	[Stockpile_Id]						INT NOT NULL,
+	[Location_Type_Id]					TINYINT NOT NULL,
+	[Location_Id]						INT NOT NULL,
+	[FromMonth]							DATETIME NOT NULL,
+	[ToMonth]							DATETIME NULL,
+ CONSTRAINT [PK_STOCKPILE_LOCATION_OVERRIDE_ID] PRIMARY KEY CLUSTERED 
+(
+	[Stockpile_Location_Override_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride]  WITH CHECK ADD  CONSTRAINT [FK1_STOCKPILE_LOCATION_OVERRIDE] FOREIGN KEY([Stockpile_Id])
+REFERENCES [dbo].[Stockpile] ([Stockpile_Id])
+GO
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride] CHECK CONSTRAINT [FK1_STOCKPILE_LOCATION_OVERRIDE]
+GO
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride]  WITH CHECK ADD  CONSTRAINT [FK2_STOCKPILE_LOCATION_OVERRIDE] FOREIGN KEY([Location_Id])
+REFERENCES [dbo].[Location] ([Location_Id])
+GO
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride] CHECK CONSTRAINT [FK2_STOCKPILE_LOCATION_OVERRIDE]
+GO
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride]  WITH CHECK ADD  CONSTRAINT [FK3_STOCKPILE_LOCATION_OVERRIDE] FOREIGN KEY([Location_Type_Id])
+REFERENCES [dbo].[LocationType] ([Location_Type_Id])
+GO
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationOverride] CHECK CONSTRAINT [FK3_STOCKPILE_LOCATION_OVERRIDE]
+GO
+

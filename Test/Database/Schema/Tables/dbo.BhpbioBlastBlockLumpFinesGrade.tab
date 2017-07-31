@@ -1,0 +1,23 @@
+IF OBJECT_ID('dbo.BhpbioBlastBlockLumpFinesGrade') IS NOT NULL 
+     DROP TABLE dbo.BhpbioBlastBlockLumpFinesGrade
+Go 
+
+CREATE TABLE [dbo].[BhpbioBlastBlockLumpFinesGrade]
+(
+	[ModelBlockId] [int] NOT NULL,
+	[SequenceNo] [int] NOT NULL,
+	[GradeId] [smallint] NOT NULL,
+	[LumpValue] [real] NOT NULL,
+	[FinesValue] [real] NOT NULL,
+	[GeometType] [varchar](15) NOT NULL DEFAULT ('NA'),
+
+	CONSTRAINT [PK_BhpbioBlastBlockLumpFinesGrade]
+		PRIMARY KEY CLUSTERED ([ModelBlockId] ASC, [SequenceNo] ASC, [GradeId] ASC, GeometType),
+
+	CONSTRAINT FK__BhpbioBlastBlockLumpFinesGrade__MODEL_BLOCK FOREIGN KEY (ModelBlockId)
+		REFERENCES dbo.ModelBlock (Model_Block_Id),
+
+	CONSTRAINT FK__BhpbioBlastBlockLumpFinesGrade__GRADE FOREIGN KEY (GradeId)
+		REFERENCES dbo.Grade (Grade_Id)
+)
+GO

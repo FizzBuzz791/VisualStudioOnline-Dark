@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="Webservice">
+      <DataSourceReference>WebService</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>96b0c517-51b4-4667-8984-de9a7ec0ce24</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="GetLocationComment">
+      <Query>
+        <DataSourceName>Webservice</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="startDate">
+            <Value>=Parameters!DateTo.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+   &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetLocationCommentByDate&lt;/SoapAction&gt;
+   &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetLocationCommentByDate"&gt;
+    &lt;Parameters&gt;
+   &lt;Parameter Name="locationId" Type="integer" &gt;&lt;DefaultValue&gt;11&lt;/DefaultValue&gt;&lt;/Parameter&gt;
+   &lt;Parameter Name="startDate" Type="date" &gt;&lt;DefaultValue&gt;2013-11-01&lt;/DefaultValue&gt;&lt;/Parameter&gt;
+   &lt;/Parameters&gt; 
+    &lt;/Method&gt;
+     &lt;ElementPath IgnoreNamespaces="true"&gt;GetLocationCommentByDateResponse{GetLocationCommentByDateResult}
+&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="GetLocationCommentByDateResult">
+          <DataField>GetLocationCommentByDateResult</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Rectangle Name="Rectangle11">
+            <ReportItems>
+              <Subreport Name="AttributeReport">
+                <ReportName>BhpbioF1F2F3ReconciliationAttributeReport</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateFrom">
+                    <Value>=Variables!LongDateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateTo">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateBreakdown">
+                    <Value>Quarter</Value>
+                  </Parameter>
+                  <Parameter Name="Factors">
+                    <Value>=IIF(Variables!f15Required.Value,
+	"&lt;Factors&gt;" +
+		"&lt;Factor id=""GradeControlModel""/&gt;" +
+		"&lt;Factor id=""GeologyModel""/&gt;" +
+		"&lt;Factor id=""ShortTermGeologyModel""/&gt;" +
+		"&lt;Factor id=""F15Factor""/&gt;" +
+	"&lt;/Factors&gt;",
+	"&lt;Factors&gt;" +
+		"&lt;Factor id=""GradeControlModel""/&gt;" +
+		"&lt;Factor id=""GeologyModel""/&gt;" +
+		"&lt;Factor id=""MiningModel""/&gt;" +
+		"&lt;Factor id=""F1Factor""/&gt;" +
+	"&lt;/Factors&gt;"
+)</Value>
+                  </Parameter>
+                  <Parameter Name="Attributes">
+                    <Value>&lt;Attributes&gt;
+&lt;Attribute id="0" name="Tonnes"/&gt;
+&lt;Attribute id="1" name="Fe"/&gt;
+&lt;Attribute id="2" name="P"/&gt;
+&lt;Attribute id="3" name="SiO2"/&gt;
+&lt;Attribute id="4" name="Al2O3"/&gt;
+&lt;Attribute id="5" name="LOI"/&gt;
+&lt;/Attributes&gt;</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <KeepTogether>true</KeepTogether>
+                <Top>0.05cm</Top>
+                <Left>0.1cm</Left>
+                <Height>1cm</Height>
+                <Width>15.53645cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>="Pit " + Parameters!LocationName.Value + " Model Performance"</PageName>
+            <Top>1.00503in</Top>
+            <Height>1.1cm</Height>
+            <Width>19.25cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="Rectangle12">
+            <ReportItems>
+              <Subreport Name="F2ReconciliationLocationComparison2">
+                <ReportName>BhpbioF1F2F3ReconciliationLocationComparisonReport</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateFrom">
+                    <Value>=Variables!LongDateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateTo">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateBreakdown">
+                    <Value>Quarter</Value>
+                  </Parameter>
+                  <Parameter Name="Factors">
+                    <Value>=IIF(Variables!f15Required.Value, "&lt;Factors&gt;&lt;Factor id=""F15Factor""/&gt;&lt;/Factors&gt;","&lt;Factors&gt;&lt;Factor id=""F1Factor""/&gt;&lt;/Factors&gt;")</Value>
+                  </Parameter>
+                  <Parameter Name="Attributes">
+                    <Value>&lt;Attributes&gt;
+&lt;Attribute id="0" name="Tonnes"/&gt;
+&lt;Attribute id="1" name="Fe"/&gt;
+&lt;Attribute id="2" name="P"/&gt;
+&lt;Attribute id="3" name="SiO2"/&gt;
+&lt;Attribute id="4" name="Al2O3"/&gt;
+&lt;Attribute id="5" name="LOI"/&gt;
+&lt;/Attributes&gt;</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <Top>0.04999cm</Top>
+                <Left>0.1cm</Left>
+                <Height>1cm</Height>
+                <Width>15.53645cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>="Pit " + Parameters!LocationName.Value + " Model Performance"</PageName>
+            <Top>0.50252in</Top>
+            <Height>1.1cm</Height>
+            <Width>19.25cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="Rectangle14">
+            <ReportItems>
+              <Subreport Name="MovementReport">
+                <ReportName>BhpbioMovementRecoveryReport</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateBreakdown">
+                    <Value>QUARTER</Value>
+                  </Parameter>
+                  <Parameter Name="DateTo">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="Comparison1BlockModelId">
+                    <Value>1</Value>
+                  </Parameter>
+                  <Parameter Name="Comparison2BlockModelId">
+                    <Value>3</Value>
+                  </Parameter>
+                  <Parameter Name="Comparison1IsActual">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="Comparison2IsActual">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <Top>0.05cm</Top>
+                <Left>0.1cm</Left>
+                <Height>1cm</Height>
+                <Width>15.53645cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageName>="Pit " + Parameters!LocationName.Value + " Model Performance"</PageName>
+            <Height>1.1cm</Height>
+            <Width>19.24999cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+        </ReportItems>
+        <Height>3.78167cm</Height>
+        <Style />
+      </Body>
+      <Width>24cm</Width>
+      <Page>
+        <PageHeight>19.05cm</PageHeight>
+        <PageWidth>25.4cm</PageWidth>
+        <InteractiveHeight>19.05cm</InteractiveHeight>
+        <InteractiveWidth>25.4cm</InteractiveWidth>
+        <LeftMargin>0.1cm</LeftMargin>
+        <RightMargin>0.1cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="LocationId">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>32272</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Location Id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LocationName">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>29</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LocationName</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateFrom">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>03/01/2013 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Date From</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateTo">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>03/31/2013 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Date To</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FactorOption">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>FactorOption</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>3</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationId</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationName</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DateFrom</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DateTo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>FactorOption</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Language>en-US</Language>
+  <Variables>
+    <Variable Name="LongDateFrom">
+      <Value>=DateAdd("m", -12, DateAdd("d", 1, Parameters!DateTo.Value))</Value>
+    </Variable>
+    <Variable Name="f15Required">
+      <Value>=InStr(Parameters!FactorOption.Value, "F15") &gt; 0</Value>
+    </Variable>
+  </Variables>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>2f422866-3477-41a9-9158-e13f6f1705eb</rd:ReportID>
+</Report>

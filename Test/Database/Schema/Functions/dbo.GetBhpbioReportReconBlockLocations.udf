@@ -1,0 +1,192 @@
+﻿IF Object_Id('dbo.GetBhpbioReportReconBlockLocations') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioReportReconBlockLocations
+GO
+
+CREATE FUNCTION dbo.GetBhpbioReportReconBlockLocations
+(
+	@iLocationId INT,
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME,
+	@iIncludeChildLocations BIT = 0
+)
+RETURNS @BlockLocation TABLE
+(
+	BlockLocationId INT NOT NULL,
+	BlastLocationId INT NULL,
+	BenchLocationId INT NULL,
+	PitLocationId INT NULL,
+	SiteLocationId INT NULL,
+	HubLocationId INT NULL,
+	CompanyLocationId INT NULL,
+	DateFrom DATETIME NOT NULL,
+	DateTo DATETIME NOT NULL,
+	MinedPercentage FLOAT,
+	BlockNumber VARCHAR(4),
+	BlockName VARCHAR(5),
+	Site VARCHAR(9),
+	OreBody VARCHAR(2),
+	Pit VARCHAR(10),
+	Bench VARCHAR(4),
+	PatternNumber VARCHAR(4),
+	ParentLocationId INT NULL,
+	
+	PRIMARY KEY (BlockLocationId, DateTo, Pit, BlockNumber)
+)
+AS
+BEGIN
+	DECLARE @FilterLocationType VARCHAR(255)
+	DECLARE @LumpFinesCutoverDate DateTime
+	
+	DECLARE @Location TABLE
+	(
+		LocationId INTEGER,
+		IncludeStart DATETIME,
+		IncludeEnd DATETIME,
+		
+		PRIMARY KEY (LocationId, IncludeStart, IncludeEnd)
+	)
+
+
+	-- Because of the way the join works in the main query, we need to get only Pit Locations in
+	-- the @Location table, so if the caller passes in a location below the pit level, we will convert
+	-- that to the pit, and then filter the children later to get the correct result.
+	Declare @PitLocationTypeId Int = 4
+	Declare @PitOrAboveLocationId Int = @iLocationId
+	If (Select Location_Type_Id from Location Where Location_Id = @iLocationId) > @PitLocationTypeId
+	Begin
+		Set @PitOrAboveLocationId = dbo.GetParentLocationByLocationType(@iLocationId, 'PIT', @iDateFrom)
+	End
+	
+	SELECT @LumpFinesCutoverDate = Value
+	FROM Setting
+	WHERE Setting_Id = 'LUMP_FINES_CUTOVER_DATE'
+	
+	INSERT INTO @Location
+	( LocationId, IncludeStart,IncludeEnd )
+	SELECT LocationId, IncludeStart,IncludeEnd
+	FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@PitOrAboveLocationId, 0, 'PIT', @iDateFrom, @iDateTo)
+
+	-- retrieve starting set of blocks based on those with recon movements over
+	-- the given period
+	INSERT INTO @BlockLocation (
+		BlockLocationId,
+		BlastLocationId,
+		BenchLocationId,
+		PitLocationId,
+		SiteLocationId,
+		HubLocationId,
+		CompanyLocationId,
+		DateFrom,
+		DateTo,
+		MinedPercentage,
+		BlockNumber,
+		BlockName,
+		Site,
+		OreBody,
+		Pit,
+		Bench,
+		PatternNumber
+	)
+	SELECT	
+		-- tag blocks with wrongly allocated pit with a negative LocationId
+		CASE
+			WHEN pitloc.Name LIKE '%' + RM.Pit THEN block.Location_Id
+			ELSE -1.0 * block.Location_Id
+		END,
+		blast.Location_Id,
+		bench.Location_Id,
+		pit.Location_Id,
+		site.Location_Id,
+		hub.Location_Id,
+		company.Location_Id,
+		RM.DateFrom,
+		RM.DateTo,
+		RM.MinedPercentage,
+		RM.BlockNumber, 
+		RM.BlockName, 
+		RM.Site, 
+		RM.OreBody, 
+		RM.Pit, 
+		RM.Bench, 
+		RM.PatternNumber
+	FROM dbo.BhpbioImportReconciliationMovement AS RM
+		INNER JOIN BhpbioLocationDate AS block
+			ON (block.Location_Id = RM.BlockLocationId)
+			AND (RM.DateTo BETWEEN block.Start_Date AND block.End_Date)
+		INNER JOIN BhpbioLocationDate blast 
+			ON blast.Location_Id = block.Parent_Location_Id
+			AND ( RM.DateTo BETWEEN blast.Start_Date AND blast.End_Date)
+		INNER JOIN BhpbioLocationDate bench 
+			ON bench.Location_Id = blast.Parent_Location_Id
+			AND ( RM.DateTo BETWEEN bench.Start_Date AND bench.End_Date)
+		INNER JOIN BhpbioLocationDate pit 
+			ON pit.Location_Id = bench.Parent_Location_Id
+			AND ( RM.DateTo BETWEEN pit.Start_Date AND pit.End_Date)
+		INNER JOIN @Location AS L
+			ON L.LocationId = pit.Location_Id
+				AND (RM.DateFrom >= L.IncludeStart AND RM.DateTo <= L.IncludeEnd)
+		INNER JOIN BhpbioLocationDate site 
+			ON site.Location_Id = pit.Parent_Location_Id
+			AND ( RM.DateTo BETWEEN site.Start_Date AND site.End_Date)
+		INNER JOIN BhpbioLocationDate hub 
+			ON hub.Location_Id = site.Parent_Location_Id
+			AND ( RM.DateTo BETWEEN hub.Start_Date AND hub.End_Date)
+		INNER JOIN BhpbioLocationDate company 
+			ON company.Location_Id = hub.Parent_Location_Id
+			AND ( RM.DateTo BETWEEN company.Start_Date AND company.End_Date)
+		INNER JOIN Location pitloc
+			ON pit.Location_Id = pitloc.Location_Id
+	WHERE (RM.DateFrom >= @iDateFrom
+		AND RM.DateTo <= @iDateTo)
+
+	-- remove blocks with incorrect pit allocation if they are duplicates, start by correcting BlockLocation to positive number
+	UPDATE BL
+	SET BlockLocationId = -1.0 * BL.BlockLocationId
+	FROM @BlockLocation BL
+		LEFT JOIN @BlockLocation BL2 
+			ON BL.BlockLocationId = BL2.BlockLocationId
+	WHERE BL.BlockLocationId < 0 
+		AND (BL2.BlockLocationId IS NULL OR BL.DateTo <= @LumpFinesCutoverDate)
+	
+	DELETE 
+	FROM @BlockLocation
+	WHERE BlockLocationId < 0
+	
+	-- determine the type of the specified location
+	SELECT @FilterLocationType = LT.Description
+	FROM Location L
+	INNER JOIN LocationType LT ON L.Location_Type_Id = LT.Location_Type_Id
+	WHERE Location_Id = @iLocationId
+
+	-- remove blocks that are not under the specified parent location hierarchy
+	DELETE FROM @BlockLocation
+	WHERE @iLocationId <> 
+		CASE
+			WHEN @FilterLocationType = 'BLAST' THEN BlastLocationId
+			WHEN @FilterLocationType = 'BENCH' THEN BenchLocationId
+			WHEN @FilterLocationType = 'PIT' THEN PitLocationId
+			WHEN @FilterLocationType = 'SITE' THEN SiteLocationId 
+			WHEN @FilterLocationType = 'HUB' THEN HubLocationId 
+			WHEN @FilterLocationType = 'COMPANY' THEN CompanyLocationId 
+			ELSE -1 
+		END
+		
+	IF (@iIncludeChildLocations = 1) 
+	BEGIN
+		UPDATE @BlockLocation
+		SET ParentLocationId = 
+			CASE
+				WHEN @FilterLocationType = 'BLAST' THEN BlockLocationId
+				WHEN @FilterLocationType = 'BENCH' THEN BlastLocationId
+				WHEN @FilterLocationType = 'PIT' THEN BenchLocationId 
+				WHEN @FilterLocationType = 'SITE' THEN PitLocationId 
+				WHEN @FilterLocationType = 'HUB' THEN SiteLocationId 
+				WHEN @FilterLocationType = 'COMPANY' THEN HubLocationId 
+				ELSE NULL 
+			END
+	END
+			
+	RETURN
+END
+GO
+

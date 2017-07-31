@@ -1,0 +1,26 @@
+﻿IF OBJECT_ID('dbo.GetBhpbioReportHighGrade') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioReportHighGrade
+Go 
+
+CREATE FUNCTION dbo.GetBhpbioReportHighGrade
+()
+RETURNS @HighGradeMaterialType TABLE
+(
+	MaterialTypeId INT,
+	Description VARCHAR(63) COLLATE DATABASE_DEFAULT,
+	Abbreviation VARCHAR(15) COLLATE DATABASE_DEFAULT,
+	PRIMARY KEY (MaterialTypeId)
+)
+BEGIN
+	INSERT INTO @HighGradeMaterialType
+		(MaterialTypeId, Description, Abbreviation)
+	SELECT Material_Type_Id, Description, Abbreviation
+	FROM dbo.MaterialType
+	WHERE Material_Category_Id = 'Designation'
+		AND Description IN ('High Grade', 'Bene Feed', 'Bene Product')
+
+	RETURN
+END
+GO
+
+--select * from dbo.GetBhpbioReportHighGrade()

@@ -1,0 +1,13 @@
+﻿IF OBJECT_ID('dbo.BhpbioShippingNomination') IS NOT NULL
+	DROP TABLE dbo.BhpbioShippingNomination
+GO
+
+CREATE TABLE dbo.BhpbioShippingNomination
+(
+	NominationKey INT NOT NULL,
+	VesselName VARCHAR(63) COLLATE DATABASE_DEFAULT NOT NULL,
+
+	CONSTRAINT PK_BhpbioShippingNomination
+		PRIMARY KEY (NominationKey)
+)
+GO

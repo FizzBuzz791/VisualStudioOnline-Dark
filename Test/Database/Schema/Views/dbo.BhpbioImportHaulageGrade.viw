@@ -1,0 +1,30 @@
+﻿IF OBJECT_ID('dbo.BhpbioImportHaulageGrade') IS NOT NULL 
+     DROP VIEW dbo.BhpbioImportHaulageGrade
+GO
+
+CREATE VIEW dbo.BhpbioImportHaulageGrade
+AS
+SELECT r.ImportSyncRowId,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/HaulageDate)[1]', 'DATETIME') AS HaulageDate,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/HaulageShift)[1]', 'CHAR(1)') AS HaulageShift,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/Source)[1]', 'VARCHAR(63)') AS Source,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/SourceMineSite)[1]', 'VARCHAR(2)') AS SourceMineSite,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/Destination)[1]', 'VARCHAR(63)') AS Destination,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/DestinationMineSite)[1]', 'VARCHAR(2)') AS DestinationMinesite,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/Truck)[1]', 'VARCHAR(31)') AS Truck,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/Type)[1]', 'VARCHAR(255)') AS Type,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/GradeName)[1]', 'VARCHAR(31)') AS GradeName,
+	r.SourceRow.value('(//HaulageSource/HaulageGrade/Value)[1]', 'VARCHAR(255)') AS Value,
+	r.DestinationRow.value('(//HaulageDestination/HaulageGrade/HaulageRawId)[1]', 'INT') AS HaulageRawId,
+	r.RootImportSyncRowId, r.IsCurrent
+FROM dbo.ImportSyncRow AS r
+	INNER JOIN dbo.Import AS i
+		ON (r.ImportId = i.ImportId)
+	INNER JOIN dbo.ImportSyncTable AS t
+		ON (r.ImportSyncTableId = t.ImportSyncTableId)
+WHERE i.ImportName = 'Haulage'
+	AND t.Name = 'HaulageGrade'
+GO
+
+GRANT SELECT ON dbo.BhpbioImportHaulageGrade TO CoreReporting
+GO

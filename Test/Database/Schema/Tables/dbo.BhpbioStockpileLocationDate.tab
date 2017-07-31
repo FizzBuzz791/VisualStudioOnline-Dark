@@ -1,0 +1,52 @@
+﻿If Object_id('dbo.BhpbioStockpileLocationDate') Is Not Null 
+     Drop Table dbo.BhpbioStockpileLocationDate
+GO 
+
+
+CREATE TABLE [dbo].[BhpbioStockpileLocationDate](
+	[Stockpile_Id]			INT			NOT NULL,
+	[Location_Id]			INT			NOT NULL,
+	[Period_Order]			INT			NOT NULL,
+	[Start_Date]			DATETIME	NOT NULL,
+	[End_Date]				DATETIME	NULL,
+	[Is_Override]			BIT			NOT NULL,
+	[Date_Created]			DATETIME	NOT NULL,
+	CONSTRAINT [PK_STOCKPILE_LOCATION_DATE] PRIMARY KEY CLUSTERED 
+(
+	Stockpile_Id,Location_Id, Period_Order
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [IX_BhpbioStockpileLocationDate] ON [BhpbioStockpileLocationDate] 
+(
+	Location_Id ASC,
+	Stockpile_Id ASC
+)
+
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationDate]  WITH CHECK ADD  CONSTRAINT [FK1_BHPBIOSTOCKPILELOCATIONDATE] FOREIGN KEY([Stockpile_Id])
+REFERENCES [dbo].[Stockpile] ([Stockpile_Id])
+GO
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationDate] CHECK CONSTRAINT [FK1_BHPBIOSTOCKPILELOCATIONDATE]
+GO
+
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationDate]  WITH CHECK ADD  CONSTRAINT [FK2_BHPBIOSTOCKPILELOCATIONDATE] FOREIGN KEY([Location_Id])
+REFERENCES [dbo].[Location] ([Location_Id])
+GO
+
+ALTER TABLE [dbo].[BhpbioStockpileLocationDate] CHECK CONSTRAINT [FK2_BHPBIOSTOCKPILELOCATIONDATE]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_StockpileLocationStartDate] ON [dbo].[BhpbioStockpileLocationDate] 
+(
+      [Start_Date] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_StockpileLocationEndDate] ON [dbo].[BhpbioStockpileLocationDate] 
+(
+      [End_Date] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO

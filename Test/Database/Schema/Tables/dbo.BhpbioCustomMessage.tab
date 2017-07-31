@@ -1,0 +1,14 @@
+﻿If OBJECT_ID('dbo.BhpbioCustomMessage') IS NOT NULL 
+     DROP TABLE dbo.BhpbioCustomMessage
+Go 
+
+CREATE TABLE dbo.BhpbioCustomMessage 
+(
+	Name VARCHAR(63) COLLATE Database_Default NOT NULL,
+	Text VARCHAR(MAX) COLLATE Database_Default NOT NULL,
+	ExpirationDate DATETIME NULL,
+	IsActive BIT NOT NULL,
+	
+	CONSTRAINT PK_BhpbioCustomMessage PRIMARY KEY CLUSTERED (Name)
+) 
+GO

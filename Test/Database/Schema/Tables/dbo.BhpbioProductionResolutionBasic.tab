@@ -1,0 +1,101 @@
+﻿ If Exists (Select 1 From sysobjects where ID = Object_Id('dbo.BhpbioProductionResolveBasic'))
+	Drop Table dbo.BhpbioProductionResolveBasic
+Go
+
+Create Table dbo.BhpbioProductionResolveBasic
+(
+	Production_Resolve_Basic_Id Int Not Null Identity(1, 1),
+	Code VarChar(63) Collate Database_Default Not Null,
+	Resolve_From_Date DateTime Not Null,
+	Resolve_From_Shift Char(1) Collate Database_Default Not Null,
+	Resolve_To_Date DateTime Null,
+	Resolve_To_Shift Char(1) Collate Database_Default Null,
+	Stockpile_Id Int Null,
+	Build_Id Int Null,
+	Component_Id Int Null,
+	Digblock_Id VarChar(31) Collate Database_Default Null,
+	Crusher_Id VarChar(31) Collate Database_Default Null,
+	Mill_Id VarChar(31) Collate Database_Default Null,
+	Description VarChar(255) Collate Database_Default Null,
+	Production_Direction Char(1) Collate Database_Default Not Null Default ('B'), 
+	Constraint PK_PRODUCTION_RESOLVE_BASIC Primary Key Clustered (PRODUCTION_RESOLVE_Basic_Id),
+	Constraint FK_PRODUCTION_RESOLVE_BASIC__STOCKPILE_BUILD_COMPONENT Foreign Key (Stockpile_Id, Build_Id, Component_Id)
+		References dbo.StockpileBuildComponent (Stockpile_Id, Build_Id, Component_Id),
+	Constraint FK_PRODUCTION_RESOLVE_BASIC__STOCKPILE_BUILD Foreign Key (Stockpile_Id, Build_Id)
+		References dbo.StockpileBuild (Stockpile_Id, Build_Id),
+	Constraint FK_PRODUCTION_RESOLVE_BASIC__STOCKPILE Foreign Key (Stockpile_Id)
+		References dbo.Stockpile (Stockpile_Id),
+	Constraint FK_PRODUCTION_RESOLVE_BASIC__DIGBLOCK Foreign Key (Digblock_Id)
+		References dbo.Digblock (Digblock_Id),
+	Constraint FK_PRODUCTION_RESOLVE_BASIC__CRUSHER Foreign Key (Crusher_Id)
+		References dbo.Crusher (Crusher_Id),
+	Constraint FK_PRODUCTION_RESOLVE_BASIC__MILL Foreign Key (Mill_Id)
+		References dbo.Mill (Mill_Id),
+	Constraint CK_PRODUCTION_RESOLVE_BASIC Check
+		(
+			Production_Direction In ('B', 'S', 'D')
+		)
+)
+Go
+
+Create Index IX_PRODUCTION_RESOLVE_BASIC_01 On BhpbioProductionResolveBasic (Stockpile_Id, Build_Id, Component_Id)
+Create Index IX_PRODUCTION_RESOLVE_BASIC_02 On BhpbioProductionResolveBasic (Digblock_Id)
+Create Index IX_PRODUCTION_RESOLVE_BASIC_03 On BhpbioProductionResolveBasic (Crusher_Id)
+Create Index IX_PRODUCTION_RESOLVE_BASIC_04 On BhpbioProductionResolveBasic (Mill_Id)
+Create Index IX_PRODUCTION_RESOLVE_BASIC_05 On dbo.BhpbioProductionResolveBasic (Code)
+Go
+
+/*
+<TAG Name="Data Dictionary" TableName="dbo.BhpbioProductionResolveBasic">
+	<Area>
+		Management
+	</Area>
+	<Table>
+		Contains all basic name resolutions for haulage raw records.
+	</Table>
+	<Columns>
+		<Column Name="PRODUCTION_RESOLVE_Basic_Id">
+			Unique identifier.
+		</Column>
+		<Column Name="Code">
+			The reference code, to identifier the code to which this rule applies.
+		</Column>
+		<Column Name="Resolve_From_Date">
+			The date from which the rule is applicable.
+		</Column>
+		<Column Name="Resolve_From_Shift">
+			The shift from which the rule is applicable.
+		</Column>
+		<Column Name="Resolve_To_Date">
+			The date to which the rule is valid to.
+		</Column>
+		<Column Name="Resolve_To_Shift">
+			The shift to which the rule is valid to.
+		</Column>
+		<Column Name="Stockpile_Id">
+			Reference to a stockpile, for which this rule may resolve to.  Supported for sources and destinations.
+		</Column>
+		<Column Name="Build_Id">
+			Reference to a stockpile's build, for which this rule may resolve to.  Not required, and supported for sources and destinations.
+		</Column>
+		<Column Name="Component_Id">
+			Reference to a stockpile's component, for which this rule may resolve to.  Not required, and supported for sources and destinations.
+		</Column>
+		<Column Name="Digblock_Id">
+			Reference to a digblock, for which this rule may resolve to.  Currently only supported as a source.
+		</Column>
+		<Column Name="Crusher_Id">
+			Reference to a crusher, for which this rule may resolve to.  Currently only supported as a destination.
+		</Column>
+		<Column Name="Mill_Id">
+			Reference to a mill, for which this rule may resolve to.  Currently not supported.
+		</Column>
+		<Column Name="Description">
+			Description for this rule.
+		</Column>
+		<Column Name="Production_Direction">
+			Specifies whether the record can be used as a Haulage Source (S), Destination (D) or Both (B).
+		</Column>
+	</Columns>
+</TAG>
+*/

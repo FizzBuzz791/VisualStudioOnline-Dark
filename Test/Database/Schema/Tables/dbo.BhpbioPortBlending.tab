@@ -1,0 +1,39 @@
+﻿IF OBJECT_ID('dbo.BhpbioPortBlending') IS NOT NULL
+	DROP TABLE dbo.BhpbioPortBlending
+GO
+
+CREATE TABLE dbo.BhpbioPortBlending
+(
+	BhpbioPortBlendingId INT IDENTITY,
+	SourceHubLocationId INT NOT NULL,
+	DestinationHubLocationId INT NOT NULL,
+	LoadSiteLocationId INT NULL,
+	StartDate DATETIME NOT NULL,
+	EndDate DATETIME NOT NULL,
+	SourceProductSize VARCHAR(5) NULL,
+	DestinationProductSize VARCHAR(5) NULL,
+	SourceProduct VARCHAR(30) NULL,
+	DestinationProduct VARCHAR(30) NULL,
+	Tonnes FLOAT NOT NULL,
+
+	CONSTRAINT PK_BhpbioPortBlending
+		PRIMARY KEY (BhpbioPortBlendingId),
+		
+	CONSTRAINT UQ_BhpbioPortBlending_Candidate
+		UNIQUE (SourceHubLocationId, DestinationHubLocationId, SourceProduct, 
+			DestinationProduct, LoadSiteLocationId, StartDate, EndDate),
+		
+	CONSTRAINT FK_BhpbioPortBlending_DestinationHubLocationId_Location
+		FOREIGN KEY (DestinationHubLocationId)
+		REFERENCES dbo.Location (Location_Id),
+
+	CONSTRAINT FK_BhpbioPortBlending_SourceHubLocationId_Location
+		FOREIGN KEY (SourceHubLocationId)
+		REFERENCES dbo.Location (Location_Id),
+		
+	CONSTRAINT FK_BhpbioPortBlending_LoadSiteLocationId_Location
+		FOREIGN KEY (LoadSiteLocationId)
+		REFERENCES dbo.Location (Location_Id)
+
+)
+GO

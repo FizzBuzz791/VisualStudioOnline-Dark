@@ -1,0 +1,208 @@
+﻿IF Object_Id('dbo.GetBhpbioReportRemainingReconBlockLocations') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioReportRemainingReconBlockLocations
+GO
+
+CREATE FUNCTION dbo.GetBhpbioReportRemainingReconBlockLocations
+(
+	@iLocationId INT,
+	@iDateTo DATETIME,
+	@iIncludeChildLocations BIT = 0
+)
+RETURNS @BlockLocation TABLE
+(
+	BlockLocationId INT NOT NULL,
+	BlastLocationId INT NULL,
+	BenchLocationId INT NULL,
+	PitLocationId INT NULL,
+	SiteLocationId INT NULL,
+	HubLocationId INT NULL,
+	CompanyLocationId INT NULL,
+	DateFrom DATETIME NOT NULL,
+	DateTo DATETIME NOT NULL,
+	RemainingPercentage FLOAT,
+	BlockName VARCHAR(5),
+	Site VARCHAR(31),
+	Pit VARCHAR(10),
+	Bench VARCHAR(4),
+	PatternNumber VARCHAR(4),
+	ParentLocationId INT NULL,
+	
+	PRIMARY KEY (BlockLocationId, DateTo, Pit, BlockName)
+)
+AS
+BEGIN
+	DECLARE @FilterLocationType VARCHAR(255)
+	DECLARE @LumpFinesCutoverDate DateTime
+	
+	DECLARE @Location TABLE
+	(
+		LocationId INTEGER,
+		IncludeStart DATETIME,
+		IncludeEnd DATETIME,
+		
+		PRIMARY KEY (LocationId, IncludeStart, IncludeEnd)
+	)
+	
+	SELECT @LumpFinesCutoverDate = Value
+	FROM Setting
+	WHERE Setting_Id = 'LUMP_FINES_CUTOVER_DATE'
+	
+	DECLARE @dateFrom DATETIME
+	SELECT @dateFrom = CONVERT(DATETIME, s.Value) FROM Setting s WHERE s.Setting_Id = 'SYSTEM_START_DATE'
+
+	-- get all blocks in range
+	INSERT INTO @Location
+	( LocationId, IncludeStart,IncludeEnd )
+	SELECT LocationId, IncludeStart,IncludeEnd
+	FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@iLocationId, 1, 'BLOCK', @iDateTo, @iDateTo) b
+	
+	--SELECT * FROM @Location
+
+	DECLARE @blockLocationTypeId INTEGER
+	SELECT @blockLocationTypeID = Location_Type_Id FROM LocationType WHERE [Description] = 'Block'
+	
+	DECLARE @Blocks TABLE (
+		BlockLocationId INTEGER,
+		Start_Date DATETIME,
+		End_Date DATETIME,
+	
+		PRIMARY KEY (BlockLocationId)
+	)
+
+	DECLARE @BlockDepletion TABLE (
+		BlockLocationId INTEGER,
+		DepletedPercent FLOAT
+
+		PRIMARY KEY (BlockLocationId)
+	)
+
+	INSERT INTO @Blocks(BlockLocationId, Start_Date, End_Date)
+	SELECT 
+		block.Location_Id,
+		MIN(block.STart_Date),
+		MAX(block.End_Date)
+	FROM @Location blockl
+		INNER JOIN BhpbioLocationDate AS block
+			ON block.Location_Id = blockl.LocationId
+			AND block.Location_Type_Id = @blockLocationTypeId
+			AND ( blockl.IncludeEnd BETWEEN block.Start_Date AND block.End_Date)
+	GROUP BY block.Location_Id
+
+	INSERT INTO @BlockDepletion(BlockLocationId, DepletedPercent)
+	SELECT RM.BlockLocationId, IsNull(SUM(RM.MinedPercentage),0)
+	FROM BhpbioImportReconciliationMovement RM
+		INNER JOIN @Blocks b ON b.BlockLocationID = RM.BlockLocationId AND b.Start_Date < RM.DateTo AND b.End_Date > RM.DateFrom
+	WHERE RM.DateFrom < @iDateTo AND RM.DateFrom >= @dateFrom
+	GROUP BY RM.BlockLocationID
+
+	DECLARE @dateAfterToDate DATETIME
+	SET @dateAfterToDate = DATEADD(day,1,@iDateTo)
+
+	DECLARE @minimumBlockOutDate DATETIME
+	SELECT @minimumBlockOutDate = DATEADD(day, -1 * convert(int, s.value),@iDateTo)
+	FROM Setting s WHERE s.Setting_Id = 'FORWARD_FACTOR_MAX_DAYS_SINCE_BLOCKOUT'
+	
+	DECLARE @minNonDepleted FLOAT
+	SELECT @minNonDepleted = convert(float, s.value) / 100.0
+	FROM Setting s WHERE s.Setting_Id = 'FORWARD_FACTOR_MINIMUM_NON_DEPLETED_PERCENT'
+
+	-- retrieve starting set of blocks based on those with recon movements over
+	-- the given period
+	INSERT INTO @BlockLocation (
+		BlockLocationId,
+		BlastLocationId,
+		BenchLocationId,
+		PitLocationId,
+		SiteLocationId,
+		HubLocationId,
+		CompanyLocationId,
+		DateFrom,
+		DateTo,
+		RemainingPercentage,
+		BlockName,
+		Site,
+		Pit,
+		Bench,
+		PatternNumber
+	)
+	SELECT	
+		block.Location_Id,
+		blast.Location_Id,
+		bench.Location_Id,
+		pit.Location_Id,
+		site.Location_Id,
+		hub.Location_Id,
+		company.Location_Id,
+		@dateFrom,
+		@iDateTo,
+		CASE WHEN bd.DepletedPercent > 1 THEN 0 ELSE 1.0 - IsNull(bd.DepletedPercent,0) END,
+		blockloc.Name, 
+		siteloc.Name, 
+		pitloc.Name, 
+		benchloc.Name, 
+		blastloc.Name
+	FROM @Blocks b
+		LEFT JOIN @BlockDepletion bd ON bd.BlockLocationID = b.BlockLocationId
+		INNER JOIN BhpbioLocationDate block
+			ON block.Location_Id = b.BlockLocationId
+			AND ( @iDateTo BETWEEN block.Start_Date AND block.End_Date)
+		INNER JOIN BhpbioLocationDate blast 
+			ON blast.Location_Id = block.Parent_Location_Id
+			AND ( @iDateTo BETWEEN blast.Start_Date AND blast.End_Date)
+		INNER JOIN BhpbioLocationDate bench 
+			ON bench.Location_Id = blast.Parent_Location_Id
+			AND ( @iDateTo BETWEEN bench.Start_Date AND bench.End_Date)
+		INNER JOIN BhpbioLocationDate pit 
+			ON pit.Location_Id = bench.Parent_Location_Id
+			AND ( @iDateTo BETWEEN pit.Start_Date AND pit.End_Date)
+		INNER JOIN BhpbioLocationDate site 
+			ON site.Location_Id = pit.Parent_Location_Id
+			AND ( @iDateTo BETWEEN site.Start_Date AND site.End_Date)
+		INNER JOIN BhpbioLocationDate hub 
+			ON hub.Location_Id = site.Parent_Location_Id
+			AND ( @iDateTo BETWEEN hub.Start_Date AND hub.End_Date)
+		INNER JOIN BhpbioLocationDate company 
+			ON company.Location_Id = hub.Parent_Location_Id
+			AND ( @iDateTo BETWEEN company.Start_Date AND company.End_Date)
+		INNER JOIN Location blockloc
+			ON block.Location_Id = blockloc.Location_Id
+		INNER JOIN Location blastloc
+			ON blast.Location_Id = blastloc.Location_Id
+		INNER JOIN Location benchloc
+			ON bench.Location_Id = benchloc.Location_Id
+		INNER JOIN Location pitloc
+			ON pit.Location_Id = pitloc.Location_Id
+		INNER JOIN Location siteloc
+			ON site.Location_Id = siteloc.Location_Id
+		INNER JOIN Location hubloc
+			ON hub.Location_Id = hubloc.Location_Id
+		INNER JOIN Location companyloc
+			ON company.Location_Id = companyloc.Location_Id
+		INNER JOIN ModelBlockLocation mbl ON mbl.Location_Id = block.Location_Id
+		INNER JOIN ModelBlock  mb ON mb.Model_Block_Id = mbl.Model_Block_Id AND mb.Block_Model_Id = 1
+		INNER JOIN ModelBlockPartialNotes mbpn ON mbpn.Model_Block_Id = mb.Model_Block_Id AND mbpn.Sequence_No = 1 AND mbpn.Model_Block_Partial_Field_Id = 'BlockedDate'
+	WHERE CASE WHEN ISDATE(left(mbpn.Notes,19)) = 1 THEN Convert(datetime, left(mbpn.Notes,19)) ELSE @dateAfterToDate END BETWEEN @minimumBlockOutDate AND @iDateTo
+		AND CASE WHEN bd.DepletedPercent > 1 THEN 0 ELSE 1.0 - IsNull(bd.DepletedPercent,0) END > @minNonDepleted
+
+	IF (@iIncludeChildLocations = 1) 
+	BEGIN
+
+		SELECT @FilterLocationType = LT.Description
+		FROM Location L
+		INNER JOIN LocationType LT ON L.Location_Type_Id = LT.Location_Type_Id
+		WHERE Location_Id = @iLocationId
+
+		UPDATE @BlockLocation
+		SET ParentLocationId = 
+			CASE
+				WHEN @FilterLocationType = 'PIT' THEN BenchLocationId 
+				WHEN @FilterLocationType = 'SITE' THEN PitLocationId 
+				WHEN @FilterLocationType = 'HUB' THEN SiteLocationId 
+				WHEN @FilterLocationType = 'COMPANY' THEN HubLocationId 
+				ELSE NULL 
+			END
+	END
+			
+	RETURN
+END
+GO

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <xsd:schema targetNamespace="http://www.snowden.com/Reconcilor/v1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:Q1="http://www.snowden.com/Reconcilor/v1.0/GeologyCommonDataTypes_Snowden" xmlns:sno="http://www.snowden.com/Reconcilor/v1.0">
+    <xsd:import schemaLocation="ReconcilorAPICommonTypes.xsd" namespace="http://www.snowden.com/Reconcilor/v1.0/GeologyCommonDataTypes_Snowden"></xsd:import>
+    <xsd:complexType name="BlockOutAndBlastedEventType">
+    	<xsd:sequence>
+    		<xsd:element name="Timestamp" type="xsd:dateTime" />
+    		<xsd:element name="IsReblockOut" type="xsd:boolean" />
+    		<xsd:element name="ResponsibleUsername" type="xsd:string" />
+    		<xsd:element name="SourceModelDetail" type="Q1:SourceModelDescriptorType">
+    		</xsd:element>
+    		<xsd:element name="PatternDetails" type="Q1:PatternDetailsType" />
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="BlockOutAndBlastedEvent"
+    	type="sno:BlockOutAndBlastedEventType">
+    </xsd:element>
+</xsd:schema>

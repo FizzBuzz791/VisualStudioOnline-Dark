@@ -1,0 +1,2329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="Webservice">
+      <DataSourceReference>WebService</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>96b0c517-51b4-4667-8984-de9a7ec0ce24</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="ConvertLocationComment">
+      <Query>
+        <DataSourceName>Webservice</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>
+          &lt;Query&gt;
+          &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetLocationCommentByDate&lt;/SoapAction&gt;
+          &lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetLocationCommentByDate"&gt;
+          &lt;Parameters&gt;
+          &lt;Parameter Name="locationId" Type="integer" &gt;&lt;DefaultValue&gt;11&lt;/DefaultValue&gt;&lt;/Parameter&gt;
+          &lt;Parameter Name="startDate" Type="date" &gt;&lt;DefaultValue&gt;2013-11-01&lt;/DefaultValue&gt;&lt;/Parameter&gt;
+          &lt;/Parameters&gt;
+          &lt;/Method&gt;
+          &lt;ElementPath IgnoreNamespaces="true"&gt;GetLocationCommentByDateResponse{GetLocationCommentByDateResult}
+          &lt;/ElementPath&gt;
+          &lt;/Query&gt;
+        </CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="GetLocationCommentByDateResult">
+          <DataField>GetLocationCommentByDateResult</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="GetPowerPointFiltering">
+      <Query>
+        <DataSourceName>Webservice</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="locationId">
+            <Value>=Parameters!LocationId.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="dateBreakdown">
+            <Value>=Switch(
+       Parameters!ReportType.Value = "SiteMonthly", "MONTH",
+        true, "QUARTER"
+        )</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="periodStart">
+            <Value>=Parameters!DateFrom.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="factorOption">
+            <Value>=Parameters!FactorOption.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="selectionMode">
+            <Value>=Parameters!AutomaticContentSelectionMode.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+	&lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetPowerPointContentSelection&lt;/SoapAction&gt;
+	&lt;Method Namespace="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/" Name="GetPowerPointContentSelection"&gt;
+		&lt;Parameters&gt;
+			&lt;Parameter Name="locationId" Type="integer" /&gt;
+			&lt;Parameter Name="dateBreakdown" Type="string" /&gt;
+			&lt;Parameter Name="periodStart" Type="date" /&gt;
+			&lt;Parameter Name="factorOption" Type="string" /&gt;
+			&lt;Parameter Name="selectionMode" Type="string" /&gt;			
+		&lt;/Parameters&gt;
+	&lt;/Method&gt;
+	&lt;ElementPath IgnoreNamespaces="true"&gt;GetPowerPointContentSelectionResponse{}/GetPowerPointContentSelectionResult/diffgram{}/DocumentElement{}/PowerPointFiltering&lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="rowOrder">
+          <DataField>rowOrder</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LocationId">
+          <DataField>LocationId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LocationName">
+          <DataField>LocationName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LocationType">
+          <DataField>LocationType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Factor">
+          <DataField>Factor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Mode">
+          <DataField>Mode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Attribute">
+          <DataField>Attribute</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Xml">
+          <DataField>Xml</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Rectangle Name="HubFactorDefinitionsRectangle">
+            <ReportItems>
+              <Image Name="FactorDefinitionsImage">
+                <Source>Embedded</Source>
+                <Value>F1F2F3ReconciliationProcesses</Value>
+                <Sizing>FitProportional</Sizing>
+                <Top>4.81216cm</Top>
+                <Left>6.78019cm</Left>
+                <Height>8.59367cm</Height>
+                <Width>19.20117cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Textbox Name="Textbox1">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>F1</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                          <Color>#3333ff</Color>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value> Grade Control Model/Mining Model: </Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>this</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value xml:space="preserve"> </Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>comparison</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value xml:space="preserve"> </Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>measures the effectiveness of grade control processes and the validity of the mining reserve.</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value />
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>F2</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                          <Color>#3333ff</Color>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value xml:space="preserve"> </Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>Mine Production (Expit)/Grade Control Model: </Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>this comparison measures the efficiency of the mine production cycle through the management of stockpiles, sample stations, haulage data etc against grade control procedures.</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <LeftIndent>0cm</LeftIndent>
+                    <RightIndent>0cm</RightIndent>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value />
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <LeftIndent>0cm</LeftIndent>
+                    <RightIndent>0cm</RightIndent>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>F3</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                          <Color>#3333ff</Color>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value> Shipped/Mining Model</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>: this comparison validates how accurate our long term planning is by comparing the final shipping or sales figures against the mining reserve. F3 is the business case reconciliation model.</Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value xml:space="preserve"> </Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Arial Narrow</FontFamily>
+                          <FontSize>12pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <LeftIndent>0cm</LeftIndent>
+                    <RightIndent>0cm</RightIndent>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox1</rd:DefaultName>
+                <Height>4.70633cm</Height>
+                <Width>32.45519cm</Width>
+                <ZIndex>1</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=NOT Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>Factor Definitions</PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>1.76953cm</Top>
+            <Left>0.20584cm</Left>
+            <Height>13.52578cm</Height>
+            <Width>32.77269cm</Width>
+            <Visibility>
+              <Hidden>=NOT Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="ResultsRectangle">
+            <ReportItems>
+              <Subreport Name="OverviewReport">
+                <ReportName>BhpbioF1F2F3OverviewReconContributionReportPPT</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="f15Required">
+                    <Value>=Variables!isF15AndRfstm.Value</Value>
+                  </Parameter>
+                  <Parameter Name="FactorOption">
+                    <Value>=NOTHING</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="F2Required">
+                    <Value>=Variables!isF1AndF2.Value</Value>
+                  </Parameter>
+                </Parameters>
+                <Height>1cm</Height>
+                <Width>18.95951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Variables!isHubQuarterly.Value, Variables!TitlePrefix.Value + " F1, F2, F3 Overview",
+              Variables!isF1AndF2.Value, Variables!TitlePrefix.Value + " F1 and F2 Results",
+              Variables!isF15AndRfstm.Value, Variables!TitlePrefix.Value + " F1.5 Results",
+              true, "Unknown"
+              )
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>22.37759cm</Top>
+            <Left>0.2cm</Left>
+            <Height>1.09596cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="PeriodYXXQXSiteNameRectangle">
+            <ReportItems>
+              <Textbox Name="Textbox3">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value EvaluationMode="Constant">Insert image or map</Value>
+                        <Style>
+                          <FontSize>18pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox3</rd:DefaultName>
+                <Top>0.07055cm</Top>
+                <Left>0.1cm</Left>
+                <Height>1.23583cm</Height>
+                <Width>23.31014cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <PageName>=Switch (
+	Variables!isSiteMonthly.Value and Variables!isF1AndF2.Value, "CYXX - Month - Site Name " + Environment.Newline + "Monthly Reconciliation Presentation",
+    Variables!isSiteMonthly.Value and Variables!isF15AndRfstm.Value, "CYXX - Month – Site Name - STM" + Environment.Newline + "Monthly Reconciliation Presentation",
+    Variables!isSiteQuarterly.Value and Variables!isF1AndF2.Value, "FYXX- QX – Site Name" + Environment.Newline + "Quarterly Reconciliation Presentation",
+    Variables!isSiteQuarterly.Value and Variables!isF15AndRfstm.Value, "FYXX- QX – Site Name - STM" + Environment.Newline + "Quarterly Reconciliation Presentation",
+    Variables!isHubQuarterly.Value, "FYXX- QX – WAIO" + Environment.Newline + "Quarterly Reconciliation Presentation",
+    true, "FYXX- QX - Unknown"
+    )</PageName>
+            <KeepTogether>true</KeepTogether>
+            <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
+            <Top>0.07056cm</Top>
+            <Left>0.21853cm</Left>
+            <Height>1.52258cm</Height>
+            <Width>32.86cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="DiaryRectangle">
+            <ReportItems>
+              <Textbox Name="Textbox5">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>
+                          =	"Use bullet points to record any changes or events that might affect future" +
+                          IIF(Variables!isF15AndRfstm.Value, " STM", "") +
+                          " Reconciliations"
+                        </Value>
+                        <Style>
+                          <FontSize>18pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox5</rd:DefaultName>
+                <Left>0.11853cm</Left>
+                <Height>1.23583cm</Height>
+                <Width>23.31014cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Variables!isHubQuarterly.Value, Variables!TitlePrefix.Value + " Reconciliations Diary (hide this slide)",
+              Variables!isF1AndF2.Value or Variables!isF15AndRfstm.Value, Variables!TitlePrefix.Value + IIF(Variables!isF15AndRfstm.Value, " STM", "") + " Diary (hide this slide)",
+              true, "Unknown"
+              )
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>15.4717cm</Top>
+            <Left>0.1cm</Left>
+            <Height>1.40516cm</Height>
+            <Width>32.86cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="SummaryRectangle">
+            <ReportItems>
+              <Textbox Name="Textbox6">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value EvaluationMode="Constant">Use bullet points to record the major findings from this presentation</Value>
+                        <Style>
+                          <FontSize>18pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox6</rd:DefaultName>
+                <Top>0.1cm</Top>
+                <Left>0.1cm</Left>
+                <Height>0.95983cm</Height>
+                <Width>17.29046cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>
+              =	Variables!TitlePrefix.Value +
+              IIF(Variables!isF15AndRfstm.Value, " STM", "") +
+              " Reconciliations Summary"
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>38.08793cm</Top>
+            <Left>0.05563cm</Left>
+            <Height>1.33583cm</Height>
+            <Width>32.86cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="F2_RFSTM_AnalysisRectangle">
+            <ReportItems>
+              <Textbox Name="Textbox4">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value EvaluationMode="Constant">Insert image or map</Value>
+                        <Style>
+                          <FontSize>18pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox3</rd:DefaultName>
+                <Top>0.08705cm</Top>
+                <Left>0.1cm</Left>
+                <Height>1.23583cm</Height>
+                <Width>18.86514cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Variables!isF1AndF2.Value, Variables!DateBreakdownPrefix.Value + " F2 Analysis",
+              Variables!isF15AndRfstm.Value, Variables!DateBreakdownPrefix.Value + " RFSTM Analysis",
+              true, "Unknown"
+              )
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>35.26343cm</Top>
+            <Height>1.55333cm</Height>
+            <Width>32.86cm</Width>
+            <ZIndex>5</ZIndex>
+            <Visibility>
+              <Hidden>=Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="MonthlySiteTonnageReviewRectangle">
+            <ReportItems>
+              <Subreport Name="BhpbioDensityAnalysisReport">
+                <ReportName>BhpbioDensityAnalysisReport</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateFrom">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateTo">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="Factors">
+                    <Value>=Switch (
+	Variables!isHubQuarterly.Value or Variables!isF1AndF2.Value, "MiningModel,GradeControlModel,ActualMined",
+    Variables!isF15AndRfstm.Value, "ShortTermGeologyModel,GradeControlModel,GradeControlSTGM,ActualMined",
+    true, "Unknown")</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <Height>0.97483cm</Height>
+                <Width>18.95951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Variables!isSiteMonthly.Value and Variables!isF1AndF2.Value, "Monthly Site Tonnage Review",
+              Variables!isSiteMonthly.Value and Variables!isF15AndRfstm.Value, "Monthly Site STM Tonnage Review",
+              Variables!isSiteQuarterly.Value and Variables!isF1AndF2.Value, "Quarterly Site Tonnage Review",
+              Variables!isSiteQuarterly.Value and Variables!isF15AndRfstm.Value, "Quarterly Site STM Tonnage Review",
+              Variables!isHubQuarterly.Value, "Quarterly WAIO Tonnage Review",
+              true, "Unknown"
+              )
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>18.94509cm</Top>
+            <Left>0.2cm</Left>
+            <Height>0.97483cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="SiteAerialPhotographRectangle">
+            <ReportItems>
+              <Textbox Name="Textbox7">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value EvaluationMode="Constant">Site Aerial Photograph</Value>
+                        <Style>
+                          <FontSize>18pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox7</rd:DefaultName>
+                <Top>0.24461cm</Top>
+                <Left>0.1cm</Left>
+                <Height>1.33583cm</Height>
+                <Width>15.60217cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>Site Aerial Photograph</PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>17.18826cm</Top>
+            <Left>0.11853cm</Left>
+            <Height>1.58044cm</Height>
+            <Width>32.86cm</Width>
+            <ZIndex>7</ZIndex>
+            <Visibility>
+              <Hidden>=Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="MonthlySiteDensityCheckRectangle">
+            <ReportItems>
+              <Subreport Name="BhpbioFactorsVsTimeReport_Density">
+                <ReportName>BhpbioFactorsVsTimeReport</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateFrom">
+                    <Value>=Variables!AdjustedStartDate.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateTo">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateBreakdown">
+                    <Value>=Variables!DateBreakdown.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DesignationMaterialTypeId">
+                    <Value>3</Value>
+                  </Parameter>
+                  <Parameter Name="Factors">
+                    <Value>
+                      =Switch (
+                      Variables!isHubQuarterly.Value or Variables!isF1AndF2.Value, "F1",
+                      Variables!isF15AndRfstm.Value, "F15",
+                      true, "Unknown"
+                      )
+                    </Value>
+                  </Parameter>
+                  <Parameter Name="Attributes">
+                    <Value>Tonnes,Volume,Density</Value>
+                  </Parameter>
+                  <Parameter Name="ReportType">
+                    <Value>Density</Value>
+                  </Parameter>
+                  <Parameter Name="productTypeIds">
+                    <Value>-1</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="IncludeLumpFines">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <Top>0.00822cm</Top>
+                <Height>0.84783cm</Height>
+                <Width>18.95951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Parameters!ReportType.Value = "SiteMonthly" and Variables!isF1AndF2.Value, "Monthly Site F1 Density Check",
+              Parameters!ReportType.Value = "SiteMonthly" and Variables!isF15AndRfstm.Value, "Monthly Site F1.5 Density Check",
+              Parameters!ReportType.Value = "SiteQuarterly" and Variables!isF1AndF2.Value, "Quarterly Site F1 Density Check",
+              Parameters!ReportType.Value = "SiteQuarterly" and Variables!isF15AndRfstm.Value, "Quarterly Site F1.5 Density Check",
+              Parameters!ReportType.Value = "HubQuarterly", "Quarterly WAIO F1 Density Check",
+              true, "Unknown"
+              )
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>20.09631cm</Top>
+            <Left>0.2cm</Left>
+            <Height>0.97483cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="ResclassSummaryRectangle">
+            <ReportItems>
+              <Subreport Name="BhpbioResourceClassificationContributionReport">
+                <ReportName>BhpbioResourceClassificationContributionReport</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateBreakdown">
+                    <Value>=Variables!DateBreakdown.Value</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="f15Required">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="ReportContext">
+                    <Value>Standard</Value>
+                  </Parameter>
+                  <Parameter Name="ReturnEmptyReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="SuppressSubReport">
+                    <Value>True</Value>
+                  </Parameter>
+                </Parameters>
+                <Height>0.91133cm</Height>
+                <Width>18.95951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=Variables!isF15AndRfstm.Value</Disabled>
+            </PageBreak>
+            <PageName>= Variables!TitlePrefix.Value + " Resclass Summary"</PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>21.24753cm</Top>
+            <Left>0.2cm</Left>
+            <Height>0.95367cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>9</ZIndex>
+            <Visibility>
+              <Hidden>=Variables!isF15AndRfstm.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="OverviewRectangle_Table">
+            <ReportItems>
+              <Subreport Name="OverviewRpt">
+                <ReportName>BhpbioF1F2F3OverviewReconContributionReportPPT</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="f15Required">
+                    <Value>=Variables!isF15AndRfstm.Value</Value>
+                  </Parameter>
+                  <Parameter Name="FactorOption">
+                    <Value>=NOTHING</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="F2Required">
+                    <Value>=Variables!isF1AndF2.Value</Value>
+                  </Parameter>
+                </Parameters>
+                <Height>1cm</Height>
+                <Width>18.95951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Variables!isHubQuarterly.Value, Variables!TitlePrefix.Value + " Factor Overview",
+              Variables!isF1AndF2.Value, Variables!TitlePrefix.Value + " F1 Overview",
+              Variables!isF15AndRfstm.Value, Variables!TitlePrefix.Value + " F1.5 Overview",
+              true, "Unknown"
+              )
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>23.64993cm</Top>
+            <Left>0.20584cm</Left>
+            <Height>1.01787cm</Height>
+            <Width>32.77269cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="OverviewRectangle2_F1_F15">
+            <ReportItems>
+              <Subreport Name="Overview2Errors">
+                <ReportName>BhpbioErrorContributionByGradeReportPPT</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="ProductTypeId">
+                    <Value>-1</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="Factor">
+                    <Value>
+                      =Switch(
+                      Variables!isF1AndF2.Value, "F1Factor",
+                      Variables!isF15AndRfstm.Value, "F15Factor",
+                      true, "ERROR"
+                      )
+                    </Value>
+                  </Parameter>
+                  <Parameter Name="ReportContext">
+                    <Value>Standard</Value>
+                  </Parameter>
+                  <Parameter Name="ReturnEmptyReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="IncludeSupportingDetails">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <Left>0.1cm</Left>
+                <Height>0.90152cm</Height>
+                <Width>18.85951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Variables!isF1AndF2.Value, Variables!TitlePrefix.Value + " F1 Overview",
+              Variables!isF15AndRfstm.Value, Variables!TitlePrefix.Value + " F1.5 Overview",
+              true, "Unknown"
+              )
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>24.84419cm</Top>
+            <Left>0.11853cm</Left>
+            <Height>1.01787cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="OverviewRectangle3">
+            <ReportItems>
+              <Subreport Name="OverviewRpt3">
+                <ReportName>BhpbioF1F2F3OverviewReconContributionReportPPT</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="f15Required">
+                    <Value>=Variables!isF15AndRfstm.Value</Value>
+                  </Parameter>
+                  <Parameter Name="FactorOption">
+                    <Value>=NOTHING</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="F2Required">
+                    <Value>=Variables!isF1AndF2.Value</Value>
+                  </Parameter>
+                </Parameters>
+                <Height>1cm</Height>
+                <Width>18.95951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Variables!isF1AndF2.Value, Variables!TitlePrefix.Value + " F1 Overview ",
+              Variables!isF15AndRfstm.Value, Variables!TitlePrefix.Value + " F1.5 Overview ",
+              true, "Unknown"
+              )
+            </PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>28.42697cm</Top>
+            <Left>0.1cm</Left>
+            <Height>1.01787cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>12</ZIndex>
+            <Visibility>
+              <Hidden>=Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="F2OverviewRectangle">
+            <ReportItems>
+              <Subreport Name="MonthlyF2SiteOverviewRpt2">
+                <ReportName>BhpbioF1F2F3OverviewReconContributionReportPPT</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="f15Required">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="FactorOption">
+                    <Value>=Parameters!FactorOption.Value</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="F2Required">
+                    <Value>True</Value>
+                  </Parameter>
+                </Parameters>
+                <Height>1cm</Height>
+                <Width>18.95951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=(NOT Variables!isF1AndF2.Value) or Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>=Variables!TitlePrefix.Value + " F2 Overview"</PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>32.78181cm</Top>
+            <Left>0.05563cm</Left>
+            <Height>1.01787cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>13</ZIndex>
+            <Visibility>
+              <Hidden>=(NOT Variables!isF1AndF2.Value) or Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="RFSTMOverviewRectangle">
+            <ReportItems>
+              <Subreport Name="F1F2F3HUBReconciliationReport_RFSTM">
+                <ReportName>F1F2F3HUBReconciliationReport</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateBreakdown">
+                    <Value>MONTH</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="FactorOption">
+                    <Value>=Nothing</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="f15Required">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="F2Required">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="RFGMRequired">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="RFMMRequired">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="RFSTMRequired">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="f25Required">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="IsPPT">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="HideDetailsTable">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="HeaderTextOverride">
+                    <Value>=Nothing</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="ReportContext">
+                    <Value>Standard</Value>
+                  </Parameter>
+                </Parameters>
+                <Left>0.05cm</Left>
+                <Height>0.869cm</Height>
+                <Width>18.90951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=(NOT Variables!isF15AndRfstm.Value) or Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>=Variables!TitlePrefix.Value + " RFSTM Overview"</PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>34.09104cm</Top>
+            <Left>0.11853cm</Left>
+            <Height>0.996cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>14</ZIndex>
+            <Visibility>
+              <Hidden>=(NOT Variables!isF15AndRfstm.Value) or Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="XXXTrendAnalysisRectangle">
+            <ReportItems>
+              <Subreport Name="BhpbioF1F2F3ReconciliationAttributeReportPPT">
+                <ReportName>BhpbioF1F2F3ReconciliationAttributeReportPPT</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="ProductTypeId">
+                    <Value>-1</Value>
+                  </Parameter>
+                  <Parameter Name="DateBreakdown">
+                    <Value>=Variables!DateBreakdown.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateFrom">
+                    <Value>=Variables!AdjustedStartDate.Value</Value>
+                  </Parameter>
+                  <Parameter Name="DateTo">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="Factors">
+                    <Value>
+                      =	"&lt;Factors&gt;&lt;Factor id=""GeologyModel""/&gt;" +
+                      IIF (Variables!isF15AndRfstm.Value, "&lt;Factor id=""ShortTermGeologyModel""/&gt;", "") +
+                      "&lt;Factor id=""MiningModel""/&gt;&lt;Factor id=""GradeControlModel""/&gt;&lt;Factor id=""MineProductionExpitEqulivent""/&gt;" +
+                      IIF (Variables!isF15AndRfstm.Value, "&lt;Factor id=""F15Factor""/&gt;&lt;Factor id=""RFSTM""/&gt;", "&lt;Factor id=""F1Factor""/&gt;&lt;Factor id=""F2Factor""/&gt;") +
+                      IIF(Variables!isHubQuarterly.Value, "&lt;Factor id=""F3Factor""/&gt;", "") +
+                      "&lt;/Factors&gt;"
+                    </Value>
+                  </Parameter>
+                  <Parameter Name="Attributes">
+                    <Value>=Lookup(Parameters!FactorOption.Value, Fields!Factor.Value, Fields!Xml.Value, "GetPowerPointFiltering").ToString()</Value>
+                  </Parameter>
+                  <Parameter Name="CompleteReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="WithoutHeaderFooter">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>True</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="lumpFinesBreakdown">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="CombineLumpAndFines">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="ReportContext">
+                    <Value>Standard</Value>
+                  </Parameter>
+                  <Parameter Name="IncludeGeometData">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <Left>0.06853cm</Left>
+                <Height>0.84783cm</Height>
+                <Width>18.84098cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <PageName>=Variables!PeriodTitlePrefix.Value + " Trend Analysis"</PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>36.95787cm</Top>
+            <Left>0.11853cm</Left>
+            <Height>0.95367cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="OverviewRectangle2_F2">
+            <ReportItems>
+              <Subreport Name="Overview2Errors2">
+                <ReportName>BhpbioErrorContributionByGradeReportPPT</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="ProductTypeId">
+                    <Value>-1</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="Factor">
+                    <Value>="F2Factor"</Value>
+                  </Parameter>
+                  <Parameter Name="ReportContext">
+                    <Value>Standard</Value>
+                  </Parameter>
+                  <Parameter Name="ReturnEmptyReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="IncludeSupportingDetails">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <Left>0.1cm</Left>
+                <Height>0.90152cm</Height>
+                <Width>18.85951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=NOT Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>=Variables!TitlePrefix.Value + " F2 Overview"</PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>26.03845cm</Top>
+            <Left>0.11853cm</Left>
+            <Height>1.01787cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>16</ZIndex>
+            <Visibility>
+              <Hidden>=NOT Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="OverviewRectangle2_F3">
+            <ReportItems>
+              <Subreport Name="Overview2Errors3">
+                <ReportName>BhpbioErrorContributionByGradeReportPPT</ReportName>
+                <Parameters>
+                  <Parameter Name="LocationId">
+                    <Value>=Parameters!LocationId.Value</Value>
+                  </Parameter>
+                  <Parameter Name="ProductTypeId">
+                    <Value>-1</Value>
+                  </Parameter>
+                  <Parameter Name="StartDate">
+                    <Value>=Parameters!DateFrom.Value</Value>
+                  </Parameter>
+                  <Parameter Name="EndDate">
+                    <Value>=Parameters!DateTo.Value</Value>
+                  </Parameter>
+                  <Parameter Name="Factor">
+                    <Value>="F3Factor"</Value>
+                  </Parameter>
+                  <Parameter Name="ReportContext">
+                    <Value>Standard</Value>
+                  </Parameter>
+                  <Parameter Name="ReturnEmptyReport">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="IncludeSupportingDetails">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyGraphs">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="OnlyTables">
+                    <Value>False</Value>
+                  </Parameter>
+                  <Parameter Name="includeH2O">
+                    <Value>False</Value>
+                  </Parameter>
+                </Parameters>
+                <Left>0.1cm</Left>
+                <Height>0.90152cm</Height>
+                <Width>18.85951cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=NOT Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>=Variables!TitlePrefix.Value + " F3 Overview"</PageName>
+            <KeepTogether>true</KeepTogether>
+            <Top>27.23271cm</Top>
+            <Left>0.01853cm</Left>
+            <Height>1.01787cm</Height>
+            <Width>32.76cm</Width>
+            <ZIndex>17</ZIndex>
+            <Visibility>
+              <Hidden>=NOT Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="PeriodAnalysisContainerRectangle">
+            <ReportItems>
+              <Tablix Name="LocAndAttributes">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>21.32252cm</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>1.09006cm</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Rectangle Name="PeriodAnalysisRectangle">
+                              <ReportItems>
+                                <Rectangle Name="AnalysisReportRectangle">
+                                  <ReportItems>
+                                    <Subreport Name="BhpbioErrorContributionContextReportPPT">
+                                      <ReportName>BhpbioErrorContributionContextReportPPT</ReportName>
+                                      <Parameters>
+                                        <Parameter Name="LocationId">
+                                          <Value>=Fields!LocationId.Value</Value>
+                                        </Parameter>
+                                        <Parameter Name="LocationBreakdown">
+                                          <Value>=Switch(
+	Variables!isHubQuarterly.Value, IIF (Parameters!LocationId.Value = 1, 2, 3),
+	true, 6
+	)</Value>
+                                        </Parameter>
+                                        <Parameter Name="DateBreakdown">
+                                          <Value>MONTH</Value>
+                                        </Parameter>
+                                        <Parameter Name="DateFrom">
+                                          <Value>=Parameters!DateFrom.Value</Value>
+                                        </Parameter>
+                                        <Parameter Name="DateTo">
+                                          <Value>=Parameters!DateTo.Value</Value>
+                                        </Parameter>
+                                        <Parameter Name="Factors">
+                                          <Value>=Switch (
+	Variables!isF1AndF2.Value, "F1",
+    Variables!isF15AndRfstm.Value, "F15",
+    true, "Unknown"
+)</Value>
+                                        </Parameter>
+                                        <Parameter Name="Attributes">
+                                          <Value>=Fields!Attribute.Value</Value>
+                                        </Parameter>
+                                        <Parameter Name="ForwardLookingError">
+                                          <Value>False</Value>
+                                        </Parameter>
+                                        <Parameter Name="CompleteReport">
+                                          <Value>False</Value>
+                                        </Parameter>
+                                        <Parameter Name="WithoutHeaderFooter">
+                                          <Value>True</Value>
+                                        </Parameter>
+                                        <Parameter Name="OnlyGraphs">
+                                          <Value>True</Value>
+                                        </Parameter>
+                                        <Parameter Name="OnlyTables">
+                                          <Value>False</Value>
+                                        </Parameter>
+                                        <Parameter Name="ReportContext">
+                                          <Value>Standard</Value>
+                                        </Parameter>
+                                      </Parameters>
+                                      <NoRowsMessage>="No dta was found for " + Fields!LocationName.Value + ", Attribute: " + Fields!Attribute.Value</NoRowsMessage>
+                                      <Height>0.9325cm</Height>
+                                      <Width>18.79098cm</Width>
+                                      <Style>
+                                        <Border>
+                                          <Style>None</Style>
+                                        </Border>
+                                      </Style>
+                                    </Subreport>
+                                  </ReportItems>
+                                  <PageBreak>
+                                    <BreakLocation>Start</BreakLocation>
+                                  </PageBreak>
+                                  <PageName>
+                                    =Switch (
+                                    Variables!isF1AndF2.Value, Variables!DateBreakdownPrefix.Value + " F1 Analysis",
+                                    Variables!isF15AndRfstm.Value, Variables!DateBreakdownPrefix.Value + " F1.5 Analysis",
+                                    true, "Unknown"
+                                    )
+                                  </PageName>
+                                  <Left>0.10584cm</Left>
+                                  <Height>0.996cm</Height>
+                                  <Width>19.90434cm</Width>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                  </Style>
+                                </Rectangle>
+                              </ReportItems>
+                              <PageName>
+                                =Switch (
+                                Variables!isF1AndF2.Value, Variables!DateBreakdownPrefix.Value + " F1 Analysis",
+                                Variables!isF15AndRfstm.Value, Variables!DateBreakdownPrefix.Value + " F1.5 Analysis",
+                                true, "Unknown"
+                                )
+                              </PageName>
+                              <ZIndex>12</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Rectangle>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                    <TablixRow>
+                      <Height>1.4255cm</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Rectangle Name="AnalysisSpacerPageRectangle">
+                              <ReportItems>
+                                <Textbox Name="Textbox9">
+                                  <CanGrow>true</CanGrow>
+                                  <KeepTogether>true</KeepTogether>
+                                  <Paragraphs>
+                                    <Paragraph>
+                                      <TextRuns>
+                                        <TextRun>
+                                          <Value>Insert Image or Map</Value>
+                                          <Style>
+                                            <FontSize>18pt</FontSize>
+                                          </Style>
+                                        </TextRun>
+                                      </TextRuns>
+                                      <Style />
+                                    </Paragraph>
+                                  </Paragraphs>
+                                  <rd:DefaultName>Textbox9</rd:DefaultName>
+                                  <Left>0.10584cm</Left>
+                                  <Height>1.06567cm</Height>
+                                  <Width>18.20567cm</Width>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                    <PaddingLeft>2pt</PaddingLeft>
+                                    <PaddingRight>2pt</PaddingRight>
+                                    <PaddingTop>2pt</PaddingTop>
+                                    <PaddingBottom>2pt</PaddingBottom>
+                                  </Style>
+                                </Textbox>
+                              </ReportItems>
+                              <PageBreak>
+                                <BreakLocation>Start</BreakLocation>
+                              </PageBreak>
+                              <PageName>
+                                    =Switch (
+                                    Variables!isF1AndF2.Value, Variables!DateBreakdownPrefix.Value + " F1 Analysis",
+                                    Variables!isF15AndRfstm.Value, Variables!DateBreakdownPrefix.Value + " F1.5 Analysis",
+                                    true, "Unknown"
+                                    )
+                                  </PageName>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Rectangle>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Group Name="Attribute">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!Attribute.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Switch (Fields!Attribute.Value = "Tonnes", 0,
+		Fields!Attribute.Value = "Fe", 1,
+		Fields!Attribute.Value = "P", 2,
+		Fields!Attribute.Value = "SiO2", 4,
+		Fields!Attribute.Value = "Al2O3", 5,
+		Fields!Attribute.Value = "LOI", 6,
+		true, 99)</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                      <TablixMembers>
+                        <TablixMember>
+                          <Group Name="Location">
+                            <GroupExpressions>
+                              <GroupExpression>=Fields!LocationId.Value</GroupExpression>
+                            </GroupExpressions>
+                            <PageBreak>
+                              <BreakLocation>Between</BreakLocation>
+                            </PageBreak>
+                          </Group>
+                          <SortExpressions>
+                            <SortExpression>
+                              <Value>=IIF(Fields!LocationId.Value = Parameters!LocationId.Value, 0, 1)</Value>
+                            </SortExpression>
+                            <SortExpression>
+                              <Value>=Fields!rowOrder.Value</Value>
+                            </SortExpression>
+                          </SortExpressions>
+                          <TablixMembers>
+                            <TablixMember>
+                              <Group Name="Details" />
+                              <TablixMembers>
+                                <TablixMember />
+                                <TablixMember />
+                              </TablixMembers>
+                            </TablixMember>
+                          </TablixMembers>
+                        </TablixMember>
+                      </TablixMembers>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <DataSetName>GetPowerPointFiltering</DataSetName>
+                <Filters>
+                  <Filter>
+                    <FilterExpression>=Fields!Factor.Value</FilterExpression>
+                    <Operator>Equal</Operator>
+                    <FilterValues>
+                      <FilterValue>=Code.GetFactor("F1,F15", Parameters!FactorOption.Value)</FilterValue>
+                    </FilterValues>
+                  </Filter>
+                </Filters>
+                <Height>2.51556cm</Height>
+                <Width>21.32252cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Tablix>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+              <Disabled>=Variables!isHubQuarterly.Value</Disabled>
+            </PageBreak>
+            <PageName>
+              =Switch (
+              Variables!isF1AndF2.Value, Variables!DateBreakdownPrefix.Value + " F1 Analysis",
+              Variables!isF15AndRfstm.Value, Variables!DateBreakdownPrefix.Value + " F1.5 Analysis",
+              true, "Unknown"
+              )
+            </PageName>
+            <Top>29.90759cm</Top>
+            <Left>0.1cm</Left>
+            <Height>2.69783cm</Height>
+            <Width>31.48535cm</Width>
+            <ZIndex>18</ZIndex>
+            <Visibility>
+              <Hidden>=Variables!isHubQuarterly.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+        </ReportItems>
+        <Height>39.5352cm</Height>
+        <Style />
+      </Body>
+      <Width>33.15cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.30717cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="PageHeadertextBox">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!PageName</Value>
+                      <Style>
+                        <FontSize>28pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <Color>#476475</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Left>0.31853cm</Left>
+              <Height>2.07433cm</Height>
+              <Width>22.61164cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="RightHandSideTextbox">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>
+                        =Switch(
+                        Globals!PageName = "FYXX- Month XXX – Site Name Reconciliation Presentation", "Name and Title of Presenter",
+                        Globals!PageName = "FYXX- QX – Site Name - STM Monthly Reconciliation Presentation",  "Name and Title of Presenter",
+                        Globals!PageName = "FYXX- QX – Site Name Quarterly Reconciliation Presentation",  "Name and Title of Presenter",
+                        Globals!PageName = "FYXX- QX – Site Name - STM Quarterly Reconciliation Presentation",  "Name and Title of Presenter",
+                        Globals!PageName = "FYXX- QX – WAIO Quarterly Reconciliation Presentation",  "Name and Title of Presenter",
+                        Globals!PageName = (Variables!TitlePrefix.Value + IIF(Variables!isF15AndRfstm.Value, " STM", "") + " Reconciliations Summary"), "",
+                        Globals!PageName = "Factor Definitions", "",
+                        Globals!PageName = "Site Aerial Photograph", "Discuss any changes that can be best explained with an air-photo.",
+                        Globals!PageName = (Variables!TitlePrefix.Value + " Reconciliations Diary (hide this slide)"), "",
+                        Globals!PageName = (Variables!TitlePrefix.Value + IIF(Variables!isF15AndRfstm.Value, " STM", "") + " Reconciliations Summary"), "",
+                        Globals!PageName = (Variables!TitlePrefix.Value + IIF(Variables!isF15AndRfstm.Value, " STM", "") + " Diary (hide this slide)"), "",
+                        Globals!PageName = (Variables!TitlePrefix.Value + " F1 Overview "), "Ring the factors that you wish to discuss further",
+                        Globals!PageName = (Variables!TitlePrefix.Value + " F1.5 Overview "), "Ring the factors that you wish to discuss further",
+                        true, "Insert commentary here using bullet points")
+                      </Value>
+                      <Style>
+                        <FontSize>18pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Left>22.93017cm</Left>
+              <Height>2.07433cm</Height>
+              <Width>10.04836cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>2.07434cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style>
+                        <Color>#476475</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>1.35861cm</Top>
+              <Left>0.21853cm</Left>
+              <Height>0.6cm</Height>
+              <Width>32.86cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="Image2">
+              <Source>Embedded</Source>
+              <Value>BhpbioTemplateFooter</Value>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.07056cm</Top>
+              <Left>29.37437cm</Left>
+              <Height>1.905cm</Height>
+              <Width>3.70416cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>19.05cm</PageHeight>
+        <PageWidth>33.86cm</PageWidth>
+        <InteractiveHeight>19.05cm</InteractiveHeight>
+        <InteractiveWidth>25.4cm</InteractiveWidth>
+        <LeftMargin>0.4cm</LeftMargin>
+        <RightMargin>0.4cm</RightMargin>
+        <TopMargin>0.4cm</TopMargin>
+        <BottomMargin>0.4cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="LocationId">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>9</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Location Id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateFrom">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>07/01/2015 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Month</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateTo">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>07/31/2015 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Date To</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FactorOption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>F1,F2</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Factors</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>F1,F2</Value>
+            <Label>F1 and F2</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>F15,RFSTM</Value>
+            <Label>F1.5 and RFSTM</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>F1,F2,F3</Value>
+            <Label>F1, F2 and F3</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="AutomaticContentSelectionMode">
+      <DataType>String</DataType>
+      <Prompt>Automatic Content Selection Mode</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>None</Value>
+            <Label>None</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Compact</Value>
+            <Label>Compact</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Expanded</Value>
+            <Label>Expanded</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="ReportType">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SiteMonthly</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Enter the type of report</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>SiteMonthly</Value>
+            <Label>SiteMonthly</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>SiteQuarterly</Value>
+            <Label>SiteQuarterly</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>HubQuarterly</Value>
+            <Label>HubQuarterly</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>4</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationId</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DateFrom</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DateTo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>FactorOption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>AutomaticContentSelectionMode</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>ReportType</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Code>Public Function GetFactor(filter As String, param as String) As String
+       Dim factor As String
+
+	Select Case filter
+		Case "F1,F15"
+                    factor = IIF(param = "F15,RFSTM", "F15Factor", "F1Factor")
+       	Case "F2,RFSTM"
+                    factor = IIF(param = "F15,RFSTM", "RFSTM", "F2Factor")
+       End Select
+
+	Return factor
+End Function
+
+</Code>
+  <EmbeddedImages>
+    <EmbeddedImage Name="BhpbioTemplateFooter">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="F1F2F3ReconciliationProcesses">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAABikAAALKCAIAAADI+CXnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTZEaa/1AADCPElEQVR4Xuz9DZgsVWHvC89NjIxK3OMHMHzu4UOY7CDMEd22EHQE8zp4uDheOWYOHA9zdIc9Rg0TcsFJXu4eLxLmvNstsx8J9k2E9FGjI1EZN4+X8aKePhBkRIUBDpsBNbQo2C8qtF+kY9S87+paq6pXrfqY/qivrvr9nt+z93St+uqqXlVr/buqeuj/BwAAAAAAAAAAEA9kTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAAAAAAAAEBdkTwAAAJAgt106pHPm/m+rgihQM7/0NvW6G769/0xrYkV0KyZWqqcVclYpcOre5wwAAACQIGRPAAAAkAxGuuMQaczToutAxgjEbPpfsa3So3DCpu5vzgAAAAAJQvYEAAAASeAkT+24
+xIl8okpQesue7NVoT+asa7/pE9kTAAAAANkTAAAAJIF/LNRKUNr5jhznzP375bhmgcKdBzkxUWve7oVoRSEhkhrLGMG9Yu55uQqcRWpjqHLXNNZaBbzBoJmr4d58yTtn72B9JQEAAADShOwJAAAA4icwRtFxRUxOeOIeauEbtrRpFXun8g9j1CxCkxqfNXBWwa9M0Cr2JkR+bzBk5oEbzTvn8JUEAAAASBOyJwAAAIgfmYxscS2OHZ+4IhM50B6kRpEvjfGdRMa5CMmZkXsmOoH5joO5VvZi5Gu71EzKZKkxd3NWW8w8bN22mLN7JQEAAADShOwJAAAA4kdmI+3syc5GFDIiUQGKf17imsIaxRvNODOwoxgDnzl7Z2LgM4K+np51dg0wJvaMHD7zsHVzl22xkgAAAABpQvYEAAAA8WOGI+q1jRwu4xLz4igVoriwxvemK/ZS9rvn7uATxKhJgq/I8slw9Gk8xa4BxtuWZdqywmduTO3CXbbFSgIAAACkCdkTAAAAJIBKR8woxBWaeKIZgRrBHbLIUbzpij03lT11lLsEZDStWVnL9AmA7MW0Bul/W7gGGBPLMm1R4TP3KXVwl22xkgAAAABpQvYEABlHdZ9aaF0oc2hYD81DVyN3Smfr2S0ddh5D35GYR7RvFaA31OfU9Uk1hslPvCsFUmPYw1SdUC/tGqbmqM3N/lOVhFYlnxVzBrUWZCzFKZSvPbN2DVDjuldff4OhM1cv2vPW8J1zwHwAAAAAUoXsCQAyjt2hErT7a3avqsWWPTQPXY3cKZ2tZ7eouW41beA7iuWtAvSMVk/cqM+oLNejmaBp1AR6HdNolXqnc8/XRcCKmcGOjl2tVFm7lrkHaJOKuclXW79B99trz1vHPefQ+QAAAACkCtkTAGQc1Z0680zRBXO6Ua2B1hBBRvpW8aynmutW05I9wQChPtU2rhxGlrmjGVfAJD7L5jiuUneV0RdlztSLNqMWxgSuUr3MvUiB
+MaA9oZjKXHlF0MzV8IAa7JqzMUTgWQoAAABASpA9AUDGsbtxl4r/7a6UNcwa0vq/1Ssze2hO50/rijkdMdfIoWNatAvEFM7oqtChs/WUaIvy9g+1QrMjLdAnbU+phhpr5VpM5ysAAAAAAAAQIWRPAJBxnPSl9YeMSazkxJ3LmOGLKjOR5a6RQ8f05Dc2zoIcOlvP9ogunNmFL847qcqNzLcvMWbW0QoAAAAAAABEC9kTAGQcJ7lRSY4adKZ984ocZIYvdr5iX9Njv/aOHDqm8aqd5jgLclBjbrGe5gydOfqWuhfnWm2BHNm3yMFbEL4CAAAAAAAAEUP2BAAZp53ctP5qJURWWqJey5KgXEYLVAJH7mRMO5cSeEa3aRe0/up0PQVasbdUn1b9beI/ocJTEL4CAAAAAAAAUUP2BAAZp52MWLGJ+L81pJXt6JmJGal48pTAkUPH9BT6ZTeS9qhh6+mdoT1Hc0yJtjj1pwetTJ+txFMQvgIAAAAAAABRQ/YEABlHC0taf565f39rgP1S/enJWDwRS+DInYypxTKe0W20gtafHa6nQCsOXZy3sI3PbCWegvAVAAAAAAAAiBqyJwDIOHoyov52v7L+NiMVT54SOHLomPYLu1hNqY9uo09mT+V65TtDZ46+pe7FuUd1zdb1jnRUgTfNcsY15goAAAAAABAtZE8AkHF8IhYVpYSFL3qZReDIoWO2F6k488ygpMZnAT7r2X7pwpmdsTgbVe6dVIVK5ttvo01iB1ChKwAQJ9qHT/vMmUODP8994Pe5F0S1EDX7CGYn5qTmEst2AAAAAEgBsicAyDiuLl3gC7OT5ukIBo4cOqaFGl0O85TauAqCX1i05yjQrkmy0Aovvc0zrRpg0Z7SfPsa7dlpCwpdAYDY0D6/no+vhfUZDvk8945eddxEshxvNe8F9zuPZTsAAAAApADZEwBAF6jOIHENQC+ohMa6ftCJVFoDg68ojAqfcMgOvaKoz3FkTwAA
+AAB5gewJACAE1aE0IHoC6Ak7obm0FTepamQNs4a0/m+lLmYC4+Q6dlgkcFdCrSCoevqGQ85A+Yf6iQDXPPRZu+etlRiXKHqW5V24GmKh5upaUmtkNcC9yv7r4yxAKw7YEAAAAADJQ/YEABCO3kdsQYcOoFeciKT1h6xKVljizm7MzMWsgwq73FvsV0n1BSjsnEaM7p6HM73fkuUcXBFQG1noWZZ7gM+0rSUag/2yp8D18SsQaJMCAAAApAjZEwAAACSDk8FYsYqTmrTDH2uQmbnYwYodCdmvQ0Z2XjrYE3lpjeuapY050A6HxGujyC5Rr1Vpe2auAeqF+93IV+43E7Qd7AE+6+O7iQAAAADShuwJAAAAkkFFIiosaQUlVn7SDk+srCQgc2nnKPoA9bdJe2SF/3hGVuOaylwNgT3afk+RawaeuekDfGbr4C4zxgxZn8BfJfBdCgAAAEDSkD0BAABAMrQTEStIEf+3hrQCID0rMUOWsGBFjeuhPbLCMxMXstROoiQ+U6il+TwZ3bXOYSscuiLud25sh5D1sZ9T1S4LWwoAAABA0pA9AQAAQDJoiUjrT5WZ2C/Vn2bm4s1RtAFO+qKnRn54ZuJClrrnYq6GwJ6Juu5JG981e8+y9AE+s3VwlxljhqwP1z0BAABAtiF7AgAAgGTQExH1t/uV9bcZsoQGK2pku9Qzrk1ggYUsNRIsNYkzjbYoo8guUa+NdTJK1bT2wlSp9VL/23ml5tLJ+jijegcAAAAApAjZEwAki917Uhh9vT7pp7vldA8l0a2YWKke+39mz1NH245auf/QzulwA4atGEAI+ifMrnKyrvmUOB8wz+fSPUC90vCrvp6ZuJClnum8s7bnYBwwbAJXyUKV+k3rnfDM/bd5Klrg+qiC9qieAQAAAAApQvYEAIkR0FmLNuZp0XV3y69DJ+h/xcw+dHeETa2tcns19S3c0zI73ID9vS0oMK5PWOAL8wPm+VwGDbAIqLeeaVzI
+Ur9J9VrlHkEr8d705q6M3oUHrXF7Or/sSeC/Pp4FeJcIAAAAkB5kTwCQEE6PydM7iq5/1Ft3y16N9mTOugb0YjtGzajH9xc2tVpp65nHzgitgT5PQe6cDjdgf28LAAAAAAAKBdkTACSDf6rRCjHa+Y4cx/nJJrNA4c6DnJioNW/3QrSikBBJjWWM4F4x97xcBc4itTFUuWsaa60C3mDQzNVw34jHXu6l4n97EmuYNaT1f3uqwJVvoRX6XJ2hT9qeMmzFAAAAAAAAXJA9AUAidJRWqORD4UpU3NizcYUqbVrF3qnM0EWiZuFfqPBZA2cV/MoErWJj7cQgvzcYMvOwjaYmk3GRnJM1uic/Cpl/6AYUeCdVmylsxQAAAAAAAFyQPQFAIsgYIzThaWcdrkxDDjSSFPnSGN8JUpyLkJwZuWeis3WMYq6VvRj52i6135p7bGPu5qy2mHnYuqkJ1Vu1RmkNEqvhlGijOfPwX3lVahfK1+bS5ci+RQAAAAAAAIGQPQFAIsjgop09OTGHRKYYrtTExDVFQALizMAOVQx85rxljOIzgr6ennV2DTAm9owcPvOwdWuP1vqrtWGtsdVrWdL9/PVp1d8m/hMCAAAAAAAEQPYEAIlgphXqtY0cLtMO8+IovwxED0e0BMReyn733B18whI1ibnQNt6luKbxFLsGGG9blmnLCp+5MbWL9pTWWOL/1pDWVPo8w+fvLdWWqP70oJXpswUAAAAAAPCH7AkAkkHlHFruYuGKP+QL9yhqBDvn0EfRUhSFPTeVPZkL88U7F4vWrKxl+uQs9mJag/S/LVwDjIllmbao8Jn7lDpoo7X+VM8vt1+qPzubv88G9C1sE7ZiAAAAAAAALsieACAhVF7hSiyMYTL5cKUdRgKishH1Ur2y56jNzf5TlWiRihefFXMGtRZkLMUplK89s3YNUOO6V19/g6EzVy/a89bQF2PPxPVKThU6f7PULpSv3aO6Zhu2YgCdYn2O9Oqg
+fQa7/3SJT2i/n8iB+GB7VrL9xn02KAAAAEAmIHsCgOSwow4Pqucky91dJ/9p9K6Wl1apd7qQLlnAitlT+BXbPT9VZr80B2iTirnJV1u/Qffba89bQ1+MvRnkjN0rEDb/0A0o8E6qVj1sxQA6xPp8uWuD/oHs5uMV0SdyID7YrpU01li+zPb6AwAAQCEhewKAZDHyDFfPU5a5O6NO76qF6FOZ47hK1cxV10tflDlTL9qMWhgTuEr1MvciBcaA9oRiKnPlFUEzV8N9e5KuxQS/sAhc+RZaobkBBWqARXvKsBUD6Aj5IXJ/HNWwSy/t9vMV0Sdy8D7Y5hrLCus5xAAAAACkDNkTAAAAJIxfzKOip/3fDsmAfNJQNbaNmCooQ/UMkDhRjX+SY+O3Op2gr187FbKHqrmql7LcWV1tBZylt1dSn7HAGkNO0V4MAAAAQCYgewIAAICE8clI2qGK/qeGkbW0aM3AG8E42Y2a0BigJTo2ssS12ICldYl3Wc5MVJH2FuwinxVsYa6k940HbTkAAACAlCF7AgAAgGTxiUhcg/wiFC2rab+Ur4zR1ZjtqV0D5Au/cfXZuGfptz4dYE7mXrR6qX6k0jO8/VbVbORr1zy962XPU04JAAAAkA3IngAAACBZvAmJkaJ4QxXvkDZGmcpu2qN6BrRQE0msItds7ABI4p60U9zzcPCsWAttCd7V1Ya4VtK7UbzTAgAAAKQP2RMAAAAki0xItOzJFQRptDOUsFDFiGA8o7oHqFcurCL3bHxWqT1HG30kz8VGW7+p9rros5YDA5I510q6Xlh4hwAAAACkD9kTAAAAJIuZDgWlNN5RfEMVo8ycu2uAnfaoUj3n8V2EPb5FaLwUVOgZ7hAwtWf99SGulfSusXdaAAAAgPQhewIAAIBkMTIT35DGTFHUa3skfRpjevXSntR+ab02RnXNVJVZkxlLU6+dl51hrIjxjpzFGetkj+eM6ZqNvpL2C221elpPAAAAgJgh
+ewIAAICEcUUk3gTFwohqnAhGRxU6aY2ci/ZSxxrZvyww1nHRfaTjXZo9D9ebdm8B/1VUha6VNN+4UQoAAACQEcieAAAAIGH0jMQdvGioYEUPUvRYRp9AzcMZ2n7dmt49I61MDJFlvsGNPhO/9esM31W2Z+0sS41ljeCsbnsF2gs3VtIYRXs3AAAAANmB7AkAAACSRmYmhCR+ONmTet05bFUAAADIJmRPAAAAkDjEJIH0nD3JbdpDZgUAAAAQL2RPAAAAkAJWxEL45KXX7InoCQAAALIK2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAAAAAAAAAAMQF2RMAQPSsr69Xq9WVlZWlpSXxh6Ber6syABgQGo2GrL/Ly8uVSkX+rcoAAAAAoGPIngAAIkD0UUXX9M3nnzt8yO8MDQ296uVHnH3G6FvPPWp+ZlT8ITzipYeK4aecdOz8n/7JxsaGmgwAMsbm5ubinqtOP/VEUWG3vfB5sv6+661HXnTeUfJvMVzwxnPPKpfLZMoAAAAAnUD2BADQF5VK5XVnnSH6qKJr+ok9x9Vv3fHMF38/yHs+etJf7R497ZTDjjhsZPcfz9ZqNTUXAEiVer2+cOXl2489/OTjX/y+tx95xw0nGpXX8DPXbH/HBUcd8dJDTz/1xHK53Gw21YwAAAAAwAPZEwBAj6yuroqe6kXnHXXr3jGjX7qlj6yc8qH3Hrn9qG2XvXc3l04ApEij0XjfFZdtP/pFi+846v6PnWxU1S2944YT33HBUduPeWmlUlFzBAAAAAA3ZE8AAF2zvr7+6lf+/vmv7aWnanjt3DGnnHD44v/xF1w3AZA81133we1Hv2Rx1xZXLG7pIyunXHTeUaefeuLa2pqaNQAAAADY
+kD0BAHTHR25YftXLj7h9/wlG57Nna58df99/Pua1Z57eaDTUMgAgZkR1e+O5r3nXhceICmhUyZ6944YT31A68toPXKWWAQAAAAAWZE8AAJ3SbDZ377r4HdPbjQ5nJN6+/4TTdhzHY8gBEmBzc3PnK1722b86yaiGkfhnFx//Rxe+iSsZAQAAABzIngAAOqJ1lcQ5r75u/nijnxmh93/s5LNftf22225ViwSAGKhWqztPP/aej8YSPElv+svjuZIRAAAAwIHsCQBga5rNpuhJfuaaWK540q19dvz8yTHiJ4CYWF9f3/ny0Qjvswvy9v0nvPY1pxI/AQAAAAjIngAAtuaPLnzTTX8Z4xVPuqJXvPP0Yzc3N9WyASAiarXazontj6ycYlS6mPzsX530xnNfo5YNAAAAUGDIngAAtuDaD1z1ZxcnFDxJ7//YyaftOI4rJgAipNlsvvqM8TtuONGobrF67Z9sv+w9u9QaAAAAABQVsicAgDBuueUfzn/dMUZ/MgFv3Tv2urPOUCsBAH3z5n//+r9/f2Q/T9m5F5937N/93UfVSgAAAAAUErInAIBAms3m9mNemtgdOobvuvCY6677oFoVAOiD1dXV8197lFHFkrF+647tR7+oXq+rVQEAAAAoHmRPAACB7LnqioVLYn++eJCPrJyy/ZiX8kvtAH0iKtHpv398rD9sF+61c8dc9t7dam0AAAAAigfZEwCAP/V6vXW1wq07jG5kknLpE0D/iEokqpJRuZKUS58AAACg4JA9AQD4c9l7d187l2Z/VVj77PgpJxxOlxWgZ9K9c9bxpr88/o8ufJNaJwAAAICCQfYEAOCD6K9ue+Hz0r3oSTr/H4+69toPqNUCgC6pVCoXnZfOk54Mj3jpoeTIAAAAUEzIngAAfFhZWXnruZnor/KDdwD98MZzz/rMNak9tU33ovOOqlQqarUAAAAAigTZEwCAD5e8/W1//edHG13HYLdfMuTL86+9yTXmP5zX
+Gvqq3S/TB27pthc+r9FoqDUDgI7p8gLGrSvyvbufr4YJzusu0vrEnuPefP65as0AAAAAigTZEwCAD9te+PzaZ8eNrmOwnWVPH3iRHNpt9sTlEgC9sbq6ev5rO7+AcYuKLLNjF93ET/Vbd2x74fP45UoAAAAoIGRPAAAm1Wr17DNGjX5jqKrLeskHjOFt9V5rt9kTl0sA9EZvFzAGVGR3qYqSzWsbwz3/tUetrq6qlQMAAAAoDGRPAAAm3T+cOLzL+rJrd1jFQ89/lfVHt9nTPR896ZSTjlUrBwAd87qzzrh175hRoYINrcgqbHrRP6ghWyfOXudnRpeWltTKAQAAABQGsicAAJPFxcX3/afDjE5jqFtnT1bepEKobrOn2mfHt73w+WrlAKBjth97+P0fO9moUMF2EyfdNPqq1rjdXff0V7tH5//0T9TKAQAAABQGsicAAJPdfzz7ofceaXQaQ1VdVgNPxtRj9iQcPuQ5PCYGoFuGD/mdjh80LuywIgvtixm7fNz4jX9xzB9d+L+qlQMAAAAoDGRPAAAmbz7/3E/sOc7oNIYae/Z0zOjv1mo1tX4A0AGNRmPbC59nVKVQu6vI2v13nXrr3rHXnXWGWj8AAACAwkD2BACg2NjYWFpampmZOfLw3719/wlGpzHUDm/V6T17evmJw2LCsbGxycnJhYWFcrlcr9fVegOAH5ubmycf/2KjKoXaSUXuPXgS3v+xk7cfe7haPwAAAIDCQPYEAEVnbW1tbm5ubGxMdigF217w25+5pqtbaWLPnkZf8hxrCS4mJiaWlpY2NjbUOwEAjXq9fvhLXmBUpVC3rMh9BU/C2/ef8PIdxxMcAwAAQNEgewKAItJsNldWVmZnZ0dGRmRXUucFz/utbn6XXRh79vT85z3n5S9/ubUQH8bGxubm5tbW1tTbAygqm5ubS0tLk5OTpVJJ1g6jKoW6RUX+h/Os4l6DJ+En9hz3whf8tpyLWMn5+XmqLQAAABQB
+sicAKBD1er1cLk9PT8u+n8H4+PjCwkK1Wn2fIMrfuXPsMXuq37pj+JDfkW9BdK1XV1fn5uZGR0etZboYGRmZmZlZWVlpNBpyfIAiIKrt/Py8fvWi5AXP+63IfudO/bCdyVa13uWH3nvk8w75LTWlzfDwsDgoVSoVrocCAACAvEL2BAD5Z3Nzc3l5eWJiQnX13ExOTopS/Une5XL5HRccZXQaQ403ewp6RszGxsbCwkLn7wsgTzQajZWVlZmZGd+rFwWjo6NdPrstrCLfu/v5VqFJV9nT+/7TYaeeeqqom8PDrSe4eRHVWVTq9fV19SYBAAAAcgHZEwDkFtF/m5+fHx8fV706DdHxE13WSqXie33Q6urq+a/tKnuK189cs/2N556lVs6PWq1WLpenpqbU23Mjr+fisVCQD8SnfXl5OfzTXq1W5cjd/2ZlvL713KNWVlbkutXrdXEIEgci3xxqdHR0dnaWaxgBAAAgH5A9AUDeaDabomvqe0uaGDg3N7e6uqpGDUDMYdsLn1e/dYfRb0zL+f941LXXfkCtXCjhV4KIt7+0tERXFgYReZWfb5QsCLrKr1KpXHRehnLkI156qO+NdWtra773DErku9vc3FRjAwAAAAwaZE8AkB8ajcbi4qI3dhH9VdGv6+rCnzeee1aXP3UXo9uP2tbDrXNBT8AZHh6em5vjXjzIPs1mc3V1dXZ21jdK7uTpZvV6/YiXHmpUqLS8de/Y6846Q61ZAPIG4aCruvhVAQAAABhQyJ4AIA/UarX5+Xnj1pXx8fGeLxbo/pFPcXnPR0865aRj1Wr1hNgCS0tL3sdCTU9P81gZyCb1el3UaN/L97rNX179yt/v5pFPMdr5BYwCeQ1jUO4mNoI4RnENIwAAAAwKZE8AMNhsbm6K7pnqkNlMTk46D3zpjexcLrH4jqMWrrxcrVZ/bGxseLdVqVRyHkADkDq+NVowMTGxtLTUQ5R87bUfmP+PmciRTz7+xb1F4evr
+676/KjAyMjI/P881jAAAAJB9yJ4AYFAR/bHp6WnVCbOZmZmJ6qHaWXhKcf3WHTtPOzLax4T7XlEyNja2vLzcbDbVSACJU61WvfeaTU5Olstl32ckdYiYdvvRL0r98W237z/h1a/8fbVOvVKzflXAG0KJ4x7XMAIAAECWIXsCgMFjbW1N9EhVr8tieHh4dnY22u//NzY2TjvlMKMDmbDXzh1z2Xt3qxWKlEajsby8bDwNamRkZGFhoZ9+PkAPrKysePMUUaOjSl1FJRJVyahcCSsOJhGGyNVqdWZmRm0pG7ENK5WKGgMAAAAgS5A9AcAgIXpWRh811rhk9663X/enqV36VL91R+t6jZiTIO8mFUTY7QcIQv4kpTcAjfw+skajccqJo4+snGJUscT8xJ7j3nz+uWptokM+5864hpGfswQAAIAMQvYEAAOA6KOWy2Wjj5pAFyvdu3UWLtm+56or1KrEjO/tTmIIv6gFcSBqlvcnKUWNXl5ejqlGX3fdB991YTqXPokDyGnjR/T2pKdO8L2GUV4KGt9CAQAAALqC7AkAso7oVhm/9CR6WZVKJZmHE137gav+7OLjjc5kAt7z0ZNO//3jE34Ak3zMs/fnAnkYOURFrVbzfsYSuFlMVKVXnzF+xw0nGhUtARMLkVdXV42bkQUkyAAAAJAFyJ4AILusr68bt4OJl8nnIH904Ztu+stE46faZ8dP+72jor3tqHPq9frCwoJxTUqpVOIuPOgH3x8HSDIZERVq58T2hO+8+/v3n/Dmf/96tQaJIOrprOeHAsfGxsrlcsJZNgAAAIAD2RMAZJFGozE/P6+6TRaTk5PValUVJ4vosL32zNNv33+C0auMz7PPGE3rzTqId+29z1HsFJ4jA92yvr5eKpXUZ8gmlWeKiTU5+5XHJHYXbSpXL0rkXY3GFaPiJQ8jBwAAgFQgewKAzLG2tqZ3mcTfqd8zIjpyO//dCfd/7GSjbxmH73jzsdd96L+qBWeA
+crls7A66r9AhjUZjbm5OfXQsYv1xgE741Kc+/tY3HGtUujh8ZOWUFK9elDSbTVFbx8fH1da3KJVK6+vragwAAACARCB7AoAMIXqkxhOvRTc1I/eJbGxsnLbjuFivfqrfuuP81x1z7QeuUovMDN7L0Oi+wpZUKhUjtYzvUeJdcd2H/usfvubo2mfHjQoYoXfccOJpv3dMdm5TXVtbMx4FNTs7m2ICCAAAAEWD7AkAsoLol+rPGMpguiG6za898/Tr5mN59tP9Hzt552lH3nLLP6iFZQ/RkTbunJqbm+MWPPCyublpfFSyEyJLbrvt1p2nH3vPR08yqmEk3vSXx7/6jPEMJjurq6v6XbTieLu0tKTKAAAAAOKE7AkA0scINbLcIxL95927Ln7Hm4+N9onFn9hz3M5/d0J2rpIIwbiYReyscrmsyqDwNBqNhYUF9eGwmJyczOYv/Yu12vmKl/31nx9tVMZ+rH12/M8uOu6PLnxTpoI2HbFii4uL+u8Mjo+P80N4AAAAEDdkTwCQJqIjZPRUp6amsn8nyEc+cv0pJ46+7z9H8NDiW/eOverlR7z5/HMH6P4XbsEDX1ZXVwfr0WDik3zJ29922imHfeaa7UbF7FZxKLh27pjtR7/k2r96v5p7hhFHG+M3B8XLdB9NBQAAAPmG7AkAUmNtbU2/AUT0VEXfVZVlHtFrXfw//mL70S8SHc7eHhxz+/4Tzn/tUa8764wBTW28t+DxBJnCsrm5aTypbYDuxxSf5Deee9bZZ4z2lkDVb93x139+9MnHv/Sy9+4elLcsqVarExMTaocNDQ0PD2ft1kgAAADIDWRPAJAC9Xp9dnZW9XgsBvTJQeKNiA7nthc+X3Rc/2r3aCc/hPeJPce944Kjjnjpoa9+5e8PUNYWhPcWvOXlZVUGBcB7D9eAXgRXrVbfeO5Z2174vIvOO+rGv9j6ksZHVk750HuPPP+1Rw0f8juXvP1tg3vRkPGgPVGdV1ZWVBkA
+AABARJA9AUDSVCoVvaszPj6eg9u1RMd1/k//ZPuxh592ymFnnzEqeqTv+0+HOb7rrUeKgcLhQ57z5vPPLZfLebo+qOG5BW9iYoJb8IrA2tqa/vv9OUgexYdZHKD+6ML/ddsLnyfr7DsucNXlt557lBgoqvkRh43s/uPZHMTHAvGu5+bm1F60mJycHIjHzwEAAMCgQPYEAMlh/PrV8PDw0tJSzm7xEB22arUqeqSLGqJDLgYKcnw/C7fgFQqxZ40HBs3MzORpd4uqKutsuVxW1dhiZWVFDMxlLuOtwvPz84N4OSoAAABkELInAEiI1dVV/XKnqampbP76FfSDcQue+Ft01FUZ5IWlpSXj0kX2cm5YWVnhLloAAACIHLInAEiCxcVF1ZWxOjMZ//Ur6AfvLXgLCwuqDAacjY0N/Sa7XF66CGKHijprPMOLX8EDAACAfiB7AoB4aTQak5OTqgdj9WG4D6sIGCEF+z0HlMtlPY+Ympoij8gxYufqv104MjLCM8gBAACgZ8ieACBGNjY2xsbGVN/F+jE7LpEoDmJf679mKPqua2trqgwGCrErZ2Zm1I60bqVkVxYEsaP1W/BEjeYYDgAAAD1A9gQAcbGysuJcJSH+4DvzYiL2u/5soIWFBfqug8Xm5qZ+CdvU1BTPny4UYnfrz5UXH4ZcPmodAAAAYoXsCQBiQX/iz9jYGH2VIrO5uTkxMaE+DTw7ZqDQE2TB0tKSKoCCsby8rH+XwAPIAQAAoCvIngAgYur1uv6AJ/E3V0lAs9mcm5tTnwnr/rvV1VVVBpnE2GX8ZCEYD3HjCjgAAADoHLInAIiS9fV1/eEg/MAZ6Kyurur3383Pz3P/XTap1WqlUkntJytB5lHxIGg0GvpD3EgkAQAAoEPIngAgMvSfweLCFvDFCDUmJiY2NzdVGWQDIyJcXFxUBQAWlUrFeIibKgAAAAAIgOwJACLAuD1nfHycQAGCEJ8W/XFgohPLc+izw8LCgtox
+/DQhBMND3AAAAKAryJ4AoF/q9bp+Jcv09DQPAYEtWVtb0y+dmJub4/67dDEqsvib++wgBEJkAAAA6ByyJwDoi2q1qj/giZ/Bgs4xwg4ul0sRoyLzKC7oEOMOTUJkAAAA8IXsCQB6Z3l5WXU4rC+9eegs9IB+k9fw8HClUlEFkBSLi4tqB/CkNugeQmQAAADYErInAOiFZrM5MzOjuhrWE6N52Af0jHHRzezsLJdOJEOj0ZiamlLbnUe/Qx8YIXK5XFYFAAAAAGRPANADzWZT76/OzMyQFECf1Ov1yclJ9ZGyQhAeNhQ36+vreuTH3VLQJ0aIzLP/AAAAwIHsCQC6Q/QlnNsr+HIbokW/+WtsbIxrcOKjUqmI+is3tfiDp0RDJBhX0o2Pj3NJLAAAAAjIngCgC0S/wvldbdFf5ffXIXL0378Tf6yvr6sCiI6lpSW5hQU8nQciR3zAnGRT1OKNjQ1VAAAAAEWF7AkAOoXgCZJB9FTHxsacTxqPvo4W/bk83DALMbG+vu6EyNRiAAAAIHsCgI6o1WpOHMDVKBA34vPmBJ0Cbu2MitnZWbVNrWe6q6EAMaCfNQTUYgAAgCJD9gQAW2MET9xAAQnQaDT0p48vLCyoAuiJZrM5PT2ttubQ0OLioioAiA39+YCC+fl5VQAAAAAFg+wJALZgc3OT4AlSodlszszMyM+egBvEesZ4AvTy8rIqAIgZI/SkFgMAABQTsicACGNjY8N5ZsfY2Bi/WATJMz8/Lz+BgsnJyQa/2t4l+pPaBJVKRRUAJIVei0ulErUYAACgaJA9AUAgBE+QEZaXl+XnUDAxMcFHsXPEthofH5ebjp8IgBQpl8vycygQn0lqMQAAQKEgewIAf6rVqhM80duH1FldXXV+tX1sbIx7PzvBuGFWVGpVAJAGei3mDm4AAIBCQfYEAD6sra05PYSJiQnuj4AsoP9qO0nKlujXLdLPh4ygfyzFWWZ1dVUVAAAAQK4hewIAE4In
+yCz6hTziU7qysqIKwI2oxU4PnxtmIVPo94EKyuWyKgAAAID8QvYEAC4qlYoTPE1NTfGDRJA16vW6/uTspaUlVQA2+p1N3DALGaTRaJRKJfkRFczPz6sCAAAAyClkTwDQplKpqK4AwRNkGNFxFZ9P9UkdGpqbm1MF4K7FXLcImUWcX2ZmZtQndWhI/M0ZBwAAIMcMWPb0w2d//cBT//Ll2rPCG+//CSJG6H+5+iOqEzA0tHPqreV7/r/GCIiZ8qwLLlKf16Ghf/f6f88nVvjWP11UW2Ro6NSz3sA2wYz7hxe/S31eh4ZOOO1VH/7Hx40REBERsWf/n8dayck9T/7z9376rypSSY/ByJ5+9svfiK22/PVn/vJ//AgR4/D1l16lmv9DQ6dNzRiliNn07Nkr1Kd2aOjoHa+8/AvfMUYolK+56DK1LYaGdpzzlitvf8IYATGDTl3+QfWpHRp6yXEve/en7zNGQERExP5duvvpzz7y8x/8/FcqZEmcrGdPzV/92//z2LN77vyxseEQMUL1DjzBEw6W5y9crz67xe64ipqrtgK1GAfNmb03P+e5h8hP7/Ch2955Y9UYAREREaPy7x/62TPNX6vAJUEynT398Nlff/BrXOuEGK/6d86vuegyoxQx++od122jxxYtfrry9idO/oM3ybcvOHv2CmMExOz7zhurL3jx4fIzLKqzqNTGCIiIiBiVe+788QNP/YuKXZIiu9nTY41/vfouLndCjFfRvpdtfQFdVhxcRcd1+NBt8pNcqPjpytufOGHnOfKNC97wnmuMERAHRVFtX3Lcy+QnmfgJERExbv/H48+q8CURMpo9/eDnv+I+O8S4veQja87VItykg4OuHj+JHmxBnv2k32p3/sL1RiniYCmq7REnnSo/z8RPiIiIcXvX9/9ZRTDxk8Xs6We//A232iHG7bs/fZ/TUT9h5zlGKeIgqsdPogeb+/jpFRfMyjcrIHjCfEj8hIiImKSPPv1LFcTE
+TBazp79/6GfG5kDEaL3sloPbRo+VjXvRyuf3sDA3Fid+0n8iYOryDxqliIOrET+JSm2MgIiIiFG5dPfTv/rNv6ksJk4ylz394Oe/MrYFIkar3qzfNnps7q8NwaJZhPjpDe+5Rr5BAU9qw/ypn6dEdSZ+QkREjM//+zu/UHFMnGQue/pvD/7U2BCIGKH6k4lFg76wP0iP+Vb0VJ1nmeUvfjp/4Xr51gQ7L9xtlCLmQ+InRETEZNxz549/9svfqEQmNrKVPYk3bGwFRIxW58nE3MiA+XZm781O/HTCznNyc2Op/tuU/EQA5lviJ0RExGS8t95UoUxsZCt7Em/Y2ASIGKGvuegy2YgX8ABXzL35i5+Md2SUIuZP4idERMQE/G8P/lSFMrGRreyJp4wjxufU5R+UzXcBP4mFBTFP8ZPodYu+dz7eC2LnEj8hIiLG7Z47f6xCmdjIVvZUvu8nxiZAxEi88JqPyYa7gCcTY6HMR/y0++N3O8FT/p5ghRgu8RMiImLcPtP8tcpl4iFb2dMHv/aM8f4RsX8v3v95p+/9igtmjVLE3Ktnr4MYP7370/dtGz1Wrv9LjnsZwRMWUOInRETEWP3eT/9V5TLxkK3syXjziNi/+uUSPCAGC6v+23CD9Yhu0eV2gifxB79NiYVVD2GpC4iIiNH6WIPsCRF7VW+pH73jlTwgBovsIMZPxrUedLax4BI/ISIixiTZEyL2qN5rFW107tNBHKz46crbn9g+cZZcW24yQpQSPyEiIsYh2RMi9qLotZ6w8xzZOn/Biw+ndY4oHZT4Sa/Cz3nuIRfv/7wxAmJhJX5CRESMXLInROzFHee8RbbLRa+VyyUQdd/wnmtk7RBk9un7p03NyDUUVXhm781GKWLBJX5CRESMVrInROzanRfuli1yeq2Ivp49e4WsIwLxt1Gauq+4YFat3NDQ+QvXG6WIKCR+QkREjFCyJ0TsTv2aDnqtiEFmNn7SV2zq8g8apYjoSPyE
+iIgYlWRPiNiFF17zMdkKF7z+0quMUkTU1VOejNQXPTvO4AVZiFnTiJ8uu+WgMQIiIiJ2ItkTInaqaIIPH7pNNsEz+xQbxEypx0/Te/7WKE1YsQJqVYaGdl642yhFRF/1+OnoHa+88vYnjBEQERFxS8meELEjRWv7iJNOlY3v7RNnGaWIGKTzcKXnPPeQSz6yZpQmpli0WAG5Jln+AT7EDPruT9/3ghcfLqvPyX/wJqMUERERt5TsCRE70vlVLNH+5qYDxK48Yec5svoMH7otlUfGiDrrXLghVsYoRcQt1dNbLhtERETsVrInRNza8xeulw1u0fK+eP/njVJEDPfyL3zHuWzwJce9TLw0RojVK29/4ugdr5RL3zZ6bMJLR8yN+hMPeU4/IiJiV5I9IeIW6l/2vuE91xiliNiJ+j072yfOSvKRMc5Nf8OHbtv98buNUkTsXP1p/TN7bzZKERERMUiyJ0QM8/IvfMe5VYeHXCD24ztvrDox7o5z3mKUxuTU5R+USxRceM3HjFJE7Fb9CW6iUhuliIiI6CvZEyKG6TynJvkbhRDz58zem2WFEpw9e4VRGrkX7/+8k3YlsDjEguicGbeNHpvKE9wQEREHTrInRAzU+Xl40X3lVh3ESNTv2Zne87dGaYTyy1yIMan/8Kv4gy9mEBERt5TsCRH9vXj/52XDWnD+wvVGKSL27M4Ld8ua9ZzYHt6v941fctzLkny8FGIRfPen79N/O5IqhoiIGC7ZEyL6KFrVw4duk61qfkwaMXKde3ZERYvjnp0d57wl1vkj4jtvrDonyldcMGuUIiIioi7ZEyKaXqn9Irv4g69zESNXvy5p2+ix0d6zo9/WF9N1VYgo1J/g9vpLrzJKERER0ZHsCRFN9V9k54oJxJjU79mJMOTVO8NveM81RikiRqv+U5KxPsENERFxoCV7QkSX5y9crxrRXDGBGLP6PTs7znmLUdqD+t2ykcwQEbf0NRddJivdc557yCUf
+WTNKERERUUj2hIhtd3/8bn6RHTFJ9cuURA/WKO3Ky7/wnZcc9zI5K+6WRUzSk//gTbLqcb0wIiKir2RPiKgUHVf9V3uMUkSMSf2enX5+U9Lp/b7gxYfT+0VMUv05iZE/wQ0RETEHkj0hotLpuNJuRkzYnRfulrXvOc89pLd7Xc+evcKZA3f9ICav/v3N9omzuPAQERFRl+wJEVu+/tKrZIuZjitiKur37Oz++N1GabgXXvMxOa1g6vIPGqWImIyi5vLANURERF/JnhAL5ztvrBqXNV28//OyrSzo55YfROzZK29/4oiTTpXVcNvosZfdctAYISiQ0h/T9ooLZo1SRExScT516qP3CW7v/vR9XA+FiIjFlOwJsXC+/tKrXvDiw2f23ixfii6ueCkbyqdNzTijIWLCisro3LOjPyz88i98Z/vEWTsv3C3+MC5L5DYfxKw5vedvZZUU6F/nXLz/88OHbnvnjVVnCCIiYnEke0IsnDvOeYtsE1td2X9yHo96xEmn0nFFTFfRL3Xu2Tn5D94kh8h0SVRV+aN4r7/0Kmf87RNnWeP6XyqFiKmoP39NftPzhvdcI4eIP/QxERERCyLZE2LhdMImwfDvjqg/+FloxGwoeqrOPTsvO+s852/xxznver/8+4Sd51z+he/oTyjnYgrETHna1IysnuL0elLpDfJvAdcXIyJiMSV7QiyczlUVOhde8zFjNERMy6nLP6hqppvfe90F6q9Wh/aF6q+hoek9f2vMARHT9crbn3AuS9R5yXEvM8ZEREQsgmRPiMXyslsOqvavG9FE5oYdxIx4+Re+88IjjlGVU+N3X3qk+ktj54W7jckRMQv+h6VP/i+/9VuqomqICm6MiYiImHvJnhCLpf6TdgbDh27j6gnE1L3kI2vO4/8Nfuu3flv9pUFwjJhBnQc8eXF+6wMREbE4kj0hFsuge3kc9McYI2LCihrqPOCpc17w4sMv3v95Y1aImIpX3v6E85sevpw9
+e4UxCSIiYu4le0Isls7Dib1sGz2W654QU/SyWw6esPMcVSG7h+AYMQtevP/z8rcpg5A/YYmIiFgoyZ4Qi6Vvz/YFLz6cX31GzIjvvLHq/EJWhzznuYfsvHA3d94hZsfpPX97xEmnqirqZvjQbcbIiIiIuZfsCbFYvuS4l6nGr4VoAZ89e8WVtz9hjIaI6fruT9/3igtmt7z/jtQJMctevP/zvl/5iApujImIiJhvyZ4QC+SVtz+hmr12l5Vf20HMspfdcvDs2SuGD92m6q0GqRPioPjOG6vGE6DOX7jeGAcRETHfkj0hFkjR/JWt3tOmZuiyIg6KV97+xDlz75eVV0DqhDiI6hcziipslCIiIuZbsifEAnnhNR87+Q/etPvjdxvDETHjXvKRNRk8HfKCF/6X/+tLRikiDoryYsbtE2cZwxEREfMt2VNCfvzBb93+Tw/c++Q93/rRXRju15/4uthWf3PfY8Y2HAg//I3Hxcrf/b17jTeFXh+of01sq0899OieO39obMZseu1Xf3DzwUfEOh986m7jvaDXrzx2/4FHH7runu8bmzH7ig9kBo/Y/+cH//f/beZN1fs+I/7+n0/8d70oXcXhTmyrG75ZMzbjQChWmyN2h4rqILaVqBrGNsyye9ef/NzmQbHaxnvJgpmqxVKxocTmEhvN2IyZlaZ15w5u01q0q2/79oN3fvc+4x2hV6ddffVddWMzZspstrIy60C3srySPcWr6HeJevVs84u//OUadutPn/2SOFmKDr+xVTOoOMqL8+LTv/iy8RawQ8X5MstHVXGOfOzpfzTWGTv0yZ9UDzz60EAkjKKNKz6KHLF7UxwAxWFwII7YYiVFY44jdm+KCiIaNhmPlT+3efDxZ+4w1hw7VGy6mw8+YmzS7EjTuh8HpWkt2tVfeez+p372FWP9sUNFYyaDUSOtrH4coFZWiGRPcSk+GeLgbnxosAfFEUrUtMxG+KJHffs/PSDO5cZqYw+KE1LW
++jM3fLNG6hSJ4pT5qYceNTZvdhRHbNGZMdYZe1AcscUhMbNRozxi0/CNxGz2YP/u/u88+ZOqsarYg2Izio1pbN50pWkdlRlvWh949CHa1ZF48Km7M9KuppUVlRlvZW0p2VMsfvgbjxPVR+vjz9yRwevAxWmbYCJaRWsjO1/UfG7zoLF62Kd3f+9eYyNnwRu+WaOZG63iwJjBXo1o+3ItTLSKpo5o8BjbOUW/8tj9xhpin9727QeNjZyWNK0jN4NNa3HiOPjU3cZ6Yj+K5k3qITKtrMjNZiurE8meolfUcCpYHD79iy9nqo173T3fpxkUh882v5iFq/3pw8SkaFZm6usa8WHjKpg4FIfHTPVqxOmDm+ziUFSfjFwdw5fqMfn1J75ubOrkpWkdk2KrZqdpLU4ZXLQYkym2q2llxWTWWlkdSvYUseIIztkxPrNTza6+q84JMj5T78wcePQhY5UwQh+of83Y4Gn5N/c9RpMoPsUROyPfy4kTB18VxKeoRKk/sO/O795nrBVGqNi8xgZPUprWsfr0L76chab1njt/yHWpsZrKL0XQyorV7LSyOpfsKUqv/eoPaN3GrTgzZeGiCS4JjlvR0EzrHnVxejZWBiP3K4/db2z25BWtbfozcfutH92V+hGbLk0Cptt95duCBPzc5kFjsycjTesEzELT+oH614y1wmh9tvnFhK9xo5WVgFloZXUl2VOU3v29e40PBMZh6k8f4DFAyXjwqbuNLZ+A4gjOjTnJmPp1/rR0k/HAow8ZWz5hxSnDWCWMw7SuZ7z2qz/ge/UEFBtZbGpj4ycgTetkTPcLIb7zS8bHn7nD2PKxSisrGVNvZXUl2VNkin6U8VHAmEyrASQlm0jS5K8Q5vvzxEz3zru/u/87xvpgTIoDZopfyhFMJGkqgTJ32yVm8nfe0bROzBSb1uIEwaVtiZlYu5pWVmKm28rqVrKnyOQhl0ma4vczfIWepI89/Y/G9o9Vcezm8uAkTfHS
+J36hMklT/FKOHw1I0uQD5b3rT5ItJmby8QRN6yRN66le3EyQpIld+kQrK0kH6NInsqdopMuasE/+pGrsgsTkYJqwSbZ0+ZYmYdMKkcWHylgTjNWEQ2RdfhQiSZ9tfjHh557Sa03YJJ/6RNM6YZ/+xZeNXZCMPEE1YRN4miqtrIRNsZXVrWRP0UiXNXlTeRA1B9PkTbKly3MlEjatEJn+avImfLmEVJwmjNXAuP3UQ48aeyFW6bUmbJLPYaRpnbzJ/2Dl1XfVuXQxYRN4bC6trORNpZXVg2RP0chV/cmbZCThKFrVxmpg3N775D3GXohPLpFI3lROltzHkbwJRxJSmr/Je/f37jX2QqzSa01YscGNXRCfNK2TN/kf8yFhTN4EEmRaWcmbSiurB8meovHrT3zd+ARg3N7+Tw8YeyEBeRB18n7rR3cZeyE+ubw/eVN55JP4UBmrgXGbysMIxGnCWA2M2yQf+XT1XXVj6ZiAid1WSdM6eZN/5NPNBx8x1gHjNoFHPtHKSt5BeeQT2VM0UseSVzRKjL2QgHwLl7xP/ewrxl6IyT13/tBYNCbg393/HWNHJCA/qZO8qTzbi75r8ib51AnuqUzFxJ54QNM6eZO80lzKNwTJm8CDvWhlJW9aT1DtVrKnaORWneRNJXuiJ5O8iWVPe9efNBaNCXjzwUeMHZGA3KeTvKkcsXkYUPImdsQW/s19jxlLxwQUm93YETFJ0zp5k7zSXMpzNlPR2AuRSysreVNpZfUg2VM0ku8mL9lTQSR7yrepZE/GOmACpnLE5rqJ5CV7yr2JZU80rZM3+eyJdnUqGnshco3FYQKSPUnInjAuyZ4KItlTviV7KohkTwWR7Cn3kj3lWLKngmjshcg1FocJSPYkIXvCuCR7KohkT/mW7Kkgkj0VRLKn3Ev2lGPJngqisRci11gcJiDZk4TsCeOS7Kkgkj3lW7Kngkj2VBDJnnIv2VOOJXsqiMZeiFxjcZiAZE8SsieM
+S7Kngkj2lG/Jngoi2VNBJHvKvWRPOZbsqSAaeyFyjcVhApI9ScieMC7Jngoi2VO+JXsqiGRPBZHsKfeSPeVYsqeCaOyFyDUWhwlI9iQhe8K4JHsqiGRP+ZbsqSCSPRVEsqfcS/aUY8meCqKxFyLXWBwmINmThOwJ45LsqSCSPeVbsqeCSPZUEMmeci/ZU44leyqIxl6IXGNxmIBkTxKyJ4xLsqeCSPaUb8meCiLZU0Eke8q9ZE85luypIBp7IXKNxWECkj1JyJ4wLsmeCiLZU74leyqIZE8Fkewp95I95Viyp4Jo7IXINRaHCUj2JCF7wrgkeyqIZE/5luypIJI9FUSyp9xL9pRjyZ4KorEXItdYHCYg2ZOE7AnjkuypIJI95Vuyp4JI9lQQyZ5yL9lTjiV7KojGXohcY3GYgGRPErKn3rx615A/uw4YYxZXsqeCSPaUb8meCiLZU0Eke8q9ZE85luypIBp7IXKNxWECkj1JyJ56MzB7EhA/ScmeCiLZU74leyqIZE8Fkewp95I95Viyp4Jo7IXINRaHCUj2JCF76k2VPRkx0wE5tLT7YW1gYc1p9sQlb6ZkT/mW7Kkgkj0VRLKn3Ev2lGPJngqisRci11gcJiDZk4TsqTf9s6dfHjivNVTLnh7et8MasUVp3032mO78YtfV9nDLh3eXVIFgx76HnSLPQuXihs470C7dsW+fHGhPqMaxcIdiAesWmUXLngTFjJ/InvJtdrMn/eAmiDb0dx1du9R1DI9yxQ7s6vUgo1Yp7O2QPRVEsqfcS/aUY8meCqKxFyLXWBwmINmThOypN32zp5v2yQ6HnSWpy6A0rIjHHk2jHf0YvSkLeymdZE82Vm9HT5cUdi8oYN3sOUdhvrMnowdY5EveyJ7ybSazJ5+jqIUe1vdnr9mT99Bq0f+KqbdM9oR9SvaUe8mecizZU0E09kLkGovDBCR7kpA99WbIxS92H8Ns68tJzjvgHq7iIRVX2bO10ys7
+PHKlS1tkT+2rqNQQO1SSL63VC1o39TIaC5U9qX2hZU89XPIWOkn7iraStfP0rFB1d82PTYvII0WvZE/5NoPZk/MJ9xwMzTrVu71lT/ZqtFdMHWxdB4eeJHvCaCR7yr1kTzmW7KkgGnshco3FYQKSPUnInnrTnSDYuPr5Tl/Iza4DwemDT/dATzr0vy1dvSNPaUhnI3DdPGP2YZGypwgueQu+Es39gRE9WLn72l1ZV6c0eD5xSfaUb7OXPfnWQSuQalcKOY7nHmSjgrjzIC20Pe+A6+jaYZ6raqIxgnvFtDSqhX49lPO+tAOFmtA4dIi1CniDQTMne0JbsqfcS/aUY8meCqKxFyLXWBwmINmThOypN92dHyfK0YIkva+iIybxKZITuns7lnpnxtPjco1vd0WczobP3JQh62aM2Y/5zp78MLp/zpaXk4Re8hY0Sftve8z2EPfiZB81bD5xSfaUbzOXPZkfcl/tWiOxox9vMutUq4CjYmspnea5asW0g7BX52ShYR943evs0FrDoOzJRr7BkJl3sNHIngoi2VPuJXvKsWRPBdHYC5FrLA4TkOxJQvbUm6rd74Q1Tr/F6ZOoIfrX3YaufoLVXfHpHugLMhe6RfYU3NnYet2isFDZk6sv6tcDFIRd8hY4SXuJ7f1ud4blQuXeVCsQNp+4JHvKt5nLnuSHfIvDl13X9FqmBtqHRJ/jpzO+k/WYkbE5E92t8x1zrewTh3sdzKRMlqpVsuuyOastZk72hLZkT7mX7CnHkj0VRGMvRK6xOExAsicJ2VNvqla+1qV3+irGxS/2OE4/R/3hhERyVvJlaOfBWYS3d2TOR6rmZsciavzWy6B1UxNGY76zJ/ema+8yob3XTMQkPkXWhCGT+O1Z+9PV6qPK3apKQ+cTl2RP+Tbz2ZNzJJTox8OAT759ALSwxvdGM+YR28Rnzt6ZGPqMoK+nZ51dR2b1Nu1Sz8jhM99y3cieCiPZU+4le8qxZE8F0dgL
+kWssDhOQ7ElC9tSbfh0b1bj3fmvdxoqBjJ6ShdOP8uvnOEvxuWGkhexOyFVyJRR+SYTqe3R6F0kfFiJ70jayswHVkHbf2KNrL7d2WegkPnvW/hTZF2XYE2696Bgke8q3mb/nLiR7MmqN7yHUGt+V8ljaS9nncxRt4Tr4uyYxF9rWuxR75a2jh+e0snX2pC0rfObmRvNxALMntcVMtG8C+tVnq/ai+OCpHdfBjojbPGRPajPaxHLK89RH3Uj3Y+u4FOlbIHvKsVnOnoxOh3/d6Ud1QJaYta99mO3d0FofpHE0iOjgYOyFyDUWhwlI9iQhe+rNgMOTfVh0Ygi9q6OFO+7OktHmcDWqfBMHifE0XE9XRKofqd0LCli3yCxI9qTtFHvj23tQjePsJvWHs4+0XRY0iTFa66VSnuN37WqN2V6ZsPnEJdlTvs3ss8bNo9aWtUaN4K4d8qioKo42vj03lT111DPUsh59eGtW1lqppej1UT+e6H9but6Rmrld6nmD4TP3KTXNT/YkiCp+cu2C3nTvuA52RNwOevakN100zFNk33rqo26U+9FaUISBKdlTrs1q9qR3TzSiC1WNYMvCqYDG+bFnQ2t9kMbRIKKDg7EXItdYHCYg2ZOE7AnjsjDZk3OmaZ9lvY1jqzvqd27eYhJRJJfobVirNTHOcMHziUuyp3ybveyp3QbVqqFTuWR18Kk1xlWBqqaol3ZtUj1AbW527VbLCg0jfFbMdXAwluKMr6+zNq1f9hR8WAideQet4cHNnvSjsf2uI0oiIs+eMuBgZ09qjwRVMW3MfvX5dMWitf7RnqbJnnJsNrMnn3OfXVUj+mz7ngGdl1EdZqOo9R2cbTvR2AuRaywOE5DsSUL2hHFZoOxJ6DnL6hmQdup1+rQW7rZywCRyiT5dKTW+5/vSgPnEJdlTvs1g9iTUP+QuVHXwqzV2JXWjGohO09lNq9S7rJBqFbBi9pr4rYN9MPEcW9TIag21OYu5dfoG
+1dwKkz25B9pbaZ/cMvbmctKKFu5t6Pok6BcXb7F3tCEW6tjuPuCLkX13ROD6OAvV5tN3wjLI2ZPR/1S2dll7s3h3+pb7To2gcB1DWlO1q56zFHM/brGn2h8qMXNj6dZL92e4X8mecmwmsydPFZO6PupyHM/R2H3yDT63mnVf1cpWbfUcZuUkocd5v8O10P1G1Bz0Y4j6o4XT9jaOBubBocM3aGrshcg1FocJSPYkIXvCuMxp9oSmZE/5NpvZU0u97Shw9cntZm5IrOAZx1Xq7h/qidLWbUdXk9dYsZAGsbvVK3Svgzah0xQ232DgzD2tYa/5yJ7snSjfuxpBIXeE8bGxcOagdxI0nE9L4N7xmbC1OE+nyLsjwtbHvf4OTp+nJwc4e1Jbz/Oxd+nd6eH7zthHLaw6Hrrxzf0YNnLwh6o1rVUa/o66luwpx2YxezJOVW1lvQg+Gnfz1Y42prEgv+yp2+O8Wh/9WOHzt4nv0cD9svM3aGjshcg1FocJSPYkIXvCuCR7KohkT/k2u9kTRurgZk8+qHTGHqEd1phD7E6I7CcYpU6XRpSqooD8QpXanQr5Uva41EzUhEGZRfj6mP00Z/JeHPzsKfztm5vUGeK/79zzVNu/Na258V27Jmg/+uwpY330D5X90p4qKsmecmx2syefj7F+9PNWzKB65Lw0tOdg067RxmHWsyzf46rf4VoVifnIKuwep/0e7RlaUxnvQn/Z3Rt0aeyFyDUWhwlI9iQhe8K4JHsqiGRP+ZbsqSDmJnvSvlVudyTUELMn4B7HW9oOKTyzCs4v3IZmT+HrE77QXi1I9tTeaFtsRlWq6CmxChtZjald2eRdut4bj0Kypxw76NmTVjGdumDiGsetHfoo7KN96GG2pbb0sMOIPZr1Mz7aO/KufPAM9Zfdv0FHYy9ErrE4TECyJwnZE8Yl2VNBJHvKt2RPBXFws6fgdrwcIajbL1WdllYfxlva7kV4lqWP7DNbx9BOUfj6
+hC+0Vwc/e9J2qI+enb7VZjR6sy1aYVDoVMZ+DBnZu8v0aa2/tbQ0Gsmecmx2syf9Q67UK6O3YvpVPYt2PQpU1Th7oe7DrM/6hB7n2zqzVdhr4l15bYnG0UB72ccbJHvKoWRPErInjEuyp4JI9pRvyZ4KYiGyJzMycMbRuxDa+O1eimdZegfGZ7aOodlT+PqEL7RXBzh7cgVz2vDWZnG2iWend7gZ1UCJmLyrPR48ctiHSv3dnioiyZ5ybBazJ/vzb1RMO3mR1cRbMe0ROrnnVK81UlfNCj3MttRqqE+poxqttUquJXoqeMgMtZddvEGPxl6IXGNxmIBkTxKypz61j1M++B7XTA/sCjlWRmB7/olL9lQQBzZ70iqvdsuD/ZwOgVUZY6mYAccNuRrxHAp6luypIBYie3Kqnl3l/XpHTqnqz1il9t8+Re0J7a6XHpHof3trd0fr036D3g5Y9w5y9uRsH22bqE3qdPDkRtN3eui+U5vUGd+ZPHTjB+xHv5FVke/Srbejr2o0DlD25OxQSXBd7kF7ywvs+tWr2qzcbL3Cxkel7/N7JrOndsPJUwWco6Lchu5Pu1151VRhxze1C5x4y32odB9mzUrnf1y1R9anVUXW+vgMd9bNNcOQXdzFGzQ19kLkGovr0DgrrKX9sbHQN5S+a9z2Xad6sZtd6Uj2JCF76lPneORly0+kOq6pihR95XHPP3HJngpiHrKn9rdSqtZYWJUxlrNa8HFDNJVSOY8GS/ZUEIuRPRlNW4UzB6NhbdOqjFoqraPqqd+EqkibcMe+A57aHbY+njfYU3vXcKCzJ2HAjvCGR1tOIjejfsy3aZ0RQje+eZQOG9n4bJRKTq/VWnRP10SEOyDZk9+WF0S0QfSd7gQWvar2ry/tne6r8VHp+/yezeypg73pUzGF3roZtLN8D87OyK7DrFhE18d5uUfcFbm9s/w/AGrpobu48zdoaOyFyDUW14HxVlhhyGnU5xjr2Hed6sWe
+zsVkTxKypz4Nrgxbq6pxT9N2Ytzz38J8ZU/+Jx6Ljg494vTjOZm5RujT9vwTd9CzJ6sn4Dq9aX0DZ+Ro9Tlu2Cddv95pqpI9FcSiZE9CdRCWmKVa89d4WI/e8vZ7jo/e29Gb4+3FBdTuwPXxvMGe2ruGg549tXRtMaPz47vTw/edu0+l5ha68c3z+BZ7qv2h2nW1VmRN1e8lOT4ORPbkbBPPRus/Kmop+/yRzMpn/1qqWKGrvrf5yenarGZPLY3swL3xfStmSz2d2WJ/2Z8QiWtk/TArFxF4XLXUZ9Xeg+aOVuu26zx7ePtY0V66sU89u7iLN6hp7IXINRa3pXFXWOc4bM9N7QvjpVEHU7N9GPcUBUv2JCF76tNOKoMaR6HaGe62jvj46kcr9bfTThXow+2XmvqhzTqMeuZvj6mfGyI6XvhL9mSr9oX6kHhOS33rnn/iDnr2ZP2gid0usU4n6idOXJXO2V9OldeqmLvp2UEV8z1u2AP3+XxCPBXcPUnwyvTv4GdPra1kbWq1uTT09qjchhFWzJDF9bMsa7ZR72XhAGZP2It5yJ4GWXWCiKEKOw5C9uScvNzDXT06Oc6OffvkwPbhequTrHZCbGFP2G5CC/SDf+CC3CMErK29K/1P00YTou8WYJazp/wa8AGIU2MvRK6xuK2MtcJKVbV1RrCDP9lrbq9Au6LJWhbYSld/tGhH/OGlYauqFfl9+dSBZE8Ssqc+bVcGT5HUOAW2sD7NxnDf7CkUraq4TniSXbvN+QeMGXwU6NdcZk89nXjUvo7tpBX3/Ldw4LMn6wwkK4J1anGfVALOaiZ2feysivl8nOyzms+VEX4V3HUyNtEODv076NmTtWFlG8jaXO2NI7ees51lPWpv9i4UHxKfbR6yuD6WJedD9oS9SvaUrLLim8TX9BIOQPYU2HOTm0s7Yjv4RjwWno1pNLCtuaklurBPwf4L0lQjuFtZ9lKsg3zgadpoQpgtiq4le0pD3w9A
+vBp7IXKNxW1hvBVWqY0ZtCAPopZ110oPKw1ZVT2T0uiuIpM9Scie+jTgQ+x8Xt1VQn12VQVwRwb6mOpve0z7lCnnaVcAo5rZL9sHCPf8hf7103kZscXLntwfBvdetsnhBW6Dnz1Z29A58Yitqp9l/WuN3PitIfYeCRm5vVNs3R8VHbEa4TNxtQBCVyYiBzx7snau2j7W5lIVs6W1uZyv5mRV6n7Tyf2lzdY2ZHG9LqulNVt7j0co2VNBJHtKXPtAbRPrGVk4MNmTz3FMNWmstpa93fSja6cnWXU2tDe1OSt3Q9pvQS7NPaih97rt1QhpQpjr37VkT2moPgBFz57irLCWZkXTNrhdZK9Duwr7L8I7pjsg85aa3/vqq2pPpd6aetfBb8RfsicJ2VOf2h9HD+YJT+I6sek11l0/1d92p8h46ep8aqrRJKLUPX+hmtAkpoNpwbIn50jUxvoMGMNzeIHb4GdP1uZqnYesnSU2eEjD0ftJ0EfutIr5HzfUPjKXaGtW8PZ8/FcmIgc7e5IbTVUia3O1K5T1st2WklXV3nSura0HRhbmVBJjs4cszr2soJno6+A3H1nNgw9K3Un2VBDJnnJvzrIn1yGu05OsO3vyOavqM/dbkEs1goFPs8p7mjYW7bMm3Un2VBCNvRC5xuK2MP4K66h/cS6wa5ln5k5z16xT3tXQhwSXqqdtmLTG9FZbZ+nOkA4ke5KQPfWp90NsatSiFqoXoddY9ydb/d1p9uQTSbRK3fP3XROLkJXvx1xmT158WzZqU3e6o+0x7WO0nKe9v5wdLdfBftn+GJg72lgZc8KozUH2ZG1qsX1aQ1obX69i/htT29rayB1XMc9MdM0lBlVwURS2MmpI3w529mRtEKPtomEfVFvKeqRtWFV/rb9Luw9YO9f+tGjbXO6vdjbkGLI4z7LU3wHr4H0XogloLdceGIFkTwWR7Cn3Dkz25HOqksdDeajU/1Z2fJJ1Z08+i1MNJ2sEnwW5
+lSPYS1Fzcx32A0/Txgndc37vVrKngmjshcg1FreF8VdYj6rS2Qt110Ghs0pmnfKuht5LCiy1f2XIpDWV9+33VJHJniRkT33qqQxBOueqFvJDr1cG9+dY/W3XDeMjbtQBe85qPvJlK5x2z985BPjk1rFYrOzJGMHVEe12R9svvQc7qRpNIkrNHe3+sLVpjxCpOcierC2mno9ovxTo+8jZC54qr43ccRULPW4YS7T3phpZvlSLCFsZNaRvBzp7cudE1uZq102j4siX+qZTI1ict0/uXG/GJPeXd3jY4rRlWbusHSE5L60/2nu2rTXb0nm7xBx8Ftq7ZE8Fkewp9w5A9mSfvNqHPku7pyqPw3IcvZfYRTu2++ueXAtyq4/c0l5Pe/7qzGuPIF/KlTQW7bMm3Un2VBCNvRC5xuK2MvYKa1cirWqoyiJnaNbB9vhmnfKM6RoSWKqyJ99Vda2JpXdtO5DsSUL21KfeD7Fb9el0Pq9yfPlSdUV8To3Gp9yoV+5PvFGx1XcvrZfu+QvVfOy17anmdG60deyyWw6ePXvF5V/4jjHcMO7sKXBHa22RNqpnqPc5O9nR9kvPDgr4Ys09f981sQhZ+X6MpCdz/sL177yxagw0jDF7sv9WW1vf8kbt834SfEa2SwOrWOjHyb3E4AouXoauTERGmz1dvP/zF17zMWOgV2MdelZuPXv7WJtLz2uszWUfIbU8yN6wVpH8WwxXFU3S3uZyf22dPemLay/LvYbtcczhbdW6WUS5oyM/Yr/hPddcefsTxnBDsqfkjSp7Evv33Z++zxhoSPaUiv1nTzN7bxYnZWOg136a1k57xnP+co7J8ljntJ8tOz3JurMn57BpH5DtZpJ+wHcvyKWaXDsgO6eD1lRhp2mjCWG87N5os6dU29UYprEXOjemVlbcFdapZfbcfCupd+nBz3uyh/jOx6c0bFXtqdzdOmcmHUr2JCF76lPnQ+xFVj9Xd0VhnJ9auB9ypiqAXYGN
+emVUXbvyu2mVuuZvzUobonAqeeRGW8dEG1es7fCh28LPlClmT0rX7nB9BtS0+t7saUe7Doutz5J7/s6R1P6YxW0kPZnTpmbEKp/8B28KSaDizJ7seio3mr7ljZ3i/SS4d1NnVSz04+T/MTCQpVusTCRGmz2J/oxYvyNOOjW8bWSsQ8/KumBvH2tzdZI9WcNdU+m1SW5kZz5yf+mzVYYszlxW+0PivHStg67c6erXGP0+XT0axxH7BS8+PDyBii17UlXDwLW5zKodi+KA4F/NXaq17WDMCIwqe9o+cZZYZ3HoDkmg+sue/HeiX13LmIl8tELsP3uSB+pto8eGJ1D9Na3t065B+2ArPwB2A8m2w3asHM04tBq4DvKeBWn61VC1l60V9pu5+gAYH4a+PxvRZk9iVdJrV/do8EE1+iNGZwfwWDT2QufG1sqKt8IK7RjIhT2ypw6qSheSPbkw5mMgS0NW1Xfduq3IZE8Ssqc+DTjStXCqn7u66n0Y59QlRu45e3JVCTFQq/z6/O1jgV61gup/JMbRk5GEnClTy57UTnG2s7YX7A+A2tr63uxmRxuJktqPrZfu+Qvt/a7W1vOBidYIsydJUAIVZ/Zkb0/ZRtG3mLFTvJ8Ez+btoIqFfpzMJQZX8A5Wpn/jyJ4kIW0jYx1619og9l6wNpfWDLX2lFNnZT2yNp3cjNaY9sY/b5e1rVub2tpB2p41Zxs0XFuctiy1E+XfnuGyvnvfhTXcvf79Gt8ROySBSjh7auGcgj0VLWrVkdm/mrtUa9vBmBEYbfYkCUqgYsmeBD7VLUvG/tHawqiyJ0lIAtV/09ro0bnPmPID4HOI6+Akq8Zxlar9ItFnG7gg24Aaqk64raVs1Q63Pwx9fzYiz54kabSrezD8oBrtEaPzA3gsGnuhc2NtZcVXYZV2nZJoI3vqoBoz5J47tQcFfvPxLQ1bVVcdd5aujbClZE8SsieMy/h6MhLfM2Xc2ZMf8jjbPoq1MXKi
+Fjm8wC3y7Elyws5zLt7/eX2cqLMn7Mj4sieJb9vIWIfelXVKtTt9arHWrJRVWFU3rQbJJz2JmqXVcSe/cI1sNLlCFudalvvo4Qx0DggW7aazNVu5Aq53169xH7F9E6i4sydXt8E+hMZ3MHSrdmsHXRe/tY3NOLInyY5z3mJ8bRBJ9qRvFrv1b9Q1dBlt9iTxTaBoWidvTNmTJNl2dQ+GH1SjPWJ0fgCPRX0XdGXSrazMGX4+TfRsa0j2JCF7wriMuycjMc6U6WVPQr0D6e6dtvuQObzALabsSSK6N04CRfaUinFnTxKjbWSsQx9atdIdFaGvyRyxjQQq0eypfQjVD7/OAdZ9kDfCvtastBHceZ8r61cfNvfpwDyqW7Q/lu21bc8qtg9tfNmTRL9wNfLsyT1Q/q1+JsJzJpW0z4lK/13QUjvD6idNbb8LXLs+oCjgo6V/064vur1cMQfPeb8H48ieJEYCRdM6eWPNniRJtavD7OKg2lY/OAQMDDw4yNGcg4lBX/WxN5191K2Jt7Kypu/HwDG8NF7JniRkTxiLX/rS/+clh73EquBJ4JwpUzlHFtnvfe9Tp552ktoNsSETKLKn5L3iirf9ziGHqN0QP07byFiNfrT6dSk0HAfLT3xiIckjtpNAJZw92R0PPbKXnw2jV9PCTh/UrEzsoMHVR5K0iny6SXq0oVB9qi0WEaEPPvi3Lzv5ODX/OJEJVMzXPbm3m9yYerRk48wheBf47EfrAxDywQguCsieTKz967NKLXo/ZP3n//yHah6x4SRQNK0TVjStjz72SLUbYibFdnXnB1X3hFsdMcIODsbBxPol2Ta918ceFO3qV796XC05auJoZWVMn4+BZnhpvJI9ScieMBYTaP14EYfUrzzMjk7Uj370crX14+dtVy0bS8e4HRl5gdr6CbLzwt3GavRnq6mRSjtjgLzggteorZ8gR+945f984r8baxKRQe1LOdyTPbnDAtVdUdGPmpUTUvjF
+H3bPxHXRiuopGX0bd6TlzlDMRUTf4dm3b7c15yR4znMP+dO/rhgr0I32ZvFi7Jp2SGcOcW9JVeqzC/zTIvNJIq4PRsdF7bUycy4xgrHCTu/ambY7n3rqs3L6BDhtaoamdcK+973TausnxUuOe9nahrkaMWvXPvky7KBqaNcmL636ZdQ1/4ODU7rVsmL0M5/ZY61KjETdysKOJHuSkD1hLN555/JrJl+zfeKsqBS9FHXI9MP5Fo7rnhL2e9/71PSFrzd2Vg8e+uLD1b70Qz7Iluuekvf669+z41U7jZ3Vj6Ihq3aqH2IEeYulsRoYt+KIfcZrztD3VJ92eMRO+ronNdwbN7g7Le3uR7tIm5XfzNXcJH7dJDOP0PXMMIobr3wVR+zzzjd3Vm8OH7rNWkkfnvPcQ0Tf5rJbDkZy3ZOBnRy1R2hvN5+NrI0Tsgv8LogQuG60FPh9MBR6kbkgz3o6+1eNKSNId5F82b1XXXXxya8sGTurWzs8UNO0TtgHH/zb157zan1P9anao344V6em1q5WtUMia0Qv2VPA1Yjt8a25eSppetnTT3964G1ve52xpzqXVlZmJXuSkD1hXEZbx4KeHmI8fYDsKXlF5XK2f88GPe9Jpk5yHLKnVEzmeU9Oe0hqrAMmYCpH7Mzcc+d8B66h0gQ5Ky0dcPdJfG4P8e0mhWUKnrWNLXsSRnLEFoo6a62kCyd1kuPE8LwnXc+u8dluai+0+p/BW9Vn71uIRQd/MIKLzF5u8P71rpJPD7lr43vek3GgpmmdvAk878l4Kl/y7epOD6qmoUeM8IOD92CyxbJi19lH3UorK7OSPUnInjAu4+7JGH0YKdlT8saUPempk5TsKRXjzp6M9pDUWAdMwFSO2ElnT3r3w7eTr0aQyH6Id1baEHt8VSpfqlur3F2XsEzBswifblJkxpQ9GamTNOnsyWcjazMJ3gUqRbLvifPR54MRXGQuKHj/qjG1GUax6+PInnwP1DStkzfW
+7Mn310iTblfbFUrVF/nS96BqGnrECD84eA8mOcqeaGVlRLInCdkTxmV8PRnfPoyU7Cl5I8+evKmTNL3s6ZO7ht5vtz9afw+1vN5uwXiH6AON4cJb9pWs4bs+qQ0U6pNI94pm0MP79nrmkKjxZU++7SGpsQ7Jqtqj3q5jNx1C2WwNH1+Ns6/V7+2rqxmJqRyxE82eVN/D7xYM1dtxOh56P8Tc+/bVLq2XRmahvq53d5Pse8TUfOyXeqlnbaMIIIKMPHvyTZ2kSWdPzs4yL02SWzJ4F9ifDbUsZ/uHfDBCisxerlqu3/41VlitUp+7PtrsKeRAnZmmtXOO7vAELfbRTSU1XNg61TpFB3Y5w9V5P/WzsG5M2ZNv6iRNuF3dzUHV0FPRXBp1zffgoB9MwpcVu8Ze6NxBaGUF2UVF1utp212fzFRtNSR7kpA9YVzG0ZMJ6cNIyZ6SN8LsKSh1kqaVPVlnMqdt6pz/7CGtJuzeUitOcs52Ml2SL63xSzfJVpQ9/vtLJe/Z0RhTLmjvvi9a4++7RRszUePInkLaQ1JjHZLVbqE6zdBWT3JHqdUM7bxDKJut4ePb41g91bQauI6pHLHjzp58sLs07oDA6fNrqDH9Z6X2lwoRDNR+1+4caX2W7K6Ojt7tGbzsKSR1kiaePfnvEWcOwbtA31kKaxeHfDCCi7rInsxVKpX0/nCPRpU9bXmgzkjTWjtHd3KCFttfvLv2WdWaXI+Z1N9W59aajzxrp3cW1o08ewpJnaRJt6u7Oai6JtzyiBF2cPA5mIQuK3aNvdC5g9DK8rfritzSam9729jZqK2GZE8SsifH1nGnfcBSTQcbp7XatZ30QHpWHWe9TZwul7jlSrZHsNpJHc082jomWrfhfRhpT+dIZ9d3sj272Faeoq6MZOd2sjJqnJ4vvoikJzO9529DUidpStmTcWKTCdH1u0qqedpqxVovtTOiNY55WZPSOrlef6DV9rXPqUo55/YZ1G4Ee86s
+yRpt9nTJR9bC20NSYx2S1apo1k8s27v4PPsXl2OpegfkH72fZaIxlSN2wtmTK+AzAwK5O2zau0PNateB9gj6fLTsQMxKjmx3VNoNCXuI3vnxWYR86YzW+eetC6PKnsT+DUmdpClkT0JX+81T6r8LWurxk7aLgz4YwUXdZE/iZfsjtOvqSHZ9/9lThwfqbGRP+imy4xO065Sqf12k2Y6oUj4L60abPYWnTtKks6duD6pttzxihBwc/A4mYcuKXWMvdO4gtLJ87bYiS711M0O11ZDsSUL2pLSOdPbBxTr3t1se8ujjbqN0rGyaxNKCdI6z7TVvrWq3388Lt1xJbQRra7ha8AGmUsd6OEdqu76T7dnNturLSHZuJytjj9PxnjWMqiezpelkT9ZXKFqQpJqt+3ap71VaCdEusQ09TVtvQ7aldVJsza01jvubGbNB7HwB2/72tT1yckabPXWosQ7JalW90u59u1R1aB0idu12VyVZayRa/bIqUQtzfKc666eSdvW0Or12TU/JVI7YsWVPEar2XVh/ZqBM7Igt7C97KqKq191jg1PZf/bUoZnInlzn6A5O0O1EqT0T52wbNDDds7ButNlTJyafPaHQ2AuRaywufbutyEqfpCk7tdWQ7ElC9iS1+gDqZK86Hv2c+DXbvQtPUf/KVe3z+3nhliupj6BvqzAHJHvy7vr+t2ckRrIynXz8nHE63bOGOc+ezHaqOiMeaJ0IW+dIcZIr7fukeUa0pmppfPfSvhjYe740sifrpTVP32ZxYhY2ezrQipxaD4Y40AqhrtaqkjWC+luvYmrC1h5UIZRnuOvv9rSyw5nWLpaSPQUodzfZUy+SPW2l+nQZ9PAlkG6xsifXOXrrE7T/+dQnkGqfgsXLdM/CumRPBdHYC5FrLC59u6zItj7ZU3ZqqyHZk4TsyVL2E+Tz54yLnvzVmgvtvrrsSEhkl8MZaLyUOAOdjoqYmxMuuCe01spTkVQ3ppfv54VdfEXv
+WpkOv6IfjOxJ3/VdbE/xsj2yxN47+rYKGsd3j9tFyj52bhd7Vthe4d4uvsh39uQ5h9kJkThNts52rdOeui3OPCO2TpZi2pbqmxw5N/VtjP63pWzp6tqlPs3i5Cxs9vRwK+0V1aRVQez7rayqZJwjnJeu4YHjWzGTrGXB80xDsqcA1WEzgw3Z3iR7ypjaedmi/+NAobIn9zl66xO0f7/Uc5KVp+/2aKmehXXJngqisRci11hc6nZbkW2tga1xtIGZqa2GZE8SsidLrd3fwffPds/E9bdsPchOvtajcP0dNI42Q2tN5HB9TQJCATVh99/Pt6dtLVRFFZ6Vaf/tmraDTdRyMLInV5dvy+0pdDaF3LZyp+gbzbvHveNof2t7XK2SUo2T/YsvCpo9ta5gEqdA8VL863tGlMoimSK5RzPPjvac1UvNVM+jxc2eWtVH1AvxUvwbXE3sY4h7uDm+gTWaVm1dB6J0JHsqiGRPuZfsKewE7Xc+NU708qVrnMz0ZsmeCqKxFyLXWFzqdl2RldZAsqdIJXuKxvATpN5n8Os/SGSCYHYSrPF37Nvn7jm0xwnuXTgvXcO18WVw0Mod9KRA1x4u5tAqbU3b0ffzZlHgJOrdPayN4BknyIHInty7e6vt2dJ5qe8UfRz974Bxgja+y153btDM3ePbezZsnA4taPbUOuHt3bev/Z1MQPakzUHezW7YPmU6c25PqyR7SlSn2oqqYR3b7QoYSdXT7LfqRSvZU0Eke8q9ZE+hJ2jtVNs6Ke/d97AcwXWhsXO1spLsCZPV2AuRaywudbuvyFJroKzOjmRP/Un2FI2dZ0++fQD9siM5soH8Wdx2B7U9k3bvwh1ztMdxD9d6I87fVgjl1y2x+0hdfj8v/g5aqO+7M/OXzrpJA5w9BWxPaxznpdNB1Qcaf/uPE7zHdbdYmaCd2+WedY3T4Z41zHf25DmHtZut6pa6VgvVfUZ0tVzbRfLMqs1KFjm33QVmT578K1EL
+nD3JI7+oJ1f71Gv1t2e4rO9WVfIZ7hrfrJ5p7WIp2VNBJHvKvYXKntzn6A5O0O5J2rfGq5OvNYf2eVmZ7llYl+ypIBp7IXKNxaVvDxW5pTXQ3XLOTm01JHuSkD21dLf79X6CUs+e/PvnxsD2y+COvfPSNVzvmchxduzaJVbPXrpLZ1XFVN18P28WBU+i9K6VdxzTAc6egrZnS+fl1v3JwD5n0MZ32evODZp54F7rZJwwc549yYuV2l+Bts+IWpZknhFlka1+w52rRavNQbwMzJ6sU6/ZFE7MImdP8vhg1QijnsqXEq3yyotVBSGPWjNn0nrpOsWkZLGzp1bts04EsucpdKqzd4il6zJGV/Vs92bt5q9V040Wc2oWMnsq0P4VFit7cp2jrb251Qm6PZWuNpWuFlGldhbWJXuy7aJS63W27a5PZq3m6hp7IXKNxaVvbxXZL3vKTm01JHuSkD1Z+nXj5UN2hPYFI07HwDdQkF0L2anQeyn630HjaDOUi1bDnUmcxRm2J+zy+3nXtO6FasPbk7im7fAr+oHInty7fsvtKXRe+m4o4++gcYI2vu6WK2ONEL7Qrfes6+8O96xhzrMnvxNbsqa8AsXLnpLXqoOqbqZmkbMnq3Urm6pOp8VuubYaxHtLRpPXfTmkbBxrMYT6u90CtlrVzvjpWsDsqVD7V1is7CmiU6TYm8F7MPVmQFuyJ2nXlbqlZz9mrObqGnshco3FZcCoalmGaqsh2ZOE7MlSfllth02WsmPfxt0h10tlB14o+/ASY2D4OE5GIBZjfFuucoeAS1HaaULX388Lu/iK3jXPDr+iH4zsybXrO9+e4mV7ZPc4+t9B44Ttcds+dm6yF1/kPXuSTZwUvxlrtatSbBuRPcVvq2IGHOSTs8DZk95UlV+3Xr+r9as6VumB6+VL7SAgx9GbttYcvEeJdoSRodZw8bKnYu1fYcGypwTO0SmfhXXJniy7rdRSbz3NVs3VNfZC5BqLy4IR
+VeQM1VZDsicJ2ZPU6n6rjCBdjXBBZU/u5CtdO91Wg5E9pb/rzT2enj1uitxnT/JMllodbHVvYm1VbyHZU+y2kuj0jwDFzZ6sr76NS/332RdBtFrDu8SxUevGtBOH9kysRrN5lNAHZucugMJlTwXbv8KiZU+xn6PTPgvrkj217LZSK32SpkzVXF1jL0SusbhsGEVFzlJtNSR7kpA9Ka1LS1Jq/aurVOTSrStT2ldgyQtVshBMOHb6Ff2AZE9p7PqwPZ6iPV58UYDsqdCSPRXE4mZPrqxBdWMOtHovrY6NdSfOJ/VujG8M4RdYWLMKnyoNC5c9FWz/CouXPRVIsqeWXVZqW5/sKVM1V9fYC5FrLA4TkOxJQvbk2Op4p3X0kTdV2dg5iH1bVraOiR1/RT8o2VMqu95/j6drrxdfkD3lW7KngljY7Mnd91DdmIdF36bVRWn1VXYdsHosXWYT1tfp2mg+4UU6Fi17Ktr+FZI95ViyJ2G3ldrWGtgaRxuYpZqra+yFyDUWhwlI9iQhe8K4HJzsCfuS7Cnfkj0VRLIn66XdjWnd0yH6LeKl+NfdjfHrqxiBhXzpGiczPRyyp3zvXyHZU44lexJ2XamVZE9tjcVhApI9ScieMC7Jngoi2VO+JXuybTVwrcau1dJ1qT8twipVz6EQulrAVovZaA1nRbIn66XdjWntuL379rW/SNd2nDOOfOyI2PtyBPtjYHVmtM9AeyDZU/IWbf8KyZ5yLNmTsPtKLbUGyqrtSPaESUn2JCF7wrgke9JsnRrz2msle8q3ZE9SqwLK2mrUU1mp3R3XgFosn5CawWausLDZk7vvYe0+q3Mib6qydqWnG6NNokazp7I/D/qBvaW7s5SmRcueirZ/hWRPOZbsqWUPlbqlNVBVZGWmaq6usRci11gcJiDZk4TsCeOS7Mkx371Wsqd8S/ZkqbdZjXoq27tOXzS0Fvu1fTNicbMn69Bq7zJr91k7SPZJrEOusRO1qXS1
+qXS1CMMMLFKxcNlTwfavkOwpx5I9teytUvudfzNVc3WNvRC5xuIwAcmeJGRPKdo6XOb1Whgh2ZOtfrYz9mYeeq1kT/mW7Kmlt6XbrqfWy3bFDK/F2W3pFjd7iujQKvasjCH8zNDRu3DZU8H2r5DsKceSPVlGVeOyVXN1jb0QucbiMAHJniRkT6lpxUayB+LXk2n3VUJ7MlaPKLg9lKZkT8q891rJnvIt2VNL7xX+Lj3fFpi2a7H8YjaDV/gXOHtK4Fuc1qciI2fq4mVPxdq/QrKnHEv2JI2oUmer5uoaeyFyjcVhApI9Scie0lLP2q2+SjtxyMO1MEKyJ2Xee61kT/mW7Enornq+x+TwUq2J7DogZMgiZ09yr8V4aG3t9Fizjy4sYPZUqP0rJHvKsWRPtlFU6ozVXF1jL0SusThMQLInCdlTSnIHRzxm8ByZ+14r2VO+JXsShtZio2IOZC0WFjt7KpCFzJ6KJdlTjiV7KojGXohcY3GYgGRPErKnlPT2VVxyB0ePDlr2lIdeK9lTviV7EpI9xSTZU/KSPeVesqccS/ZUEI29ELnG4jAByZ4kZE/pmPtrYYRkT1Kyp6gke0pFsqeWYfW0q7uk+bbAJdlT8pI95V6ypxxL9lQQjb0QucbiMAHJniRkT+nIt+gxmcVzZN57rWRP+ZbsqaX3Lmm3Wq3cohZzl7Qu2VPykj3lXrKnHEv2VBCNvRC5xuIwAcmeJGRP6Uj2FJNZPEfmvddK9pRvyZ4srcoYwa86RDWf6CV7KohkT7mX7CnHkj0VRGMvRK6xOExAsicJ2VNK5v1aGCHZk23Oe61kT/mW7ElqHWm10L9HW8fzDH5VICR7KohkT7mX7CnHkj0VRGMvRK6xOExAsicJ2VNKcgdHPGbzHJnvXivZU74le7JtVcB+U/7Wtw79HwpikeypIJI95V6ypxxL9lQQjb0QucbiMAHJniRkT2mZ82thhGRPmnnutZI95Vuyp4JI9lQQyZ5y
+L9lTjiV7KojGXohcY3GYgGRPErKn1OQOjjjkHJm8ZE/5luypIJI9FUSyp9xL9pRjyZ4KorEXItdYHCYg2ZOE7ClFuYMjejlHJi/ZU74leyqIZE8Fkewp95I95Viyp4Jo7IXINRaHCUj2JCF7wrgkeyqIZE/5luypIJI9FUSyp9xL9pRjyZ4KorEXItdYHCYg2ZOE7AnjkuypIJI95Vuyp4JI9lQQyZ5yL9lTjiV7KojGXohcY3GYgGRPErInjEuyp4JI9pRvyZ4KItlTQSR7yr1kTzmW7KkgGnshco3FYQKSPUnInjAuyZ4KItlTviV7KohkTwWR7Cn3kj3lWLKngmjshcg1FocJSPYkIXvCuCR7KohkT/mW7Kkgkj0VRLKn3Ev2lGPJngqisRci11gcJiDZk4TsCeOS7Kkgkj3lW7Kngkj2VBDJnnIv2VOOJXsqiMZeiFxjcZiAZE8SsieMS7Kngkj2lG/Jngoi2VNBJHvKvWRPOZbsqSAaeyFyjcVhApI9ScieMC7Jngoi2VO+JXsqiGRPBZHsKfeSPeVYsqeCaOyFyDUWhwlI9iQhe8K4JHsqiGRP+ZbsqSCSPRVEsqfcS/aUY8meCqKxFyLXWBwmINmThOwJ45LsqSCSPeVbsqeCSPZUEMmeci/ZU44leyqIxl6IXGNxmIBkTxKyJ4xLsqeCSPaUb8meCiLZU0Eke8q9ZE85luypIBp7IXKNxWECkj1JipI9PfmTqvEJwLgleyqIZE/5NpXs6dnmF43VwLhN5Yh98Km7jdXAuCV7yr2JZU80rZM3+ezp7u/da6wDJqCxFyKXVlbykj1JipI90cBNXnG6MvZCAn7lsfuN1cC4Fa1PYy/E5J47f2gsGhPw7+7/jrEjEpAuTfKKg6exFxKQXk3yPvb0Pxp7IT6vu+f7xtIxAcVmN3ZETNK0Tt57n7zH2Atxe9u3HzTWAeP26V982dgLkUsrK3lTaWX1INlTNHI5TPLe/k8PGHsh
+AQ88+pCxGhi3SX4L99Nnv2QsHeP2w9943NgLCcitWMkrDp7GXkhAcZowVgPj9oH614y9EJ9X31U3lo4JKDa7sSNikqZ18t753fuMvRC3Nx98xFgHjNvHn7nD2AuRSysreVNpZfUg2VM00sBN3lRu1fnUQ48aq4Fxm+RFpHxRk7zXfvUHxl5IQLo0ySsOnsZeSEB6Ncmb8CXJ3NmRsGKDG7sgPmlaJ+9t337Q2Atxy52zyXvwqbuNvRC5tLKSN5VWVg+SPUUjh87k3bv+pLEXEpBvWZM3yZDxzu/eZywdYzWBL998JZJI3sSuldDlIW7J+/EHv2XshVh9oP41YwUwVpO8ro2mdfImfyXynjt/SIKcsAlcIEMrK3lTaWX1INlTZHK3TpKm1WUVch1pwiZ5MKWlm7Cp3DkrJERO2OSfX+soThbGymB8ij6k6EkauyBW6eEkbJLfBglpWidpkj8UoEuCnLAJfHlPKythU2xldSvZU2RyxUSSpnhT6+c2Dxorg/GZ5Fes0qd/8WVjHTA+E3tmrVcau0kqDpvG9k9MHtKXpMk/qFj0cLhoIjHFpk74q3Wa1kma1rOKP/7gt4w1wfhM7OcgaGUlaYqtrG4le4rMa7/6AxpAyfj0L76c8DerumLRPBUoMZO//JueamImHyzqio+WsT4Yk6kfsQmUEzOVnw4gnkjM5B9ETdM6McVxMpXHL0q5QDUxE7stmlZWYqbbyupWsqcopQGUjKk/yZ+vaJIxlWxCHL5pAyWg6E6k8sg2XZ6FmYypP/+SQDkZE37KuOPVd9WJFxNQbOSEL3qS0rROxnSb1jzxIBkTeMq4Lq2sZByUp4xLyZ6iVJyVuSImbr/1o7uyEO7e++Q9xophtIpmblrZxA3frPFFa9ymniALxRH7qZ99xVgxjNZ0r26TilMGz+mLW1GVUgkmpHwhlIAJP0XekaZ1AmahaU3IGLc/ffZLCberaWUlYBZaWV1J9hSxolbzZMT4TLd1
+q8vVMbH6bPOLN3yzZmzzJP3UQ48aq4QRmtb1EV4//I3HyRnjUxwks/BVgZAWcKyKZk+Kz26T3vbtB421wghN/qf3dWlax6o4NqZ4t50jXxLEqmjq/M19jxnbPAFpZcVqdlpZnUv2FL2imnGOjENxdkz9Jh1dsTLET3EozlJ/d/93jK2dvNynE5P3PnlPps6U4sPGETsOxeExa0dsrp6IQ1F9UunSeOW6iZhM/jFPXmlax6RoWotta2zttLz6rvpjT/+jsYbYv6JdneJtWbSyYjJrrawOJXuKRVKJyP3Wj+7KyBVPuqILzc130ZqpZtDHH/wW58tovf2fHjA2cha87p7vk0pE6wP1r2XwiC1WSayYsarYj1lr+35u8yDfsUeo2JjZ+fkkmtaRm8GmtWhX3/29e431xH58+hdfTvdOAiGtrMjNZiurE8me4lJ8IEQvizZQ/4rOfxYeDRPizQcf4UGnkXjnd+/L2pFUNHbprEai6DNk5OIIX8UH7yuP3c8Ru3/FwTDjv/UrVo8jdv+KyiIaORm82v/D33icO3ciUWzG7HwVJKVpHZUZb1p//MFvcZd0JN79vXuzcEOlkFZWVGa/lRUu2VO8igovqj3N3N4UJx5xnMpaGOGraH/f9u0HCfV7U7SBvv7E11N/XEiIf3PfYw/Uv8Ypszcfe/ofbz74iLFJs+ne9SfFR5Ejdm+KA6DoFg7EEVv2YDli96aoINnpzwQp+q4Hn7rbWHPsULHp0nqyeCfStO7HQWlai3b1gUcf4kq33hTt6nufvCdr2bGQVlY/DlArK0Syp4S84Zs18XERfutHd2GIosUjttJt334wg0fMTrzunu+Lk6V4Cw/Uv2a8tXT95ne+aAxJXdH6ERsqC4926lDREvrUQ4+Kdb7zu/cZ7wUNRdtCbKjPbR7MeAc1yL+57zGx/kLjfaGhONCJrSSO2FnOjkMUqy1WXryFrB2x/+cT/90YkrqyRqR+70ZXijb6zQcfEat9
+9/fuNd5Ouor9m7VdLDaR2FBicw1Qx4amdYcOdNN67/qTsl1975P3GO8LDWW7OsvBsWNmW1lfPXirMSRdB72V5ZXsCbEQvvvT973gxYe/4oLZ3R+/2yhCRMRMecLOc668/QljIObGN7znGqExEBERU3Fm782nTc0MH7pNdJeMIoxWsifEonjESacOWYg/pi7/4OVfGJgLjhARi+OF13xMHKjJJvLqlbc/8YIXHy4kXkRETNGL93/+FRfMiqOx7B8dveOVxggYuWRPiEXxNRddJo+tDjvOecvM3puN0RARMUXl9wRkE3n1De+5Rp6CiRcREZP3nTdW9cjJ4ezZK4wxMXLJnhCL4sX7P68Orm7Ewfc1F13GVaaIiKkrL3qSkE3kT3nRk9y/xIuIiIn5zhurOy/cvW30WHkE9sJjSRKQ7AmxKIo27vCh29Tx1Y+jd7zy4v2fN6ZCRMTEdG6OFpBN5E/noicJ8SIiYgJOXf5BddgN4CXHvcyYBOOQ7AmxQJ78B29Sh1g/tk+cxUOgEBHTUr/oSUI2kSf1i54kxIuIiMl49uwV6sjrBzfcJSPZE2KBPH/henWI9XDyH7yJFjAiYorqFz1JyCbypHHRk4R4ERExGUPiJ264S0ayJ8QC+e5P36cOsW5O/X+9zRgTERGT1HvRk4RsIh96L3qSEC8iIibmqX94oTr4anDDXWKSPSEWS+/36oITdp5D2xcRMUV9D84Csol86HvRk4R4ERExAWf23vyc5x6ijrwar7noMmNMjEmyJ8RiKQ6v6kBr8Vu//Rz5B/ETImJaBl30JCGbGHSDLnqSEC8iIsat/uCRFx19vPrL4pKPrBkjY0ySPSEWy4v3f14daIeGxFFY7/CcNjVjjIyIiAkYdNGThGxi0A256ElCvIiIGJ968CS/bnee/bRt9FhjZIxPsifEYimOtsOHbnvOcw+Z2XuzHKIfjomfEBETNvyiJwnZxOAaftGThHgRETEmvcGTHC7jJ264
+S1KyJ8TCedrUzMX7P68PIX5CREzL3R+/WxyTHZ2cQh/4zhurxlQ4KF7+he/ou1KcZOX+fc1Ff6oPF6MZEyIiYp8GBU/Ss2ev4Ia7JCV7QsSWU5d/UB2Y+QYAETE9t40eKw/FxnDMh86NHqJHZBQhImKE6r0bvlzPgmRPiKh0GsQC8bdRioiICUj2lG/JnhARE1Dv1xA8ZUSyJ0RsS/yEiJiuZE/5luwJETFuCZ6yKdkTIrrUD9avv/QqoxQREWOV7Cnfkj0hIsYqwVNmJXtCRFPnSagCGseIiElK9pRvyZ4QEeNTD552XrjbKMV0JXtCRB+JnxARU5HsKd+SPSEixuTOC3fLA6xAHGyNUkxdsidE9Jf4CRExecme8i3ZEyJiHOo9F4KnbEr2hIiBnrDzHHkEf85zD5nZe7NRioiIkUv2lG/JnhARI5fgaSAke0LEQK+8/QniJ0TEJCV7yrdkT4iI0UrwNCiSPSFimMRPiIhJSvaUb8meEBEjlIeEDJBkT4i4hVfe/sTRO14pj+nPee4h77yxaoyAiIhRSfaUb8meEBEjUfRQTv6DN8kjqoCDavYle0LErb38C9854qRT5ZF9+NBtxE+IiDFJ9pRvyZ4QEftXvzNDwBF1ICR7QsSOJH5CRExAsqd8S/aEiNinBE8DKtkTInaqET+9+9P3GSMgImKfkj3lW7InRMR+NJ5Fy7F0gCR7QsQufPen73P6ReIP4idExGgle8q3ZE+IiD1rBE/8CNJgSfaEiN1J/ISIGJ9kT/mW7AkRsTf1OzAIngZRsidE7FojfrrsloPGCIiI2JtkT/mW7AkRsQcJnnIg2RMi9uLuj989fOg2eQIQZwJxPjBGQETEHiR7yrdkT4iI3UrwlA/JnhCxR995Y5X4CRExWsme8i3ZEyJiV+rBk+h6XPKRNWMEHBTJnhCxd4mfEBGjlewp35I9ISJ27mW3HNSDJ9H1MEbAAZLsCRH78pKPrD3nuYfIU8L2ibOu
+vP0JYwREROxcsqd8S/aEiNih+hNmCZ5yINkTIvbrzN6bnfjphJ3nED8hIvYs2VO+JXtCROxEgqf8SfaEiBFI/ISIGIlkT/mW7AkRcUv14OkFLz6c4CkfFit7Wrr7aeP9I2JUzuy9WZ4hBCf/wZuMUkRE7ESyp3xL9oSIGK4ePIk/xEtjBBxQv/fTImVP13+zYbx/RIxQ0ZKW5wnBaVMzRikiIm4p2VO+JXtCRAzxnTdWCZ7y6jPNX6tcJh6ylT39twd/arx/RIxW4idExK6c2Xvz9omzHPVfb3B8/aVXGVPhoHjl7U+csPMcZ1c6faqXHPcyZyD3qiMiCt+p/YI2wVPO3HPnj1UoExvZyp7uefKfjU2AiJGrx0+vuGDWKEVERN0rb3/iBS8+XB00A+BRFwPtzgt3qx0ZgBjBmAQRsWgSPOXbG+//iQplYiNb2dMzzV8bmwAR4/D1l14lzxyCs2evMEoREVH3De+5Rh0x/eAJeoPuZbccdC5n8yKKxAjGJIiIhVIPno446VSOivnznif/WYUysZGt7ElQvu8nxlZAxDh0HmkhIH5CRAwx/NInLnrKgSGXPnHREyIWXCN4uvwL3zFGwEF3z50//tkvf6MSmdjIXPb0vZ/+q7EhEDEmiZ8QETs06NInLnrKh0GXPnHREyIW3Jm9NxM85d7/+zu/UHFMnGQuexL8/UM/M7YFIsak/k0vv+mDiBhk0KVPXPSUG30vfeKiJ0QssjN7b3ZyeYKnvJrMRU+CLGZPzzR/vXT308YWQcSYPG1qRp5RBMRPiIhB6teKSrjoKU96L33ioidELLJ68HT0jlcSPOXVgz/6FxXExEwWsyfB9376r3vu/LGxURAxJomfEBG31JtNcNFTzjQufeKiJ0QsrHrwdMLOc668/QljBMyH/+PxZ1UEEz8ZzZ4Ejz79S+InxMTccc5b5NlFcOE1HzNKERFRqGcTXPSUP/V4kYueELGwEjwVxGQe8+SQ3exJ8IOf
+/4qb7xCTUZxUxKlFnmPEyUaccowREBFRzya46CmXOvEiFz0hYjE9f+F6eRgUEDzl1T13/vieJ/9ZxS5JkensSfCzX/7m89/6hbGlEDEOiZ8QEbdUZhNc9JRXZbwo5KInRCygBE9F8Mb7f/KDn/9KBS4JkvXsSfJM89ef/9YvuAYKMW6JnxARw5XZBBc95didF+7moidELKB68HTa1AzBU87cc+ePP/3wzx5r/KsKWRJnMLInhx/8/Fdfrj0r/OwjP7/x/p8gYuR++B8fP/aUl8uzzu8cMjx/w2eNERAxfy5//Zn/9//4UTa99qs/+Nv7HsuUl/11xRiSusv3fN/YbgOk8V5Sd9+X7hEaA1PX2Gip+3/d1zAOI4g40F4wtyDb/4KzLrjIKMUB9e8f+pnMTxL7MbsQBix7AoAEaDQaExMT8twzPDy8tramCgAgp9xbbxpfjqXr3vUnP7d58OBTd//yl2vYuY8/c8dt337wunu+b2zPrLnnzh9+/MFvff2Jrz/9iy8bbwFDFJtLbDSx6YztmYrPNH+tDh8AMPjMzs7Klr9A/K2GAkQK2RMA+GDET5VKRRUAQB7JTvZ09V31O79737PNLxq9buzKe5+8Z+/6k8a2zYifeujRp372FWOFsSvFBhSb0diwCUv2BJAPms3m9PS0bPMLFhcXVQFA1JA9AYA/4lQ0NTWlTkRDQ8RPADkmI9mT6E7/9NkvGd1s7Nnbvv2gsYXTde/6k489/Y/GSmLPio157Vd/YGzkxCR7AsgBjUajVCqptv7QULlcVgUAMUD2BACBGPHT8vKyKgCAfJGF7On2f3rA6Fpj/9775D177vyhsalT8cPfeJw77CL3qZ99RWxYY1MnI9kTwKBTq9X0uxxWV1dVAUA8kD0BQBjNZnNmZkaelgRciAuQS1LPnu787n1Gpxqj8uBTd6ceP334G49zH2VM/vTZL6USP5E9AQw0GxsbY2Njsnk/MjJSrVZVAUBskD0BwNbo
+DyAkfgLIH+lmTwcefcjoTmO03v29e41tnqR715/kAU+xKjZv8jffkT0BDC7VanVkZEQ27MfGxjY2NlQBQJyQPQFAR8zNzclTlIDfvwDIGSlmTx/+xuNGRxrj8HObB40tn5g84ykBxUY2Nnvckj0BDCirq6vDw8OyST8+Pl6r1VQBQMyQPQFApywuLsoTlYD4CSBPpJg9EUwk49O/+HIqd959/MFvGWuCMSk2tbHxY5XsCWAQKZfLqik/NFQqlRqNhioAiB+yJwDoAj1+mpmZaTabqgAABpm0sieCiSQ98OhDxvaP2z13/vDxZ+4wVgNjUmxqY/vHKtkTwMChN+OnpqZoxkPCkD0BQHfoX5hw3gLIB2llTw/Uv2b0nzE+n/rZV4ztH7d/c99jxjpgrIoNbuyC+CR7Ahgs9Ie3cvsCpALZEwB0TaVSUecu4ieAXJBK9rTnzh/y22cJm/APovHzhQkrNrixC+KT7AlgUBANddFcVw13fjUI0oPsCQB6oVKpOM8pnJiY4HZxgIEmleyJG+6S9/Z/esDYC7HKz9slbJKXtpE9AQwEooleKpVki11QLpdVAUDikD0BQI+sra0RPwHkg1Syp9u+/aDRc8a4/foTXzf2QqwaS8cENHZBfJI9AWSfWq02Pj4u2+qi0b66uqoKANKA7AkAeseIn/iVVoABJZXsiRuykvdbP7rL2AvxuXf9SWPpmIBisxs7IibJngAyzsbGxtjYmGylj4yMVKtVVQCQEmRPANAX6+vr4nwmT2ziDEf8BDCIpJI93fvkPUa3GeP2yZ9Ujb0Qnzd8s2YsHRNQbHZjR8Qk2RNAlqlWq077fHR0dGNjQxUApAfZEwD0izifET8BDDSpZE/f+tFdRrcZ4zbJ5wHxI3epmNhP3ZE9AWSWlZUV576E8fFxWuaQEcieACACNjY2RkdH5UluZGSEb1cABguyp4JI9pR7yZ4ACk65XJYNcgHPY4VMQfYEANFQq9X0u8qJnwAG
+CLKngkj2lHvJngCKzMLCgmyKC6ampprNpioAyABkTwAQGUb8xEMNAQYFsqeCSPaUe8meAArL7OysbIQLxN9qKEBmIHsCgCip1+sTExPytDc8PLy2tqYKACDDkD0VRLKn3Ev2BFBAms3m1NSUbH4LFhYWVAFAliB7AoCIaTQaevy0urqqCgAgq5A9FUSyp9xL9gRQNPSGt6BcLqsCgIxB9gQA0SPOgqVSSZ0Dh4YqlYoqAIBMQvZUEMmeci/ZE0ChqNVq4+Pjsr09PDy8srKiCgCyB9kTAMSCcfUv8RNAliF7KohkT7mX7AmgOBg/M82DViHjkD0BQFwY8dPS0pIqAICMQfZUEMmeci/ZE0BBqFarIyMjso09OjrKD0xD9iF7AoAYaTab+o9uLC4uqgIAyBJkTwWR7Cn3kj0BFIGVlZXh4WHZuh4fH6/VaqoAIMOQPQFA7OjxEz+9AZBByJ4KItlT7iV7Asg95XJZtaqHhiYmJhqNhioAyDZkTwCQBPPz8+okOTQ0OzurhgJANiB7KohkT7mX7Akg3ywsLKj29NDQ1NRUs9lUBQCZh+wJABJicXFRnSqJnwAyBtlTQSR7yr1kTwB5xXiQBW1pGDjIngAgOfT4aXp6mu9qADIC2VNBJHvKvWRPALnE+AEfHmEBgwjZEwAkSqVSUadNLhUGyAxkTwWR7Cn3kj0B5I9GozExMaFaz0ND5XJZFQAMFGRPAJA0RvzEIxIBUofsqSCSPeVesieAnFGr1cbGxmSzeXh4eGVlRRUADBpkTwCQAvpPw/ILHQCpQ/ZUEMmeci/ZE0Ce2NjYGB0dlQ3mkZGRarWqCgAGELInAEiHtbU14ieAjED2VBDJnnIv2RNAbhBN5ZGREdlUHh0d3djYUAUAgwnZEwCkhh4/jY+P12o1VQAAyUL2VBDJnnIv2RNAPtBvEaCRDPmA7AkA0mRjY8P5SmdsbIwzK0AqkD0VRLKn3Ev2BJADlpeXZdtYwM0BkBvI
+ngAgZYz4aXNzUxUAQFKQPRVEsqfcS/YEMOgsLCzIVrGAn4SGPEH2BADps7Gx4fyEx8jICDe0AyQM2VNBJHvKvWRPAINLs9mcnZ2V7WGB+FsVAOQCsicAyAT6L8gSPwEkDNlTQSR7yr1kTwADSqPRmJqaki1hwcLCgioAyAtkTwCQFYz4aW1tTRUAQMyQPRVEsqfcS/YEMIiINvDExIRsAwvK5bIqAMgRZE8AkCEajQanXoDkIXsqiGRPuZfsCWDgqFarzpNPh4eHV1ZWVAFAviB7AoBs0Wg0Jicn5QlYMD8/rwoAIDbIngoi2VPuJXsCGCzK5fLw8LBs9I6MjKyvr6sCgNxB9gQAmaPZbM7MzMjTsED8zW98AMQK2VNBJHvKvWRPAAPE3NycauwODU1MTNRqNVUAkEfIngAgo+g/MVsqlRqNhioAgKgheyqIZE+5l+wJYCAwLvOfnp7me1bIPWRPAJBdKpWKOicPDY2NjfF1EEBMkD0VRLKn3Ev2BJB9Njc3nV/XESwuLqoCgFxD9gQAmWZtbc15/iK3wQPEBNlTQSR7yr1kTwAZZ3V1lSeLQzEhewKArLOxseF8O8RJGiAOyJ4KItlT7iV7Asgyy8vLskErEI1b0cRVBQAFgOwJAAaAWq02MTGhztVDQ+LMrQoAIArIngoi2VPuJXsCyCbGD+mUSqV6va7KAIoB2RMADAaNRmNqakqdsYeG5ubmVAEA9E0Ws6cD56na3uK8A0ZpVrx6l1pDN7uubpU+vLvUetHJyqv57DpgDI/YTGZPAdsw9q2hLbe0o9M91cU+XTuwy34L3UzVp2RPABmkXq+XStZhwGJ2dpYni0MBIXsCgEFCnK3VeXtoaGpqijM3QCRkLXt6eN8OVc/bZDN+CsxNWvET2ZNnBfwM3oZxbpAD2lJLu86LOnu6aZ81HtkTAGxsbIyOjraOARZcvA+FhewJAAaMpaUldfYeGpqYmOCKZYD+yVj2pPrtpX03WS9V
+NmG/zJQ+mZEdnO3Y93B74FaSPRnvXX0G1BVkMSizp9g+VO7sKUHJngAyxcrKyvDwcOtwYP1mztramioAKB5kTwAweOgncp7UCNA/2c6e7EtUVAzhiSrU3XnnHVBFO/btk0Na6Y83YnDPzXWNlTWaTxQSnFP45ib2wH1+V7vo9xKWdj+shrvnoy6TkemVZxHm+xVF6o8WoWHN4GRP9n5pbyLvnhIDnWntrEqgTRIwlTZyix37DnS8pzxXMKmPk0SNZsz/vAO+1z2pgRI9qdz6TYVI9gSQHRYWFlQVHhoaHx/f3NxUBQCFhOwJAAaSarXq/EIt3yMB9EnW7rnT+vPu7npLT1ThyWIUsrsuS9tdd9Wfl5O7ggOL0r6bVFrRDnHkbH2vY/KsjH7dkyfR0HMQhVoxfT7GPD2LCHq/DsHx08Bd9+Tkfb57ypnWxN4CAVNtnT0F7il3iuSdv7XoDrInPdiyMfa4SWiq6Ej2BJAFGo3G9PS0qrxDQ5OTk2KIKgMoKmRPADCobG5ujo2NyZP68PBwpVJRBQDQJdl71rjZ/daCCU9U4c1iXL10OdBOjmQK4Jcj2GN6kgIzvdI117ONWAf/+Tt5ir5iqki8KRlnOJmLXqSGeN+vvW7t2MsnJms5YM97crZ50J7ybAE7DLLGDJyqPabazp3vKdeYrhlq+0W8dEWcQfN3Pqj2jtNnG/CmtpLsCSB1jF9nnp+fVwUAxYbsCQAGmEajoZ/dFxYWVAEAdEP2sqeWxrUn7iAgLItpF1nqKYOcp5qVmtDEuddJzkdObszT1o4J3PgnGmYAoWuv+S5vztXV+/XfAo6D+qzxwD0VsnFCpmqNGZY9hewp3yI1UCKLQrMnn5nobyT0TW0l2RNAuugX5g8PD5fLZVUAUHjIngBgsGk2m/pVzfxsLUAPZDN7snWyCdn3DumZyyLPVT+yq98KdGQioEbwua/KQsxZFbUuS5HzDOr2e1ZG14gYwhIE5z0qtBl29X7d
+kYfHwXvek7W5gvdUyMYJ279izLDsKWRPuce0r0jSkUWh2ZPP/NX41vqEvSl7/EDJngBSpFwu608WX19fVwUAQPYEAPlgfn5enukF3FQP0C3Zyp68PW3VdZchS1dZjFR27O2b6eyrilQ24brIyNYJC+TMAx+145+bKI3EwXjpUs2ntTLm29/y/epLD12fgcqe7OGtvRm8p0I2Tuj+jeS6J7Use+nypVpcaPbkM3/9jYS9KXv8QMmeAFKh2WzOzc1ZVbXFxMRErVZTZQBgQfYEADlheXlZnfCtHxPhlA/QORm77kn1vVUu4L4ExunV23mQ/bJV2k4r7Fkp5RzkHW3tLr2KANzZgd3D1y5p8ZmhrScm0DUjBuN9BV3qog9vvwx+v/JvUWRsKB8HKXtSu8Pa+IF7yjOtvhM72L/+2VPIntLGNLIt9YFxZ0/h8w9/3pP/m9pKsieA5Gk0GpOTk1Y9bTE9Pc01+ABeyJ4AID+srq46lzqPjo5ubGyoAgAIJWv33NldcRd2EOB7o5NA9Mxlp903KrJ7++4OvHdWzlLsDn87XPDTExPomomD7/vyixvcE271fk3ab8HjwD3vyUlnAvaUZ/v7BUw6xqdIvex8T+ljOp8QF95F+/yOnu+09rvY4k2FS/YEkDCiten89I1gcXFRFQCAG7InAMgVogUwOjoqT//Dw8Orq6uqAACCyeLzntydc3ee4lz7I7Bvi2v1zGWn3f8yJZUFeO6e0+MJ91JUBOAeaOiJCXQ9iUZL/X21Uy1zPu61DX+/Yqr2CKFrO2DZk/Fe/PaUZ/t7Ypqg/SuHqyGd7yn3mFpE5ewO++OnxrSGeLMn1wgC/UO79ZsKkewJIElEO1N/svjKyooqAAAPZE8AkDdqtdr4+LhsBwj4hRGALcn2s8ZTUkUD/klWNvSEFFuZyewJo5TsCSAxlpaWrGNwi7GxMS63BwiH7AkAcohx4/38/LwqAAA/yJ5c6hekeK6TypJkT2hK9gSQ
+AM1mc2ZmxjoAtyiVSvV6XZUBQABkTwCQT0SzYHZ2VjUKeO4jQChkTy7b2VNHdzmlJ9kTmpI9AcRNvV6fmJiwjr4tRGuTFiZAJ5A9AUCeWVhYUE0D61upRqOhCgBAg+ypIJI95V6yJ4BYWV9fd54rKlheXlYFALAVZE8AkHMqlYrz43djY2Obm5uqAABsyJ4KItlT7iV7AoiPlZUVp0k5MjKytramCgCgA8ieACD/iMaB8ysk4o9qtaoKAMCC7Kkgkj3lXrIngJiYn5+XLUnB+Pg432UCdAvZEwAUgo2NjbGxMdli4EdwAQzInmw/uWvo/fbjk1p/D7ncq/3mnVW665P2y1v2lcQI1x9o/e7+XvmHXZQhyZ60XezsX2dnuYYc2CX/dmvt8SzvYrIngMhpNBrT09OyDSmYnJzkGQ4APUD2BABFwXg25NLSkioAKDxkT1IrU3ACJiNdksGEO6fwy55++fBNpaH3l/bdYhdlSLInbRc7SZO9x1s7bm/J2Y9Ka8+Wbnq4PSTTu5jsCSBaarXa+Pi4ajvy08kAfUD2BAAFotFoTE1NqeaD9dMkqgCg2JA9WRopg5EuyQthgpIpLXvyTSuyYeGzJ33XWHuwdP2ukn2l24Hr5cuts6cM72KyJ4AIqVarzkMbhoeHy+WyKgCA7iF7AoDCMTc3J5sRgqmpKS6cBiB7amldzGJe6GS8DEym9OzJSKkyZNGzJ9cuVjt03y51BVPrkqhdN+n70dI/ZsrsLiZ7AoiKcrmsGovW00LX19dVAQD0BNkTABSRpaUl1ZoYGpqYmKjVaqoAoJCQPbU8cP2Q60YqK5twqWcN3lKhyiysG7uc50ZlyKJnT65drLKnA63IqZVGHWiFUJ/sMHvK7C4mewLon2azqX9PSUMRIBLIngCgoOg/lDs2NraxsaEKAIoH2ZPQkyb4XtnkjOBbamcWZoyVFQuePbl3scqeHm7danfTw9Ye3HXAvR9b+mdPmd3FZE8AfdJo
+NCYnJ2X7UDA9Pd1sNlUZAPQB2RMAFJf19XXnNn7xx9ramioAKBhkT8Ktsie/q2bInoIdmOypdSOe2HHipfiX7KlTyZ4gl+g/iyxYXFxUBQDQN2RPAFBoNjc39UZGpVJRBQBFguxJSPYUrQOTPbX23d59+9pXP5E9dSLZE+SP1dVV/cniKysrqgAAooDsCQCKTqPRKJVKsqkhWFhYUAUAhYHsqaWZJpjZU8e/c+eNsbIiz3vSdrGTPck9K/dmp9lTZncx2RNAbywuLqqGII9iAIgHsicAgNZDJaenp1WLw7q3nx+/g0JB9tTS93fu3AZfFeXKLPidO2EWsye/37l72A6SrEyq0+yJ37kje4LcIJp8U1NTqgk4NFQqler1uioDgOggewIAUMzPz6t2x9DQ+Pj45uamKgDIO2RPlv4pQ/dGNZ/oLXr2VIBdTPYE0BXr6+ujo6Oq8Tc0NDs7y5PFAWKC7AkAoE25XHZ+/G5kZIRb/aEgkD1Jretf9GteerN1QU0GnwQkLHz2lP9dTPYE0DlLS0uyyScQzT/RCFQFABADZE8AAC6Mb8Dm5+dVAUB+IXuybWUK/T7Ep/VQof7TjVgke8r9LiZ7AugE4z678fFxHvAEEDdkTwAAJqJFMjk5qdojQ0Pibx7/BPmG7Kkgkj3lXrIngC0xvmWcmZmhmQeQAGRPAAD+6I9/Em0U0VJRBQC5g+ypIJI95V6yJ4BwuM8OIC3IngAAAlldXR0ZGaGBArmH7Kkgkj3lXrIngCC4zw4gXcieAADC2NzcFK0T1U7hB1Agp5A9FUSyp9xL9gTgC/fZAaQO2RMAwBaI1oloo6jWytDQxMRErVZTZQC5gOypIJI95V6yJwAvxn12lUpFFQBAgpA9AQB0xPLysmq2DA2NjIysra2pAoDBh+ypIJI95V6yJwAd7312m5ubqgwAkoXsCQCgU6rVqvP4J8Hi4qIqABhwyJ4KItlT7iV7AnAw7rPjsQkA6UL2BADQ
+BfV6vVQqqVbM0ND09DTPC4AcQPZUEMmeci/ZE4BkcXFRtdW4zw4gG5A9AQB0R7PZnJubU80ZficFcgHZU0Eke8q9ZE8A9Xp9cnJStdK4zw4gM5A9AQD0QqVSGR4els0a8cfKyooqABhAyJ4KItlT7iV7goJTrVa5zw4gm5A9AQD0yMbGxtjYmGrdDA3Nz8/TvoEBheypIJI95V6yJygy+n12IyMjfC8IkCnIngAAesf4/ZRSqVSv11UZwOBA9lQQyZ5yL9kTFBPjPruJiQnuswPIGmRPAAD9on/PNjo6ur6+rgoABgSyp4JI9pR7yZ6ggBj32c3NzXEdOkAGIXsCAIiA1dXVkZER1eoZGlpeXlYFAIMA2VNBJHvKvWRPUDS4zw5gUCB7AgCIhlqtNjExoZo/Q0MzMzN87QaDAtlTQSR7yr1kT1AcuM8OYLAgewIAiIxmszkzM6MaQTSDYHAgeyqIZE+5l+wJCgL32QEMHGRPAAARUy6Xh4eHZWNoZGRkdXVVFQBkFbKngkj2lHvJnqAIGPfZ0dACGAjIngAAomd9fV3/Ok40klQBQCYheyqIZE+5l+wJ8o1xn12pVKrVaqoMALIN2RMAQCwYzSPxd6PRUGUAGYPsqSCSPeVesifIMWtra/rvuszPz3OfHcAAQfYEABAjomGkmkhDQ2NjYxsbG6oAIEuQPRVEsqfcS/YEeWVhYUE1p7jPDmAwIXsCAIiXlZUV52u64eHhcrmsCgAyA9lTQSR7yr1kT5A/6vV6qVSS7SgB99kBDChkTwAAsbO5uTk+Pq4aTfwaC2QPsqeCSPaUe8meIGdwnx1AbiB7AgBIgkajMT09rZpO1rd29XpdlQGkDdlTQSR7yr1kT5AnjPvs1tbWVAEADCBkTwAAybG8vKzaUFYrqlqtqgKAVCF7KohkT7mX7Anygfc+O76xAxh0yJ4AABKlWq3qV48vLy+rAoD0IHsqiGRPuZfsCXKAcZ/dwsKCKgCAQYbs
+CQAgaYxv86anpxuNhioDSAOyp4JI9pR7yZ5g0OE+O4C8QvYEAJACzWZzbm5Ota2GhsbHxzc3N1UZQOKQPRVEsqfcS/YEgwv32QHkG7InAIDUqFQqw8PDso01MjKysrKiCgCSheypIJI95V6yJxhQuM8OIPeQPQEApMnGxsbY2Jhqalk/HqwKABKE7Kkgkj3lXrInGDiazaZ+n93o6Ci/xAKQS8ieAABSptFoTE1NqTaXdZE5999BwpA9FUSyp9xL9gSDxfr6+vj4uGoADQ1NTk5ynx1AXiF7AgDIBIuLi6rlNTQ0PDxcLpdVAUD8kD0VRLKn3Ev2BIOCcbmTQDSEVBkA5BGyJwCArLC2tjY6OqqaYENDU1NTfPsHyZBK9nTvk/cY3WaM2yd/UjX2Qnze8M2asXRMQLHZjR0Rk2RP0A/G5U7ibzFElQFATiF7AgDIEI1GY2ZmRrXFrAeQr66uqjKA2Egle/rKY/cb3WaM22/96C5jL8Tn3vUnjaVjAorNbuyImCR7gt7wXu4kXoqBqhgA8gvZEwBA5qhUKvqvvczOzjYaDVUGEAOpZE8HHn3I6DZj3H79ia8beyFWjaVjAhq7ID7JnqAHuNwJoMiQPQEAZJF6vV4qlVTrbGhobGyM9hnERyrZ09/d/x2j24xxe9u3HzT2Qqw++ZOqsQIYq0neU0n2BF3B5U4AQPYEAJBdlpaWhoeHVTONhhrERirZ0547f/jTZ79kdJ4xVq+75/vGXohVbqtMWLHBjV0Qn2RP0Dlc7gQAArInAIBMs7GxobfYSqXS5uamKgOIiFSyJyGPG0/SJC+KkfK48YRN7EHjQrIn6AQudwIAB7InAICsYzTdhoeHl5eXVRlAFKSVPX34G48bnWeMzwOPPmRs/wR8/Jk7jNXAmBSb2tj4sUr2BFvC5U4AoEP2BAAwGKytrY2OjqoW3NDQ1NRUvV5XZQD9kVb2JHyg/jWjC41x+NTPvrLnzh8aGz8BeapXYopN
+bWz8WCV7ghC8lzvNzs5yuRNAwSF7AgAYGBqNxszMjGrHDQ2NjIysrKyoMoA+SDF7+vA3Hn+2+UWjF42Rm3AwocudlQkoNrKx2eOW7AmCMC53Gh0dXVtbU2UAUGDIngAABoxKpTIyMqLadNZ3iY1GQ5UB9ESK2ZPwUw89anSkMVqTfAS116vvqvODd7EqNq/YyMZmj1uyJ/Die7kTTRQAkJA9AQAMHvV6fXJyUrXsrC8VeYYC9EO62ZPw9n96wOhOY1Q+UP+asbWTd+/6k/ymYUyKDSs2r7HBE5DsCQy43AkAwiF7AgAYVJaWloaHh1Urj9+OgT5IPXsSfm7zIDffRe6d373P2M5puXf9Sa5+ilyxSVMJnoRkT+DA5U4A0AlkTwAAA8zm5qb+NePExIQYosoAOiYL2ZPwhm/WnvrZV4zeNfbmT5/90qceetTYwul69V11nv0UoWJjJn+rnSPZE0hEq6NUKqlWCJc7AUAwZE8AAION8X3j8PDw0tKSKgPojIxkT8I9d/7wtm8/yP1ZfXrnd+9LMZUI92/ue+zxZ+4wVhi7UmxAsRmNDZuwZE8gMK6/5nInAAiB7AkAIA9Uq9XR0VHV+hsampycrNfrqgxgK7KTPUmvvqv+qYcevffJe7gLrysPPnX35zYPXvvVHxjbM4Pe8M3and+9j8vculJsLrHRxKYzNmYqkj0VHC53AoBuIXsCAMgJjUZjdnZWNQOHhkZGRiqViioDCCVr2ZPhh7/x+N/c9xiGaGyxwfLar/7AeDtomME8keypyHC5EwD0ANkTAECuqFQqIyMjqj1IixA6I+PZEyJmTbKnYsLlTgDQM2RPAAB5o16vT05Oqoah1TSsVquqDMAPsidE7EqypwLC5U4A0A9kTwAA+cRoIy4sLDSbTVUG4IbsCRG7kuypUHC5EwD0D9kTAEBuEY3F8fFx1VQcGhJ/iyGqDECD7AkRu5LsqThwuRMARALZEwBAnmk2mwsLC6rBODQk
+mo+iEanKAGzInhCxK8meigCXOwFAhJA9AQDkn2q1KpqMqvE4NCSakvV6XZUBkD0hYpeSPeUe43KnmZkZLncCgH4gewIAKASiyTg7O6uakENDIyMjlUpFlUHhIXtCxK4ke8oxxuVONBgAIBLIngAACoRoPopGpGpO8jUm2JA9IWJXkj3lFeNyp6mpKS6UBoBIIHsCACgWohE5OTmpGpU8vgEsyJ4QsSvJnvIHlzsBQKyQPQEAFBHji82FhYVms6nKoHiQPSFiV5I95QwudwKAuCF7AgAoKJubm+Pj46qZOTQk/t7Y2FBlUDDInhCxK8mecgOXOwFAMpA9AQAUl2azubCwoNqbFuIlT4AqIGRPiNiVZE85QJzujTYAlzsBQHyQPQEAFJ1qtTo6OqoantYToFZXV1UZFAOyJ0TsSrKnQadSqeinfi53AoC4IXsCAIDWl59zc3OqBWoxNTVVq9VUMeQdsidE7Eqyp8FlY2NDv8lOMDMzw+VOABA3ZE8AAKBYX1+fmJhQTdGhoeHh4aWlJZ5BXgTInhCxK8meBhHv90zipC9O/aoYACBOyJ4AAMDF0tLSyMiIapZazyCvVquqDHIK2RMidiXZ08BRLpf1k7v4e3l5WZUBAMQP2RMAAJjU6/Xp6WnVPrWYnZ3lgvwc88BT/2J0LBERQyR7GiCMi5oFc3Nz/K4IACQM2RMAAPiztrY2Pj6uGqrWd6TlclmVQb54rPGvRscSETHE5q/+TR0+IMPU6/XZ2Vl1FrcolUrcZAcAqUD2BAAAgTSbzcXFxeHhYdVotZqtGxsbqhjywjPNXxsdS0TEIPfc+WN17IAMY9xBPzo6yi/ZAUCKkD0BAMAWbG5uTk1NqdarxcLCApfr54lf/ebfRGfS6F4iIvpavu8n6tgBmaRareqXLQvm5+c5awNAupA9AQBAR6ysrIyOjqpmrPUN6urqqiqDwefTD//M6F4iIvr65dqz6sABGcP7uMbJycnNzU1VDACQ
+HmRPAADQKY1GY35+XrVnLaampmq1miqGQYafukPEDv3hszxoPHM0m82lpSX9HvnR0dGVlRVVDACQNmRPAADQHevr66VSSbVth4ZES3dxcVG0elUxDCa/+s2/Ld39tNHDREQ0vP6b3LqVOdbW1sbGxtRZ2TovLywscF4GgExB9gQAAL2wvLysP8R0fHxctH1VGQwmd33/n41OJiKi4Q9+/it1yIAMUKvVjAcyipfcZAcAGYTsCQAAeqRer8/MzKjWroV4KQaqYhg0fvWbf/vg154x+pmIiI6ffvhn6ngBadNsNhcWFvSb7MbGxvgSCAAyC9kTAAD0hWjp6r+nMzIysry8rMpg0Pjhs7+++i5+8A4RfVz++jPNX/2bOlhAqqyuruq//sHN7wCQfcieAACgX7yPOC2VSuvr66oYBopHn/6l0eFERLz6rh8/0+QR4+mzubk5OTmpzrUW09PTXHEMANmH7AkAAKLB+9SJ+fn5RoOn0g4ejzX+laufENFx+evP8Nt2qSPOpwsLC+r8asGTFgFggCB7AgCAKDFuBOA3ngcU0c8UvU2j/4mIBfS/PfhTbrVLnUqlop9bR0ZGlpaWVBkAwCBA9gQAABHj/W6Wn90ZUO6tN5fuftroiCJiQbz+m41Hn/6lOhxASmxsbJRKJXU2teBnPQBgECF7AgCAWDCayzwJdUD51W/+7YGn/uWzj/ycu/AQC+IHv/bM57/1i8ca/6qOApASjUZjbm5OnUQtJiYmeJYiAAwoZE8AABAj5XJ5ZGREtZp5OMWA86vf/JvojiJiXv3eT8mbsoJx9uQ3ZAFg0CF7AgCAeKnX67Ozs6r5bMH9AgAAAL6sr69PTEyo86XF3NwcP9wBAIMO2RMAACRBtVodHx9X7Wi+wgUAAHDj/aqmVCpxkx0A5AOyJwAASIhms7m0tDQ8PKza1Dy6AgAAwEKcH/Wb7EZHRyuViioDABh8yJ4AACBR6vX61NSUalxbcDcBAAAUFuO6
+YMH8/DynRQDIGWRPAACQAmtra6Ojo6qVbX3BWy6XVRkAAEABqNVq09PT6kRoMTk5ubm5qYoBAHIE2RMAAKRDs9lcWFhQzW2LiYmJ1dVVVQwAAJBTarWa8Win0dHRlZUVVQwAkDvIngAAIE02NzdLpZJqeluIl9VqVRUDAADkiHq9Pjc3p054FsPDwwsLC81mU40BAJBHyJ4AACB9VldXx8bGVDPcYmpqamNjQxUDAAAMOPV6fX5+Xv/BDcHs7GytVlNjAADkF7InAADICuVyWX8IlGBmZoZGOQAADDSNRmNhYYHUCQCKDNkTAABkiGazafzOtGB+fr5er6sxAAAABoRGo7G4uGic1Kanp3mgOAAUDbInAADIHN6viOXjMPjNaQAAGAh8v0qZnp7mdnIAKCZkTwAAkFG8D2QVjXjRlOeBrAAAkFnESWp5edm4hXxycpLUCQCKDNkTAABkmlqtNj09rRrvFqJBXy6XVTEAAEBm8D64cHJykh9vBQAgewIAgAFgY2NDNN9VQ95ibGxsdXVVFQMAAKRKpVIxfrC1VCqROgEASMieAABgYBCNeNGUV416i4mJibW1NVUMAACQOKurq0bqJM5NfDsCAKBD9gQAAAOGaNCPj4+rBr7F5OTk+vq6KgYAAEgEcT6amJhQpyILUicAAF/IngAAYCCpVCrGMzX41WoAAEiGarVqpE5jY2PixKSKAQDADdkTAAAMKvK3hIxfsJ6dna3X62oMAACASKlWq97nD5I6AQCEQ/YEAACDTaPRWFxcHB4eVp2AoSHx9/z8vBiuxgAAAOgb769ejI6OLi8vq2IAAAiG7AkAAPJAvV6fn59XvQGLkZGRxcVFEigAAOiTjY2N6elpdXaxkKlTs9lUYwAAQChkTwAAkB9qtdrMzIzqGVjQPQAAgJ4RpxUjdZJfbHBaAQDoCrInAADIGxsbG1NTU6qXYMHDOAAAoCtqtdrs7Kw6i1hwOS0AQM+QPQEAQD6pVqul
+Ukn1GCz46WsAANiSer1upE7Dw8MLCwukTgAAPUP2BAAAeWZ1dXV8fFz1HiwmJyer1aoqBgAAsJGPDvT+eAU/nwoA0CdkTwAAkH8qlcro6KjqSVhMTU1tbGyoYgAAKDaNRsNInQSkTgAAUUH2BAAAhaDZbC4vL4+MjKguhcXMzEytVlNjAABA8Wg0GouLi8bZYXZ2lrMDAECEkD0BAECBkH0MvtkGAABSJwCAxCB7AgCAwiGf6KH6GTaiv7G5uanGAACA/FKr1ebm5ozvIaanp7kXGwAgJsieAACgoIi+x8zMjOpz2ExNTa2trakxAAAgX4gj/PT0tDri25A6AQDEDdkTAAAUGtHf8CZQ4+PjlUql2WyqkQAAYJARx3NxVDd+9lQgjv+kTgAACUD2BAAA0LoGan5+3njqx+jo6NLSUqPRUCMBAMCgUa/XFxYWjJ86FUd7MZDnOgEAJAbZEwAAgKLRaCwvL4+NjaneicXw8PDc3BxdFACAwWJjY2N2dlYdym3EEb5cLnNZKwBAwpA9AQAAmFQqlYmJCdVTsZmenl5fX1djAABAVllZWSmVSurYbcPj/AAAUoTsCQAAwJ9qtep9JK3oz4hejRoDAAAyQ8i1q/yMKQBAupA9AQAAhOH7U9yibyN6ODwKCgAgC/geqHlmHwBAdiB7AgAA2Jp6vb64uOj7tFpRpEYCAIBkWVtbm5qaUgdlGy5QBQDIGmRPAAAAnRL0K92zs7P8SjcAQGIEHY1nZmZ4MB8AQAYhewIAAOiatbW1yclJ1dexEUN4kC0AQKzU6/WFhYWRkRF15LXgKlQAgIxD9gQAANAjvj/gPT4+XqlU+AFvAIBoWV9f55ALADCgkD0BAAD0he+X8KOjo4uLi3wJDwDQPysrK6VSSR1ebaamprjUFABgUCB7AgAAiIBmsxn02961Wk2NBAAAHdNoNJaWljiuAgDkALInAACAKPH9fn56erparaoxAAAglM3Nzbm5ueHhYXUM
+tRgbG1teXm40GmokAAAYHMieAAAAomd9fX1mZkZ1mGwmJib42W8AgBDW1tampqbUQdOmVCpx8AQAGGjIngAAAOKiVqvNz8/z1T0AQDjNZrNcLo+Pj6sDpc3s7OzGxoYaCQAABhayJwAAgHiRjywZHR1VfSmLkZGR+fl5HlkCAAUn6OcaxEB+rgEAIDeQPQEAACREpVKZmJhQXSub2dnZ9fV1NQYAQGGoVqvee5PHx8fFobLZbKqRAAAgF5A9AQAAJIrobnmfZjI2Nra4uMhlUACQezY3N+fn541LQQX8JgMAQI4hewIAAEgB0fuanZ01HgUlKJVKlUqFp0EBQM6o1WpLS0veJzqNjIzMzc2RvAMA5BuyJwAAgNSo1+u+nbHh4eGZmZnV1VU1HgDAYNJoNCqVyuTkpDq6aZRKpXK5TNQOAFAEyJ4AAADSZ2NjY25uznsTihgihvMzTwAwcKysrHgf5yQYHx9fWlriQicAgEJB9gQAAJAhVldX6a0BwOBSrVZnZ2eN360TjI6Ozs/Pk6QDABQTsicAAIDM0Wg0yuVyqVRSnTaNyclJHggFAFljc3NzYWFhbGxMHapshoeHZ2dn19bW1HgAAFBIyJ4AAACyS61WW1xc9O3O8UAoAEider2+vLzsfWidYHp6emVlpdlsqlEBAKDAkD0BAAAMAOvr63Nzc0G3sWxubqrxAADiJ+QJ4hMTE+VyuV6vq1EBAADIngAAAAaIZrO5srIyPT2tOnka4+Pjy8vL9PcAIFbkE8SHh4fVocdmbGxscXGRZ9IBAIAvZE8AAACDR71eL5fLExMTqtunMTU1ValUuM8FACIk5NJLfosTAAC2hOwJAABggJHP9xXdP9URtOH5vgDQPyFPEOeRcwAA0DlkTwAAAHlgbW1tdnbWeyMMD4QCgG6RTxDnykoAAIgKsicAAID8IDqEolsoOoeqm6jBA6EAIBz5BHHfAwhPEAcAgH4gewIAAMgh8rIF3x8+Fx1L
+fvgcAHRWV1eDniC+sLDAhZMAANAnZE8AAAB5ZmNjY25uzvtAqJGRkdnZ2Wq1qsYDgOIhnyDue3wQw0WpGg8AAKA/yJ4AAAAKQdB1DaLbOTs7u7Ky0mg01KgAkF9ETRf1XdR6398oEEcJUapGBQAAiAiyJwAAgAIhn+cyOTmp+ppuSqXS0tISP5cOkD/W19cXFxdFHVe13Y04JogjAwE0AADEBNkTAABAEanVaqIj6vtAKAEXQwHkgHq9XqlUZmZmRkZGVN12MzExwU8QAABAApA9AQAAFJparVYul6enp72340m4GApgsFhbW5ufn5+YmFB12I1MliuVCpETAAAkBtkTAAAAKGSXlYuhioC8+/LN55/7urPOOP3UE9U+ttj2wueLgcKF911B5jgobG5uEiIDAEBmIXsCAAAAE+diqKBbdejHDij1en15efl1Z52x7YXPu+i8oz6x57hb947dccOJz3zx9x1rnx0XA4V7/ssRp51y2BGHjez+49m1tTU1C8gMzWZzdXV1bm5ubGxM1Uw3YrgoFeOIMdU0AAAAaUD2BAAAAGGsr68vLCwE3b8zMjIyMzPD/TvZp9FoXPbe3duPftG73nrkrXvH9LAp3EdWTvnQe498Q+nI0089sVqtqtlBemxsbCwtLU1NTalK6GZ4eFgULS8vb25uqgkAAADShuwJAAAAOqKT5xYvLCysr6+rCSAbNJvNa//q/duPfsm1c8fUb91hREude8cNJ559xugbzz2L692Sp9ForKyszM7Ojo6OqvrmZnx8fH5+nsvTAAAgm5A9AQAAQNdwMdSgsLm5ecqJR/3ZRcfVPjtuZEm9+Zlrtp92ymHXfuAqtQCIkw4rWq1WUxMAAABkErInAAAA6B3nYqigyzG4GCpFbrnlH3aefuz9HzvZyI/6988uPv6PLnwTTxGKA/m0tZALDEulEnUKAAAGC7InAAAAiAb5GBrRMVZdZDdcDJUw133ov57/umOiutzJ601/
+efxrzzydvRkV/MokAADkGLInAAAAiJgtn03DxVBxc9l7dr3rP2w30qLIvX3/CTv/3Qnc8NUzm5uby8vLU1NTw8PDqm64kU8N5wFbAAAw6JA9AQAAQIyEXwwlutyTk5MLCwsrKyv8LFdUfOSG5XdMxx48Se+44cRXnzHOzXcdUqvVVldXFxcXxcc+6Ja68fHxubk5MRpbFQAAcgPZEwAAACSBczHU2NiY6mR7kFGU6JmLjjdX0/RGtVr9wzOP7ef37Lr1pr9sPftJLR7cdBI2CcQnf3p6ulwu87EHAIBcQvYEAAAASePcaqR63gGIvjpRVFeIrXTa7x0V3zOegvyzi4/nl+8kHYZNEnnz6drampoYAAAgp5A9AQAAQJpsbGxUKpX5+XnRV1c98gBET35qakr06kVfnUdc+3L6qSfeccOJRjCUjKedclgxH0vUbdg0Ozu7vLxcrVbV9AAAAAWA7AkAAAAyhIyi5ubmgh4R5TA6OkoUpbO6unr+a48yIqHEvOOGE08/9US1KrmGsAkAAKBbyJ4AAAAgu6yvr5fL5a6iKNHJL+Dv0DebzVNOPOr+j51sREJJev5rj1pdXVUrlCMImwAAAPqE7AkAAAAGhvX1ddGrF3170cNXff0AxsbGpqenixNFXXfdB9914TFGGJSwufnNO8ImAACAaCF7AgAAgEFF9Pa7iqKWlpbEJLn86fojDht5ZOUUIwxK3ovOO6pSqah1GhwImwAAAGKF7AkAAADyQLPZrFarS0tLMzMz4+PjKicIQIwgRpNRVA4SBPEWzj5j1IiBUvETe4578/nnqtXKKrVaTWyxlZUVwiYAAIBkIHsCAACAHKJHUWNjYypFCGXSYmFhYdF6frmYfFBu1pv/0z/5q92ZyJ7qt+7Y9sLnZeTKsvX1dbETl5eXxQ4VHwOxc0dHR9XODoWwCQAAIFrIngAAACD/NBqNarW6uLg4PT3dYRTlMDExMTk5OTc3JyZfWVkR86nVamq+
+2WD7sYd385Tx7Zeod2bw/GtvUuP8w3lqkOCSDzgTduQbSkeura2pNYsfGTKKJYq9I7Dyw8nh4WG19p1B2AQAABArZE8AAABQOJwoan5+fnJycssf0fNlbGxMTDszMyPmUy6XxQw3NjbUAhJkc3Pz5ONfbARAoW6RPenBk6Sr+Omv//zoS97+NrVy0aHfKDc3Nye2/MRWD/nyZWRkREwrfxKRsAkAACAZyJ4AAAAAWsgraASLFpMWKrHohuHhYSfdEMh5qmXEQKVSuei8o4wAKFSVPQUkSq5SlUOdt909Tph33HDi6aeeqFaue3q+Uc5gfHxcTDs7OyvmI5PBzc1NtQwAAABIFrInAAAAgC2QgcjS0tKiddfeZAcPqPalVCqJaeUjpVZXV1uhlEW9XldL6h6xVvMzXT3sKTx7ctlD9vTIyilHHDaiVs6NvNzMoc8b5SRyWn2TDspTugAAAIoD2RMAAABAj2xublar1XK5vLi4ODs7Ozk52e3DpIKQt4YZWEGNi9XV1f9w4XSXDxrvLHu6afRV1mhDO0bvNYq2Ukwk1ra3e+J8GR0dFTOcnp4Wb1n+OuH6+rraBwAAAJB5yJ4AAAAAIiaqhxN1wu8+/7du/ItjjPQnVP/nPb1q98tcoznZk/YM8g59yQt/W03aJfpj3SuVitiGWXusOwAAAPQA2RMAAABAQsibzuS9ZgsLC5MeeriVb9sLfvv2/ScY6U+onWVP0g+8yCp80T8Yw0M9+dhDrKkU8gFYBmILSMTWENuk2WyqbQQAAAC5g+wJAAAAILvIS6h0nMckSU458ehb944Z6U+oXTzvyR65u0ufTjvlsFR+8g8AAACyCdkTAAAAwABzydvf9td/frSR/oQamj2ZFzr1kj0d8dJD+3l6OgAAAOQMsicAAACAAWbhfVfs+S9HGOlPqKHZk/2YJ3kL3r27n2+96u6eOzGBWjkAAAAAsicAAACAgWZ5efldbz3SSH9C3eKeOztvauP/
+KKgA7//YyduPPVytHAAAAADZEwAAAMBAs7Ky8tZzjzICoFC3yJ6EevzU2WOh2t6+/4RXv/L31coBAAAAkD0BAAAADDT1ev2Ilx5qBEApuviOoxauvFytHAAAAADZEwAAAMCg8+pXtq42MjKgtHzVy49YX19XawYAAABA9gQAAAAw6Czuuep9b+/qkU9x+cjKKUccNqJWCwAAAMCC7AkAAABgsNnc3Dz5+BcbMVAq/vWfH33J29+mVgsAAADAguwJAAAAYOA5/dQT77jhRCMJSt43lI5cW1tT65QCt12qnpBucultaowBRHtT2tvwH9o5avqtpv32/jNDRxOzGeRtCwAACUH2BAAAADDwrK6unv/arn7tLno/c832N557llqhdAjMngQDG5Fob+rM/d9WA1UmZJFW9rRVLgUAAGBD9gQAAACQB1K/9Om0Uw7b2NhQa5MO/oGKGtoObgYLe/XPPFN7Z62B1hBBT+EP2RMAACQI2RMAAABAHtjY2DjtlMOMPCgxP7HnuDeff65aldQICFTkYC170q8a0garyRXuuYROcub+/XJSFQfpMZexTgHzCcGewaXif3sKa5g1pPV/e0X1uXtmrxVeepuxWkErpoaaW9RYUnuE0BUAAIDCQvYEAAAAkBP+6MI33fSXxxupUALWb91x2vgRm5ubaj1SwxOotLDjEHuoGknDykiMMKWFk50ETOIpEUPlgHbq4gpvgucTgppIxkVyfGumnvzIO/d2md/ba6HKA1fMtfo6xvysEUJXAAAAigzZEwAAAEBOaDQaO1/xsns+epKRDcXtW99w7Kc+9XG1EmniF34o7JDHDFPkJJfe5h7uehU0SftvrVANcS9OS4wC5hOCWoRaRWv01iAxT6dEG82Zn1qaf6ldKF+HrJhZpGOUha8AAAAUGrInAAAAgPxQq9VO+72jap8dN+Kh+Fz84+Pf97+/Wy0+Zez4w42dA1n4jzLkXESk0AOTwEnaZd7R9bhJrUDY
+fEJoL6L1V2te1lzVa1niGxJpxd5SfVr1t4n/hG3cZeErAAAAxYbsCQAAACBXVKvVPzzz2PqtO4yQKA7//v0nvPnfv14tOH3cYYcTqWjhh0pIPIhRfIqsCUMmsZfhSrfUBE5IZJeGzieE9puy5iD+bw1pzVR/u/rfCrVAc0yJKmwNCVsxbTQP7rLwFQAAgGJD9gQAAACQN/7upvIfvubouK9+uuHKEy9409nNZlMtNX3M/MNJVZz4Y+s4RM1D0hovdBI5tlEmp7Dv47MLt160P9qbav2pnmtuv1R/2nPXox+t2Lvs0MI2PrN1cJeFrwAAABQbsicAAACAHHLbbbfuPP3Y+J799K7/sP2Si9+SpeBJ4A07VCLiSYDscZwp1B9OACNfWy+DJjFG05BTyN+ha69M2HxC0MdTf7tfyTnYRfb83EszSu1C+TpkxVSRKnGjyuw3H74CAABQaMieAAAAAPLJ5ubmzle87DPXbDdioz6tfXb8/Ncdc92H/qtaTIZwhTEKJ2YxM5I2roRJZ4tJnBL7VRtnCte6BM8nBDWRNSN7JeVkekn7pQtn8X5vT6DKA1dMTeZ6Fw7aVNbooSsAAABFhuwJAAAAILc0Go03nnvWG0pH3nHDiUaE1IP1W3cs7jpu+9EvueWWf1ALyBZGGGNjZyJO0KOHJFr6485ntAJBwCRysHtUi4BVCZpPCK45Bb+wcL0Dc/ZaoXOdV3ta/xULzZ60OdpThK4AAAAUFrInAAAAgJyztrZ2+qknXnTeUfd/7GQjTurcv/7zo7cf/aL3XXFZo9FQ8wUAAADoALInAAAAgEJQqVS2H3v42WeM/tXu0c5DqE/sOe4dFxx1xEsPveTtb6vX62peAAAAAB1D9gQAAABQIKrV6vyf/sn2Yw8/7ZTD5mdG3/efDvvMNdtv3Tt2z0dPqt+6Q/wh/NB7jxTD33ruUdte+Lw3n39uuVwmdQIAAICeIXsCAAAAKCIbGxtLS0uLi4tvPPes
+1511xiknHTt8yO+IP4S7/3hWDF9ZWeH2OgAAAOgfsicAAAAAAAAAAIgLsicAAAAAAAAAAIgLsicAAAAAAAAAAIgLsicAAAAAGEC+vf/MIY0z939bFWSe2y611vjS28Tf6l1Yf9uIctfrzlFzlujz0BfpwW8dYid0jf7/7dxRdtsgEAXQfXVBXk9Xk+21kgUIRgjXOaGN1Ht/ajQDg/z5jlMAbkb2BADAxTQZy+4i+VMdu8Tc5/M5UMjinsoxsicA/iXZEwAAl5KTpz23KLnLJdKnUezy6RwobcxfQJoRlt8o6ZE9AfxPZE8AAFxICFmS9WnnUZFrZfdHqT7jj725SkPeal50Jz5VlcdHHbukwnZOs7+oZ2xbw4s+pb2l1GY7+yp9WpTW5g6lc2+sbjCurup3CPesSu2XAMDdyZ4AALiOmLGcqLKRYs056mjkTMlD3mo+m3h6zLOYat3Gx8+6uNpm9N/9NA1a9S63aMZui2Hni2qnHAOu6HhVAG5I9gQAwHU0QcmZnIHkrhx8PD5KBLKVcuMWkexta63KS143n0+MpfbQtMrbwjpUt5NOY7c8KCuHxqs31wtTzjq39bAabpua22NTMe/bmwG4M9kTAADXEQOOnk5Pyj7yT4lCdpKXuSttDNVB8+uJVWm0Mayb5bavOqgjbchOXmxwh0Nn82RYTR+jtRRfs3cSAPclewIA4DpSipFDla5OrpG3PR7N9nBa2Biqg+bBxB/Pf+pSqjyf1J9Xg/U2ozpnJF0o9x/uVz9oZm6F+uuty6Nq+nSwbjzMb4cCcHOyJwAALiSFFnX+sVrTjRxkdHKNHH70f/eUO0NEEkYNmv984mK08XBQebDtqifUws0XaeM291A+vcPxoPrJqNoMDI6140kA3JfsCQCAK0k5Rp1blEcp3EjBRunI9fL/PeUQJC1zXwhE3mg+nxhLubKtw5lx5CrvX9SPg9RVOqoLLJq7ruoHzR3KtNTbPadfbVvbmXlj2JfX
+ANyb7AkAgIspEUirimZ6HWvOkUKPP4mT3mw+m1gFLa1nMZzZHJPnlkfV+x11p4QjDmOOd+i9RucqjXKvY7mURl8CAHcnewIA4IJCmHHMZZqGXE4PwzInICGieat50Z34VFXyX89tG8OZi721nJA2NCd2tdlP1X+46+kdSqFzj1fVVX2FUNr3LAccbgTAjcmeAADgG0uZzevo6SuMMyGJEQCfIXsCAIBvqfql0N/Ke2RPAHw92RMAAHxLe/b019Ie2RMAX0/2BAAAAMAssicAAAAAZpE9AQAAADCL7AkAAACAWWRPAAAAAMwiewIAAABgFtkTAAAAALPIngAAAACYRfYEAAAAwCyyJwAAAABmkT0BAAAAMIvsCQAAAIBZZE8AAAAAzCJ7AgAAAGAW2RMAAAAAs8ieAAAAAJhF9gQAAADALLInAAAAAGaRPQEAAAAwi+wJAAAAgDl+/foNMR2EfQPQDh0AAAAASUVORK5CYII=</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>en-US</Language>
+  <Variables>
+    <Variable Name="isF15AndRfstm">
+      <Value>=Parameters!FactorOption.Value = "F15,RFSTM"</Value>
+    </Variable>
+    <Variable Name="isF1AndF2">
+      <Value>=Parameters!FactorOption.Value = "F1,F2" or Variables!isHubQuarterly.Value</Value>
+    </Variable>
+    <Variable Name="previous12Months">
+      <Value>=DateAdd(DateInterval.Year, -1, Parameters!DateFrom.Value)</Value>
+    </Variable>
+    <Variable Name="TitlePrefix">
+      <Value>=Variables!PeriodTitlePrefix.Value +
+Switch(
+        Variables!isSiteMonthly.Value, " Site",
+        Variables!isSiteQuarterly.Value, " Site",
+        Variables!isHubQuarterly.Value, " WAIO",
+        true, "Unknown"
+        )</Value>
+    </Variable>
+    <Variable Name="isSiteMonthly">
+      <Value>=Parameters!ReportType.Value = "SiteMonthly"</Value>
+    </Variable>
+    <Variable Name="isSiteQuarterly">
+      <Value>=Parameters!ReportType.Value = "SiteQuarterly"</Value>
+    </Variable>
+    <Variable Name="isHubQuarterly">
+      <Value>=Parameters!ReportType.Value = "HubQuarterly"</Value>
+    </Variable>
+    <Variable Name="DateBreakdown">
+      <Value>=Switch(
+       Parameters!ReportType.Value = "SiteMonthly", "MONTH",
+        true, "QUARTER"
+        )</Value>
+    </Variable>
+    <Variable Name="DateBreakdownPrefix">
+      <Value>=Switch(
+        Variables!isSiteMonthly.Value, "Monthly",
+        true, "Quarterly"
+        )</Value>
+    </Variable>
+    <Variable Name="previous2Years">
+      <Value>=DateAdd(DateInterval.Year, -2, Parameters!DateFrom.Value)</Value>
+    </Variable>
+    <Variable Name="AdjustedStartDate">
+      <Value>=Switch(
+	Variables!isSiteMonthly.Value, Variables!previous12Months.Value,
+	true, Variables!previous2Years.Value
+	)</Value>
+    </Variable>
+    <Variable Name="PeriodTitlePrefix">
+      <Value>=Switch(
+        Variables!isSiteMonthly.Value, "Monthly",
+        Variables!isSiteQuarterly.Value, "Quarterly",
+        Variables!isHubQuarterly.Value, "Quarterly",
+        true, "Unknown"
+        )</Value>
+    </Variable>
+  </Variables>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>2f422866-3477-41a9-9158-e13f6f1705eb</rd:ReportID>
+</Report>

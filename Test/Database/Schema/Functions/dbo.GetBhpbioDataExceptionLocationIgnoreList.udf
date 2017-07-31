@@ -1,0 +1,46 @@
+﻿ IF OBJECT_ID('dbo.GetBhpbioDataExceptionLocationIgnoreList') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioDataExceptionLocationIgnoreList
+Go 
+
+CREATE FUNCTION dbo.GetBhpbioDataExceptionLocationIgnoreList
+(
+	@iLocationId INT
+)
+-- Searches the data exceptions for their location, if they are of the provided location tree they are removed.
+RETURNS @Exceptions TABLE
+(
+	DataExceptionId INT,
+	LocationId INT,
+	PRIMARY KEY (DataExceptionId)
+)
+BEGIN
+	
+	DECLARE @LocationTypeId TINYINT
+	
+	IF @iLocationId is null or @iLocationId <= 0
+	BEGIN
+		RETURN
+	END
+	
+	SELECT @LocationTypeId = Location_Type_Id
+		FROM Location L
+		WHERE Location_Id = @iLocationId
+		
+	INSERT INTO @Exceptions
+	(DataExceptionId, LocationId)
+	SELECT DataExceptionId, LocationId
+	FROM BhpbioDataExceptionLocation
+
+	IF @iLocationId IS NOT NULL AND @iLocationId > 0
+	BEGIN
+		DELETE E
+		FROM @Exceptions As E
+		WHERE dbo.GetLocationTypeLocationId(E.LocationId, @LocationTypeId) = @iLocationId
+	END
+	ELSE
+	BEGIN
+		DELETE FROM @Exceptions
+	END
+	
+	RETURN
+END

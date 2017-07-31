@@ -1,0 +1,106 @@
+﻿IF OBJECT_ID('dbo.IsBhpbioApprovalAllBlockLocationDate') IS NOT NULL
+     DROP PROCEDURE dbo.IsBhpbioApprovalAllBlockLocationDate  
+GO 
+  
+CREATE PROCEDURE dbo.IsBhpbioApprovalAllBlockLocationDate 
+(
+	@iLocationId INT,
+	@iMonth DATETIME,
+	@oAllApproved BIT OUTPUT
+)
+WITH ENCRYPTION
+AS 
+BEGIN 
+	DECLARE @TransactionCount INT
+	DECLARE @TransactionName VARCHAR(32)
+	
+	DECLARE @ReturnValue BIT
+	DECLARE @MonthDate DATETIME
+	DECLARE @EndMonthDate DATETIME
+
+	DECLARE @Results TABLE
+	(
+		DigblockId VARCHAR(31) COLLATE DATABASE_DEFAULT NULL,
+		Approved BIT NULL
+	)
+	
+	SET NOCOUNT ON 
+
+	SELECT @TransactionName = 'IsBhpbioApprovalAllBlockLocationDate',
+		@TransactionCount = @@TranCount 
+
+	-- if there are no transactions available then start a new one
+	-- if there is already a transaction then only mark a savepoint
+	IF @TransactionCount = 0
+	BEGIN
+		SET TRANSACTION ISOLATION LEVEL REPEATABLE READ 
+		BEGIN TRANSACTION
+	END
+	ELSE
+	BEGIN
+		SAVE TRANSACTION @TransactionName
+	END
+  
+	BEGIN TRY
+		SET @MonthDate = dbo.GetDateMonth(@iMonth)
+		SET @EndMonthDate = DateAdd(Day, -1, DateAdd(Month, 1, @MonthDate))
+
+		INSERT INTO @Results
+			(
+				DigblockId, Approved
+			)
+		SELECT DL.Digblock_Id, CASE WHEN a.DigblockId IS NOT NULL THEN 1 ELSE 0 END
+		FROM dbo.GetBhpbioReportReconBlockLocations(@iLocationId, @MonthDate, @EndMonthDate, 0) AS RM
+			INNER JOIN dbo.DigblockLocation AS DL
+				ON (DL.Location_Id = RM.BLockLocationId)
+			LEFT JOIN dbo.BhpbioApprovalDigblock AS a
+				ON DL.Digblock_Id = a.DigblockId
+					AND @MonthDate = a.ApprovedMonth
+
+		-- If the block has been approved for on the month, return true
+		IF EXISTS	(
+					SELECT TOP 1 1
+					FROM @Results
+					WHERE Approved = 0
+					)
+		BEGIN
+			SET @ReturnValue = 0
+		END
+		ELSE
+		BEGIN
+			SET @ReturnValue = 1
+		END
+
+		SET @oAllApproved = @ReturnValue
+
+		-- if we started a new transaction that is still valid then commit the changes
+		IF (@TransactionCount = 0) AND (XAct_State() = 1)
+		BEGIN
+			COMMIT TRANSACTION
+		END
+	END TRY
+	BEGIN CATCH
+		-- if we started a transaction then roll it back
+		IF (@TransactionCount = 0)
+		BEGIN
+			ROLLBACK TRANSACTION
+		END
+		-- if we are part of an existing transaction and 
+		ELSE IF (XAct_State() = 1) AND (@TransactionCount > 0)
+		BEGIN
+			ROLLBACK TRANSACTION @TransactionName
+		END
+
+		EXEC dbo.StandardCatchBlock
+	END CATCH
+END 
+GO
+
+GRANT EXECUTE ON dbo.IsBhpbioApprovalAllBlockLocationDate TO BhpbioGenericManager
+GO
+
+/*
+DECLARE @TEST BIT
+exec dbo.IsBhpbioApprovalAllBlockLocationDate 2615, '1-jan-2008', @TEST OUTPUT
+SELECT @TEST
+*/

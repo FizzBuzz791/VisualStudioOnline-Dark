@@ -1,0 +1,30 @@
+﻿IF OBJECT_ID('dbo.BhpbioImportHaulageNotes') IS NOT NULL 
+     DROP VIEW dbo.BhpbioImportHaulageNotes
+GO
+
+CREATE VIEW dbo.BhpbioImportHaulageNotes
+AS
+SELECT r.ImportSyncRowId,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/HaulageDate)[1]', 'DATETIME') AS HaulageDate,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/HaulageShift)[1]', 'CHAR(1)') AS HaulageShift,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/Source)[1]', 'VARCHAR(63)') AS Source,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/SourceMineSite)[1]', 'VARCHAR(2)') AS SourceMineSite,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/Destination)[1]', 'VARCHAR(63)') AS Destination,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/DestinationMineSite)[1]', 'VARCHAR(2)') AS DestinationMinesite,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/Truck)[1]', 'VARCHAR(31)') AS Truck,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/Type)[1]', 'VARCHAR(255)') AS Type,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/FieldId)[1]', 'VARCHAR(31)') AS FieldId,
+	r.SourceRow.value('(//HaulageSource/HaulageNotes/Notes)[1]', 'VARCHAR(255)') AS Notes,
+	r.DestinationRow.value('(//HaulageDestination/HaulageNotes/HaulageRawId)[1]', 'INT') AS HaulageRawId,
+	r.RootImportSyncRowId, r.IsCurrent
+FROM dbo.ImportSyncRow AS r
+	INNER JOIN dbo.Import AS i
+		ON (r.ImportId = i.ImportId)
+	INNER JOIN dbo.ImportSyncTable AS t
+		ON (r.ImportSyncTableId = t.ImportSyncTableId)
+WHERE i.ImportName = 'Haulage'
+	AND t.Name = 'HaulageNotes'
+GO
+
+GRANT SELECT ON dbo.BhpbioImportHaulageNotes TO CoreReporting
+GO

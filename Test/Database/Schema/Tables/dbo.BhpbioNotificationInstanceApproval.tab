@@ -1,0 +1,19 @@
+﻿IF Object_Id('dbo.BhpbioNotificationInstanceApproval') IS NOT NULL
+	DROP TABLE dbo.BhpbioNotificationInstanceApproval
+GO
+
+CREATE TABLE dbo.BhpbioNotificationInstanceApproval
+(
+	InstanceId INT NOT NULL,
+	TagGroupId VARCHAR(124) COLLATE DATABASE_DEFAULT NULL,
+	LocationId INT NULL,
+	CONSTRAINT PK_BhpbioNotificationInstanceApproval PRIMARY KEY CLUSTERED (InstanceId),
+	CONSTRAINT FK_BhpbioNotificationInstanceApproval_NotificationInstance FOREIGN KEY (InstanceId) 
+		REFERENCES dbo.NotificationInstance (InstanceId),
+	CONSTRAINT FK_BhpbioNotificationInstanceApproval_Location FOREIGN KEY (LocationId)
+		REFERENCES dbo.Location (Location_Id)
+)
+
+
+CREATE NONCLUSTERED INDEX IX_BhpbioNotificationInstanceApproval_Lookup ON dbo.BhpbioNotificationInstanceApproval (TagGroupId, LocationId, InstanceId)
+GO

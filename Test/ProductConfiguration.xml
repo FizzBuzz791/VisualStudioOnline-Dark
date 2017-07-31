@@ -1,0 +1,24 @@
+<ProductConfiguration>
+  <Product Name="ReconcilorBhpbio" Version="*" />
+  <Database Key="Main" Name="ReconcilorBhpbioV403Test" ServerInstance="AUCANDWNWAP002\SQL2008R2">
+    <User Name="ReconcilorRecalc" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
+    <User Name="ReconcilorEngine" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
+    <User Name="ReconcilorImport" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
+    <User Name="ReconcilorReport" Mapping="Standard" Password="LongI5land" EncryptedPassword="False" ServerLogin="ReconcilorReport" />
+    <User Name="ReconcilorUI" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
+    <!--
+    <User Name="ReconcilorRecalc" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
+    <User Name="ReconcilorEngine" Mapping="Standard" Password="NJGPjSqrExqMvZvbP/1oWuttWcwKPwv8" EncryptedPassword="True" ServerLogin="ReconcilorEngine" />
+    <User Name="ReconcilorImportBhpbioImportTemp" Mapping="Standard" Password="Tt0eFsYefQIYk30OG0RXE5nmus6Yt01P" EncryptedPassword="True" ServerLogin="ReconcilorImportBhpbioImportTemp" />
+    <User Name="ReconcilorImport" Mapping="Standard" Password="Tt0eFsYefQIYk30OG0RXE5nmus6Yt01P" EncryptedPassword="True" ServerLogin="ReconcilorImport" />
+    <User Name="ReconcilorReport" Mapping="Standard" Password="UpQ4ggPkKtlsAZb63Li5zA==" EncryptedPassword="True" ServerLogin="ReconcilorReport" />
+    <User Name="ReconcilorUI" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
+    <User Name="ReconcilorSupport" Mapping="Unmapped" />
+    -->
+  </Database>
+  <Smtp Key="Default" Server="Homer" Port="25" DefaultReplyToAddress="reconcilorsupport@snowdengroup.com" SecureConnection="False" EncryptedPassword="False" AuthenticationMethod="Anonymous" />
+  <Reconcilor>
+    <Report ReportInstance="" ReportServer="localhost" ReportFolder="Reconcilor/BhpbioV40" />
+    <Web SiteName="ReconcilorBhpbio40" AbsolutePath="http://localhost/ReconcilorBhpbio40" />
+  </Reconcilor>
+</ProductConfiguration>

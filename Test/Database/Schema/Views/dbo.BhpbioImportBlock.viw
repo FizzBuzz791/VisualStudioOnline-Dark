@@ -1,0 +1,43 @@
+﻿IF OBJECT_ID('dbo.BhpbioImportBlock') IS NOT NULL 
+     DROP VIEW dbo.BhpbioImportBlock
+GO
+
+CREATE VIEW dbo.BhpbioImportBlock
+AS
+SELECT r.ImportSyncRowId,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/Site)[1]', 'VARCHAR(9)') AS Site,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/Orebody)[1]', 'VARCHAR(2)') AS OreBody,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/Pit)[1]', 'VARCHAR(10)') AS Pit,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/Bench)[1]', 'VARCHAR(4)') AS Bench,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/PatternNumber)[1]', 'VARCHAR(4)') AS PatternNumber,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/BlockName)[1]', 'VARCHAR(14)') AS BlockName,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/ModelName)[1]', 'VARCHAR(31)') AS ModelName,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/ModelOreType)[1]', 'VARCHAR(8)') AS ModelOreType,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/BlockNumber)[1]', 'VARCHAR(4)') AS BlockNumber,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/GeoType)[1]', 'VARCHAR(9)') AS GeoType,
+	r.SourceRow.value('xs:dateTime((//BlockModelSource/BlastModelBlockWithPointAndGrade/BlockedDate)[1])', 'DATETIME') AS BlockedDate,
+	r.SourceRow.value('xs:dateTime((//BlockModelSource/BlastModelBlockWithPointAndGrade/BlastedDate)[1])', 'DATETIME') AS BlastedDate,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/CentroidEasting)[1]', 'FLOAT') AS CentroidEasting,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/CentroidNorthing)[1]', 'FLOAT') AS CentroidNorthing,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/CentroidRL)[1]', 'FLOAT') AS CentroidRL,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/ModelVolume)[1]', 'FLOAT') AS ModelVolume,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/ModelTonnes)[1]', 'FLOAT') AS ModelTonnes,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/ModelDensity)[1]', 'FLOAT') AS ModelDensity,
+	r.SourceRow.value('(//BlockModelSource/BlastModelBlockWithPointAndGrade/LastModifiedUser)[1]', 'VARCHAR(50)') AS LastModifiedUser,
+	r.SourceRow.value('xs:dateTime((//BlockModelSource/BlastModelBlockWithPointAndGrade/LastModifiedDate)[1])', 'DATETIME') AS LastModifiedDate,
+	r.DestinationRow.value('(//BlockModelDestination/BlastModelBlockWithPointAndGrade/DigblockId)[1]', 'VARCHAR(31)') AS DigblockId,
+	r.DestinationRow.value('(//BlockModelDestination/BlastModelBlockWithPointAndGrade/BlockModelId)[1]', 'INT') AS BlockModelId,
+	r.DestinationRow.value('(//BlockModelDestination/BlastModelBlockWithPointAndGrade/ModelBlockId)[1]', 'INT') AS ModelBlockId,
+	r.DestinationRow.value('(//BlockModelDestination/BlastModelBlockWithPointAndGrade/SequenceNo)[1]', 'INT') AS SequenceNo,
+	r.RootImportSyncRowId, r.IsCurrent
+FROM dbo.ImportSyncRow AS r
+	INNER JOIN dbo.Import AS i
+		ON (r.ImportId = i.ImportId)
+	INNER JOIN dbo.ImportSyncTable AS t
+		ON (r.ImportSyncTableId = t.ImportSyncTableId)
+WHERE i.ImportName = 'Blocks'
+	AND t.Name = 'BlastModelBlockWithPointAndGrade'
+GO
+
+GRANT SELECT ON dbo.BhpbioImportBlock TO CoreReporting
+GO

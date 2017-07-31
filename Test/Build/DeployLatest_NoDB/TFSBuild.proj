@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(MSBuildExtensionsPath)\Snowden\Snowden.Build.TeamFoundation.targets" />
+
+  <ProjectExtensions>
+    <!-- Team Foundation Build Version - DO NOT CHANGE. Backwards compatibility. See Comments -->
+    <ProjectFileVersion>2</ProjectFileVersion>
+    <Description></Description>
+    <BuildMachine>UNKNOWN</BuildMachine>
+  </ProjectExtensions>
+
+  <!-- Project Settings -->
+  <PropertyGroup>
+    <TfsVersion />
+    <TFSVersionType>Latest</TFSVersionType>
+    <RunTest>false</RunTest>
+    <RunCodeAnalysis>Never</RunCodeAnalysis>
+    <SkipDropBuild>true</SkipDropBuild>
+	<IncrementalGet>False</IncrementalGet>
+  </PropertyGroup>
+  
+  <!-- Solutions to Build -->
+  <ItemGroup>
+    <SolutionToBuild Include="$(BuildProjectFolderPath)/../../ReconcilorBhpbio.sln">
+      <Targets></Targets>
+      <Properties></Properties>
+    </SolutionToBuild>
+  </ItemGroup>
+
+  <!-- Configurations to Build -->
+  <ItemGroup>
+    <ConfigurationToBuild Include="Release|Any CPU">
+      <FlavorToBuild>Release</FlavorToBuild>
+      <PlatformToBuild>Any CPU</PlatformToBuild>
+    </ConfigurationToBuild>
+  </ItemGroup>
+
+  <!-- Snowden Custom Compile Steps -->
+  <Target Name="BeforeCompile">
+    <!-- Place any compile steps here, such as build Manifest -->
+    <SqlBuildManifest TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+     BuildUri="$(BuildUri)"
+     BuildManifestName="Reconcilor.Database"
+     SourceFolder="$(LineFolder)\Database\"
+     DestinationFolder="$(BinariesRoot)\Database\"
+     ManifestFile="Build Manifest.txt"
+     FailOnErrors="True"
+     ParseScripts="False"
+     />
+
+    <!--<CallTarget Targets="CopyReports" />-->
+  </Target>
+
+  <Target Name="AfterCompile">
+    <CallTarget Targets="DeployIT" />
+  </Target>
+  
+  <!-- Copy Reports -->
+  <Target Name="CopyReports">
+    <PropertyGroup>
+      <ReportsSource>$(SolutionRoot)\$(Branch)\$(Line)\Reports\**\</ReportsSource>
+      <ReportsDest>$(BinariesRoot)\Reports\</ReportsDest>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ReportFiles Include="$(ReportsSource)*.*" 
+        Exclude="$(ReportsSource)*.rptproj;$(ReportsSource)*.vspscc;$(ReportsSource)*.vssscc;$(ReportsSource)*.sln" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ReportFiles)"
+          DestinationFiles="@(ReportFiles ->'$(ReportsDest)%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <!-- Deploy to Integration Test Environment -->
+  <Target Name="DeployIT"> <!--  Condition="'$(IsDesktopBuild)' != 'true'" -->
+    <!-- Deployment Settings -->
+    <PropertyGroup>
+      <SQLServer>Reconcilor1\SQL2005</SQLServer>
+      <SQLDatabase>ReconcilorBhpbio11</SQLDatabase>
+      <WebSource>$(BinariesRoot)\Release\_PublishedWebsites\ReconcilorBhpbio\</WebSource>
+      <WebDestination>\\reconcilorbhpbio\c$\Reconcilor\Application\Site\BHPBIO\Web\</WebDestination>
+      <ReportingServicesUrl>http://reconcilorbhpbio/ReportServer/ReportService2005.asmx</ReportingServicesUrl>
+      <CoreReports>L:\Reconcilor_Core\Test\6.1\Reports\Core_Reports\</CoreReports>
+      <TargetReportPath>/Reconcilor/Bhpbio</TargetReportPath>
+      <SettingAbsoluteURL>/Reconcilor/Bhpbio</SettingAbsoluteURL>
+      <SettingReportingServer>ReconcilorBhpbio</SettingReportingServer>
+      <SettingReportingInstance></SettingReportingInstance>
+      <SettingSiteName>ReconcilorBhpbio</SettingSiteName>
+    </PropertyGroup>
+
+    <!-- Reporting Deployment -->
+    <DeployReportingServices TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+      BuildUri="$(BuildUri)"
+      Url="$(ReportingServicesUrl)"
+      ReportDirectory="$(CoreReports)"
+      TargetPath="$(TargetReportPath)"
+      DataSourceName="dsCore"
+      DataSourceServer="$(SQLServer)"
+      DataSourceDatabase="$(SQLDatabase)"
+      DataSourceAuthenticatedLogin="False"
+      DataSourceUsername="RECONCILORREPORT"
+      DataSourcePassword="LongI5land"
+      />
+
+    <!-- Web Deployment -->
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
+      Message="Dropping Web to location $(WebDestination)" Condition="'$(IsDesktopBuild)' != 'true'">
+      <Output TaskParameter="Id" PropertyName="StepId" />
+    </BuildStep>
+
+    <RemoveDir Directories="$(WebDestination)" ContinueOnError="true" />
+
+    <ItemGroup>
+      <WebFiles Include="$(WebSource)\**\*.*" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(WebFiles)"
+      DestinationFiles="@(WebFiles ->'$(WebDestination)%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="True"
+          />
+
+    <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
+           Id="$(StepId)" Status="Succeeded" Condition="'$(IsDesktopBuild)' != 'true'" />
+
+    <ModifyAppConfig TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+      BuildUri="$(BuildUri)"
+      ConfigFile ="$(WebDestination)Web.config"
+      Section="appSettings"
+      Key="connectionString"
+      Value="Server=$(SQLServer);Database=$(SQLDatabase);User=RECONCILORUI;Password=Vap0rware;"
+      Encrypt="False"
+          />
+
+  </Target>
+</Project>

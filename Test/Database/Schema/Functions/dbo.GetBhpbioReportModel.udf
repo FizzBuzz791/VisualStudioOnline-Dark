@@ -1,0 +1,341 @@
+﻿IF Object_Id('dbo.GetBhpbioReportModel') IS NOT NULL
+	DROP FUNCTION dbo.GetBhpbioReportModel
+GO
+
+CREATE FUNCTION dbo.GetBhpbioReportModel
+(
+	@iDateFrom DATETIME,
+	@iDateTo DATETIME,
+	@iDateBreakdown VARCHAR(31),
+	@iLocationId INT,
+	@iGetChildLocations BIT,
+	@iIncludeLiveData BIT,
+	@iIncludeApprovedData BIT,
+	@iGeometType VARCHAR(31)  = 'As-Dropped'
+)
+RETURNS @M TABLE
+(
+	CalendarDate DATETIME NOT NULL,
+	BlockModelId INT NOT NULL,
+	DateFrom DATETIME NOT NULL,
+	DateTo DATETIME NOT NULL,
+	DesignationMaterialTypeId INT NOT NULL,
+	LocationId INT NULL,
+	ProductSize VARCHAR(5) NOT NULL,
+	Attribute SMALLINT NULL,
+	Value FLOAT NULL
+)
+WITH ENCRYPTION
+AS
+BEGIN
+	-- 'M' - all model movements
+	-- returns all designation types
+	DECLARE @Model TABLE
+	(
+		CalendarDate DATETIME NOT NULL,
+		BlockModelId INT NOT NULL,
+		ModelBlockId INT NOT NULL,
+		LocationId INT NOT NULL,
+		SequenceNo INT NOT NULL,
+		DateFrom DATETIME NOT NULL,
+		DateTo DATETIME NOT NULL,
+		ParentLocationId INT NULL,
+		ProductSize VARCHAR(5) NOT NULL,
+		Tonnes FLOAT NOT NULL,
+		DesignationMaterialTypeId INT NOT NULL,
+		PRIMARY KEY (ModelBlockId, SequenceNo, BlockModelId, CalendarDate, ProductSize)
+	)
+	
+	DECLARE @outputStaging TABLE
+	(
+		CalendarDate DATETIME NOT NULL,
+		BlockModelId INT NOT NULL,
+		DateFrom DATETIME NOT NULL,
+		DateTo DATETIME NOT NULL,
+		DesignationMaterialTypeId INT NOT NULL,
+		LocationId INT NULL,
+		ProductSize VARCHAR(5) NOT NULL,
+		Attribute SMALLINT NULL,
+		Value FLOAT NULL,
+		AssociatedTonnes FLOAT NULL
+	)
+	
+	DECLARE @BlockLocation TABLE
+	(
+		BlockLocationId INT NOT NULL,
+		BlastLocationId INT NULL,
+		BenchLocationId INT NULL,
+		PitLocationId INT NULL,
+		SiteLocationId INT NULL,
+		HubLocationId INT NULL,
+		CompanyLocationId INT NULL,
+		DateFrom DATETIME NOT NULL,
+		DateTo DATETIME NOT NULL,
+		MinedPercentage FLOAT,
+		BlockNumber VARCHAR(4),
+		BlockName VARCHAR(5),
+		Site VARCHAR(9),
+		OreBody VARCHAR(2),
+		Pit VARCHAR(10),
+		Bench VARCHAR(4),
+		PatternNumber VARCHAR(4),
+		ParentLocationId INT NULL,
+		
+		PRIMARY KEY (BlockLocationId, DateTo, Pit, BlockNumber)
+	)
+	
+	INSERT INTO @BlockLocation
+	(
+		BlockLocationId, BlastLocationId, BenchLocationId, PitLocationId, SiteLocationId, HubLocationId, CompanyLocationId, DateFrom, 
+		DateTo, MinedPercentage, BlockNumber, BlockName, [Site], OreBody, Pit, Bench, PatternNumber, ParentLocationId
+	)
+	SELECT BlockLocationId, BlastLocationId, BenchLocationId, PitLocationId, SiteLocationId, HubLocationId, CompanyLocationId, DateFrom, 
+		DateTo, MinedPercentage, BlockNumber, BlockName, [Site], OreBody, Pit, Bench, PatternNumber, ParentLocationId
+	FROM dbo.GetBhpbioReportReconBlockLocations(@iLocationId, @iDateFrom, @iDateTo, @iGetChildLocations)
+	
+	DECLARE @MaterialCategory VARCHAR(31)
+	SET @MaterialCategory = 'Designation'
+	
+	IF @iIncludeLiveData = 1
+	BEGIN
+		-- retrieve the list of Model Block Partials to be used in the calculations
+		INSERT INTO @Model
+			(CalendarDate, DateFrom, DateTo, BlockModelId, ModelBlockId, LocationId, SequenceNo, ParentLocationId, ProductSize, Tonnes, DesignationMaterialTypeId)
+		SELECT b.CalendarDate, b.DateFrom, b.DateTo, mb.Block_Model_Id, mbp.Model_Block_Id, RM.BlockLocationId, mbp.Sequence_No, RM.ParentLocationId, defaultlf.ProductSize,
+			SUM(ISNULL(
+				CASE 
+					WHEN defaultlf.ProductSize = 'LUMP' THEN blocklf.[LumpPercent] 
+					WHEN defaultlf.ProductSize = 'FINES' THEN 1 - blocklf.[LumpPercent] 
+					ELSE NULL END, 
+				defaultlf.[Percent])
+			* RM.MinedPercentage * MBP.Tonnes),
+			MT.Material_Type_Id
+		FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B
+			INNER JOIN @BlockLocation AS RM
+				ON (RM.DateFrom >= b.DateFrom
+				AND RM.DateTo <= b.DateTo)
+			INNER JOIN dbo.ModelBlockLocation AS mbl WITH (NOLOCK)
+				ON (mbl.Location_Id = rm.BlockLocationId)
+			INNER JOIN dbo.ModelBlock AS mb WITH (NOLOCK)
+				ON (mb.Model_Block_Id = mbl.Model_Block_Id)
+			INNER JOIN dbo.ModelBlockPartial AS mbp WITH (NOLOCK)
+				ON (mbp.Model_Block_Id = mb.Model_Block_Id)
+			INNER JOIN dbo.BlockModel bm WITH (NOLOCK)
+				ON bm.Block_Model_Id = mb.Block_Model_Id
+			INNER JOIN dbo.GetMaterialsByCategory(@MaterialCategory) AS MC
+				ON (MC.MaterialTypeId = MBP.Material_Type_Id)
+			INNER JOIN dbo.MaterialType AS MT WITH (NOLOCK)
+				ON (MC.RootMaterialTypeId = MT.Material_Type_Id)
+			LEFT JOIN dbo.GetBhpbioReportHighGrade() AS BRHG
+				ON (BRHG.MaterialTypeId = MT.Material_Type_Id)
+			INNER JOIN dbo.GetBhpbioDefaultLumpFinesRatios(null, null, null) defaultlf
+				ON RM.PitLocationId = defaultlf.LocationId
+				AND RM.DateFrom BETWEEN defaultlf.StartDate AND defaultlf.EndDate
+			LEFT JOIN dbo.BhpbioBlastBlockLumpPercent blocklf WITH (NOLOCK)
+				ON mbp.Model_Block_Id = blocklf.ModelBlockId
+				AND mbp.Sequence_No = blocklf.SequenceNo
+				AND blocklf.GeometType = @iGeometType
+			-- This join is used to determine whether there is an associated approval for this data
+			LEFT JOIN dbo.BhpbioApprovalData a WITH (NOLOCK)
+				ON a.LocationId = RM.PitLocationId
+				AND (a.TagId = 'F1' + REPLACE(bm.Name,' ','') + 'Model' OR a.TagId = 'F15' + REPLACE(bm.Name,' ','') + 'Model')
+				AND a.ApprovedMonth = dbo.GetDateMonth(RM.DateFrom)
+				AND BRHG.MaterialTypeId IS NOT NULL
+		WHERE	@iIncludeApprovedData = 0 -- we are not including approved data in this call
+				OR -- or we are and
+				(	a.LocationId IS NULL -- there is no associated approval for this data
+					AND NOT EXISTS
+					(
+						SELECT aOther.TagId 
+						FROM dbo.BhpbioApprovalData aOther
+							INNER JOIN dbo.BhpbioReportDataTags brdt
+								ON brdt.TagId = aOther.TagId
+						WHERE aOther.LocationId = rm.PitLocationId
+							AND aOther.ApprovedMonth = dbo.GetDateMonth(RM.DateFrom)
+							AND (brdt.OtherMaterialTypeId = MT.Material_Type_Id)
+					)	
+				)
+		GROUP BY b.CalendarDate, b.DateFrom, b.DateTo, mb.Block_Model_Id, mbp.Model_Block_Id, mbp.Sequence_No, RM.ParentLocationId,RM.BlockLocationId,
+			MT.Material_Type_Id, defaultlf.ProductSize
+		
+		-- return the TONNES values
+		INSERT INTO @outputStaging
+			(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, ProductSize, Attribute, Value)
+		SELECT CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, 
+			ParentLocationId, ProductSize, 0, SUM(Tonnes)
+		FROM @Model
+		GROUP BY CalendarDate, BlockModelId, DateFrom, DateTo, ParentLocationId, DesignationMaterialTypeId, ProductSize
+		UNION ALL
+		SELECT CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, 
+			ParentLocationId, 'TOTAL', 0, SUM(Tonnes)
+		FROM @Model
+		GROUP BY CalendarDate, BlockModelId, DateFrom, DateTo, ParentLocationId, DesignationMaterialTypeId
+
+		-- return the VOLUME values
+		INSERT INTO @outputStaging
+			(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, ProductSize, Attribute, Value)
+		SELECT m.CalendarDate, m.BlockModelId, m.DateFrom, m.DateTo, m.DesignationMaterialTypeId, 
+			m.ParentLocationId, 'TOTAL', -1, 
+			-- times 0.5 to compensate for the two productsizes
+			SUM(bl.MinedPercentage * MBPV.Field_Value * 0.5) 
+		FROM @Model m
+			INNER JOIN ModelBlockPartialValue mbpv 
+				ON mbpv.Model_Block_Id = m.ModelBlockId 
+					AND mbpv.Model_Block_Partial_Field_Id = 'ModelVolume'
+					AND mbpv.Sequence_No = m.SequenceNo
+			INNER JOIN @BlockLocation bl ON bl.BlockLocationId = m.LocationId AND bl.DateFrom = m.DateFrom
+		WHERE m.ProductSize != 'TOTAL'
+		GROUP BY m.CalendarDate, m.BlockModelId, m.DateFrom, m.DateTo, m.ParentLocationId, m.DesignationMaterialTypeId
+		
+		-- return the GRADES values
+		INSERT INTO @outputStaging 
+			(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, 
+			ProductSize, Attribute, Value, AssociatedTonnes)
+		SELECT m.CalendarDate, m.BlockModelId, m.DateFrom, m.DateTo, m.DesignationMaterialTypeId,
+			m.ParentLocationId, m.ProductSize, g.Grade_Id As GradeId,
+			SUM(m.Tonnes * 
+				ISNULL(
+					CASE 
+						WHEN m.ProductSize = 'LUMP' THEN LFG.LumpValue 
+						WHEN m.ProductSize = 'FINES' THEN LFG.FinesValue 
+						ELSE NULL 
+					END, MBPG.Grade_Value)
+			) / NULLIF(SUM(m.Tonnes), 0.0) As GradeValue, 			
+			SUM(m.Tonnes)
+		FROM @Model AS m
+			-- add the grades
+			CROSS JOIN dbo.Grade AS g
+			LEFT JOIN dbo.ModelBlockPartialGrade AS mbpg
+				ON (mbpg.Model_Block_Id = m.ModelBlockId
+					AND mbpg.Sequence_No = m.SequenceNo
+					AND g.Grade_Id = mbpg.Grade_Id)
+			LEFT JOIN dbo.BhpbioBlastBlockLumpFinesGrade LFG
+				ON (LFG.ModelBlockId = m.ModelBlockId
+					AND MBPG.Sequence_No = LFG.SequenceNo
+					AND MBPG.Grade_Id = LFG.GradeId)
+		GROUP BY m.CalendarDate, m.BlockModelId, m.DateFrom, m.DateTo, g.Grade_Id, m.ParentLocationId, m.DesignationMaterialTypeId, m.ProductSize
+		
+		-- Roll up lump and fines values
+		-- Retrieve Grades
+		INSERT INTO @outputStaging
+			(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, 
+			ProductSize, Attribute, Value, AssociatedTonnes)
+		SELECT CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, 
+			'TOTAL', Attribute, SUM(Value * AssociatedTonnes) / SUM(AssociatedTonnes), SUM(AssociatedTonnes)
+		FROM @outputStaging
+		WHERE AssociatedTonnes IS NOT NULL
+		GROUP BY CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, Attribute
+	END
+	
+	-- If Including Approved Summary Data
+	IF @iIncludeApprovedData = 1
+	BEGIN
+			-- These 2 queries retrieve summary tonnes and grades for all summary types
+			-- that are associated with a block model
+	
+			-- Retrieve Tonnes from Approved Data
+			INSERT INTO @outputStaging
+				(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, ProductSize, Attribute, Value)
+			SELECT B.CalendarDate AS CalendarDate, bset.AssociatedBlockModelId, B.DateFrom, B.DateTo, mt.Parent_Material_Type_Id, 
+				RM.ParentLocationId AS ParentLocationId,
+				bse.ProductSize,
+				0, -- meaning Tonnes
+				SUM(bse.Tonnes) AS Tonnes
+			FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B
+				INNER JOIN @BlockLocation AS RM
+					ON (RM.DateFrom >= b.DateFrom
+					AND RM.DateTo <= b.DateTo)
+				INNER JOIN dbo.BhpbioSummary s WITH (NOLOCK)
+					ON s.SummaryMonth >= B.DateFrom AND s.SummaryMonth < B.DateTo
+					AND s.SummaryMonth >= RM.DateFrom AND s.SummaryMonth < RM.DateTo
+				INNER JOIN dbo.BhpbioSummaryEntry AS bse WITH (NOLOCK)
+					ON bse.SummaryId = s.SummaryId
+					AND RM.BlockLocationId = bse.LocationId
+				INNER JOIN dbo.BhpbioSummaryEntryType AS bset WITH (NOLOCK)
+					ON bset.SummaryEntryTypeId = bse.SummaryEntryTypeId
+				INNER JOIN dbo.MaterialType mt WITH (NOLOCK)
+					ON mt.Material_Type_Id = bse.MaterialTypeId
+			WHERE bset.AssociatedBlockModelId IS NOT NULL
+				AND bset.Name like '%ModelMovement'
+			GROUP BY B.CalendarDate, bset.AssociatedBlockModelId, B.DateFrom, B.DateTo, mt.Parent_Material_Type_Id, RM.ParentLocationId, bse.ProductSize
+
+			-- Retrieve Volume from approved data
+			INSERT INTO @outputStaging
+				(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, ProductSize, Attribute, Value)
+			SELECT B.CalendarDate AS CalendarDate, bset.AssociatedBlockModelId, B.DateFrom, B.DateTo, mt.Parent_Material_Type_Id, 
+				RM.ParentLocationId AS ParentLocationId,
+				bse.ProductSize,
+				-1, -- meaning Volume
+				SUM(bse.Volume) AS Volume
+			FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B
+				INNER JOIN @BlockLocation AS RM
+					ON (RM.DateFrom >= b.DateFrom
+					AND RM.DateTo <= b.DateTo)
+				INNER JOIN dbo.BhpbioSummary s WITH (NOLOCK)
+					ON s.SummaryMonth >= B.DateFrom AND s.SummaryMonth < B.DateTo
+					AND s.SummaryMonth >= RM.DateFrom AND s.SummaryMonth < RM.DateTo
+				INNER JOIN dbo.BhpbioSummaryEntry AS bse WITH (NOLOCK)
+					ON bse.SummaryId = s.SummaryId
+					AND RM.BlockLocationId = bse.LocationId
+				INNER JOIN dbo.BhpbioSummaryEntryType AS bset WITH (NOLOCK)
+					ON bset.SummaryEntryTypeId = bse.SummaryEntryTypeId
+				INNER JOIN dbo.MaterialType mt WITH (NOLOCK)
+					ON mt.Material_Type_Id = bse.MaterialTypeId
+			WHERE bset.AssociatedBlockModelId IS NOT NULL
+				AND bset.Name like '%ModelMovement'
+			GROUP BY B.CalendarDate, bset.AssociatedBlockModelId, B.DateFrom, B.DateTo, mt.Parent_Material_Type_Id, RM.ParentLocationId, bse.ProductSize
+
+			-- Retrieve Grades from Approved Data
+			INSERT INTO @outputStaging
+				(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, ProductSize, Attribute, Value, AssociatedTonnes)
+			SELECT B.CalendarDate AS CalendarDate, bset.AssociatedBlockModelId, B.DateFrom, B.DateTo, mt.Parent_Material_Type_Id, RM.ParentLocationId AS ParentLocationId,
+				bse.ProductSize, bseg.GradeId,	
+				CASE WHEN SUM(bse.Tonnes) <> 0 THEN SUM(bse.Tonnes * bseg.GradeValue) / SUM(bse.Tonnes) ELSE NULL END As GradeValue,
+				SUM(bse.Tonnes)
+			FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B
+				INNER JOIN @BlockLocation AS RM
+					ON (RM.DateFrom >= b.DateFrom
+					AND RM.DateTo <= b.DateTo)
+				INNER JOIN dbo.BhpbioSummary s WITH (NOLOCK)
+					ON s.SummaryMonth >= B.DateFrom AND s.SummaryMonth < B.DateTo
+					AND s.SummaryMonth >= RM.DateFrom AND s.SummaryMonth < RM.DateTo
+				INNER JOIN dbo.BhpbioSummaryEntry AS bse WITH (NOLOCK)
+					ON bse.SummaryId = s.SummaryId
+					AND RM.BlockLocationId = bse.LocationId
+				INNER JOIN dbo.BhpbioSummaryEntryType AS bset WITH (NOLOCK)
+					ON bset.SummaryEntryTypeId = bse.SummaryEntryTypeId
+				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg WITH (NOLOCK)
+					ON bseg.SummaryEntryId = bse.SummaryEntryId
+				INNER JOIN dbo.MaterialType mt WITH (NOLOCK)
+					ON mt.Material_Type_Id = bse.MaterialTypeId
+			WHERE bset.AssociatedBlockModelId IS NOT NULL
+				AND bset.Name like '%ModelMovement'
+			GROUP BY B.CalendarDate, bset.AssociatedBlockModelId, RM.ParentLocationId, B.DateFrom, B.DateTo, mt.Parent_Material_Type_Id, bseg.GradeId, bse.ProductSize
+	END
+	
+	-- insert tonnes values into the table
+	INSERT INTO @M
+			(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, ProductSize, Attribute, Value)
+		SELECT os.CalendarDate, os.BlockModelId, os.DateFrom, os.DateTo, os.DesignationMaterialTypeId, os.LocationId, os.ProductSize, os.Attribute, Sum(os.Value)
+		FROM @outputStaging os
+		WHERE os.Attribute in (-1, 0)
+		GROUP BY os.CalendarDate, os.BlockModelId, os.DateFrom, os.DateTo, os.LocationId, os.DesignationMaterialTypeId, os.Attribute, os.ProductSize
+		
+	-- insert grade values into the table
+	INSERT INTO @M
+			(CalendarDate, BlockModelId, DateFrom, DateTo, DesignationMaterialTypeId, LocationId, ProductSize, Attribute, Value)
+		SELECT os.CalendarDate, os.BlockModelId, os.DateFrom, os.DateTo, os.DesignationMaterialTypeId, os.LocationId, os.ProductSize, os.Attribute, Sum(os.Value * os.AssociatedTonnes) / Sum(os.AssociatedTonnes)
+		FROM @outputStaging os
+		WHERE os.Attribute > 0
+		GROUP BY os.CalendarDate, os.BlockModelId, os.DateFrom, os.DateTo, os.LocationId, os.DesignationMaterialTypeId, os.Attribute, os.ProductSize
+	
+	RETURN
+END
+GO
+
+/*
+SELECT * FROM dbo.GetBhpbioReportModel('01-APR-2008', '30-JUN-2008', 'MONTH', 1, 1, 1, 1)
+SELECT * FROM dbo.GetBhpbioReportModel('01-APR-2008', '30-JUN-2008', 'QUARTER', 1, 0, 1, 1)
+SELECT * FROM dbo.GetBhpbioReportModel('01-JAN-2012', '31-JAN-2012', NULL, 12, 0, 1, 1)
+
+*/

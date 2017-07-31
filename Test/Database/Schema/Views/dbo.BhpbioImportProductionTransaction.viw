@@ -1,0 +1,38 @@
+﻿IF OBJECT_ID('dbo.BhpbioImportProductionTransaction') IS NOT NULL 
+     DROP VIEW dbo.BhpbioImportProductionTransaction
+GO
+
+CREATE VIEW dbo.BhpbioImportProductionTransaction
+AS
+SELECT r.ImportSyncRowId,
+	r.SourceRow.value('(//ProductionSource/Transaction/TransactionDate)[1]', 'DATETIME') AS TransactionDate,
+	r.SourceRow.value('(//ProductionSource/Transaction/Source)[1]', 'VARCHAR(63)') AS Source,
+	r.SourceRow.value('(//ProductionSource/Transaction/SourceMineSite)[1]', 'VARCHAR(2)') AS SourceMineSite,
+	r.SourceRow.value('(//ProductionSource/Transaction/SourceLocationType)[1]', 'VARCHAR(63)') AS SourceLocationType,
+	r.SourceRow.value('(//ProductionSource/Transaction/Destination)[1]', 'VARCHAR(63)') AS Destination,
+	r.SourceRow.value('(//ProductionSource/Transaction/DestinationMineSite)[1]', 'VARCHAR(2)') AS DestinationMineSite,
+	r.SourceRow.value('(//ProductionSource/Transaction/DestinationType)[1]', 'VARCHAR(63)') AS DestinationType,
+	r.SourceRow.value('(//ProductionSource/Transaction/Type)[1]', 'VARCHAR(255)') AS Type,
+	r.SourceRow.value('(//ProductionSource/Transaction/SampleSource)[1]', 'VARCHAR(MAX)') AS SampleSource,
+	r.SourceRow.value('(//ProductionSource/Transaction/SampleTonnes)[1]', 'FLOAT') AS SampleTonnes,
+	r.SourceRow.value('(//ProductionSource/Transaction/Tonnes)[1]', 'FLOAT') AS Tonnes,
+	r.SourceRow.value('(//ProductionSource/Transaction/FinesPercent)[1]', 'REAL') AS FinesPercent,
+	r.SourceRow.value('(//ProductionSource/Transaction/LumpPercent)[1]', 'REAL') AS LumpPercent,
+	CONVERT(XML, r.SourceRow.value('(//ProductionSource/Transaction/Grades)[1]', 'VARCHAR(MAX)')) AS Grades,
+	r.DestinationRow.value('(//ProductionDestination/Transaction/WeightometerSampleId)[1]', 'INT') AS WeightometerSampleId,
+	r.RootImportSyncRowId, r.IsCurrent
+FROM dbo.ImportSyncRow AS r
+	INNER JOIN dbo.Import AS i
+		ON (r.ImportId = i.ImportId)
+	INNER JOIN dbo.ImportSyncTable AS t
+		ON (r.ImportSyncTableId = t.ImportSyncTableId)
+WHERE i.ImportName = 'Production'
+	AND t.Name = 'Transaction'
+GO
+
+GRANT SELECT ON dbo.BhpbioImportProductionTransaction TO CoreReporting
+GO
+
+/* testing
+SELECT * FROM dbo.BhpbioImportProductionTransaction
+*/

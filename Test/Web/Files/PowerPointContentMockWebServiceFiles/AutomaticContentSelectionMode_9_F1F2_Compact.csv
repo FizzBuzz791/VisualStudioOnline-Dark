@@ -1,0 +1,5 @@
+LocationId,LocationType,Factor,Mode,Attribute
+9,Newman,Main,F1Factor,Compact,Tonnes
+9,Newman,Main,F1Factor,Compact,SiO2
+9,Newman,Main,F2Factor,Compact,Tonnes
+9,Newman,Main,F2Factor,Compact,P

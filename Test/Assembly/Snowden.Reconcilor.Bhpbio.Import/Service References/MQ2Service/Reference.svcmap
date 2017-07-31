@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4f96f659-4108-40e4-85f6-566c1492b418" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ImportWebServices/MQ2WebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MQ2WebService.xsd" MetadataType="Schema" ID="cb7e2ccb-7adf-42ae-a303-e15a5a670477" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MQ2WebService.wsdl" MetadataType="Wsdl" ID="d0cacea2-351d-4652-bc1c-f32a3c6b4b46" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="MQ2WebService.disco" MetadataType="Disco" ID="57dab714-b792-425a-8c22-48311d41f674" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?disco" />
+    <MetadataFile FileName="MQ2WebService1.wsdl" MetadataType="Wsdl" ID="64f0081a-1ed3-4f21-acbd-3bb3ec14916b" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

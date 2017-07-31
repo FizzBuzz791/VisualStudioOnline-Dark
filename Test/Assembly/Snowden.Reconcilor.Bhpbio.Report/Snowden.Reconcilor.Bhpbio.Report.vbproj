@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BB0D1F66-81DF-4746-9E59-72D4A3F52E8E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Snowden.Reconcilor.Bhpbio.Report</RootNamespace>
+    <AssemblyName>Snowden.Reconcilor.Bhpbio.Report</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)\Snowden.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Report.xml</DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Report.xml</DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Report.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>Snowden.Reconcilor.Bhpbio.Report.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1308;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA2101;-Microsoft.Globalization#CA1300;-Microsoft.Globalization#CA1307;-Microsoft.Globalization#CA1309</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Snowden.Common, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Snowden.Common.1.4.10.4\lib\Snowden.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core, Version=6.5.0.8, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Snowden.Reconcilor.Core.WebDevelopment, Version=6.5.0.8, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.WebDevelopment.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Version.vb">
+      <Link>Version.vb</Link>
+    </Compile>
+    <Compile Include="Cache\ActualBeneProduct.vb" />
+    <Compile Include="Cache\ActualExpitToStockpile.vb" />
+    <Compile Include="Cache\ActualMineProduction.vb" />
+    <Compile Include="Cache\ActualStockpileToCrusher.vb" />
+    <Compile Include="Cache\BlockModel.vb" />
+    <Compile Include="Cache\ActualHubPostCrusherStockpileDelta.vb" />
+    <Compile Include="Cache\ActualSitePostCrusherStockpileDelta.vb" />
+    <Compile Include="Cache\ActualDirectFeed.vb" />
+    <Compile Include="Cache\ActualMined.vb" />
+    <Compile Include="Cache\Historical.vb" />
+    <Compile Include="Cache\OreForRail.vb" />
+    <Compile Include="Cache\PortBlendedAdjustment.vb" />
+    <Compile Include="Cache\PortOreShipped.vb" />
+    <Compile Include="Cache\PortStockpileDelta.vb" />
+    <Compile Include="Calc\BeneProduct.vb" />
+    <Compile Include="Calc\BeneRatio.vb" />
+    <Compile Include="Calc\Calculation.vb" />
+    <Compile Include="Calc\CalculationBasic.vb" />
+    <Compile Include="Calc\ActualMined.vb" />
+    <Compile Include="Calc\F0.vb" />
+    <Compile Include="Calc\IAllMaterialTypesCalculation.vb" />
+    <Compile Include="Calc\RecoveryFactorDensity.vb" />
+    <Compile Include="Calc\F2Density.vb" />
+    <Compile Include="Calc\DirectFeed.vb" />
+    <Compile Include="Calc\ModelGradeControlSTGM.vb" />
+    <Compile Include="Calc\F15.vb" />
+    <Compile Include="Calc\ModelShortTermGeology.vb" />
+    <Compile Include="Calc\F25.vb" />
+    <Compile Include="Calc\MiningModelOreForRailEquivalent.vb" />
+    <Compile Include="Calc\OreForRail.vb" />
+    <Compile Include="Calc\RecoveryFactorMoisture.vb" />
+    <Compile Include="Calc\RFGM.vb" />
+    <Compile Include="Calc\RFMM.vb" />
+    <Compile Include="Calc\RFSTM.vb" />
+    <Compile Include="Calc\SitePostCrusherStockpileDelta.vb" />
+    <Compile Include="Calc\HubPostCrusherStockpileDelta.vb" />
+    <Compile Include="Calc\CalcType.vb" />
+    <Compile Include="Calc\ExPitToOreStockpile.vb" />
+    <Compile Include="Calc\F1.vb" />
+    <Compile Include="Calc\F2.vb" />
+    <Compile Include="Calc\F3.vb" />
+    <Compile Include="Calc\ICalculation.vb" />
+    <Compile Include="Calc\MineProductionActuals.vb" />
+    <Compile Include="Calc\MineProductionExpitEquivalent.vb" />
+    <Compile Include="Calc\MiningModelCrusherEquivalent.vb" />
+    <Compile Include="Calc\MiningModelShippingEquivalent.vb" />
+    <Compile Include="Calc\CalculationModel.vb" />
+    <Compile Include="Calc\ModelGeology.vb" />
+    <Compile Include="Calc\ModelGradeControl.vb" />
+    <Compile Include="Calc\ModelMining.vb" />
+    <Compile Include="Calc\PortOreShipped.vb" />
+    <Compile Include="Calc\PortBlendedAdjustment.vb" />
+    <Compile Include="Calc\PortStockpileDelta.vb" />
+    <Compile Include="Calc\PostCrusherStockpileDelta.vb" />
+    <Compile Include="Calc\StockpileToCrusher.vb" />
+    <Compile Include="Data\ApprovalData.vb" />
+    <Compile Include="Data\BlockModels.vb" />
+    <Compile Include="Data\DateBreakdown.vb" />
+    <Compile Include="Data\FactorList.vb" />
+    <Compile Include="Data\FactorLocation.vb" />
+    <Compile Include="Data\GradeProperties.vb" />
+    <Compile Include="Data\Location.vb" />
+    <Compile Include="Data\MaterialType.vb" />
+    <Compile Include="Data\ReportColour.vb" />
+    <Compile Include="Data\ReportDisplayParameter.vb" />
+    <Compile Include="Cache\DataCache.vb" />
+    <Compile Include="Data\ResourceClassifcation.vb" />
+    <Compile Include="ReportDefinitions\AttributeHelper.vb" />
+    <Compile Include="ReportDefinitions\AutomaticContentSelectionMode.vb" />
+    <Compile Include="ReportDefinitions\AutomaticContentSelectionModeBase.vb" />
+    <Compile Include="ReportDefinitions\AutomaticContentSelectionModeFile.vb" />
+    <Compile Include="ReportDefinitions\BackgroundCacheRetrievalContext.vb" />
+    <Compile Include="ReportDefinitions\BlastByBlastReconciliationReport.vb" />
+    <Compile Include="ReportDefinitions\BenchErrorDistributionByLocationReport.vb" />
+    <Compile Include="ReportDefinitions\BenchErrorDistributionByAttributeReport.vb" />
+    <Compile Include="ReportDefinitions\ColorHelper.vb" />
+    <Compile Include="ReportDefinitions\CombinationOfInterestIdentifier.vb" />
+    <Compile Include="ReportDefinitions\DateBreakdownHelper.vb" />
+    <Compile Include="ReportDefinitions\ErrorContributionEngine.vb" />
+    <Compile Include="ReportDefinitions\F2AnalysisReport.vb" />
+    <Compile Include="ReportDefinitions\DensityAnalysisReport.vb" />
+    <Compile Include="ReportDefinitions\DensityReconciliationReport.vb" />
+    <Compile Include="ReportDefinitions\F1F2F3GeometDataHelper.vb" />
+    <Compile Include="ReportDefinitions\BlockOutSummaryReport.vb" />
+    <Compile Include="ReportDefinitions\FactorsVsTimeReportResourceClassification.vb" />
+    <Compile Include="ReportDefinitions\IAutomaticContentSelectionMode.vb" />
+    <Compile Include="ReportDefinitions\ICombinationOfInterestIdentifier.vb" />
+    <Compile Include="ReportDefinitions\ResourceClassificationContributionReport.vb" />
+    <Compile Include="ReportDefinitions\F1F2F3SingleCalculationReport.vb" />
+    <Compile Include="ReportDefinitions\ResourceContributionReports.vb" />
+    <Compile Include="ReportDefinitions\RiskProfileReport.vb" />
+    <Compile Include="ReportDefinitions\SampleCoverageReport.vb" />
+    <Compile Include="ReportDefinitions\ShippingTargetsReport.vb" />
+    <Compile Include="ReportDefinitions\SupplyChainMonitoringReport.vb" />
+    <Compile Include="ReportDefinitions\ReconciliationDataExportReport.vb" />
+    <Compile Include="ReportDefinitions\F1F2F3OverviewReconciliationReport.vb" />
+    <Compile Include="ReportDefinitions\F1F2F3ReconciliationComparisonReport.vb" />
+    <Compile Include="ReportDefinitions\F1F2F3HUBReconciliationReport.vb" />
+    <Compile Include="ReportDefinitions\F1F2F3ReconciliationByAttributeReport.vb" />
+    <Compile Include="ReportDefinitions\F1F2F3ReportEngine.vb" />
+    <Compile Include="ReportDefinitions\HomescreenValues.vb" />
+    <Compile Include="ReportDefinitions\GradeRecoveryReport.vb" />
+    <Compile Include="ReportDefinitions\LiveVersusSummaryComparisonReport.vb" />
+    <Compile Include="ReportDefinitions\ModelComparisonReport.vb" />
+    <Compile Include="ReportDefinitions\RecoveryAnalysisReport.vb" />
+    <Compile Include="ReportDefinitions\ReportBase.vb" />
+    <Compile Include="ReportDefinitions\ValidationApprovalData.vb" />
+    <Compile Include="Types\AutomaticContentSelectionModeFactorEnum.vb" />
+    <Compile Include="Types\CalculationResult.vb" />
+    <Compile Include="Types\CalculationResultDepth.vb" />
+    <Compile Include="Types\CalculationResultRecord.vb" />
+    <Compile Include="Types\CalculationResultTag.vb" />
+    <Compile Include="Types\CalculationResultType.vb" />
+    <Compile Include="Types\CalculationOperation.vb" />
+    <Compile Include="GlobalSuppressions.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Types\CalculationSet.vb" />
+    <Compile Include="Types\CalculationStep.vb" />
+    <Compile Include="Types\CombinationOfInterest.vb" />
+    <Compile Include="Types\DataRequest.vb" />
+    <Compile Include="Types\CalendarDateList.vb" />
+    <Compile Include="Types\IdList.vb" />
+    <Compile Include="Types\Location.vb" />
+    <Compile Include="Types\LocationGroup.vb" />
+    <Compile Include="Types\ReportBreakdown.vb" />
+    <Compile Include="Types\ReportContext.vb" />
+    <Compile Include="Types\ProductType.vb" />
+    <Compile Include="Types\ReportSession.vb" />
+    <Compile Include="Types\ReportThreadContext.vb" />
+    <Compile Include="WebService.vb">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(SolutionDir)\Snowden.snk">
+      <Link>Snowden.snk</Link>
+    </None>
+    <Compile Include="Calc\F05.vb" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="ReportingClass.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Database\Snowden.Reconcilor.Bhpbio.Database.vbproj">
+      <Project>{FB0D8BFC-A134-4303-995F-90BC802C0842}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Database</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <PropertyGroup>
+    <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

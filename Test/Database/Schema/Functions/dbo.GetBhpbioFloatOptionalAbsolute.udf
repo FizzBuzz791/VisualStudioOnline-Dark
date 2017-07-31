@@ -1,0 +1,30 @@
+﻿IF OBJECT_ID('dbo.GetBhpbioFloatOptionalAbsolute') IS NOT NULL 
+     DROP FUNCTION dbo.GetBhpbioFloatOptionalAbsolute
+Go 
+
+CREATE FUNCTION dbo.GetBhpbioFloatOptionalAbsolute
+(
+	@iValue FLOAT,
+	@iReturnAbsolute BIT
+)
+RETURNS FLOAT
+AS 
+BEGIN
+	DECLARE @returnValue FLOAT
+	
+	
+	IF @iReturnAbsolute = 1
+	BEGIN
+		SET @returnValue = ABS(@iValue)
+	END
+	ELSE
+	BEGIN
+		SET @returnValue = @iValue
+	END
+	
+	RETURN @returnValue
+END
+GO
+
+GRANT EXECUTE ON dbo.GetBhpbioFloatOptionalAbsolute TO BhpbioGenericManager
+GO

@@ -1,0 +1,30 @@
+﻿IF OBJECT_ID('dbo.BhpbioShippingNominationItem') IS NOT NULL
+	DROP TABLE dbo.BhpbioShippingNominationItem
+GO
+
+CREATE TABLE dbo.BhpbioShippingNominationItem
+(
+	BhpbioShippingNominationItemId INT NOT NULL IDENTITY(1, 1),
+	NominationKey INT NOT NULL,
+	ItemNo INT NOT NULL,
+	OfficialFinishTime DATETIME NOT NULL,
+	LastAuthorisedDate DATETIME,
+	CustomerNo INT NULL,
+	CustomerName VARCHAR(63) COLLATE DATABASE_DEFAULT NULL,
+	ShippedProduct VARCHAR(63) COLLATE DATABASE_DEFAULT NULL,
+	ShippedProductSize VARCHAR(5) COLLATE DATABASE_DEFAULT NULL,
+	COA DATETIME NULL,
+	Undersize FLOAT NULL,
+	Oversize FLOAT NULL,
+
+	CONSTRAINT PK_BhpbioShippingNominationItem
+		PRIMARY KEY (BhpbioShippingNominationItemId),
+
+	CONSTRAINT UQ_BhpbioShippingNominationItem_Candidate
+		UNIQUE (NominationKey, ItemNo, OfficialFinishTime),
+
+	CONSTRAINT FK_BhpbioShippingNomination_Transaction
+		FOREIGN KEY (NominationKey)
+		REFERENCES dbo.BhpbioShippingNomination (NominationKey)
+)
+GO

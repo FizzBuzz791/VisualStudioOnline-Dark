@@ -1,0 +1,1190 @@
+<?xml version="1.0"?>
+<Manifest Name="ReconcilorBhpbio">
+  <Reference Name="ReconcilorCore" Path="..\..\Libraries\Snowden.Reconcilor.Core" />
+  <Options />
+  <Security>       
+    <User Name="ReconcilorSupport" />
+    <DatabaseRole Name="BhpbioGenericManager" />
+    <DatabaseRoleMember Name="BhpbioGenericManager" UserName="ReconcilorImport" />
+    <DatabaseRoleMember Name="BhpbioGenericManager" UserName="ReconcilorUI" />
+    <DatabaseRoleMember Name="CoreHaulageManager" UserName="ReconcilorRecalc" />
+    <DatabaseRoleMember Name="db_owner" UserName="ReconcilorSupport" />
+  </Security>
+  <ScriptGroup Type="Schema">
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioApprovalDigblock.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSecurityRoleLocation.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioReportColor.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioReportThresholdType.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioReportThreshold.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioImportReconciliationMovement.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioImportReconciliationMovementStage.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioReportDataTags.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioApprovalData.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioShippingNomination.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioShippingNominationItem.tab" />
+	  <Script Type="Table" Path="Schema\Tables\dbo.BhpbioShippingNominationItemParcel.tab" />
+	  <Script Type="Table" Path="Schema\Tables\dbo.BhpbioShippingNominationItemParcelGrade.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioBlastBlockLumpFinesGrade.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioBlastBlockLumpPercent.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioPortBlending.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioPortBlendingGrade.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioPortBalance.tab" />
+	  <Script Type="Table" Path="Schema\Tables\dbo.BhpbioPortBalanceGrade.tab" />
+	  <Script Type="Table" Path="Schema\Tables\dbo.BhpbioAnalysisVariance.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioMetBalancing.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioMetBalancingGrade.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioStockpileGroupDesignation.tab" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioReportDataHistorical.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.bhpbioproductionresolutionbasic.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.bhpbiodataexceptionlocation.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.bhpbiolocationstockpileconfiguration.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioNotificationInstanceApproval.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioCustomMessage.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioPurgeRequestStatus.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioPurgeRequest.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioSummary.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioSummaryEntryType.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioSummaryEntry.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioSummaryEntryGrade.tab" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioStockpileDeletion.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioLocationDate.tab" />
+	  <Script Type="Table" Path="schema\Tables\dbo.BhpbioLocationOverride.tab" />
+	  <Script Type="Table" Path="schema\Tables\dbo.BhpbioStockpileLocationOverride.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioStockpileLocationDate.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioFactorExclusionFilter.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioDefaultLumpFines.sql" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioPortBalanceGrade.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioShippingNominationItemParcel.TAB" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioShippingNominationItemParcelGrade.TAB" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioHaulageLumpFinesGrade.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioCrusherLocationOverride.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioWeightometerDataExceptionExemption.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioWeightometerGroupWeightometer.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioWeightometerLocationOverride.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioImportLocationCode.sql" />
+
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioProductType.tab" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioProductTypeLocation.tab" />
+    
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioShippingTargetPeriod.sql" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioShippingTargetPeriodValue.sql" />
+    
+    <Script Type="Table" Path="schema\Tables\Staging.StageBlock.sql" />
+    <Script Type="Table" Path="schema\Tables\Staging.StageBlockDeletion.sql" />
+    <Script Type="Table" Path="schema\Tables\Staging.StageBlockModel.sql" />
+    <Script Type="Table" Path="schema\Tables\Staging.StageBlockModelGrade.sql" />
+    <Script Type="Table" Path="schema\Tables\Staging.StageBlockPoint.sql" />
+    <Script Type="Table" Path="schema\Tables\Staging.MessageLog.sql" />
+    <Script Type="Table" Path="schema\Tables\Staging.StageDataMap.sql" />
+    <Script Type="Table" Path="schema\Tables\Staging.StageBlockModelResourceClassification.sql" />
+  
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioSummaryEntryField.sql" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioSummaryEntryFieldValue.sql" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioLocationGroup.sql" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioLocationGroupLocation.sql" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioBulkApprovalBatch.sql" />
+    <Script Type="Table" Path="schema\Tables\dbo.BhpbioBulkApprovalBatchProgress.sql" />
+
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioImportSyncRowFilterData.sql" />
+  </ScriptGroup>
+  <ScriptGroup Type="Code">
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioImportHaulage.viw" />
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioImportHaulageNotes.viw" />
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioImportHaulageValue.viw" />
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioImportHaulageGrade.viw" />
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioImportProductionTransaction.viw" />
+    <Script Type="View" Path="Schema\Views\dbo.Bhpbioimportstockpile.viw" />
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioImportBlock.viw" />
+    <Script Type="View" Path="Schema\views\dbo.bhpbioimportstocpkileadjustment.viw" />
+    <Script Type="View" Path="Schema\views\dbo.BhpbioModelBlock.sql" />
+
+    <Script Type="View" Path="Schema\Views\Staging.BhpbioStageBlock.sql" />
+    <Script Type="View" Path="Schema\Views\Staging.BhpbioStageBlockModel.sql" />
+    <Script Type="View" Path="Schema\Views\Staging.BhpbioStageBlockModelGrade.sql" />
+    <Script Type="View" Path="Schema\views\Staging.BhpbioStageBlockPoint.sql" />
+
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioReportLocationBreakdownWithOverride.udf" />
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioApprovalStatusByMonth.viw" />
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioImportRowLocation.sql" />
+    <Script Type="View" Path="Schema\Views\dbo.BhpbioImportRowLocationParents.sql" />
+
+    <Script Type="Function" Path="Schema\Functions\dbo.SameMonth.sql" />
+    <Script Type="Function" Path="Schema\Functions\dbo.SplitString.sql" />
+    
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioHaulageLumpFinesGrade.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioHaulageLumpFinesPercent.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportLocation.UDF" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportBreakdown.UDF" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportHighGrade.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioWeightometerSampleSource.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioWeightometerSampleSourceActualC.sql" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportLocationBreakdown.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.getbhpbiodataexceptionlocationignorelist.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioSummaryGradeBreakdown.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioSummaryTonnesBreakdown.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioSummaryTonnesByLocation.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportActualC.sql" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportActualX.sql" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportActualY.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportActualZ.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportModel.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportReconBlockLocations.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.BhpbioGetBlockedDateForLocation.sql" />
+    <Script Type="Function" Path="Schema\Functions\dbo.BhpbioDoesQueuedBlocksJobExist.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.BhpbioDoesQueuedBlocksJobExist.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioIntCollection.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioFilteredMaterialTypes.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioFloatOptionalAbsolute.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioLocationChildMap.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioDefaultLumpFinesRatios.udf" />
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioCrusherLocationWithOverride.udf" />
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioWeightometerLocationWithOverride.udf" />
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioExcludeHubLocation.udf" />
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioExcludeStockpile.udf" />
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioReportLocationWithOverride.udf" />
+    <Script Type="Function" Path="schema\Functions\dbo.GetParentLocationByLocationType.sql"/>
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioReportModelBlockLocations.sql"/>
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioReportHaulageBreakdown.udf" />
+    <Script Type="Function" Path="schema\Functions\dbo.DoesBhpbioDigblockNotesExist.sql" />
+    <Script Type="Function" Path="schema\Functions\dbo.DoesBhpbioDigblockAssociationsExist.sql" />
+    <Script Type="Function" Path="schema\Functions\dbo.DoesBhpbioDigblockHaulageExist.sql" />
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioWeightometerSampleWithProductSize.sql"/>
+    <Script Type="Function" Path="schema\Functions\dbo.BhpbioInvertIfNonZero.udf"/>
+    <Script Type="Function" Path="schema\Procedures\dbo.IsStockpileGroupAdminEditable.sql"/>
+    <Script Type="Function" Path="schema\Functions\dbo.GetBhpbioReportRemainingReconBlockLocations.udf"/>
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioReportHauledBlockLocations.udf" />
+    <Script Type="Function" Path="Schema\Functions\dbo.ChildLocationsAndSelf.sql" />
+    <Script Type="Function" Path="Schema\Functions\dbo.ConvertMQ2ToLocationId.sql" />
+    <Script Type="Function" Path="Schema\Functions\dbo.GetBhpbioPortBlendingForGeomet.sql" />
+    <Script Type="Function" Path="Schema\Functions\ConvertMESToLocationId.sql" />
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.BhpbioGetImportJobLatestActivtyDate.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioApprovalDigblockList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.IsBhpbioApprovalBlock.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.IsBhpbioApprovalLocation.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.IsBhpbioApprovalBlockDate.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.IsBhpbioApprovalBlockLocationDate.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.IsBhpbioApprovalAllBlockLocationDate.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.IsBhpbioUserInLocation.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportColorList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioReportColor.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioReportThreshold.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioBlastBlockLumpFinesGrade.PRC" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioBlastBlockLumpPercent.PRC" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioHaulageLumpFinesGrade.PRC" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioReportThreshold.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportThresholdList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportThresholdTypeList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.IsDigblockTreeUserSettingAvailable.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.SetDigblockTreeUserDefaults.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.ApproveBhpbioApprovalData.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.ApproveBhpbioApprovalDigblock.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UnapproveBhpbioApprovalData.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UnapproveBhpbioApprovalDigblock.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioUserLocation.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioApprovalData.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioShippingNominationItem.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioShippingNomination.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioShippingNominationItemParcelGrade.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioShippingNominationItem.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioShippingNominationItem.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioShippingNominationItemParcel.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioShippingNominationItemParcel.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioShippingNominationItemParcel.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioReconciliationMovement.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioReconciliationMovementStage.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.getbhpbiodigblockhaulagegradeoverrange.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.getbhpbiodigblockmodelblockgradeoverperiod.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.getbhpbiodigblockreconciledgradeoverperiod.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioAnalysisVariance.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioAnalysisVariance.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioMaterialLookup.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioProductionEntity.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioProductionWeightometer.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioAnalysisVarianceList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioModelComparisonReport.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioMetBalancing.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioMetBalancing.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioMetBalancing.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpMaterialTypeList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioRecalcLogicHistoryTransactionLevel0.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReconciliationMovements.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioBlastByBlastReconciliation.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioShippingNomination.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioPortBalance.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioPortBlending.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioApprovalOtherMaterial.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioPortBlending.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioPortBlending.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddUpdateDeleteBhpbioPortBlendingGrade.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioPortBlending.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioPortBalance.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioPortBalance.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioPortBalance.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioDigblockPolygonWithinRangeAndBench.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioStockpileList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioDigblockPolygonList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioHaulageManagementList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.BhpbioDataExceptionStockpileGroupLocationMissing.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.BhpbioDeleteLocationGroup.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioUserLocationList.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioLocationRoot.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.ResolveBhpbioLocationByName.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioStockpilelocationconfiguration.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioStockpileLocationConfiguration.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.CalcNjvVirtualFlow.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportBaseDataAsTonnes.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportBaseDataAsGrades.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioModelComparisonReport.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioGradeRecoveryReport.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioMovementRecoveryReport.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioRecoveryAnalysisReport.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportAttributeProperties.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataBlockModel.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataBlockModelBlockOuts.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataActualMineProduction.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataActualExpitToStockpile.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataActualM.sql" />    
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataActualStockpileToCrusher.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataBenchErrorByLocation.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioReportDataOreForRail.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataPortStockpileDelta.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataPortBlendedAdjustment.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataPortOreShipped.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataHistorical.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataReview.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataBlockModelTotal.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioShippingNominationItemById.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportFactorProperties.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.addbhpbiomaterialtypelocation.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.deletebhpbiomaterialtypelocationall.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiodataexceptioncount.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiodataexceptionlist.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiodataexceptionFilteredlist.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioDataExceptionDismissAll.sql"/>
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiodataexceptionTypeFilteredList.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiohaulagecorrectionlist.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiohaulagecorrectionlistfilter.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiohaulagevsplantreport.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbioimportsrunningqueuedcount.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiomaterialtypelocationlist.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbionohaulageerrors.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiostockpilebalancereport.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.bhpbioresolvebasic.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.calcwhalebackvirtualflowbene.prc" />
+	  <Script Type="Procedure" Path="schema\Procedures\dbo.calcwhalebackvirtualflowc2.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.calcyandivirtualflow.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.updatebhpbiodataexceptionlocations.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiohaulagemanagementlistfilter.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbiostockpilelistbygroups.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbioreportdataactualbeneproduct.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DoesBhpbioQueuedBlocksJobExist.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.calcvirtualflow.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.BhpbioTryDeleteLocation.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbioreportdatahubpostcrusherstockpiledelta.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.getbhpbioreportdatasitepostcrusherstockpiledelta.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.IsBhpbioApprovalPitMovedDate.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.IsBhpbioApprovalOtherMovementDate.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.IsBhpbioAllF1Approved.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.IsBhpbioAllOtherMovementsApproved.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioApprovalDataRaw.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioReportPatternValidationData.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioNotificationInstanceApproval.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SaveBhpbioNotificationInstanceApproval.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.AddOrUpdateBhpbioCustomMessage.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.DeleteBhpbioCustomMessage.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioCustomMessages.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioReportDataTags.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioReportDataTagsDetailed.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.DeleteBhpbioSummaryActualY.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.DeleteBhpbioSummaryAdditionalHaulageRelated.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.DeleteBhpbioSummaryEntry.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.DeleteBhpbioSummaryModelMovement.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.DeleteBhpbioSummaryOMToStockpile.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.DeleteBhpbioSummaryOMHauledFromBlock.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.DeleteBhpbioSummaryDataRelatedToApproval.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioApprovalDigblockListApprovedData.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioApprovalDigblockListLiveData.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioActualC.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioActualY.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioActualZ.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioAdditionalHaulageRelated.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioModelMovement.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioOMToStockpile.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioOMHauledFromBlock.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioOreForRail.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioPortBlendedAdjustment.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioPortStockpileDelta.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioPostCrusherStockpileDelta.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioShippingTransaction.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.SummariseBhpbioActualBeneProduct.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.SummariseBhpbioDataRelatedToApproval.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioLatestPurgedMonth.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioPurgeRequests.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioPurgeRequests.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioPurgeRequests.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioPurgeRequest.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.PurgeBhpbioData.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioLatestPurgeableMonth.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSummaryIdForMonth.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioStockpileDeletionState.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.ClearBhpbioStockpileDeletionState.prc" />
+	  <Script Type="Procedure" Path="schema\Procedures\dbo.UpdateBhpbioLocationDate.prc" />
+	  <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioLocationNameWithOverride.prc" />
+	  <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioLocationChildrenNameWithOverride.prc" />
+	  <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioLocationListWithOverride.prc" />
+	  <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioLocationParentHeirarchyWithOverride.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.UpdateBhpbioStockpileLocationDate.prc" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.CorrectBhpbioProductionWeightometerAndDestinationAssignments.prc" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioDefaultLumpFinesList.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioDefaultLumpFinesRecord.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioLumpFinesRecord.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioLumpFinesRecord.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioMetBalancingGrade.prc"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioPortBalanceGrade.prc"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioModelBlockLumpFinesInformation.prc"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportLocationBreakdownWithNames.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioBlastblockDataExportReport.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioReportDataActualDirectFeed.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioMissingSampleDataException.prc"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioLocationListWithOverrideAndDates.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioPitListWithBlockCounts.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleCoverageReport.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioDigblockDetailList.sql"/>
+	  <Script Type="Procedure" Path="Schema\Procedures\dbo.BhpbioCopyWeightometerSample.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.CalcWhalebackVirtualFlowOHP4.sql"/>
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioImportLoadRowMessages.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioLocationGroup.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioImportLoadRowMessages.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioDigblockFieldNotes.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioBlockImportSyncRowsForLocation.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioNextSyncQueueEntryForLocation.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSiteMaps.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.GetBhpbioStagingModelBlocks.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.GetBhpbioStagingBlockHoldingPitCode.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.DeleteBhpbioStageBlock.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.DeleteBhpbioStageBlockModels.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.DeleteBhpbioStageBlockPoints.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.AddOrUpdateBhpbioStageBlockIfLatest.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.AddBhpbioStageBlockModel.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.AddBhpbioStageBlockModelGrade.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.AddBhpbioStageBlockPoint.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.LogMessage.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.GetBhpbioStagingBlockId.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.ResolveBhpbioDataExceptionDigblockHasHaulage.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioDataExceptionDigblockHasHaulage.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrActivateBhpbioDataExceptionDigblockHasHaulage.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioBlastblockbyOreTypeDataExportReport.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioImportLocationCodeList.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioImportList.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioImportSyncValidateGrouping.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioImportExceptionGrouping.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioImportSyncValidateRecords.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioImportExceptionRecords.sql" />
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioHaulageMovementsToCrusher.sql" />
+    
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioShippingTargets.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioShippingTarget.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioShippingTargetValue.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.UpdateBhpbioShippingTarget.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioShippingTarget.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioShippingTargetValues.sql" />
+  
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioProductTypeLocation.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioProductTypeLocation.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioProductTypeLocations.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioProductTypesWithLocationIds.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.SaveBhpbioProductTypeLocations.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioImportErrorCount.sql" />
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioLocationGroupsWithLocationIds.sql" />
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioOutliersForLocation.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioOutlierCountByAnalysisGroupForLocation.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioWeightometerMovementSummaryForMonth.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioOutlierAnalysisPoints.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioOutlierAnalysisSeriesAttributes.sql" />
+    
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioDataRetrievalQueueEntriesForRecalcHistory.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddBhpbioDataRetrievalQueueEntry.sql" />
+  
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.AddUpdateBlockModelResourceClassification.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.DeleteBlockModelResourceClassification.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.GetBlockModelResourceClassification.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\Staging.GetBhpbioResourceClassificationData.sql" />
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddUpdateSummaryEntryFieldValue.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioResourceClassificationByLocation.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioDepositPits.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioDeposits.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.BhpbioGetApprovalProgress.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.BhpbioEnqueueBulkApproval.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.BhpbioGetApprovalProgress.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.BhpbioGetPendingApprovalId.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.BhpbioSelectEnqueuedBulkApproval.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.BhpbioStartBulkApproval.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetLocationTypeId.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioApprovalSummary.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioLocationGroup.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioSiblingLocations.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioLocationTypeAndApprovalStatus.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioNoHaulageErrors2.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioDataExceptionCount2.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioImportErrorCount2.sql" />
+    
+    <Script Type="Procedure" Path="schema\Procedures\dbo.AreBhpbioLocationChildrenApproved.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.BhpbioCreateBulkApproveBatch.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\dbo.GetBhpbioUngroupedStockpileCount.sql" />
+
+    <Script Type="Procedure" Path="schema\Procedures\Staging.TmpImportStagingModelBlockAsDroppedToLiveTables.sql" />
+    <Script Type="Procedure" Path="schema\Procedures\Staging.TmpImportStagingModelBlockAsDroppedToSummaryTables.sql" />
+
+    <Script Type="Procedure" Path="schema\Procedures\DataSeries.GetNextPendingQueueEntry.sql" />
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.BhpbioUpdateImportSyncRowFilterData.sql" />
+  </ScriptGroup>
+  
+  <ScriptGroup Type="DataPopulation">
+    <Script Type="DataPopulation" Path="Data\dbo.BhpbioSummaryEntryType.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.BhpbioPurgeRequestStatus.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.SecurityOptionGroup.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.SecurityOption.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.SecurityRole.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.SecurityRoleOption.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.AuditTypeGroup.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.AuditType.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.BhpbioThresholdType.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.BhpbioThreshold.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.Report.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.UserInterfaceListingField.sql" />
+    <Script Type="DataPopulation" Path="Data\dbo.BhpbioDefaultLumpFinesRatios.sql" />
+  </ScriptGroup>
+  
+  <!--<Upgrade Version="1.4.0.0">
+    <UpgradeReference ReferenceName="ReconcilorCore" Version="6.2.0.0" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.0.0\(0001) Recalc User Haulage.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.0.0\(0002) Code.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.1.0">
+    <UpgradeReference ReferenceName="ReconcilorCore" Version="6.2.13.0" />
+    <UpgradeReference ReferenceName="ReconcilorCore" Version="6.2.14.0" />
+  </Upgrade>
+  <Upgrade Version="1.4.2.0">
+    <UpgradeReference ReferenceName="ReconcilorCore" Version="6.2.27.0"/>
+    <UpgradeReference ReferenceName="ReconcilorCore" Version="6.2.29.0"/>
+    <Script Type="Upgrade" Path="Upgrade\1.4.2.0\(0001) ENH-2136-REQ-80 Updates.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.2.0\(0002) ENH-2136 Updates.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.3.0">
+    <UpgradeReference ReferenceName="ReconcilorCore" Version="6.2.33.0"/>
+  </Upgrade>
+  <Upgrade Version="1.4.3.10">
+    <Script Type="Upgrade" Path="Upgrade\1.4.3.10\(0001) Updates.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.3.13">
+    <Script Type="Upgrade" Path="Upgrade\1.4.3.13\(0001) Bene Product.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.3.14">
+    <Script Type="Upgrade" Path="Upgrade\1.4.3.14\(0001) BhpbioApprovalData Index.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.4.3">
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.3\(0001) CalcWhalebackVirtualFlow.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.4.4">
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.4\(0001) RGP5 Crusher Rename.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.4\(0002) RGP5 OHP3 Crusher Addition.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.4.5">
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.5\(0001) GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.4.8">
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.8\(0001) Table Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.8\(0002) View Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.8\(0003) Function Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.8\(0004) Stored Procedure Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.8\(0005) Data Population Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.8\(0006) UI Listing Update for Approvals.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.4.9">
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.9\(0001) GetBhpbioReportDataHistorical.sql" />
+  </Upgrade>
+  <Upgrade Version="1.4.4.10">
+    <Script Type="Upgrade" Path="Upgrade\1.4.4.10\(0001) UpdateBhpbioDataExceptionLocations.sql" />
+  </Upgrade>
+  <Upgrade Version="1.5.0.1">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.1\(0001) PurgeBhpbioData.sql" />
+  </Upgrade>
+  <Upgrade Version="1.5.0.3">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.3\(0001) Upgrade GetBhpbioApprovalOtherMaterial.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.3\(0002) Add ReportDataTag for Other Movements Blend Grade.sql" />
+  </Upgrade>
+  <Upgrade Version="1.5.0.4">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.4\(0001) PurgeBhpbioData.sql" />
+  </Upgrade>
+  <Upgrade Version="1.5.0.5">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.5\(0001) Update Summary Table Indexes.sql" />
+  </Upgrade>
+  <Upgrade Version="1.5.0.6">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.6\(0001) Add Table dbo.BhpbioStockpileDeletion.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.6\(0002) dbo.AddBhpbioStockpileDeletionState.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.6\(0003) dbo.ClearBhpbioStockpileDeletionState.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.6\(0004) PopulateStockpileDeletionTable.sql" />
+  </Upgrade>
+  <Upgrade Version="1.5.0.9">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.9\(0001) Add columns to Nomination table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.9\(0002) Update UserInterfaceListingField.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.9\(0003) dbo.GetBhpbioShippingTransaction.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.9\(0004) dbo.UserInterfaceListingField.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.9\(0005) dbo.AddBhpbioShippingTransactionNomination.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.9\(0006) dbo.UpdateBhpbioShippingTransactionNomination.sql" />
+  </Upgrade>
+  <Upgrade Version="1.5.0.10">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.10\(0001) Crusher enhancements.sql" />
+  </Upgrade>
+  <Upgrade Version="1.5.0.15">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0001) Index Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0002) Table Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0003) Proc dbo.UpdateBhpbioLocationDate.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0004) Proc dbo.UpdateBhpbioStockpileLocationDate.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0005) Data Population Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0006) Func dbo.GetBhpbioReportActualC.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0007) Func dbo.GetBhpbioReportActualY.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0008) Func dbo.GetBhpbioReportActualZ.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0009) Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0010) Proc dbo.GetBhpbioLocationNameWithOverride.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0011) Proc dbo.GetBhpbioLocationChildrenNameWithOverride.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0012) Proc dbo.GetBhpbioApprovalDigblockListApprovedData.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0013) Proc dbo.GetBhpbioApprovalDigblockListLiveData.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0014) Proc dbo.GetBhpbioApprovalOtherMaterial.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0015) Proc dbo.GetBhpbioReportDataActualBeneProduct.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0016) Proc dbo.GetBhpbioReportDataBlockModel.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0017) Proc dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0018) Proc dbo.GetBhpbioReportDataPortBlendedAdjustment.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0019) Proc dbo.GetBhpbioReportDataPortOreShipped.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0020) Proc dbo.GetBhpbioReportDataPortStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0021) Proc dbo.GetBhpbioReportDataSitePostCrusherStockpileDelta.sql" />
+	  <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0022) Proc dbo.GetBhpbioLocationListWithOverride.sql" />
+	  <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0023) Proc dbo.GetBhpbioLocationParentHeirarchyWithOverride.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0024) Proc dbo.GetBhpbioHaulageManagementList.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0025) Proc dbo.GetBhpbioHaulageManagementListFilter.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0026) Proc dbo.GetBhpbioProductionEntity.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0027) Proc dbo.GetBhpbioReportDataReview.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0028) Proc dbo.GetBhpbioStockpileBalanceReport.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0029) Proc dbo.GetBhpbioStockpileList.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0030) Proc dbo.GetBhpbioStockpileListByGroups.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0031) Proc dbo.SummariseBhpbioPostCrusherStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.15\(0032) Func dbo.GetBhpbioReportModel.sql" />
+
+  </Upgrade>
+  <Upgrade Version="1.5.0.16">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.16\(0001) Proc dbo.GetBhpbioBlastByBlastReconciliation.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.16\(0002) Proc dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.16\(0003) Proc dbo.GetBhpbioReportDataReview.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.16\(0004) Proc dbo.GetBhpbioStockpileBalanceReport.sql" />
+  </Upgrade>
+
+  <Upgrade Version="1.5.0.17">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.17\(0001) Proc dbo.GetBhpbioLocationParentHeirarchyWithOverride.sql" />
+	  <Script Type="Upgrade" Path="Upgrade\1.5.0.17\(0002) Stored Procedure Grant Scripts.sql" />
+	  <Script Type="Upgrade" Path="Upgrade\1.5.0.17\(0003) Func dbo.GetBhpbioReportActualC.sql" />
+  </Upgrade>
+
+  <Upgrade Version="1.5.0.19">
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.19\(0001) Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.19\(0002) Add Jimblebar Security Role.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.0.19\(0003) DeleteBhpbioSummaryEntry.sql" />
+  </Upgrade>
+
+  <Upgrade Version="1.5.1.0">
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0001) Table Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0002) Data Population Scripts.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0003) Func dbo.GetBhpbioExcludeHubLocation.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0004) Func dbo.GetBhpbioExcludeStockpile.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0009) Func dbo.GetBhpbioReportActualC.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0010) Func dbo.GetBhpbioReportActualY.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0011) Func dbo.GetBhpbioReportActualZ.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0013) Proc dbo.GetBhpbioHaulageVsPlantReport.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0016) Proc dbo.GetBhpbioReportDataActualBeneProduct.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0017) Proc dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0018) Proc dbo.GetBhpbioReportDataReview.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0019) Proc dbo.GetBhpbioReportDataSitePostCrusherStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0021) Proc dbo.SummariseBhpbioActualBeneProduct.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0022) Proc dbo.SummariseBhpbioActualC.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0023) Proc dbo.SummariseBhpbioActualY.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0024) Proc dbo.SummariseBhpbioActualZ.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0025) Proc dbo.SummariseBhpbioOMToStockpile.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0026) Proc dbo.SummariseBhpbioPostCrusherStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0027) Proc dbo.GetBhpbioReportDataPortOreShipped.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0029) Proc dbo.SummariseBhpbioShippingTransaction.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0030) Proc dbo.GetBhpbioReportDataPortStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0031) Proc dbo.SummariseBhpbioPortStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0032) Proc dbo.GetBhpbioReportDataPortBlendedAdjustment.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0033) Proc dbo.SummariseBhpbioPortBlendedAdjustment.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0034) Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0036) Proc dbo.GetBhpbioHaulageManagementList.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0037) Proc dbo.GetBhpbioHaulageManagementListFilter.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0038) Proc dbo.GetBhpbioApprovalDigblockList.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0039) Proc dbo.GetBhpbioApprovalDigblockListLiveData.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.1.0\(0040) Proc dbo.IsBhpbioUserInLocation.sql" />
+  </Upgrade>
+
+  <Upgrade Version="1.5.2.0">
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.0\(0001) AC-C3 and YR-CT Crushers.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.0\(0002) Proc dbo.CalcYandiVirtualFlow.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.0\(0003) Yandi Crusher Reconfiguration.sql" />
+  </Upgrade>
+
+  <Upgrade Version="1.5.2.1">
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.1\(0001) Update dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.1\(0002) Update dbo.SummariseBhpbioPostCrusherStockpileDelta.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.1\(0003) Update dbo.GetBhpbioReportDataPortBlendedAdjustment.sql" />
+  </Upgrade>
+
+  <Upgrade Version="1.5.2.2">
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.2\(0001) Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+  </Upgrade>
+
+  <Upgrade Version="1.5.2.3">
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0001) Create OB24 Crusher.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0002) Func dbo.GetBhpbioReportLocationBreakdownWithOverride.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0003) Func dbo.GetBhpbioReportLocationWithOverride.UDF" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0004) Func dbo.IsBhpbioAllF1Approved.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0005) Func dbo.IsBhpbioAllOtherMovementsApproved.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0006) Func dbo.IsBhpbioApprovalAllBlockLocationDate.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0007) Func dbo.IsBhpbioApprovalBlockLocationDate.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0008) Func dbo.IsBhpbioApprovalOtherMovementDate.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.3\(0009) Func dbo.IsBhpbioApprovalPitMovedDate.prc" />
+  </Upgrade>-->
+  <!--
+  <Upgrade Version="1.5.2.4">
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.4\(0001) dbo.CorrectBhpbioProductionWeightometerAndDestinationAssignments.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.4\(0002) Update dbo.GetBhpbioProductionEntity.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.2.4\(0003) Update dbo.GetBhpbioProductionWeightometer.sql" />
+  </Upgrade>
+  -->
+  
+  <!--<Upgrade Version="1.5.3.0">
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0001) dbo.BhpbioCrusherLocationOverride.tab" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0002) dbo.BhpbioWeightometerLocationOverride.tab" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0003) Add location override records.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0004) dbo.GetBhpbioCrusherLocationWithOverride.udf" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0005) dbo.GetBhpbioWeightometerLocationWithOverride.udf" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0006) dbo.CorrectBhpbioProductionWeightometerAndDestinationAssignments.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0007) Update dbo.GetBhpbioProductionEntity.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0008) Update dbo.GetBhpbioProductionWeightometer.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0009) Update StockpileBhpbioStockpileLocationOverride.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0010) dbo.GetBhpbioReportActualC.udf" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0011) dbo.GetBhpbioReportActualZ.udf" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0012) dbo.GetBhpbioWeightometerSampleSource.udf" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0013) dbo.GetBhpbioReportDataHubPostCrusherStockpileDelta.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0014) dbo.GetBhpbioReportDataReview.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0015) dbo.SummariseBhpbioActualC.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0016) dbo.SummariseBhpbioActualZ.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0017) dbo.SummariseBhpbioPostCrusherStockpileDelta.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0018) Update dbo.GetBhpbioApprovalData.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0019) Add dbo.GetBhpbioLocationChildMap.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.3.0\(0020) dbo.GetBhpbioReportActualY.udf" />
+  </Upgrade>
+
+  <Upgrade Version="1.5.4.0">
+    <Script Type="Upgrade" Path="Upgrade\1.5.4.0\(0001) dbo.UpdateBhpbioLocationDate.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.4.0\(0002) dbo.BhpbioApprovalStatusByMonth.viw" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.4.0\(0003) Update Jimblebar Location Override.sql" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.4.0\(0004) dbo.GetBhpbioReportDataHistorical.prc" />
+    <Script Type="Upgrade" Path="Upgrade\1.5.4.0\(0005) dbo.IsBhpbioAllF1Approved.prc" />
+  </Upgrade>-->
+
+
+  <!--<Upgrade Version="2.0.0.0">
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0001) Upgrade Schema to Core 6.4.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0002) Refactor Shipping Schema.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0004) Port Balance Fields.sql" />
+	  <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0005) Sample Notes Field Metadata.sql" />
+	  <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0006) Update BhpbioPortBlending Table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0007) Default Lump Fines.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0008) Upgrade BhpbioSummaryEntry Table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0009) Add Blast Block Lump Fines Tables.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0010) Add Haulage Lump Fines Tables.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0011) Add UserInterfaceListingFields for Port Tab.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0012) Extend BhpbioReportDataTagsTable.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0013) Add Report tags.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0014) GetBhpbioReportDataTagsDetailed.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0015) Alter Blast Block Import Holding Tables.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0016) MET Balancing Fields.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0017) Fix Haulage Raw and Haulage Field Definitions.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0018) Import Metadata Fixes (Excludes Shipping).sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0020) DeleteBhpbioModelBlockLumpFinesInformation.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0021) GetBhpbioHoldingModelBlocks.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0022) Shipping Import Metadata.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0023) Migrate Digblock Movement Detail.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.0.0\(0024) New Approval Data Index.sql" />
+  </Upgrade>-->
+
+  <!--<Upgrade Version="2.0.18.0">
+    <Script Type="Upgrade" Path="Upgrade\2.0.18.0\(0001) Correct Shipping Constraints.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.18.0\(0002) Correct Shipping Nomination Sync Data.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.18.0\(0003) Correct Shipping Nomination Parcel Sync Data.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.0.19.0">
+    <Script Type="Upgrade" Path="Upgrade\2.0.19.0\(0001) Correct PostCrusher Approval Data Tags.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.0.20.0">
+    <Script Type="Upgrade" Path="Upgrade\2.0.20.0\(0001) BhpbioLocationStockpileConfiguration changes to Support Jimblebar.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.0.21.0">
+    <Script Type="Upgrade" Path="Upgrade\2.0.21.0\(0001) Rename WB Weightometers.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.21.0\(0002) Add new WB Weightometers.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.21.0\(0003) Add new 25-C2 Weightometer.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="2.0.24.0">
+    <Script Type="Upgrade" Path="Upgrade\2.0.24.0\(0001) Correct Transaction and Transaction Grade Sync ProductSize Data.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.0.24.0\(0002) Correct Weightometer Sample Notes Product Size.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.0.26.0">
+    <Script Type="Upgrade" Path="Upgrade\2.0.26.0\(0001) Jimblebar OHP1 Configuration.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.1.0.0">
+    <UpgradeReference ReferenceName="ReconcilorCore" Version="6.4.33.0"/>
+    <UpgradeReference ReferenceName="ReconcilorCore" Version="6.4.34.0"/>
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0001) STGM Block Model.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0002) Data Export Report Security.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0003) Update UserInterfaceListtingField.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0004) Upgrade BhpbioSummaryEntry Table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0005) Add F15 to Approvals.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0006) Update BlastBlockModel Import.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0007) Add OverviewReconContribution Report.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0008) Add User Settings.sql"/>
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0009) New colour.sql"/>
+    <Script Type="Upgrade" Path="Upgrade\2.1.0.0\(0010) F3+F25 Approval Security.sql"/>
+  </Upgrade>
+  
+  <Upgrade Version="2.1.2.0">
+    <Script Type="Upgrade" Path="Upgrade\2.1.2.0\(0001) Correct Transaction and Transaction Grade Sync Data.sql" />
+  </Upgrade>
+
+ 
+  <Upgrade Version="2.1.5.0">
+    <Script Type="Upgrade" Path="Upgrade\2.1.5.0\(0001) Correct Approval Data Tag Grouping.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="2.1.6.0">
+    <Script Type="Upgrade" Path="Upgrade\2.1.6.0\(0001) Change Blastblock approval column.sql" />
+  </Upgrade>
+
+ 
+  <Upgrade Version="2.1.7.0">
+    <Script Type="Upgrade" Path="Upgrade\2.1.7.0\(0001) Remove Approval Tags No Longer Needed.sql" />
+  </Upgrade>
+
+
+  <Upgrade Version="2.1.8.0">
+    <Script Type="Upgrade" Path="Upgrade\2.1.8.0\(0001) New Report Colours.sql" />
+  </Upgrade>
+
+	<Upgrade Version="2.1.9.0">
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0001) Change Weightometer Type of WB-C2OutFlow.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0002) Add New Weightometers WB-C2OutFlow-Corrected and WB-C2OutFlow-CorrectedBCOnly.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0003) Delete CalcWhalebackVirtualFlow due to recreation with new name CalcWhalebackVirtualFlowBene.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0004) Delete WeightometerFlowPeriod for WB-C2OutFlow.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0005) Create System Setting to Control the Date frrom which the WB-C2 Back Calculation will apply.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0006) Create New Data Exception Type for Missing Samples.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0007) Create System Setting to Limit Time Range when Identifying Missing Sample Data Exceptions.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0008) Populate the Weightometer Exemption table.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0009) Create New Data Exception Type for Insufficient Sample Information to perform Back Calculation.sql" />		
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0010) Create BhpbioWeightometerGroupWeightometer Table.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0011) Populate new WeightometerGroups and relate via BhpbioWeightometerGroupWeightometer.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.0\(0012) Perform historical back calculations for WB-C2OutFlow and redirect DataTransactionTonnesFlow.sql" />
+	</Upgrade>
+
+	<Upgrade Version="2.1.9.1">
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.1\(0001) Update Missing Samples Data Exception Type Description.sql" />
+		<Script Type="Upgrade" Path="Upgrade\2.1.9.1\(0002) Populate the Weightometer Exemption table.sql" />
+	</Upgrade>
+
+  <Upgrade Version="2.1.9.4">
+    <Script Type="Upgrade" Path="Upgrade\2.1.9.4\(0001) Create System Setting Weightometer Tonnes Significant.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.1.10.0">
+    <Script Type="Upgrade" Path="Upgrade\2.1.10.0\(0001) Create OHP5 Crusher.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.10.0\(0002) Create OHP4 Weightometers.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.1.10.0\(0003) Add Data Exceptions.sql" />
+  </Upgrade>
+  
+
+  <Upgrade Version="2.2.0.0">
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0001) Add new Reports.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0002) Add H2O.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0003) Update Summary tables for Volume.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0004) Add Report Colour Attributes.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0005) Update Grade Sort Order.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0006) Add New Report Thresholds.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0007) Invert Density Values.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0008) Recalc Grades.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0009) Upgrade BhpbioShippingNominationItem.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0010) Increase BhpbioBlastBlockModelGradeHolding GradeName Length.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0011) Fix BhpbioPortBalance table contraint.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0012) Update UserInterfaceListing Order for Port.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0013) Add H2O to Stockpile Screen.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0014) Update UserInterfaceListings.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.0.0\(0015) Update Live and Approved Thresholds.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.2.7.1">
+    <Script Type="Upgrade" Path="Upgrade\2.2.07.1\(0001) Add mssing H2O to Digblock Grade.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="2.2.9.0">
+    <Script Type="Upgrade" Path="Upgrade\2.2.09.0\(0001) Set Attribute Colors.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.2.10.0">
+    <Script Type="Upgrade" Path="Upgrade\2.2.10.0\(0001) BhpbioBlastBlockModelGradeHolding Nullable GradeValue.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.10.0\(0002) Add missing report colors.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.2.10.5">
+    <Script Type="Upgrade" Path="Upgrade\2.2.10.5\(0001) Fill missing threshold values.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.10.5\(0002) Hide Sample Coverage Report.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.2.11.0">
+    <Script Type="Upgrade" Path="Upgrade\2.2.11.0\(0001) Clear Monthly approval table.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.2.12.0">
+    <Script Type="Upgrade" Path="Upgrade\2.2.12.0\(0001) Update Live vs Approved Thresholds.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.12.0\(0002) Calculate Historic Volume Summary Data.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.2.13.0">
+    <Script Type="Upgrade" Path="Upgrade\2.2.13.0\(0001) Correct WeightometerFlowPeriod BeneOreRaw.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.13.0\(0002) Correct BeneFinesToSYard Weightometer Type.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.13.0\(0003) Rename WB-OHP5 to NH-OHP5.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.13.0\(0004) Correct OHP4 Weightometer Locations.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.2.13.0\(0005) Correct OHP4 Weightometer Types.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.2.15.3">
+    <Script Type="Upgrade" Path="Upgrade\2.2.15.3\(0001) Correct WeightometerFlowPeriod for 25-C2.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="2.3.1.0">
+    <Script Type="Upgrade" Path="Upgrade\2.3.1.0\(0001) Create new Staging Tables.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.1.0\(0003) DataMigrationBlockModelData.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.1.0\(0004) ImportLoadRow Identity row.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.1.0\(0005) Populate ChangeKey reference data.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.1.0\(0006) Populate ChangeType reference data.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.1.0\(0007) ReconBlockInsertUpdate Import Definition.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.3.2.0">
+    <Script Type="Upgrade" Path="Upgrade\2.3.2.0\(0002) Deactivate obsolete imports.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.2.0\(0003) Populate Staging ImportChangeTrigger.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.2.0\(0004) Schedule Imports.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.2.0\(0005) Add Data Exception Type Block Change with Haulage.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.2.0\(0006) Staging Grants.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.2.0\(0007) Add Audit Types.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="2.3.3.1">
+    <Script Type="Upgrade" Path="Upgrade\2.3.3.1\(0001) Add Index to StageBlock.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="2.3.3.2">
+    <Script Type="Upgrade" Path="Upgrade\2.3.3.2\(0001) Add DateFrom parameter to autoqueue.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.3.2\(0002) Add BlockExternalSystemId DigblockNote.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.3.4.0">
+    <Script Type="Upgrade" Path="Upgrade\2.3.4.0\(0001) Correct Staging Grants.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.3.4.4">
+    <Script Type="Upgrade" Path="Upgrade\2.3.4.4\_0001_ Correct import schedule.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.3.4.5">
+    <Script Type="Upgrade" Path="Upgrade\2.3.4.5\_0001_ Correct import schedule Order.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.3.4.5\_0002_ Update GetImportAutoQueueProfileList.sql" />
+  </Upgrade>
+
+  <Upgrade Version="2.4.0.1">
+    <Script Type="Upgrade" Path="Upgrade\2.4.0.1\(0001) Correct WeightometerFlowPeriod for 25-C2.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.4.0.1\(0002) MoveActualCSampleGradesToActualC.sql" />
+    <Script Type="Upgrade" Path="Upgrade\2.4.0.1\(0003) TriggerCalcVirtualFlow.sql" />
+  </Upgrade>-->
+  
+  <!--<Upgrade Version="3.0.0.0">
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0000_Create Table Staging.StageDataMap.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0001_ Rename OB2325 to Eastern Ridge.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0002_ MoveActualCSampleGradesToActualC.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0003_Reduce size of DataProcessTransactionLeftGrade Table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0004_ Populate_StockpileGroupNotes_AdminOnly.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0005_Create and Populate BhpbioImportLocationCode Table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0006_Update UI Listing to include SignOff Date.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0007_Add new hub report.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0008_Add Geomet Threshold.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0009_Add Geomet Adjustment Setting.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0011_Blastblock by Ore type permissions.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0013_AddMissingIndexes.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0012_UpdateShortTermGeologyName.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0014_AddMissingIndexesAndReplaceObsolete - Core.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.0.0\_0015_AddMissingIndexesAndReplaceObsolete - Common.sql" />
+  </Upgrade>
+
+
+  <Upgrade Version="3.0.2.0">
+    <Script Type="Upgrade" Path="Upgrade\3.0.2.0\_0001_queue complete recalculation.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.2.0\_0002_fix blocks import location codes.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.2.0\_0003_add NJV to list of import parameters.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.0.3.0">
+    <Script Type="Upgrade" Path="Upgrade\3.0.3.0\_0001_delete obsolete settings.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.3.0\_0002_update signoff column titles.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.3.0\_0003_Add bhp specific modelblock view.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.3.0\_0004_Fix remaining STGM names.sql" />
+  </Upgrade>
+ 
+   <Upgrade Version="3.0.5.0">
+    <Script Type="Upgrade" Path="Upgrade\3.0.5.0\_0001_Reactivate GEOMET reporting.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.1.0.0">
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0001_ Prod Reconciliation Export Security.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0002_Create Tables Product Type and Prod Type Location.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0003_Product Types security options.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0004_Populate Product Types.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0005_add ImportValidationLookbackDate settings.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0010_ Create Shipping Target Tables.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0011_ Add Product Reconciliation Report.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0012_ Add Bhpbio Product Supply Chain Monitoring Report.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0012b_DataSeries_Schema.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0006_Annual Report security options.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0013_ Add Data Series Type Groups.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0014_ Add Outlier Series Types.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0015_ Add Bhpbio Product Recon Contribution Report.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0016_ Add Bhpbio Product Recon Attribute Report.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0017_ Add Product Factors by Location Against Shipping Targets Report.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0018_Add Outlier Series Configuration.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0019_Add Outlier Series Types.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0020_Configure Data Series Processing.sql" />
+	<Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0021_ Add Data Series Processing Audit Types and Group.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0022_ Add Product Reports.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0023_Outlier Analysis security options.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0024_Add Outlier Chart Report.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0025_RenameApprovalLiveViewerColumn.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0026_OutlierDisplaySystemSettings.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0027_Fix ReportColor for WAIO.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0028_OutlierAnalysisGroups.sql" />
+  <Script Type="Upgrade" Path="Upgrade\3.1.0.0\_0029_Add resource classification fields.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.0.6.0">
+    <Script Type="Upgrade" Path="Upgrade\3.0.6.0\_0001_Change BlockNumber length.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.0.6.0\_0002_Correct Yandi Pattern With Large Block Numbers.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.1.1.0">
+    <Script Type="Upgrade" Path="Upgrade\3.1.1.0\_0001_Correct Product Recon Att Report Name.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.1.1.0\_0002_Amend Product and Shipping Tgt Report Name.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.1.1.0\_0003_Alter Prod Type table prevent duplicates.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.1.1.0\_0004_Prod Ship Tgt Report Group queries.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="3.2.0.0">
+	  <Script Type="Upgrade" Path="Upgrade\3.2.0.0\_0001_Create Table StageBlockModelResourceClassification.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.0.0\_0002_Create Tables BhpbioSummaryEntryField.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.0.0\_0003_Populate BhpbioSummaryEntryField.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.1.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.1.0\_0004_ Add BhpbioError Contribution Context Report.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.1.0\_0005_ Add BhpbioGeomet Overview Contribution Report.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.1.0\_0006_Update Report Security.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.2.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.2.0\_0001_Add Geomet by Attribute Report.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.2.0\_0002_Rename Geomet Contribution Report.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.2.0\_0003_ Product Recon Export Security Update.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.3.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.3.0\_0001_OutlierSeriesNameSuffixConfiguration.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.3.1">
+    <Script Type="Upgrade" Path="Upgrade\3.2.3.1\_0001_RemoveIncorrectOutlierSeries.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.4.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.4.0\_0001_create standard shipping targets.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.4.0\_0002_Outlier Analysis security options.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.4.0\_0003_Fix contribution report name.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.4.0\_0004_Correct Outlier Config.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.6.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.6.0\_0001_update RC fields.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.6.0\_0002_Remove Outlier Series Types.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.6.0\_0003_Add Outlier Series RecoveryMoisture.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.6.0\_0004_Add Missing Outlier Analysis Groups.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.6.0\_0005_Correct Outlier Series Display Names.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.6.0\_0006_GrantRECVIEW_AbilityToRunGeometReports.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.7.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.7.0\_0001_add constraint to the RC staging table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.7.0\_0002_minor changes to outlier config.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.7.0\_0003_Raise Outlier Detection Queue Entries.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.7.0\_0004_give DataSeries permissions to ReconcilorUI.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.11.2">
+    <Script Type="Upgrade" Path="Upgrade\3.2.11.2\_0001_AddExclusionForHaulageVsPlantReport.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.12.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.12.0\_0001_Create JBC3 crusher.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.12.0\_0002_RedefineBlastBlockLumpPercent.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="3.2.12.1">
+    <Script Type="Upgrade" Path="Upgrade\3.2.12.1\_0002_CorrectStagingLumpPercentBasedOnXML.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.12.1\_0003_CorrectLiveLumpPercent.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.12.1\_0004_CorrectApprovedLumpPercent.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.12.1\_0005a_CorrectImportSourceRowPrep.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.12.1\_0005b_CorrectImportSourceRow.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.12.1\_0006_CleanupTemporaryTables.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="3.2.14.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.14.0\_0001_HGABeneConfiguration.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.14.0\_0002_HGABeneReassignment.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.14.0\_0003_HGABeneRollback.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.14.0\_0004_ExtendStagingMaterialTypeColumnWidth.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="3.2.15.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.15.0\_0001_ExplicitlyIncludeOreForRailGroup.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.15.0\_0002_UpdateOreForRailApprovalData.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.15.0\_0003_LocationParentLocationIdIndex.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.15.0\_0004_ReconciliationRiskSystemSettings.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.15.0\_0005_ AddReconcilorRiskReport.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.15.0\_0006_ AddReconcilorRiskReportColourConfiguration.sql" />
+    <Script Type="Upgrade" Path="Upgrade\3.2.15.0\_0007_ ReenableHaulageToOreVsNonOreRatio.sql"  />      
+  </Upgrade>
+
+  <Upgrade Version="3.2.16.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.16.0\_0001_ Add Blockout Summary Report.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.17.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.17.0\_0001_ Add Foward Looking Error Report.sql" />
+  </Upgrade>
+
+  <Upgrade Version="3.2.18.0">
+    <Script Type="Upgrade" Path="Upgrade\3.2.18.0\_0001_ Add F2 Analysis Report.sql" />
+  </Upgrade>-->
+
+  <!--<Upgrade Version="4.0.0.0">
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0000_Add_Deposits_Tables.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0001_Make Stockpile Groups require admin priv.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0002_Add security option configuration for screen.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0003_GeometType_StageBlockModelGrade.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0004_GeometType_BhpbioBlastBlockLumpPercent.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0005_GeometType_BhpbioBlastBlockLumpFinesGrade.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0006_GeometType_BhpbioSummaryEntry.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0007_AsDropped_StageBlockModel.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0008_AddColoursForNewFactors_F0_F05_RFGM_RFMM_RFSTM.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0009_AddUltraFinesPercentGrade.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0010_Add Bulk Approval Auditor.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0011_Add Approval Summary Permission.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0012_Add Bulk Approval Permission.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0013_Add_FactorVsTimeResourceClassification_to_Report_table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0014_Add System Settings for Assessment.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0015_Add Data Series Type Groups.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0016_Add Outlier Series Types.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.0.0\_0017_Add_Recovery_Factors.sql" />
+  </Upgrade>
+
+  <Upgrade Version="4.0.1.0">
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.1.0\_0002_Add New Setting.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.1.0\_0003_Add New PowerPoint Settings.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.1.0\_0004_Fix Bulk Approval Permissions.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.1.0\_0005_dbo.TmpSummariseBhpbioPortBlendedAdjustment_LFOnly.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.1.0\_0006_dbo.TmpSummariseBhpbioShippingTransaction_UF_ONLY.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.1.0\_0007_Reapprove All PBA for LF ONLY.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.1.0\_0008_Reapprove All UF for Ore Shipped.sql" />
+  </Upgrade>
+  
+  <Upgrade Version="4.0.2.0">
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.2.0\_0001_Staging.TmpImportStagingModelBlockAsDroppedToLiveTables.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.2.0\_0002_Staging.TmpImportStagingModelBlockAsDroppedToSummaryTables.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.2.0\_0003_Enhance Bulk Approval Table.sql"/>
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.2.0\_0004_Index to improve Approval Summary speed.sql"/>
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.2.0\_0005_Add_Report_Caching_Configuration_Settings.sql"/>
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.2.0\_0006_Fix Bulk Approval Permissions.sql"/>
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.2.0\_0099_Update Version Number.sql" />
+  </Upgrade>
+
+  <Upgrade Version="4.0.3.0">
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.3.0\_0001_CorrectRecalcGradeEntriesForNewGrade.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.3.0\_0002_AddMissingThresholds.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.3.0\_0003_Fix_Invalid_Colors.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.3.0\_0099_Update Version Number.sql" />
+  </Upgrade>
+
+  <Upgrade Version="4.0.4.0">
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.4.0\_0001_Set_DataSeries.SeriesTypeGroup_Context_Key.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.4.0\_0002_Make_PPT_Webservice_settings_user_editable.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.4.0\_0003_DataSeries_GetNextPendingQueueEntry.sql" />
+  </Upgrade>
+
+  <Upgrade Version="4.0.5.0">
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.5.0\_0001_Raise Outlier Detection Queue Entries.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.5.0\_0002_RemoveASGrades.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.5.0\_0003_CorrectRecalcGradeEntriesForNewGrade.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.5.0\_0099_Update Version Number.sql" />
+  </Upgrade>
+
+  <Upgrade Version="4.0.6.0">
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.6.0\_0000_BhpbioImportSyncRowFilter.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.6.0\_0001_AddIndexesForFilterDataTable.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.6.0\_0002_DeployInc10677Setting.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.6.0\_0099_Update Version Number.sql" />
+  </Upgrade>
+
+  <Upgrade Version="4.0.7.0">
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.7.0\_0002_DeployInc10677Permission.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.0\4.0.7.0\_0099_Update Version Number.sql" />
+  </Upgrade>-->
+
+  <Upgrade Version="4.1.0.0">
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
+  </Upgrade>
+
+  <Excludes>
+    <Folder Path="bin" Pattern="*.*" SubFolders="true" />
+    <Folder Path="obj" Pattern="*.*" Subfolders="true" />
+    <Folder Path="My Project" Pattern="*.*" Subfolders="true" />
+
+    <Folder Path="Upgrade\1.0" Pattern="*.*" Subfolders="true" />
+    <Folder Path="Upgrade\2.0" Pattern="*.*" Subfolders="true" />
+    <Folder Path="Upgrade\3.0" Pattern="*.*" Subfolders="true" />
+    <Folder Path="Upgrade\4.0" Pattern="*.*" Subfolders="true" />
+    
+    <Folder Path="UtilityScripts" Pattern="*.*" Subfolders="true" />
+    <Folder Path="Properties" Pattern="*.*" Subfolders="true" />
+  </Excludes>
+</Manifest>

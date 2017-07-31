@@ -1,0 +1,904 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Snowden.Reconcilor.Bhpbio.Report
+</name>
+</assembly>
+<members>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.Cache.DataCache">
+ <summary>
+ Abstract class to where data can be stored for subquential calls of the same parameters.
+ </summary>
+ <remarks>Must inherit and override in the AquireFromDatabase Call</remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Cache.DataCache.Session">
+ <summary>
+ Holds the report session with all the active connections. 
+ </summary>
+ <remarks>Required by the data cache.</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Calc.Calculation.GetCacheCalcResult(Snowden.Reconcilor.Bhpbio.Report.Cache.DataCache,System.String,System.String)">
+ <summary>
+ Function to get a cache from base data. To be used when calculation does not merrit new calc class.
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationBasic.GetCache">
+ <summary>
+ Basic Calculation Function which is to return the data set the needs processing.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationBasic.SetupOperation">
+ <summary>
+ Processes a basic cache data and assigns it to the calculation.
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.F0.IncludeAllMaterialTypes">
+ <summary>
+ The block model method now will return all material types, if the appropriate arguments are set. Overriding this properly will decide if non-high grade MTs are filtered out or not.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.IAllMaterialTypesCalculation.IncludeAllMaterialTypes">
+ <summary>
+ Contorls whether to fetch high grade only or all material types. Used for density calculations where all material types are included.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.F15.IncludeAllMaterialTypes">
+ <summary>
+ The block model method now will return all material types, if the appropriate arguments are set. Overriding this properly will decide if non-high grade MTs are filtered out or not.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.F1.IncludeAllMaterialTypes">
+ <summary>
+ The block model method now will return all material types, if the appropriate arguments are set. Overriding this properly will decide if non-high grade MTs are filtered out or not.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationModel.IncludeAllMaterialTypes">
+ <summary>
+ By default, all factors on F1F2F3 Validation + Approval screen are high grade only. By default this flag is set to false to mean include high grade only.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationModel.H2OOverride">
+ <summary>
+ Value that indicates the type of H2O override in place if any
+ </summary>
+ <value>The type of H2O override required</value>
+ <returns>The name of the override in place, if any</returns>
+ <remarks>Use the CalculationModel.H2OOverride... constants</remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationModel.ShouldAppendH2OOverrideToIdAndDescription">
+ <summary>
+ A flag indicating whether the H2O override in place should cause the calculation Id to be modified or not
+ </summary>
+ <value>If true, the name of the H2O override in place will be appended to the CalculationId</value>
+ <returns>true if the name of the H2O override in place will be appended to the CalculationId</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationModel.CreateForExplicitH2OOverride(Snowden.Reconcilor.Bhpbio.Report.Calc.CalcType,Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.String)">
+ <summary>
+ Creates a CalculatiomModel of the specified type explicitly for a H2O Override
+ </summary>
+ <param name="calcType">The type of model calculation</param>
+ <param name="session">The report session</param>
+ <param name="h2OOverride">The type of H2O Override being performed</param>
+ <returns>A calculation object setup for the H2O override required</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Calc.CalculationModel.GetCalculationIdWithOptionalSuffix(System.String)">
+ <summary>
+ Get the CalculationId with an optional suffix
+ </summary>
+ <param name="calculationId">The calculation Id</param>
+ <returns>The calculation Id with an optional suffix where there is an H2O override</returns>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Calc.F05.IncludeAllMaterialTypes">
+ <summary>
+ The block model method now will return all material types, if the appropriate arguments are set. Overriding this properly will decide if non-high grade MTs are filtered out or not.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Data.ApprovalData.AssignEditableOnLocationType(Snowden.Reconcilor.Bhpbio.Database.SqlDal.SqlDalUtility,Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet,System.String,System.Nullable{System.Int32})">
+ <summary>
+ Sets the Presentation Editable on the calculation set. Accounts for the location id's of each result or if 
+ the location id is not set (dont include children) then it will used the null location id. 
+ </summary>
+ <param name="utilityDal">Requires a valid connected Utility DAL object</param>
+ <param name="calcSet">The set of calculation results to add the tag to.</param>
+ <param name="validLocationType">The location type required for it to be valid</param>
+ <param name="nullLocationId">If the location ID is null, use this one instead. This will be used when children are not included.</param>
+ <remarks></remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Data.ApprovalData.GetSignOffDenorm(System.Data.DataSet,System.String,System.Nullable{System.Int32})">
+ <summary>
+ Returns the Denormalized form of the sign off users.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Data.ApprovalData.GetSignOffDateDenorm(System.Data.DataSet,System.String,System.Nullable{System.Int32})">
+ <summary>
+ Returns the Denormalized form of the sign off date users.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Data.DateBreakdown.FindStartOfBreakdownPeriod(System.DateTime,Snowden.Reconcilor.Bhpbio.Report.Types.ReportBreakdown)">
+ <summary>
+ Find the date that begins a breakdown period
+ </summary>
+ <param name="referencedDateTime">date time used as a reference point</param>
+ <param name="breakdown">date breakdown to be used</param>
+ <returns>Date that is the start of the breakdown period that the referenced date time belongs to</returns>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.Data.Location">
+ <summary>
+ Provides shared interface for the reports to query Locational questions.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Data.Location.IsLocationBetween(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32,System.String,System.String)">
+ <summary>
+ Function to aquire if a given location id is within two location types.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Data.Location.GetLocationType(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32)">
+ <summary>
+ Returns the Location Type assoicated with the Location Id
+ </summary>
+ <returns>Location Type</returns>
+ <remarks></remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Data.Location.GetLocationParentDescriptionList(System.String,System.String,Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession)">
+ <summary>
+ Returns the location list of the location types description between two location types.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Data.Location.GetLocationParentDescriptionList(System.String,Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession)">
+ <summary>
+ Returns the location list of the location type and all it's parent descriptions.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.BackgroundCacheRetrievalContext">
+ <summary>
+ Encapsulates the context information for background retrieval
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.ErrorContributionEngine.AddAndPrepareErrorContributionColumns(System.Data.DataTable@)">
+ <summary>
+ Prepare a datatable to store additional error contribution information
+ </summary>
+ <param name="table">table to be appended</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.F1F2F3OverviewReconciliationReport.GetLocationNamesWithOverride(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32,System.DateTime,System.DateTime)">
+ <summary>
+ Retrieves a dictionary of all the location ids, location definitons of the supplied parent id and its children.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.F1F2F3OverviewReconciliationReport.GetLocationNames(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32)">
+ <summary>
+ Retrieves a dictionary of all the location ids, location definitons of the supplied parent id and its childrend.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.F1F2F3ReconciliationComparisonReport.GetRawData(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32,System.DateTime,System.DateTime)">
+ <summary>
+ Gets the raw data.
+ </summary>
+ <param name="session">The session.</param>
+ <param name="locationId">The location id.</param>
+ <param name="startDate">The start date.</param>
+ <param name="endDate">The end date.</param>
+ <returns></returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.LiveVersusSummaryComparisonReport.CombineLiveAndSummaryData(System.Data.DataTable,System.Data.DataTable)">
+ <summary>
+ Combines Live and Summary data into a table
+ </summary>
+ <param name="liveLocationDataTable">the live data</param>
+ <param name="summaryLocationDataTable">the summary data</param>
+ <returns>Newly combined data table</returns>
+ <remarks>This method is used to prepare comparison data</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.LiveVersusSummaryComparisonReport.UpdateComparisonValue(System.Data.DataRow,System.Data.DataRow,System.String)">
+ <summary>
+ Compare column values across 2 rows and change the column value in the first to represent the proportional difference between the 2
+ </summary>
+ <param name="firstRow">the first row</param>
+ <param name="secondRow">the second row</param>
+ <param name="columnName">the column to compare</param>
+ <remarks>this is used to support variation reporting</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.LiveVersusSummaryComparisonReport.GetLocationNamesWithOverride(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32,System.DateTime,System.DateTime)">
+ <summary>
+ Retrieves a dictionary of all the location ids, location definitons of the supplied parent id and its childrend.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.LiveVersusSummaryComparisonReport.GetLocationNames(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32)">
+ <summary>
+ Retrieves a dictionary of all the location ids, location definitons of the supplied parent id and its childrend.
+ </summary>
+</member>
+<member name="F:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.ValidationApprovalData.ProductSizeColumnSortExpression">
+ <summary>
+ A sort expression used to order product sizes in desired display order
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions.ValidationApprovalData.SentenceCase(System.String)">
+ <summary>
+ Transforms text to sentence case, where the first letter is uppercased and the remainder lower.
+ </summary>
+ <param name="stringToSentenceCase">The string to transform</param>
+ <returns>Transformed text</returns>
+ <remarks>Example input and output:  "TEST" => "Test", "test" => "Test", "THis iS a Test" => "This is a test"</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCacheActualBeneProduct(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCachePortStockpileDelta(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCacheBlockModel(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCacheOreForRail(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCachePortOreShipped(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCachePortBlendedAdjustment(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCacheActualStockpileToCrusher(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCacheActualMineProduction(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCacheActualExpitToStockpile(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCacheActualHubPostCrusherStockpileDelta(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.BackgroundGetCacheActualSitePostCrusherStockpileDelta(System.Object)">
+ <summary>
+ Method used to obtain report data on a background thread for caching purposes
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.PrepareF1F2F3Cache(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession)">
+ <summary>
+ Prepare the report cache by asynchronously performing the data lookups needed
+ </summary>
+ <param name="session">The report session to be used</param>
+ <remarks>This is done for performance reasons</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.CalculateF1F2F3Factors(System.Data.DataTable,System.Boolean,System.Boolean,System.Nullable{System.Int32})">
+ <summary>
+ Update / Recalculate Factor row values based on component values within the data table. 
+ NOTE: Use RecalculateF1F2F3Factors instead of calling this directly
+ </summary>
+ <param name="resultTable">The table whose factor values must be updated</param>
+ <param name="groupOnCalendarDate">If true, the results are grouped on calendar date... if false, only a single date is expected</param>
+ <param name="includeFactorPrefixOnCalcIds">If true, the F1 F2 F3 factor prefixes will be prepended to row Ids</param>
+ <returns>The same table (it is updated in place, so return value can be ignored)</returns>
+ <remarks>This function exists because when multiple sets of results are merged into a datatable together (such as results for multiple periods), the factor values become invalid and must be recalculated from the aggregate components</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.RecalculateF1F2F3FactorsByCalculationIdLookup(System.Data.DataTable)">
+ <summary>
+ Recalculate F1F2F3 values based on source data in the supplied data tables
+ </summary>
+ <param name="resultTable">the result table to be updated</param>
+ <returns>the updated table</returns>
+ <remarks>This function is used to correct F1F2F3 values on tables that may have been aggregated and require recalculation
+ The calculation process involves identifying rows in the table based on CalcId, CalendarDate and LocationId
+ </remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.RecalculateFactorValueBasedOnDataRowDictionaries(System.Collections.Generic.Dictionary{System.String,System.Data.DataRow},System.Collections.Generic.Dictionary{System.String,System.Data.DataRow},System.Collections.Generic.Dictionary{System.String,System.Data.DataRow})">
+ <summary>
+ Recalculate factors (F1F2F3 etc) based on a set of dictionaries used to match Factor rows with source data rows for time periods
+ </summary>
+ <param name="factorRowDictionary">A dictionary containing the factor rows</param>
+ <param name="numeratorSourceRowDictionary">a dictionary containing source rows... these are the </param>
+ <param name="denominatorSourceRowDictionary">a dictionary containing source rows... these are the denominator values in factor calculation</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.InvertDensityForDisplay(System.Data.DataTable@,System.String,System.Boolean)">
+ <summary>
+ Invert the Density column (switching between m3/t and t/m3)
+ </summary>
+ <param name="table">the table for which the density column should be inverted</param>
+ <param name="densityValueColumnName">The name of the density value column</param>
+ <param name="checkAttributeNameColumn">flag used to check whether the attribute column name should be referred to
+ </param>
+ <remarks>NOTE: Intuitively it would seem that density valuees on factor rows should not be inverted (because factors are already a ratio, however on further analysis
+ they also require inversion... In m3/t form, higher numbers are less dense...but in t/m3 form higher numbers are proportionally more dense...  
+ for this reason any factor ratios already calculated also need to be inverted (values > 1 will become &lt; 1 and vice-versa</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.AddLocationDataToTable(Snowden.Reconcilor.Bhpbio.Report.Types.Location,System.Data.DataTable)">
+ <summary>
+ Adds the LocationName column and LocationType column to the report data table and populates the LocationName,
+ LocationType and LocationId columns used by the report with the relevant location information.
+ </summary>
+ <param name="location"></param>
+ <param name="reportDataTable"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.GetLocationNames(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32)">
+ <summary>
+ Retrieves a dictionary of all the location ids, location definitons of the supplied parent id and its childrend.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.GetAllLocationNamesRecursive(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32,System.DateTime,System.String)">
+ <summary>
+ Retrieves a dictionary of all the location ids, location definitons of the supplied parent id and ALL it's children.
+ all the way down to the set level
+ 
+ A DateTime is required due to the dynamic nature of the location hierarchy
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.GetAllLocationNames(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Int32)">
+ <summary>
+ Retrieves a dictionary of all the location ids, location definitons of the supplied parent id and ALL it's children.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.GetFactorsForProductType(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.DateTime,System.DateTime,System.Int32,System.Boolean)">
+ <summary>
+ Get factor values for a Product Type
+ </summary>
+ <param name="session">session object defining paramters for this reporting session</param>
+ <param name="dateFrom">start date in the reporting range</param>
+ <param name="dateTo">end date in the reporting range</param>
+ <param name="productTypeId">product type code to report</param>
+ <param name="groupOnCalendarDate">if true, results are grouped by calendar date within the reporting period, otherwise they are grouped together</param>
+ <returns>DataTable containing factor results for the product type</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.GetFactorsForProductTypes(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.DateTime,System.DateTime,System.String,System.Boolean)">
+ <summary>
+ Get factor values for a Product Type
+ </summary>
+ <param name="session">session object defining paramters for this reporting session</param>
+ <param name="dateFrom">start date in the reporting range</param>
+ <param name="dateTo">end date in the reporting range</param>
+ <param name="productTypeIdsString">product type Ids to include in report (as delimited string)</param>
+ <param name="groupOnCalendarDate">if true, results are grouped by calendar date within the reporting period, otherwise they are grouped together</param>
+ <returns>DataTable containing factor results for the product type</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.GetFactorsForProductTypes(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.Int32},System.Boolean)">
+ <summary>
+ Get factor values for a Product Type
+ </summary>
+ <param name="session">session object defining paramters for this reporting session</param>
+ <param name="dateFrom">start date in the reporting range</param>
+ <param name="dateTo">end date in the reporting range</param>
+ <param name="productTypeIds">product type Ids to include in report</param>
+ <param name="groupOnCalendarDate">if true, results are grouped by calendar date within the reporting period, otherwise they are grouped together</param>
+ <returns>DataTable containing factor results for the product type</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.F1F2F3ReportEngine.AddProductTypeColumns(System.Data.DataTable,Snowden.Reconcilor.Bhpbio.Report.Types.ProductType)">
+ <summary>
+ Add product type column to the table and assign the value provided
+ </summary>
+ <param name="table">table to have the product type code assigned</param>
+ <param name="prodType">ProductType object containing id and name information for the Product Type</param>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult">
+ <summary>
+ Contains the result of a given calculation.
+ Also supplies shared functions for the conversion between datatables and calculationResult.
+ </summary>
+ <remarks>CalculationResult will contain one to many CalculationDate</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.RemoveResourceClassificationRows">
+ <summary>
+ Remove any result rows that are ResourceClassification related
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.#ctor(System.Data.DataRow[],System.Data.DataRow[])">
+ <summary>
+ Creates and fills out the structure the the calculations.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.#ctor(System.Data.DataRow[],System.Data.DataRow[],System.DateTime,System.DateTime,Snowden.Reconcilor.Bhpbio.Report.Types.ReportBreakdown)">
+ <summary>
+ Creates and fills out the structure the the calculations with dates.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.MergeInRows(System.Data.DataSet,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{Snowden.Reconcilor.Bhpbio.Report.Types.ReportBreakdown})">
+ <summary>
+ Add's the rows into the calculation result.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.MergeInRows(System.Data.DataRow[],System.Data.DataRow[],System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{Snowden.Reconcilor.Bhpbio.Report.Types.ReportBreakdown})">
+ <summary>
+ Add's the rows into the calculation result.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetRecordsForPeriod(System.DateTime,System.DateTime,Snowden.Reconcilor.Bhpbio.Report.Types.ReportBreakdown)">
+ <summary>
+ Returns blank records for the dates.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.BuildDataRowLookupByDateAndLocationStoreKey(System.Data.DataRow)">
+ <summary>
+ For a given row, determine an appropriate key for looking up related data in a lookup store
+ </summary>
+ <param name="row">DataRow for which a key is to be determined</param>
+ <returns>the lookup key</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.BuildDataRowLookupByDateAndLocationStore(System.Data.DataRow[])">
+ <summary>
+ Build a data structure that supports quick lookup of data rows by DateFrom and Location
+ </summary>
+ <param name="dataRows">The data rows on which to build a lookup store</param>
+ <returns>A structure that supports lookup based on dateFrom_locationId keys</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.BuildRecordLookupByMainAggregationFieldsStore(Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Build a data structure that enables lookup of calculation records by lookup key
+ </summary>
+ <param name="result">the calculation result whose data should be added to the store</param>
+ <param name="onMaterialTypeId">if true, material type id will be part of the lookup key</param>
+ <param name="onLocationId">if true, location id will be part of the lookup key</param>
+ <param name="onProductSize">if true, product size will be part of the lookup key</param>
+ <returns>the dictionary data structure to be used for lookup</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.BuildRecordLookupByMainAggregationFieldsStoreKey(Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultRecord,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Build a lookup key suitable for obtaining calculation records from a lookup store
+ </summary>
+ <param name="record">the record, whose attributes will be inspected to build the lookup key</param>
+ <param name="onMaterialTypeId">if true, material type id will be part of the lookup key</param>
+ <param name="onLocationId">if true, location id will be part of the lookup key</param>
+ <param name="onProductSize">if true, product size will be part of the lookup key</param>
+ <returns>string representing the lookup key</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.BuildRecordLookupByMainAggregationFieldsStoreKey(System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String)">
+ <summary>
+ Build a lookup key suitable for obtaining calculation records from a lookup store
+ </summary>
+ <param name="calDate">the date to be included in the lookup key</param>
+ <param name="locationId">the Location Id to be included in the lookup key</param>
+ <param name="materialTypeId">the material type Id to be included in the lookup key</param>
+ <param name="productSize">the product size to be included in the lookup key</param>
+ <returns>string representing the lookup key</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.Clone">
+ <summary>
+ Deep copy of the object.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.CloneData">
+ <summary>
+ Deep copy of just the object data.
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetAllCalculations">
+ <summary>
+ Returns a calculation set of all calculation results, including parents used in this result.
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetAllResults">
+ <summary>
+ Returns a list of parents and their depths in this result, including the root result.
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetParents">
+ <summary>
+ Returns a list of parents and their depths in this result.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetParentDepths(System.Int32,System.Collections.ObjectModel.Collection{Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultDepth})">
+ <summary>
+ To be used only by GetParents().
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetFirstCalcId(System.String)">
+ <summary>
+ Returns the first result matching the calc id.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetCalcById(System.String)">
+ <summary>
+ Returns a Calculation set of all items matching that calc id.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.ReplaceDescription(System.String,System.String)">
+ <summary>
+ Replaces any calc id's descriptions found with the description provided.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.PrefixTagId(System.String)">
+ <summary>
+ Prefix's this calclulation and all the parents Tag id with the string provided.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetMaterialTypeResult(System.Nullable{System.Int32})">
+ <summary>
+ Returns a copy of the result containing all records belonging to the supplied material type.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.UpdateMaterialType(System.Nullable{System.Int32})">
+ <summary>
+ Change all records to the newly supplied material type.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.UpdateMaterialType(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+ <summary>
+ Change any records of the old material type to the newly supplied material type.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.StripDateRange(System.DateTime,System.DateTime,System.Boolean)">
+ <summary>
+ Strips out all the dates between the range.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.StripDateExcept(System.DateTime)">
+ <summary>
+ Strips out all the dates execpt for the one provided.
+ </summary>
+ <param name="calendarDate">Keep all records relating to this date.</param>
+ <remarks>Used to get a subset of the data.</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.DeleteRecordAndTags(Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultRecord[],System.Collections.Generic.List{Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultTag})">
+ <summary>
+ Deletes the records and tags in the list.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.ToDataTable">
+ <summary>
+ Dumps the results to a datatable with no aggregation - this is not used by the reports, but it good for testing
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.GetDataTableStub">
+ <summary>
+ Returns the table stub needed for ToDataTable conversions.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.ToAggregatedClone(System.Boolean)">
+ <summary>
+ Created an equivalent calculation result that has been aggregated using options the perform the minimum amount of aggregation
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.ToDataTableParseRows(Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultRecord[],System.Data.DataTable,System.Int32,System.Boolean,System.Boolean)">
+ <summary>
+ Parse the rows in normalized data into a data table. To be used only from ToDataTable.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResult.ToCalculationResult(System.Data.DataRow[],System.Data.DataRow[],System.DateTime,System.DateTime,Snowden.Reconcilor.Bhpbio.Report.Types.ReportBreakdown)">
+ <summary>
+ Primary function to convert data rows to the report object model. Often used on Database calls to format into calculation model.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultRecord.GetGradeValue(System.String,System.Collections.Generic.IEnumerable{System.Data.DataRow})">
+ <summary>
+ Returns a value from the row if it exists.
+ </summary>
+ <param name="gradeName">Name of the grade to obtain the value for</param>
+ <param name="gradeFiltered">All relevant rows, pre-filtered but may contain multiple rows..one per grade</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultRecord.RatioGrade(System.Nullable{System.Double},System.Nullable{System.Double})">
+ <summary>
+ Gets the ratio of a grade
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultTag.AddTagToRow(System.Data.DataRow)">
+ <summary>
+ Adds this tag to a data row. This should be called when the calculation set is being turned into a data table.
+ </summary>
+ <param name="row">Row for the tag to be added to.</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultTag.NullEqual(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+ <summary>
+ Returns true if the two nullable int32's are equal, this includes both being nothing. 
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationResultTag.NullEqual(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+ <summary>
+ Returns true if the two nullable datetime's are equal, this includes both being nothing. 
+ </summary>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet">
+ <summary>
+ Contains a set of CalculationResults and functions to manage them.
+ Supplies shared functions for the conversion between datatables and CalculationSet's.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.InError">
+ <summary>
+ returns true if any of the CalculationResults are in error
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.GetAllParentResults">
+ <summary>
+ Returns the Calculation set of all result's and their parent results.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.GetCalcById(System.String)">
+ <summary>
+ Returns a Calculation set of all items matching that calc id.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.ToDataTable(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,Snowden.Reconcilor.Bhpbio.Report.Types.DataTableOptions)">
+ <summary>
+ Converts set to a datatable, this is the same as the other ToDataTable methods, but it takes an options object
+ that is a bit easier to deal with
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.ToDataTable(Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession)">
+ <summary>
+ Converts set to a datatable without including parents in a denorm form.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.ToDataTable(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Nullable{Snowden.Reconcilor.Bhpbio.Report.Types.ReportBreakdown},Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession,System.Boolean)">
+ <summary>
+ Converts set to a datatable without including parents in a denorm form.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.ToDataTable(System.Boolean,System.Boolean,System.Boolean,System.Boolean,Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession)">
+ <summary>
+ Converts set to a datatable without including parents in a denorm form.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.Merge(Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet)">
+ <summary>
+ Merges Calulcation References.
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.RemoveProductSizeRecordsBeforeCutover(System.Data.DataTable,Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession)">
+ <summary>
+ Lump and Fines breakdowns records should only appear in report results and approvals if they are after the cutover
+ </summary>
+ <param name="reportDataTable">The data table containing results</param>
+ <param name="session">The session containing the cutover date</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.SafeGetDataRowString(System.Data.DataRow@,System.String)">
+ <summary>
+ Get a string value from a data row, avoiding exceptions that may be caused by incorrect treatment of nulls or DBNull
+ </summary>
+ <param name="row">The row to read from</param>
+ <param name="columnName">The name of the column to read</param>
+ <returns>The read value, or Nothing if the value could not be read</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.CalculationSet.SafeGetDataRowInteger(System.Data.DataRow@,System.String)">
+ <summary>
+ Get an integer value from a data row, avoiding exceptions that may be caused by incorrect treatment of nulls or DBNull
+ </summary>
+ <param name="row">The row to read from</param>
+ <param name="columnName">The name of the column to read</param>
+ <returns>The read value, or the default value for integer if the value could not be read</returns>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.Types.ExtendedLocation">
+ <summary>
+ Class to hold location information.
+ </summary>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.Types.Location">
+ <summary>
+ Class to hold location information.
+ </summary>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.Types.ReportContext">
+ <summary>
+ A Reporting Context type
+ </summary>
+ <remarks>
+ Note that this is used to drive report behaviour so that reports include data appropriate for the context.
+ e.g When reporting in preparation for approvals, it is neccessary to include Live and Approved summary data
+ </remarks>
+</member>
+<member name="F:Snowden.Reconcilor.Bhpbio.Report.Types.ReportContext.Standard">
+ <summary>
+ A standard reporting context
+ </summary>
+ <remarks>typically approved summary data is used as the source for reporting display</remarks>
+</member>
+<member name="F:Snowden.Reconcilor.Bhpbio.Report.Types.ReportContext.ApprovalListing">
+ <summary>
+ A reporting context specifically for approvals viewing
+ </summary>
+ <remarks>This context requires a mix of live and approved summary data</remarks>
+</member>
+<member name="F:Snowden.Reconcilor.Bhpbio.Report.Types.ReportContext.LiveOnly">
+ <summary>
+ A Reporting Context that uses live data only
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.IncludeGeometData">
+ <summary>
+ if this is true then the session should try calculate the geomet split data for the 
+ table if possible, if this is false it doesn't mean that no geomet data will be added
+ - this is just a hint
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.ExplicitlyIncludeExtendedH2OModelCalculations">
+ <summary>
+ Explicitly include the extended H2O model calculations (ie the AsDropped, AsShipped variants)
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.OptionalCalculationTypesToInclude">
+ <summary>
+ A list of optional calculation types to be include (where otherwise they would not ordinarily be included)
+ </summary>
+ <returns>The list containing optional calc types to include</returns>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.DalConnectionText">
+ <summary>
+ The connection text (string) that was used to instantiate DAL instances
+ </summary>
+ <value>a connection string</value>
+ <returns>The connection string used to instantiate DAL instances</returns>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.DalReport">
+ <summary>
+ Gets a SqlDalReport instance used to retrieve report data
+ </summary>
+ <value>A SqlDalReportInstance</value>
+ <returns>A SqlDalReportInstance</returns>
+ <remarks>This property will return the instance owned by this session, unless there is a DalReport instance available in a current ReportThreadContext in which case the Thread specific instance will be returned.  
+ This is needed to work around thread-safety issue with SqlDalReport and is needed because multiple threads are now used to retrieve data more efficiently</remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.IncludeModelDataForInactiveLocations">
+ <summary>
+ Flag used to control whether model data is loaded for inactive locations or not
+ </summary>
+ <returns>True if model data should be returned, falst otherwise</returns>
+ <remarks>This is useful for the reporting system</remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.ForwardModelFactorCalculation">
+ <summary>
+ Flag used to indicate that the model calculations are to be based on remaining rather than depleted material
+ </summary>
+ <returns>True if model data should be returned based on remaining material, falst otherwise</returns>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.OverrideModelDataLocationTypeBreakdown">
+ <summary>
+ Indicates an override location type for the retrieval of model data
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.IgnoreLumpFinesCutover">
+ <summary>
+ If True then the Lump/Fines data will always be returned, regardless of the cutover date
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.AllowExceptionsToBeThrown">
+ <summary>
+ A flag used to control whether the reporting system is able to throw exceptions back
+ </summary>
+ <value>if true, exceptions are thrown, otherwise they are wrapped on in calculation result statuses</value>
+ <returns>True if exceptions are to be thrown</returns>
+ <remarks>The value of this flag is set differently by the approvals and reporting systems</remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.RequiredModelList">
+ <summary>
+ Gets or sets a comma delimited list of Models
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.ReportName">
+ <summary>
+ Stores the name of the report that called the webmethod. *Note that this is only set in some cases*
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.GetModelDesignDataByBlockoutDate">
+ <summary>
+ Set this to true to change the functionality of the CalculationModel class to get the model data by block out
+ date, not by depletion month. This is used by the Reconciliation Risk Blockout Summary Report
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.IsFactorExcludedFromHubReportSet(System.String)">
+ <summary>
+ Test whether a factor is to be excluded from the report set or not
+ </summary>
+ <param name="factor">The factor to be excluded</param>
+ <returns>True if the factor is excluded, false otherwise</returns>
+ <remarks>Useful for the home screen that doesn't need all factors</remarks>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.Types.ReportSession.ExcludeFactorFromHubReportSet(System.String)">
+ <summary>
+ Exclude a factor from the hub report set
+ </summary>
+ <param name="factor">the factor to be excluded</param>
+ <remarks>Useful for the home screen that doesn't need all factors</remarks>
+</member>
+<member name="T:Snowden.Reconcilor.Bhpbio.Report.ReportThreadContext">
+ <summary>
+ A Report Context that applies to a single thread only
+ </summary>
+ <remarks>This is used to provide each thread with it's own SqlReportDal</remarks>
+</member>
+<member name="F:Snowden.Reconcilor.Bhpbio.Report.ReportThreadContext._dalReport">
+ <summary>
+ The reprot Dal instance appropriate for this thread
+ </summary>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.ReportThreadContext.Current">
+ <summary>
+ Gets the current context for this thread
+ </summary>
+ <value>the value of the current context</value>
+ <returns>the current context</returns>
+ <remarks>Used to make thread specific objects available to report code</remarks>
+</member>
+<member name="P:Snowden.Reconcilor.Bhpbio.Report.ReportThreadContext.DalReport">
+ <summary>
+ Gets or sets the DalReport to be used for this context
+ </summary>
+ <value>Gets the dal report to be used</value>
+ <returns>A SqlDalReport instance</returns>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportThreadContext.#ctor(System.String@)">
+ <summary>
+ Constructor that accepts a database connection string used for creating dals
+ </summary>
+ <param name="connectionString">The connection string to be used to create DAL instances</param>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.ReportThreadContext.Dispose">
+ <summary>
+ Dispose of this thread context and any dependents
+ </summary>
+</member>
+<member name="M:Snowden.Reconcilor.Bhpbio.Report.WebService.GetRiskProfileReportColours">
+ <summary>
+ Method used to obtain additional colours needed by the RiskProfileReport
+ </summary>
+ <returns>A data table containing a single row with a column per required colour</returns>
+</member>
+</members>
+</doc>

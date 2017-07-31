@@ -1,0 +1,174 @@
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\KinrossPlantHandler.dll.config
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\KinrossPlantHandler.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\KinrossPlantHandler.pdb
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Antlr3.Runtime.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\EntityFramework.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\EntityFramework.SqlServer.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Core.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Owin.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Host.SystemWeb.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Cookies.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Facebook.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Google.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.OAuth.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Twitter.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Web.Infrastructure.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Newtonsoft.Json.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Owin.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Helpers.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Mvc.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Optimization.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Razor.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.Deployment.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.Razor.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\WebGrease.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Helpers.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Mvc.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Optimization.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Razor.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.Deployment.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.Razor.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Antlr3.Runtime.pdb
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Newtonsoft.Json.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\EntityFramework.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\EntityFramework.SqlServer.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Core.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Owin.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Host.SystemWeb.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Facebook.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Cookies.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.OAuth.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Google.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Twitter.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.csprojResolveAssemblyReference.cache
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.pdb
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Excel.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\ICSharpCode.SharpZipLib.dll
+c:\users\snowdendell\documents\visual studio 2013\Projects\KinrossPlantHandler\KinrossPlantHandler\bin\Excel.pdb
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\KinrossPlantHandler.dll.config
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\KinrossPlantHandler.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\KinrossPlantHandler.pdb
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Antlr3.Runtime.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\EntityFramework.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\EntityFramework.SqlServer.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Excel.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\ICSharpCode.SharpZipLib.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Core.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Cookies.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Facebook.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Google.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.OAuth.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Twitter.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Web.Infrastructure.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Newtonsoft.Json.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Owin.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Helpers.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Mvc.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Optimization.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Razor.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.Deployment.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.Razor.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\WebGrease.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Excel.pdb
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Helpers.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Mvc.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Optimization.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.Razor.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.Deployment.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\System.Web.WebPages.Razor.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Antlr3.Runtime.pdb
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Newtonsoft.Json.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\EntityFramework.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\EntityFramework.SqlServer.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Core.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Facebook.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Cookies.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.OAuth.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Google.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.Twitter.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.csprojResolveAssemblyReference.cache
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.dll
+C:\PROJECTS\KinrossPlantHandler\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.pdb
+C:\PROJECTS\ShipTest\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.csprojResolveAssemblyReference.cache
+C:\PROJECTS\ShipTest\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\KinrossPlantHandler.dll.config
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\KinrossPlantHandler.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\KinrossPlantHandler.pdb
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Antlr3.Runtime.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\EntityFramework.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\EntityFramework.SqlServer.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Excel.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\ICSharpCode.SharpZipLib.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Core.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.Cookies.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.Facebook.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.Google.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.OAuth.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.Twitter.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Web.Infrastructure.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Newtonsoft.Json.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Owin.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.Helpers.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.Mvc.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.Optimization.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.Razor.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.WebPages.Deployment.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.WebPages.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.WebPages.Razor.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\WebGrease.dll
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Excel.pdb
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.Helpers.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.Mvc.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.Optimization.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.Razor.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.WebPages.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.WebPages.Deployment.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\System.Web.WebPages.Razor.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Antlr3.Runtime.pdb
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Newtonsoft.Json.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\EntityFramework.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\EntityFramework.SqlServer.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Core.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.Facebook.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.Cookies.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.OAuth.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.Google.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.Twitter.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\PROJECTS\ShipTest\KinrossPlantHandler\obj\Debug\KinrossPlantHandler.pdb
