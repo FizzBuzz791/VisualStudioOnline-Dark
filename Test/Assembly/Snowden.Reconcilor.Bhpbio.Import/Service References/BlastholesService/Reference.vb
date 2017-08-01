@@ -654,19 +654,19 @@ Namespace BlastholesService
                 Return Me.densityField
             End Get
             Set
-                Me.densityField = value
+                Me.densityField = Value
                 Me.RaisePropertyChanged("Density")
             End Set
         End Property
-        
+
         '''<remarks/>
-        <System.Xml.Serialization.XmlIgnoreAttribute()>  _
+        <System.Xml.Serialization.XmlIgnoreAttribute()>
         Public Property DensitySpecified() As Boolean
             Get
                 Return Me.densityFieldSpecified
             End Get
             Set
-                Me.densityFieldSpecified = value
+                Me.densityFieldSpecified = Value
                 Me.RaisePropertyChanged("DensitySpecified")
             End Set
         End Property
@@ -678,7 +678,7 @@ Namespace BlastholesService
                 Return Me.lastModifiedUserField
             End Get
             Set
-                Me.lastModifiedUserField = value
+                Me.lastModifiedUserField = Value
                 Me.RaisePropertyChanged("LastModifiedUser")
             End Set
         End Property
@@ -690,19 +690,19 @@ Namespace BlastholesService
                 Return Me.lastModifiedDateField
             End Get
             Set
-                Me.lastModifiedDateField = value
+                Me.lastModifiedDateField = Value
                 Me.RaisePropertyChanged("LastModifiedDate")
             End Set
         End Property
-        
+
         '''<remarks/>
-        <System.Xml.Serialization.XmlIgnoreAttribute()>  _
+        <System.Xml.Serialization.XmlIgnoreAttribute()>
         Public Property LastModifiedDateSpecified() As Boolean
             Get
                 Return Me.lastModifiedDateFieldSpecified
             End Get
             Set
-                Me.lastModifiedDateFieldSpecified = value
+                Me.lastModifiedDateFieldSpecified = Value
                 Me.RaisePropertyChanged("LastModifiedDateSpecified")
             End Set
         End Property
@@ -714,13 +714,13 @@ Namespace BlastholesService
                 Return Me.gradeField
             End Get
             Set
-                Me.gradeField = value
+                Me.gradeField = Value
                 Me.RaisePropertyChanged("Grade")
             End Set
         End Property
-        
+
         Public Event PropertyChanged As System.ComponentModel.PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-        
+
         Protected Sub RaisePropertyChanged(ByVal propertyName As String)
             Dim propertyChanged As System.ComponentModel.PropertyChangedEventHandler = Me.PropertyChangedEvent
             If (Not (propertyChanged) Is Nothing) Then
@@ -728,13 +728,13 @@ Namespace BlastholesService
             End If
         End Sub
     End Class
-    
+
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234"),  _
-     System.SerializableAttribute(),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://www.bhpbilliton.com/waio/F1F2F3DataService")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234"),
+     System.SerializableAttribute(),
+     System.Diagnostics.DebuggerStepThroughAttribute(),
+     System.ComponentModel.DesignerCategoryAttribute("code"),
+     System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://www.bhpbilliton.com/waio/F1F2F3DataService")>
     Partial Public Class Grade
         Inherits Object
         Implements System.ComponentModel.INotifyPropertyChanged
@@ -744,23 +744,23 @@ Namespace BlastholesService
         Private geometTypeField As String
 
         Private sampleValueField As Decimal
-        
+
         Private sampleValueFieldSpecified As Boolean
-        
+
         Private headValueField As Decimal
-        
+
         Private headValueFieldSpecified As Boolean
-        
+
         Private finesValueField As Decimal
-        
+
         Private finesValueFieldSpecified As Boolean
-        
+
         Private lumpValueField As Decimal
-        
+
         Private lumpValueFieldSpecified As Boolean
 
         '''<remarks/>
-        <System.Xml.Serialization.XmlElementAttribute(Form:=System.Xml.Schema.XmlSchemaForm.Unqualified, Order:=0)>
+        <System.Xml.Serialization.XmlElementAttribute(Form:=System.Xml.Schema.XmlSchemaForm.Unqualified, Order:=1)>
         Public Property Name() As String
             Get
                 Return Me.nameField
@@ -772,7 +772,7 @@ Namespace BlastholesService
         End Property
 
         '''<remarks/>
-        <System.Xml.Serialization.XmlElementAttribute(Form:=System.Xml.Schema.XmlSchemaForm.Unqualified, Order:=1)>
+        <System.Xml.Serialization.XmlElementAttribute(Form:=System.Xml.Schema.XmlSchemaForm.Unqualified, Order:=0)>
         Public Property GeometType() As String
             Get
                 Return Me.geometTypeField
