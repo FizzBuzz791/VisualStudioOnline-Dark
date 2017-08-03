@@ -45,3 +45,5 @@ packages/*
 _UpgradeReport_Files/
 UpgradeLog*.XML
 UpgradeLog*.htm
+*.cache
+/Test/Database/Database.dbmdl
