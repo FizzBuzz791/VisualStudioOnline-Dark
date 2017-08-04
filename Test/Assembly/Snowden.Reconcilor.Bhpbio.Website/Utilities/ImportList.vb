@@ -9,8 +9,6 @@ Namespace Utilities
         Private _month As Integer = Nothing
         Private _year As Integer = Nothing
         Private _locationId As Integer = Nothing
-        Private _locationName As String = Nothing
-        Private _locationType As String = Nothing
         Private _useMonthLocation As Boolean = Nothing
 
         Public ReadOnly Property BhpbioDalImport As SqlDalImportManager
@@ -53,16 +51,17 @@ Namespace Utilities
                 _month = tempDate.Month
             End If
 
-            If (Request("MonthPickerYearPart") = "null") Then
+            If (Request("MonthPickerYearPart") = "null" Or Request("MonthPickerYearPart") Is Nothing) Then
                 _year = Date.Now.Year 'Doesn't matter, it's not going to be used, just give it *any* value so that things don't break.
             Else
                 _year = RequestAsInt32("MonthPickerYearPart")
             End If
 
-            _locationId = RequestAsInt32("LocationId")
-            _locationName = RequestAsString("LocationName")
-            _locationType = RequestAsString("LocationType")
+            If (Request("LocationId") Is Nothing) Then
+                _locationId = 1 ' Safety. Default to WAIO if nothing comes through.
+            Else
+                _locationId = RequestAsInt32("LocationId")
+            End If
         End Sub
-
     End Class
 End Namespace

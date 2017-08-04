@@ -45,6 +45,27 @@ function GetBhpbioImportsTabContent() {
     return false;
 }
 
+// override existing method to force submit so that filters work correctly
+function GetImportsList(importId) {
+    // see if the critical or validation link has been clicked
+    var url = GetAddressParameter('Tab', window.location);
+
+    switch (url)
+    {
+        case "Validation":
+        case "Critical":
+            url = './ImportList.aspx?Tab=' + url;
+            if (importId != null) {
+                url = url + '&ImportId=' + importId;
+            }
+            CallAjax('importContent', url);
+            break;
+        default:
+            // Super important; Submit is necessary so that filter parameters are passed through.
+            SubmitFormWithDateValidation(true, 'importAdminForm', 'importsContent', './ImportList.aspx', 'image');
+    }
+}
+
 function FilterBhpbioHaulageCorrectionLocations() {
     var locationId = document.getElementById('LocationId')
     if (locationId != null) {

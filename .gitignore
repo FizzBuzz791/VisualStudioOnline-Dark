@@ -45,7 +45,10 @@ TestResult.xml
 _UpgradeReport_Files/
 UpgradeLog*.XML
 UpgradeLog*.htm
-*.cache
-/Test/Database/Database.dbmdl
+
+# Rec4 stuff we don't need to Version
+**/*.cache
 **/Debug/*
+/Test/Database/Database.dbmdl
 /Test/Database/Database.jfm
+/Test/Web/images/reports/*-[0-9]*.thumb.png
