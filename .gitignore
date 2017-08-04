@@ -31,7 +31,7 @@ TestResult.xml
 *.vspx
 
 # NuGet Packages Directory
-packages/*
+**/packages/*
 
 # Enable "build/" folder in the NuGet Packages folder since
 # NuGet packages use it for MSBuild targets.
@@ -47,3 +47,5 @@ UpgradeLog*.XML
 UpgradeLog*.htm
 *.cache
 /Test/Database/Database.dbmdl
+**/Debug/*
+/Test/Database/Database.jfm
