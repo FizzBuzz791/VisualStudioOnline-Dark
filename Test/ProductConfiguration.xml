@@ -1,6 +1,6 @@
 <ProductConfiguration>
   <Product Name="ReconcilorBhpbio" Version="*" />
-  <Database Key="Main" Name="ReconcilorBhpbioV403Test" ServerInstance="AUCANDWNWAP002\SQL2008R2">
+  <Database Key="Main" Name="ReconcilorBhpbio" ServerInstance="localhost\SQL2008R2">
     <User Name="ReconcilorRecalc" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
     <User Name="ReconcilorEngine" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
     <User Name="ReconcilorImport" Mapping="Standard" Password="Vap0rware" EncryptedPassword="False" ServerLogin="ReconcilorUI" />
