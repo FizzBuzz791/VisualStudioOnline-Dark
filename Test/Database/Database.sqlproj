@@ -453,6 +453,7 @@
     <None Include="Schema\Procedures\dbo.BhpbioUpdateImportSyncRowFilterData.sql" />
     <None Include="Schema\Functions\ConvertMESToLocationId.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

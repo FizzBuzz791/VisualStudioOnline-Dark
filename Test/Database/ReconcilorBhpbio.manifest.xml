@@ -1171,6 +1171,7 @@
   </Upgrade>-->
 
   <Upgrade Version="4.1.0.0">
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 
