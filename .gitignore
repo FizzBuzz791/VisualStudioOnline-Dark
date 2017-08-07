@@ -47,7 +47,7 @@ UpgradeLog*.XML
 UpgradeLog*.htm
 
 # Rec4 stuff we don't need to Version
-**/*.cache
+**/*.[Cc]ache
 **/Debug/*
 /Test/Database/Database.dbmdl
 /Test/Database/Database.jfm
