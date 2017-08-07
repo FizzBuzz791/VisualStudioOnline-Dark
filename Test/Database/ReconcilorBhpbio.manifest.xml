@@ -1182,7 +1182,7 @@
   </Upgrade>-->
 
   <Upgrade Version="4.1.0.0">
-    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTables.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 

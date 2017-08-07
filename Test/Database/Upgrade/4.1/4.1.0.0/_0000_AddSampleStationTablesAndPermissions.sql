@@ -57,3 +57,6 @@ GO
 
 ALTER TABLE [dbo].[BhpbioSampleStationTarget] CHECK CONSTRAINT [FK_BhpbioSampleStationTarget_BhpbioSampleStation]
 GO
+
+INSERT INTO [dbo].[SecurityOption] VALUES ('REC', 'UTILITIES_SAMPLE_STATION_VIEW', 'Utilities', 'Access to Sample Station List', 99)
+INSERT INTO [dbo].[SecurityRoleOption] VALUES ('REC_VIEW', 'REC', 'UTILITIES_SAMPLE_STATION_VIEW')

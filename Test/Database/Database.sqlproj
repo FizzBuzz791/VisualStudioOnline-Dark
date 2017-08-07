@@ -462,7 +462,7 @@
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStation.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationList.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql" />
-    <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTables.sql" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
