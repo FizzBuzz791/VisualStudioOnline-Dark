@@ -4,18 +4,19 @@ Imports Snowden.Reconcilor.Core.WebDevelopment.Extensibility
 Namespace Extensibility
 
     Public Class DependencyFactories
-        Inherits Snowden.Reconcilor.Core.WebDevelopment.Extensibility.DependencyFactories
+        Inherits Core.WebDevelopment.Extensibility.DependencyFactories
 
-        Protected Overrides Sub ConfigureSideNavigationFactory(ByVal factory As Core.WebDevelopment.Extensibility.SideNavigationFactory)
+        Protected Overrides Sub ConfigureSideNavigationFactory(ByVal factory As SideNavigationFactory)
             MyBase.ConfigureSideNavigationFactory(factory)
-            factory.Register("CustomFields", GetType(WebDevelopment.ReconcilorControls.SideNavigationBoxes.CustomFieldsNavigationBox))
-            factory.Register("ProductType", GetType(WebDevelopment.ReconcilorControls.SideNavigationBoxes.ProductTypeNavigationBox))
-            factory.Register("Deposit", GetType(WebDevelopment.ReconcilorControls.SideNavigationBoxes.DepositSideNavigationBox))
-            factory.Register("ShippingTarget", GetType(WebDevelopment.ReconcilorControls.SideNavigationBoxes.ShippingTargetNavigationBox))
-            factory.Register("Approval", GetType(WebDevelopment.ReconcilorControls.SideNavigationBoxes.ApprovalSideNavigation))
-            factory.Register("Port", GetType(WebDevelopment.ReconcilorControls.SideNavigationBoxes.PortSideNavigationBox))
-            factory.Register("Purge", GetType(WebDevelopment.ReconcilorControls.SideNavigationBoxes.PurgeAdministrationSideNavigation))
-            factory.Register("Analysis", GetType(WebDevelopment.ReconcilorControls.SideNavigationBoxes.AnalysisSideNavigation))
+            factory.Register(SideNavigationKeys.CustomFields.ToString, GetType(ReconcilorControls.SideNavigationBoxes.CustomFieldsNavigationBox))
+            factory.Register(SideNavigationKeys.ProductType.ToString, GetType(ReconcilorControls.SideNavigationBoxes.ProductTypeNavigationBox))
+            factory.Register(SideNavigationKeys.Deposit.ToString, GetType(ReconcilorControls.SideNavigationBoxes.DepositSideNavigationBox))
+            factory.Register(SideNavigationKeys.ShippingTarget.ToString, GetType(ReconcilorControls.SideNavigationBoxes.ShippingTargetNavigationBox))
+            factory.Register(SideNavigationKeys.Approval.ToString, GetType(ReconcilorControls.SideNavigationBoxes.ApprovalSideNavigation))
+            factory.Register(SideNavigationKeys.Port.ToString, GetType(ReconcilorControls.SideNavigationBoxes.PortSideNavigationBox))
+            factory.Register(SideNavigationKeys.Purge.ToString, GetType(ReconcilorControls.SideNavigationBoxes.PurgeAdministrationSideNavigation))
+            factory.Register(SideNavigationKeys.Analysis.ToString, GetType(ReconcilorControls.SideNavigationBoxes.AnalysisSideNavigation))
+            factory.Register(SideNavigationKeys.SampleStation.ToString, GetType(ReconcilorControls.SideNavigationBoxes.SampleStationSideNavigation))
         End Sub
 
         Protected Overrides Sub ConfigureNotificationPartFactory(ByVal factory As Core.WebDevelopment.Extensibility.NotificationPartFactory)

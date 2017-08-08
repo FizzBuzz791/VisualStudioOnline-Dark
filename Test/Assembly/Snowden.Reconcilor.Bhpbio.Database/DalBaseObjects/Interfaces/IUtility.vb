@@ -226,5 +226,10 @@ Namespace DalBaseObjects
         Function GetBhpbioAttributeProperties() As DataTable
 
         Sub UpdateBhpbioImportSyncRowFilterData(ByVal importJobId As Int32)
+
+#Region "Sample Stations"
+        Function GetBhpbioSampleStationList(locationId As Integer, productSize As String) As DataTable
+        Sub DeleteBhpbioSampleStation(sampleStationId As Integer)
+#End Region
     End Interface
 End Namespace

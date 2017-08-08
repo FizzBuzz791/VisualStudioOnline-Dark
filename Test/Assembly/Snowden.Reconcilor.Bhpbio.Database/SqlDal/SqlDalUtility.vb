@@ -1260,5 +1260,34 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
                 .ExecuteNonQuery()
             End With
         End Sub
+
+#Region "Sample Stations"
+        Public Function GetBhpbioSampleStationList(locationId As Integer, productSize As String) As DataTable Implements IUtility.GetBhpbioSampleStationList
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStationList"
+                .CommandType = CommandObjectType.StoredProcedure
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@LocationId", CommandDataType.Int, CommandDirection.Input, locationId)
+                    .Add("@ProductSize", CommandDataType.VarChar, CommandDirection.Input, productSize)
+                End With
+
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+        Public Sub DeleteBhpbioSampleStation(sampleStationId As Integer) Implements IUtility.DeleteBhpbioSampleStation
+            With DataAccess
+                .CommandText = "dbo.DeleteBhpbioSampleStation"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                End With
+
+                .ExecuteNonQuery()
+            End With
+        End Sub
+#End Region
+
     End Class
 End Namespace

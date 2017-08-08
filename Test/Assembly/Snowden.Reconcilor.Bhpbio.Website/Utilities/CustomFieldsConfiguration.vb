@@ -1,6 +1,7 @@
 ﻿Imports Snowden.Common.Web.BaseHtmlControls
 Imports Snowden.Reconcilor.Core.WebDevelopment
 Imports System.Web.UI
+Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 
 Namespace Utilities
     Public Class CustomFieldsConfiguration
@@ -24,7 +25,7 @@ Namespace Utilities
                 Return _tabPane
             End Get
             Set
-                _tabPane = value
+                _tabPane = Value
             End Set
         End Property
 
@@ -118,7 +119,7 @@ Namespace Utilities
             HasCalendarControl = True
             MyBase.SetupPageControls()
 
-            _customFieldsSideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create("CustomFields", Resources),  _
+            _customFieldsSideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.CustomFields.ToString, Resources),
                                 Bhpbio.WebDevelopment.ReconcilorControls.SideNavigationBoxes.CustomFieldsNavigationBox)
             _customFieldsSideNavigation.LoadItems()
             ReconcilorContent.SideNavigation = _customFieldsSideNavigation

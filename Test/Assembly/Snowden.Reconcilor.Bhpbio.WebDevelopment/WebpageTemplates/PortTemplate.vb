@@ -1,4 +1,5 @@
 ﻿Imports Snowden.Common.Web.BaseHtmlControls
+Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 Imports Snowden.Reconcilor.Core.WebDevelopment
 Imports Snowden.Reconcilor.Core.WebDevelopment.WebpageTemplates
 
@@ -27,7 +28,7 @@ Namespace WebpageTemplates
 
             With ReconcilorContent
                 .HasSideNavigation = True
-                .SideNavigation = Resources.DependencyFactories.SideNavigationFactory.Create("Port", Resources)
+                .SideNavigation = Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.Port.ToString, Resources)
                 .SideNavigation.LoadItems()
             End With
         End Sub
