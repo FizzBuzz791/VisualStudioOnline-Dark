@@ -5,40 +5,22 @@ GO
 CREATE PROCEDURE dbo.GetBhpbioSampleStationList
 (
 	@LocationId INT = 1,
-	@ProductSize VARCHAR = NULL
+	@ProductSize VARCHAR(15) = NULL
 )
 AS
 BEGIN
-	IF @ProductSize IS NULL OR @ProductSize = 'LUMP,FINES,ROM'
-		SELECT *
-		FROM dbo.BhpbioSampleStation
-		WHERE ProductSize IN ('LUMP', 'FINES', 'ROM')
-			AND Location_Id IN (SELECT LocationId
-								FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@LocationId, 0, 'SITE', '2009-01-01', GETDATE()))
-	ELSE IF @ProductSize = 'LUMP,FINES'
-		SELECT *
-		FROM dbo.BhpbioSampleStation
-		WHERE ProductSize IN ('LUMP', 'FINES')
-			AND Location_Id IN (SELECT LocationId
-								FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@LocationId, 0, 'SITE', '2009-01-01', GETDATE()))
-	ELSE IF @ProductSize = 'LUMP,ROM'
-		SELECT *
-		FROM dbo.BhpbioSampleStation
-		WHERE ProductSize IN ('LUMP', 'ROM')
-			AND Location_Id IN (SELECT LocationId
-								FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@LocationId, 0, 'SITE', '2009-01-01', GETDATE()))
-	ELSE IF @ProductSize = 'FINES,ROM'
-		SELECT *
-		FROM dbo.BhpbioSampleStation
-		WHERE ProductSize IN ('FINES', 'ROM')
-			AND Location_Id IN (SELECT LocationId
-								FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@LocationId, 0, 'SITE', '2009-01-01', GETDATE()))
-	ELSE
-		SELECT *
-		FROM dbo.BhpbioSampleStation
-		WHERE ProductSize = @ProductSize
-			AND Location_Id IN (SELECT LocationId
-								FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@LocationId, 0, 'SITE', '2009-01-01', GETDATE()))
+	SELECT SS.Id, SS.Name, SS.Description, LParent.Name + '/' + L.Name AS Location, 
+			SS.ProductSize AS [Product Size], SS.Weightometer_Id AS [Weightometer], 
+			SST.CoverageTarget AS [Coverage Target], SST.CoverageWarning AS [Coverage Warning], 
+			SST.RatioTarget AS [Ratio Target], SST.RatioWarning AS [Ratio Warning]
+	FROM BhpbioSampleStation SS
+	INNER JOIN Location L ON L.Location_Id = SS.Location_Id
+	INNER JOIN Location LParent ON LParent.Location_Id = L.Parent_Location_Id
+	LEFT OUTER JOIN BhpbioSampleStationTarget SST ON SST.SampleStation_Id = SS.Id AND SST.EndDate IS NULL
+	WHERE SS.ProductSize IN (SELECT Item FROM dbo.SplitString(@ProductSize, ','))
+		AND SS.Location_Id IN (SELECT LocationId
+							   FROM dbo.GetBhpbioReportLocationBreakdownWithOverride(@LocationId, 0, 'SITE', GETDATE(), GETDATE()))
+	ORDER BY SS.Name
 END
 GO
 	
