@@ -25,31 +25,28 @@ Namespace Utilities
             SideNavigation.LoadItems()
             ReconcilorContent.SideNavigation = SideNavigation
 
-            Const LABEL_WIDTH = 90
-            Dim locationId As Int32 = Convert.ToInt32(Resources.UserSecurity.GetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterLocation), "1"))
-
             With LocationFilter
-                .LocationLabelCellWidth = LABEL_WIDTH
-                .LocationId = locationId
+                .LocationLabelCellWidth = 90
+                .LocationId = Convert.ToInt32(Resources.UserSecurity.GetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterLocation), "1"))
                 .LowestLocationTypeDescription = "Site"
             End With
 
             With LumpFilter
                 .ID = "LumpFilter"
                 .Text = "Lump"
-                .Checked = True
+                .Checked = Convert.ToBoolean(Resources.UserSecurity.GetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterLump), "True"))
             End With
 
             With FinesFilter
                 .ID = "FinesFilter"
                 .Text = "Fines"
-                .Checked = True
+                .Checked = Convert.ToBoolean(Resources.UserSecurity.GetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterFines), "True"))
             End With
 
             With RomFilter
                 .ID = "RomFilter"
                 .Text = "Unscreened"
-                .Checked = True
+                .Checked = Convert.ToBoolean(Resources.UserSecurity.GetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterRom), "True"))
             End With
 
             With FilterButton

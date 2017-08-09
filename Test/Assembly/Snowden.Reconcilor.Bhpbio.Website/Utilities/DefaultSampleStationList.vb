@@ -32,8 +32,11 @@ Namespace Utilities
             End If
 
             Dim lumpFilter = RequestAsBoolean("LumpFilter")
+            Resources.UserSecurity.SetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterLump), lumpFilter.ToString)
             Dim finesFilter = RequestAsBoolean("FinesFilter")
+            Resources.UserSecurity.SetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterFines), finesFilter.ToString)
             Dim romFilter = RequestAsBoolean("RomFilter")
+            Resources.UserSecurity.SetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterRom), romFilter.ToString)
 
             Dim productSizeList As List(Of String) = New List(Of String)
             If lumpFilter Then
