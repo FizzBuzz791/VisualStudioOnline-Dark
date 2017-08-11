@@ -230,6 +230,9 @@ Namespace DalBaseObjects
 #Region "Sample Stations"
         Function GetBhpbioSampleStationList(locationId As Integer, productSize As String) As DataTable
         Sub DeleteBhpbioSampleStation(sampleStationId As Integer)
+        Function GetWeightometerListWithLocations() As DataTable
+        Sub AddOrUpdateBhpbioSampleStation(sampleStationId As Integer?, name As String, description As String, locationId As Integer, weightometerId As String, productSize As String)
+        Function GetBhpbioSampleStation(sampleStationId As Integer) As DataTable
 #End Region
     End Interface
 End Namespace

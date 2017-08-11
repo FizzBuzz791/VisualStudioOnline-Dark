@@ -1287,7 +1287,43 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
                 .ExecuteNonQuery()
             End With
         End Sub
-#End Region
 
+        Public Function GetWeightometerListWithLocations() As DataTable Implements IUtility.GetWeightometerListWithLocations
+            With DataAccess
+                .CommandText = "dbo.GetWeightometerListWithLocations"
+                .ParameterCollection.Clear()
+
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+        Public Sub AddOrUpdateBhpbioSampleStation(sampleStationId As Integer?, name As String, description As String, locationId As Integer, weightometerId As String, productSize As String) Implements IUtility.AddOrUpdateBhpbioSampleStation
+            With DataAccess
+                .CommandText = "dbo.AddOrUpdateBhpbioSampleStation"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                    .Add("@Location_Id", CommandDataType.Int, CommandDirection.Input, locationId)
+                    .Add("@Weightometer_Id", CommandDataType.VarChar, CommandDirection.Input, weightometerId)
+                    .Add("@Name", CommandDataType.VarChar, CommandDirection.Input, name)
+                    .Add("@Description", CommandDataType.VarChar, CommandDirection.Input, description)
+                    .Add("@ProductSize", CommandDataType.VarChar, CommandDirection.Input, productSize)
+                End With
+                .ExecuteNonQuery()
+            End With
+        End Sub
+
+        Public Function GetBhpbioSampleStation(sampleStationId As Integer) As DataTable Implements IUtility.GetBhpbioSampleStation
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStation"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                End With
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+#End Region
     End Class
 End Namespace

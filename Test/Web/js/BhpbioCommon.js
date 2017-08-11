@@ -68,8 +68,10 @@ SubmitForm = function (formName, elementId, urlToLoad, showLoading, finalCall) {
             vars[name] = el.val();
             break;
         case 'radio':
-            if (el.attr('checked') == true) {
-                vars[name] = el.val();
+            el = el[0]; // I *think* this is because of the upgrade to jQuery 1.7... The others didn't need this change though...
+            name = el.id;
+            if (el.checked === true) {
+                vars[name] = el.value;
             }
             break;
         case 'checkbox':

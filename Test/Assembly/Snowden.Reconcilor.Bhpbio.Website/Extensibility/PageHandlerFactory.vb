@@ -210,6 +210,8 @@
                 AddPage("~/Utilities/DefaultSampleStationsAdministration.aspx", GetType(Utilities.DefaultSampleStationsAdministration))
                 AddPage("~/Utilities/DefaultSampleStationList.aspx", GetType(Utilities.DefaultSampleStationList))
                 AddPage("~/Utilities/DefaultSampleStationDelete.aspx", GetType(Utilities.DefaultSampleStationDelete))
+                AddPage("~/Utilities/DefaultSampleStationEdit.aspx", GetType(Utilities.DefaultSampleStationEdit))
+                AddPage("~/Utilities/DefaultSampleStationSave.aspx", GetType(Utilities.DefaultSampleStationSave))
             End If
         End Sub
     End Class

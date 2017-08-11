@@ -322,15 +322,50 @@ function GetDepositsForSite() {
 }
 
 function GetSampleStations() {
-    SubmitForm('FilterForm', 'SampleStationContent', './DefaultSampleStationList.aspx', 'image');
+    ClearElement("SampleStationDetail");
+    SubmitForm("FilterForm", "SampleStationContent", "./DefaultSampleStationList.aspx", "image");
     return false;
 }
 
 function DeleteSampleStation(sampleStationId) {
+    ClearElement("SampleStationDetail");
     if (confirm("Are you sure you want to delete?")) {
-        CallAjax('SampleStationContent', './DefaultSampleStationDelete.aspx?SampleStationId=' + sampleStationId);
+        CallAjax("SampleStationContent", "./DefaultSampleStationDelete.aspx?SampleStationId=" + sampleStationId);
     }
     return false;
+}
+
+function AddDefaultSampleStation() {
+    CallAjax("SampleStationDetail", "./DefaultSampleStationEdit.aspx");
+}
+
+function PopulateWeightometer() {
+    var locationType = GetElementValue("SampleStationLocationIDTypeDescription");
+    var locationId = GetElementValue("SampleStationLocationID");
+
+    if (locationType !== "" &&
+        (locationType.toUpperCase() === "HUB" || locationType.toUpperCase() === "SITE")) {
+
+        $("#FilteredWeightometerList").empty();
+        $("#BodyTable_WeightometerList tr").filter(function(index, element) {
+            if (parseInt($(element)[0].all[2].innerText) === parseInt(locationId) ||
+                parseInt($(element)[0].all[3].innerText) === parseInt(locationId)) {
+                var option = document.createElement("option");
+                option.text = $.trim($(element)[0].all[0].innerText);
+                document.getElementById("FilteredWeightometerList").add(option);
+            }
+        });
+    }
+}
+
+function EditSampleStation(sampleStationId) {
+    ClearElement("SampleStationDetail");
+    CallAjax("SampleStationDetail", "./DefaultSampleStationEdit.aspx?SampleStationId=" + sampleStationId);
+    return false;
+}
+
+function CancelEditSampleStation() {
+    ClearElement("SampleStationDetail");
 }
 
 function CancelEditDefaultDeposit() {
