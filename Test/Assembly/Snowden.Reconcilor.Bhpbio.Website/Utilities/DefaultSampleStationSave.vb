@@ -73,6 +73,21 @@ Namespace Utilities
                 validationResult.AppendLine(" - Weightometer to attach Sample Station to must be specified.")
             End If
 
+            If SampleStationId <> Integer.MinValue AndAlso Not String.IsNullOrEmpty(Name) AndAlso LocationId <> Integer.MinValue AndAlso Not String.IsNullOrEmpty(ProductSize) Then
+                ' If we're here, we must be editing an existing sample station, check for dupes at this location
+                Dim sampleStations = DalUtility.GetBhpbioSampleStationList(LocationId, "LUMP,FINES,ROM")
+                Dim foundDuplicate = False
+                For Each sampleStation As DataRow In sampleStations.Rows
+                    ' Ignore the "current" Sample Station or we'll get a false positive.
+                    If CType(sampleStation("Id"), Integer) <> SampleStationId And sampleStation("Name").Equals(Name) Then
+                        foundDuplicate = True
+                    End If
+                Next
+                If foundDuplicate Then
+                    validationResult.AppendLine(" - Name of Sample Station must be unique for the location.")
+                End If
+            End If
+
             Return validationResult.ToString()
         End Function
 
