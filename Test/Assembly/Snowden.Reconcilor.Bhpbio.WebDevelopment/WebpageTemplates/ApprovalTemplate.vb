@@ -4,6 +4,7 @@ Imports Snowden.Reconcilor.Core.WebDevelopment.WebpageTemplates
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls
 
 Imports System.Web.UI
+Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 
 Namespace WebpageTemplates
     Public Class ApprovalTemplate
@@ -43,7 +44,7 @@ Namespace WebpageTemplates
 
             With ReconcilorContent
                 .HasSideNavigation = True
-                .SideNavigation = Resources.DependencyFactories.SideNavigationFactory.Create("Approval", Resources)
+                .SideNavigation = Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.Approval.ToString, Resources)
                 .SideNavigation.LoadItems()
             End With
 

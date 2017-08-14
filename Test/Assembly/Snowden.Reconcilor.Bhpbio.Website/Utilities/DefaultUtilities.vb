@@ -46,6 +46,11 @@ Namespace Utilities
                     .Add(New Tags.HtmlAnchorTag("./DefaultDepositAdministration.aspx", "", "Deposits"))
                     .Add(New Tags.HtmlBRTag)
                 End If
+                If (Resources.UserSecurity.HasAccess("UTILITIES_SAMPLE_STATIONS")) Or
+                        (Resources.UserSecurity.HasAccess("ADMIN_ROLE")) Then
+                    .Add(New Tags.HtmlAnchorTag("./DefaultSampleStationsAdministration.aspx", "", "Sample Stations"))
+                    .Add(New Tags.HtmlBRTag)
+                End If
             End With
 
             RemoveLink(ReferenceData, "Waste Types")

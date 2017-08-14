@@ -206,8 +206,10 @@
                 AddPage("~/Utilities/GetDefaultOutlierSeriesList.aspx", GetType(Utilities.DefaultOutlierSeriesConfigurationList))
                 AddPage("~/Utilities/DefaultOutlierSeriesConfigurationEdit.aspx", GetType(Utilities.DefaultOutlierSeriesConfigurationEdit))
                 AddPage("~/Utilities/DefaultOutlierSeriesConfigurationSave.aspx", GetType(Utilities.DefaultOutlierSeriesConfigurationSave))
-                
 
+                AddPage("~/Utilities/DefaultSampleStationsAdministration.aspx", GetType(Utilities.DefaultSampleStationsAdministration))
+                AddPage("~/Utilities/DefaultSampleStationList.aspx", GetType(Utilities.DefaultSampleStationList))
+                AddPage("~/Utilities/DefaultSampleStationDelete.aspx", GetType(Utilities.DefaultSampleStationDelete))
             End If
         End Sub
     End Class

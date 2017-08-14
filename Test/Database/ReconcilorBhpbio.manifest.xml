@@ -86,6 +86,9 @@
     <Script Type="Table" Path="schema\Tables\dbo.BhpbioBulkApprovalBatchProgress.sql" />
 
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioImportSyncRowFilterData.sql" />
+
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStation.sql" />
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStationTarget.sql"/>
   </ScriptGroup>
   <ScriptGroup Type="Code">
     <Script Type="View" Path="Schema\Views\dbo.BhpbioImportHaulage.viw" />
@@ -444,6 +447,14 @@
     <Script Type="Procedure" Path="schema\Procedures\DataSeries.GetNextPendingQueueEntry.sql" />
 
     <Script Type="Procedure" Path="Schema\Procedures\dbo.BhpbioUpdateImportSyncRowFilterData.sql" />
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioSampleStation.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioSampleStation.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.AddOrUpdateBhpbioSampleStationTarget.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.DeleteBhpbioSampleStationTarget.sql" />
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStation.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationList.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql"/>
   </ScriptGroup>
   
   <ScriptGroup Type="DataPopulation">
@@ -1171,6 +1182,7 @@
   </Upgrade>-->
 
   <Upgrade Version="4.1.0.0">
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 

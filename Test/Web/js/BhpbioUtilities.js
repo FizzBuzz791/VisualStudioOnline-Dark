@@ -321,6 +321,18 @@ function GetDepositsForSite() {
     return false;
 }
 
+function GetSampleStations() {
+    SubmitForm('FilterForm', 'SampleStationContent', './DefaultSampleStationList.aspx', 'image');
+    return false;
+}
+
+function DeleteSampleStation(sampleStationId) {
+    if (confirm("Are you sure you want to delete?")) {
+        CallAjax('SampleStationContent', './DefaultSampleStationDelete.aspx?SampleStationId=' + sampleStationId);
+    }
+    return false;
+}
+
 function CancelEditDefaultDeposit() {
     ClearElement('itemDetail')
 }
