@@ -76,7 +76,7 @@ Namespace SqlDal
             ' turns out the only way to execute scalar functions is with inline sql
             With DataAccess
                 .CommandType = CommandObjectType.InlineSql
-                .CommandText = String.Format("Select dbo.BhpbioGetBlockedDateForLocation({0}, '{1:yyyy-MM-dd}')", locationId, locationDate)
+                .CommandText = $"Select dbo.BhpbioGetBlockedDateForLocation({locationId}, '{locationDate:yyyy-MM-dd}')"
             End With
 
             Dim result = DataAccess.ExecuteScalar2()
@@ -722,6 +722,7 @@ Namespace SqlDal
                 imageData As Byte(), promoteStockpiles As Boolean, updateImageData As Boolean, updatePromoteStockpiles As Boolean) Implements IUtility.AddOrUpdateBhpbioStockpileLocationConfiguration
             Dim command As New SqlCommand
             With command
+                ' ReSharper disable once VBWarnings::BC40000
                 .Connection = DataAccess.Connection
                 .Transaction = DataAccess.Transaction
                 .CommandText = "dbo.AddOrUpdateBhpbioStockpileLocationConfiguration"
@@ -862,18 +863,18 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
             End With
         End Function
 
-        Public Function GetBhpbioImportLocationCodeList(importParameterId As Nullable(Of Int32), locationId As Nullable(Of Int32)) As DataTable Implements IUtility.GetBhpbioImportLocationCodeList
+        Public Function GetBhpbioImportLocationCodeList(importParameterId As Integer?, locationId As Integer?) As DataTable Implements IUtility.GetBhpbioImportLocationCodeList
             With DataAccess
                 .CommandText = "dbo.GetBhpbioImportLocationCodeList"
 
                 With .ParameterCollection
                     .Clear()
 
-                    If (importParameterId.HasValue) Then
+                    If importParameterId.HasValue Then
                         .Add("@iImportParameterId", CommandDataType.Int, CommandDirection.Input, importParameterId.Value)
                     End If
 
-                    If (locationId.HasValue) Then
+                    If locationId.HasValue Then
                         .Add("@iLocationId", CommandDataType.Int, CommandDirection.Input, locationId.Value)
                     End If
                 End With
@@ -1019,11 +1020,11 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
 
         Public Function GetReportCacheTimeoutPeriod() As Integer
             Dim defaultCacheMinutes = 30
-            Dim cache As Integer = defaultCacheMinutes
+            Dim cache = defaultCacheMinutes
 
             Try
 
-                If Not Integer.TryParse(Me.GetSystemSetting("BHPBIO_REPORT_CACHE_TIMEOUT_PERIOD"), cache) Then
+                If Not Integer.TryParse(GetSystemSetting("BHPBIO_REPORT_CACHE_TIMEOUT_PERIOD"), cache) Then
                     cache = defaultCacheMinutes
                 End If
 
@@ -1064,18 +1065,18 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
 
             Dim responsibleForConnection = False
 
-            If (Not sqlConnection.State = ConnectionState.Open) Then
+            If Not sqlConnection.State = ConnectionState.Open Then
                 ' if the connection is not yet open, open it now
                 sqlConnection.Open()
                 responsibleForConnection = True
             End If
 
             Try
-                Dim sqlCommand As SqlCommand = sqlConnection.CreateCommand()
+                Dim sqlCommand = sqlConnection.CreateCommand()
                 sqlCommand.CommandType = CommandType.StoredProcedure
                 sqlCommand.CommandText = "Staging.LogMessage"
                 sqlCommand.Parameters.AddWithValue("@iReceivedDateTime", receivedDateTime)
-                If (messageTimestamp.HasValue) Then
+                If messageTimestamp.HasValue Then
                     sqlCommand.Parameters.AddWithValue("@iMessageTimestamp", messageTimestamp.Value)
                 End If
                 sqlCommand.Parameters.AddWithValue("@iMessageBody", messageBody)
