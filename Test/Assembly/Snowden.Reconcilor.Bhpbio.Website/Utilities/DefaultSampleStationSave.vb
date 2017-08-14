@@ -97,8 +97,11 @@ Namespace Utilities
             Try
                 Dim errorMessage = ValidateData()
                 If String.IsNullOrEmpty(errorMessage) Then
-                    ' TODO: This'll get more complex when editing is added.
-                    EventLogDescription = "Save new Sample Station"
+                    If SampleStationId <> Integer.MinValue And SampleStationId IsNot Nothing Then
+                        EventLogDescription = String.Format($"Save update to Sample Station record ID: {SampleStationId}")
+                    Else
+                        EventLogDescription = "Save new Sample Station"
+                    End If
 
                     ProcessData()
                     JavaScriptAlert("Sample Station saved successfully.", String.Empty, "GetSampleStations();")

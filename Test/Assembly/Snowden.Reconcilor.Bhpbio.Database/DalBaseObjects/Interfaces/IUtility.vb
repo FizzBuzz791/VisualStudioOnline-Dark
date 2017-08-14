@@ -233,6 +233,10 @@ Namespace DalBaseObjects
         Function GetWeightometerListWithLocations() As DataTable
         Sub AddOrUpdateBhpbioSampleStation(sampleStationId As Integer?, name As String, description As String, locationId As Integer, weightometerId As String, productSize As String)
         Function GetBhpbioSampleStation(sampleStationId As Integer) As DataTable
+        Function GetBhpbioSampleStationTargetsForSampleStation(sampleStationId As Integer) As DataTable
+        Sub AddOrUpdateBhpbioSampleStationTarget(targetId As Integer?, sampleStationId As Integer, startDate As Date, coverageTarget As Decimal, coverageWarning As Decimal, ratioTarget As Integer, ratioWarning As Integer)
+        Function GetBhpbioSampleStationTarget(sampleStationTargetId As Integer) As DataTable
+        Sub DeleteBhpbioSampleStationTarget(targetId As Integer)
 #End Region
     End Interface
 End Namespace

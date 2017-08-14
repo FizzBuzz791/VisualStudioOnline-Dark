@@ -38,7 +38,7 @@ Namespace Utilities
             Dim romFilter = RequestAsBoolean("RomFilter")
             Resources.UserSecurity.SetSetting(SettingsDictionary.Item(SettingsNames.SampleStationFilterRom), romFilter.ToString)
 
-            Dim productSizeList As List(Of String) = New List(Of String)
+            Dim productSizeList = New List(Of String)
             If lumpFilter Then
                 productSizeList.Add("LUMP")
             End If
@@ -48,9 +48,9 @@ Namespace Utilities
             If romFilter Then
                 productSizeList.Add("ROM")
             End If
-            Dim productSizes As String = String.Join(",", productSizeList.ToArray())
+            Dim productSizes = String.Join(",", productSizeList.ToArray())
 
-            Dim sampleStations As DataTable = DalUtility.GetBhpbioSampleStationList(locationId, productSizes)
+            Dim sampleStations = DalUtility.GetBhpbioSampleStationList(locationId, productSizes)
             With sampleStations.Columns
                 .Add("Edit", GetType(String), "'<a href=""#"" onclick=""EditSampleStation(''' + Id + ''')"">Edit</a>'")
                 .Add("Delete", GetType(String), "'<a href=""#"" onclick=""DeleteSampleStation(''' + Id + ''')"">Delete</a>'")
@@ -62,6 +62,7 @@ Namespace Utilities
                 .ID = "ReturnTable"
                 .DataBind()
             End With
+            ReturnTable.Height = 200 ' Restrict the height to ensure everything fits without _page_ scrolling.
 
             Controls.Add(ReturnTable)
         End Sub

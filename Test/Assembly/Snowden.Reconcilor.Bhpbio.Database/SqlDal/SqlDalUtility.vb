@@ -1324,6 +1324,55 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
             End With
         End Function
 
+        Public Function GetBhpbioSampleStationTargetsForSampleStation(sampleStationId As Integer) As DataTable Implements IUtility.GetBhpbioSampleStationTargetsForSampleStation
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStationTargetsForSampleStation"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@SampleStationId", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                End With
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+        Public Sub AddOrUpdateBhpbioSampleStationTarget(targetId As Integer?, sampleStationId As Integer, startDate As Date, coverageTarget As Decimal, coverageWarning As Decimal, ratioTarget As Integer, ratioWarning As Integer) Implements IUtility.AddOrUpdateBhpbioSampleStationTarget
+            With DataAccess
+                .CommandText = "dbo.AddOrUpdateBhpbioSampleStationTarget"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, targetId)
+                    .Add("@SampleStation_Id", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                    .Add("@StartDate", CommandDataType.DateTime, CommandDirection.Input, startDate)
+                    .Add("@CoverageTarget", CommandDataType.Decimal, CommandDirection.Input, coverageTarget)
+                    .Add("@CoverageWarning", CommandDataType.Decimal, CommandDirection.Input, coverageWarning)
+                    .Add("@RatioTarget", CommandDataType.Int, CommandDirection.Input, ratioTarget)
+                    .Add("@RatioWarning", CommandDataType.Int, CommandDirection.Input, ratioWarning)
+                End With
+                .ExecuteNonQuery()
+            End With
+        End Sub
+
+        Public Function GetBhpbioSampleStationTarget(sampleStationTargetId As Integer) As DataTable Implements IUtility.GetBhpbioSampleStationTarget
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStationTarget"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@TargetId", CommandDataType.Int, CommandDirection.Input, sampleStationTargetId)
+                End With
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+        Public Sub DeleteBhpbioSampleStationTarget(targetId As Integer) Implements IUtility.DeleteBhpbioSampleStationTarget
+            With DataAccess
+                .CommandText = "dbo.DeleteBhpbioSampleStationTarget"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, targetId)
+                End With
+                .ExecuteNonQuery()
+            End With
+        End Sub
 #End Region
     End Class
 End Namespace

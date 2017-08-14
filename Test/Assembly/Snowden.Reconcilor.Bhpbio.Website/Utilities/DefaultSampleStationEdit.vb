@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Web.UI
+Imports System.Web.UI.HtmlControls
 Imports System.Web.UI.WebControls
 Imports Snowden.Common.Web.BaseHtmlControls.Tags
 Imports Snowden.Common.Web.BaseHtmlControls.WebpageControls
@@ -16,8 +17,6 @@ Namespace Utilities
         Protected Property IsNew As Boolean = True
         Protected Property SampleStationId As Integer?
         Protected Property DalUtility As IUtility
-
-        Protected Property EditForm As HtmlFormTag = New HtmlFormTag
 
         Protected Overrides Sub RetrieveRequestData()
             MyBase.RetrieveRequestData()
@@ -41,7 +40,6 @@ Namespace Utilities
 
             Try
                 SetupFormControls()
-                Controls.Add(EditForm)
             Catch ex As SqlException
                 JavaScriptAlert($"Error while setting up Sample Station form: {ex.Message}")
             End Try
@@ -192,8 +190,23 @@ Namespace Utilities
                 cell.Controls.Add(cancelButton)
             End With
 
+            Dim sampleStationEditForm = New HtmlFormTag With {
+                .ID = "SampleStationEditForm"
+            }
+            sampleStationEditForm.OnSubmit = $"return SubmitForm('{sampleStationEditForm.ID}', 'itemList', './DefaultSampleStationSave.aspx');"
+            sampleStationEditForm.Controls.Add(detailsLayoutTable)
+            Dim hiddenSampleStationId = New InputHidden With {
+                    .ID = "SampleStationId"
+                    }
+            If Not IsNew Then
+                hiddenSampleStationId.Value = targetSampleStation.Rows(0)("Id").ToString()
+            End If
+            Dim temp = New HtmlDivTag
+            temp.Controls.Add(hiddenSampleStationId)
+            sampleStationEditForm.Controls.Add(temp)
+
             Dim sampleStationDetails = New WebDevelopment.Controls.TabPage("details", "detailsScript", "Details")
-            sampleStationDetails.Controls.Add(detailsLayoutTable)
+            sampleStationDetails.Controls.Add(sampleStationEditForm)
             Dim weightometers = New ReconcilorTable(DalUtility.GetWeightometerListWithLocations())
             With weightometers
                 .ID = "WeightometerList"
@@ -204,13 +217,6 @@ Namespace Utilities
                 .StyleClass = "hidden"
             }
             weightometerListDiv.Controls.Add(weightometers)
-            Dim hiddenSampleStationId = New InputHidden With {
-                .ID = "SampleStationId"
-            }
-            If Not IsNew Then
-                hiddenSampleStationId.Value = targetSampleStation.Rows(0)("Id").ToString()
-            End If
-            weightometerListDiv.Controls.Add(hiddenSampleStationId)
             sampleStationDetails.Controls.Add(weightometerListDiv)
 
             Dim targetsLayoutTable = New HtmlTableTag With {
@@ -223,33 +229,63 @@ Namespace Utilities
             With targetsLayoutTable
                 Dim cell = .AddCellInNewRow()
                 cell.Controls.Add(New LiteralControl("Active Dates:"))
-                cell = .AddCell()
-                Dim dataTable = New DataTable
-                With dataTable.Columns
-                    .Add("Id", GetType(Integer))
-                    .Add("Effective From", GetType(Date))
-                    .Add("Effective To", GetType(Date))
-                    .Add("Coverage Low (?)", GetType(Decimal))
-                    .Add("Coverage High (?)", GetType(Decimal))
-                    .Add("Ratio Low (?)", GetType(Integer))
-                    .Add("Ratio High (?)", GetType(Integer))
-                    .Add("Edit", GetType(String), "'<a href=""#"" onclick=""EditSampleStation(''' + Id + ''')"">Edit</a>'")
-                    .Add("Delete", GetType(String), "'<a href=""#"" onclick=""DeleteSampleStation(''' + Id + ''')"">Delete</a>'")
-                End With
 
+                Dim dataTable = New DataTable()
+                If Not IsNew Then
+                    dataTable = DalUtility.GetBhpbioSampleStationTargetsForSampleStation(CType(SampleStationId, Integer))
+
+                    With dataTable.Columns
+                        .Add("Edit", GetType(String), "'<a href=""#"" onclick=""EditSampleStationTarget(''' + Id + ''')"">Edit</a>'")
+                        .Add("Delete", GetType(String), "'<a href=""#"" onclick=""DeleteSampleStationTarget(''' + Id + ''')"">Delete</a>'")
+                    End With
+                Else
+                    ' Require this for "Add New" or we just get an empty table with no columns
+                    With dataTable.Columns
+                        .Add("StartDate")
+                        .Add("EndDate")
+                        .Add("CoverageTarget")
+                        .Add("CoverageWarning")
+                        .Add("RatioTarget")
+                        .Add("RatioWarning")
+                        .Add("Edit")
+                        .Add("Delete")
+                    End With
+                End If
+
+                Dim dateFormat = "dd-MMM-yyyy"
+                If Not Application("DateFormat") Is Nothing Then
+                    dateFormat = Application("DateFormat").ToString
+                End If
                 Dim resultsTable = New ReconcilorTable(dataTable) With {
-                    .ExcludeColumns = {"Id"}
+                    .ExcludeColumns = {"TempId", "Id", "SampleStation_Id"}
                 }
+                With resultsTable
+                    .Columns.Add("StartDate", New ReconcilorTableColumn("Effective From"))
+                    .Columns.Add("EndDate", New ReconcilorTableColumn("Effective To"))
+                    .Columns.Add("CoverageTarget", New ReconcilorTableColumn("Coverage Low"))
+                    .Columns.Add("CoverageWarning", New ReconcilorTableColumn("Coverage High"))
+                    .Columns.Add("RatioTarget", New ReconcilorTableColumn("Ratio Low"))
+                    .Columns.Add("RatioWarning", New ReconcilorTableColumn("Ratio High"))
+
+                    .Columns("StartDate").DateTimeFormat = dateFormat
+                    .Columns("EndDate").DateTimeFormat = dateFormat
+                    .DataBind()
+                End With
+                resultsTable.Height = 100 ' Otherwise it's too big and the use doesn't notice the added controls after click "Add Target".
+                cell = .AddCell()
                 cell.Controls.Add(resultsTable)
 
                 cell = .AddCellInNewRow()
-                Dim addNewButton = New InputButton() With {
-                    .ID = "AddNewTargetButton",
-                    .Text = "Add New"
+                Dim addNewTargetButton = New HtmlInputButton() With { ' I have wasted far too much time wondering why "InputButton" doesn't work here. This does. Leave it.
+                    .ID = "AddNewTargetSubmit",
+                    .Value = String.Format(" Add New ")
                 }
-                cell.Controls.Add(addNewButton)
+                addNewTargetButton.Attributes.Add("class", "inputButton")
+                addNewTargetButton.Attributes.Add("onclick", $"return AddSampleStationTarget({SampleStationId});")
+                cell.Controls.Add(addNewTargetButton)
 
-                ' TODO: "New Target" Controls
+                cell = .AddCellInNewRow()
+                cell.Controls.Add(New HtmlDivTag("TargetContent"))
             End With
 
             Dim sampleStationTargets = New WebDevelopment.Controls.TabPage("targets", "targetsScript", "Targets")
@@ -260,14 +296,12 @@ Namespace Utilities
             tabPane.TabPages.Add(sampleStationTargets)
 
             Dim layoutBox = New GroupBox With {
+                .ID = "SampleStationDetailsForm",
                 .Title = CType(IIf(IsNew, "Add Sample Station", "Edit Sample Station"), String),
                 .Width = Unit.Percentage(100)
             }
             layoutBox.Controls.Add(tabPane)
-
-            EditForm.ID = "SampleStationEditForm"
-            EditForm.OnSubmit = $"return SubmitForm('{EditForm.ID}', 'itemList', './DefaultSampleStationSave.aspx');"
-            EditForm.Controls.Add(layoutBox)
+            Controls.Add(layoutBox)
         End Sub
     End Class
 End Namespace

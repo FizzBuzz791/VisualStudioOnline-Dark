@@ -212,6 +212,9 @@
                 AddPage("~/Utilities/DefaultSampleStationDelete.aspx", GetType(Utilities.DefaultSampleStationDelete))
                 AddPage("~/Utilities/DefaultSampleStationEdit.aspx", GetType(Utilities.DefaultSampleStationEdit))
                 AddPage("~/Utilities/DefaultSampleStationSave.aspx", GetType(Utilities.DefaultSampleStationSave))
+                AddPage("~/Utilities/DefaultSampleStationTargetEdit.aspx", GetType(Utilities.DefaultSampleStationTargetEdit))
+                AddPage("~/Utilities/DefaultSampleStationTargetSave.aspx", GetType(Utilities.DefaultSampleStationTargetSave))
+                AddPage("~/Utilities/DefaultSampleStationTargetDelete.aspx", GetType(Utilities.DefaultSampleStationTargetDelete))
             End If
         End Sub
     End Class

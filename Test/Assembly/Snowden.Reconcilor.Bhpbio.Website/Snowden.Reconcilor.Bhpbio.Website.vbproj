@@ -331,6 +331,15 @@
     <Compile Include="Utilities\DefaultSampleStationSave.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Utilities\DefaultSampleStationTargetDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationTargetEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationTargetSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Utilities\DefaultshippingTargetDelete.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

@@ -38,7 +38,6 @@ CREATE TABLE [dbo].[BhpbioSampleStationTarget](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[SampleStation_Id] [int] NOT NULL,
 	[StartDate] [date] NOT NULL,
-	[EndDate] [date] NULL,
 	[CoverageTarget] [decimal](18,2) NOT NULL,
 	[CoverageWarning] [decimal](18,2) NOT NULL,
 	[RatioTarget] [int] NOT NULL,

@@ -464,6 +464,7 @@
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <None Include="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

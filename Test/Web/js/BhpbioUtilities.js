@@ -368,6 +368,26 @@ function CancelEditSampleStation() {
     ClearElement("SampleStationDetail");
 }
 
+function AddSampleStationTarget(sampleStationId) {
+    CallAjax("TargetContent", "./DefaultSampleStationTargetEdit.aspx?SampleStationId=" + sampleStationId);
+}
+
+function EditSampleStationTarget(targetId) {
+    ClearElement("TargetContent");
+    CallAjax("TargetContent", "./DefaultSampleStationTargetEdit.aspx?TargetId=" + targetId);
+}
+
+function CancelEditSampleStationTarget() {
+    ClearElement("TargetContent");
+}
+
+function DeleteSampleStationTarget(targetId) {
+    ClearElement("TargetContent");
+    if (confirm("Are you sure you want to delete?")) {
+        CallAjax("SampleStationDetail", "./DefaultSampleStationTargetDelete.aspx?TargetId=" + targetId);
+    }
+}
+
 function CancelEditDefaultDeposit() {
     ClearElement('itemDetail')
 }
