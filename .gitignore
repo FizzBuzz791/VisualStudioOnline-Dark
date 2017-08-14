@@ -53,3 +53,4 @@ UpgradeLog*.htm
 /Test/Database/Database.jfm
 /Test/Web/images/reports/*-[0-9]*.thumb.png
 /Test/Web/Snowden.Reconcilor.Bhpbio.Web.log
+/Test/Web/js/jquery.js

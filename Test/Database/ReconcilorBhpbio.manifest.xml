@@ -455,6 +455,8 @@
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStation.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationList.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql"/>
   </ScriptGroup>
   
   <ScriptGroup Type="DataPopulation">

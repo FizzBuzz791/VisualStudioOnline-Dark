@@ -3,6 +3,7 @@ Imports Snowden.Common.Web.BaseHtmlControls
 Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 Imports System.Web.UI
 Imports Snowden.Reconcilor.Bhpbio.Website.Internal.SettingsModule
+Imports System.Web.UI.WebControls
 
 Namespace Utilities
     Public Class DefaultSampleStationsAdministration
@@ -20,10 +21,10 @@ Namespace Utilities
         Protected Overrides Sub SetupPageControls()
             MyBase.SetupPageControls()
 
-            Dim SideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.SampleStation.ToString, Resources),
+            Dim sideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.SampleStation.ToString, Resources),
                 WebDevelopment.ReconcilorControls.SideNavigationBoxes.SampleStationSideNavigation)
-            SideNavigation.LoadItems()
-            ReconcilorContent.SideNavigation = SideNavigation
+            sideNavigation.LoadItems()
+            ReconcilorContent.SideNavigation = sideNavigation
 
             With LocationFilter
                 .LocationLabelCellWidth = 90
@@ -65,12 +66,30 @@ Namespace Utilities
                 cell = .AddCell
                 cell.Controls.Add(LumpFilter)
                 cell = .AddCell
+                cell.Controls.Add(New LiteralControl("&nbsp;")) ' This cell is a spacer for alignment (lines up with Filter Button)
+                cell.Width = Unit.Percentage(50)
+
+                cell = .AddCellInNewRow
+                cell.Controls.Add(New LiteralControl("&nbsp;")) ' This cell is equivalent to Product Size
+                cell = .AddCell
+                cell.Controls.Add(New LiteralControl("&nbsp;")) ' This cell is a spacer for alignment
+                cell = .AddCell
                 cell.Controls.Add(FinesFilter)
+                cell = .AddCell
+                cell.Controls.Add(New LiteralControl("&nbsp;")) ' This cell is a spacer for alignment  (lines up with Filter Button)
+                cell.Width = Unit.Percentage(50)
+
+                cell = .AddCellInNewRow
+                cell.Controls.Add(New LiteralControl("&nbsp;")) ' This cell is equivalent to Product Size
+                cell = .AddCell
+                cell.Controls.Add(New LiteralControl("&nbsp;")) ' This cell is a spacer for alignment
                 cell = .AddCell
                 cell.Controls.Add(RomFilter)
                 cell = .AddCell
                 cell.Controls.Add(FilterButton)
                 cell.CssClass = "left-pad"
+
+
             End With
 
             LocationContainer.Controls.Add(FilterTable)
@@ -85,6 +104,7 @@ Namespace Utilities
         Protected Overrides Sub SetupPageLayout()
             PageHeader.ScriptTags.Add(New Tags.HtmlScriptTag(Tags.ScriptType.TextJavaScript, Tags.ScriptLanguage.JavaScript, "../js/BhpbioUtilities.js", String.Empty))
 
+
             Dim headerDiv As New Tags.HtmlDivTag
             With headerDiv
                 .StyleClass = "largeHeaderText"
@@ -97,9 +117,13 @@ Namespace Utilities
                 .Controls.Add(FilterForm)
                 .Controls.Add(New Tags.HtmlDivTag(Nothing, String.Empty, "tabs_spacer"))
                 .Controls.Add(New Tags.HtmlDivTag("SampleStationContent"))
+                .Controls.Add(New Tags.HtmlDivTag(Nothing, String.Empty, "tabs_spacer"))
+                .Controls.Add(New Tags.HtmlDivTag("SampleStationDetail"))
             End With
 
             MyBase.SetupPageLayout()
+            ' *Must* add this script here so that it comes *after* common.js
+            PageHeader.ScriptTags.Add(New Tags.HtmlScriptTag(Tags.ScriptType.TextJavaScript, Tags.ScriptLanguage.JavaScript, "../js/BhpbioCommon.js", String.Empty))
             Controls.Add(New Tags.HtmlScriptTag(Tags.ScriptType.TextJavaScript, "GetSampleStations();"))
         End Sub
     End Class

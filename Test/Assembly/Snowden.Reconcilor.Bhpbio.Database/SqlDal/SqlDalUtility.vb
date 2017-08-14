@@ -76,7 +76,7 @@ Namespace SqlDal
             ' turns out the only way to execute scalar functions is with inline sql
             With DataAccess
                 .CommandType = CommandObjectType.InlineSql
-                .CommandText = String.Format("Select dbo.BhpbioGetBlockedDateForLocation({0}, '{1:yyyy-MM-dd}')", locationId, locationDate)
+                .CommandText = $"Select dbo.BhpbioGetBlockedDateForLocation({locationId}, '{locationDate:yyyy-MM-dd}')"
             End With
 
             Dim result = DataAccess.ExecuteScalar2()
@@ -722,6 +722,7 @@ Namespace SqlDal
                 imageData As Byte(), promoteStockpiles As Boolean, updateImageData As Boolean, updatePromoteStockpiles As Boolean) Implements IUtility.AddOrUpdateBhpbioStockpileLocationConfiguration
             Dim command As New SqlCommand
             With command
+                ' ReSharper disable once VBWarnings::BC40000
                 .Connection = DataAccess.Connection
                 .Transaction = DataAccess.Transaction
                 .CommandText = "dbo.AddOrUpdateBhpbioStockpileLocationConfiguration"
@@ -862,18 +863,18 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
             End With
         End Function
 
-        Public Function GetBhpbioImportLocationCodeList(importParameterId As Nullable(Of Int32), locationId As Nullable(Of Int32)) As DataTable Implements IUtility.GetBhpbioImportLocationCodeList
+        Public Function GetBhpbioImportLocationCodeList(importParameterId As Integer?, locationId As Integer?) As DataTable Implements IUtility.GetBhpbioImportLocationCodeList
             With DataAccess
                 .CommandText = "dbo.GetBhpbioImportLocationCodeList"
 
                 With .ParameterCollection
                     .Clear()
 
-                    If (importParameterId.HasValue) Then
+                    If importParameterId.HasValue Then
                         .Add("@iImportParameterId", CommandDataType.Int, CommandDirection.Input, importParameterId.Value)
                     End If
 
-                    If (locationId.HasValue) Then
+                    If locationId.HasValue Then
                         .Add("@iLocationId", CommandDataType.Int, CommandDirection.Input, locationId.Value)
                     End If
                 End With
@@ -1019,11 +1020,11 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
 
         Public Function GetReportCacheTimeoutPeriod() As Integer
             Dim defaultCacheMinutes = 30
-            Dim cache As Integer = defaultCacheMinutes
+            Dim cache = defaultCacheMinutes
 
             Try
 
-                If Not Integer.TryParse(Me.GetSystemSetting("BHPBIO_REPORT_CACHE_TIMEOUT_PERIOD"), cache) Then
+                If Not Integer.TryParse(GetSystemSetting("BHPBIO_REPORT_CACHE_TIMEOUT_PERIOD"), cache) Then
                     cache = defaultCacheMinutes
                 End If
 
@@ -1064,18 +1065,18 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
 
             Dim responsibleForConnection = False
 
-            If (Not sqlConnection.State = ConnectionState.Open) Then
+            If Not sqlConnection.State = ConnectionState.Open Then
                 ' if the connection is not yet open, open it now
                 sqlConnection.Open()
                 responsibleForConnection = True
             End If
 
             Try
-                Dim sqlCommand As SqlCommand = sqlConnection.CreateCommand()
+                Dim sqlCommand = sqlConnection.CreateCommand()
                 sqlCommand.CommandType = CommandType.StoredProcedure
                 sqlCommand.CommandText = "Staging.LogMessage"
                 sqlCommand.Parameters.AddWithValue("@iReceivedDateTime", receivedDateTime)
-                If (messageTimestamp.HasValue) Then
+                If messageTimestamp.HasValue Then
                     sqlCommand.Parameters.AddWithValue("@iMessageTimestamp", messageTimestamp.Value)
                 End If
                 sqlCommand.Parameters.AddWithValue("@iMessageBody", messageBody)
@@ -1287,7 +1288,92 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
                 .ExecuteNonQuery()
             End With
         End Sub
-#End Region
 
+        Public Function GetWeightometerListWithLocations() As DataTable Implements IUtility.GetWeightometerListWithLocations
+            With DataAccess
+                .CommandText = "dbo.GetWeightometerListWithLocations"
+                .ParameterCollection.Clear()
+
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+        Public Sub AddOrUpdateBhpbioSampleStation(sampleStationId As Integer?, name As String, description As String, locationId As Integer, weightometerId As String, productSize As String) Implements IUtility.AddOrUpdateBhpbioSampleStation
+            With DataAccess
+                .CommandText = "dbo.AddOrUpdateBhpbioSampleStation"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                    .Add("@Location_Id", CommandDataType.Int, CommandDirection.Input, locationId)
+                    .Add("@Weightometer_Id", CommandDataType.VarChar, CommandDirection.Input, weightometerId)
+                    .Add("@Name", CommandDataType.VarChar, CommandDirection.Input, name)
+                    .Add("@Description", CommandDataType.VarChar, CommandDirection.Input, description)
+                    .Add("@ProductSize", CommandDataType.VarChar, CommandDirection.Input, productSize)
+                End With
+                .ExecuteNonQuery()
+            End With
+        End Sub
+
+        Public Function GetBhpbioSampleStation(sampleStationId As Integer) As DataTable Implements IUtility.GetBhpbioSampleStation
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStation"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                End With
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+        Public Function GetBhpbioSampleStationTargetsForSampleStation(sampleStationId As Integer) As DataTable Implements IUtility.GetBhpbioSampleStationTargetsForSampleStation
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStationTargetsForSampleStation"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@SampleStationId", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                End With
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+        Public Sub AddOrUpdateBhpbioSampleStationTarget(targetId As Integer?, sampleStationId As Integer, startDate As Date, coverageTarget As Decimal, coverageWarning As Decimal, ratioTarget As Integer, ratioWarning As Integer) Implements IUtility.AddOrUpdateBhpbioSampleStationTarget
+            With DataAccess
+                .CommandText = "dbo.AddOrUpdateBhpbioSampleStationTarget"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, targetId)
+                    .Add("@SampleStation_Id", CommandDataType.Int, CommandDirection.Input, sampleStationId)
+                    .Add("@StartDate", CommandDataType.DateTime, CommandDirection.Input, startDate)
+                    .Add("@CoverageTarget", CommandDataType.Decimal, CommandDirection.Input, coverageTarget)
+                    .Add("@CoverageWarning", CommandDataType.Decimal, CommandDirection.Input, coverageWarning)
+                    .Add("@RatioTarget", CommandDataType.Int, CommandDirection.Input, ratioTarget)
+                    .Add("@RatioWarning", CommandDataType.Int, CommandDirection.Input, ratioWarning)
+                End With
+                .ExecuteNonQuery()
+            End With
+        End Sub
+
+        Public Function GetBhpbioSampleStationTarget(sampleStationTargetId As Integer) As DataTable Implements IUtility.GetBhpbioSampleStationTarget
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStationTarget"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@TargetId", CommandDataType.Int, CommandDirection.Input, sampleStationTargetId)
+                End With
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
+        Public Sub DeleteBhpbioSampleStationTarget(targetId As Integer) Implements IUtility.DeleteBhpbioSampleStationTarget
+            With DataAccess
+                .CommandText = "dbo.DeleteBhpbioSampleStationTarget"
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@Id", CommandDataType.Int, CommandDirection.Input, targetId)
+                End With
+                .ExecuteNonQuery()
+            End With
+        End Sub
+#End Region
     End Class
 End Namespace
