@@ -440,10 +440,12 @@ BEGIN
 			SELECT WS.Weightometer_Id, SS.Name AS [Sample Station], WeightometerSampleId, WS.Weightometer_Sample_Date, MT.Description, WFP.Source_Crusher_Id,
 				VALUE.ProductSize, DefaultProductSize,
 				RealTonnes AS [Tonnes Moved], ROUND(SampleTonnes, 2, 0) AS [Tonnes Sampled], SampleCount AS [Sample Count], 
-				CAST(ROUND((SampleTonnes/RealTonnes)*100, 2, 0) AS VARCHAR) + '%' AS [Sample Coverage], 
+				CASE 
+					WHEN RealTonnes = 0 THEN NULL
+					ELSE CAST(ROUND((SampleTonnes/RealTonnes)*100, 2, 0) AS VARCHAR) + '%'
+				END AS [Sample Coverage], 
 				CASE
 					WHEN SampleCount = 0 THEN NULL
-					WHEN SampleCount IS NULL THEN NULL
 					ELSE CAST(RealTonnes/SampleCount AS INT) 
 				END AS [Sample Ratio], 
 				SampleSource, Fe, P, SiO2, Al2O3, LOI, H2O, ParentLocationId, S.Stockpile_Name AS Destination_Stockpile
