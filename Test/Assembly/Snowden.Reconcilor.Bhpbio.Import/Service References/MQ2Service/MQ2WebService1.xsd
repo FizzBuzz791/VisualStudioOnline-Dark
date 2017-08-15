@@ -99,6 +99,7 @@
       <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LastModifiedTime" type="xs:dateTime" />
       <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SampleSource" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SampleTonnes" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SampleCount" type="xs:decimal" />
       <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Grade" type="tns:Grade" />
     </xs:sequence>
   </xs:complexType>

@@ -492,6 +492,11 @@
     <None Include="Service References\MQ2Service\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\MQ2Service\MQ2WebService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MQ2Service\MQ2WebService2.wsdl" />
+    <None Include="Service References\MQ2Service\MQ2WebService21.wsdl" />
     <None Include="Service References\MQ2Service\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
@@ -520,12 +525,8 @@
     <None Include="Service References\MaterialTrackerService\Snowden.Reconcilor.Bhpbio.Import.MaterialTrackerService.RetrieveShippingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\MQ2Service\MQ2WebService.wsdl" />
-    <None Include="Service References\MQ2Service\MQ2WebService.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\MQ2Service\MQ2WebService.disco" />
-    <None Include="Service References\MQ2Service\MQ2WebService1.wsdl" />
     <None Include="Service References\MQ2Service\Snowden.Reconcilor.Bhpbio.Import.MQ2Service.RetrieveHaulageResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -553,6 +554,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CommandLineParameters.txt" />
+    <None Include="Service References\MQ2Service\MQ2WebService1.disco" />
   </ItemGroup>
   <PropertyGroup>
     <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>

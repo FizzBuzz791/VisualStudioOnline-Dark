@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="RetrieveStockpilesResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Snowden.Reconcilor.Bhpbio.Import.MQ2Service.RetrieveStockpilesResponse, Service References.MQ2Service.Reference.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>Snowden.Reconcilor.Bhpbio.Import.MQ2Service.RetrieveStockpilesResponse, Service References.MQ2Service.Reference.vb.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

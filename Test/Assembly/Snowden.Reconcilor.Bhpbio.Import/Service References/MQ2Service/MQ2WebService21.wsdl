@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:i0="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MQ2/v1.0" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="MQ2WebService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsdl:import namespace="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MQ2/v1.0" location="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?wsdl=wsdl0" />
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MQ2/v1.0" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MQ2WebService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://www.bhpbilliton.com/waio/F1F2F3ReconciliationDataService/MQ2/v1.0" location="http://dow-cnd4415722.downergroup.internal/ImportWebServices/MQ2WebService.svc?wsdl=wsdl0" />
   <wsdl:types />
   <wsdl:binding name="BasicHttpBinding_IM_MQ2_DS" type="i0:IM_MQ2_DS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -43,7 +43,7 @@
   </wsdl:binding>
   <wsdl:service name="MQ2WebService">
     <wsdl:port name="BasicHttpBinding_IM_MQ2_DS" binding="tns:BasicHttpBinding_IM_MQ2_DS">
-      <soap:address location="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc" />
+      <soap:address location="http://dow-cnd4415722.downergroup.internal/ImportWebServices/MQ2WebService.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
