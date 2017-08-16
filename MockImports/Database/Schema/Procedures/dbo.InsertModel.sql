@@ -1,11 +1,4 @@
-﻿--USE [ReconcilorImportMockWS]
---GO
-
---IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[InsertModel]') AND type in (N'P', N'PC'))
---DROP PROCEDURE [dbo].[InsertModel]
---GO
-
-CREATE PROCEDURE [dbo].[InsertModel]
+﻿CREATE PROCEDURE [dbo].[InsertModel]
 	@BlockId Int,
 	@Name Nvarchar(50),
 	@Filename Nvarchar(200),
@@ -127,3 +120,6 @@ Begin
 
 End
 Go
+
+GRANT EXECUTE ON dbo.InsertModel TO public
+GO

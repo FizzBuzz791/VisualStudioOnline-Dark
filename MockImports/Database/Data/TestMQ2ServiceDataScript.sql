@@ -47,12 +47,13 @@ INSERT INTO [dbo].[Transactions]
 	[ProductSize],
 	[SampleSource],
 	[SampleTonnes],
+	[SampleCount],
 	[LocationId]
 )
-SELECT '2013-08-01', 'WB-BPF0', 'Post Crusher', 'WB-W23B', 'Pre Crusher', 'Movement', 'WB', 'WB', 6573.78, 'FINES', 'SampleSource', 12.34, [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-02', 'WB-BPF0', 'Post Crusher', 'WB-W23B', 'Pre Crusher', 'Movement', 'WB', 'WB', 6573.78, 'LUMP', 'SampleSource', 12.34, [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-03', 'WB-BPF0', 'Post Crusher', 'WB-W23B', 'Pre Crusher', 'Movement', 'WB', 'WB', 6573.78, 'FINES', 'SampleSource', 12.34, [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-04', 'WB-BPF0', 'Post Crusher', 'WB-W23B', 'Pre Crusher', 'Movement', 'WB', 'WB', 6573.78, 'LUMP', 'SampleSource', 12.34, [Id] FROM dbo.Locations WHERE Mine='WB'
+SELECT '2017-08-10', 'C1', 'Crusher', '17198B1', 'Post Crusher', 'Movement', 'AC', 'AC', 6573.18, 'FINES', 'SampleSource', 12.34, 1, [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-11', 'C1', 'Crusher', '17198B1', 'Post Crusher', 'Movement', 'AC', 'AC', 6673.28, 'LUMP', 'SampleSource', 22.34, 2, [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-12', 'C1', 'Crusher', '17198B1', 'Post Crusher', 'Movement', 'AC', 'AC', 6773.38, 'FINES', 'SampleSource', 32.34, 3, [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-13', 'C1', 'Crusher', '17198B1', 'Post Crusher', 'Movement', 'AC', 'AC', 6873.48, 'LUMP', 'SampleSource', 42.34, 2, [Id] FROM dbo.Locations WHERE Mine='WB'
 GO
 
 INSERT INTO [dbo].[TransactionGrades]
@@ -92,13 +93,13 @@ INSERT INTO [dbo].[Haulage]
 	LastModifiedTime,
 	LocationId
 )
-SELECT '2013-08-01', 'SP17', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200061', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-02', 'SP18', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200062', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-03', 'SP19', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200063', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-04', 'SP20', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200064', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-05', 'SP21', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200065', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-06', 'SP22', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200066', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
-SELECT '2013-08-07', 'SP23', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200067', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB'
+SELECT '2017-08-10', 'SP17', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200061', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-11', 'SP18', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200062', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-12', 'SP19', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200063', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-13', 'SP20', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200064', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-14', 'SP21', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200065', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-15', 'SP22', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200066', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB' UNION ALL
+SELECT '2017-08-16', 'SP23', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200067', 'Pre Crusher', 'Movement', 6573.78, 6587.49, 6522.54, 6573.78, 0.19, '2013-08-10', [Id] FROM dbo.Locations WHERE Mine='WB'
 GO
 
 INSERT INTO [dbo].[HaulageGrade]
@@ -139,13 +140,13 @@ INSERT INTO [dbo].[Haulage]
 	LastModifiedTime,
 	LocationId
 )
-SELECT '2013-08-08', 'IOCrusher1', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200061', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
-SELECT '2013-08-09', 'IOCrusher2', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200062', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
-SELECT '2013-08-10', 'IOCrusher3', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200063', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
-SELECT '2013-08-11', 'IOCrusher4', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200064', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
-SELECT '2013-08-12', 'IOCrusher5', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200065', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
-SELECT '2013-08-13', 'IOCrusher1', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200066', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
-SELECT '2013-08-14', 'IOCrusher1', 'WB', 'WB', 'Pre Crusher', 'SP7', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1
+SELECT '2017-08-08', 'IOCrusher1', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200061', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
+SELECT '2017-08-09', 'IOCrusher2', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200062', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
+SELECT '2017-08-10', 'IOCrusher3', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200063', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
+SELECT '2017-08-11', 'IOCrusher4', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200064', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
+SELECT '2017-08-12', 'IOCrusher5', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200065', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
+SELECT '2017-08-13', 'IOCrusher1', 'WB', 'WB', 'Pre Crusher', 'BSP4_1200066', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1 UNION ALL
+SELECT '2017-08-14', 'IOCrusher1', 'WB', 'WB', 'Pre Crusher', 'SP7', 'Pre Crusher', 'Movement', Null, Null, Null, Null, Null, '2013-08-14', 1
 
 INSERT INTO [dbo].[HaulageGrade]
 (
@@ -185,14 +186,14 @@ INSERT INTO [dbo].[Haulage]
 	LastModifiedTime,
 	LocationId
 )
-SELECT '2013-08-16', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
-SELECT '2013-08-17', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
-SELECT '2013-08-18', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
-SELECT '2013-08-19', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
-SELECT '2013-08-20', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
-SELECT '2013-08-21', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
-SELECT '2013-08-22', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
-SELECT '2013-08-23', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null
+SELECT '2017-08-08', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
+SELECT '2017-08-09', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
+SELECT '2017-08-10', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
+SELECT '2017-08-11', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
+SELECT '2017-08-12', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
+SELECT '2017-08-13', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
+SELECT '2017-08-14', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null UNION ALL
+SELECT '2017-08-15', Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null
 
 
 
@@ -224,7 +225,7 @@ join [RECONCILOR2\SQL2005].[ReconcilorBhpbioV64].dbo.Location as sl
 on hrl.SourceLocationId = sl.Location_Id
 join [RECONCILOR2\SQL2005].[ReconcilorBhpbioV64].dbo.Location as dl
 on hrl.DestinationLocationId = dl.Location_Id
-where h.Haulage_Date between '2013-07-01' and '2013-07-31'
+where h.Haulage_Date between '2017-08-10' and '2017-08-14'
 order by h.Haulage_Date desc
 
 
@@ -246,13 +247,13 @@ INSERT INTO [dbo].[Stockpiles]
 	[Product],
 	[Tonnes]
 )
-Select loc.Id, 'Stockpile1', 'Business1', 'Average', 'Test stockpile data for import', 'SCR', 'ExampleType', 1, '2013-07-01', 'LUMP', '2013-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
-Select loc.Id, 'Stockpile2', 'Business2', 'FIFO', 'Test stockpile data for import', 'LTS', 'ExampleType', 1, '2013-07-02', 'FINES', '2013-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
-Select loc.Id, 'Stockpile3', 'Business3', 'LIFO', 'Test stockpile data for import', 'MG', 'ExampleType', 1, '2013-07-03', 'LUMP', '2013-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
-Select loc.Id, 'Stockpile4', 'Business4', 'Average', 'Test stockpile data for import', 'MG', 'ExampleType', 1, '2013-07-04', 'FINES', '2013-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
-Select loc.Id, 'Stockpile5', 'Business5', 'FIFO', 'Test stockpile data for import', 'ROM', 'ExampleType', 1, '2013-07-05', 'LUMP', '2013-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
-Select loc.Id, 'Stockpile6', 'Business6', 'LIFO', 'Test stockpile data for import', 'SW', 'ExampleType', 1, '2013-07-06', 'FINES', '2013-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
-Select loc.Id, 'Stockpile7', 'Business7', 'Average', 'Test stockpile data for import', 'WS', 'ExampleType', 1, '2013-07-07', 'LUMP', '2013-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD'
+Select loc.Id, 'Stockpile1', 'Business1', 'Average', 'Test stockpile data for import', 'SCR', 'ExampleType', 1, '2013-07-01', 'LUMP', '2017-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
+Select loc.Id, 'Stockpile2', 'Business2', 'FIFO', 'Test stockpile data for import', 'LTS', 'ExampleType', 1, '2013-07-02', 'FINES', '2017-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
+Select loc.Id, 'Stockpile3', 'Business3', 'LIFO', 'Test stockpile data for import', 'MG', 'ExampleType', 1, '2013-07-03', 'LUMP', '2017-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
+Select loc.Id, 'Stockpile4', 'Business4', 'Average', 'Test stockpile data for import', 'MG', 'ExampleType', 1, '2013-07-04', 'FINES', '2017-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
+Select loc.Id, 'Stockpile5', 'Business5', 'FIFO', 'Test stockpile data for import', 'ROM', 'ExampleType', 1, '2013-07-05', 'LUMP', '2017-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
+Select loc.Id, 'Stockpile6', 'Business6', 'LIFO', 'Test stockpile data for import', 'SW', 'ExampleType', 1, '2013-07-06', 'FINES', '2017-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD' UNION ALL
+Select loc.Id, 'Stockpile7', 'Business7', 'Average', 'Test stockpile data for import', 'WS', 'ExampleType', 1, '2013-07-07', 'LUMP', '2017-07-01', 'Yandi', 'ExampleProduct', 1000 From dbo.Locations loc Where loc.Mine = 'YD'
 
 -- Test Case: Stockpile Import - INSERT, Step 2
 INSERT INTO [dbo].[Stockpiles]
@@ -334,10 +335,10 @@ INSERT INTO dbo.StockpileAdjustment
 (
 	LocationId, StockpileName, AdjustmentType, AdjustmentDate, Tonnes, FinesPercent, LumpPercent, BCM, LastModifiedTime
 )
-SELECT Id, '06001PL', '+', '2013-08-01', 237.548, 0.1254, 0.5687, 3.457, GETDATE() FROM dbo.Locations WHERE Mine = '18' UNION ALL
-SELECT Id, '06001PL', '-', '2013-08-02', 237.548, 0.1254, 0.5687, 3.457, GETDATE() FROM dbo.Locations WHERE Mine = '18' UNION ALL
-SELECT Id, '06001PL', '+', '2013-08-03', 237.548, 0.1254, 0.5687, 3.457, GETDATE() FROM dbo.Locations WHERE Mine = '18' UNION ALL
-SELECT Id, '06001PL', '-', '2013-08-04', 237.548, 0.1254, 0.5687, 3.457, GETDATE() FROM dbo.Locations WHERE Mine = '18'
+SELECT Id, '06001PL', '+', '2017-08-10', 237.548, 0.1254, 0.5687, 3.457, GETDATE() FROM dbo.Locations WHERE Mine = '18' UNION ALL
+SELECT Id, '06001PL', '-', '2017-08-11', 237.548, 0.1254, 0.5687, 3.457, GETDATE() FROM dbo.Locations WHERE Mine = '18' UNION ALL
+SELECT Id, '06001PL', '+', '2017-08-12', 237.548, 0.1254, 0.5687, 3.457, GETDATE() FROM dbo.Locations WHERE Mine = '18' UNION ALL
+SELECT Id, '06001PL', '-', '2017-08-13', 237.548, 0.1254, 0.5687, 3.457, GETDATE() FROM dbo.Locations WHERE Mine = '18'
 GO
 
 INSERT INTO dbo.StockpileAdjustmentGrade

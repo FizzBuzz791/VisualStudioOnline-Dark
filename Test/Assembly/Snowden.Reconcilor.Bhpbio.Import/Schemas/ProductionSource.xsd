@@ -9,102 +9,103 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="ProductionSource" msdata:IsDataSet="true" msdata:Locale="" msprop:Generator_UserDSName="ProductionSource" msprop:Generator_DataSetName="ProductionSource">
+  <xs:element name="ProductionSource" msdata:IsDataSet="true" msdata:Locale="" msprop:Generator_DataSetName="ProductionSource" msprop:Generator_UserDSName="ProductionSource">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Transaction" msprop:Generator_UserTableName="Transaction" msprop:Generator_RowDeletedName="TransactionRowDeleted" msprop:Generator_RowChangedName="TransactionRowChanged" msprop:Generator_RowClassName="TransactionRow" msprop:Generator_RowChangingName="TransactionRowChanging" msprop:Generator_RowEvArgName="TransactionRowChangeEvent" msprop:Generator_RowEvHandlerName="TransactionRowChangeEventHandler" msprop:Generator_TableClassName="TransactionDataTable" msprop:Generator_TableVarName="tableTransaction" msprop:Generator_RowDeletingName="TransactionRowDeleting" msprop:Generator_TablePropName="Transaction">
+        <xs:element name="Transaction" msprop:Generator_UserTableName="Transaction" msprop:Generator_RowEvArgName="TransactionRowChangeEvent" msprop:Generator_TableVarName="tableTransaction" msprop:Generator_TablePropName="Transaction" msprop:Generator_RowDeletingName="TransactionRowDeleting" msprop:Generator_RowChangingName="TransactionRowChanging" msprop:Generator_RowDeletedName="TransactionRowDeleted" msprop:Generator_RowEvHandlerName="TransactionRowChangeEventHandler" msprop:Generator_TableClassName="TransactionDataTable" msprop:Generator_RowChangedName="TransactionRowChanged" msprop:Generator_RowClassName="TransactionRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="TransactionDate" msdata:DateTimeMode="Unspecified" msprop:Generator_UserColumnName="TransactionDate" msprop:Generator_ColumnPropNameInRow="TransactionDate" msprop:Generator_ColumnVarNameInTable="columnTransactionDate" msprop:Generator_ColumnPropNameInTable="TransactionDateColumn" type="xs:dateTime" />
-              <xs:element name="Source" msprop:Generator_UserColumnName="Source" msprop:Generator_ColumnPropNameInRow="Source" msprop:Generator_ColumnVarNameInTable="columnSource" msprop:Generator_ColumnPropNameInTable="SourceColumn" type="xs:string" />
-              <xs:element name="SourceMineSite" msprop:Generator_UserColumnName="SourceMineSite" msprop:Generator_ColumnVarNameInTable="columnSourceMineSite" msprop:Generator_ColumnPropNameInRow="SourceMineSite" msprop:Generator_ColumnPropNameInTable="SourceMineSiteColumn">
+              <xs:element name="TransactionDate" msdata:DateTimeMode="Unspecified" msprop:Generator_ColumnVarNameInTable="columnTransactionDate" msprop:Generator_ColumnPropNameInRow="TransactionDate" msprop:Generator_ColumnPropNameInTable="TransactionDateColumn" msprop:Generator_UserColumnName="TransactionDate" type="xs:dateTime" />
+              <xs:element name="Source" msprop:Generator_ColumnVarNameInTable="columnSource" msprop:Generator_ColumnPropNameInRow="Source" msprop:Generator_ColumnPropNameInTable="SourceColumn" msprop:Generator_UserColumnName="Source" type="xs:string" />
+              <xs:element name="SourceMineSite" msprop:Generator_ColumnVarNameInTable="columnSourceMineSite" msprop:Generator_ColumnPropNameInRow="SourceMineSite" msprop:Generator_ColumnPropNameInTable="SourceMineSiteColumn" msprop:Generator_UserColumnName="SourceMineSite">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="SourceLocationType" msprop:Generator_UserColumnName="SourceLocationType" msprop:Generator_ColumnPropNameInRow="SourceLocationType" msprop:Generator_ColumnVarNameInTable="columnSourceLocationType" msprop:Generator_ColumnPropNameInTable="SourceLocationTypeColumn">
+              <xs:element name="SourceLocationType" msprop:Generator_ColumnVarNameInTable="columnSourceLocationType" msprop:Generator_ColumnPropNameInRow="SourceLocationType" msprop:Generator_ColumnPropNameInTable="SourceLocationTypeColumn" msprop:Generator_UserColumnName="SourceLocationType">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="31" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Destination" msprop:Generator_UserColumnName="Destination" msprop:Generator_ColumnPropNameInRow="Destination" msprop:Generator_ColumnVarNameInTable="columnDestination" msprop:Generator_ColumnPropNameInTable="DestinationColumn" type="xs:string" />
-              <xs:element name="DestinationMineSite" msprop:Generator_UserColumnName="DestinationMineSite" msprop:Generator_ColumnVarNameInTable="columnDestinationMineSite" msprop:Generator_ColumnPropNameInRow="DestinationMineSite" msprop:Generator_ColumnPropNameInTable="DestinationMineSiteColumn">
+              <xs:element name="Destination" msprop:Generator_ColumnVarNameInTable="columnDestination" msprop:Generator_ColumnPropNameInRow="Destination" msprop:Generator_ColumnPropNameInTable="DestinationColumn" msprop:Generator_UserColumnName="Destination" type="xs:string" />
+              <xs:element name="DestinationMineSite" msprop:Generator_ColumnVarNameInTable="columnDestinationMineSite" msprop:Generator_ColumnPropNameInRow="DestinationMineSite" msprop:Generator_ColumnPropNameInTable="DestinationMineSiteColumn" msprop:Generator_UserColumnName="DestinationMineSite">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DestinationType" msprop:Generator_UserColumnName="DestinationType" msprop:Generator_ColumnPropNameInRow="DestinationType" msprop:Generator_ColumnVarNameInTable="columnDestinationType" msprop:Generator_ColumnPropNameInTable="DestinationTypeColumn" type="xs:string" />
-              <xs:element name="Type" msprop:Generator_UserColumnName="Type" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInTable="TypeColumn">
+              <xs:element name="DestinationType" msprop:Generator_ColumnVarNameInTable="columnDestinationType" msprop:Generator_ColumnPropNameInRow="DestinationType" msprop:Generator_ColumnPropNameInTable="DestinationTypeColumn" msprop:Generator_UserColumnName="DestinationType" type="xs:string" />
+              <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="31" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="SampleSource" msprop:Generator_UserColumnName="SampleSource" msprop:Generator_ColumnPropNameInRow="SampleSource" msprop:Generator_ColumnVarNameInTable="columnSampleSource" msprop:Generator_ColumnPropNameInTable="SampleSourceColumn" type="xs:string" minOccurs="0" />
-              <xs:element name="SampleTonnes" msprop:Generator_UserColumnName="SampleTonnes" msprop:Generator_ColumnPropNameInRow="SampleTonnes" msprop:Generator_ColumnVarNameInTable="columnSampleTonnes" msprop:Generator_ColumnPropNameInTable="SampleTonnesColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="Tonnes" msprop:Generator_UserColumnName="Tonnes" msprop:Generator_ColumnPropNameInRow="Tonnes" msprop:Generator_ColumnVarNameInTable="columnTonnes" msprop:Generator_ColumnPropNameInTable="TonnesColumn" type="xs:double" />
-              <xs:element name="ProductSize" msprop:Generator_UserColumnName="ProductSize" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="ProductSize" msprop:Generator_ColumnPropNameInTable="ProductSizeColumn" msprop:Generator_ColumnVarNameInTable="columnProductSize">
+              <xs:element name="SampleSource" msprop:Generator_ColumnVarNameInTable="columnSampleSource" msprop:Generator_ColumnPropNameInRow="SampleSource" msprop:Generator_ColumnPropNameInTable="SampleSourceColumn" msprop:Generator_UserColumnName="SampleSource" type="xs:string" minOccurs="0" />
+              <xs:element name="SampleTonnes" msprop:Generator_ColumnVarNameInTable="columnSampleTonnes" msprop:Generator_ColumnPropNameInRow="SampleTonnes" msprop:Generator_ColumnPropNameInTable="SampleTonnesColumn" msprop:Generator_UserColumnName="SampleTonnes" type="xs:double" minOccurs="0" />
+              <xs:element name="Tonnes" msprop:Generator_ColumnVarNameInTable="columnTonnes" msprop:Generator_ColumnPropNameInRow="Tonnes" msprop:Generator_ColumnPropNameInTable="TonnesColumn" msprop:Generator_UserColumnName="Tonnes" type="xs:double" />
+              <xs:element name="ProductSize" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="ProductSize" msprop:Generator_ColumnVarNameInTable="columnProductSize" msprop:Generator_ColumnPropNameInTable="ProductSizeColumn" msprop:Generator_UserColumnName="ProductSize">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="5" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="SampleCount" msprop:Generator_ColumnVarNameInTable="columnSampleCount" msprop:Generator_ColumnPropNameInRow="SampleCount" msprop:Generator_ColumnPropNameInTable="SampleCountColumn" msprop:Generator_UserColumnName="SampleCount" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TransactionGrade" msprop:Generator_UserTableName="TransactionGrade" msprop:Generator_RowDeletedName="TransactionGradeRowDeleted" msprop:Generator_RowChangedName="TransactionGradeRowChanged" msprop:Generator_RowClassName="TransactionGradeRow" msprop:Generator_RowChangingName="TransactionGradeRowChanging" msprop:Generator_RowEvArgName="TransactionGradeRowChangeEvent" msprop:Generator_RowEvHandlerName="TransactionGradeRowChangeEventHandler" msprop:Generator_TableClassName="TransactionGradeDataTable" msprop:Generator_TableVarName="tableTransactionGrade" msprop:Generator_RowDeletingName="TransactionGradeRowDeleting" msprop:Generator_TablePropName="TransactionGrade">
+        <xs:element name="TransactionGrade" msprop:Generator_UserTableName="TransactionGrade" msprop:Generator_RowEvArgName="TransactionGradeRowChangeEvent" msprop:Generator_TableVarName="tableTransactionGrade" msprop:Generator_TablePropName="TransactionGrade" msprop:Generator_RowDeletingName="TransactionGradeRowDeleting" msprop:Generator_RowChangingName="TransactionGradeRowChanging" msprop:Generator_RowDeletedName="TransactionGradeRowDeleted" msprop:Generator_RowEvHandlerName="TransactionGradeRowChangeEventHandler" msprop:Generator_TableClassName="TransactionGradeDataTable" msprop:Generator_RowChangedName="TransactionGradeRowChanged" msprop:Generator_RowClassName="TransactionGradeRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="TransactionDate" msprop:Generator_UserColumnName="TransactionDate" msprop:Generator_ColumnVarNameInTable="columnTransactionDate" msprop:Generator_ColumnPropNameInRow="TransactionDate" msprop:Generator_ColumnPropNameInTable="TransactionDateColumn" type="xs:dateTime" />
-              <xs:element name="Source" msprop:Generator_UserColumnName="Source" msprop:Generator_ColumnVarNameInTable="columnSource" msprop:Generator_ColumnPropNameInRow="Source" msprop:Generator_ColumnPropNameInTable="SourceColumn" type="xs:string" />
-              <xs:element name="SourceMineSite" msprop:Generator_UserColumnName="SourceMineSite" msprop:Generator_ColumnVarNameInTable="columnSourceMineSite" msprop:Generator_ColumnPropNameInRow="SourceMineSite" msprop:Generator_ColumnPropNameInTable="SourceMineSiteColumn">
+              <xs:element name="TransactionDate" msprop:Generator_ColumnVarNameInTable="columnTransactionDate" msprop:Generator_ColumnPropNameInRow="TransactionDate" msprop:Generator_ColumnPropNameInTable="TransactionDateColumn" msprop:Generator_UserColumnName="TransactionDate" type="xs:dateTime" />
+              <xs:element name="Source" msprop:Generator_ColumnVarNameInTable="columnSource" msprop:Generator_ColumnPropNameInRow="Source" msprop:Generator_ColumnPropNameInTable="SourceColumn" msprop:Generator_UserColumnName="Source" type="xs:string" />
+              <xs:element name="SourceMineSite" msprop:Generator_ColumnVarNameInTable="columnSourceMineSite" msprop:Generator_ColumnPropNameInRow="SourceMineSite" msprop:Generator_ColumnPropNameInTable="SourceMineSiteColumn" msprop:Generator_UserColumnName="SourceMineSite">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="SourceLocationType" msprop:Generator_UserColumnName="SourceLocationType" msprop:Generator_ColumnVarNameInTable="columnSourceLocationType" msprop:Generator_ColumnPropNameInRow="SourceLocationType" msprop:Generator_ColumnPropNameInTable="SourceLocationTypeColumn">
+              <xs:element name="SourceLocationType" msprop:Generator_ColumnVarNameInTable="columnSourceLocationType" msprop:Generator_ColumnPropNameInRow="SourceLocationType" msprop:Generator_ColumnPropNameInTable="SourceLocationTypeColumn" msprop:Generator_UserColumnName="SourceLocationType">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="31" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Destination" msprop:Generator_UserColumnName="Destination" msprop:Generator_ColumnVarNameInTable="columnDestination" msprop:Generator_ColumnPropNameInRow="Destination" msprop:Generator_ColumnPropNameInTable="DestinationColumn" type="xs:string" />
-              <xs:element name="DestinationMineSite" msprop:Generator_UserColumnName="DestinationMineSite" msprop:Generator_ColumnVarNameInTable="columnDestinationMineSite" msprop:Generator_ColumnPropNameInRow="DestinationMineSite" msprop:Generator_ColumnPropNameInTable="DestinationMineSiteColumn">
+              <xs:element name="Destination" msprop:Generator_ColumnVarNameInTable="columnDestination" msprop:Generator_ColumnPropNameInRow="Destination" msprop:Generator_ColumnPropNameInTable="DestinationColumn" msprop:Generator_UserColumnName="Destination" type="xs:string" />
+              <xs:element name="DestinationMineSite" msprop:Generator_ColumnVarNameInTable="columnDestinationMineSite" msprop:Generator_ColumnPropNameInRow="DestinationMineSite" msprop:Generator_ColumnPropNameInTable="DestinationMineSiteColumn" msprop:Generator_UserColumnName="DestinationMineSite">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DestinationType" msprop:Generator_UserColumnName="DestinationType" msprop:Generator_ColumnVarNameInTable="columnDestinationType" msprop:Generator_ColumnPropNameInRow="DestinationType" msprop:Generator_ColumnPropNameInTable="DestinationTypeColumn" type="xs:string" />
-              <xs:element name="Type" msprop:Generator_UserColumnName="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn">
+              <xs:element name="DestinationType" msprop:Generator_ColumnVarNameInTable="columnDestinationType" msprop:Generator_ColumnPropNameInRow="DestinationType" msprop:Generator_ColumnPropNameInTable="DestinationTypeColumn" msprop:Generator_UserColumnName="DestinationType" type="xs:string" />
+              <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="31" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="GradeName" msprop:Generator_UserColumnName="GradeName" msprop:Generator_ColumnVarNameInTable="columnGradeName" msprop:Generator_ColumnPropNameInRow="GradeName" msprop:Generator_ColumnPropNameInTable="GradeNameColumn">
+              <xs:element name="GradeName" msprop:Generator_ColumnVarNameInTable="columnGradeName" msprop:Generator_ColumnPropNameInRow="GradeName" msprop:Generator_ColumnPropNameInTable="GradeNameColumn" msprop:Generator_UserColumnName="GradeName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="31" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="HeadValue" msprop:Generator_UserColumnName="HeadValue" msprop:Generator_ColumnVarNameInTable="columnHeadValue" msprop:Generator_ColumnPropNameInRow="HeadValue" msprop:Generator_ColumnPropNameInTable="HeadValueColumn" type="xs:float" minOccurs="0" />
-              <xs:element name="SampleValue" msprop:Generator_UserColumnName="SampleValue" msprop:Generator_ColumnPropNameInRow="SampleValue" msprop:Generator_ColumnVarNameInTable="columnSampleValue" msprop:Generator_ColumnPropNameInTable="SampleValueColumn" type="xs:float" minOccurs="0" />
-              <xs:element name="ProductSize" msprop:Generator_UserColumnName="ProductSize" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="ProductSize" msprop:Generator_ColumnPropNameInTable="ProductSizeColumn" msprop:Generator_ColumnVarNameInTable="columnProductSize">
+              <xs:element name="HeadValue" msprop:Generator_ColumnVarNameInTable="columnHeadValue" msprop:Generator_ColumnPropNameInRow="HeadValue" msprop:Generator_ColumnPropNameInTable="HeadValueColumn" msprop:Generator_UserColumnName="HeadValue" type="xs:float" minOccurs="0" />
+              <xs:element name="SampleValue" msprop:Generator_ColumnVarNameInTable="columnSampleValue" msprop:Generator_ColumnPropNameInRow="SampleValue" msprop:Generator_ColumnPropNameInTable="SampleValueColumn" msprop:Generator_UserColumnName="SampleValue" type="xs:float" minOccurs="0" />
+              <xs:element name="ProductSize" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="ProductSize" msprop:Generator_ColumnVarNameInTable="columnProductSize" msprop:Generator_ColumnPropNameInTable="ProductSizeColumn" msprop:Generator_UserColumnName="ProductSize">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="5" />
@@ -141,7 +142,7 @@
       <xs:field xpath="GradeName" />
       <xs:field xpath="ProductSize" />
     </xs:unique>
-    <xs:keyref name="FK_Transaction_TransactionGrade" refer="Constraint1" msprop:rel_Generator_UserRelationName="FK_Transaction_TransactionGrade" msprop:rel_Generator_RelationVarName="relationFK_Transaction_TransactionGrade" msprop:rel_Generator_UserChildTable="TransactionGrade" msprop:rel_Generator_UserParentTable="Transaction" msprop:rel_Generator_ParentPropName="TransactionRowParent" msprop:rel_Generator_ChildPropName="GetTransactionGradeRows">
+    <xs:keyref name="FK_Transaction_TransactionGrade" refer="Constraint1" msprop:rel_Generator_UserChildTable="TransactionGrade" msprop:rel_Generator_ChildPropName="GetTransactionGradeRows" msprop:rel_Generator_UserRelationName="FK_Transaction_TransactionGrade" msprop:rel_Generator_RelationVarName="relationFK_Transaction_TransactionGrade" msprop:rel_Generator_UserParentTable="Transaction" msprop:rel_Generator_ParentPropName="TransactionRowParent">
       <xs:selector xpath=".//TransactionGrade" />
       <xs:field xpath="TransactionDate" />
       <xs:field xpath="Source" />

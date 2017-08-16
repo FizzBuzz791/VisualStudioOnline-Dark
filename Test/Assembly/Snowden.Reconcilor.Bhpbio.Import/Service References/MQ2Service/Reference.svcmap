@@ -20,10 +20,10 @@
     <MetadataSource Address="http://localhost/ImportWebServices/MQ2WebService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MQ2WebService.xsd" MetadataType="Schema" ID="cb7e2ccb-7adf-42ae-a303-e15a5a670477" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?xsd=xsd0" />
-    <MetadataFile FileName="MQ2WebService.wsdl" MetadataType="Wsdl" ID="d0cacea2-351d-4652-bc1c-f32a3c6b4b46" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="MQ2WebService.disco" MetadataType="Disco" ID="57dab714-b792-425a-8c22-48311d41f674" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?disco" />
-    <MetadataFile FileName="MQ2WebService1.wsdl" MetadataType="Wsdl" ID="64f0081a-1ed3-4f21-acbd-3bb3ec14916b" SourceId="1" SourceUrl="http://abarmouta.snowdenau.com/ImportWebServices/MQ2WebService.svc?wsdl" />
+    <MetadataFile FileName="MQ2WebService2.wsdl" MetadataType="Wsdl" ID="f6d04d45-5c70-4e90-8dbe-5c8bee49086d" SourceId="1" SourceUrl="http://dow-cnd4415722.downergroup.internal/ImportWebServices/MQ2WebService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="MQ2WebService1.disco" MetadataType="Disco" ID="538ba1bb-7129-4598-a044-cf81409ab60b" SourceId="1" SourceUrl="http://dow-cnd4415722.downergroup.internal/ImportWebServices/MQ2WebService.svc?disco" />
+    <MetadataFile FileName="MQ2WebService1.xsd" MetadataType="Schema" ID="2b677d6c-a89b-4bea-8dc2-669ad4fd27b0" SourceId="1" SourceUrl="http://dow-cnd4415722.downergroup.internal/ImportWebServices/MQ2WebService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MQ2WebService21.wsdl" MetadataType="Wsdl" ID="c103db0b-762e-410e-be82-fb842663984e" SourceId="1" SourceUrl="http://dow-cnd4415722.downergroup.internal/ImportWebServices/MQ2WebService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

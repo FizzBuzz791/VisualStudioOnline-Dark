@@ -1,22 +1,4 @@
-﻿USE [ReconcilorImportMockWS]
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetStockpileAdjustments]    Script Date: 08/23/2013 13:52:34 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetStockpileAdjustments]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[GetStockpileAdjustments]
-GO
-
-USE [ReconcilorImportMockWS]
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetStockpileAdjustments]    Script Date: 08/23/2013 13:52:34 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
+﻿-- =============================================
 -- Author:		Alex Barmouta
 -- Create date: 2013-08-27
 -- Description:	
@@ -50,3 +32,5 @@ END
 
 GO
 
+GRANT EXECUTE ON dbo.GetStockpileAdjustments TO public
+GO
