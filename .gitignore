@@ -54,3 +54,5 @@ UpgradeLog*.htm
 /Test/Web/images/reports/*-[0-9]*.thumb.png
 /Test/Web/Snowden.Reconcilor.Bhpbio.Web.log
 /Test/Web/js/jquery.js
+/Test/DeploymentScripts/RS Scripter Load Log.txt
+/Test/Web/Cache/*.txt

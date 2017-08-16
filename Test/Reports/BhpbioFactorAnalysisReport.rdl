@@ -1,1662 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
-  <Body>
-    <ReportItems>
-      <Rectangle Name="rectangle1">
-        <ReportItems>
-          <Textbox Name="textbox28">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value EvaluationMode="Constant">Date From:</Value>
-                    <Style>
-                      <FontSize>7pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.15cm</Top>
-            <Left>0.01958cm</Left>
-            <Height>0.5cm</Height>
-            <Width>1.50917cm</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="textbox21">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Date To:</Value>
-                    <Style>
-                      <FontSize>7pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.15cm</Top>
-            <Left>3.63153cm</Left>
-            <Height>0.5cm</Height>
-            <Width>1.50917cm</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="textbox15">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Format(CDATE(Parameters!DateFrom.Value), "dd-MMM-yy")</Value>
-                    <Style>
-                      <FontSize>7pt</FontSize>
-                      <Format>d</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.15cm</Top>
-            <Left>1.70514cm</Left>
-            <Height>0.5cm</Height>
-            <Width>1.75cm</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="textbox13">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Format(CDATE(Parameters!DateTo.Value), "dd-MMM-yy")</Value>
-                    <Style>
-                      <FontSize>7pt</FontSize>
-                      <Format>d</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.15cm</Top>
-            <Left>5.24653cm</Left>
-            <Height>0.5cm</Height>
-            <Width>1.75cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="textbox18">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Attributes:</Value>
-                    <Style>
-                      <FontSize>7pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>textbox18</rd:DefaultName>
-            <Top>0.15cm</Top>
-            <Left>12.39657cm</Left>
-            <Height>0.5cm</Height>
-            <Width>1.64417cm</Width>
-            <ZIndex>4</ZIndex>
-            <DataElementOutput>NoOutput</DataElementOutput>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="textbox20">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!ConvertXmlToCsvResult.Value, "Attributes")</Value>
-                    <Style>
-                      <FontSize>7pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>textbox20</rd:DefaultName>
-            <Top>0.15cm</Top>
-            <Left>14.21713cm</Left>
-            <Height>0.5cm</Height>
-            <Width>5.25935cm</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox6">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Location:</Value>
-                    <Style>
-                      <FontSize>7pt</FontSize>
-                      <FontWeight>SemiBold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>0.15cm</Top>
-            <Left>7.17292cm</Left>
-            <Height>0.5cm</Height>
-            <Width>1.43209cm</Width>
-            <ZIndex>6</ZIndex>
-            <Visibility>
-              <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox7">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!GetLocationCommentByDateResult.Value, "LocationNameData")</Value>
-                    <Style>
-                      <FontSize>7pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>0.15cm</Top>
-            <Left>8.74612cm</Left>
-            <Height>0.5cm</Height>
-            <Width>3.47407cm</Width>
-            <ZIndex>7</ZIndex>
-            <Visibility>
-              <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-        </ReportItems>
-        <Top>0.17639cm</Top>
-        <Height>0.80596cm</Height>
-        <Width>19.82646cm</Width>
-        <Visibility>
-          <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
-        </Visibility>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.5pt</Width>
-          </Border>
-          <BottomBorder>
-            <Style>Solid</Style>
-          </BottomBorder>
-        </Style>
-      </Rectangle>
-      <Tablix Name="Tablix1">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>19.28729cm</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>23.77752cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Rectangle Name="Rectangle3">
-                      <ReportItems>
-                        <Chart Name="Chart1">
-                          <ChartCategoryHierarchy>
-                            <ChartMembers>
-                              <ChartMember>
-                                <Group Name="Chart1_CategoryGroup">
-                                  <GroupExpressions>
-                                    <GroupExpression>=Fields!DateFrom.Value</GroupExpression>
-                                  </GroupExpressions>
-                                </Group>
-                                <SortExpressions>
-                                  <SortExpression>
-                                    <Value>=Fields!DateFrom.Value</Value>
-                                  </SortExpression>
-                                </SortExpressions>
-                                <Label>=Fields!DateText.Value</Label>
-                              </ChartMember>
-                            </ChartMembers>
-                          </ChartCategoryHierarchy>
-                          <ChartSeriesHierarchy>
-                            <ChartMembers>
-                              <ChartMember>
-                                <Label />
-                              </ChartMember>
-                            </ChartMembers>
-                          </ChartSeriesHierarchy>
-                          <ChartData>
-                            <ChartSeriesCollection>
-                              <ChartSeries Name="AttributeValue">
-                                <ChartDataPoints>
-                                  <ChartDataPoint>
-                                    <ChartDataPointValues>
-                                      <Y>=Switch(
-	IsNothing(Fields!AttributeValue.Value), Nothing,
-	CDbl(Fields!AttributeValue.Value) = 0.0, Nothing,
-	True, CDbl(Fields!AttributeValue.Value)
-)</Y>
-                                    </ChartDataPointValues>
-                                    <ChartDataLabel>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <Format>=Fields!AttributeValueFormat.Value</Format>
-                                      </Style>
-                                      <UseValueAsLabel>true</UseValueAsLabel>
-                                      <Visible>=(DateDiff("M", Parameters!DateFrom.Value, Parameters!DateTo.Value) / IIF(Parameters!DateBreakdown.Value = "QUARTER", 4, 1)) &lt;= 12</Visible>
-                                      <Position>Top</Position>
-                                    </ChartDataLabel>
-                                    <Style>
-                                      <Border>
-                                        <Width>2pt</Width>
-                                      </Border>
-                                      <Color>=Fields!PresentationColor.Value</Color>
-                                    </Style>
-                                    <ChartMarker>
-                                      <Type>Circle</Type>
-                                      <Size>6pt</Size>
-                                      <Style />
-                                    </ChartMarker>
-                                    <DataElementOutput>Output</DataElementOutput>
-                                  </ChartDataPoint>
-                                </ChartDataPoints>
-                                <Type>Line</Type>
-                                <Style />
-                                <ChartEmptyPoints>
-                                  <Style />
-                                  <ChartMarker>
-                                    <Style />
-                                  </ChartMarker>
-                                  <ChartDataLabel>
-                                    <Style />
-                                  </ChartDataLabel>
-                                </ChartEmptyPoints>
-                                <ChartItemInLegend>
-                                  <LegendText>=Fields!Description.Value</LegendText>
-                                </ChartItemInLegend>
-                                <ValueAxisName>Primary</ValueAxisName>
-                                <CategoryAxisName>Primary</CategoryAxisName>
-                                <ChartSmartLabel>
-                                  <Disabled>true</Disabled>
-                                  <CalloutLineColor>Black</CalloutLineColor>
-                                  <MinMovingDistance>0pt</MinMovingDistance>
-                                </ChartSmartLabel>
-                              </ChartSeries>
-                            </ChartSeriesCollection>
-                          </ChartData>
-                          <ChartAreas>
-                            <ChartArea Name="Default">
-                              <ChartCategoryAxes>
-                                <ChartAxis Name="Primary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption />
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <Margin>True</Margin>
-                                  <Interval>1</Interval>
-                                  <IntervalType>Default</IntervalType>
-                                  <ChartMajorGridLines>
-                                    <Enabled>False</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                                <ChartAxis Name="Secondary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>Axis Title</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <ChartMajorGridLines>
-                                    <Enabled>False</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Location>Opposite</Location>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <IncludeZero>false</IncludeZero>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                              </ChartCategoryAxes>
-                              <ChartValueAxes>
-                                <ChartAxis Name="Primary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>=First(Fields!AttributeValueFormat.Value)</Format>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>=Fields!Attribute.Value + " Factor"</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <Interval>=IIF(Fields!Attribute.Value = "Fe", 0.005, 0.05)</Interval>
-                                  <IntervalType>Number</IntervalType>
-                                  <ChartMajorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <ChartStripLines>
-                                    <ChartStripLine>
-                                      <Style>
-                                        <Border>
-                                          <Style>Dashed</Style>
-                                        </Border>
-                                        <BackgroundGradientType>None</BackgroundGradientType>
-                                        <FontSize>8pt</FontSize>
-                                        <TextAlign>General</TextAlign>
-                                        <VerticalAlign>Top</VerticalAlign>
-                                      </Style>
-                                      <IntervalOffset>1</IntervalOffset>
-                                    </ChartStripLine>
-                                  </ChartStripLines>
-                                  <Minimum>=IIF(Fields!Attribute.Value = "Fe", 0.98, 0.80)</Minimum>
-                                  <Maximum>=IIF(Fields!Attribute.Value = "Fe", 1.02, 1.20)</Maximum>
-                                  <IncludeZero>false</IncludeZero>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                                <ChartAxis Name="Secondary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>n0</Format>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>kTonnes</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <ChartMajorGridLines>
-                                    <Enabled>False</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Location>Opposite</Location>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                              </ChartValueAxes>
-                              <Style>
-                                <BackgroundGradientType>None</BackgroundGradientType>
-                              </Style>
-                              <ChartInnerPlotPosition>
-                                <Left>10</Left>
-                                <Height>81.924</Height>
-                                <Width>90</Width>
-                              </ChartInnerPlotPosition>
-                            </ChartArea>
-                          </ChartAreas>
-                          <ChartTitles>
-                            <ChartTitle Name="Default">
-                              <Caption>=Fields!ShortDescription.Value + " " + Fields!Attribute.Value</Caption>
-                              <Style>
-                                <BackgroundGradientType>None</BackgroundGradientType>
-                                <FontWeight>Bold</FontWeight>
-                                <TextAlign>General</TextAlign>
-                                <VerticalAlign>Top</VerticalAlign>
-                              </Style>
-                            </ChartTitle>
-                          </ChartTitles>
-                          <Palette>BrightPastel</Palette>
-                          <ChartBorderSkin>
-                            <Style>
-                              <BackgroundColor>Gray</BackgroundColor>
-                              <BackgroundGradientType>None</BackgroundGradientType>
-                              <Color>White</Color>
-                            </Style>
-                          </ChartBorderSkin>
-                          <ChartNoDataMessage Name="NoDataMessage">
-                            <Caption>No Data Available</Caption>
-                            <Style>
-                              <BackgroundGradientType>None</BackgroundGradientType>
-                              <TextAlign>General</TextAlign>
-                              <VerticalAlign>Top</VerticalAlign>
-                            </Style>
-                          </ChartNoDataMessage>
-                          <DataSetName>Data</DataSetName>
-                          <Top>6.81167cm</Top>
-                          <Left>0.15cm</Left>
-                          <Height>6.6cm</Height>
-                          <Width>18.5812cm</Width>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>White</BackgroundColor>
-                            <BackgroundGradientType>None</BackgroundGradientType>
-                          </Style>
-                        </Chart>
-                        <Chart Name="Chart2">
-                          <ChartCategoryHierarchy>
-                            <ChartMembers>
-                              <ChartMember>
-                                <Group Name="Chart1_CategoryGroup2">
-                                  <GroupExpressions>
-                                    <GroupExpression>=Fields!DateFrom.Value</GroupExpression>
-                                  </GroupExpressions>
-                                </Group>
-                                <SortExpressions>
-                                  <SortExpression>
-                                    <Value>=Fields!DateFrom.Value</Value>
-                                  </SortExpression>
-                                </SortExpressions>
-                                <ChartMembers>
-                                  <ChartMember>
-                                    <Group Name="Chart1_CategoryGroup3">
-                                      <GroupExpressions>
-                                        <GroupExpression>=Fields!ContextCategory.Value</GroupExpression>
-                                      </GroupExpressions>
-                                      <Filters>
-                                        <Filter>
-                                          <FilterExpression>=Fields!ContextCategory.Value</FilterExpression>
-                                          <Operator>NotEqual</Operator>
-                                          <FilterValues>
-                                            <FilterValue>Factor</FilterValue>
-                                          </FilterValues>
-                                        </Filter>
-                                      </Filters>
-                                    </Group>
-                                    <SortExpressions>
-                                      <SortExpression>
-                                        <Value>=Switch(
-	Fields!ContextCategory.Value = "HaulageContext", 0,
-	Fields!ContextCategory.Value = "DepletionContext", 1,
-	Fields!ContextCategory.Value = "ResourceClassification", 2,
-	True, 99
-)</Value>
-                                      </SortExpression>
-                                      <SortExpression>
-                                        <Value>=Fields!ProductSize.Value</Value>
-                                      </SortExpression>
-                                    </SortExpressions>
-                                    <Label>=IIF(DateDiff("M", Parameters!DateFrom.Value, Parameters!DateTo.Value) &gt; 6,
-	Switch(
-		Fields!ContextCategory.Value = "ResourceClassification", "R",
-		Fields!ContextCategory.Value = "HaulageContext", "H",
-		Fields!ContextCategory.Value = "DepletionContext", "M",
-		True, Fields!ContextCategory.Value
-	),
-	Switch(
-		Fields!ContextCategory.Value = "ResourceClassification", "Resclass",
-		Fields!ContextCategory.Value = "HaulageContext", "Hauled From",
-		Fields!ContextCategory.Value = "DepletionContext", "Mined",
-		True, Fields!ContextCategory.Value
-	)
-)</Label>
-                                  </ChartMember>
-                                </ChartMembers>
-                                <Label>=Fields!DateText.Value</Label>
-                              </ChartMember>
-                            </ChartMembers>
-                          </ChartCategoryHierarchy>
-                          <ChartSeriesHierarchy>
-                            <ChartMembers>
-                              <ChartMember>
-                                <Group Name="Chart1_SeriesGroup2">
-                                  <GroupExpressions>
-                                    <GroupExpression>=Fields!ContextGrouping.Value</GroupExpression>
-                                    <GroupExpression>=Fields!ContextGroupingLabel.Value</GroupExpression>
-                                  </GroupExpressions>
-                                </Group>
-                                <SortExpressions>
-                                  <SortExpression>
-                                    <Value>=Fields!ResourceClassification.Value</Value>
-                                  </SortExpression>
-                                  <SortExpression>
-                                    <Value>=cInt(Fields!ContextGroupingOrder.Value)</Value>
-                                  </SortExpression>
-                                  <SortExpression>
-                                    <Value>=Fields!ContextGroupingLabel.Value</Value>
-                                  </SortExpression>
-                                </SortExpressions>
-                                <Label>=Fields!ContextGroupingLabel.Value</Label>
-                              </ChartMember>
-                            </ChartMembers>
-                          </ChartSeriesHierarchy>
-                          <ChartData>
-                            <ChartSeriesCollection>
-                              <ChartSeries Name="ResourceClassification">
-                                <ChartDataPoints>
-                                  <ChartDataPoint>
-                                    <ChartDataPointValues>
-                                      <Y>=Abs(Sum(CDbl(Fields!FactorTonnesBottom.Value) * CDbl(Fields!FactorGradeValueBottom.Value)) / 100) / 1000</Y>
-                                    </ChartDataPointValues>
-                                    <ChartDataLabel>
-                                      <Style>
-                                        <FontSize>5pt</FontSize>
-                                      </Style>
-                                      <Label>=Switch(
-	Fields!ContextCategory.Value = "ResourceClassification", Format(CDbl(Fields!FactorTonnesBottom.Value) / Sum(CDbl(Fields!FactorTonnesBottom.Value), "Chart1_CategoryGroup3"), "P1"),
-	True, Fields!ContextGroupingLabel.Value
-)</Label>
-                                      <Visible>=(
-	CDbl(Fields!FactorTonnesBottom.Value) / Sum(CDbl(Fields!FactorTonnesBottom.Value), "Chart1_CategoryGroup3") &gt; 0.05 AndAlso
-	Fields!ContextGrouping.Value &lt;&gt; "Other"
-) OrElse (
-	Fields!ContextCategory.Value = "HaulageContext" AndAlso
-	Fields!LocationType.Value = "Stockpile" AndAlso
-	Fields!ContextGrouping.Value &lt;&gt; "Other" AndAlso
-	CDbl(Fields!Tonnes.Value) &gt; 0.0
-) OrElse (
-	Fields!ContextGrouping.Value = "StockpileContext"
-)</Visible>
-                                    </ChartDataLabel>
-                                    <Style>
-                                      <Border>
-                                        <Color>Black</Color>
-                                        <Style>=IIF(Fields!LocationType.Value &lt;&gt; "Stockpile" And Fields!ContextCategory.Value = "HaulageContext", "Solid", "Default")</Style>
-                                        <Width>0.75pt</Width>
-                                      </Border>
-                                      <Color>=Fields!PresentationColor.Value</Color>
-                                      <BackgroundGradientType>None</BackgroundGradientType>
-                                      <BackgroundGradientEndColor>DimGray</BackgroundGradientEndColor>
-                                      <BackgroundHatchType>=IIF(
-	Fields!LocationType.Value = "Stockpile" AndAlso Fields!ContextGrouping.Value &lt;&gt; "StockpileContext", 
-	"WideDownwardDiagonal", 
-	"Default"
-)</BackgroundHatchType>
-                                    </Style>
-                                    <ChartMarker>
-                                      <Style />
-                                    </ChartMarker>
-                                    <DataElementOutput>Output</DataElementOutput>
-                                  </ChartDataPoint>
-                                </ChartDataPoints>
-                                <Subtype>Stacked</Subtype>
-                                <Style />
-                                <ChartEmptyPoints>
-                                  <Style />
-                                  <ChartMarker>
-                                    <Style />
-                                  </ChartMarker>
-                                  <ChartDataLabel>
-                                    <Style />
-                                  </ChartDataLabel>
-                                </ChartEmptyPoints>
-                                <CustomProperties>
-                                  <CustomProperty>
-                                    <Name>PointWidth</Name>
-                                    <Value>0.7</Value>
-                                  </CustomProperty>
-                                </CustomProperties>
-                                <ChartItemInLegend>
-                                  <LegendText>=IIF(Fields!ContextCategory.Value = "HaulageContext", Fields!ContextGrouping.Value, Fields!ContextGroupingLabel.Value)</LegendText>
-                                  <Hidden>=Fields!ContextCategory.Value &lt;&gt; "HaulageContext" OrElse Fields!ContextGrouping.Value = "StockpileContext"</Hidden>
-                                </ChartItemInLegend>
-                                <ValueAxisName>Primary</ValueAxisName>
-                                <CategoryAxisName>Primary</CategoryAxisName>
-                                <ChartSmartLabel>
-                                  <CalloutLineColor>Black</CalloutLineColor>
-                                  <MinMovingDistance>0pt</MinMovingDistance>
-                                </ChartSmartLabel>
-                              </ChartSeries>
-                            </ChartSeriesCollection>
-                          </ChartData>
-                          <ChartAreas>
-                            <ChartArea Name="Default">
-                              <ChartCategoryAxes>
-                                <ChartAxis Name="Primary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption />
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <Margin>True</Margin>
-                                  <Interval>1</Interval>
-                                  <IntervalType>Default</IntervalType>
-                                  <ChartMajorGridLines>
-                                    <Enabled>True</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                    <Interval>=Code.ContextCount(Parameters!ContextSelection.Value)</Interval>
-                                    <IntervalOffset>0.5</IntervalOffset>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                                <ChartAxis Name="Secondary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>Axis Title</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <ChartMajorGridLines>
-                                    <Enabled>False</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Location>Opposite</Location>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <IncludeZero>false</IncludeZero>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                              </ChartCategoryAxes>
-                              <ChartValueAxes>
-                                <ChartAxis Name="Primary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>=IIF(Fields!Attribute.Value = "P", "N1", "N0")</Format>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>kTonnes</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <IntervalType>Number</IntervalType>
-                                  <ChartMajorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <IncludeZero>false</IncludeZero>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                                <ChartAxis Name="Secondary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>n0</Format>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>kTonnes</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <ChartMajorGridLines>
-                                    <Enabled>False</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Location>Opposite</Location>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                              </ChartValueAxes>
-                              <Style>
-                                <BackgroundGradientType>None</BackgroundGradientType>
-                              </Style>
-                              <ChartInnerPlotPosition>
-                                <Top>0.5</Top>
-                                <Left>10</Left>
-                                <Height>82</Height>
-                                <Width>90</Width>
-                              </ChartInnerPlotPosition>
-                            </ChartArea>
-                          </ChartAreas>
-                          <ChartLegends>
-                            <ChartLegend Name="Legend1">
-                              <Style>
-                                <BackgroundGradientType>None</BackgroundGradientType>
-                                <FontSize>8pt</FontSize>
-                              </Style>
-                              <Position>BottomCenter</Position>
-                              <ChartLegendTitle>
-                                <Caption />
-                                <Style>
-                                  <FontSize>8pt</FontSize>
-                                  <FontWeight>Bold</FontWeight>
-                                  <TextAlign>Center</TextAlign>
-                                </Style>
-                              </ChartLegendTitle>
-                              <HeaderSeparatorColor>Black</HeaderSeparatorColor>
-                              <ColumnSeparatorColor>Black</ColumnSeparatorColor>
-                              <Reversed>True</Reversed>
-                            </ChartLegend>
-                          </ChartLegends>
-                          <Palette>BrightPastel</Palette>
-                          <ChartBorderSkin>
-                            <Style>
-                              <BackgroundColor>Gray</BackgroundColor>
-                              <BackgroundGradientType>None</BackgroundGradientType>
-                              <Color>White</Color>
-                            </Style>
-                          </ChartBorderSkin>
-                          <ChartNoDataMessage Name="NoDataMessage">
-                            <Caption>No Data Available</Caption>
-                            <Style>
-                              <BackgroundGradientType>None</BackgroundGradientType>
-                              <TextAlign>General</TextAlign>
-                              <VerticalAlign>Top</VerticalAlign>
-                            </Style>
-                          </ChartNoDataMessage>
-                          <DataSetName>Data</DataSetName>
-                          <Top>13.55278cm</Top>
-                          <Left>0.15cm</Left>
-                          <Height>9.2cm</Height>
-                          <Width>18.5812cm</Width>
-                          <ZIndex>1</ZIndex>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>White</BackgroundColor>
-                            <BackgroundGradientType>None</BackgroundGradientType>
-                          </Style>
-                        </Chart>
-                        <Chart Name="Chart3">
-                          <ChartCategoryHierarchy>
-                            <ChartMembers>
-                              <ChartMember>
-                                <Group Name="Chart1_CategoryGroup4">
-                                  <GroupExpressions>
-                                    <GroupExpression>=Fields!DateFrom.Value</GroupExpression>
-                                  </GroupExpressions>
-                                </Group>
-                                <SortExpressions>
-                                  <SortExpression>
-                                    <Value>=Fields!DateFrom.Value</Value>
-                                  </SortExpression>
-                                </SortExpressions>
-                                <Label>=Fields!DateText.Value</Label>
-                              </ChartMember>
-                            </ChartMembers>
-                          </ChartCategoryHierarchy>
-                          <ChartSeriesHierarchy>
-                            <ChartMembers>
-                              <ChartMember>
-                                <Group Name="Chart3_SeriesGroup">
-                                  <GroupExpressions>
-                                    <GroupExpression>=Fields!ReportTagId.Value</GroupExpression>
-                                  </GroupExpressions>
-                                </Group>
-                                <SortExpressions>
-                                  <SortExpression>
-                                    <Value>=Fields!ReportTagId.Value</Value>
-                                  </SortExpression>
-                                </SortExpressions>
-                                <Label>=Fields!ReportTagId.Value</Label>
-                              </ChartMember>
-                            </ChartMembers>
-                          </ChartSeriesHierarchy>
-                          <ChartData>
-                            <ChartSeriesCollection>
-                              <ChartSeries Name="AttributeValue">
-                                <ChartDataPoints>
-                                  <ChartDataPoint>
-                                    <ChartDataPointValues>
-                                      <Y>=Switch(
-	IsNothing(Fields!AttributeValue.Value), Nothing, 
-	Fields!Attribute.Value = "Tonnes", CDbl(Fields!AttributeValue.Value) / 1000,
-	True, CDbl(Fields!AttributeValue.Value)
-)</Y>
-                                    </ChartDataPointValues>
-                                    <ChartDataLabel>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <Format>=IIF(Fields!Attribute.Value = "Tonnes", "N0", Fields!AttributeValueFormat.Value)</Format>
-                                      </Style>
-                                      <UseValueAsLabel>true</UseValueAsLabel>
-                                      <Visible>=(DateDiff("M", Parameters!DateFrom.Value, Parameters!DateTo.Value) / IIF(Parameters!DateBreakdown.Value = "QUARTER", 4, 1)) &lt;= 12</Visible>
-                                      <Position>Top</Position>
-                                    </ChartDataLabel>
-                                    <Style>
-                                      <Border>
-                                        <Width>2pt</Width>
-                                      </Border>
-                                      <Color>=Fields!PresentationColor.Value</Color>
-                                    </Style>
-                                    <ChartMarker>
-                                      <Type>Circle</Type>
-                                      <Size>6pt</Size>
-                                      <Style />
-                                    </ChartMarker>
-                                    <DataElementOutput>Output</DataElementOutput>
-                                  </ChartDataPoint>
-                                </ChartDataPoints>
-                                <Type>Line</Type>
-                                <Style />
-                                <ChartEmptyPoints>
-                                  <Style />
-                                  <ChartMarker>
-                                    <Style />
-                                  </ChartMarker>
-                                  <ChartDataLabel>
-                                    <Style />
-                                  </ChartDataLabel>
-                                </ChartEmptyPoints>
-                                <ChartItemInLegend>
-                                  <LegendText>=Fields!Description.Value</LegendText>
-                                </ChartItemInLegend>
-                                <ValueAxisName>Primary</ValueAxisName>
-                                <CategoryAxisName>Primary</CategoryAxisName>
-                                <ChartSmartLabel>
-                                  <CalloutLineColor>Black</CalloutLineColor>
-                                  <MinMovingDistance>0pt</MinMovingDistance>
-                                </ChartSmartLabel>
-                              </ChartSeries>
-                            </ChartSeriesCollection>
-                          </ChartData>
-                          <ChartAreas>
-                            <ChartArea Name="Default">
-                              <ChartCategoryAxes>
-                                <ChartAxis Name="Primary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption />
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <Margin>True</Margin>
-                                  <Interval>1</Interval>
-                                  <IntervalType>Default</IntervalType>
-                                  <ChartMajorGridLines>
-                                    <Enabled>False</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                                <ChartAxis Name="Secondary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>Axis Title</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <ChartMajorGridLines>
-                                    <Enabled>False</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Location>Opposite</Location>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <IncludeZero>false</IncludeZero>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                              </ChartCategoryAxes>
-                              <ChartValueAxes>
-                                <ChartAxis Name="Primary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>=First(Fields!AttributeValueFormat.Value)</Format>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>=IIF(Fields!Attribute.Value  = "Tonnes", "kTonnes", Fields!Attribute.Value + " %")</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <IntervalType>Number</IntervalType>
-                                  <ChartMajorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <IncludeZero>false</IncludeZero>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                                <ChartAxis Name="Secondary">
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>n0</Format>
-                                  </Style>
-                                  <ChartAxisTitle>
-                                    <Caption>kTonnes</Caption>
-                                    <Style>
-                                      <FontSize>8pt</FontSize>
-                                    </Style>
-                                  </ChartAxisTitle>
-                                  <ChartMajorGridLines>
-                                    <Enabled>False</Enabled>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                      </Border>
-                                    </Style>
-                                  </ChartMajorGridLines>
-                                  <ChartMinorGridLines>
-                                    <Style>
-                                      <Border>
-                                        <Color>Gainsboro</Color>
-                                        <Style>Dotted</Style>
-                                      </Border>
-                                    </Style>
-                                  </ChartMinorGridLines>
-                                  <ChartMinorTickMarks>
-                                    <Length>0.5</Length>
-                                  </ChartMinorTickMarks>
-                                  <CrossAt>NaN</CrossAt>
-                                  <Location>Opposite</Location>
-                                  <Minimum>NaN</Minimum>
-                                  <Maximum>NaN</Maximum>
-                                  <ChartAxisScaleBreak>
-                                    <Style />
-                                  </ChartAxisScaleBreak>
-                                </ChartAxis>
-                              </ChartValueAxes>
-                              <Style>
-                                <BackgroundGradientType>None</BackgroundGradientType>
-                              </Style>
-                              <ChartInnerPlotPosition>
-                                <Left>10</Left>
-                                <Height>81.924</Height>
-                                <Width>90</Width>
-                              </ChartInnerPlotPosition>
-                            </ChartArea>
-                          </ChartAreas>
-                          <ChartLegends>
-                            <ChartLegend Name="Legend1">
-                              <Style>
-                                <BackgroundGradientType>None</BackgroundGradientType>
-                                <FontSize>8pt</FontSize>
-                              </Style>
-                              <Position>TopCenter</Position>
-                              <ChartLegendTitle>
-                                <Caption />
-                                <Style>
-                                  <FontSize>8pt</FontSize>
-                                  <FontWeight>Bold</FontWeight>
-                                  <TextAlign>Center</TextAlign>
-                                </Style>
-                              </ChartLegendTitle>
-                              <HeaderSeparatorColor>Black</HeaderSeparatorColor>
-                              <ColumnSeparatorColor>Black</ColumnSeparatorColor>
-                            </ChartLegend>
-                          </ChartLegends>
-                          <ChartTitles>
-                            <ChartTitle Name="Default">
-                              <Caption>=Fields!Attribute.Value</Caption>
-                              <Style>
-                                <BackgroundGradientType>None</BackgroundGradientType>
-                                <FontWeight>Bold</FontWeight>
-                                <TextAlign>General</TextAlign>
-                                <VerticalAlign>Top</VerticalAlign>
-                              </Style>
-                            </ChartTitle>
-                          </ChartTitles>
-                          <Palette>BrightPastel</Palette>
-                          <ChartBorderSkin>
-                            <Style>
-                              <BackgroundColor>Gray</BackgroundColor>
-                              <BackgroundGradientType>None</BackgroundGradientType>
-                              <Color>White</Color>
-                            </Style>
-                          </ChartBorderSkin>
-                          <ChartNoDataMessage Name="NoDataMessage">
-                            <Caption>No Data Available</Caption>
-                            <Style>
-                              <BackgroundGradientType>None</BackgroundGradientType>
-                              <TextAlign>General</TextAlign>
-                              <VerticalAlign>Top</VerticalAlign>
-                            </Style>
-                          </ChartNoDataMessage>
-                          <DataSetName>Data</DataSetName>
-                          <Filters>
-                            <Filter>
-                              <FilterExpression>=CInt(Fields!Type.Value)</FilterExpression>
-                              <Operator>NotEqual</Operator>
-                              <FilterValues>
-                                <FilterValue DataType="Integer">0</FilterValue>
-                              </FilterValues>
-                            </Filter>
-                            <Filter>
-                              <FilterExpression>=Fields!ContextCategory.Value</FilterExpression>
-                              <Operator>Equal</Operator>
-                              <FilterValues>
-                                <FilterValue>Factor</FilterValue>
-                              </FilterValues>
-                            </Filter>
-                          </Filters>
-                          <Top>0.03528cm</Top>
-                          <Left>0.15cm</Left>
-                          <Height>6.6cm</Height>
-                          <Width>18.5812cm</Width>
-                          <ZIndex>2</ZIndex>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>White</BackgroundColor>
-                            <BackgroundGradientType>None</BackgroundGradientType>
-                          </Style>
-                        </Chart>
-                        <Textbox Name="Textbox1">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Note: individual stockpiles are called out only if they contribute at least 5 % of the material for that month or quarter</Value>
-                                  <Style>
-                                    <FontStyle>Italic</FontStyle>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox1</rd:DefaultName>
-                          <Top>22.92917cm</Top>
-                          <Left>0.15cm</Left>
-                          <Height>0.58522cm</Height>
-                          <Width>18.50023cm</Width>
-                          <ZIndex>3</ZIndex>
-                          <Visibility>
-                            <Hidden>=InStr(Parameters!ContextSelection.Value, "HaulageContext") = 0</Hidden>
-                          </Visibility>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </ReportItems>
-                      <KeepTogether>true</KeepTogether>
-                      <Visibility>
-                        <Hidden>=Parameters!OnlyTables.Value</Hidden>
-                      </Visibility>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </Rectangle>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Details">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!Attribute.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>Data</DataSetName>
-        <Top>1.15873cm</Top>
-        <Left>0.18919cm</Left>
-        <Height>23.77752cm</Height>
-        <Width>19.28729cm</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Tablix>
-      <Subreport Name="Subreport1">
-        <ReportName>BhpbioResourceClassificationLegend</ReportName>
-        <Top>25.04208cm</Top>
-        <Left>0.18919cm</Left>
-        <Height>1.05833cm</Height>
-        <Width>19.28729cm</Width>
-        <ZIndex>2</ZIndex>
-        <Visibility>
-          <Hidden>=InStr(Parameters!ContextSelection.Value, "ResourceClassification") = 0</Hidden>
-        </Visibility>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Subreport>
-    </ReportItems>
-    <Height>26.28563cm</Height>
-    <Style>
-      <BackgroundColor>=IIF(Parameters!ReportContext.Value = "Standard", "Transparent", "#fcf5d1")</BackgroundColor>
-      <BackgroundImage>
-        <Source>External</Source>
-        <Value>=IIF(Parameters!ReportContext.Value = "Standard", Nothing, "Watermark.png")</Value>
-        <MIMEType>image/png</MIMEType>
-        <BackgroundRepeat>RepeatY</BackgroundRepeat>
-      </BackgroundImage>
-    </Style>
-  </Body>
-  <Width>19.82646cm</Width>
-  <Page>
-    <PageHeader>
-      <Height>2.62448cm</Height>
-      <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Rectangle Name="rectangle2">
-          <ReportItems>
-            <Image Name="image1">
-              <Source>External</Source>
-              <Value>ReportHeaderImageLeft.gif</Value>
-              <Sizing>FitProportional</Sizing>
-              <Top>0.27008cm</Top>
-              <Height>1.93122cm</Height>
-              <Width>5.34392cm</Width>
-              <Style />
-            </Image>
-            <Textbox Name="textbox10">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Factor Analysis with Context Report</Value>
-                      <Style>
-                        <FontFamily>Verdana</FontFamily>
-                        <FontSize>13pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>0.60417cm</Top>
-              <Left>5.73198cm</Left>
-              <Height>0.70896cm</Height>
-              <Width>13.71804cm</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Line Name="line3">
-              <Top>2.27008cm</Top>
-              <Height>0cm</Height>
-              <Width>19.8cm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>Solid</Style>
-                </Border>
-              </Style>
-            </Line>
-            <Textbox Name="textbox12">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=IIF(Parameters!ReportContext.Value = "Standard","" , "DRAFT RESULTS ONLY")</Value>
-                      <Style>
-                        <FontFamily>Verdana</FontFamily>
-                        <FontSize>14pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <Color>Red</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <LeftIndent>0cm</LeftIndent>
-                  <HangingIndent>0cm</HangingIndent>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>1.41896cm</Top>
-              <Left>12.22229cm</Left>
-              <Height>0.71cm</Height>
-              <Width>7.22773cm</Width>
-              <ZIndex>3</ZIndex>
-              <Visibility>
-                <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
-              </Visibility>
-              <Style>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
-          <DataElementOutput>ContentsOnly</DataElementOutput>
-          <Top>0.13496cm</Top>
-          <Left>0.02646cm</Left>
-          <Height>2.48952cm</Height>
-          <Width>19.8cm</Width>
-          <Visibility>
-            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
-          </Visibility>
-          <Style />
-        </Rectangle>
-      </ReportItems>
-      <Style>
-        <Border>
-          <Style>None</Style>
-        </Border>
-      </Style>
-    </PageHeader>
-    <PageFooter>
-      <Height>1.05317cm</Height>
-      <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Rectangle Name="rectangle5">
-          <ReportItems>
-            <Image Name="image3">
-              <Source>External</Source>
-              <Value>Reconcilor_logo1.jpg</Value>
-              <Sizing>Fit</Sizing>
-              <Top>0.16117cm</Top>
-              <Left>15.87078cm</Left>
-              <Height>0.625cm</Height>
-              <Width>3.625cm</Width>
-              <Style />
-            </Image>
-            <Textbox Name="textbox32">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>= "Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
-                      <Style>
-                        <FontFamily>Verdana</FontFamily>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>0.16117cm</Top>
-              <Left>6.75cm</Left>
-              <Height>0.625cm</Height>
-              <Width>7.39658cm</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="textbox33">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>= "Report Generated: " + Format(Now(), "dd MMM yyyy, HH:mm")</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>0.16117cm</Top>
-              <Left>0.02646cm</Left>
-              <Height>0.625cm</Height>
-              <Width>6.75cm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
-          <Top>0.10583cm</Top>
-          <Height>0.94734cm</Height>
-          <Width>19.73065cm</Width>
-          <Visibility>
-            <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <TopBorder>
-              <Style>Solid</Style>
-            </TopBorder>
-          </Style>
-        </Rectangle>
-      </ReportItems>
-      <Style>
-        <Border>
-          <Style>None</Style>
-        </Border>
-      </Style>
-    </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
-    <LeftMargin>0.5cm</LeftMargin>
-    <RightMargin>0.5cm</RightMargin>
-    <TopMargin>0.5cm</TopMargin>
-    <BottomMargin>0.5cm</BottomMargin>
-    <ColumnSpacing>1.27cm</ColumnSpacing>
-    <Style />
-  </Page>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="WebService">
@@ -1977,6 +320,1702 @@
       </Fields>
     </DataSet>
   </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Rectangle Name="rectangle1">
+            <ReportItems>
+              <Textbox Name="textbox28">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value EvaluationMode="Constant">Date From:</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.15cm</Top>
+                <Left>0.01958cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.50917cm</Width>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox21">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Date To:</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.15cm</Top>
+                <Left>3.63153cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.50917cm</Width>
+                <ZIndex>1</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox15">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Format(CDATE(Parameters!DateFrom.Value), "dd-MMM-yy")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <Format>d</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.15cm</Top>
+                <Left>1.70514cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.75cm</Width>
+                <ZIndex>2</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox13">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Format(CDATE(Parameters!DateTo.Value), "dd-MMM-yy")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <Format>d</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.15cm</Top>
+                <Left>5.24653cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.75cm</Width>
+                <ZIndex>3</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox18">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Attributes:</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>textbox18</rd:DefaultName>
+                <Top>0.15cm</Top>
+                <Left>12.39657cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.64417cm</Width>
+                <ZIndex>4</ZIndex>
+                <DataElementOutput>NoOutput</DataElementOutput>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="textbox20">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!ConvertXmlToCsvResult.Value, "Attributes")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>textbox20</rd:DefaultName>
+                <Top>0.15cm</Top>
+                <Left>14.21713cm</Left>
+                <Height>0.5cm</Height>
+                <Width>5.25935cm</Width>
+                <ZIndex>5</ZIndex>
+                <Style>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox6">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Location:</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>SemiBold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox6</rd:DefaultName>
+                <Top>0.15cm</Top>
+                <Left>7.17292cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.43209cm</Width>
+                <ZIndex>6</ZIndex>
+                <Visibility>
+                  <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox7">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!GetLocationCommentByDateResult.Value, "LocationNameData")</Value>
+                        <Style>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox7</rd:DefaultName>
+                <Top>0.15cm</Top>
+                <Left>8.74612cm</Left>
+                <Height>0.5cm</Height>
+                <Width>3.47407cm</Width>
+                <ZIndex>7</ZIndex>
+                <Visibility>
+                  <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <Top>0.17639cm</Top>
+            <Height>0.80596cm</Height>
+            <Width>19.82646cm</Width>
+            <Visibility>
+              <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+                <Width>0.5pt</Width>
+              </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
+            </Style>
+          </Rectangle>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>19.28729cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>23.70203cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle3">
+                          <ReportItems>
+                            <Chart Name="Chart1">
+                              <ChartCategoryHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Group Name="Chart1_CategoryGroup">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!DateFrom.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <SortExpressions>
+                                      <SortExpression>
+                                        <Value>=Fields!DateFrom.Value</Value>
+                                      </SortExpression>
+                                    </SortExpressions>
+                                    <Label>=Fields!DateText.Value</Label>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartCategoryHierarchy>
+                              <ChartSeriesHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Label />
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartSeriesHierarchy>
+                              <ChartData>
+                                <ChartSeriesCollection>
+                                  <ChartSeries Name="AttributeValue">
+                                    <ChartDataPoints>
+                                      <ChartDataPoint>
+                                        <ChartDataPointValues>
+                                          <Y>=Switch(
+	IsNothing(Fields!AttributeValue.Value), Nothing,
+	CDbl(Fields!AttributeValue.Value) = 0.0, Nothing,
+	True, CDbl(Fields!AttributeValue.Value)
+)</Y>
+                                        </ChartDataPointValues>
+                                        <ChartDataLabel>
+                                          <Style>
+                                            <FontSize>8pt</FontSize>
+                                            <Format>=Fields!AttributeValueFormat.Value</Format>
+                                          </Style>
+                                          <UseValueAsLabel>true</UseValueAsLabel>
+                                          <Visible>=(DateDiff("M", Parameters!DateFrom.Value, Parameters!DateTo.Value) / IIF(Parameters!DateBreakdown.Value = "QUARTER", 4, 1)) &lt;= 12</Visible>
+                                          <Position>Top</Position>
+                                        </ChartDataLabel>
+                                        <Style>
+                                          <Border>
+                                            <Width>2pt</Width>
+                                          </Border>
+                                          <Color>=Fields!PresentationColor.Value</Color>
+                                        </Style>
+                                        <ChartMarker>
+                                          <Type>Circle</Type>
+                                          <Size>6pt</Size>
+                                          <Style />
+                                        </ChartMarker>
+                                        <DataElementOutput>Output</DataElementOutput>
+                                      </ChartDataPoint>
+                                    </ChartDataPoints>
+                                    <Type>Line</Type>
+                                    <Style />
+                                    <ChartEmptyPoints>
+                                      <Style />
+                                      <ChartMarker>
+                                        <Style />
+                                      </ChartMarker>
+                                      <ChartDataLabel>
+                                        <Style />
+                                      </ChartDataLabel>
+                                    </ChartEmptyPoints>
+                                    <ChartItemInLegend>
+                                      <LegendText>=Fields!Description.Value</LegendText>
+                                    </ChartItemInLegend>
+                                    <ValueAxisName>Primary</ValueAxisName>
+                                    <CategoryAxisName>Primary</CategoryAxisName>
+                                    <ChartSmartLabel>
+                                      <Disabled>true</Disabled>
+                                      <CalloutLineColor>Black</CalloutLineColor>
+                                      <MinMovingDistance>0pt</MinMovingDistance>
+                                    </ChartSmartLabel>
+                                  </ChartSeries>
+                                </ChartSeriesCollection>
+                              </ChartData>
+                              <ChartAreas>
+                                <ChartArea Name="Default">
+                                  <ChartCategoryAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <Margin>True</Margin>
+                                      <Interval>1</Interval>
+                                      <IntervalType>Default</IntervalType>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>Axis Title</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <IncludeZero>false</IncludeZero>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartCategoryAxes>
+                                  <ChartValueAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>=First(Fields!AttributeValueFormat.Value)</Format>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>=Fields!Attribute.Value + " Factor"</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <Interval>=IIF(Fields!Attribute.Value = "Fe", 0.005, 0.05)</Interval>
+                                      <IntervalType>Number</IntervalType>
+                                      <ChartMajorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <ChartStripLines>
+                                        <ChartStripLine>
+                                          <Style>
+                                            <Border>
+                                              <Style>Dashed</Style>
+                                            </Border>
+                                            <BackgroundGradientType>None</BackgroundGradientType>
+                                            <FontSize>8pt</FontSize>
+                                            <TextAlign>General</TextAlign>
+                                            <VerticalAlign>Top</VerticalAlign>
+                                          </Style>
+                                          <IntervalOffset>1</IntervalOffset>
+                                        </ChartStripLine>
+                                      </ChartStripLines>
+                                      <Minimum>=IIF(Fields!Attribute.Value = "Fe", 0.98, 0.80)</Minimum>
+                                      <Maximum>=IIF(Fields!Attribute.Value = "Fe", 1.02, 1.20)</Maximum>
+                                      <IncludeZero>false</IncludeZero>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>n0</Format>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>kTonnes</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartValueAxes>
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                  </Style>
+                                  <ChartInnerPlotPosition>
+                                    <Left>10</Left>
+                                    <Height>81.924</Height>
+                                    <Width>90</Width>
+                                  </ChartInnerPlotPosition>
+                                </ChartArea>
+                              </ChartAreas>
+                              <ChartTitles>
+                                <ChartTitle Name="Default">
+                                  <Caption>=Fields!ShortDescription.Value + " " + Fields!Attribute.Value</Caption>
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextAlign>General</TextAlign>
+                                    <VerticalAlign>Top</VerticalAlign>
+                                  </Style>
+                                </ChartTitle>
+                              </ChartTitles>
+                              <Palette>BrightPastel</Palette>
+                              <ChartBorderSkin>
+                                <Style>
+                                  <BackgroundColor>Gray</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <Color>White</Color>
+                                </Style>
+                              </ChartBorderSkin>
+                              <ChartNoDataMessage Name="NoDataMessage">
+                                <Caption>No Data Available</Caption>
+                                <Style>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <TextAlign>General</TextAlign>
+                                  <VerticalAlign>Top</VerticalAlign>
+                                </Style>
+                              </ChartNoDataMessage>
+                              <DataSetName>Data</DataSetName>
+                              <Top>6.81167cm</Top>
+                              <Left>0.15cm</Left>
+                              <Height>6.6cm</Height>
+                              <Width>18.5812cm</Width>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                              </Style>
+                            </Chart>
+                            <Chart Name="Chart2">
+                              <ChartCategoryHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Group Name="Chart1_CategoryGroup2">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!DateFrom.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <SortExpressions>
+                                      <SortExpression>
+                                        <Value>=Fields!DateFrom.Value</Value>
+                                      </SortExpression>
+                                    </SortExpressions>
+                                    <ChartMembers>
+                                      <ChartMember>
+                                        <Group Name="Chart1_CategoryGroup3">
+                                          <GroupExpressions>
+                                            <GroupExpression>=Fields!ContextCategory.Value</GroupExpression>
+                                          </GroupExpressions>
+                                          <Filters>
+                                            <Filter>
+                                              <FilterExpression>=Fields!ContextCategory.Value</FilterExpression>
+                                              <Operator>NotEqual</Operator>
+                                              <FilterValues>
+                                                <FilterValue>Factor</FilterValue>
+                                              </FilterValues>
+                                            </Filter>
+                                          </Filters>
+                                        </Group>
+                                        <SortExpressions>
+                                          <SortExpression>
+                                            <Value>=Switch(
+	Fields!ContextCategory.Value = "HaulageContext", 0,
+	Fields!ContextCategory.Value = "DepletionContext", 1,
+	Fields!ContextCategory.Value = "ResourceClassification", 2,
+	True, 99
+)</Value>
+                                          </SortExpression>
+                                          <SortExpression>
+                                            <Value>=Fields!ProductSize.Value</Value>
+                                          </SortExpression>
+                                        </SortExpressions>
+                                        <Label>=IIF(DateDiff("M", Parameters!DateFrom.Value, Parameters!DateTo.Value) &gt; 6,
+	Switch(
+		Fields!ContextCategory.Value = "ResourceClassification", "R",
+		Fields!ContextCategory.Value = "HaulageContext", "H",
+		Fields!ContextCategory.Value = "DepletionContext", "M",
+		True, Fields!ContextCategory.Value
+	),
+	Switch(
+		Fields!ContextCategory.Value = "ResourceClassification", "Resclass",
+		Fields!ContextCategory.Value = "HaulageContext", "Hauled From",
+		Fields!ContextCategory.Value = "DepletionContext", "Mined",
+		True, Fields!ContextCategory.Value
+	)
+)</Label>
+                                      </ChartMember>
+                                    </ChartMembers>
+                                    <Label>=Fields!DateText.Value</Label>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartCategoryHierarchy>
+                              <ChartSeriesHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Group Name="Chart1_SeriesGroup2">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!ContextGrouping.Value</GroupExpression>
+                                        <GroupExpression>=Fields!ContextGroupingLabel.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <SortExpressions>
+                                      <SortExpression>
+                                        <Value>=Fields!ResourceClassification.Value</Value>
+                                      </SortExpression>
+                                      <SortExpression>
+                                        <Value>=cInt(Fields!ContextGroupingOrder.Value)</Value>
+                                      </SortExpression>
+                                      <SortExpression>
+                                        <Value>=Fields!ContextGroupingLabel.Value</Value>
+                                      </SortExpression>
+                                    </SortExpressions>
+                                    <Label>=Fields!ContextGroupingLabel.Value</Label>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartSeriesHierarchy>
+                              <ChartData>
+                                <ChartSeriesCollection>
+                                  <ChartSeries Name="ResourceClassification">
+                                    <ChartDataPoints>
+                                      <ChartDataPoint>
+                                        <ChartDataPointValues>
+                                          <Y>=Abs(Sum(CDbl(Fields!FactorTonnesBottom.Value) * CDbl(Fields!FactorGradeValueBottom.Value)) / 100) / 1000</Y>
+                                        </ChartDataPointValues>
+                                        <ChartDataLabel>
+                                          <Style>
+                                            <FontSize>5pt</FontSize>
+                                          </Style>
+                                          <Label>=Switch(
+	Fields!ContextCategory.Value = "ResourceClassification", Format(CDbl(Fields!FactorTonnesBottom.Value) / Sum(CDbl(Fields!FactorTonnesBottom.Value), "Chart1_CategoryGroup3"), "P1"),
+	True, Fields!ContextGroupingLabel.Value
+)</Label>
+                                          <Visible>=(
+	CDbl(Fields!FactorTonnesBottom.Value) / Sum(CDbl(Fields!FactorTonnesBottom.Value), "Chart1_CategoryGroup3") &gt; 0.05 AndAlso
+	Fields!ContextGrouping.Value &lt;&gt; "Other"
+) OrElse (
+	Fields!ContextCategory.Value = "HaulageContext" AndAlso
+	Fields!LocationType.Value = "Stockpile" AndAlso
+	Fields!ContextGrouping.Value &lt;&gt; "Other" AndAlso
+	CDbl(Fields!Tonnes.Value) &gt; 0.0
+) OrElse (
+	Fields!ContextGrouping.Value = "StockpileContext"
+)</Visible>
+                                        </ChartDataLabel>
+                                        <Style>
+                                          <Border>
+                                            <Color>Black</Color>
+                                            <Style>=IIF(Fields!LocationType.Value &lt;&gt; "Stockpile" And Fields!ContextCategory.Value = "HaulageContext", "Solid", "Default")</Style>
+                                            <Width>0.75pt</Width>
+                                          </Border>
+                                          <Color>=Fields!PresentationColor.Value</Color>
+                                          <BackgroundGradientType>None</BackgroundGradientType>
+                                          <BackgroundGradientEndColor>DimGray</BackgroundGradientEndColor>
+                                          <BackgroundHatchType>=IIF(
+	Fields!LocationType.Value = "Stockpile" AndAlso Fields!ContextGrouping.Value &lt;&gt; "StockpileContext", 
+	"WideDownwardDiagonal", 
+	"Default"
+)</BackgroundHatchType>
+                                        </Style>
+                                        <ChartMarker>
+                                          <Style />
+                                        </ChartMarker>
+                                        <DataElementOutput>Output</DataElementOutput>
+                                      </ChartDataPoint>
+                                    </ChartDataPoints>
+                                    <Subtype>Stacked</Subtype>
+                                    <Style />
+                                    <ChartEmptyPoints>
+                                      <Style />
+                                      <ChartMarker>
+                                        <Style />
+                                      </ChartMarker>
+                                      <ChartDataLabel>
+                                        <Style />
+                                      </ChartDataLabel>
+                                    </ChartEmptyPoints>
+                                    <CustomProperties>
+                                      <CustomProperty>
+                                        <Name>PointWidth</Name>
+                                        <Value>0.7</Value>
+                                      </CustomProperty>
+                                    </CustomProperties>
+                                    <ChartItemInLegend>
+                                      <LegendText>=IIF(Fields!ContextCategory.Value = "HaulageContext", Fields!ContextGrouping.Value, Fields!ContextGroupingLabel.Value)</LegendText>
+                                      <Hidden>=Fields!ContextCategory.Value &lt;&gt; "HaulageContext" OrElse Fields!ContextGrouping.Value = "StockpileContext"</Hidden>
+                                    </ChartItemInLegend>
+                                    <ValueAxisName>Primary</ValueAxisName>
+                                    <CategoryAxisName>Primary</CategoryAxisName>
+                                    <ChartSmartLabel>
+                                      <CalloutLineColor>Black</CalloutLineColor>
+                                      <MinMovingDistance>0pt</MinMovingDistance>
+                                    </ChartSmartLabel>
+                                  </ChartSeries>
+                                </ChartSeriesCollection>
+                              </ChartData>
+                              <ChartAreas>
+                                <ChartArea Name="Default">
+                                  <ChartCategoryAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <Margin>True</Margin>
+                                      <Interval>1</Interval>
+                                      <IntervalType>Default</IntervalType>
+                                      <ChartMajorGridLines>
+                                        <Enabled>True</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                        <Interval>=Code.ContextCount(Parameters!ContextSelection.Value)</Interval>
+                                        <IntervalOffset>0.5</IntervalOffset>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>Axis Title</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <IncludeZero>false</IncludeZero>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartCategoryAxes>
+                                  <ChartValueAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>=IIF(Fields!Attribute.Value = "P", "N1", "N0")</Format>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>kTonnes</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <IntervalType>Number</IntervalType>
+                                      <ChartMajorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <IncludeZero>false</IncludeZero>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>n0</Format>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>kTonnes</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartValueAxes>
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                  </Style>
+                                  <ChartInnerPlotPosition>
+                                    <Top>0.5</Top>
+                                    <Left>10</Left>
+                                    <Height>82</Height>
+                                    <Width>90</Width>
+                                  </ChartInnerPlotPosition>
+                                </ChartArea>
+                              </ChartAreas>
+                              <ChartLegends>
+                                <ChartLegend Name="Legend1">
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                  <Position>BottomCenter</Position>
+                                  <ChartLegendTitle>
+                                    <Caption />
+                                    <Style>
+                                      <FontSize>8pt</FontSize>
+                                      <FontWeight>Bold</FontWeight>
+                                      <TextAlign>Center</TextAlign>
+                                    </Style>
+                                  </ChartLegendTitle>
+                                  <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                                  <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+                                  <Reversed>True</Reversed>
+                                </ChartLegend>
+                              </ChartLegends>
+                              <Palette>BrightPastel</Palette>
+                              <ChartBorderSkin>
+                                <Style>
+                                  <BackgroundColor>Gray</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <Color>White</Color>
+                                </Style>
+                              </ChartBorderSkin>
+                              <ChartNoDataMessage Name="NoDataMessage">
+                                <Caption>No Data Available</Caption>
+                                <Style>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <TextAlign>General</TextAlign>
+                                  <VerticalAlign>Top</VerticalAlign>
+                                </Style>
+                              </ChartNoDataMessage>
+                              <DataSetName>Data</DataSetName>
+                              <Top>13.55278cm</Top>
+                              <Left>0.15cm</Left>
+                              <Height>9.2cm</Height>
+                              <Width>18.5812cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                              </Style>
+                            </Chart>
+                            <Chart Name="Chart3">
+                              <ChartCategoryHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Group Name="Chart1_CategoryGroup4">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!DateFrom.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <SortExpressions>
+                                      <SortExpression>
+                                        <Value>=Fields!DateFrom.Value</Value>
+                                      </SortExpression>
+                                    </SortExpressions>
+                                    <Label>=Fields!DateText.Value</Label>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartCategoryHierarchy>
+                              <ChartSeriesHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Group Name="Chart3_SeriesGroup">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!ReportTagId.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <SortExpressions>
+                                      <SortExpression>
+                                        <Value>=Fields!ReportTagId.Value</Value>
+                                      </SortExpression>
+                                    </SortExpressions>
+                                    <Label>=Fields!ReportTagId.Value</Label>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartSeriesHierarchy>
+                              <ChartData>
+                                <ChartSeriesCollection>
+                                  <ChartSeries Name="AttributeValue">
+                                    <ChartDataPoints>
+                                      <ChartDataPoint>
+                                        <ChartDataPointValues>
+                                          <Y>=Switch(
+	IsNothing(Fields!AttributeValue.Value), Nothing, 
+	Fields!Attribute.Value = "Tonnes", CDbl(Fields!AttributeValue.Value) / 1000,
+	True, CDbl(Fields!AttributeValue.Value)
+)</Y>
+                                        </ChartDataPointValues>
+                                        <ChartDataLabel>
+                                          <Style>
+                                            <FontSize>8pt</FontSize>
+                                            <Format>=IIF(Fields!Attribute.Value = "Tonnes", "N0", Fields!AttributeValueFormat.Value)</Format>
+                                          </Style>
+                                          <UseValueAsLabel>true</UseValueAsLabel>
+                                          <Visible>=(DateDiff("M", Parameters!DateFrom.Value, Parameters!DateTo.Value) / IIF(Parameters!DateBreakdown.Value = "QUARTER", 4, 1)) &lt;= 12</Visible>
+                                          <Position>Top</Position>
+                                        </ChartDataLabel>
+                                        <Style>
+                                          <Border>
+                                            <Width>2pt</Width>
+                                          </Border>
+                                          <Color>=Fields!PresentationColor.Value</Color>
+                                        </Style>
+                                        <ChartMarker>
+                                          <Type>Circle</Type>
+                                          <Size>6pt</Size>
+                                          <Style />
+                                        </ChartMarker>
+                                        <DataElementOutput>Output</DataElementOutput>
+                                      </ChartDataPoint>
+                                    </ChartDataPoints>
+                                    <Type>Line</Type>
+                                    <Style />
+                                    <ChartEmptyPoints>
+                                      <Style />
+                                      <ChartMarker>
+                                        <Style />
+                                      </ChartMarker>
+                                      <ChartDataLabel>
+                                        <Style />
+                                      </ChartDataLabel>
+                                    </ChartEmptyPoints>
+                                    <ChartItemInLegend>
+                                      <LegendText>=Fields!Description.Value</LegendText>
+                                    </ChartItemInLegend>
+                                    <ValueAxisName>Primary</ValueAxisName>
+                                    <CategoryAxisName>Primary</CategoryAxisName>
+                                    <ChartSmartLabel>
+                                      <CalloutLineColor>Black</CalloutLineColor>
+                                      <MinMovingDistance>0pt</MinMovingDistance>
+                                    </ChartSmartLabel>
+                                  </ChartSeries>
+                                </ChartSeriesCollection>
+                              </ChartData>
+                              <ChartAreas>
+                                <ChartArea Name="Default">
+                                  <ChartCategoryAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <Margin>True</Margin>
+                                      <Interval>1</Interval>
+                                      <IntervalType>Default</IntervalType>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>Axis Title</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <IncludeZero>false</IncludeZero>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartCategoryAxes>
+                                  <ChartValueAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>=First(Fields!AttributeValueFormat.Value)</Format>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>=IIF(Fields!Attribute.Value  = "Tonnes", "kTonnes", Fields!Attribute.Value + " %")</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <IntervalType>Number</IntervalType>
+                                      <ChartMajorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <IncludeZero>false</IncludeZero>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>n0</Format>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption>kTonnes</Caption>
+                                        <Style>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMinorTickMarks>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartValueAxes>
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                  </Style>
+                                  <ChartInnerPlotPosition>
+                                    <Left>10</Left>
+                                    <Height>81.924</Height>
+                                    <Width>90</Width>
+                                  </ChartInnerPlotPosition>
+                                </ChartArea>
+                              </ChartAreas>
+                              <ChartLegends>
+                                <ChartLegend Name="Legend1">
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                  <Position>TopCenter</Position>
+                                  <ChartLegendTitle>
+                                    <Caption />
+                                    <Style>
+                                      <FontSize>8pt</FontSize>
+                                      <FontWeight>Bold</FontWeight>
+                                      <TextAlign>Center</TextAlign>
+                                    </Style>
+                                  </ChartLegendTitle>
+                                  <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                                  <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+                                </ChartLegend>
+                              </ChartLegends>
+                              <ChartTitles>
+                                <ChartTitle Name="Default">
+                                  <Caption>=Fields!Attribute.Value</Caption>
+                                  <Style>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextAlign>General</TextAlign>
+                                    <VerticalAlign>Top</VerticalAlign>
+                                  </Style>
+                                </ChartTitle>
+                              </ChartTitles>
+                              <Palette>BrightPastel</Palette>
+                              <ChartBorderSkin>
+                                <Style>
+                                  <BackgroundColor>Gray</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <Color>White</Color>
+                                </Style>
+                              </ChartBorderSkin>
+                              <ChartNoDataMessage Name="NoDataMessage">
+                                <Caption>No Data Available</Caption>
+                                <Style>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <TextAlign>General</TextAlign>
+                                  <VerticalAlign>Top</VerticalAlign>
+                                </Style>
+                              </ChartNoDataMessage>
+                              <DataSetName>Data</DataSetName>
+                              <Filters>
+                                <Filter>
+                                  <FilterExpression>=CInt(Fields!Type.Value)</FilterExpression>
+                                  <Operator>NotEqual</Operator>
+                                  <FilterValues>
+                                    <FilterValue DataType="Integer">0</FilterValue>
+                                  </FilterValues>
+                                </Filter>
+                                <Filter>
+                                  <FilterExpression>=Fields!ContextCategory.Value</FilterExpression>
+                                  <Operator>Equal</Operator>
+                                  <FilterValues>
+                                    <FilterValue>Factor</FilterValue>
+                                  </FilterValues>
+                                </Filter>
+                              </Filters>
+                              <Top>0.03528cm</Top>
+                              <Left>0.15cm</Left>
+                              <Height>6.6cm</Height>
+                              <Width>18.5812cm</Width>
+                              <ZIndex>2</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                              </Style>
+                            </Chart>
+                            <Textbox Name="Textbox1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Note: individual stockpiles are called out only if they contribute at least 5 % of the material for that month or quarter</Value>
+                                      <Style>
+                                        <FontStyle>Italic</FontStyle>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox1</rd:DefaultName>
+                              <Top>22.92917cm</Top>
+                              <Left>0.15cm</Left>
+                              <Height>0.58522cm</Height>
+                              <Width>18.50023cm</Width>
+                              <ZIndex>3</ZIndex>
+                              <Visibility>
+                                <Hidden>=InStr(Parameters!ContextSelection.Value, "HaulageContext") = 0</Hidden>
+                              </Visibility>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Visibility>
+                            <Hidden>=Parameters!OnlyTables.Value</Hidden>
+                          </Visibility>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Attribute.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>Data</DataSetName>
+            <Top>1.15873cm</Top>
+            <Left>0.18919cm</Left>
+            <Height>23.70203cm</Height>
+            <Width>19.28729cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Subreport Name="Subreport1">
+            <ReportName>BhpbioResourceClassificationLegend</ReportName>
+            <Top>26.68512cm</Top>
+            <Left>0.18919cm</Left>
+            <Height>1.05833cm</Height>
+            <Width>19.28729cm</Width>
+            <ZIndex>2</ZIndex>
+            <Visibility>
+              <Hidden>=InStr(Parameters!ContextSelection.Value, "ResourceClassification") = 0</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Subreport>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Note: Sample station reliability is determined from the number of assays used to derive the Mine Production Actual grades. Any production samples that were taken but not successfully assayed are not considered. To that end, sample station reliability also includes the overall reliability of the assay process.</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>25.03715cm</Top>
+            <Left>0.33919cm</Left>
+            <Height>1.44cm</Height>
+            <Width>18.50023cm</Width>
+            <ZIndex>3</ZIndex>
+            <Visibility>
+              <Hidden>=(InStr(Parameters!ContextSelection.Value, "SampleCoverage")=0)	And (InStr(Parameters!ContextSelection.Value, "SampleRatio")=0)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>27.92605cm</Height>
+        <Style>
+          <BackgroundColor>=IIF(Parameters!ReportContext.Value = "Standard", "Transparent", "#fcf5d1")</BackgroundColor>
+          <BackgroundImage>
+            <Source>External</Source>
+            <Value>=IIF(Parameters!ReportContext.Value = "Standard", Nothing, "Watermark.png")</Value>
+            <MIMEType>image/png</MIMEType>
+            <BackgroundRepeat>RepeatY</BackgroundRepeat>
+          </BackgroundImage>
+        </Style>
+      </Body>
+      <Width>19.82646cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.62448cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Rectangle Name="rectangle2">
+              <ReportItems>
+                <Image Name="image1">
+                  <Source>External</Source>
+                  <Value>ReportHeaderImageLeft.gif</Value>
+                  <Sizing>FitProportional</Sizing>
+                  <Top>0.27008cm</Top>
+                  <Height>1.93122cm</Height>
+                  <Width>5.34392cm</Width>
+                  <Style />
+                </Image>
+                <Textbox Name="textbox10">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>Factor Analysis with Context Report</Value>
+                          <Style>
+                            <FontFamily>Verdana</FontFamily>
+                            <FontSize>13pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.60417cm</Top>
+                  <Left>5.73198cm</Left>
+                  <Height>0.70896cm</Height>
+                  <Width>13.71804cm</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Line Name="line3">
+                  <Top>2.27008cm</Top>
+                  <Height>0cm</Height>
+                  <Width>19.8cm</Width>
+                  <ZIndex>2</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>Solid</Style>
+                    </Border>
+                  </Style>
+                </Line>
+                <Textbox Name="textbox12">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=IIF(Parameters!ReportContext.Value = "Standard","" , "DRAFT RESULTS ONLY")</Value>
+                          <Style>
+                            <FontFamily>Verdana</FontFamily>
+                            <FontSize>14pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                            <Color>Red</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <LeftIndent>0cm</LeftIndent>
+                      <HangingIndent>0cm</HangingIndent>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>1.41896cm</Top>
+                  <Left>12.22229cm</Left>
+                  <Height>0.71cm</Height>
+                  <Width>7.22773cm</Width>
+                  <ZIndex>3</ZIndex>
+                  <Visibility>
+                    <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+                  </Visibility>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+              </ReportItems>
+              <DataElementOutput>ContentsOnly</DataElementOutput>
+              <Top>0.13496cm</Top>
+              <Left>0.02646cm</Left>
+              <Height>2.48952cm</Height>
+              <Width>19.8cm</Width>
+              <Visibility>
+                <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+              </Visibility>
+              <Style />
+            </Rectangle>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>1.05317cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Rectangle Name="rectangle5">
+              <ReportItems>
+                <Image Name="image3">
+                  <Source>External</Source>
+                  <Value>Reconcilor_logo1.jpg</Value>
+                  <Sizing>Fit</Sizing>
+                  <Top>0.16117cm</Top>
+                  <Left>15.87078cm</Left>
+                  <Height>0.625cm</Height>
+                  <Width>3.625cm</Width>
+                  <Style />
+                </Image>
+                <Textbox Name="textbox32">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>= "Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
+                          <Style>
+                            <FontFamily>Verdana</FontFamily>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.16117cm</Top>
+                  <Left>6.75cm</Left>
+                  <Height>0.625cm</Height>
+                  <Width>7.39658cm</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="textbox33">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>= "Report Generated: " + Format(Now(), "dd MMM yyyy, HH:mm")</Value>
+                          <Style />
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.16117cm</Top>
+                  <Left>0.02646cm</Left>
+                  <Height>0.625cm</Height>
+                  <Width>6.75cm</Width>
+                  <ZIndex>2</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+              </ReportItems>
+              <Top>0.10583cm</Top>
+              <Height>0.94734cm</Height>
+              <Width>19.73065cm</Width>
+              <Visibility>
+                <Hidden>=Parameters!WithoutHeaderFooter.Value</Hidden>
+              </Visibility>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <TopBorder>
+                  <Style>Solid</Style>
+                </TopBorder>
+              </Style>
+            </Rectangle>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>0.5cm</LeftMargin>
+        <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
   <ReportParameters>
     <ReportParameter Name="LocationId">
       <DataType>Integer</DataType>
@@ -2105,6 +2144,74 @@
       </ValidValues>
     </ReportParameter>
   </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>6</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationId</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DateBreakdown</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DateFrom</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DateTo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>SingleSource</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>Attributes</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>ContextSelection</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>CompleteReport</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>WithoutHeaderFooter</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>OnlyGraphs</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>OnlyTables</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>ReportContext</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Function ContextCount(ByVal contextSelection as String) as Integer
 	Dim ch = ","c
 	Dim n = 0

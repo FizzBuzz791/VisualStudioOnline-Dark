@@ -7,7 +7,7 @@
 SET LOGFILE="RS Scripter Load Log.txt"
 SET SCRIPTLOCATION=
 SET BACKUPLOCATION=
-SET REPORTSERVER=http://localhost/reportserver_SQL2008R2
+SET REPORTSERVER=http://localhost:80/ReportServer
 SET RS="C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\RS.EXE"
 SET TIMEOUT=60
 

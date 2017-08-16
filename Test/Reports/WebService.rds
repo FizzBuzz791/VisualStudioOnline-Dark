@@ -2,7 +2,7 @@
 <RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="WebService">
   <ConnectionProperties>
     <Extension>XML</Extension>
-    <ConnectString>http://localhost/ReconcilorBhpbio40/Reports.asmx</ConnectString>
+    <ConnectString>http://localhost/ReconcilorBhpbio/Reports.asmx</ConnectString>
     <IntegratedSecurity>true</IntegratedSecurity>
   </ConnectionProperties>
   <DataSourceID>4a45b090-e8d8-47d8-adb2-ce6d6a033c34</DataSourceID>
