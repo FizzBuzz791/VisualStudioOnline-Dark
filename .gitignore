@@ -49,7 +49,7 @@ UpgradeLog*.htm
 # Rec4 stuff we don't need to Version
 **/*.[Cc]ache
 **/Debug/*
-/Test/Database/Database.dbmdl
+**/Database.dbmdl
 /Test/Database/Database.jfm
 /Test/Web/images/reports/*-[0-9]*.thumb.png
 /Test/Web/Snowden.Reconcilor.Bhpbio.Web.log
