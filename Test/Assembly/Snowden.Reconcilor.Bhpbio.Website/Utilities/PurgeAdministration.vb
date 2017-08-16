@@ -3,6 +3,7 @@ Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.ReconcilorControls.SideNavigati
 Imports Snowden.Common.Web.BaseHtmlControls
 Imports Snowden.Reconcilor.Core.WebDevelopment
 Imports System.Web.UI
+Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 
 Namespace Utilities
     Public Class PurgeAdministration
@@ -15,7 +16,8 @@ Namespace Utilities
                 If Me._sideNavigation Is Nothing Then
                     SyncLock GetType(PurgeAdministration)
                         If Me._sideNavigation Is Nothing Then
-                            Me._sideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create("Purge", Resources), PurgeAdministrationSideNavigation)
+                            Me._sideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.Purge.ToString, Resources),
+                                PurgeAdministrationSideNavigation)
                         End If
                     End SyncLock
                 End If

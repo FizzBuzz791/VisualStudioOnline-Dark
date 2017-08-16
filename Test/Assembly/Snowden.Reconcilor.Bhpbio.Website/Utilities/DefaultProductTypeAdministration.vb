@@ -4,6 +4,7 @@ Imports System.Web.UI
 Imports Snowden.Common.Web.BaseHtmlControls.Tags
 Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.ReconcilorControls.FilterBoxes.Utilities
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.InputTags
+Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 
 Namespace Utilities
     Public Class DefaultProductTypeAdministration
@@ -17,7 +18,8 @@ Namespace Utilities
         Protected Overrides Sub SetupPageControls()
             MyBase.SetupPageControls()
 
-            _productTypeSideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create("ProductType", Resources), WebDevelopment.ReconcilorControls.SideNavigationBoxes.ProductTypeNavigationBox)
+            _productTypeSideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.ProductType.ToString, Resources),
+                WebDevelopment.ReconcilorControls.SideNavigationBoxes.ProductTypeNavigationBox)
             _productTypeSideNavigation.LoadItems()
             ReconcilorContent.SideNavigation = _productTypeSideNavigation
 

@@ -142,12 +142,14 @@
     <Compile Include="Controls\Inputs\ProductPicker.vb" />
     <Compile Include="Controls\SideNavigationBoxes\BhpbioApprovalSummarySideNavigationItem.vb" />
     <Compile Include="Controls\SideNavigationBoxes\DepositSideNavigation.vb" />
+    <Compile Include="Controls\SideNavigationBoxes\SampleStationSideNavigation.vb" />
     <Compile Include="Controls\TabPage.vb" />
     <Compile Include="Controls\VersionedScriptTag.vb" />
     <Compile Include="Controls\SideNavigationBoxes\ApprovalSideNavigation.vb" />
     <Compile Include="Controls\SideNavigationBoxes\ShippingTargetSideNavigation.vb" />
     <Compile Include="Controls\SideNavigationBoxes\ProductTypeSideNavigation.vb" />
     <Compile Include="Controls\SideNavigationBoxes\PortSideNavigation.vb" />
+    <Compile Include="Extensibility\DependencyFactoryKeys.vb" />
     <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="WebpageTemplates\ApprovalAjaxTemplate.vb">
       <SubType>ASPXCodeBehind</SubType>

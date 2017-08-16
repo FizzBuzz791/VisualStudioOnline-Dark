@@ -279,6 +279,7 @@
     <Compile Include="Approval\ApprovalTree.vb" />
     <Compile Include="Extensibility\OutlierHelper.vb" />
     <Compile Include="Extensibility\FactorFormatHelper.vb" />
+    <Compile Include="Internal\SettingsModule.vb" />
     <Compile Include="Reports\GetAnnualReport.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -313,6 +314,30 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Utilities\DefaultDepositList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationsAdministration.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationSave.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationTargetDelete.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationTargetEdit.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\DefaultSampleStationTargetSave.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Utilities\DefaultshippingTargetDelete.vb">

@@ -28,3 +28,11 @@
 #ApprovalGroupBox legend {
     font-weight: bold;
 }
+
+.align-top {
+    vertical-align: text-top;
+}
+
+.hidden {
+    display: none;
+}

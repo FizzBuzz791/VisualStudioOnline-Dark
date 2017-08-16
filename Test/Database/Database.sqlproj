@@ -453,7 +453,18 @@
     <None Include="Schema\Procedures\dbo.BhpbioUpdateImportSyncRowFilterData.sql" />
     <None Include="Schema\Functions\ConvertMESToLocationId.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
-    <None Include="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioSampleStation.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioSampleStationTarget.sql" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioSampleStation.sql" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSampleStation.sql" />
+    <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioSampleStationTarget.sql" />
+    <None Include="Schema\Procedures\dbo.DeleteBhpbioSampleStationTarget.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSampleStation.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationList.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
+    <None Include="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

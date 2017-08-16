@@ -3,6 +3,7 @@ Imports Snowden.Common.Web.BaseHtmlControls
 Imports System.Web.UI
 Imports System.Web.UI.WebControls
 Imports Snowden.Common.Database.DataAccessBaseObjects
+Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 
 Namespace Utilities
     Public Class DefaultDepositAdministration
@@ -31,10 +32,10 @@ Namespace Utilities
         Protected Overrides Sub SetupPageControls()
             MyBase.SetupPageControls()
 
-            _DepositSideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create("Deposit", Resources),
+            _depositSideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.Deposit.ToString, Resources),
                 WebDevelopment.ReconcilorControls.SideNavigationBoxes.DepositSideNavigationBox)
-            _DepositSideNavigation.LoadItems()
-            ReconcilorContent.SideNavigation = _DepositSideNavigation
+            _depositSideNavigation.LoadItems()
+            ReconcilorContent.SideNavigation = _depositSideNavigation
 
             Dim cell As TableCell
             Const LABEL_WIDTH = 90

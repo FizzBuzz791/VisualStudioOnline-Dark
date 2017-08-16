@@ -38,3 +38,64 @@ function BhpbioDisplayLumpFinesDateValidationErrorMessage(lumpDates, outputType)
 
     alert("The Date From must be greater than the lump/fines cutover date. This " + outputType + " cannot be run prior to " + lumpMonthName + " " + lumpYear + " or Q" + financialQuarter + " " + lumpFinancialYear + " as no GeoMet / product data is present prior to these dates.");
 }
+
+var originalSubmitForm = SubmitForm;
+
+// overrides core.common as it's using ancient methods
+SubmitForm = function (formName, elementId, urlToLoad, showLoading, finalCall) {
+    // PP: Disabling this call until updated based on code-review
+    // validateDates();
+
+    var QueryString = '?';
+    var ServerForm = $('#' + formName);
+    var vars = new Object();
+
+    if (urlToLoad.indexOf('?') != -1) {
+        QueryString += urlToLoad.substring(urlToLoad.indexOf('?') + 1) + '&';
+        urlToLoad = urlToLoad.substring(0, urlToLoad.indexOf('?'));
+    }
+    ServerForm.find('input').each(function (i) {
+        var el = $(this);
+        var type = el.attr('type').toLowerCase();
+        var name = el.attr('name');
+        switch (type) {
+        case 'hidden':
+            if (name.substring(0, 2) != '__') {
+                vars[name] = el.val();
+            }
+            break;
+        case 'text':
+            vars[name] = el.val();
+            break;
+        case 'radio':
+            el = el[0]; // I *think* this is because of the upgrade to jQuery 1.7... The others didn't need this change though...
+            name = el.id;
+            if (el.checked === true) {
+                vars[name] = el.value;
+            }
+            break;
+        case 'checkbox':
+            // el.is() *should* work for all versions of jquery
+            vars[name] = el.is(':checked') === true ? el.val() : '';
+            break;
+        case 'button':
+        case 'submit':
+            vars[name] = el.val();
+            break;
+        }
+    });
+    ServerForm.find('select').each(function (i) {
+        var el = $(this);
+        if (el.find('option').length > 0) {
+            var name = el.attr('name');
+            vars[name] = el.val();
+        }
+    });
+    ServerForm.find('textarea').each(function (i) {
+        var el = $(this);
+        var name = el.attr('name');
+        vars[name] = el.val();
+    });
+    CallAjax(elementId, urlToLoad + QueryString, showLoading, finalCall, vars);
+    return false;
+}

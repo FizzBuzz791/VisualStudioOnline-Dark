@@ -5,6 +5,7 @@ Imports System.Web.UI.WebControls
 Imports Snowden.Common.Web.BaseHtmlControls.Tags
 Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.ReconcilorControls.FilterBoxes.Utilities
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.InputTags
+Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 
 Namespace Utilities
 
@@ -48,7 +49,7 @@ Namespace Utilities
         Protected Overrides Sub SetupPageControls()
             MyBase.SetupPageControls()
 
-            _shippingTargetSideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create("ShippingTarget", Resources),
+            _shippingTargetSideNavigation = CType(Resources.DependencyFactories.SideNavigationFactory.Create(SideNavigationKeys.ShippingTarget.ToString, Resources),
                                 Bhpbio.WebDevelopment.ReconcilorControls.SideNavigationBoxes.ShippingTargetNavigationBox)
             _shippingTargetSideNavigation.LoadItems()
             ReconcilorContent.SideNavigation = _shippingTargetSideNavigation

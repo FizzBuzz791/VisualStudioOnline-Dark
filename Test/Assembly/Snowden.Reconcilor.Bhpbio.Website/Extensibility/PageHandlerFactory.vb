@@ -1,12 +1,10 @@
 ﻿Namespace Extensibility
-
     Public Class PageHandlerFactory
-        Inherits Snowden.Reconcilor.Core.Website.Extensibility.PageHandlerFactory
+        Inherits Core.Website.Extensibility.PageHandlerFactory
 
         Private _pageListBhpbioParsed As Boolean
 
         Protected Overrides Sub SetupPageList()
-            Dim assembly As String = "Snowden.Reconcilor.Bhpbio.Website"
             MyBase.SetupPageList()
 
             If Not _pageListBhpbioParsed Then
@@ -130,14 +128,14 @@
                 AddPage("~/Utilities/CustomFieldsLocationColorsDetails.aspx", GetType(Utilities.CustomFieldsLocationColorsDetails))
                 AddPage("~/Utilities/CustomFieldsLocationColorsDetailsSave.aspx", GetType(Utilities.CustomFieldsLocationColorsDetailsSave))
 
-				AddPage("~/Utilities/ImportAdministration.aspx", GetType(Utilities.ImportAdministration))
+                AddPage("~/Utilities/ImportAdministration.aspx", GetType(Utilities.ImportAdministration))
                 AddPage("~/Utilities/ImportJobDetail.aspx", GetType(Utilities.ImportJobDetail))
                 AddPage("~/Utilities/ImportList.aspx", GetType(Utilities.ImportList))
                 AddPage("~/Utilities/ImportMessage.aspx", GetType(Utilities.ImportMessage))
                 AddPage("~/Utilities/ImportMessageGrouping.aspx", GetType(Utilities.ImportMessageGrouping))
                 AddPage("~/Utilities/ImportMessageGroupingExportXml.aspx", GetType(Utilities.ImportMessageGroupingExportXml))
 
-				AddPage("~/Utilities/PurgeAdministration.aspx", GetType(Utilities.PurgeAdministration))
+                AddPage("~/Utilities/PurgeAdministration.aspx", GetType(Utilities.PurgeAdministration))
                 AddPage("~/Utilities/PurgeAdministrationList.aspx", GetType(Utilities.PurgeAdministrationList))
                 AddPage("~/Utilities/PurgeAdministrationAdd.aspx", GetType(Utilities.PurgeAdministrationAdd))
                 AddPage("~/Utilities/PurgeAdministrationSave.aspx", GetType(Utilities.PurgeAdministrationSave))
@@ -206,8 +204,15 @@
                 AddPage("~/Utilities/GetDefaultOutlierSeriesList.aspx", GetType(Utilities.DefaultOutlierSeriesConfigurationList))
                 AddPage("~/Utilities/DefaultOutlierSeriesConfigurationEdit.aspx", GetType(Utilities.DefaultOutlierSeriesConfigurationEdit))
                 AddPage("~/Utilities/DefaultOutlierSeriesConfigurationSave.aspx", GetType(Utilities.DefaultOutlierSeriesConfigurationSave))
-                
 
+                AddPage("~/Utilities/DefaultSampleStationsAdministration.aspx", GetType(Utilities.DefaultSampleStationsAdministration))
+                AddPage("~/Utilities/DefaultSampleStationList.aspx", GetType(Utilities.DefaultSampleStationList))
+                AddPage("~/Utilities/DefaultSampleStationDelete.aspx", GetType(Utilities.DefaultSampleStationDelete))
+                AddPage("~/Utilities/DefaultSampleStationEdit.aspx", GetType(Utilities.DefaultSampleStationEdit))
+                AddPage("~/Utilities/DefaultSampleStationSave.aspx", GetType(Utilities.DefaultSampleStationSave))
+                AddPage("~/Utilities/DefaultSampleStationTargetEdit.aspx", GetType(Utilities.DefaultSampleStationTargetEdit))
+                AddPage("~/Utilities/DefaultSampleStationTargetSave.aspx", GetType(Utilities.DefaultSampleStationTargetSave))
+                AddPage("~/Utilities/DefaultSampleStationTargetDelete.aspx", GetType(Utilities.DefaultSampleStationTargetDelete))
             End If
         End Sub
     End Class
