@@ -78,6 +78,19 @@ Namespace ReportDefinitions
                     If childLocations Then
                         calcSet.ReplaceDescription("F2Factor", "F2")
                     End If
+
+                    If (session.OptionalCalculationTypesToInclude.Contains(Calc.CalcType.RFGM)) Then
+                        calcSet.Add(Calc.Calculation.Create(Calc.CalcType.RFGM, session).Calculate())
+                    End If
+
+                    If (session.OptionalCalculationTypesToInclude.Contains(Calc.CalcType.RFMM)) Then
+                        calcSet.Add(Calc.Calculation.Create(Calc.CalcType.RFMM, session).Calculate())
+                    End If
+
+                    If (session.OptionalCalculationTypesToInclude.Contains(Calc.CalcType.RFSTM)) Then
+                        calcSet.Add(Calc.Calculation.Create(Calc.CalcType.RFSTM, session).Calculate())
+                    End If
+
                 End If
 
                 If locationLevel.ToUpper() <> "SITE" Then
