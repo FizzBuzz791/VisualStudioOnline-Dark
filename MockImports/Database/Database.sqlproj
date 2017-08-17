@@ -99,110 +99,112 @@
     <Folder Include="Schema\Tables" />
     <Folder Include="Data" />
     <Folder Include="Schema\Procedures" />
+    <Folder Include="Schema\Users" />
+    <Folder Include="Schema\Logins" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schema\Tables\dbo.Blocks.sql">
+    <Build Include="Schema\Tables\dbo.Blocks.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Polygons.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Polygons.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Grades.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Grades.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Models.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Models.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Movements.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Movements.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Patterns.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Patterns.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Points.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Points.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.ShippingNominationItemHub.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.ShippingNominationItemHub.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.ShippingNominationItemHubGrade.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.ShippingNominationItemHubGrade.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Locations.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Locations.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.METBalancing.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.METBalancing.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.METBalancingGrades.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.METBalancingGrades.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.ModelGrades.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.ModelGrades.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.PortBlendingMovement.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.PortBlendingMovement.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.PortBlendingMovementGrades.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.PortBlendingMovementGrades.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.ShippingNomination.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.ShippingNomination.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.ShippingNominationItem.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.ShippingNominationItem.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.StockpileAdjustmentGrades.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.StockpileAdjustmentGrades.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.StockpileAdjustments.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.StockpileAdjustments.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Stockpiles.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Stockpiles.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.TransactionGrades.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.TransactionGrades.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.Transactions.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.Transactions.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetReconciliationBlocks.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetReconciliationBlocks.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetHaulage.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetHaulage.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetMETBalancing.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetMETBalancing.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetPortBalances.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetPortBalances.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetPortBlending.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetPortBlending.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetProductionMovements.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetProductionMovements.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetReconciliationDeletedBlocks.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetReconciliationDeletedBlocks.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetReconciliationMovements.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetReconciliationMovements.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetShipping.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetShipping.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Procedures\dbo.GetStockpiles.sql">
+    </Build>
+    <Build Include="Schema\Procedures\dbo.GetStockpiles.sql">
       <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Schema\Tables\dbo.StockpileGrades.sql">
+    </Build>
+    <Build Include="Schema\Tables\dbo.StockpileGrades.sql">
       <SubType>NotInBuild</SubType>
-    </None>
+    </Build>
     <None Include="Data\TestMQ2ServiceDataScript.sql">
       <SubType>NotInBuild</SubType>
     </None>
@@ -218,6 +220,8 @@
     <None Include="Data\TestBlockImportDataClearScript.sql">
       <SubType>NotInBuild</SubType>
     </None>
+    <Build Include="Schema\Users\MockImportUser.sql" />
+    <Build Include="Schema\Logins\MockImportUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Permissions.sql" />
@@ -227,9 +231,9 @@
     <Build Include="Schema\Tables\dbo.HaulageGrade.sql">
       <SubType>Code</SubType>
     </Build>
-    <None Include="Schema\Procedures\dbo.GetStockpileAdjustments.sql">
+    <Build Include="Schema\Procedures\dbo.GetStockpileAdjustments.sql">
       <SubType>Code</SubType>
-    </None>
+    </Build>
     <Build Include="Schema\Procedures\dbo.InsertBlock.sql">
       <SubType>Code</SubType>
     </Build>

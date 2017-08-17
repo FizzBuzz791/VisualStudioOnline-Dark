@@ -12,6 +12,8 @@ Friend NotInheritable Class Production
 
     Private Const _productSizeFines As String = "FINES"
     Private Const _productSizeLump As String = "LUMP"
+    Private Const SAMPLE_COUNT As String = "SampleCount"
+
     Private Shared ReadOnly _allowedProductSizesForStorage As New List(Of String)(New String() {_productSizeFines, _productSizeLump})
 
     Private Const _numberOfDaysPerWebRequest As Int32 = 7
@@ -251,6 +253,14 @@ Friend NotInheritable Class Production
                 End If
             End If
 
+            If Not (sourceRow(SAMPLE_COUNT) Is DBNull.Value) Then
+                If Single.TryParse(sourceRow(SAMPLE_COUNT).ToString, sourceRowSingleValue) Then
+                    _utilityDal.AddOrUpdateWeightometerSampleValue(weightometerSampleId, SAMPLE_COUNT, sourceRowSingleValue)
+                Else
+                    Throw New Exception("Failed to Convert SampleCount to a Single: " & sourceRow("SAMPLE_COUNT").ToString)
+                End If
+            End If
+
             Dim effectiveProductSize As String = GetEffectiveProductSize(sourceRow)
 
             If Not (effectiveProductSize Is Nothing) Then
@@ -325,6 +335,14 @@ Friend NotInheritable Class Production
                     _utilityDal.AddOrUpdateWeightometerSampleValue(weightometerSampleId, "SampleTonnes", Convert.ToSingle(sourceRow("SampleTonnes")))
                 Else
                     _utilityDal.AddOrUpdateWeightometerSampleValue(weightometerSampleId, "SampleTonnes", NullValues.Single)
+                End If
+            End If
+
+            If syncQueueChangedFields.Select("ChangedField = '" & SAMPLE_COUNT & "'").Length > 0 Then
+                If Not (sourceRow(SAMPLE_COUNT) Is DBNull.Value) Then
+                    _utilityDal.AddOrUpdateWeightometerSampleValue(weightometerSampleId, SAMPLE_COUNT, Convert.ToSingle(sourceRow(SAMPLE_COUNT)))
+                Else
+                    _utilityDal.AddOrUpdateWeightometerSampleValue(weightometerSampleId, SAMPLE_COUNT, NullValues.Single)
                 End If
             End If
 
@@ -548,9 +566,9 @@ Friend NotInheritable Class Production
                 errorDescription = NullValues.String
 
                 'note: the weightometer must exist at the source
-                _utilityDal.GetBhpbioProductionWeightometer(sourceStockpileId, sourceCrusherId, sourceMillId, _
-                    destStockpileId, destCrusherId, destMillId, Convert.ToDateTime(sourceRow("TransactionDate")), _
-                    Convert.ToString(sourceRow("SourceLocationType")), Convert.ToString(sourceRow("DestinationType")), _
+                _utilityDal.GetBhpbioProductionWeightometer(sourceStockpileId, sourceCrusherId, sourceMillId,
+                    destStockpileId, destCrusherId, destMillId, Convert.ToDateTime(sourceRow("TransactionDate")),
+                    Convert.ToString(sourceRow("SourceLocationType")), Convert.ToString(sourceRow("DestinationType")),
                     sourceLocationId.Value, weightometerId, isError, errorDescription)
 
                 If isError Then
@@ -783,6 +801,7 @@ Friend NotInheritable Class Production
         transactionRow("ProductSize") = prodMovementTransaction.ProductSize.ReadStringWithDbNull()
         transactionRow("SampleSource") = prodMovementTransaction.SampleSource.ReadStringWithDbNull()
         transactionRow("SampleTonnes") = prodMovementTransaction.SampleTonnes.ReadAsDoubleWithDbNull(prodMovementTransaction.SampleTonnesSpecified)
+        transactionRow(SAMPLE_COUNT) = prodMovementTransaction.SampleCount.ReadAsDoubleWithDbNull(prodMovementTransaction.SampleCountSpecified)
 
         'pre-process product size
         If (Not transactionRow("ProductSize") Is DBNull.Value) Then

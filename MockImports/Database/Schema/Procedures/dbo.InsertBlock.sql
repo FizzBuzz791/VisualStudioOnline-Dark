@@ -1,11 +1,4 @@
-﻿--USE [ReconcilorImportMockWS]
---GO
-
---IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[InsertBlock]') AND type in (N'P', N'PC'))
---DROP PROCEDURE [dbo].[InsertBlock]
---GO
-
-CREATE PROCEDURE [dbo].[InsertBlock]
+﻿CREATE PROCEDURE [dbo].[InsertBlock]
 	@BlastedDate Datetime, 
 	@BlockedDate Datetime,
 	@GeoType Nvarchar(50),
@@ -90,3 +83,6 @@ Begin
 
 End
 Go
+
+GRANT EXECUTE ON dbo.InsertBlock TO public
+GO

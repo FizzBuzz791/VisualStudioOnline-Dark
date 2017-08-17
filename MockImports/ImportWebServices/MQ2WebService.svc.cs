@@ -7,6 +7,7 @@ using System.Text;
 using MQ2Direct;
 using MockImportDAL.SqlDal;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace NewService
 {
@@ -55,6 +56,22 @@ namespace NewService
             var connection = new SqlDalTransaction(ConnectionString);
             try
             {
+
+                if (request.RetrieveProductionMovementsRequest.StartDate == DateTime.MinValue)
+                {
+                    request.RetrieveProductionMovementsRequest.StartDate = DateTime.Today.AddDays(-7);
+                }
+
+                if (request.RetrieveProductionMovementsRequest.EndDate == DateTime.MinValue)
+                {
+                    request.RetrieveProductionMovementsRequest.EndDate = DateTime.Today;
+                }
+
+                if (String.IsNullOrEmpty(request.RetrieveProductionMovementsRequest.MineSiteCode))
+                {
+                    request.RetrieveProductionMovementsRequest.MineSiteCode = "AC";
+                }
+
                 var ds = connection.RetrieveProductionMovements(request.RetrieveProductionMovementsRequest.MineSiteCode,
                     request.RetrieveProductionMovementsRequest.StartDate, request.RetrieveProductionMovementsRequest.EndDate);
 
