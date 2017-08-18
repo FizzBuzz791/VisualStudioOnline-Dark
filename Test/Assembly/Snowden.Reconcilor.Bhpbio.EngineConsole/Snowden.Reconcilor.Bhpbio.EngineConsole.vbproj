@@ -72,6 +72,9 @@
     <Reference Include="Snowden.Common.Import, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Snowden.Common.Import.1.4.10.4\lib\Snowden.Common.Import.dll</HintPath>
     </Reference>
+    <Reference Include="Snowden.Consulting.DataStaging.Import">
+      <HintPath>..\..\..\..\..\TFS\Reconcilor_BHPBIO\Branch-4.0.0.0\Libraries\Snowden.Consulting.DataStaging\Snowden.Consulting.DataStaging.Import.dll</HintPath>
+    </Reference>
     <Reference Include="Snowden.Reconcilor.Core.Engine, Version=6.5.0.8, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Libraries\Snowden.Reconcilor.Core\Snowden.Reconcilor.Core.Engine.exe</HintPath>
