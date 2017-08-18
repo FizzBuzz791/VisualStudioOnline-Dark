@@ -1169,8 +1169,7 @@
     <Script Type="Upgrade" Path="Upgrade\4.0\4.0.5.0\_0002_RemoveASGrades.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.0\4.0.5.0\_0003_CorrectRecalcGradeEntriesForNewGrade.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.0\4.0.5.0\_0099_Update Version Number.sql" />
-  </Upgrade>
-
+  </Upgre>
   <Upgrade Version="4.0.6.0">
     <Script Type="Upgrade" Path="Upgrade\4.0\4.0.6.0\_0000_BhpbioImportSyncRowFilter.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.0\4.0.6.0\_0001_AddIndexesForFilterDataTable.sql" />
@@ -1185,7 +1184,8 @@
 
   <Upgrade Version="4.1.0.0">
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
-    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0001_Raise Outlier Detection Queue Entries.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0002_Raise Outlier Detection Queue Entries.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 
