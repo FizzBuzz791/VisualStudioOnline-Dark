@@ -33,7 +33,7 @@ CREATE TABLE [dbo].[BhpbioStratigraphyHierarchy]
 	[Stratigraphy] varchar(50) NOT NULL,
     [StratigraphyHierarchyTypeId] INT NOT NULL, 
     [Description] NVARCHAR(255) NOT NULL, 
-    [StratNum] VARCHAR(4) NOT NULL, 
+    [StratNum] VARCHAR(4) NULL, 
     [Colour] VARCHAR(25) NOT NULL,
 	[SortOrder] INT NOT NULL, 
     CONSTRAINT [PK_BhpbioStratigraphyHierarchy] PRIMARY KEY CLUSTERED
@@ -50,7 +50,7 @@ GO
 CREATE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyParent
 ON dbo.[BhpbioStratigraphyHierarchy]([ParentId])
 GO
-CREATE UNIQUE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyStratNum
+CREATE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyStratNum
 ON dbo.[BhpbioStratigraphyHierarchy]([StratNum])
 GO
 

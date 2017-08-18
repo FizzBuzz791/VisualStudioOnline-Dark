@@ -459,6 +459,8 @@
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql"/>
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyList.sql"/>
   </ScriptGroup>
   
   <ScriptGroup Type="DataPopulation">
@@ -1188,7 +1190,8 @@
   <Upgrade Version="4.1.0.0">
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
-    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0002_AddStratigraphyHierarchyTablesAndPermissions.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0002_Raise Outlier Detection Queue Entries.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0003_AddStratigraphyHierarchyTablesAndPermissions.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 
