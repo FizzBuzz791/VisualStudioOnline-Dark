@@ -1832,6 +1832,7 @@
     <None Include="Upgrade\4.1\4.1.0.0\_0001_Raise Outlier Detection Queue Entries.sql" />
     <Build Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchyType.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0003_AddStratigraphyHierarchyTablesAndPermissions.sql" />
+    <None Include="Schema\Procedures\GetBhpbioStratigraphyHierarchyList.sql" />
   </ItemGroup>
   <PropertyGroup>
     <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>

@@ -34,7 +34,7 @@ Namespace Utilities
             MyBase.SetupPageLayout()
             ' *Must* add this script here so that it comes *after* common.js
             PageHeader.ScriptTags.Add(New Tags.HtmlScriptTag(Tags.ScriptType.TextJavaScript, Tags.ScriptLanguage.JavaScript, "../js/BhpbioCommon.js", String.Empty))
-            'Controls.Add(New Tags.HtmlScriptTag(Tags.ScriptType.TextJavaScript, "GetSampleStations();"))
+            Controls.Add(New Tags.HtmlScriptTag(Tags.ScriptType.TextJavaScript, "GetSampleStations();"))
 
         End Sub
 

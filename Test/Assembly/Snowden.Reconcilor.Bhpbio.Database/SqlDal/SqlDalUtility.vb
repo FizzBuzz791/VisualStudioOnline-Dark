@@ -1375,5 +1375,21 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
             End With
         End Sub
 #End Region
+
+        Public Function GetStratigraphyHierarchyList() As DataTable Implements IUtility.GetStratigraphyHierarchyList
+
+
+            'Public Function GetBhpbioSampleStationList(locationId As Integer, productSize As String) As DataTable Implements IUtility.GetBhpbioSampleStationList
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioStratigraphyHierarchyList"
+                .CommandType = CommandObjectType.StoredProcedure
+                With .ParameterCollection
+                    .Clear()
+                End With
+
+                Return .ExecuteDataTable()
+            End With
+
+        End Function
     End Class
 End Namespace
