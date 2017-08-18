@@ -1828,6 +1828,9 @@
     <None Include="Upgrade\4.0\4.0.7.0\_0002_DeployInc10677Permission.sql" />
     <None Include="UtilityScripts\Deployment\4.0.1.0\AD Bulk Import\08_RemoveVolumeFromGeometRecords.sql" />
     <None Include="UtilityScripts\Deployment\4.0.1.0\AD Bulk Import\09_ReapprovePortBlendedAdjustment.sql" />
+    <Build Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchy.sql" />
+    <Build Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchyType.sql" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0002_AddStratigraphyHierarchyTablesAndPermissions.sql" />
   </ItemGroup>
   <PropertyGroup>
     <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>

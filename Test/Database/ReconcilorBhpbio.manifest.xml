@@ -89,6 +89,8 @@
 
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStation.sql" />
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStationTarget.sql"/>
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioStratigraphyHierarchy.sql" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioStratigraphyHierarchyType.sql" />
   </ScriptGroup>
   <ScriptGroup Type="Code">
     <Script Type="View" Path="Schema\Views\dbo.BhpbioImportHaulage.viw" />
@@ -1186,6 +1188,7 @@
   <Upgrade Version="4.1.0.0">
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0002_AddStratigraphyHierarchyTablesAndPermissions.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 
