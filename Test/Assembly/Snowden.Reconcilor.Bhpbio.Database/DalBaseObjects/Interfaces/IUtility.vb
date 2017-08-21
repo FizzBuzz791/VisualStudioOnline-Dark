@@ -240,7 +240,9 @@ Namespace DalBaseObjects
         Sub DeleteBhpbioSampleStationTarget(targetId As Integer)
 #End Region
 
-        Function GetStratigraphyHierarchyList() As DataTable
+        Function GetBhpbioStratigraphyHierarchyList() As DataTable
+
+        Function GetBhpbioStratigraphyHierarchyTypeList() As DataTable
 
     End Interface
 End Namespace
