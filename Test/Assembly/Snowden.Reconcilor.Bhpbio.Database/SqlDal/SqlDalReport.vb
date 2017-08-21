@@ -861,6 +861,24 @@ Namespace SqlDal
             End With
         End Function
 #End Region
+
+        Public Function GetBhpbioSampleStationCoverage(locationId As Integer, startDate As Date, endDate As Date, dateBreakdown As String) As DataTable
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStationCoverage"
+                .CommandType = CommandObjectType.StoredProcedure
+
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@iLocationId", CommandDataType.Int, CommandDirection.Input, locationId)
+                    .Add("@iStartDate", CommandDataType.DateTime, CommandDirection.Input, startDate)
+                    .Add("@iEndDate", CommandDataType.DateTime, CommandDirection.Input, endDate)
+                    .Add("@iDateBreakdown", CommandDataType.VarChar, CommandDirection.Input, dateBreakdown)
+                End With
+
+                Return .ExecuteDataTable()
+            End With
+
+        End Function
     End Class
 
     Public Class ReportDataBlockModelOptions

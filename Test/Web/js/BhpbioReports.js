@@ -423,8 +423,8 @@ function FilterContextForFactorType() {
     $('input[name^=chkContext_]').each(function (k, v) {
         var name = v.name.replace("chkContext_", "");
 
-        if ((factorName == 'F1Factor' || factorName == 'F15Factor') &&
-            (name == 'HaulageContext' || name === "SampleCoverage" || name === "SampleRatio")) {
+        if (((factorName == 'F1Factor' || factorName == 'F15Factor') && (name == 'HaulageContext' || name === "SampleCoverage" || name === "SampleRatio"))
+            || (factorName === "F3Factor" && (name === "SampleCoverage" || name === "SampleRatio"))) {
             $('#' + name).hide();
             $('#' + name).find("input").removeAttr('checked');
         } else {

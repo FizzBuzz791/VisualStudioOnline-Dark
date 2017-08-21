@@ -961,12 +961,14 @@
 		Fields!ContextCategory.Value = "ResourceClassification", "R",
 		Fields!ContextCategory.Value = "HaulageContext", "H",
 		Fields!ContextCategory.Value = "DepletionContext", "M",
+		Fields!ContextCategory.Value = "SampleCoverage", "SC",
 		True, Fields!ContextCategory.Value
 	),
 	Switch(
 		Fields!ContextCategory.Value = "ResourceClassification", "Resclass",
 		Fields!ContextCategory.Value = "HaulageContext", "Hauled From",
 		Fields!ContextCategory.Value = "DepletionContext", "Mined",
+		Fields!ContextCategory.Value = "SampleCoverage", "Sample Coverage",
 		True, Fields!ContextCategory.Value
 	)
 )</Label>
@@ -1068,7 +1070,7 @@
                                     </CustomProperties>
                                     <ChartItemInLegend>
                                       <LegendText>=IIF(Fields!ContextCategory.Value = "HaulageContext", Fields!ContextGrouping.Value, Fields!ContextGroupingLabel.Value)</LegendText>
-                                      <Hidden>=Fields!ContextCategory.Value &lt;&gt; "HaulageContext" OrElse Fields!ContextGrouping.Value = "StockpileContext"</Hidden>
+                                      <Hidden>=(Fields!ContextCategory.Value &lt;&gt; "HaulageContext" And Fields!ContextCategory.Value &lt;&gt; "SampleCoverage") OrElse Fields!ContextGrouping.Value = "StockpileContext"</Hidden>
                                     </ChartItemInLegend>
                                     <ValueAxisName>Primary</ValueAxisName>
                                     <CategoryAxisName>Primary</CategoryAxisName>

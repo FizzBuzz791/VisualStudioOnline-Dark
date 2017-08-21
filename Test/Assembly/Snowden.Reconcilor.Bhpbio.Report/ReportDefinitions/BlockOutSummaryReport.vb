@@ -232,7 +232,7 @@ Namespace ReportDefinitions
 
     End Class
 
-
+    'TODO: WTF is this doing here?! Refactor!
     Public Module StringExtensions
         <Runtime.CompilerServices.Extension()>
         Public Function AddIfNeeded(columns As DataColumnCollection, columnName As String, type As Type) As DataColumn

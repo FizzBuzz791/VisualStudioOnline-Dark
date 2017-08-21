@@ -3,6 +3,7 @@ Imports Snowden.Reconcilor.Bhpbio.Report.Data
 Imports System.Data.DataTableExtensions
 Imports System.Data.DataRowExtensions
 Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportHelpers
 
 Namespace ReportDefinitions
 
@@ -75,6 +76,7 @@ Namespace ReportDefinitions
             End If
 
             ' add haulage context information
+            ' TODO: This will never evaluate (contextList never has a DepletionContext option according to Ctrl+Shift+F), remove during cleanup.
             If contextList.Contains("DepletionContext") Then
                 Dim locationTable = AddDepletionContextData(session, dateBreakdown, locationId, factorId, calcSet)
                 table.Merge(locationTable)
@@ -94,6 +96,26 @@ Namespace ReportDefinitions
                 ReportColour.AddLocationColor(session, table)
                 F1F2F3ReportEngine.AddLocationDataToTable(session, table, locationId)
                 AddHaulageContextData(session, table, dateBreakdown)
+                F1F2F3ReportEngine.FilterTableByAttributeList(table, attributeList)
+            End If
+
+            If contextList.Contains("SampleCoverage") Or contextList.Contains("SampleRation") Then
+                table.Columns.AddIfNeeded("ContextCategory", GetType(String))
+                table.Columns.AddIfNeeded("ContextGrouping", GetType(String))
+
+                Dim sampleStationReporter As ISampleStationReporter = New SampleStationReporter()
+
+                ' TODO: Ensure any shared parameters get moved to the ctor.
+                If contextList.Contains("SampleCoverage") Then
+                    ' WARNING: Don't use session.reportparameter as it could have been (read: will have been) modified.
+                    sampleStationReporter.AddSampleStationCoverageContextData(table, locationId, dateFrom, dateTo,
+                                                                              dateBreakdown, session.DalReport)
+                End If
+
+                If contextList.Contains("SampleRatio") Then
+                    sampleStationReporter.AddSampleStationRatioContextData()
+                End If
+
                 F1F2F3ReportEngine.FilterTableByAttributeList(table, attributeList)
             End If
 
@@ -177,7 +199,8 @@ Namespace ReportDefinitions
             Return row
         End Function
 
-        Private Shared Function GetContextGroupingOrder(row As DataRow) As Integer
+        <Obsolete("Inherit ReportHelpers.Reporter and use the method from there instead.")>
+        Public Shared Function GetContextGroupingOrder(row As DataRow) As Integer
             If row.AsString("ContextGrouping") = "Other" Then
                 Return 3
             ElseIf row.AsString("ContextGrouping") = "StockpileContext" Then
