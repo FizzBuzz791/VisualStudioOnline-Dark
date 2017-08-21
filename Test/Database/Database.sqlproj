@@ -465,7 +465,7 @@
     <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <None Include="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql" />
-    <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationCoverage.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationReportData.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

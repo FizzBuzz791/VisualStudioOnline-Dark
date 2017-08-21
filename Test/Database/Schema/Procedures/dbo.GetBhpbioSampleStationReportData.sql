@@ -1,8 +1,8 @@
-﻿IF OBJECT_ID('dbo.GetBhpbioSampleStationCoverage') IS NOT NULL
-	DROP PROCEDURE dbo.GetBhpbioSampleStationCoverage
+﻿IF OBJECT_ID('dbo.GetBhpbioSampleStationReportData') IS NOT NULL
+	DROP PROCEDURE dbo.GetBhpbioSampleStationReportData
 GO
  
-CREATE PROCEDURE dbo.GetBhpbioSampleStationCoverage
+CREATE PROCEDURE dbo.GetBhpbioSampleStationReportData
 (
 	@iLocationId INT,
 	@iStartDate DATETIME,
@@ -16,7 +16,7 @@ BEGIN
 
 	SET NOCOUNT ON 
 
-	SELECT @TransactionName = 'GetBhpbioSampleStationCoverage',
+	SELECT @TransactionName = 'GetBhpbioSampleStationReportData',
 		   @TransactionCount = @@TranCount 
 
 	-- if there are no transactions available then start a new one
@@ -227,6 +227,6 @@ BEGIN
 END 
 GO
 
-GRANT EXECUTE ON dbo.GetBhpbioSampleStationCoverage TO CoreReporting
-GRANT EXECUTE ON dbo.GetBhpbioSampleStationCoverage TO BhpbioGenericManager
+GRANT EXECUTE ON dbo.GetBhpbioSampleStationReportData TO CoreReporting
+GRANT EXECUTE ON dbo.GetBhpbioSampleStationReportData TO BhpbioGenericManager
 GO

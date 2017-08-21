@@ -13,7 +13,7 @@ Namespace ReportHelpers
                                                        dateBreakdown As ReportBreakdown, dalReport As SqlDalReport) _
                                                        Implements ISampleStationReporter.AddSampleStationCoverageContextData
 
-            Dim coverage = dalReport.GetBhpbioSampleStationCoverage(locationId, startDate, endDate,
+            Dim coverage = dalReport.GetBhpbioSampleStationReportData(locationId, startDate, endDate,
                                                                     dateBreakdown.ToParameterString())
 
             CombineSmallSamplesIntoOtherCategory(coverage.AsEnumerable)
@@ -110,6 +110,11 @@ Namespace ReportHelpers
         ''' <param name="contextGrouping">Field to group the context on.</param>
         Private Shared Sub AddCoverageRowAsFactorRow(coverageRow As DataRow, ByRef masterTable As DataTable,
                                                      presentationColor As String, tonnes As Double, contextGrouping As String)
+            ' If *only* Coverage has been chosen, these rows won't exist in the master table.
+            masterTable.Columns.AddIfNeeded("LocationName", GetType(String)).SetDefault(String.Empty)
+            masterTable.Columns.AddIfNeeded("LocationType", GetType(String)).SetDefault(String.Empty)
+            masterTable.Columns.AddIfNeeded("LocationColor", GetType(String)).SetDefault(String.Empty)
+
             Dim row = masterTable.AsEnumerable.First.CloneFactorRow(addToTable:=False)
 
             row("CalendarDate") = coverageRow("DateFrom")
