@@ -99,21 +99,21 @@ Namespace ReportDefinitions
                 F1F2F3ReportEngine.FilterTableByAttributeList(table, attributeList)
             End If
 
-            If contextList.Contains("SampleCoverage") Or contextList.Contains("SampleRation") Then
+            If contextList.Contains("SampleCoverage") Or contextList.Contains("SampleRatio") Then
                 table.Columns.AddIfNeeded("ContextCategory", GetType(String))
                 table.Columns.AddIfNeeded("ContextGrouping", GetType(String))
 
-                Dim sampleStationReporter As ISampleStationReporter = New SampleStationReporter()
+                Dim sampleStationReporter As ISampleStationReporter = New SampleStationReporter(session.DalReport)
 
-                ' TODO: Ensure any shared parameters get moved to the ctor.
                 If contextList.Contains("SampleCoverage") Then
                     ' WARNING: Don't use session.reportparameter as it could have been (read: will have been) modified.
                     sampleStationReporter.AddSampleStationCoverageContextData(table, locationId, dateFrom, dateTo,
-                                                                              dateBreakdown, session.DalReport)
+                                                                              dateBreakdown)
                 End If
 
                 If contextList.Contains("SampleRatio") Then
-                    sampleStationReporter.AddSampleStationRatioContextData()
+                    sampleStationReporter.AddSampleStationRatioContextData(table, locationId, dateFrom, dateTo,
+                                                                           dateBreakdown)
                 End If
 
                 F1F2F3ReportEngine.FilterTableByAttributeList(table, attributeList)

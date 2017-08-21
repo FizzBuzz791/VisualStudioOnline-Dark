@@ -5,24 +5,28 @@ Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 Namespace ReportHelpers
     Public Class SampleStationReporter : Inherits Reporter : Implements ISampleStationReporter
-        Public Sub New()
+        Private ReadOnly Property DalReport As ISqlDalReport
+
+        Public Sub New(dalReport As ISqlDalReport)
+            Me.DalReport = dalReport
         End Sub
 
         Public Sub AddSampleStationCoverageContextData(ByRef masterTable As DataTable, locationId As Integer,
                                                        startDate As DateTime, endDate As DateTime,
-                                                       dateBreakdown As ReportBreakdown, dalReport As SqlDalReport) _
+                                                       dateBreakdown As ReportBreakdown) _
                                                        Implements ISampleStationReporter.AddSampleStationCoverageContextData
 
-            Dim coverage = dalReport.GetBhpbioSampleStationReportData(locationId, startDate, endDate,
-                                                                    dateBreakdown.ToParameterString())
+            Dim sampleStationReportData = DalReport.GetBhpbioSampleStationReportData(locationId, startDate, endDate,
+                                                                                     dateBreakdown.ToParameterString())
 
-            CombineSmallSamplesIntoOtherCategory(coverage.AsEnumerable)
+            CombineSmallSamplesIntoOtherCategory(sampleStationReportData.AsEnumerable)
 
-            For Each coverageRow As DataRow In coverage.Rows
-                AddCoverageRowAsFactorRow(coverageRow, masterTable, String.Empty, coverageRow.AsDbl("Assayed"), coverageRow.AsString("SampleStation"))
+            For Each coverageRow As DataRow In sampleStationReportData.Rows
+                AddSampleStationRowAsNonFactorRow(coverageRow, masterTable, String.Empty, coverageRow.AsDbl("Assayed"),
+                                                  coverageRow.AsString("SampleStation"), "SampleCoverage", "SampleCoverage")
             Next
 
-            AddUnsampledRows(coverage.AsEnumerable, masterTable)
+            AddUnsampledRows(sampleStationReportData.AsEnumerable, masterTable)
 
             SeedLegend(masterTable.AsEnumerable.ToList())
 
@@ -32,8 +36,30 @@ Namespace ReportHelpers
             coverageRows.AsEnumerable.SetField("ContextGroupingOrder", Function(r) GetContextGroupingOrder(r))
         End Sub
 
-        Public Sub AddSampleStationRatioContextData() Implements ISampleStationReporter.AddSampleStationRatioContextData
-            Throw New NotImplementedException
+        Public Sub AddSampleStationRatioContextData(ByRef masterTable As DataTable, locationId As Integer,
+                                                    startDate As DateTime, endDate As DateTime,
+                                                    dateBreakdown As ReportBreakdown) _
+            Implements ISampleStationReporter.AddSampleStationRatioContextData
+
+            Dim sampleStationReportData = DalReport.GetBhpbioSampleStationReportData(locationId, startDate, endDate,
+                                                                                     dateBreakdown.ToParameterString())
+
+            For Each ratioGroup In sampleStationReportData.AsEnumerable.GroupBy(Function(r) $"{r.AsDate("DateFrom")}-{r.AsString("Grade_Id")}")
+                Dim ratio = 0.0
+
+                Dim sampleCount = ratioGroup.Sum(Function(r) r.AsInt("Sample_Count"))
+                If sampleCount > 0 Then
+                    ratio = ratioGroup.Sum(Function(r) r.AsDbl("Assayed") + r.AsDbl("Unassayed")) / sampleCount
+                End If
+
+                Dim representativeRow = ratioGroup.FirstOrDefault()
+                'representativeRow("Grade_Value") = 10000 ' Negate the X / 100 / 1000 in the report so that this value displays relative to the others
+                AddSampleStationRowAsNonFactorRow(representativeRow, masterTable, String.Empty, ratio,
+                                                  Math.Round(ratio, 0).ToString(), "SampleRatio", "SampleRatio")
+            Next
+
+            SeedLegend(masterTable.AsEnumerable.ToList())
+            masterTable.Columns.AddIfNeeded("ContextGroupingOrder", GetType(Integer)).SetDefault(0)
         End Sub
 
         ' There is a problem with the SSRS legend that requires each series to appear in the first category on the chart.
@@ -95,21 +121,23 @@ Namespace ReportHelpers
                 Dim totalUnsampled = periodGroup.Sum(Function(r) r.AsDbl("Unassayed"))
                 ' Add a new row for each grade to show the unsampled
                 Dim representativeRow = periodGroup.FirstOrDefault()
-                AddCoverageRowAsFactorRow(representativeRow, masterTable, "#C0C0C0", totalUnsampled, "Unsampled")
+                AddSampleStationRowAsNonFactorRow(representativeRow, masterTable, "#C0C0C0", totalUnsampled, "Unsampled", "SampleCoverage", "SampleCoverage")
             Next
         End Sub
 
-        ' TODO: Can/should this be made generic? (Consider HaulageContext needs to be refactored to this Reporter pattern)
         ''' <summary>
         ''' Convert a coverage row to a factor row (a.k.a. standard row) and add to the master table.
         ''' </summary>
-        ''' <param name="coverageRow">Row to convert.</param>
+        ''' <param name="dataRow">Row to convert.</param>
         ''' <param name="masterTable">Table to add converted row to.</param>
-        ''' <param name="presentationColor">Color to display on the report. If null or empty, will convert LocationName to a color.</param>
+        ''' <param name="presentationColor">Color to display on the report. If null or empty, LocationName will be converted to 
+        '''                                 a color.</param>
         ''' <param name="tonnes">Tonnes to display on the report.</param>
         ''' <param name="contextGrouping">Field to group the context on.</param>
-        Private Shared Sub AddCoverageRowAsFactorRow(coverageRow As DataRow, ByRef masterTable As DataTable,
-                                                     presentationColor As String, tonnes As Double, contextGrouping As String)
+        Private Shared Sub AddSampleStationRowAsNonFactorRow(dataRow As DataRow, ByRef masterTable As DataTable,
+                                                             presentationColor As String, tonnes As Double,
+                                                             contextGrouping As String, locationType As String,
+                                                             contextCategory As String)
             ' If *only* Coverage has been chosen, these rows won't exist in the master table.
             masterTable.Columns.AddIfNeeded("LocationName", GetType(String)).SetDefault(String.Empty)
             masterTable.Columns.AddIfNeeded("LocationType", GetType(String)).SetDefault(String.Empty)
@@ -117,27 +145,27 @@ Namespace ReportHelpers
 
             Dim row = masterTable.AsEnumerable.First.CloneFactorRow(addToTable:=False)
 
-            row("CalendarDate") = coverageRow("DateFrom")
-            row("DateFrom") = coverageRow("DateFrom")
-            row("DateTo") = coverageRow("DateTo")
-            row("DateText") = coverageRow.AsDate("DateFrom").ToString("MMMM-yy")
+            row("CalendarDate") = dataRow("DateFrom")
+            row("DateFrom") = dataRow("DateFrom")
+            row("DateTo") = dataRow("DateTo")
+            row("DateText") = dataRow.AsDate("DateFrom").ToString("MMMM-yy")
 
-            row("LocationId") = coverageRow("LocationId")
-            row("LocationName") = coverageRow("SampleStation")
-            row("LocationType") = "SampleCoverage"
+            row("LocationId") = dataRow("LocationId")
+            row("LocationName") = dataRow("SampleStation")
+            row("LocationType") = locationType
 
-            row("ContextCategory") = "SampleCoverage"
+            row("ContextCategory") = contextCategory
             row("ContextGrouping") = contextGrouping
             row("ContextGroupingLabel") = contextGrouping
-            row("PresentationColor") = IIf(String.IsNullOrEmpty(presentationColor), coverageRow.AsString("SampleStation").AsColor, presentationColor)
+            row("PresentationColor") = IIf(String.IsNullOrEmpty(presentationColor), row.AsString("LocationName").AsColor, presentationColor)
             row("LocationColor") = DBNull.Value
 
-            row("Attribute") = coverageRow("Grade_Name")
+            row("Attribute") = dataRow("Grade_Name")
             row("AttributeValue") = 0.0
 
             row("Type") = 1 ' this means a non-factor row
             row("Tonnes") = tonnes
-            row("FactorGradeValueBottom") = coverageRow("Grade_Value")
+            row("FactorGradeValueBottom") = dataRow("Grade_Value")
             row("FactorTonnesBottom") = tonnes
 
             masterTable.Rows.Add(row)

@@ -56,3 +56,4 @@ UpgradeLog*.htm
 /Test/Web/js/jquery.js
 /Test/DeploymentScripts/RS Scripter Load Log.txt
 /Test/Web/Cache/*.txt
+/Test/.vs/ReconcilorBhpbio/v15/sqlite3/storage.ide

@@ -139,6 +139,7 @@
     <Compile Include="DalBaseObjects\Interfaces\IBhpbioBlock.vb" />
     <Compile Include="JSONConverters\BhpbioDataSetConverter.vb" />
     <Compile Include="JSONConverters\BhpbioDataTableConverter.vb" />
+    <Compile Include="SqlDal\ISqlDalReport.vb" />
     <Compile Include="SqlDal\SqlDalBhpbioLocationGroup.vb" />
     <Compile Include="SqlDal\SqlDalBhpbioBlock.vb" />
     <Compile Include="DalBaseObjects\Interfaces\ISecurityLocation.vb" />

@@ -8,7 +8,7 @@ Namespace SqlDal
 
     Public Class SqlDalReport
         Inherits Core.Database.SqlDal.SqlDalReport
-        Implements Bhpbio.Database.DalBaseObjects.IReport
+        Implements ISqlDalReport
 
         Public Property FileSystemRoot As String = Nothing
         Public ReadOnly Property ReportCacheMaxAge As Integer = -1
@@ -862,7 +862,7 @@ Namespace SqlDal
         End Function
 #End Region
 
-        Public Function GetBhpbioSampleStationReportData(locationId As Integer, startDate As Date, endDate As Date, dateBreakdown As String) As DataTable
+        Public Function GetBhpbioSampleStationReportData(locationId As Integer, startDate As Date, endDate As Date, dateBreakdown As String) As DataTable Implements ISqlDalReport.GetBhpbioSampleStationReportData
             With DataAccess
                 .CommandText = "dbo.GetBhpbioSampleStationReportData"
                 .CommandType = CommandObjectType.StoredProcedure

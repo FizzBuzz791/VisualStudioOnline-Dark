@@ -181,7 +181,8 @@ BEGIN
 			AND wsv2.Weightometer_Sample_Field_Id = @SampleCountField
 
 		SELECT W.DateFrom, W.DateTo, W.ParentLocationId AS LocationId, COALESCE(SS.Name, WS.Weightometer_Id) AS SampleStation, 
-			ROUND(SUM(W.SampleTonnes),2,0) AS [Assayed], ABS(ROUND(SUM(W.RealTonnes - W.SampleTonnes),2,0)) AS [Unassayed], 0 AS Grade_Id, 'Tonnes' As Grade_Name, 100 As Grade_Value
+			ROUND(SUM(W.SampleTonnes),2,0) AS Assayed, ABS(ROUND(SUM(W.RealTonnes - W.SampleTonnes),2,0)) AS [Unassayed], 
+			0 AS Grade_Id, 'Tonnes' As Grade_Name, 100 As Grade_Value, SUM(NULLIF(W.SampleCount, 0)) AS Sample_Count
 		FROM @Weightometer W
 		INNER JOIN WeightometerSample WS
 			ON WS.Weightometer_Sample_Id = W.WeightometerSampleId
@@ -192,7 +193,9 @@ BEGIN
 		UNION
 
 		SELECT W.DateFrom, W.DateTo, W.ParentLocationId AS LocationId, COALESCE(SS.Name, WS.Weightometer_Id) AS SampleStation, 
-			ROUND(SUM(W.SampleTonnes),2,0) AS [Assayed], ROUND(SUM(W.RealTonnes - W.SampleTonnes),2,0) AS [Unassayed], WSG.Grade_Id, G.Grade_Name, SUM(W.SampleTonnes * WSG.Grade_Value) / NULLIF(SUM(W.SampleTonnes), 0.0) As Grade_Value
+			ROUND(SUM(W.SampleTonnes),2,0) AS Assayed, ROUND(SUM(W.RealTonnes - W.SampleTonnes),2,0) AS [Unassayed], 
+			WSG.Grade_Id, G.Grade_Name, SUM(W.SampleTonnes * WSG.Grade_Value) / NULLIF(SUM(W.SampleTonnes), 1.0) As Grade_Value, 
+			SUM(NULLIF(W.SampleCount, 0)) AS Sample_Count
 		FROM @Weightometer W
 		INNER JOIN WeightometerSample WS
 			ON WS.Weightometer_Sample_Id = W.WeightometerSampleId
