@@ -19,16 +19,18 @@ Namespace ReportHelpers
             Dim sampleStationReportData = DalReport.GetBhpbioSampleStationReportData(locationId, startDate, endDate,
                                                                                      dateBreakdown.ToParameterString())
 
-            CombineSmallSamplesIntoOtherCategory(sampleStationReportData.AsEnumerable)
-
             For Each coverageRow As DataRow In sampleStationReportData.Rows
                 AddSampleStationRowAsNonFactorRow(coverageRow, masterTable, String.Empty, coverageRow.AsDbl("Assayed"),
-                                                  coverageRow.AsString("SampleStation"), "SampleCoverage", "SampleCoverage")
+                                                  coverageRow.AsString("SampleStation"), "SampleCoverage", "SampleCoverage",
+                                                  coverageRow.AsString("SampleStation"))
             Next
 
             AddUnsampledRows(sampleStationReportData.AsEnumerable, masterTable)
-
             SeedLegend(masterTable.AsEnumerable.ToList())
+            ' In theory, adding it after the seeding would prevent the percentage sampled entry from showing in the legend. If 
+            ' only Sample Coverage is chosen though, it will be in the first series, which means it'll get added to the legend. 
+            ' The Report has an IIF statement to "hide" this in the legend (only works because it's transparent).
+            AddPercentageSampledLabel(sampleStationReportData.AsEnumerable, masterTable)
 
             masterTable.Columns.AddIfNeeded("ContextGroupingOrder", GetType(Integer)).SetDefault(0)
 
@@ -53,8 +55,8 @@ Namespace ReportHelpers
                 End If
 
                 Dim representativeRow = ratioGroup.FirstOrDefault()
-                AddSampleStationRowAsNonFactorRow(representativeRow, masterTable, String.Empty, ratio,
-                                                  Math.Round(ratio, 0).ToString(), "SampleRatio", "SampleRatio")
+                AddSampleStationRowAsNonFactorRow(representativeRow, masterTable, "#1E7BFC", ratio,
+                                                  Math.Round(ratio, 0).ToString(), "SampleRatio", "SampleRatio", Math.Round(ratio, 0).ToString())
             Next
         End Sub
 
@@ -95,29 +97,29 @@ Namespace ReportHelpers
             End If
         End Sub
 
-        Private Shared Sub CombineSmallSamplesIntoOtherCategory(coverageRows As IEnumerable(Of DataRow))
-            ' Group by period & grade to find the total tonnes (sampled + unsampled)
-            For Each periodGroup In coverageRows.GroupBy(Function(r) $"{r.AsDate("DateFrom")}-{r.AsInt("Grade_Id")}").Reverse()
-                Dim totalTonnesMoved = periodGroup.Sum(Function(r) r.AsDbl("Assayed") + r.AsDbl("Unassayed"))
-                Dim periodThreshold = totalTonnesMoved * 0.05 ' 5%
-
-                ' Loop through each row, marking as "Other" if <= 5%
-                For Each row In periodGroup
-                    Dim tonnesMoved = row.AsDbl("Assayed") + row.AsDbl("Unassayed")
-                    If tonnesMoved <= periodThreshold Then
-                        row("SampleStation") = "Other" ' This affects ContextGrouping & Context Grouping Label
-                    End If
-                Next
-            Next
-        End Sub
-
         Private Shared Sub AddUnsampledRows(coverageRows As IEnumerable(Of DataRow), ByRef masterTable As DataTable)
             ' Group by period (month/quarter) to find the total unsampled for that "stack".
             For Each periodGroup In coverageRows.GroupBy(Function(r) $"{r.AsDate("DateFrom")}-{r.AsInt("Grade_Id")}")
                 Dim totalUnsampled = periodGroup.Sum(Function(r) r.AsDbl("Unassayed"))
                 ' Add a new row for each grade to show the unsampled
                 Dim representativeRow = periodGroup.FirstOrDefault()
-                AddSampleStationRowAsNonFactorRow(representativeRow, masterTable, "#C0C0C0", totalUnsampled, "Unsampled", "SampleCoverage", "SampleCoverage")
+                AddSampleStationRowAsNonFactorRow(representativeRow, masterTable, "#C0C0C0", totalUnsampled, "Unsampled",
+                                                  "SampleCoverage", "SampleCoverage", "Unsampled")
+            Next
+        End Sub
+
+        Private Shared Sub AddPercentageSampledLabel(dataRows As IEnumerable(Of DataRow), ByRef masterTable As DataTable)
+            ' Group by period (month/quarter) to find the total moved for that "stack".
+            For Each periodGroup In dataRows.GroupBy(Function(r) $"{r.AsDate("DateFrom")}-{r.AsInt("Grade_Id")}")
+                Dim totalTonnesMoved = periodGroup.Sum(Function(r) r.AsDbl("Assayed") + r.AsDbl("Unassayed"))
+                Dim totalTonnesSampled = periodGroup.Sum(Function(r) r.AsDbl("Assayed"))
+                Dim percentageSampled = Math.Round((totalTonnesSampled / totalTonnesMoved) * 100, 1)
+
+                ' Add a new row with a transparent color to show the label.
+                Dim representativeRow = periodGroup.FirstOrDefault()
+                AddSampleStationRowAsNonFactorRow(representativeRow, masterTable, "Transparent", totalTonnesMoved * 0.1,
+                                                  "SampledPercentage", "SampleCoverage", "SampleCoverage",
+                                                  $"{percentageSampled}% Sampled")
             Next
         End Sub
 
@@ -132,10 +134,11 @@ Namespace ReportHelpers
         ''' <param name="contextGrouping">Field to group the context on.</param>
         ''' <param name="locationType">Location Type to assign.</param>
         ''' <param name="contextCategory">Category of the context.</param>
+        ''' <param name="contextGroupingLabel">Label for the context grouping.</param>
         Private Shared Sub AddSampleStationRowAsNonFactorRow(dataRow As DataRow, ByRef masterTable As DataTable,
                                                              presentationColor As String, tonnes As Double,
                                                              contextGrouping As String, locationType As String,
-                                                             contextCategory As String)
+                                                             contextCategory As String, contextGroupingLabel As String)
             ' If *only* Coverage has been chosen, these rows won't exist in the master table.
             masterTable.Columns.AddIfNeeded("LocationName", GetType(String)).SetDefault(String.Empty)
             masterTable.Columns.AddIfNeeded("LocationType", GetType(String)).SetDefault(String.Empty)
@@ -154,7 +157,7 @@ Namespace ReportHelpers
 
             row("ContextCategory") = contextCategory
             row("ContextGrouping") = contextGrouping
-            row("ContextGroupingLabel") = contextGrouping
+            row("ContextGroupingLabel") = contextGroupingLabel
             row("PresentationColor") = IIf(String.IsNullOrEmpty(presentationColor), row.AsString("LocationName").AsColor, presentationColor)
             row("LocationColor") = DBNull.Value
 

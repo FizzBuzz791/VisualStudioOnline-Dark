@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -962,7 +962,7 @@
 		Fields!ContextCategory.Value = "HaulageContext", "H",
 		Fields!ContextCategory.Value = "DepletionContext", "M",
 		Fields!ContextCategory.Value = "SampleCoverage", "SC",
-    	Fields!ContextCategory.Value = "SampleRatio", "SR",
+    	Fields!ContextCategory.Value = "SampleRatio", "T/S",
 		True, Fields!ContextCategory.Value
 	),
 	Switch(
@@ -970,7 +970,7 @@
 		Fields!ContextCategory.Value = "HaulageContext", "Hauled From",
 		Fields!ContextCategory.Value = "DepletionContext", "Mined",
 		Fields!ContextCategory.Value = "SampleCoverage", "Sample Coverage",
-    	Fields!ContextCategory.Value = "SampleRatio", "Sample Ratio",
+    	Fields!ContextCategory.Value = "SampleRatio", "Tonnes/Sample",
 		True, Fields!ContextCategory.Value
 	)
 )</Label>
@@ -1071,7 +1071,7 @@
                                       </CustomProperty>
                                     </CustomProperties>
                                     <ChartItemInLegend>
-                                      <LegendText>=IIF(Fields!ContextCategory.Value = "HaulageContext", Fields!ContextGrouping.Value, Fields!ContextGroupingLabel.Value)</LegendText>
+                                      <LegendText>=IIF(Fields!ContextCategory.Value = "HaulageContext", Fields!ContextGrouping.Value, IIF(Fields!ContextGrouping.Value = "SampledPercentage", " ", Fields!ContextGroupingLabel.Value))</LegendText>
                                       <Hidden>=(Fields!ContextCategory.Value &lt;&gt; "HaulageContext" And Fields!ContextCategory.Value &lt;&gt; "SampleCoverage") OrElse Fields!ContextGrouping.Value = "StockpileContext"</Hidden>
                                     </ChartItemInLegend>
                                     <ValueAxisName>Primary</ValueAxisName>
@@ -1173,7 +1173,7 @@
                                         <Format>=IIF(Fields!Attribute.Value = "P", "N1", "N0")</Format>
                                       </Style>
                                       <ChartAxisTitle>
-                                        <Caption>kTonnes</Caption>
+                                        <Caption>=IIF(Parameters!ContextSelection.Value = "SampleRatio", "Tonnes", "kTonnes")</Caption>
                                         <Style>
                                           <FontSize>8pt</FontSize>
                                         </Style>
@@ -1748,7 +1748,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Note: Sample station reliability is determined from the number of assays used to derive the Mine Production Actual grades. Any production samples that were taken but not successfully assayed are not considered. To that end, sample station reliability also includes the overall reliability of the assay process.</Value>
+                    <Value>Note: Sample station reliability is determined from the number of assays returned for the sample station used to derive the Mine Production Actual grades. Sample station reliability also reflects the overall reliability of the assay process.</Value>
                     <Style>
                       <FontStyle>Italic</FontStyle>
                     </Style>

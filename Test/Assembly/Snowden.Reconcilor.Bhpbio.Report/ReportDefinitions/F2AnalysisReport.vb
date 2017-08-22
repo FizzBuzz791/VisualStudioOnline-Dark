@@ -269,7 +269,7 @@ Namespace ReportDefinitions
                     Dim stockpileName = row.AsString("ContextGrouping")
 
                     If row.AsDblN("Tonnes") / totalTonnes < 0.05 Or stockpileList.Keys.Count > maximumStockpiles Then
-                        row("ContextGrouping") = "Other"
+                        row("ContextGrouping") = "Other (<5%)"
                         row("ContextGroupingLabel") = "Other SPs"
                         row("PresentationColor") = "#C0C0C0"
                     Else

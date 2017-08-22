@@ -1523,7 +1523,7 @@ Namespace Reports
                 contexts.Add("ResourceClassification", "Resource Classification")
                 contexts.Add("HaulageContext", "Haulage Context")
                 contexts.Add("SampleCoverage", "Sample Coverage")
-                contexts.Add("SampleRatio", "Sample Ratio")
+                contexts.Add("SampleRatio", "Tonnes/Sample")
             Else
                 contexts.Add("ResourceClassification", "Resource Classification")
             End If

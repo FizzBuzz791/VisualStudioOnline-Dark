@@ -14,6 +14,8 @@
             ElseIf row.AsString("LocationType") = "SampleCoverage" Then
                 If row.AsString("ContextGrouping") = "Unsampled" Then
                     Return 5
+                ElseIf row.AsString("ContextGrouping") = "SampledPercentage" Then
+                    Return 6
                 Else
                     Return 3
                 End If

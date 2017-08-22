@@ -241,13 +241,13 @@ function BhpbioValidateErrorDistributionReport(systemStartDate) {
 
     var datebreakdown = GetDateBreakdown();
 
-    if (HasCheckBoxes(sourcePrefix) && !ValidateCheckBoxSelections(sourcePrefix)) {
+    if (HasCheckBoxes(sourcePrefix) && !EnsureAtleastOneCheckboxIsSelected(sourcePrefix)) {
         error = 'Please select at least one Source';
-    } else if (HasCheckBoxes(attributePrefix) && !ValidateCheckBoxSelections(attributePrefix)) {
+    } else if (HasCheckBoxes(attributePrefix) && !EnsureAtleastOneCheckboxIsSelected(attributePrefix)) {
         error = 'Please select at least one Attribute';
-    } else if (HasCheckBoxes(productPrefix) && !ValidateCheckBoxSelections(productPrefix)) {
+    } else if (HasCheckBoxes(productPrefix) && !EnsureAtleastOneCheckboxIsSelected(productPrefix)) {
         error = 'Please select at least one Product';
-    } else if (HasCheckBoxes(productTypePrefix) && !ValidateCheckBoxSelections(productTypePrefix)) {
+    } else if (HasCheckBoxes(productTypePrefix) && !EnsureAtleastOneCheckboxIsSelected(productTypePrefix)) {
         error = 'Please select at least one Product Type';
     } else if (productInput && (productTypeId == '' || productTypeId == '-1')) {
         alert('Please select a Product Type');
@@ -381,8 +381,8 @@ function BhpbioValidateReport(locationList, actualsList, minLocation, maxLocatio
     var success = true;
     var locationID = document.getElementById(locationIdField).value;
 
-    var sourceValid = ValidateCheckBoxSelections(sourcePrefix);
-    var attributeValid = ValidateCheckBoxSelections(gradePrefix);
+    var sourceValid = EnsureAtleastOneCheckboxIsSelected(sourcePrefix);
+    var attributeValid = EnsureAtleastOneCheckboxIsSelected(gradePrefix);
 
     var locationTypeDesc = document.getElementById(locationTypeDescField).value;
     var actualsSelected = document.getElementById("chkSource_MineProductionActuals").checked;
@@ -560,17 +560,39 @@ function HideF3FactoronMonth() {
 
 function ValidateFactorAnalysisContextReport() {
     var result = true;
-    var attributeValid = ValidateCheckBoxSelections(attributePrefix);
-    var validateMonth = BhpbioValidateReportLocationAndDateOnly();
+    var attributeSelectionIsValid = EnsureAtleastOneCheckboxIsSelected(attributePrefix);
+    var monthSelectionIsValid = BhpbioValidateReportLocationAndDateOnly();
+    var contextSelectionIsValid = EnsureContextSelectionIsValid()
 
-    if (!attributeValid) {
+    if (!attributeSelectionIsValid) {
         alert('Please select at least one Attribute');
         result = false;
-    } else if (!validateMonth) {
+    } else if (!monthSelectionIsValid) {
+        result = false;
+    } else if (!contextSelectionIsValid) {
+        alert("Please ensure Tonnes/Sample is selected in isolation");
         result = false;
     }
 
     return result;
+}
+
+function EnsureContextSelectionIsValid() {
+    // Context selection is valid only if Tonnes/Sample is selected in isolation (or not selected at all)
+    var contextSelectionIsValid = false;
+
+    var tonnesPerSampleIsSelected = $("#chkContext_SampleRatio").is(":checked");
+    if (tonnesPerSampleIsSelected) {
+        $('input[name^=chkContext_]').each(function(k, v) {
+            if (v.name !== "chkContext_SampleRatio") {
+                contextSelectionIsValid = !($("#" + v.name).is(":checked"));
+            }
+        });
+    } else {
+        contextSelectionIsValid = true;
+    }
+
+    return contextSelectionIsValid;
 }
 
 function ValidateBhpbioFactorsVsTimeResourceClassificationReport()
@@ -578,7 +600,7 @@ function ValidateBhpbioFactorsVsTimeResourceClassificationReport()
     var result = false;
     if (BhpbioValidateReportLocationAndDateOnly()) {
         if (IsSingleSourceSelected) {
-            if (ValidateCheckBoxSelections(attributePrefix)) {
+            if (EnsureAtleastOneCheckboxIsSelected(attributePrefix)) {
                 if (ValidateResourceClassification()) {
                     result = true;
                 }
@@ -599,8 +621,8 @@ function ValidateErrorContributionReport() {
     var result = false;
     var LocationBreakdown = document.getElementById("LocationBreakdown");
     var Location = document.getElementById("LocationTypeDescription");
-    var factorValid = ValidateCheckBoxSelections(factorPrefix);
-    var attributeValid = ValidateCheckBoxSelections(attributePrefix);
+    var factorValid = EnsureAtleastOneCheckboxIsSelected(factorPrefix);
+    var attributeValid = EnsureAtleastOneCheckboxIsSelected(attributePrefix);
     var validateMonth = BhpbioValidateReportLocationAndDateOnly();
 
     if (!attributeValid) {
@@ -1630,7 +1652,7 @@ function FormatFactorControls() {
 function BhpbioValidateRecoveryAnalysisReport(systemStartDate) {
     var success = true;
     var locationID = document.getElementById(locationIdField).value;
-    var sourceValid = ValidateCheckBoxSelections(sourcePrefix);
+    var sourceValid = EnsureAtleastOneCheckboxIsSelected(sourcePrefix);
     var isActuals = document.getElementById(sourceActualsField).checked;
 
     var datebreakdown = document.getElementById("DateBreakdown");
@@ -1854,10 +1876,10 @@ function BhpbioValidateHubReconciliationReport(fieldName, checkActuals, historic
             alert('Please select a Product Type');
             success = false;
         }
-    } else if (HasCheckBoxes(productPrefix) && !ValidateCheckBoxSelections(productPrefix)) {
+    } else if (HasCheckBoxes(productPrefix) && !EnsureAtleastOneCheckboxIsSelected(productPrefix)) {
         alert('Please select at least one Product Type');
         success = false;
-    } else if (HasCheckBoxes(productTypePrefix) && !ValidateCheckBoxSelections(productTypePrefix)) {
+    } else if (HasCheckBoxes(productTypePrefix) && !EnsureAtleastOneCheckboxIsSelected(productTypePrefix)) {
         alert('Please select at least one Product Type');
         success = false;
     }
@@ -1960,7 +1982,7 @@ function GetCheckBoxSelectionValues(key) {
     return selectedValues;
 }
 
-function ValidateCheckBoxSelections(key) {
+function EnsureAtleastOneCheckboxIsSelected(key) {
 
     //alert(key);
 
@@ -1989,7 +2011,7 @@ function ValidateCheckBoxSelections(key) {
 }
 
 function ValidateResourceClassification() {
-    return ValidateCheckBoxSelections("chkResourceClassifications_");
+    return EnsureAtleastOneCheckboxIsSelected("chkResourceClassifications_");
 }
 
 function BhpbioValidateF1F2F3ByAttributeReportWithLumpFines(historicalStartDate, systemStartDate, historicalAggregateStartDate, skipAttributeSelectionCheck, lumpFinesCutoverDate) {
@@ -2024,9 +2046,9 @@ function BhpbioValidateF1F2F3ByAttributeReport(historicalStartDate, systemStartD
     var productInput = document.getElementById('ProductTypeId');
     var productTypeId = null;
 
-    var factorValid = ValidateCheckBoxSelections(factorPrefix);
+    var factorValid = EnsureAtleastOneCheckboxIsSelected(factorPrefix);
     //alert(locationID);
-    var attributeValid = skipAttributeSelectionCheck || ValidateCheckBoxSelections(attributePrefix);
+    var attributeValid = skipAttributeSelectionCheck || EnsureAtleastOneCheckboxIsSelected(attributePrefix);
     var datebreakdown = document.getElementById("DateBreakdown");
 
     if (!datebreakdown)
@@ -2041,10 +2063,10 @@ function BhpbioValidateF1F2F3ByAttributeReport(historicalStartDate, systemStartD
     if ((locationID == '') || (locationID == '-1')) {
         alert('Please select a Location');
         success = false;
-    } else if (HasCheckBoxes(productPrefix) && !ValidateCheckBoxSelections(productPrefix)) {
+    } else if (HasCheckBoxes(productPrefix) && !EnsureAtleastOneCheckboxIsSelected(productPrefix)) {
         alert('Please select at least one Product');
         success = false;
-    } else if (HasCheckBoxes(productTypePrefix) && !ValidateCheckBoxSelections(productTypePrefix)) {
+    } else if (HasCheckBoxes(productTypePrefix) && !EnsureAtleastOneCheckboxIsSelected(productTypePrefix)) {
         alert('Please select at least one Product Type');
         success = false;
     } else if (!BhpbioValidateLocationType(locationIdField, false)) {
@@ -2059,7 +2081,7 @@ function BhpbioValidateF1F2F3ByAttributeReport(historicalStartDate, systemStartD
             alert('Please select at least one Factor');
         }
         success = false;
-    } else if (HasCheckBoxes(sourcePrefix) && !ValidateCheckBoxSelections(sourcePrefix)) {
+    } else if (HasCheckBoxes(sourcePrefix) && !EnsureAtleastOneCheckboxIsSelected(sourcePrefix)) {
         alert('Please select at least one source');
         success = false;
     } else if (productInput && (productTypeId == '' || productTypeId == '-1')) {
@@ -2162,9 +2184,9 @@ function BhpbioValidateProductFactorsByLocationAgainstShippingTargetsReport(hist
     var success = true;
     var locationID = document.getElementById(locationIdField).value;
 
-    var factorValid = ValidateCheckBoxSelections(factorPrefix);
-    var attributeValid = ValidateCheckBoxSelections(attributePrefix); //isFactorVsTime || ValidateCheckBoxSelections(attributePrefix);
-    var productValid = ValidateCheckBoxSelections(productPrefix);
+    var factorValid = EnsureAtleastOneCheckboxIsSelected(factorPrefix);
+    var attributeValid = EnsureAtleastOneCheckboxIsSelected(attributePrefix); //isFactorVsTime || EnsureAtleastOneCheckboxIsSelected(attributePrefix);
+    var productValid = EnsureAtleastOneCheckboxIsSelected(productPrefix);
     var datebreakdown = document.getElementById("DateBreakdown");
 
     if (!datebreakdown) {
@@ -2997,8 +3019,8 @@ function BhpbioValidateF1F2F3ReconciliationComparison(historicalStartDate, syste
 
     var adjustdate = new Date();
 
-    var factorValid = ValidateCheckBoxSelections(factorPrefix);
-    var attributeValid = ValidateCheckBoxSelections(attributePrefix);
+    var factorValid = EnsureAtleastOneCheckboxIsSelected(factorPrefix);
+    var attributeValid = EnsureAtleastOneCheckboxIsSelected(attributePrefix);
     var datebreakdown = document.getElementById("DateBreakdown");
     var singleSourceElement = document.getElementsByName("SingleSource");
 
@@ -3027,7 +3049,7 @@ function BhpbioValidateF1F2F3ReconciliationComparison(historicalStartDate, syste
         success = false;
     } else if (!BhpbioValidateLocationType(locationIdField, false)) {
         success = false;
-    } else if (hasSourceCheckBoxes && !ValidateCheckBoxSelections(sourcePrefix)) {
+    } else if (hasSourceCheckBoxes && !EnsureAtleastOneCheckboxIsSelected(sourcePrefix)) {
         alert('Please select at least one Source');
         success = false;
     } else if (singleSourceElement && singleSourceElement.length > 0 && !hasSourceCheckBoxes && !IsSingleSourceSelected()) {
