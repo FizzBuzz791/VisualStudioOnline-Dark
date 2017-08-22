@@ -461,6 +461,7 @@
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql"/>
 
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyList.sql"/>
+  <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyTypeList.sql"/>
   </ScriptGroup>
   
   <ScriptGroup Type="DataPopulation">
