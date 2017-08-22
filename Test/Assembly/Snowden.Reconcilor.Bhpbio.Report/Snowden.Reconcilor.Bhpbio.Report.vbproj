@@ -218,7 +218,6 @@
     <Compile Include="ReportHelpers\IReporter.vb" />
     <Compile Include="ReportHelpers\ISampleStationReporter.vb" />
     <Compile Include="ReportHelpers\Reporter.vb" />
-    <Compile Include="ReportHelpers\SampleStationReporter.vb" />
     <Compile Include="ReportDefinitions\ShippingTargetsReport.vb" />
     <Compile Include="ReportDefinitions\SupplyChainMonitoringReport.vb" />
     <Compile Include="ReportDefinitions\ReconciliationDataExportReport.vb" />
@@ -234,6 +233,7 @@
     <Compile Include="ReportDefinitions\RecoveryAnalysisReport.vb" />
     <Compile Include="ReportDefinitions\ReportBase.vb" />
     <Compile Include="ReportDefinitions\ValidationApprovalData.vb" />
+    <Compile Include="ReportHelpers\SampleStationReporter.vb" />
     <Compile Include="Types\AutomaticContentSelectionModeFactorEnum.vb" />
     <Compile Include="Types\CalculationResult.vb" />
     <Compile Include="Types\CalculationResultDepth.vb" />

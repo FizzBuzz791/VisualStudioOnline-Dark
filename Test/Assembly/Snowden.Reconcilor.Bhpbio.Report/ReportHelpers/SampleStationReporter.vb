@@ -39,7 +39,7 @@ Namespace ReportHelpers
         Public Sub AddSampleStationRatioContextData(ByRef masterTable As DataTable, locationId As Integer,
                                                     startDate As DateTime, endDate As DateTime,
                                                     dateBreakdown As ReportBreakdown) _
-            Implements ISampleStationReporter.AddSampleStationRatioContextData
+                                                    Implements ISampleStationReporter.AddSampleStationRatioContextData
 
             Dim sampleStationReportData = DalReport.GetBhpbioSampleStationReportData(locationId, startDate, endDate,
                                                                                      dateBreakdown.ToParameterString())
@@ -53,13 +53,9 @@ Namespace ReportHelpers
                 End If
 
                 Dim representativeRow = ratioGroup.FirstOrDefault()
-                'representativeRow("Grade_Value") = 10000 ' Negate the X / 100 / 1000 in the report so that this value displays relative to the others
                 AddSampleStationRowAsNonFactorRow(representativeRow, masterTable, String.Empty, ratio,
                                                   Math.Round(ratio, 0).ToString(), "SampleRatio", "SampleRatio")
             Next
-
-            SeedLegend(masterTable.AsEnumerable.ToList())
-            masterTable.Columns.AddIfNeeded("ContextGroupingOrder", GetType(Integer)).SetDefault(0)
         End Sub
 
         ' There is a problem with the SSRS legend that requires each series to appear in the first category on the chart.
@@ -130,10 +126,12 @@ Namespace ReportHelpers
         ''' </summary>
         ''' <param name="dataRow">Row to convert.</param>
         ''' <param name="masterTable">Table to add converted row to.</param>
-        ''' <param name="presentationColor">Color to display on the report. If null or empty, LocationName will be converted to 
+        ''' <param name="presentationColor">Color to display on the report. If null or empty, LocationName will be converted to
         '''                                 a color.</param>
         ''' <param name="tonnes">Tonnes to display on the report.</param>
         ''' <param name="contextGrouping">Field to group the context on.</param>
+        ''' <param name="locationType">Location Type to assign.</param>
+        ''' <param name="contextCategory">Category of the context.</param>
         Private Shared Sub AddSampleStationRowAsNonFactorRow(dataRow As DataRow, ByRef masterTable As DataTable,
                                                              presentationColor As String, tonnes As Double,
                                                              contextGrouping As String, locationType As String,
@@ -148,7 +146,7 @@ Namespace ReportHelpers
             row("CalendarDate") = dataRow("DateFrom")
             row("DateFrom") = dataRow("DateFrom")
             row("DateTo") = dataRow("DateTo")
-            row("DateText") = dataRow.AsDate("DateFrom").ToString("MMMM-yy")
+            row("DateText") = CType(dataRow("DateFrom"), DateTime).ToString("MMMM-yy") ' .AsDate breaks Re# *only* here. NFI why.
 
             row("LocationId") = dataRow("LocationId")
             row("LocationName") = dataRow("SampleStation")
