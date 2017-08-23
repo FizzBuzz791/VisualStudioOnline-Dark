@@ -1,14 +1,10 @@
 ﻿Imports Snowden.Reconcilor.Core.WebDevelopment
 Imports Snowden.Common.Web.BaseHtmlControls
-Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.Extensibility.DependencyFactoryKeys
 Imports System.Web.UI
-Imports Snowden.Reconcilor.Bhpbio.Website.Internal.SettingsModule
-Imports System.Web.UI.WebControls
-Imports Snowden.Common.Database.DataAccessBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
-Imports System.Text
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls
+Imports Snowden.Reconcilor.Bhpbio.Report
 
 Namespace Utilities
     Public Class StratigraphyHierarchy
@@ -17,20 +13,28 @@ Namespace Utilities
         Protected Const SORT_ORDER As String = "SortOrder"
         Protected Const STRAT_NUM As String = "Strat Num"
 
-        Protected Property ReturnTable As ReconcilorTable
-        Protected Property DalUtility As IUtility
+        Protected ReadOnly SpanText As String = String.Join("", Enumerable.Repeat("&nbsp;", 13).ToArray())
 
-        Private _stratigraphyHierarchyContent As Tags.HtmlDivTag
+        Protected Property DalUtility As IUtility
 
         Protected Overrides Sub SetupPageControls()
             MyBase.SetupPageControls()
 
         End Sub
 
+        Protected Overrides Sub SetupDalObjects()
+            MyBase.SetupDalObjects()
+
+            DalUtility = New SqlDalUtility(Resources.Connection)
+        End Sub
+
         Protected Overrides Sub SetupPageLayout()
             PageHeader.ScriptTags.Add(New Tags.HtmlScriptTag(Tags.ScriptType.TextJavaScript, Tags.ScriptLanguage.JavaScript, "../js/BhpbioUtilities.js", String.Empty))
 
             Dim headerDiv As New Tags.HtmlDivTag
+            Dim ReturnTable As ReconcilorTable
+            Dim stratigraphyHierarchyContent As Tags.HtmlDivTag
+
             With headerDiv
                 .StyleClass = "largeHeaderText"
                 .Style.Add("margin-bottom", "5px")
@@ -42,15 +46,11 @@ Namespace Utilities
                 .Controls.Add(New Tags.HtmlDivTag(Nothing, String.Empty, "tabs_spacer"))
             End With
 
-            _stratigraphyHierarchyContent = New Tags.HtmlDivTag("StratigraphyHierarchyContent")
+            stratigraphyHierarchyContent = New Tags.HtmlDivTag("StratigraphyHierarchyContent")
 
-            ReconcilorContent.ContainerContent.Controls.Add(_stratigraphyHierarchyContent)
+            ReconcilorContent.ContainerContent.Controls.Add(stratigraphyHierarchyContent)
 
             MyBase.SetupPageLayout()
-            ' *Must* add this script here so that it comes *after* common.js
-            PageHeader.ScriptTags.Add(New Tags.HtmlScriptTag(Tags.ScriptType.TextJavaScript, Tags.ScriptLanguage.JavaScript, "../js/BhpbioCommon.js", String.Empty))
-
-            DalUtility = New SqlDalUtility(Resources.Connection)
 
             Dim stratHierachyType = DalUtility.GetBhpbioStratigraphyHierarchyTypeList
 
@@ -68,7 +68,7 @@ Namespace Utilities
             End With
             ReturnTable.Height = 400 ' Restrict the height to ensure everything fits without _page_ scrolling.
 
-            _stratigraphyHierarchyContent.Controls.Add(ReturnTable)
+            stratigraphyHierarchyContent.Controls.Add(ReturnTable)
 
         End Sub
 
@@ -101,41 +101,41 @@ Namespace Utilities
             Return dictionary
         End Function
 
-        Public Sub AddLevelForParent(ByRef sourceTable As DataTable, ByRef outputTable As DataTable, level As Int32, parent As Int32?)
-            Dim filter = BuildFilter(level, parent)
+        Public Sub AddLevelForParent(ByRef sourceTable As DataTable, ByRef outputTable As DataTable, level As Int32, parentId As Int32?)
+            Dim filter = BuildFilter(level, parentId)
 
             Dim levelRows = sourceTable.Select(filter, SORT_ORDER)
 
             For Each row In levelRows
                 Dim newRow = outputTable.NewRow()
 
-                Dim typeCol As String = CStr(row("Type"))
-                Dim stratigraphy As String = CStr(row("Stratigraphy"))
-                Dim description As String = CStr(row("Description"))
-                Dim colour As String = CStr(row("Colour"))
+                Dim typeCol As String = row.AsString("Type")
+                Dim stratigraphy As String = row.AsString("Stratigraphy")
+                Dim description As String = row.AsString("Description")
+                Dim colour As String = row.AsString("Colour")
                 Dim stratNum As String = Nothing
-                Dim id As Int32
+                Dim rowId As Int32
 
                 If Not IsDBNull(row("StratNum")) Then
-                    stratNum = CStr(row("StratNum"))
+                    stratNum = row.AsString("StratNum")
                 End If
 
-                id = CInt(row("id"))
+                rowId = row.AsInt("id")
 
                 newRow(typeCol) = stratigraphy
                 newRow("Description") = description
                 newRow("Colour") = colour
                 newRow(STRAT_NUM) = stratNum
-                newRow("Display") = $"<span id=""{id}"" style=""background-color:{colour}"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+                newRow("Display") = $"<span id=""{rowId}"" style=""background-color:{colour}"">{SpanText}</span>"   '13 spaces gives a nice column width in the span
 
                 outputTable.Rows.Add(newRow)
-                AddLevelForParent(sourceTable, outputTable, level + 1, id)
+                AddLevelForParent(sourceTable, outputTable, level + 1, rowId)
             Next
 
         End Sub
 
-        Public Function BuildFilter(level As Int32, parent As Integer?) As String
-            Return If(parent Is Nothing, $"Level={level}", $"Level={level} and Parentid = {parent}")
+        Public Function BuildFilter(level As Int32, parentId As Integer?) As String
+            Return If(parentId Is Nothing, $"Level={level}", $"Level={level} and Parent_Id = {parentId}")
         End Function
 
     End Class

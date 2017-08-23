@@ -5,11 +5,11 @@ GO
 CREATE PROCEDURE [dbo].[GetBhpbioStratigraphyHierarchyTypeList]
 AS
 BEGIN
-	SELECT	[Id],
-			[Type],
-			[Level]
-  FROM [dbo].[BhpbioStratigraphyHierarchyType]
-ORDER BY [Level]
+	SELECT		[Id],
+				[Type],
+				[Level]
+	FROM		[dbo].[BhpbioStratigraphyHierarchyType]
+	ORDER BY	[Level]
 END 
 GO
 

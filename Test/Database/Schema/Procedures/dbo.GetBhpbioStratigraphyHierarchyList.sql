@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[GetBhpbioStratigraphyHierarchyList]
 AS
 BEGIN
 	SELECT	[dbo].[BhpbioStratigraphyHierarchy].[Id],
-			[Parentid],
+			[Parent_Id],
 			[Stratigraphy],
 			[dbo].[BhpbioStratigraphyHierarchyType].[Id] StratTypeId,
 			[Type],
@@ -15,7 +15,8 @@ BEGIN
 			[StratNum],
 			[Colour],
 			[SortOrder]
-FROM		[dbo].[BhpbioStratigraphyHierarchy] INNER JOIN [dbo].[BhpbioStratigraphyHierarchyType] on [dbo].[BhpbioStratigraphyHierarchy].[StratigraphyHierarchyTypeId] = [dbo].[BhpbioStratigraphyHierarchyType].[Id]
+	FROM	[dbo].[BhpbioStratigraphyHierarchy] 
+			INNER JOIN [dbo].[BhpbioStratigraphyHierarchyType] on [dbo].[BhpbioStratigraphyHierarchy].[StratigraphyHierarchyTypeId] = [dbo].[BhpbioStratigraphyHierarchyType].[Id]
 END 
 GO
 

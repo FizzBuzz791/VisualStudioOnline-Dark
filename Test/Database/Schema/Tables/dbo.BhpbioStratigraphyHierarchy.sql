@@ -2,13 +2,13 @@
 (
 	[Id] INT NOT NULL IDENTITY, 
 	[Parentid] INT NULL,
+	[StratigraphyHierarchyTypeId] INT NOT NULL, 
 	[Stratigraphy] varchar(50) NOT NULL,
-    [StratigraphyHierarchyTypeId] INT NOT NULL, 
-    [Description] NVARCHAR(255) NOT NULL, 
-    [StratNum] VARCHAR(4) NULL, 
-    [Colour] VARCHAR(25) NOT NULL,
+	[Description] VARCHAR(255) NOT NULL, 
+	[StratNum] VARCHAR(7) NULL, 
+	[Colour] VARCHAR(25) NOT NULL,
 	[SortOrder] INT NOT NULL, 
-    CONSTRAINT [PK_BhpbioStratigraphyHierarchy] PRIMARY KEY CLUSTERED
+	CONSTRAINT [PK_BhpbioStratigraphyHierarchy] PRIMARY KEY CLUSTERED
 	(
 		[Id] ASC
 	),

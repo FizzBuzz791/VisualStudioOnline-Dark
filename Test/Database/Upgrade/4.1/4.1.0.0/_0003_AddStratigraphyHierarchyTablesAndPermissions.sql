@@ -1,17 +1,17 @@
 ﻿IF OBJECT_ID('dbo.BhpbioStratigraphyHierarchy') IS NOT NULL 
-     DROP TABLE dbo.BhpbioStratigraphyHierarchy
+	DROP TABLE dbo.BhpbioStratigraphyHierarchy
 GO 
 
 IF OBJECT_ID('dbo.BhpbioStratigraphyHierarchyType') IS NOT NULL 
-     DROP TABLE dbo.BhpbioStratigraphyHierarchyType
+	DROP TABLE dbo.BhpbioStratigraphyHierarchyType
 GO 
 
 
 CREATE TABLE [dbo].[BhpbioStratigraphyHierarchyType]
 (
 	[Id] INT NOT NULL IDENTITY, 
-    [Type] VARCHAR(100) NOT NULL, 
-    [Level] INT NOT NULL,
+	[Type] VARCHAR(100) NOT NULL, 
+	[Level] INT NOT NULL,
 	CONSTRAINT [PK_BhpbioStratigraphyHierarchyType] PRIMARY KEY CLUSTERED
 	(
 		[Id] ASC
@@ -29,18 +29,18 @@ INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('S
 CREATE TABLE [dbo].[BhpbioStratigraphyHierarchy]
 (
 	[Id] INT NOT NULL IDENTITY, 
-	[Parentid] INT NULL,
+	[Parent_Id] INT NULL,
+	[StratigraphyHierarchyTypeId] INT NOT NULL, 
 	[Stratigraphy] varchar(50) NOT NULL,
-    [StratigraphyHierarchyTypeId] INT NOT NULL, 
-    [Description] NVARCHAR(255) NOT NULL, 
-    [StratNum] VARCHAR(4) NULL, 
-    [Colour] VARCHAR(25) NOT NULL,
+	[Description] VARCHAR(255) NOT NULL, 
+	[StratNum] VARCHAR(7) NULL, 
+	[Colour] VARCHAR(25) NOT NULL,
 	[SortOrder] INT NOT NULL, 
-    CONSTRAINT [PK_BhpbioStratigraphyHierarchy] PRIMARY KEY CLUSTERED
+	CONSTRAINT [PK_BhpbioStratigraphyHierarchy] PRIMARY KEY CLUSTERED
 	(
 		[Id] ASC
 	),
-	CONSTRAINT FK_BhpbioStratigraphyHierarchy FOREIGN KEY ([ParentId])
+	CONSTRAINT FK_BhpbioStratigraphyHierarchy FOREIGN KEY ([Parent_Id])
 		REFERENCES [dbo].[BhpbioStratigraphyHierarchy] ([Id]),
 	CONSTRAINT FK_BhpbioStratigraphyHierarchyType FOREIGN KEY ([StratigraphyHierarchyTypeId])
 		REFERENCES [dbo].[BhpbioStratigraphyHierarchyType] ([Id])
@@ -48,7 +48,7 @@ CREATE TABLE [dbo].[BhpbioStratigraphyHierarchy]
 
 GO
 CREATE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyParent
-ON dbo.[BhpbioStratigraphyHierarchy]([ParentId])
+ON dbo.[BhpbioStratigraphyHierarchy]([Parent_Id])
 GO
 CREATE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyStratNum
 ON dbo.[BhpbioStratigraphyHierarchy]([StratNum])
