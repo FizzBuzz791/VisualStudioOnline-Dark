@@ -54,3 +54,7 @@ CREATE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyStratNum
 ON dbo.[BhpbioStratigraphyHierarchy]([StratNum])
 GO
 
+INSERT INTO [dbo].[SecurityOption] VALUES ('REC', 'UTILITIES_STRATIGRAPHY_HIERARCHY', 'Utilities', 'Access to Stratigraphy Reference Screen', 99)
+INSERT INTO [dbo].[SecurityRoleOption] VALUES ('REC_VIEW', 'REC', 'UTILITIES_STRATIGRAPHY_HIERARCHY')
+GO
+
