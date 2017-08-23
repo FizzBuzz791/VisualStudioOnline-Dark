@@ -16,11 +16,11 @@ BEGIN
 		EndDate DATETIME NULL,
 		CoverageTarget INT NOT NULL,
 		CoverageWarning INT NOT NULL,
-		[Tonnes/Sample Target] INT NOT NULL,
-		[Tonnes/Sample Warning] INT NOT NULL
+		RatioTarget INT NOT NULL,
+		RatioWarning INT NOT NULL
 	)
 
-	INSERT INTO @sampleStationTargets (Id, SampleStation_Id, StartDate, CoverageTarget, CoverageWarning, [Tonnes/Sample Target], [Tonnes/Sample Warning])
+	INSERT INTO @sampleStationTargets (Id, SampleStation_Id, StartDate, CoverageTarget, CoverageWarning, RatioTarget, RatioWarning)
 	SELECT SST.Id, SST.SampleStation_Id, SST.StartDate, SST.CoverageTarget*100, SST.CoverageWarning*100, SST.RatioTarget, SST.RatioWarning
 	FROM BhpbioSampleStationTarget SST
 	WHERE SST.SampleStation_Id = @SampleStationId
