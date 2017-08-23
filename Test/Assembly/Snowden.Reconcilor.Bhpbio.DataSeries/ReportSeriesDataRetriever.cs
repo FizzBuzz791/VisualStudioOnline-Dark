@@ -10,6 +10,7 @@ using Snowden.Consulting.DataSeries.Processing;
 using System.ComponentModel;
 using System.Threading;
 using Snowden.Consulting.DataSeries.DataAccess;
+using Snowden.Reconcilor.Bhpbio.Report.Calc;
 
 namespace Snowden.Reconcilor.Bhpbio.DataSeries
 {
@@ -290,12 +291,18 @@ namespace Snowden.Reconcilor.Bhpbio.DataSeries
         
         private ReportSession CreateSession(string connectionString)
         {
-            return new ReportSession(connectionString)
+            var session =  new ReportSession(connectionString)
             {
                 Context = ReportContext.ApprovalListing, // set the context to approval listing .. this combines live and approved data
                 IncludeProductSizeBreakdown = true,
                 IncludeModelDataForInactiveLocations = true,
             };
+
+            session.OptionalCalculationTypesToInclude.Add(CalcType.RFGM);
+            session.OptionalCalculationTypesToInclude.Add(CalcType.RFMM);
+            session.OptionalCalculationTypesToInclude.Add(CalcType.RFSTM);
+
+            return session;
         }
 
         /// <summary>
@@ -344,7 +351,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataSeries
                     string tagId = row["CalcId"] as String;
 
                     // work out if this calc Id is a factor
-                    bool isFactor = (tagId != null && tagId.Contains("Factor"));
+                    bool isFactor = (tagId != null && SeriesIsFactor(tagId));
 
                     int? materialTypeId = null;
 
@@ -669,6 +676,12 @@ namespace Snowden.Reconcilor.Bhpbio.DataSeries
 
             return value;
         }
-        
+
+        private bool SeriesIsFactor(String seriesTypeId)
+        {
+            return seriesTypeId.Contains("Factor") || Report.Calc.Calculation.RecoveryFactors.Any(x => seriesTypeId.Contains(x));
+        }
+
+
     }
 }

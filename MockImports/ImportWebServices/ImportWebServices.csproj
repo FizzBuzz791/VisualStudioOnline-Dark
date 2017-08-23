@@ -52,8 +52,9 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Snowden.Common">
-      <HintPath>..\..\Libraries\Snowden.Common\Snowden.Common.dll</HintPath>
+    <Reference Include="Snowden.Common, Version=1.4.10.4, Culture=neutral, PublicKeyToken=2dd20541a998e7c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Snowden.Common.1.4.10.4\lib\Snowden.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -106,6 +107,7 @@
     <Compile Include="MQ2WebService.svc.cs">
       <DependentUpon>MQ2WebService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Non-generatedPartialClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="WebServiceTests.asmx.cs">
@@ -121,6 +123,9 @@
       <Project>{481EF11E-FE3C-4B6C-9DA7-E8213F7C5648}</Project>
       <Name>MockImportDAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

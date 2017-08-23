@@ -1,32 +1,3 @@
-USE [ReconcilorImportMockWS]
-GO
-
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StockpileGrades_Grades]') AND parent_object_id = OBJECT_ID(N'[dbo].[StockpileGrades]'))
-ALTER TABLE [dbo].[StockpileGrades] DROP CONSTRAINT [FK_StockpileGrades_Grades]
-GO
-
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StockpileGrades_Stockpiles]') AND parent_object_id = OBJECT_ID(N'[dbo].[StockpileGrades]'))
-ALTER TABLE [dbo].[StockpileGrades] DROP CONSTRAINT [FK_StockpileGrades_Stockpiles]
-GO
-
-USE [ReconcilorImportMockWS]
-GO
-
-/****** Object:  Table [dbo].[StockpileGrades]    Script Date: 07/11/2013 14:49:05 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[StockpileGrades]') AND type in (N'U'))
-DROP TABLE [dbo].[StockpileGrades]
-GO
-
-USE [ReconcilorImportMockWS]
-GO
-
-/****** Object:  Table [dbo].[StockpileGrades]    Script Date: 07/11/2013 14:49:05 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[StockpileGrades](
 	[StockpileId] [int] NOT NULL,
 	[GradeId] [int] NOT NULL,

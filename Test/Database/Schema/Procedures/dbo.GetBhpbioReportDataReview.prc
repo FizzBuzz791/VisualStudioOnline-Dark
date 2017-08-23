@@ -57,10 +57,12 @@ BEGIN
 	DECLARE @SampleTonnesField VARCHAR(31)
 	DECLARE @SampleSourceField VARCHAR(31)
 	DECLARE @ProductSizeField VARCHAR(31)
+	DECLARE @SampleCountField VARCHAR(31)
 
 	SET @SampleTonnesField = 'SampleTonnes'
 	SET @SampleSourceField = 'SampleSource'
 	SET @ProductSizeField = 'ProductSize'
+	SET @SampleCountField = 'SampleCount'
 	
 	DECLARE @Location TABLE
 	(
@@ -328,12 +330,13 @@ BEGIN
 				DesignationMaterialTypeId INT NOT NULL,
 				ProductSize VARCHAR(5) NOT NULL,
 				DefaultProductSize BIT NOT NULL,
+				SampleCount INT NULL,
 				PRIMARY KEY (WeightometerSampleId, ProductSize)
 			)
 		
 			-- retrieve the list of Weightometer Records to be used in the calculations
 			INSERT INTO @Weightometer
-				(CalendarDate, DateFrom, DateTo, WeightometerSampleId, ParentLocationId, ProductSize, DefaultProductSize, RealTonnes, SampleTonnes, DesignationMaterialTypeId)
+				(CalendarDate, DateFrom, DateTo, WeightometerSampleId, ParentLocationId, ProductSize, DefaultProductSize, RealTonnes, SampleTonnes, DesignationMaterialTypeId, SampleCount)
 			SELECT b.CalendarDate, b.DateFrom, b.DateTo, w.WeightometerSampleId, l.LocationId, ISNULL(wsn.Notes, defaultlf.ProductSize) As ProductSize,
 				CASE WHEN wsn.Notes IS NULL THEN 1 ELSE 0 END As DefaultProductSize,
 				-- calculate the REAL tonnes
@@ -353,7 +356,8 @@ BEGIN
 				CASE w.BeneFeed
 					WHEN 1 THEN @BeneFeedMaterialTypeId
 					WHEN 0 THEN @HighGradeMaterialTypeId
-				END AS MaterialTypeId
+				END AS MaterialTypeId,
+				wsv2.Field_Value
 			FROM dbo.GetBhpbioReportBreakdown(NULL, @iDateFrom, @iDateTo, 1) AS b
 				INNER JOIN dbo.WeightometerSample AS ws
 					ON (ws.Weightometer_Sample_Date BETWEEN b.DateFrom AND b.DateTo)
@@ -429,12 +433,22 @@ BEGIN
 					ON wsn.Notes IS NULL
 					AND wl.Location_Id = defaultlf.LocationId
 					AND ws.Weightometer_Sample_Date BETWEEN defaultlf.StartDate AND defaultlf.EndDate
+				LEFT JOIN dbo.WeightometerSampleValue as wsv2
+					ON ws.Weightometer_Sample_Id = wsv2.Weightometer_Sample_Id
+					AND wsv2.Weightometer_Sample_Field_Id = @SampleCountField
 
-
-			SELECT WS.Weightometer_Id, WeightometerSampleId, WS.Weightometer_Sample_Date, MT.Description, WFP.Source_Crusher_Id,
+			SELECT WS.Weightometer_Id, SS.Name AS [Sample Station], WeightometerSampleId, WS.Weightometer_Sample_Date, MT.Description, WFP.Source_Crusher_Id,
 				VALUE.ProductSize, DefaultProductSize,
-				SampleTonnes, RealTonnes, SampleSource, 
-				Fe, P, SiO2, Al2O3, LOI, H2O, ParentLocationId, S.Stockpile_Name AS Destination_Stockpile
+				RealTonnes AS [Tonnes Moved], ROUND(SampleTonnes, 2, 0) AS [Tonnes Sampled], SampleCount AS [Sample Count], 
+				CASE 
+					WHEN RealTonnes = 0 THEN NULL
+					ELSE CAST(ROUND((SampleTonnes/RealTonnes)*100, 2, 0) AS VARCHAR) + '%'
+				END AS [Sample Coverage], 
+				CASE
+					WHEN SampleCount = 0 THEN NULL
+					ELSE CAST(RealTonnes/SampleCount AS INT) 
+				END AS [Sample Ratio], 
+				SampleSource, Fe, P, SiO2, Al2O3, LOI, H2O, ParentLocationId, S.Stockpile_Name AS Destination_Stockpile
 			FROM (
 				SELECT WeightometerSampleId, DesignationMaterialTypeId, ParentLocationId, ProductSize, DefaultProductSize,
 					NULL As SampleTonnes, RealTonnes, 
@@ -444,7 +458,7 @@ BEGIN
 						ELSE 
 							NULL 
 						END) As SampleSource, 
-					NULL AS Fe, NULL AS P, NULL AS SiO2, NULL As Al2O3, NULL As LOI, NULL As H2O
+					NULL AS Fe, NULL AS P, NULL AS SiO2, NULL As Al2O3, NULL As LOI, NULL As H2O, w.SampleCount
 				FROM @Weightometer As w
 				INNER JOIN dbo.WeightometerSample As ws
 					ON w.WeightometerSampleId = ws.Weightometer_Sample_Id
@@ -472,7 +486,7 @@ BEGIN
 				-- Include a row for all weightometers for which we do expect a sample, but of a type other than CRUSHER ACTUAL and BACK_CALCULATED Actual for which there is no such sample on a day and shift (even if RealTonnes is 0 which is the case for Port Actuals)
 				
 				SELECT ws.Weightometer_Sample_Id, DesignationMaterialTypeId, ParentLocationId, Null, DefaultProductSize, NULL As SampleTonnes, Null As RealTonnes, 
-					(CASE WHEN DesignationMaterialTypeId != @BeneFeedMaterialTypeId THEN 'No Sample Available' ELSE NULL END) As SampleSource, NULL AS Fe, NULL AS P, NULL AS SiO2, NULL As Al2O3, NULL As LOI, NULL As H2O
+					(CASE WHEN DesignationMaterialTypeId != @BeneFeedMaterialTypeId THEN 'No Sample Available' ELSE NULL END) As SampleSource, NULL AS Fe, NULL AS P, NULL AS SiO2, NULL As Al2O3, NULL As LOI, NULL As H2O, NULL AS SampleCount
 				FROM @Weightometer As w
 					INNER JOIN dbo.WeightometerSample As ws
 						ON w.WeightometerSampleId = ws.Weightometer_Sample_Id
@@ -507,7 +521,7 @@ BEGIN
 				
 				SELECT DISTINCT W.WeightometerSampleId, w.DesignationMaterialTypeId, w.ParentLocationId, w.ProductSize, DefaultProductSize,
 					w.SampleTonnes, w.realtonnes, sSource.SampleSource, 
-					Fe.Grade_Value As Fe, P.Grade_Value As P, SiO2.Grade_Value As SiO2, Al2O3.Grade_Value As Al2O3, LOI.Grade_Value As LOI, H2O.Grade_Value As H2O
+					Fe.Grade_Value As Fe, P.Grade_Value As P, SiO2.Grade_Value As SiO2, Al2O3.Grade_Value As Al2O3, LOI.Grade_Value As LOI, H2O.Grade_Value As H2O, w.SampleCount
 				FROM @Weightometer AS w
 				-- check the membership with the Sample Source
 				LEFT OUTER JOIN
@@ -556,6 +570,8 @@ BEGIN
 				ON (WS.Weightometer_Sample_Id = VALUE.WeightometerSampleId)
 			INNER JOIN dbo.MaterialType AS MT
 				ON (MT.Material_Type_Id = VALUE.DesignationMaterialTypeId)
+			LEFT JOIN dbo.BhpbioSampleStation AS SS
+				ON SS.Weightometer_Id = WS.Weightometer_Id AND SS.ProductSize = VALUE.ProductSize
 			LEFT JOIN dbo.WeightometerFlowPeriod AS WFP
 				ON (WFP.Weightometer_Id = WS.Weightometer_Id)
 			LEFT JOIN dbo.Stockpile AS S
@@ -569,10 +585,10 @@ BEGIN
 			UNION
 			
 			-- Find any weightometer/date combinations that had no samples during the report period (and are not on the exemption list for missing samples)
-			SELECT w.Weightometer_Id, NULL AS WeightometerSampleId, d.This_Date, NULL AS Description, NULL AS Source_Crusher_Id,
+			SELECT w.Weightometer_Id, SS.Name AS [Sample Station], NULL AS WeightometerSampleId, d.This_Date, NULL AS Description, NULL AS Source_Crusher_Id,
 				NULL AS ProductSize, NULL AS DefaultProductSize,
-				NULL AS SampleTonnes, 0 AS RealTonnes, 'No Tonnes Moved' AS SampleSource, 
-				NULL AS Fe, NULL AS P, NULL AS SiO2, NULL AS Al2O3, NULL AS LOI, NULL as H2O, NULL AS ParentLocationId, NULL AS Destination_Stockpile
+				0 AS [Tonnes Moved], NULL AS [Tonnes Sampled], NULL AS SampleCount, NULL AS [Sample Coverage], NULL AS [Sample Ratio], 
+				'No Tonnes Moved' AS SampleSource, NULL AS Fe, NULL AS P, NULL AS SiO2, NULL AS Al2O3, NULL AS LOI, NULL as H2O, NULL AS ParentLocationId, NULL AS Destination_Stockpile
 			FROM dbo.Weightometer w
 			CROSS JOIN dbo.GetDateList(@iDateFrom, @iDateTo, 'DAY', 1) d	
 			INNER JOIN dbo.GetBhpbioWeightometerLocationWithOverride(@iDateFrom, @iDateTo) AS wl
@@ -580,7 +596,8 @@ BEGIN
 				    AND (d.This_Date BETWEEN wl.IncludeStart AND wl.IncludeEnd)
 			INNER JOIN @Location AS l
 				ON (l.LocationId = wl.Location_Id
-					AND d.This_Date BETWEEN l.IncludeStart AND l.IncludeEnd)								 
+					AND d.This_Date BETWEEN l.IncludeStart AND l.IncludeEnd)
+			LEFT JOIN dbo.BhpbioSampleStation SS ON SS.Weightometer_Id = w.Weightometer_Id	
 			LEFT OUTER JOIN dbo.BhpbioWeightometerDataExceptionExemption e
 				ON w.Weightometer_Id = e.Weightometer_Id
 					AND @DataExceptionTypeId_MissingSamples = e.Data_Exception_Type_Id
