@@ -465,6 +465,7 @@
     <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <None Include="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
@@ -1829,6 +1830,8 @@
     <None Include="UtilityScripts\Deployment\4.0.1.0\AD Bulk Import\08_RemoveVolumeFromGeometRecords.sql" />
     <None Include="UtilityScripts\Deployment\4.0.1.0\AD Bulk Import\09_ReapprovePortBlendedAdjustment.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0001_Raise Outlier Detection Queue Entries.sql" />
+    <Build Include="Schema\Tables\dbo.BhpbioWeathering.sql" />
+    <Build Include="Schema\Procedures\dbo.GetBhpbioWeatheringList.sql" />
   </ItemGroup>
   <PropertyGroup>
     <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>

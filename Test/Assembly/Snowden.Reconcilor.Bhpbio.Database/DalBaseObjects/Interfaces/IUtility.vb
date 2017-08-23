@@ -239,5 +239,7 @@ Namespace DalBaseObjects
         Function GetBhpbioSampleStationTarget(sampleStationTargetId As Integer) As DataTable
         Sub DeleteBhpbioSampleStationTarget(targetId As Integer)
 #End Region
+
+        Function GetWeatheringList() As DataTable
     End Interface
 End Namespace

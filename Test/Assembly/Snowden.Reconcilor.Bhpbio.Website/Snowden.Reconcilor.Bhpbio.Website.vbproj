@@ -740,6 +740,9 @@
     <Compile Include="Utilities\SystemSettingsList.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Utilities\Weathering.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Utilities\WeightometerSampleEdit.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

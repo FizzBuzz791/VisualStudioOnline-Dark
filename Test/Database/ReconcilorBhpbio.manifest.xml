@@ -89,6 +89,8 @@
 
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStation.sql" />
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStationTarget.sql"/>
+
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioWeathering.sql" />
   </ScriptGroup>
   <ScriptGroup Type="Code">
     <Script Type="View" Path="Schema\Views\dbo.BhpbioImportHaulage.viw" />
@@ -457,6 +459,8 @@
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql"/>
+
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioWeatheringList.sql" />
   </ScriptGroup>
   
   <ScriptGroup Type="DataPopulation">
@@ -1186,6 +1190,7 @@
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0002_Raise Outlier Detection Queue Entries.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 

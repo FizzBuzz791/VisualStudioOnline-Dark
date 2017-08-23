@@ -1375,5 +1375,15 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
             End With
         End Sub
 #End Region
+
+        Public Function GetWeatheringList() As DataTable Implements IUtility.GetWeatheringList
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioWeatheringList"
+                With .ParameterCollection
+                    .Clear()
+                End With
+                Return .ExecuteDataTable()
+            End With
+        End Function
     End Class
 End Namespace
