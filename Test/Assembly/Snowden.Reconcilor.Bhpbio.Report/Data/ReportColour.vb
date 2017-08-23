@@ -1,4 +1,5 @@
 ﻿Imports Snowden.Common.Database.DataAccessBaseObjects
+Imports Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 Namespace Data
@@ -16,11 +17,11 @@ Namespace Data
                 table.Columns.Add("LocationColor", GetType(String))
             End If
 
-            AddLocationColor(session, table.AsEnumerable)
+            AddLocationColor(session.DalUtility, table.AsEnumerable)
         End Sub
 
-        Public Shared Sub AddLocationColor(session As Types.ReportSession, rows As IEnumerable(Of DataRow))
-            Dim colors = session.DalUtility.GetBhpbioReportColorList(NullValues.String, True)
+        Public Shared Sub AddLocationColor(dalUtility As IUtility, rows As IEnumerable(Of DataRow))
+            Dim colors = dalUtility.GetBhpbioReportColorList(NullValues.String, True)
             Dim locationColors = colors.AsEnumerable.Where(Function(r) r.AsString("Description").Contains("Location")).ToList
 
             For Each row As DataRow In rows

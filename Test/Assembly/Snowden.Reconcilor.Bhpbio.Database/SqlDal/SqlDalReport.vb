@@ -371,7 +371,7 @@ Namespace SqlDal
             Return DataAccess.ExecuteDataTable
         End Function
 
-        Public Function GetBhpbioHaulageMovementsToCrusher(locationId As Integer, startDate As DateTime, endDate As DateTime, ByVal dateBreakdown As String) As DataTable
+        Public Function GetBhpbioHaulageMovementsToCrusher(locationId As Integer, startDate As DateTime, endDate As DateTime, ByVal dateBreakdown As String) As DataTable Implements ISqlDalReport.GetBhpbioHaulageMovementsToCrusher
             DataAccess.CommandText = "dbo.GetBhpbioHaulageMovementsToCrusher"
             DataAccess.CommandType = CommandObjectType.StoredProcedure
 

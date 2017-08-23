@@ -1035,7 +1035,7 @@
                                         <Style>
                                           <Border>
                                             <Color>Black</Color>
-                                            <Style>=IIF(Fields!LocationType.Value &lt;&gt; "Stockpile" And Fields!ContextCategory.Value = "HaulageContext", "Solid", "Default")</Style>
+                                            <Style>=IIF(Fields!LocationType.Value &lt;&gt; "Stockpile" And Fields!ContextCategory.Value = "HaulageContext" And Fields!ContextGrouping.Value &lt;&gt; "SampledPercentage", "Solid", "Default")</Style>
                                             <Width>0.75pt</Width>
                                           </Border>
                                           <Color>=Fields!PresentationColor.Value</Color>
@@ -1272,7 +1272,7 @@
                                   </ChartLegendTitle>
                                   <HeaderSeparatorColor>Black</HeaderSeparatorColor>
                                   <ColumnSeparatorColor>Black</ColumnSeparatorColor>
-                                  <Reversed>True</Reversed>
+                                  <Reversed>False</Reversed>
                                 </ChartLegend>
                               </ChartLegends>
                               <Palette>BrightPastel</Palette>

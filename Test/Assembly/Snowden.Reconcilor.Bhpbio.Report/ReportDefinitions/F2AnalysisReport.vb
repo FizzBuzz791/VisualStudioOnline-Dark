@@ -95,7 +95,9 @@ Namespace ReportDefinitions
             If contextList.Contains("HaulageContext") Then
                 ReportColour.AddLocationColor(session, table)
                 F1F2F3ReportEngine.AddLocationDataToTable(session, table, locationId)
-                AddHaulageContextData(session, table, dateBreakdown)
+                Dim haulageReporter As IHaulageReporter = New HaulageReporter(session.DalReport, session.DalUtility)
+                haulageReporter.AddHaulageContextData(table, locationId, dateFrom, dateTo, dateBreakdown)
+                'AddHaulageContextData(session, table, dateBreakdown)
                 F1F2F3ReportEngine.FilterTableByAttributeList(table, attributeList)
             End If
 
@@ -145,7 +147,7 @@ Namespace ReportDefinitions
             Dim haulageRows = table.AsEnumerable.Where(Function(r) r.AsString("ContextCategory") = "HaulageContext")
 
             ' make sure the colors are there for the new locations
-            ReportColour.AddLocationColor(session, haulageRows.Where(Function(r) r.AsString("LocationType") = "Pit"))
+            ReportColour.AddLocationColor(session.DalUtility, haulageRows.Where(Function(r) r.AsString("LocationType") = "Pit"))
             haulageRows.Where(Function(r) r.HasValue("LocationColor")).SetField("PresentationColor", Function(r) r.AsString("LocationColor"))
 
             SetHaulageContextOtherCategory(haulageRows)

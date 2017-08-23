@@ -215,6 +215,8 @@
     <Compile Include="ReportDefinitions\ResourceContributionReports.vb" />
     <Compile Include="ReportDefinitions\RiskProfileReport.vb" />
     <Compile Include="ReportDefinitions\SampleCoverageReport.vb" />
+    <Compile Include="ReportHelpers\HaulageReporter.vb" />
+    <Compile Include="ReportHelpers\IHaulageReporter.vb" />
     <Compile Include="ReportHelpers\IReporter.vb" />
     <Compile Include="ReportHelpers\ISampleStationReporter.vb" />
     <Compile Include="ReportHelpers\Reporter.vb" />

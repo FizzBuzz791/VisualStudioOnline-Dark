@@ -79,7 +79,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
 
             // Assert
             Assert.That(_masterTable.Rows.Cast<DataRow>().Count(r => (string) r["ContextCategory"] == "HaulageContext"),
-                Is.EqualTo(3)); // Actual Haulage, Sample Coverage Tonnes Row, Sample Coverage Unsampled Row
+                Is.EqualTo(4)); // Haulage Row, Sample Coverage Sampled Row, Sample Coverage Unsampled Row, Label Row
         }
 
         private void GeneralSetup()
