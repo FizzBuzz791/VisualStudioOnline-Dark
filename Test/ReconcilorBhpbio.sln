@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{39B33DBB-7F5D-4857-A70A-23798C8601C2}"
 	ProjectSection(SolutionItems) = preProject
@@ -161,6 +161,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource Classification Mig
 		Resource Classification Migration v2\ZZb_ReinstateBackedUpData.sql = Resource Classification Migration v2\ZZb_ReinstateBackedUpData.sql
 		Resource Classification Migration v2\ZZc_CleanupTemporaryBackoutData.sql = Resource Classification Migration v2\ZZc_CleanupTemporaryBackoutData.sql
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowden.Reconcilor.Bhpbio.Report.UnitTests", "Snowden.Reconcilor.Bhpbio.Report.UnitTests\Snowden.Reconcilor.Bhpbio.Report.UnitTests.csproj", "{305F443D-8952-4DE5-9099-9938A709B270}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -624,6 +626,36 @@ Global
 		{8D1080E1-D18E-4239-B7C3-3C6605FFD4D5}.Web Development|Mixed Platforms.Build.0 = Release|Any CPU
 		{8D1080E1-D18E-4239-B7C3-3C6605FFD4D5}.Web Development|x86.ActiveCfg = Release|Any CPU
 		{8D1080E1-D18E-4239-B7C3-3C6605FFD4D5}.Web Development|x86.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Debug|x86.Build.0 = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.DebugLocal|x86.Build.0 = Debug|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Production|Any CPU.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Production|Any CPU.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Production|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Production|Mixed Platforms.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Production|x86.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Production|x86.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Release|x86.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Release|x86.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Web Development|Any CPU.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Web Development|Any CPU.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Web Development|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Web Development|Mixed Platforms.Build.0 = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Web Development|x86.ActiveCfg = Release|Any CPU
+		{305F443D-8952-4DE5-9099-9938A709B270}.Web Development|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -641,68 +673,10 @@ Global
 		{49DB9937-1AA6-44FB-95F1-6A6CAEB09D2E} = {39B33DBB-7F5D-4857-A70A-23798C8601C2}
 		{AD10DAA1-4EDF-48C4-A087-2624DD366644} = {48E47749-2F2A-4CD1-8DF4-F4480BE8ADBB}
 		{4EFA2AEB-4A73-4C64-8A89-9DE412BE0456} = {39B33DBB-7F5D-4857-A70A-23798C8601C2}
+		{305F443D-8952-4DE5-9099-9938A709B270} = {EACA70BB-4CCC-4F01-95E7-935007C960BF}
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 18
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://sptfsdb:8080/tfs/technologies
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Assembly\\Snowden.Reconcilor.Bhpbio.Website\\Snowden.Reconcilor.Bhpbio.Website.vbproj
-		SccProjectName1 = Assembly/Snowden.Reconcilor.Bhpbio.Website
-		SccLocalPath1 = Assembly\\Snowden.Reconcilor.Bhpbio.Website
-		SccProjectUniqueName2 = Assembly\\Snowden.Reconcilor.Bhpbio.WebDevelopment\\Snowden.Reconcilor.Bhpbio.WebDevelopment.vbproj
-		SccProjectName2 = Assembly/Snowden.Reconcilor.Bhpbio.WebDevelopment
-		SccLocalPath2 = Assembly\\Snowden.Reconcilor.Bhpbio.WebDevelopment
-		SccProjectUniqueName3 = Assembly\\Snowden.Reconcilor.Bhpbio.Import\\Snowden.Reconcilor.Bhpbio.Import.vbproj
-		SccProjectName3 = Assembly/Snowden.Reconcilor.Bhpbio.Import
-		SccLocalPath3 = Assembly\\Snowden.Reconcilor.Bhpbio.Import
-		SccProjectUniqueName4 = Assembly\\Snowden.Reconcilor.Bhpbio.Database\\Snowden.Reconcilor.Bhpbio.Database.vbproj
-		SccProjectName4 = Assembly/Snowden.Reconcilor.Bhpbio.Database
-		SccLocalPath4 = Assembly\\Snowden.Reconcilor.Bhpbio.Database
-		SccProjectUniqueName5 = Assembly\\Snowden.Reconcilor.Bhpbio.Report\\Snowden.Reconcilor.Bhpbio.Report.vbproj
-		SccProjectName5 = Assembly/Snowden.Reconcilor.Bhpbio.Report
-		SccLocalPath5 = Assembly\\Snowden.Reconcilor.Bhpbio.Report
-		SccProjectUniqueName6 = Web\\ReconcilorBhpbio.vbproj
-		SccProjectName6 = Web
-		SccLocalPath6 = Web
-		SccProjectUniqueName7 = Assembly\\Snowden.Reconcilor.Bhpbio.EngineConsole\\Snowden.Reconcilor.Bhpbio.EngineConsole.vbproj
-		SccProjectName7 = Assembly/Snowden.Reconcilor.Bhpbio.EngineConsole
-		SccLocalPath7 = Assembly\\Snowden.Reconcilor.Bhpbio.EngineConsole
-		SccProjectUniqueName8 = Assembly\\Snowden.Reconcilor.Bhpbio.Notification\\Snowden.Reconcilor.Bhpbio.vbproj
-		SccProjectName8 = Assembly/Snowden.Reconcilor.Bhpbio.Notification
-		SccLocalPath8 = Assembly\\Snowden.Reconcilor.Bhpbio.Notification
-		SccProjectUniqueName9 = UnitTests\\UnitTests.csproj
-		SccProjectTopLevelParentUniqueName9 = ReconcilorBhpbio.sln
-		SccProjectName9 = UnitTests
-		SccLocalPath9 = UnitTests
-		SccProjectUniqueName10 = Assembly\\Snowden.Reconcilor.Bhpbio.Engine\\Snowden.Reconcilor.Bhpbio.Engine.csproj
-		SccProjectName10 = Assembly/Snowden.Reconcilor.Bhpbio.Engine
-		SccLocalPath10 = Assembly\\Snowden.Reconcilor.Bhpbio.Engine
-		SccProjectUniqueName11 = Tests\\Snowden.Reconcilor.Bhpbio.DalTests\\Snowden.Reconcilor.Bhpbio.DalTests.csproj
-		SccProjectTopLevelParentUniqueName11 = ReconcilorBhpbio.sln
-		SccProjectName11 = Tests/Snowden.Reconcilor.Bhpbio.DalTests
-		SccLocalPath11 = Tests\\Snowden.Reconcilor.Bhpbio.DalTests
-		SccProjectUniqueName12 = Tests\\Snowden.Reconcilor.Bhpbio.Report.IntegrationTest\\Snowden.Reconcilor.Bhpbio.Report.IntegrationTest.vbproj
-		SccProjectTopLevelParentUniqueName12 = ReconcilorBhpbio.sln
-		SccProjectName12 = Tests/Snowden.Reconcilor.Bhpbio.Report.IntegrationTest
-		SccLocalPath12 = Tests\\Snowden.Reconcilor.Bhpbio.Report.IntegrationTest
-		SccProjectUniqueName13 = Assembly\\Snowden.Reconcilor.Bhpbio.DataStaging\\Snowden.Reconcilor.Bhpbio.DataStaging.csproj
-		SccProjectName13 = Assembly/Snowden.Reconcilor.Bhpbio.DataStaging
-		SccLocalPath13 = Assembly\\Snowden.Reconcilor.Bhpbio.DataStaging
-		SccProjectUniqueName14 = Tests\\Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest\\Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.csproj
-		SccProjectTopLevelParentUniqueName14 = ReconcilorBhpbio.sln
-		SccProjectName14 = Tests/Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest
-		SccLocalPath14 = Tests\\Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest
-		SccProjectUniqueName15 = Tests\\DataStaging.IntegrationTestConsole\\DataStaging.IntegrationTestConsole.csproj
-		SccProjectTopLevelParentUniqueName15 = ReconcilorBhpbio.sln
-		SccProjectName15 = Tests/DataStaging.IntegrationTestConsole
-		SccLocalPath15 = Tests\\DataStaging.IntegrationTestConsole
-		SccProjectUniqueName16 = Assembly\\Snowden.Reconcilor.Bhpbio.DataSeries\\Snowden.Reconcilor.Bhpbio.DataSeries.csproj
-		SccProjectName16 = Assembly/Snowden.Reconcilor.Bhpbio.DataSeries
-		SccLocalPath16 = Assembly\\Snowden.Reconcilor.Bhpbio.DataSeries
-		SccProjectUniqueName17 = Database\\Database.sqlproj
-		SccProjectName17 = Database
-		SccLocalPath17 = Database
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0225AFB-02C3-4C32-9998-8784895055CE}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ReconcilorBhpbio4.vsmdi

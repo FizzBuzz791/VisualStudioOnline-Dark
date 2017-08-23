@@ -57,3 +57,5 @@ UpgradeLog*.htm
 /Test/DeploymentScripts/RS Scripter Load Log.txt
 /Test/Web/Cache/*.txt
 /Test/.vs/ReconcilorBhpbio/v15/sqlite3/storage.ide
+*.ncrunchproject
+*.ncrunchsolution

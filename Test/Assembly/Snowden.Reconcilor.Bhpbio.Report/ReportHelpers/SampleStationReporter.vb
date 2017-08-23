@@ -144,7 +144,12 @@ Namespace ReportHelpers
             masterTable.Columns.AddIfNeeded("LocationType", GetType(String)).SetDefault(String.Empty)
             masterTable.Columns.AddIfNeeded("LocationColor", GetType(String)).SetDefault(String.Empty)
 
-            Dim row = masterTable.AsEnumerable.First.CloneFactorRow(addToTable:=False)
+            Dim row As DataRow
+            If masterTable.AsEnumerable.Any Then
+                row = masterTable.AsEnumerable.First.CloneFactorRow(addToTable:=False)
+            Else
+                row = masterTable.NewRow()
+            End If
 
             row("CalendarDate") = dataRow("DateFrom")
             row("DateFrom") = dataRow("DateFrom")
