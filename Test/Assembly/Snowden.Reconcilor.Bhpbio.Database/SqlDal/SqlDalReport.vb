@@ -8,7 +8,7 @@ Namespace SqlDal
 
     Public Class SqlDalReport
         Inherits Core.Database.SqlDal.SqlDalReport
-        Implements Bhpbio.Database.DalBaseObjects.IReport
+        Implements ISqlDalReport
 
         Public Property FileSystemRoot As String = Nothing
         Public ReadOnly Property ReportCacheMaxAge As Integer = -1
@@ -371,7 +371,7 @@ Namespace SqlDal
             Return DataAccess.ExecuteDataTable
         End Function
 
-        Public Function GetBhpbioHaulageMovementsToCrusher(locationId As Integer, startDate As DateTime, endDate As DateTime, ByVal dateBreakdown As String) As DataTable
+        Public Function GetBhpbioHaulageMovementsToCrusher(locationId As Integer, startDate As DateTime, endDate As DateTime, ByVal dateBreakdown As String) As DataTable Implements ISqlDalReport.GetBhpbioHaulageMovementsToCrusher
             DataAccess.CommandText = "dbo.GetBhpbioHaulageMovementsToCrusher"
             DataAccess.CommandType = CommandObjectType.StoredProcedure
 
@@ -861,6 +861,24 @@ Namespace SqlDal
             End With
         End Function
 #End Region
+
+        Public Function GetBhpbioSampleStationReportData(locationId As Integer, startDate As Date, endDate As Date, dateBreakdown As String) As DataTable Implements ISqlDalReport.GetBhpbioSampleStationReportData
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioSampleStationReportData"
+                .CommandType = CommandObjectType.StoredProcedure
+
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@iLocationId", CommandDataType.Int, CommandDirection.Input, locationId)
+                    .Add("@iStartDate", CommandDataType.DateTime, CommandDirection.Input, startDate)
+                    .Add("@iEndDate", CommandDataType.DateTime, CommandDirection.Input, endDate)
+                    .Add("@iDateBreakdown", CommandDataType.VarChar, CommandDirection.Input, dateBreakdown)
+                End With
+
+                Return .ExecuteDataTable()
+            End With
+
+        End Function
     End Class
 
     Public Class ReportDataBlockModelOptions

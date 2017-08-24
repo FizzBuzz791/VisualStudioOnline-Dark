@@ -460,6 +460,7 @@
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql"/>
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationReportData.sql"/>
 
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioWeatheringList.sql" />
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyList.sql"/>

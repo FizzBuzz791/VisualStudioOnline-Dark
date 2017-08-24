@@ -1522,7 +1522,8 @@ Namespace Reports
             If Report.Name = "BhpbioFactorAnalysisReport" Then
                 contexts.Add("ResourceClassification", "Resource Classification")
                 contexts.Add("HaulageContext", "Haulage Context")
-                'contexts.Add("DepletionContext", "Pit Depletions")
+                contexts.Add("SampleCoverage", "Sample Coverage")
+                contexts.Add("SampleRatio", "Tonnes/Sample")
             Else
                 contexts.Add("ResourceClassification", "Resource Classification")
             End If

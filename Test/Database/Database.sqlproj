@@ -465,6 +465,7 @@
     <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <None Include="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationReportData.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
   </ItemGroup>
   <ItemGroup>

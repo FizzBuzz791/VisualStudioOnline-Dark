@@ -18,7 +18,7 @@
   </Database>
   <Smtp Key="Default" Server="Homer" Port="25" DefaultReplyToAddress="reconcilorsupport@snowdengroup.com" SecureConnection="False" EncryptedPassword="False" AuthenticationMethod="Anonymous" />
   <Reconcilor>
-    <Report ReportInstance="" ReportServer="localhost" ReportFolder="Reconcilor/BhpbioV40" />
-    <Web SiteName="ReconcilorBhpbio40" AbsolutePath="http://localhost/ReconcilorBhpbio40" />
+    <Report ReportInstance="" ReportServer="localhost" ReportFolder="Reconcilor/BhpbioV41" />
+    <Web SiteName="ReconcilorBhpbio" AbsolutePath="http://localhost/ReconcilorBhpbio" />
   </Reconcilor>
 </ProductConfiguration>

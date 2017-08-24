@@ -288,8 +288,10 @@
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
         <TargetServerURL>http://localhost/ReportServer</TargetServerURL>
-        <TargetFolder>Reconcilor/BhpbioV40</TargetFolder>
-        <TargetDataSourceFolder>Reconcilor/BhpbioV40</TargetDataSourceFolder>
+        <TargetFolder>Reconcilor/BhpbioV41</TargetFolder>
+        <TargetDataSourceFolder>Reconcilor/BhpbioV41</TargetDataSourceFolder>
+        <OverwriteDataSources>true</OverwriteDataSources>
+        <OverwriteDatasets>true</OverwriteDatasets>
       </Options>
     </Configuration>
     <Configuration>
