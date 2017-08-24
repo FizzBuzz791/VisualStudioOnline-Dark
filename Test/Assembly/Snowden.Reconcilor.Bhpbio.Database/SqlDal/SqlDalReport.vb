@@ -939,20 +939,9 @@ Namespace SqlDal
 
         ' when this is true the CacheFilePath will always return null, disabling the caching 
         ' this is useful for debugging purposes
-        Public Property DisableCaching As Boolean
-            Get
-                Return _isCacheDisabled
-            End Get
-            Set
-                _isCacheDisabled = Value
-#If DEBUG Then
-                _isCacheDisabled = True
-#End If
-            End Set
-        End Property
+        Public Property DisableCaching As Boolean = False
 
         Private _cachePath As String = Nothing
-        Private _isCacheDisabled As Boolean
 
         Public ReadOnly Property CachePath As String
             Get
