@@ -51,11 +51,19 @@ Namespace Utilities
                     .Add(New Tags.HtmlAnchorTag("./DefaultSampleStationsAdministration.aspx", "", "Sample Stations"))
                     .Add(New Tags.HtmlBRTag)
                 End If
+
                 If (Resources.UserSecurity.HasAccess("UTILITIES_STRATIGRAPHY_HIERARCHY")) Or
                         (Resources.UserSecurity.HasAccess("ADMIN_ROLE")) Then
                     .Add(New Tags.HtmlAnchorTag("./StratigraphyHierarchy.aspx", "", "Stratigraphy Hierarchy"))
                     .Add(New Tags.HtmlBRTag)
                 End If
+
+                If (Resources.UserSecurity.HasAccess("UTILITIES_WEATHERING")) Or
+                        (Resources.UserSecurity.HasAccess("ADMIN_ROLE")) Then
+                    .Add(New Tags.HtmlAnchorTag("./Weathering.aspx", "", "Weathering"))
+                    .Add(New Tags.HtmlBRTag)
+                End If
+
             End With
 
             RemoveLink(ReferenceData, "Waste Types")

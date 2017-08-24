@@ -89,6 +89,7 @@
 
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStation.sql" />
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStationTarget.sql"/>
+    <Script Type="Table" Path="Schema\Tables\dbo.BhpbioWeathering.sql" />
     <Script Type="Table" Path="schema\tables\dbo.BhpbioStratigraphyHierarchy.sql" />
     <Script Type="Table" Path="schema\tables\dbo.BhpbioStratigraphyHierarchyType.sql" />
   </ScriptGroup>
@@ -460,6 +461,7 @@
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql"/>
 
+    <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioWeatheringList.sql" />
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyList.sql"/>
     <Script Type="Procedure" Path="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyTypeList.sql"/>
   </ScriptGroup>
@@ -1193,6 +1195,7 @@
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0002_Raise Outlier Detection Queue Entries.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0003_AddStratigraphyHierarchyTablesAndPermissions.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 

@@ -1384,11 +1384,20 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
                 With .ParameterCollection
                     .Clear()
                 End With
-
                 Return .ExecuteDataTable()
             End With
-
         End Function
+
+        Public Function GetWeatheringList() As DataTable Implements IUtility.GetWeatheringList
+            With DataAccess
+                .CommandText = "dbo.GetBhpbioWeatheringList"
+                With .ParameterCollection
+                    .Clear()
+                End With
+                Return .ExecuteDataTable()
+            End With
+        End Function
+
 
         Public Function GetBhpbioStratigraphyHierarchyTypeList() As DataTable Implements IUtility.GetBhpbioStratigraphyHierarchyTypeList
 
