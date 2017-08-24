@@ -1,17 +1,17 @@
 ﻿IF OBJECT_ID('dbo.BhpbioWeathering') IS NOT NULL 
-     DROP TABLE dbo.BhpbioWeathering
+	DROP TABLE dbo.BhpbioWeathering
 GO 
 
 CREATE TABLE [dbo].[BhpbioWeathering]
 (
 	[Id] INT NOT NULL IDENTITY, 
-    [Description] VARCHAR(100) NOT NULL, 
+	[Description] VARCHAR(100) NOT NULL, 
 	[DisplayValue] int NOT NULL,
-    [Colour] VARCHAR(25) NOT NULL,
+	[Colour] VARCHAR(25) NOT NULL,
 	CONSTRAINT [PK_BhpbioWeathering] PRIMARY KEY CLUSTERED
 	(
 		[Id] ASC
-	),
+	)
 )
 
 GO
