@@ -10,9 +10,12 @@ CREATE PROCEDURE dbo.GetBhpbioSampleStationList
 AS
 BEGIN
 	SELECT SS.Id, SS.Name, SS.Description, LParent.Name + '/' + L.Name AS Location, 
-			SS.ProductSize AS [Product Size], SS.Weightometer_Id AS [Weightometer], 
+			CASE SS.ProductSize
+				WHEN 'ROM' THEN 'Unscreened'
+				ELSE UPPER(LEFT(SS.ProductSize, 1)) + LOWER(RIGHT(SS.ProductSize, LEN(SS.ProductSize) - 1))
+			END AS [Product Size], SS.Weightometer_Id AS [Weightometer], 
 			FLOOR(SST.CoverageTarget * 100) AS [Coverage Target], FLOOR(SST.CoverageWarning * 100) AS [Coverage Warning], 
-			SST.RatioTarget AS [Ratio Target], SST.RatioWarning AS [Ratio Warning]
+			SST.RatioTarget AS [Tonnes/Sample Target], SST.RatioWarning AS [Tonnes/Sample Warning]
 	FROM BhpbioSampleStation SS
 	INNER JOIN Location L ON L.Location_Id = SS.Location_Id
 	INNER JOIN Location LParent ON LParent.Location_Id = L.Parent_Location_Id
