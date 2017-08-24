@@ -241,5 +241,9 @@ Namespace DalBaseObjects
 #End Region
 
         Function GetWeatheringList() As DataTable
+        
+        Function GetBhpbioStratigraphyHierarchyList() As DataTable
+        Function GetBhpbioStratigraphyHierarchyTypeList() As DataTable
+
     End Interface
 End Namespace

@@ -214,6 +214,7 @@
                 AddPage("~/Utilities/DefaultSampleStationTargetSave.aspx", GetType(Utilities.DefaultSampleStationTargetSave))
                 AddPage("~/Utilities/DefaultSampleStationTargetDelete.aspx", GetType(Utilities.DefaultSampleStationTargetDelete))
 
+                AddPage("~/Utilities/StratigraphyHierarchy.aspx", GetType(Utilities.StratigraphyHierarchy))
                 AddPage("~/Utilities/Weathering.aspx", GetType(Utilities.Weathering))
             End If
         End Sub
