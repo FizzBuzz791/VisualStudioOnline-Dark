@@ -16,7 +16,7 @@ BEGIN
 			[Colour],
 			[SortOrder]
 	FROM	[dbo].[BhpbioStratigraphyHierarchy] 
-			INNER JOIN [dbo].[BhpbioStratigraphyHierarchyType] on [dbo].[BhpbioStratigraphyHierarchy].[StratigraphyHierarchyTypeId] = [dbo].[BhpbioStratigraphyHierarchyType].[Id]
+			INNER JOIN [dbo].[BhpbioStratigraphyHierarchyType] on [dbo].[BhpbioStratigraphyHierarchy].[StratigraphyHierarchyType_Id] = [dbo].[BhpbioStratigraphyHierarchyType].[Id]
 END 
 GO
 

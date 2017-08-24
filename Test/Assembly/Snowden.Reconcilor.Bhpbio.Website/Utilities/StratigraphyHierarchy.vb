@@ -25,7 +25,9 @@ Namespace Utilities
         Protected Overrides Sub SetupDalObjects()
             MyBase.SetupDalObjects()
 
-            DalUtility = New SqlDalUtility(Resources.Connection)
+            If DalUtility Is Nothing Then
+                DalUtility = New SqlDalUtility(Resources.Connection)
+            End If
         End Sub
 
         Protected Overrides Sub SetupPageLayout()

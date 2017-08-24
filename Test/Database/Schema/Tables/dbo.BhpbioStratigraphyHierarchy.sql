@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[BhpbioStratigraphyHierarchy]
 (
 	[Id] INT NOT NULL IDENTITY, 
-	[Parentid] INT NULL,
-	[StratigraphyHierarchyTypeId] INT NOT NULL, 
+	[Parent_Id] INT NULL,
+	[StratigraphyHierarchyType_Id] INT NOT NULL, 
 	[Stratigraphy] varchar(50) NOT NULL,
 	[Description] VARCHAR(255) NOT NULL, 
 	[StratNum] VARCHAR(7) NULL, 
@@ -14,7 +14,7 @@
 	),
 	CONSTRAINT FK_BhpbioStratigraphyHierarchy FOREIGN KEY ([ParentId])
 		REFERENCES [dbo].[BhpbioStratigraphyHierarchy] ([Id]),
-	CONSTRAINT FK_BhpbioStratigraphyHierarchyType FOREIGN KEY ([StratigraphyHierarchyTypeId])
+	CONSTRAINT FK_BhpbioStratigraphyHierarchyType FOREIGN KEY ([StratigraphyHierarchyType_Id])
 		REFERENCES [dbo].[BhpbioStratigraphyHierarchyType] ([Id])
 )
 
