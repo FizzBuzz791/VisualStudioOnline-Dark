@@ -70,25 +70,10 @@ Namespace Utilities
                 If Not IsNew Then
                     monthFromPicker.SelectedDate = DateTime.Parse(targetSampleStationTarget.Rows(0)("StartDate").ToString())
                 End If
-                cell.ColumnSpan = 3
                 cell.Controls.Add(monthFromPicker)
 
-                cell = .AddCell()
-                cell.Controls.Add(New LiteralControl("Effective To:"))
-                cell = .AddCell()
-                Dim dateTo = New LiteralControl()
-                If IsNew Then
-                    dateTo.Text = "Current"
-                Else
-                    dateTo.Text = targetSampleStationTarget.Rows(0)("EndDate").ToString()
-                End If
-                cell.ColumnSpan = 2
-                cell.Controls.Add(dateTo)
-
                 cell = .AddCellInNewRow()
-                cell.Controls.Add(New LiteralControl("Coverage Thresholds:"))
-                cell = .AddCell()
-                cell.Controls.Add(New LiteralControl("Low <"))
+                cell.Controls.Add(New LiteralControl("Coverage Target:"))
                 cell = .AddCell()
                 Dim coverageTarget = New InputText() With {
                     .ID = "CoverageTarget",
@@ -99,7 +84,10 @@ Namespace Utilities
                 End If
                 cell.Controls.Add(coverageTarget)
                 cell = .AddCell()
-                cell.Controls.Add(New LiteralControl("<= Medium <"))
+                cell.Controls.Add(New LiteralControl("%"))
+
+                cell = .AddCellInNewRow()
+                cell.Controls.Add(New LiteralControl("Coverage Warning:"))
                 cell = .AddCell()
                 Dim coverageWarning = New InputText() With {
                     .ID = "CoverageWarning",
@@ -110,12 +98,10 @@ Namespace Utilities
                 End If
                 cell.Controls.Add(coverageWarning)
                 cell = .AddCell()
-                cell.Controls.Add(New LiteralControl("<= High"))
+                cell.Controls.Add(New LiteralControl("%"))
 
                 cell = .AddCellInNewRow()
-                cell.Controls.Add(New LiteralControl("Ratio Thresholds:"))
-                cell = .AddCell()
-                cell.Controls.Add(New LiteralControl("Low <"))
+                cell.Controls.Add(New LiteralControl("Tonnes/Sample Target:"))
                 cell = .AddCell()
                 Dim ratioTarget = New InputText() With {
                     .ID = "RatioTarget",
@@ -126,7 +112,10 @@ Namespace Utilities
                 End If
                 cell.Controls.Add(ratioTarget)
                 cell = .AddCell()
-                cell.Controls.Add(New LiteralControl("<= Medium <"))
+                cell.Controls.Add(New LiteralControl("tonnes/sample"))
+
+                cell = .AddCellInNewRow()
+                cell.Controls.Add(New LiteralControl("Tonnes/Sample Warning:"))
                 cell = .AddCell()
                 Dim ratioWarning = New InputText() With {
                     .ID = "RatioWarning",
@@ -137,7 +126,7 @@ Namespace Utilities
                 End If
                 cell.Controls.Add(ratioWarning)
                 cell = .AddCell()
-                cell.Controls.Add(New LiteralControl("<= High"))
+                cell.Controls.Add(New LiteralControl("tonnes/sample"))
 
                 cell = .AddCellInNewRow()
                 Dim saveButton = New InputButton With {

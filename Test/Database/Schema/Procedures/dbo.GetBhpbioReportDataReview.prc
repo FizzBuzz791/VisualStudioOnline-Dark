@@ -447,7 +447,7 @@ BEGIN
 				CASE
 					WHEN SampleCount = 0 THEN NULL
 					ELSE CAST(RealTonnes/SampleCount AS INT) 
-				END AS [Sample Ratio], 
+				END AS [Tonnes / Sample], 
 				SampleSource, Fe, P, SiO2, Al2O3, LOI, H2O, ParentLocationId, S.Stockpile_Name AS Destination_Stockpile
 			FROM (
 				SELECT WeightometerSampleId, DesignationMaterialTypeId, ParentLocationId, ProductSize, DefaultProductSize,
@@ -587,7 +587,7 @@ BEGIN
 			-- Find any weightometer/date combinations that had no samples during the report period (and are not on the exemption list for missing samples)
 			SELECT w.Weightometer_Id, SS.Name AS [Sample Station], NULL AS WeightometerSampleId, d.This_Date, NULL AS Description, NULL AS Source_Crusher_Id,
 				NULL AS ProductSize, NULL AS DefaultProductSize,
-				0 AS [Tonnes Moved], NULL AS [Tonnes Sampled], NULL AS SampleCount, NULL AS [Sample Coverage], NULL AS [Sample Ratio], 
+				0 AS [Tonnes Moved], NULL AS [Tonnes Sampled], NULL AS SampleCount, NULL AS [Sample Coverage], NULL AS [Tonnes / Sample], 
 				'No Tonnes Moved' AS SampleSource, NULL AS Fe, NULL AS P, NULL AS SiO2, NULL AS Al2O3, NULL AS LOI, NULL as H2O, NULL AS ParentLocationId, NULL AS Destination_Stockpile
 			FROM dbo.Weightometer w
 			CROSS JOIN dbo.GetDateList(@iDateFrom, @iDateTo, 'DAY', 1) d	

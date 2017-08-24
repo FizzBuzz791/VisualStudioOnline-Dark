@@ -734,10 +734,16 @@
     <Compile Include="Internal\StockpileImageLoaderPage.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Utilities\StratigraphyHierarchy.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Utilities\SystemSettingsEdit.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Utilities\SystemSettingsList.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\Weathering.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Utilities\WeightometerSampleEdit.vb">

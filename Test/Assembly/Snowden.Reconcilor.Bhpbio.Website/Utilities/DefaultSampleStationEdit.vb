@@ -262,10 +262,10 @@ Namespace Utilities
                 With resultsTable
                     .Columns.Add("StartDate", New ReconcilorTableColumn("Effective From"))
                     .Columns.Add("EndDate", New ReconcilorTableColumn("Effective To"))
-                    .Columns.Add("CoverageTarget", New ReconcilorTableColumn("Coverage Low"))
-                    .Columns.Add("CoverageWarning", New ReconcilorTableColumn("Coverage High"))
-                    .Columns.Add("RatioTarget", New ReconcilorTableColumn("Ratio Low"))
-                    .Columns.Add("RatioWarning", New ReconcilorTableColumn("Ratio High"))
+                    .Columns.Add("CoverageTarget", New ReconcilorTableColumn("Coverage Target"))
+                    .Columns.Add("CoverageWarning", New ReconcilorTableColumn("Coverage Warning"))
+                    .Columns.Add("RatioTarget", New ReconcilorTableColumn("Tonnes/Sample Target"))
+                    .Columns.Add("RatioWarning", New ReconcilorTableColumn("Tonnes/Sample Warning"))
 
                     .Columns("StartDate").DateTimeFormat = dateFormat
                     .Columns("EndDate").DateTimeFormat = dateFormat
