@@ -56,3 +56,4 @@ Test/Web/Cache/*
 /Test/Web/Snowden.Reconcilor.Bhpbio.Web.log
 /Test/Web/js/jquery.js
 Test/Reports/*.rdl.data
+Test/Database/Database.refactorlog
