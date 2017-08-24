@@ -12,7 +12,7 @@
 	(
 		[Id] ASC
 	),
-	CONSTRAINT FK_BhpbioStratigraphyHierarchy FOREIGN KEY ([ParentId])
+	CONSTRAINT FK_BhpbioStratigraphyHierarchy FOREIGN KEY ([Parent_Id])
 		REFERENCES [dbo].[BhpbioStratigraphyHierarchy] ([Id]),
 	CONSTRAINT FK_BhpbioStratigraphyHierarchyType FOREIGN KEY ([StratigraphyHierarchyType_Id])
 		REFERENCES [dbo].[BhpbioStratigraphyHierarchyType] ([Id])
@@ -20,7 +20,7 @@
 
 GO
 CREATE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyParent
-ON dbo.[BhpbioStratigraphyHierarchy]([ParentId])
+ON dbo.[BhpbioStratigraphyHierarchy]([Parent_Id])
 GO
 CREATE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyStratNum
 ON dbo.[BhpbioStratigraphyHierarchy]([StratNum])
