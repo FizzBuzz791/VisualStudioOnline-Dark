@@ -268,6 +268,7 @@ Friend NotInheritable Class ReconBlockInsertUpdate
                                                                     Convert.ToString(blockModelHoldingRow("ModelFilename")),
                                                                     LumpPercentAsShipped,
                                                                     LumpPercentAsDropped,
+                                                                    Nothing,
                                                                     modelBlockId)
 
                             If (Not modelBlockId Is Nothing) Then

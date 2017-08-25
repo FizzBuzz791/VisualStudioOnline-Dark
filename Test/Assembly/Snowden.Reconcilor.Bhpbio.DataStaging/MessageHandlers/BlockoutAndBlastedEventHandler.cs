@@ -366,6 +366,9 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
                         string modelFileName = null;
                         modelFileName = GetModelFilename(blockOutAndBlastedEvent, modelBlock.ModelType);
 
+                        string stratNum = null;
+                        stratNum = GetStratNum(block, modelBlock.ModelType);
+
                         ExtractGradeSetsAndQualityTypes(modelBlock,
                             ref qualitySetInSituRom,
                             ref qualitySetAsDroppedLump,
@@ -396,6 +399,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
                             modelFileName,
                             lumpPercentAsShipped,
                             lumpPercentAsDropped,
+                            stratNum,
                             ref modelBlockId);
 
                         if (qualitySetInSituRom != null)
@@ -573,7 +577,19 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
 
             return modelFileName;
         }
-        
+
+        private static string GetStratNum(BlockType block, string modelType)
+        {
+            string stratNum = null;
+
+            if (modelType == "Grade Control")
+            {
+                stratNum = block.StratNum.ToString();
+            }
+
+            return stratNum;
+        }
+
         /// <summary>
         /// Replace point data for the specified block
         /// </summary>

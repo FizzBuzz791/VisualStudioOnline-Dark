@@ -1197,6 +1197,7 @@
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0002_Raise Outlier Detection Queue Entries.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0003_AddStratigraphyHierarchyTablesAndPermissions.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0005_Modify_Staging_StageBlockModel.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 
