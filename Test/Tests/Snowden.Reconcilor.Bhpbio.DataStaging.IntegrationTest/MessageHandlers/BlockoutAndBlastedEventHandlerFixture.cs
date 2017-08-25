@@ -10,6 +10,7 @@ using Snowden.Bcd.ProductConfiguration;
 using System.Data.SqlClient;
 using Snowden.Reconcilor.Bhpbio.Database.SqlDal;
 using Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects;
+using System.Data;
 
 namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
 {
@@ -44,6 +45,30 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
             }
         }
 
+        private MessageHandlerConfiguration _config;
+        private BlockoutAndBlastedEventHandler _handler;
+
+        private Message _message;
+
+        [TestInitialize]
+        public void InitalizeTests ()
+        {
+            _config = BuildMessageHandlerConfiguration();
+            _handler = new BlockoutAndBlastedEventHandler();
+            _handler.Initialise(_config);
+            _message = new Message();
+            ClearIntegrationTestStageBlocks(_config, new List<string>()
+            {
+                "a2443171-b363-4f88-a403-3cee9420dd4d",
+                "8f4d3ae2-0f58-4efc-91e0-aa54d91c7094",
+                "5aa36434-bb74-4d69-8a3f-bfea410d6273",
+                "9a4d3ae2-0f58-4efc-91e0-aa54d91c7094",
+                "5E09371F-9E24-684E-E053-211BF40AE5B1",
+                "ca20e57e-e025-467b-8880-d7d54444848d",
+                "af1743ff-4c38-f846-abc2-051de605dd90"
+            });
+        }
+
         #region Additional test attributes
         //
         // You can use the following additional attributes as you write your tests:
@@ -72,15 +97,8 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
         [TestMethod]
         public void Process_IntegrationTest()
         {
-            MessageHandlerConfiguration config = BuildMessageHandlerConfiguration();
-
-            BlockoutAndBlastedEventHandler handler = new BlockoutAndBlastedEventHandler();
-            handler.Initialise(config);
-
-            // process the initial create
-            Message message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_IntegrationTesting.xml");
-            handler.Process(message);
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_IntegrationTesting.xml");
+            _handler.Process(_message);
         }
 
         /// <summary>
@@ -89,36 +107,22 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
         [TestMethod]
         public void Process_NormalCycle_BlockDataPeristedAsExpected()
         {
-            MessageHandlerConfiguration config = BuildMessageHandlerConfiguration();
-
-            ClearIntegrationTestStageBlocks(config, new List<string>()
-            {
-                "a2443171-b363-4f88-a403-3cee9420dd4d",
-                "8f4d3ae2-0f58-4efc-91e0-aa54d91c7094",
-                "5aa36434-bb74-4d69-8a3f-bfea410d6273",
-                "9a4d3ae2-0f58-4efc-91e0-aa54d91c7094"
-            });
-
-            BlockoutAndBlastedEventHandler handler = new BlockoutAndBlastedEventHandler();
-            handler.Initialise(config);
-
             // process the initial create
-            Message message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario1_M1_BlocksCreated.xml");
-            handler.Process(message);
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario1_M1_BlocksCreated.xml");
+            _handler.Process(_message);
 
-            AssertStageBlocksExistWithGUIDsAndGCTonnes(config, new Dictionary<string, decimal>() { 
+            AssertStageBlocksExistWithGUIDsAndGCTonnes(_config, new Dictionary<string, decimal>() { 
                 {"a2443171-b363-4f88-a403-3cee9420dd4d", 52077.009m},
                 {"8f4d3ae2-0f58-4efc-91e0-aa54d91c7094", 12144.415m},
                 {"5aa36434-bb74-4d69-8a3f-bfea410d6273", 2021.543m},
             } );
 
             // process the create update delete
-            message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario1_M2_BlocksCreatedUpdatedDeleted.xml");
-            handler.Process(message);
+            _message = new Message();
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario1_M2_BlocksCreatedUpdatedDeleted.xml");
+            _handler.Process(_message);
 
-            AssertStageBlocksExistWithGUIDsAndGCTonnes(config, new Dictionary<string, decimal>() { 
+            AssertStageBlocksExistWithGUIDsAndGCTonnes(_config, new Dictionary<string, decimal>() { 
                 {"8f4d3ae2-0f58-4efc-91e0-aa54d91c7094", 12144.415m}, // unchanged block
                 {"5aa36434-bb74-4d69-8a3f-bfea410d6273", 3022.543m}, // updated block
                 {"9a4d3ae2-0f58-4efc-91e0-aa54d91c7094", 12150.415m}, // new block
@@ -128,24 +132,24 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
             }
             );
 
-            
-            // process an out of sequence update
-            message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario1_M3_OutOfSequenceUpdate.xml");
-            handler.Process(message);
 
-            AssertStageBlocksExistWithGUIDsAndGCTonnes(config, new Dictionary<string, decimal>() { 
+            // process an out of sequence update
+            _message = new Message();
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario1_M3_OutOfSequenceUpdate.xml");
+            _handler.Process(_message);
+
+            AssertStageBlocksExistWithGUIDsAndGCTonnes(_config, new Dictionary<string, decimal>() { 
                 {"8f4d3ae2-0f58-4efc-91e0-aa54d91c7094", 12144.415m}, // no change as message is ignored due to out of sequence
                 {"5aa36434-bb74-4d69-8a3f-bfea410d6273", 3022.543m}, // no change as message is ignored due to out of sequence
                 {"9a4d3ae2-0f58-4efc-91e0-aa54d91c7094", 12150.415m}, // no change as message is ignored due to out of sequence
             });
 
             // process a no change message
-            message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario1_M4_BlocksNoChange.xml");
-            handler.Process(message);
+            _message = new Message();
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario1_M4_BlocksNoChange.xml");
+            _handler.Process(_message);
 
-            AssertStageBlocksExistWithGUIDsAndGCTonnes(config, new Dictionary<string, decimal>() { 
+            AssertStageBlocksExistWithGUIDsAndGCTonnes(_config, new Dictionary<string, decimal>() { 
                 {"8f4d3ae2-0f58-4efc-91e0-aa54d91c7094", 12144.415m}, // no change as block is UNCHANGED
                 {"5aa36434-bb74-4d69-8a3f-bfea410d6273", 3022.543m}, // no change as block is UNCHANGED
                 {"9a4d3ae2-0f58-4efc-91e0-aa54d91c7094", 12150.415m}, // no change as block is UNCHANGED
@@ -159,21 +163,11 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
         [TestMethod]
         public void Process_OutOfSequenceDeleteAndCreate_BlockIsNeverCreated()
         {
-            MessageHandlerConfiguration config = BuildMessageHandlerConfiguration();
-            ClearIntegrationTestStageBlocks(config, new List<string>()
-            {
-                "af1743ff-4c38-f846-abc2-051de605dd90"
-            });
-            
-            BlockoutAndBlastedEventHandler handler = new BlockoutAndBlastedEventHandler();
-            handler.Initialise(config);
-
             // process the initial create
-            Message message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario2_M1_OutofSequenceDelete.xml");
-            handler.Process(message);
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario2_M1_OutofSequenceDelete.xml");
+            _handler.Process(_message);
 
-            AssertStageBlocksExistWithGUIDsAndGCTonnes(config, new Dictionary<string, decimal>() { 
+            AssertStageBlocksExistWithGUIDsAndGCTonnes(_config, new Dictionary<string, decimal>() { 
                 // no blocks should exist as this message was a delete
             },
             new List<string>() { 
@@ -181,11 +175,11 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
             });
 
             // process the create
-            message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario2_M2_BlocksCreated.xml");
-            handler.Process(message);
+            _message = new Message();
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario2_M2_BlocksCreated.xml");
+            _handler.Process(_message);
 
-            AssertStageBlocksExistWithGUIDsAndGCTonnes(config, new Dictionary<string, decimal>()
+            AssertStageBlocksExistWithGUIDsAndGCTonnes(_config, new Dictionary<string, decimal>()
             {
                 // still no blocks should exist due to the earlier received delete message
             },
@@ -202,31 +196,20 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
         {
             string blockGuid = "5E09371F-9E24-684E-E053-211BF40AE5B1";
 
-            MessageHandlerConfiguration config = BuildMessageHandlerConfiguration();
-
-            ClearIntegrationTestStageBlocks(config, new List<string>()
-            {
-                blockGuid
-            });
-
-            BlockoutAndBlastedEventHandler handler = new BlockoutAndBlastedEventHandler();
-            handler.Initialise(config);
-
             // process the initial create
-            Message message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario3_M2_BlocksCreatedAShippedAsDropped.xml");
-            handler.Process(message);
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Scenario3_M2_BlocksCreatedAShippedAsDropped.xml");
+            _handler.Process(_message);
 
             // check that the as-dropped and as-shipped lump percent have been specified correctly
-            AssertLumpPercentagesAsExpected(config, blockGuid, "Grade Control", "W", expectedLumpPercentAsDropped: 43.475, expectedLumpPercentAsShipped: 51.0);
+            AssertLumpPercentagesAsExpected(_config, blockGuid, "Grade Control", "W", expectedLumpPercentAsDropped: 43.475, expectedLumpPercentAsShipped: 51.0);
             
             // check Fe grades
-            AssertGradeValuesAsExpected(config, blockGuid, "Grade Control", "W", "FE", "As-Dropped",expectedGradeValue: 52.78, expectedLumpValue: 56.334, expectedFinesValue: 50.046);
-            AssertGradeValuesAsExpected(config, blockGuid, "Grade Control", "W", "FE", "As-Shipped", expectedGradeValue: 52.78, expectedLumpValue: 57.176, expectedFinesValue: 50.154);
+            AssertGradeValuesAsExpected(_config, blockGuid, "Grade Control", "W", "FE", "As-Dropped",expectedGradeValue: 52.78, expectedLumpValue: 56.334, expectedFinesValue: 50.046);
+            AssertGradeValuesAsExpected(_config, blockGuid, "Grade Control", "W", "FE", "As-Shipped", expectedGradeValue: 52.78, expectedLumpValue: 57.176, expectedFinesValue: 50.154);
 
             // check Ultrafines values
-            AssertGradeValuesAsExpected(config, blockGuid, "Grade Control", "W", "ULTRAFINES", "As-Dropped", expectedGradeValue: 8.05, expectedLumpValue: 0, expectedFinesValue: 18.51);
-            AssertGradeValuesAsExpected(config, blockGuid, "Grade Control", "W", "ULTRAFINES", "As-Shipped", expectedGradeValue: 8.8, expectedLumpValue: 0, expectedFinesValue: 17.25);
+            AssertGradeValuesAsExpected(_config, blockGuid, "Grade Control", "W", "ULTRAFINES", "As-Dropped", expectedGradeValue: 8.05, expectedLumpValue: 0, expectedFinesValue: 18.51);
+            AssertGradeValuesAsExpected(_config, blockGuid, "Grade Control", "W", "ULTRAFINES", "As-Shipped", expectedGradeValue: 8.8, expectedLumpValue: 0, expectedFinesValue: 17.25);
         }
         
         /// <summary>
@@ -235,19 +218,40 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
         [TestMethod]
         public void Process_AdhocMessage_MessageIsProcessedAsExpected()
         {
-            MessageHandlerConfiguration config = BuildMessageHandlerConfiguration();
-
-            BlockoutAndBlastedEventHandler handler = new BlockoutAndBlastedEventHandler();
-            handler.Initialise(config);
-
             // process the initial create
-            Message message = new Message();
-            message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_AdhocMessageTest.xml");
-            handler.Process(message);
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_AdhocMessageTest.xml");
+            _handler.Process(_message);
 
             // this is an ad-hoc test method... results should be manually inspected
         }
-        
+
+        [TestMethod]
+        public void Does_A_Valid_Strat_Message_Get_Saved_With_Strat_Num ()
+        {
+            string blockGuid = @"a2443171-b363-4f88-a403-3cee9420dd4d";
+            string expectedStratNum = "3430";  
+
+            if (!DoesStratNumExists(_config, expectedStratNum))
+            {
+                Assert.Fail("StratNum not found in [dbo].[BhpbioStratigraphyHierarchy]");
+            }
+
+            // process the initial create
+
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Strat-ValidStratNum.xml");
+            _handler.Process(_message);
+
+            var blockId = GetBlockId(_config, blockGuid);
+
+            Assert.IsNotNull(blockId);
+
+            var dataTable = GetStagingBhpbioStageBlockModels(_config, blockId);
+
+            Assert.AreEqual(1, dataTable.Rows.Count);
+
+            Assert.AreEqual(expectedStratNum, dataTable.Rows[0]["StratNum"]);
+        }
+
         private string BuildConnectionString(MessageHandlerConfiguration configuration)
         {
             string productConfigurationPath = configuration.InitialisationData["ProductionConfigurationPath"].Value;
@@ -465,6 +469,130 @@ AND sbmg.GeometType = @geometType";
                     }
                 }
             }
+        }
+
+        private String GetBlockId(MessageHandlerConfiguration config, string guid)
+        {
+            string blockId = null;
+            string connectionString = BuildConnectionString(config);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    var sql = @"SELECT	BlockId
+                                  FROM	[Staging].[BhpbioStageBlockModel]
+                                WHERE	BlockExternalSystemId = @BlockExternalSystemId";
+
+                    var command = conn.CreateCommand();
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = sql;
+
+                    command.Parameters.AddWithValue("@BlockExternalSystemId", guid);
+
+                    var returnValue = command.ExecuteScalar();
+
+                    if (returnValue != null)
+                    {
+                        blockId = returnValue.ToString();
+                    }
+
+                conn.Close();
+                }
+                finally
+                {
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+
+            return blockId;
+        }
+
+        private DataTable GetStagingBhpbioStageBlockModels(MessageHandlerConfiguration config, string blockId)
+        {
+            DataTable dt = new DataTable();
+            string connectionString = BuildConnectionString(config);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    var sql = @"SELECT	*
+                                  FROM	[Staging].[BhpbioStageBlockModel]
+                                WHERE	BlockId = @BlockId";
+
+                    var command = conn.CreateCommand();
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = sql;
+
+                    command.Parameters.AddWithValue("@BlockId", blockId);
+
+                    var dataAdapter = new SqlDataAdapter(command);
+                    dataAdapter.Fill(dt);
+
+
+                    conn.Close();
+                    dataAdapter.Dispose();
+                }
+                finally
+                {
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+        private bool DoesStratNumExists(MessageHandlerConfiguration config, string expectedStratNum)
+        {
+            int stratNumCount = 0;
+            string connectionString = BuildConnectionString(config);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    var sql = @"SELECT	count(1)
+                                FROM	[dbo].[BhpbioStratigraphyHierarchy]
+                                WHERE	StratNum = @StratNum";
+
+                    var command = conn.CreateCommand();
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = sql;
+
+                    command.Parameters.AddWithValue("@StratNum", expectedStratNum);
+
+                    var returnValue = command.ExecuteScalar();
+
+                    if (returnValue != null)
+                    {
+                        stratNumCount = (int)returnValue;
+                    }
+
+                    conn.Close();
+                }
+                finally
+                {
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+
+            return (stratNumCount == 1);
         }
 
         /// <summary>

@@ -933,7 +933,7 @@ Friend NotInheritable Class BlockModel
 
         'the following fields can change: BlockNumber, GeoType, BlockedDate, BlastedDate,
         'CentroidEasting, CentroidNorthing, CentroidRL, ModelTonnes,
-        'LastModifiedUser, LastModifiedDate, Point, Grade
+        'LastModifiedUser, LastModifiedDate, Point, Grade, StratNum
 
         ProcessChangedFieldNotes("BlockNumber", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("GeoType", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
@@ -943,6 +943,7 @@ Friend NotInheritable Class BlockModel
         ProcessChangedFieldNotes("LastModifiedDate", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("ModelFilename", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("BlockExternalSystemId", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
+        ProcessChangedFieldNotes("StratNum", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
 
         If syncQueueChangedFields.Select("ChangedField = 'ModelVolume'").Length > 0 Then
             If Not sourceRow("ModelVolume") Is DBNull.Value Then
@@ -1062,13 +1063,13 @@ Friend NotInheritable Class BlockModel
                 ElseIf changedField.Equals("BlockedDate") Or changedField.Equals("BlastedDate") Or changedField.Equals("LastModifiedDate") Then
                     BlockModelDal.AddOrUpdateModelBlockPartialNotes(modelBlockId, sequenceNo,
                         changedField, Convert.ToDateTime(sourceRow(changedField)).ToString("O"), NullValues.Int32)
-                Else
+                ElseIf (Not changedField.Equals("StratNum")) Then
                     BlockModelDal.AddOrUpdateModelBlockPartialNotes(modelBlockId, sequenceNo,
                         changedField, Convert.ToString(sourceRow(changedField)), NullValues.Int32)
+                    End If
                 End If
-            End If
 
-            If digblock And Not changedField.Equals("ModelFilename") Then
+                If digblock And Not changedField.Equals("ModelFilename") Then
                 If sourceRow(changedField) Is DBNull.Value And Not (changedField.Equals("ModelVolume") Or changedField.Equals("BlockExternalSystemId")) Then
                     _digblockDal.AddOrUpdateDigblockNotes(digblockId,
                         NullValues.String, changedField, NullValues.Int32)

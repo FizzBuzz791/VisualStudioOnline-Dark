@@ -37,6 +37,8 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
         private const string _QUALITY_TYPE_HEAD = "HEAD";
         private const string _ANALYTE_ULTRAFINES = "ULTRAFINES";
 
+        private const string GRADE_CONTROL_MODEL_NAME = "Grade Control";
+
         /// <summary>
         /// Constant used to define the configuration key used to specify the Product Configuration File
         /// </summary>
@@ -581,8 +583,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
         private static string GetStratNum(BlockType block, string modelType)
         {
             string stratNum = null;
-
-            if (modelType.ToUpper() == "GRADE CONTROL")
+            if (modelType.ToUpper() == GRADE_CONTROL_MODEL_NAME.ToUpper())
             {
                 stratNum = block.StratNum.ToString();
             }
