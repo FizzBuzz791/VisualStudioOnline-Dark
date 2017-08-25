@@ -544,7 +544,8 @@ WHERE sb.BlockExternalSystemId = @BlockExternalSystemId";
         private MessageHandlerConfiguration BuildMessageHandlerConfiguration()
         {
             MessageHandlerConfiguration config = new MessageHandlerConfiguration();
-            config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "ProductionConfigurationPath", Value = @"..\..\..\..\ProductConfiguration.xml" });
+            //config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "ProductionConfigurationPath", Value = @"..\..\..\..\ProductConfiguration.xml" });
+            config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "ProductionConfigurationPath", Value = @"..\..\..\ProductConfiguration.xml" });
             config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "Database", Value = @"Main" });
             config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "ProductUser", Value = @"ReconcilorUI" });
             config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "StringReplaceSearchValues", Value = "\"http://www.snowden.com/Blastholes/v1.0\"|BlockOutAndBlastedEvent |BlockOutAndBlastedEvent>" });

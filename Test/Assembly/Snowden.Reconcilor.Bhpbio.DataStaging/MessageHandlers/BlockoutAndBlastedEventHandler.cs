@@ -582,7 +582,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
         {
             string stratNum = null;
 
-            if (modelType == "Grade Control")
+            if (modelType.ToUpper() == "GRADE CONTROL")
             {
                 stratNum = block.StratNum.ToString();
             }
