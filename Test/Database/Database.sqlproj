@@ -452,7 +452,6 @@
     <None Include="Schema\Tables\dbo.BhpbioImportSyncRowFilterData.sql" />
     <None Include="Schema\Procedures\dbo.BhpbioUpdateImportSyncRowFilterData.sql" />
     <None Include="Schema\Functions\ConvertMESToLocationId.sql" />
-    <None Include="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
     <None Include="Schema\Tables\dbo.BhpbioSampleStation.sql" />
     <None Include="Schema\Tables\dbo.BhpbioSampleStationTarget.sql" />
     <None Include="Schema\Procedures\dbo.AddOrUpdateBhpbioSampleStation.sql" />
@@ -462,11 +461,16 @@
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStation.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationList.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTargetsForSampleStation.sql" />
-    <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
     <None Include="Schema\Procedures\dbo.GetWeightometerListWithLocations.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationTarget.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioSampleStationReportData.sql" />
-    <None Include="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
+	<None Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchy.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioWeathering.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchyType.sql" />
+    <None Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchy.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioWeatheringList.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyList.sql" />
+    <None Include="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyTypeList.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
@@ -1830,16 +1834,12 @@
     <None Include="Upgrade\4.0\4.0.7.0\_0002_DeployInc10677Permission.sql" />
     <None Include="UtilityScripts\Deployment\4.0.1.0\AD Bulk Import\08_RemoveVolumeFromGeometRecords.sql" />
     <None Include="UtilityScripts\Deployment\4.0.1.0\AD Bulk Import\09_ReapprovePortBlendedAdjustment.sql" />
-    <None Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchy.sql" />
-    <None Include="Upgrade\4.1\4.1.0.0\_0003_AddStratigraphyHierarchyTablesAndPermissions.sql" />
-    <None Include="Schema\Tables\dbo.BhpbioWeathering.sql" />
-    <None Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchyType.sql" />
-    <None Include="Schema\Tables\dbo.BhpbioStratigraphyHierarchy.sql" />
-    <None Include="Schema\Procedures\dbo.GetBhpbioWeatheringList.sql" />
-    <None Include="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyList.sql" />
-    <None Include="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyTypeList.sql" />
-    <Build Include="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
-    <Build Include="Upgrade\4.1\4.1.0.0\_0002_Raise Outlier Detection Queue Entries.sql" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0000_AddSampleStationTablesAndPermissions.sql" />
+	<None Include="Upgrade\4.1\4.1.0.0\_0001_Add SampleCount to WeightometerSampleField.sql" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0002_Raise Outlier Detection Queue Entries.sql" />
+	<None Include="Upgrade\4.1\4.1.0.0\_0003_AddStratigraphyHierarchyTablesAndPermissions.sql" />	
+	<None Include="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
+	<None Include="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </ItemGroup>
   <PropertyGroup>
     <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
