@@ -127,6 +127,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-ValidStratNum.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-EmptyStratNum.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-MissingStratNum.xml" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

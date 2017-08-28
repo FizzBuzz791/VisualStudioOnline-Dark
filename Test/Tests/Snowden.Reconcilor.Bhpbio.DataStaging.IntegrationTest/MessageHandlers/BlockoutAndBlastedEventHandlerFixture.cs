@@ -226,19 +226,41 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
         }
 
         [TestMethod]
-        public void Does_A_Valid_Strat_Message_Get_Saved_With_Strat_Num ()
+        public void Does_A_Valid_StratNum_Message_Get_Saved_With_Strat_Num ()
         {
             string blockGuid = @"a2443171-b363-4f88-a403-3cee9420dd4d";
             string expectedStratNum = "3430";  
 
             if (!DoesStratNumExists(_config, expectedStratNum))
             {
-                Assert.Fail("StratNum not found in [dbo].[BhpbioStratigraphyHierarchy]");
+                Assert.Fail($"StratNum {expectedStratNum} not found in [dbo].[BhpbioStratigraphyHierarchy]");
             }
 
             // process the initial create
 
             _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Strat-ValidStratNum.xml");
+            _handler.Process(_message);
+
+            var blockId = GetBlockId(_config, blockGuid);
+
+            Assert.IsNotNull(blockId);
+
+            var dataTable = GetStagingBhpbioStageBlockModels(_config, blockId);
+
+            Assert.AreEqual(1, dataTable.Rows.Count);
+
+            Assert.AreEqual(expectedStratNum, dataTable.Rows[0]["StratNum"]);
+        }
+
+        [TestMethod]
+        public void Does_A_Missing_StratNum_Message_Import_As_A_Null()
+        {
+            string blockGuid = @"a2443171-b363-4f88-a403-3cee9420dd4d";
+            var expectedStratNum = DBNull.Value;
+
+            // process the initial create
+
+            _message.MessageBody = LoadEmbeddedResourceString("Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Resources.BlockoutAndBlastedEvent_Strat-MissingStratNum.xml");
             _handler.Process(_message);
 
             var blockId = GetBlockId(_config, blockGuid);

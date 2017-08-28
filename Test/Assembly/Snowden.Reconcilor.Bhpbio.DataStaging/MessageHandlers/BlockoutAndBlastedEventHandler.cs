@@ -586,6 +586,10 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
             if (modelType.ToUpper() == GRADE_CONTROL_MODEL_NAME.ToUpper())
             {
                 stratNum = block.StratNum.ToString();
+                if (stratNum == "0") // Is the default for an int because we had a NULL in the XML
+                {
+                    stratNum = null;    // Set it to null so we write that to the database.
+                }
             }
 
             return stratNum;
