@@ -22,10 +22,10 @@ Friend NotInheritable Class ReconciliationMovement
     Private _dateTo As DateTime
     Private _settings As ConfigurationSettings
 
-    Friend Sub New()
+    Friend Sub New(Optional config As ConfigurationSettings = Nothing)
         ImportGroup = "Reconcilor Generics"
         ImportName = "Recon Movements"
-        _settings = ConfigurationSettings.GetConfigurationSettings()
+        _settings = ConfigurationSettings.GetConfigurationSettings(config)
     End Sub
 
     Protected Overrides Function ValidateParameters(ByVal parameters As System.Collections.Generic.IDictionary(Of String, String), ByVal validationMessage As System.Text.StringBuilder) As Boolean

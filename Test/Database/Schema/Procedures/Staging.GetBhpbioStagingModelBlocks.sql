@@ -35,6 +35,7 @@ BEGIN
 			m.LumpPercentAsShipped as ModelLumpPercentAsShipped, 
 			m.LastModifiedUser, 
 			m.LastModifiedDate,
+			m.StratNum,
 			(
 				SELECT p.Number,
 					p.Easting, p.Northing, p.RL

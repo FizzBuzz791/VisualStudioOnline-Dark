@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using Snowden.Reconcilor.Bhpbio.Database.SqlDal;
 using Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects;
 using System.Data;
+using Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Helpers;
 
 namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
 {
@@ -244,8 +245,9 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
             var blockId = GetBlockId(_config, blockGuid);
 
             Assert.IsNotNull(blockId);
+            Assert.IsTrue(blockId.HasValue);
 
-            var dataTable = GetStagingBhpbioStageBlockModels(_config, blockId);
+            var dataTable = GetStagingBhpbioStageBlockModels(_config, blockId.Value);
 
             Assert.AreEqual(1, dataTable.Rows.Count);
 
@@ -266,29 +268,16 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.MessageHandlers
             var blockId = GetBlockId(_config, blockGuid);
 
             Assert.IsNotNull(blockId);
+            Assert.IsTrue(blockId.HasValue);
 
-            var dataTable = GetStagingBhpbioStageBlockModels(_config, blockId);
+            var dataTable = GetStagingBhpbioStageBlockModels(_config, blockId.Value);
 
             Assert.AreEqual(1, dataTable.Rows.Count);
 
             Assert.AreEqual(expectedStratNum, dataTable.Rows[0]["StratNum"]);
         }
 
-        private string BuildConnectionString(MessageHandlerConfiguration configuration)
-        {
-            string productConfigurationPath = configuration.InitialisationData["ProductionConfigurationPath"].Value;
-            string productUserName = configuration.InitialisationData["ProductUser"].Value;
-
-            ConfigurationManager prodConfig = new ConfigurationManager(productConfigurationPath);
-            prodConfig.Open();
-
-            string databaseName = configuration.InitialisationData["Database"].Value;
-            
-            // obtain and open a database connection string
-            DatabaseConfiguration dbConfig = prodConfig.GetDatabaseConfiguration(databaseName);
-
-            return dbConfig.GenerateSqlClientConnectionString(productUserName);
-        }
+        
 
         private void AssertLumpPercentagesAsExpected(MessageHandlerConfiguration config, string blockGuid, string model, string oreType, double? expectedLumpPercentAsDropped, double? expectedLumpPercentAsShipped)
         {
@@ -455,166 +444,21 @@ AND sbmg.GeometType = @geometType";
         /// Clear all integration testing stage blocks
         /// </summary>
         /// <param name="config">config used to connect to the database</param>
-        private void ClearIntegrationTestStageBlocks(MessageHandlerConfiguration config, List<string> guids)
+        
+
+        private int? GetBlockId(MessageHandlerConfiguration config, string guid)
         {
-            string connectionString = BuildConnectionString(config);
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    IBhpbioBlock dal = new SqlDalBhpbioBlock(conn);
-
-                    foreach (string guid in guids)
-                    {
-                        // delete from StageBlock
-                        dal.DeleteBhpbioStageBlock(DateTime.Now, guid);
-
-                        // remove any trace of the deletion to allow tests to be rerun
-                        var deleteFromStageBlockDeletion = conn.CreateCommand();
-                        deleteFromStageBlockDeletion.CommandType = System.Data.CommandType.Text;
-                        deleteFromStageBlockDeletion.CommandText = "DELETE FROM Staging.StageBlockDeletion WHERE BlockExternalSystemId = @BlockExternalSystemId";
-                        deleteFromStageBlockDeletion.Parameters.AddWithValue("@BlockExternalSystemId", guid);
-
-                        deleteFromStageBlockDeletion.ExecuteNonQuery();
-                    }
-
-                    conn.Close();
-                }
-                finally
-                {
-                    if (conn.State == System.Data.ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                }
-            }
+            return StagingTestsHelper.GetBlockId(config, guid);
         }
 
-        private String GetBlockId(MessageHandlerConfiguration config, string guid)
+        private DataTable GetStagingBhpbioStageBlockModels(MessageHandlerConfiguration config, int blockId)
         {
-            string blockId = null;
-            string connectionString = BuildConnectionString(config);
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    var sql = @"SELECT	BlockId
-                                  FROM	[Staging].[BhpbioStageBlockModel]
-                                WHERE	BlockExternalSystemId = @BlockExternalSystemId";
-
-                    var command = conn.CreateCommand();
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = sql;
-
-                    command.Parameters.AddWithValue("@BlockExternalSystemId", guid);
-
-                    var returnValue = command.ExecuteScalar();
-
-                    if (returnValue != null)
-                    {
-                        blockId = returnValue.ToString();
-                    }
-
-                conn.Close();
-                }
-                finally
-                {
-                    if (conn.State == System.Data.ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                }
-            }
-
-            return blockId;
-        }
-
-        private DataTable GetStagingBhpbioStageBlockModels(MessageHandlerConfiguration config, string blockId)
-        {
-            DataTable dt = new DataTable();
-            string connectionString = BuildConnectionString(config);
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    var sql = @"SELECT	*
-                                  FROM	[Staging].[BhpbioStageBlockModel]
-                                WHERE	BlockId = @BlockId";
-
-                    var command = conn.CreateCommand();
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = sql;
-
-                    command.Parameters.AddWithValue("@BlockId", blockId);
-
-                    var dataAdapter = new SqlDataAdapter(command);
-                    dataAdapter.Fill(dt);
-
-
-                    conn.Close();
-                    dataAdapter.Dispose();
-                }
-                finally
-                {
-                    if (conn.State == System.Data.ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                }
-            }
-
-            return dt;
+            return StagingTestsHelper.GetStagingBhpbioStageBlockModels(config, blockId);
         }
 
         private bool DoesStratNumExists(MessageHandlerConfiguration config, string expectedStratNum)
         {
-            int stratNumCount = 0;
-            string connectionString = BuildConnectionString(config);
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    var sql = @"SELECT	count(1)
-                                FROM	[dbo].[BhpbioStratigraphyHierarchy]
-                                WHERE	StratNum = @StratNum";
-
-                    var command = conn.CreateCommand();
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = sql;
-
-                    command.Parameters.AddWithValue("@StratNum", expectedStratNum);
-
-                    var returnValue = command.ExecuteScalar();
-
-                    if (returnValue != null)
-                    {
-                        stratNumCount = (int)returnValue;
-                    }
-
-                    conn.Close();
-                }
-                finally
-                {
-                    if (conn.State == System.Data.ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                }
-            }
-
-            return (stratNumCount == 1);
+            return StagingTestsHelper.DoesStratNumExist(config, expectedStratNum);
         }
 
         /// <summary>
@@ -694,7 +538,6 @@ WHERE sb.BlockExternalSystemId = @BlockExternalSystemId";
         private MessageHandlerConfiguration BuildMessageHandlerConfiguration()
         {
             MessageHandlerConfiguration config = new MessageHandlerConfiguration();
-            //config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "ProductionConfigurationPath", Value = @"..\..\..\..\ProductConfiguration.xml" });
             config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "ProductionConfigurationPath", Value = @"..\..\..\ProductConfiguration.xml" });
             config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "Database", Value = @"Main" });
             config.InitialisationData.Add(new InitialisationDataNameValuePairConfiguration() { Name = "ProductUser", Value = @"ReconcilorUI" });
@@ -711,18 +554,17 @@ WHERE sb.BlockExternalSystemId = @BlockExternalSystemId";
         /// <returns>message body</returns>
         private string LoadEmbeddedResourceString(string embeddedResourcePath)
         {
-            string result = null;
-            var assembly = typeof(BlockoutAndBlastedEventHandlerFixture).Assembly;
-            var resourceName = embeddedResourcePath;
+            return StagingTestsHelper.LoadEmbeddedResourceString(this.GetType().Assembly, embeddedResourcePath);
+        }
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    result = reader.ReadToEnd();
-                }
-            }
-            return result; 
+        private string BuildConnectionString(MessageHandlerConfiguration configuration)
+        {
+            return StagingTestsHelper.BuildConnectionString(configuration);
+        }
+
+        private void ClearIntegrationTestStageBlocks(MessageHandlerConfiguration config, List<string> guids)
+        {
+            StagingTestsHelper.ClearIntegrationTestStageBlocks(config, guids);
         }
     }
 }

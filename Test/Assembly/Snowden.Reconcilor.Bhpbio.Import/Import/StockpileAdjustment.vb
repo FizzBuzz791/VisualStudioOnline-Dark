@@ -52,13 +52,13 @@ Friend NotInheritable Class StockpileAdjustment
         End Set
     End Property
 
-    Public Sub New()
+    Public Sub New(Optional config As ConfigurationSettings = Nothing)
         MyBase.New()
         ImportGroup = "Reconcilor Generics"
         ImportName = "Stockpile Adjustment"
         SourceSchemaName = "StockpileAdjustment"
         CanGenerateSourceSchema = True
-        _settings = ConfigurationSettings.GetConfigurationSettings()
+        _settings = ConfigurationSettings.GetConfigurationSettings(config)
     End Sub
 
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)

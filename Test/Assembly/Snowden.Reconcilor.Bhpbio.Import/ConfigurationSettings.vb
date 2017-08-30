@@ -37,22 +37,32 @@
     ''' <param name="payloadTarget">The prefix for the payload target.  This can be haulage, weightometer, etc.</param>
     ''' <returns>The actual configuration settings.</returns>
     ''' <remarks>Utilises the app.config for all of its data.</remarks>
-    Public Shared Function GetConfigurationSettings() As ConfigurationSettings
+    Public Shared Function GetConfigurationSettings(Optional config As ConfigurationSettings = Nothing) As ConfigurationSettings
         Dim configurationSettings As ConfigurationSettings
         Dim serviceUsername As String
         Dim servicePassword As String
         Dim defaultShift As Char
 
-        'load the username/password for the web service
-        serviceUsername = Configuration.ConfigurationManager.AppSettings(_settingServiceUsername)
-        servicePassword = Configuration.ConfigurationManager.AppSettings(_settingServicePassword)
+        If (config Is Nothing) Then
 
-        'load the default shift
-        defaultShift = Configuration.ConfigurationManager.AppSettings(_defaultShiftType).Chars(0)
+            'load the username/password for the web service
+            serviceUsername = Configuration.ConfigurationManager.AppSettings(_settingServiceUsername)
+            servicePassword = Configuration.ConfigurationManager.AppSettings(_settingServicePassword)
 
-        'create the new object based on these settings & return
-        configurationSettings = New ConfigurationSettings(serviceUsername, servicePassword, defaultShift)
+            'load the default shift
+            defaultShift = Configuration.ConfigurationManager.AppSettings(_defaultShiftType).Chars(0)
+
+            'create the new object based on these settings & return
+            configurationSettings = BuildConfigurationSettings(serviceUsername, servicePassword, defaultShift)
+
+        Else
+            configurationSettings = config
+        End If
 
         Return configurationSettings
+    End Function
+
+    Public Shared Function BuildConfigurationSettings(serviceUsername As String, servicePassword As String, defaultShift As Char) As ConfigurationSettings
+        Return New ConfigurationSettings(serviceUsername, servicePassword, defaultShift)
     End Function
 End Class

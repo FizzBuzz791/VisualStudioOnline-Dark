@@ -58,13 +58,13 @@ Friend NotInheritable Class Production
         End Set
     End Property
 
-    Public Sub New()
+    Public Sub New(Optional config As ConfigurationSettings = Nothing)
         MyBase.New()
         ImportGroup = "Reconcilor Generics"
         ImportName = "Production"
         SourceSchemaName = "Production"
         CanGenerateSourceSchema = False
-        _settings = ConfigurationSettings.GetConfigurationSettings()
+        _settings = ConfigurationSettings.GetConfigurationSettings(config)
     End Sub
 
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)

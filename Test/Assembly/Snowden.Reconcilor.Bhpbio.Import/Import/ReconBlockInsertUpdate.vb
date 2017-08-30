@@ -21,10 +21,10 @@ Friend NotInheritable Class ReconBlockInsertUpdate
     Private _dateFrom As DateTime
     Private _dateTo As DateTime
 
-    Public Sub New()
+    Public Sub New(Optional config As ConfigurationSettings = Nothing)
         ImportGroup = "Reconcilor Generics"
         ImportName = "ReconBlockInsertUpdate"
-        _settings = ConfigurationSettings.GetConfigurationSettings()
+        _settings = ConfigurationSettings.GetConfigurationSettings(config)
     End Sub
 
     Protected Overrides Sub ProcessPrepareData()

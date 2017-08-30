@@ -1411,5 +1411,22 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
                 Return .ExecuteDataTable()
             End With
         End Function
+
+
+        Function GetBhpbioStratigraphyHierarchyExists(stratNum As String) As Boolean Implements IUtility.GetBhpbioStratigraphyHierarchyExists
+
+            With DataAccess
+                .CommandText = "dbo.DoesStratNumExistInStratigraphyHierarchy"
+                .CommandType = CommandObjectType.StoredProcedure
+                With .ParameterCollection
+                    .Clear()
+                    .Add("@iStratNum", CommandDataType.VarChar, stratNum)
+                    .Add("@oReturn", CommandDataType.Bit, CommandDirection.Output, -1)
+                End With
+
+                .ExecuteNonQuery()
+                Return Convert.ToBoolean(.ParameterCollection.Item("@oReturn").Value)
+            End With
+        End Function
     End Class
 End Namespace

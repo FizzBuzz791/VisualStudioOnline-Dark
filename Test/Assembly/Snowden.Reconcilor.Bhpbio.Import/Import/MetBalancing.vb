@@ -34,13 +34,13 @@ Friend NotInheritable Class MetBalancing
         End Set
     End Property
 
-    Public Sub New()
+    Public Sub New(Optional config As ConfigurationSettings = Nothing)
         MyBase.New()
         ImportGroup = "Reconcilor Generics"
         ImportName = "Met Balancing"
         SourceSchemaName = "MetBalancing"
         CanGenerateSourceSchema = False
-        _settings = ConfigurationSettings.GetConfigurationSettings()
+        _settings = ConfigurationSettings.GetConfigurationSettings(config)
     End Sub
 
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
