@@ -60,5 +60,6 @@ Test/Reports/*.rdl.data
 /Test/Web/Cache/*.txt
 Test/Database/Database.refactorlog
 /Test/.vs/ReconcilorBhpbio/v15/sqlite3/storage.ide
+/Test/.vs/ReconcilorBhpbio.sqlite
 *.ncrunchproject
 *.ncrunchsolution
