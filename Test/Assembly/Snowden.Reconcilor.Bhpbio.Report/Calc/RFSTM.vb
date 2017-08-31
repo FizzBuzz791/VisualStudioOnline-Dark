@@ -55,7 +55,7 @@ Namespace Calc
 
             SetPresentation()
 
-            difference = CalculationResult.Difference(mineProductionExpitEquivalentResult, shortTermGeologyModelResult)
+            difference = CalculationResult.PerformCalculation(mineProductionExpitEquivalentResult, shortTermGeologyModelResult, CalculationType.Difference)
 
             For Each differenceDate In difference.AggregateRecords(onMaterialTypeId := False, onLocationId := False, onProductSize := False)
                 Result.Tags.Add(New CalculationResultTag("TonnesDifference", differenceDate.CalendarDate, GetType(Double), ZeroIfNull(differenceDate.Tonnes)))

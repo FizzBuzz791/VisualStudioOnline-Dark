@@ -125,7 +125,7 @@ Namespace Calc
 
             SetPresentation()
 
-            difference = CalculationResult.Difference(gradeControlResult, modelResult)
+            difference = CalculationResult.PerformCalculation(gradeControlResult, modelResult, CalculationType.Difference)
 
             For Each differenceDate In difference.AggregateRecords(onMaterialTypeId := False, onLocationId := False, onProductSize := False)
                 Result.Tags.Add(New CalculationResultTag("TonnesDifference", differenceDate.CalendarDate, GetType(Double), ZeroIfNull(differenceDate.Tonnes)))

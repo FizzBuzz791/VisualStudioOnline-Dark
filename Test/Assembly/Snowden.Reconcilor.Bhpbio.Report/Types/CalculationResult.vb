@@ -85,7 +85,7 @@ Namespace Types
                                                                 location As Int32?, materialTypeId As Int32?, productSize As String) As CalculationResultRecord
             Get
                 Dim aggregatedFilteredRecords As IEnumerable(Of CalculationResultRecord)
-                Dim aggregatedRecord As CalculationResultRecord = Nothing
+                Dim aggregatedRecord As CalculationResultRecord
 
                 aggregatedFilteredRecords = From t In AggregateRecords(onMaterialTypeId:=True, onLocationId:=True, onProductSize:=True)
                                             Where t.CalendarDate = calDate _
@@ -113,7 +113,7 @@ Namespace Types
         Public ReadOnly Property AggregatedDateLocation(calDate As DateTime, location As Int32?, productSize As String) As CalculationResultRecord
             Get
                 Dim aggregatedFilteredRecords As IEnumerable(Of CalculationResultRecord)
-                Dim aggregatedRecord As CalculationResultRecord = Nothing
+                Dim aggregatedRecord As CalculationResultRecord
                 Dim aggregatedRecords = AggregateRecords(onMaterialTypeId:=False, onLocationId:=True, onProductSize:=True)
 
                 aggregatedFilteredRecords = From t In aggregatedRecords
@@ -559,14 +559,21 @@ Namespace Types
             Dim leftRecord As CalculationResultRecord = Nothing
             Dim rightRecord As CalculationResultRecord = Nothing
 
-            Dim byMaterialType = False
+            Dim preAggregatedLeft As Dictionary(Of String, CalculationResultRecord)
+            Dim preAggregatedRight As Dictionary(Of String, CalculationResultRecord)
 
-            If breakdownFactorByMaterialType AndAlso calcId.Contains("Factor") Then
-                byMaterialType = True
+            If breakdownFactorByMaterialType Or calculationType = CalculationType.Difference Then
+                Dim byMaterialType = False
+                If breakdownFactorByMaterialType And calcId.Contains("Factor") Then
+                    byMaterialType = True
+                End If
+
+                preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left, byMaterialType)
+                preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right, byMaterialType)
+            Else
+                preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left)
+                preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right)
             End If
-
-            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left, byMaterialType)
-            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right, byMaterialType)
 
             ' Order is important, the lookup key will get built in this order.
             Dim combined = New List(Of IEnumerable(Of String)) From {
@@ -577,7 +584,7 @@ Namespace Types
             }
 
             If breakdownFactorByMaterialType Or calculationType = CalculationType.Difference Then
-                If byMaterialType Then
+                If breakdownFactorByMaterialType And calcId.Contains("Factor") Then
                     ' Insert after locationIdList and before productSizeList
                     combined.Insert(2, materialTypeIdList.Select(Function(i) i?.ToString()))
                 Else
@@ -620,285 +627,6 @@ Namespace Types
 
             Return result
 
-        End Function
-
-        <Obsolete("Use PerformCalculation instead.")>
-        Public Shared Function ApplyRatio(left As CalculationResult, right As CalculationResult) As CalculationResult
-            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
-            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
-            Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
-
-            Dim leftRecord As CalculationResultRecord = Nothing
-            Dim rightRecord As CalculationResultRecord = Nothing
-            Dim result As New CalculationResult()
-
-            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left)
-            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right)
-
-            For Each material In materialTypeIdList
-                For Each location In locationIdList
-                    For Each calendarDate In dateList
-                        For Each productSize In productSizeList
-                            For Each resouceClassification In resouceList
-                                Dim lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
-
-                                preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
-                                preAggregatedRight.TryGetValue(lookupKey, rightRecord)
-
-                                If Not leftRecord Is Nothing Or Not rightRecord Is Nothing Then
-                                    result.Add(leftRecord * rightRecord)
-                                End If
-
-                                leftRecord = Nothing
-                                rightRecord = Nothing
-                            Next
-                        Next
-                    Next
-                Next
-            Next
-
-            ' Correct parent link.
-            For Each record In result
-                record.Parent = result
-            Next
-
-            CloneHeaders(result, left)
-
-            Return result
-        End Function
-
-        <Obsolete("Use PerformCalculation instead.")>
-        Public Shared Function Divide(left As CalculationResult, right As CalculationResult, breakdownFactorByMaterialType As Boolean, calcId As String) As CalculationResult
-
-            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
-            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
-            Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
-
-            Dim result As New CalculationResult()
-            Dim leftRecord As CalculationResultRecord = Nothing
-            Dim rightRecord As CalculationResultRecord = Nothing
-            Dim lookupKey As String
-
-            Dim byMaterialType = False
-
-            If breakdownFactorByMaterialType AndAlso calcId.Contains("Factor") Then
-                byMaterialType = True
-            End If
-
-            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left, False, True, True)
-            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right, False, True, True)
-
-            Dim preAggregatedLeftWithMaterialType As Dictionary(Of String, CalculationResultRecord) = Nothing
-            Dim preAggregatedRightWithMaterialType As Dictionary(Of String, CalculationResultRecord) = Nothing
-
-            If byMaterialType Then
-                preAggregatedLeftWithMaterialType = BuildRecordLookupByMainAggregationFieldsStore(left, True, True, True)
-                preAggregatedRightWithMaterialType = BuildRecordLookupByMainAggregationFieldsStore(right, True, True, True)
-            End If
-
-            If breakdownFactorByMaterialType AndAlso calcId.Contains("Factor") Then
-                ' iterate through material types and location types
-                For Each location In locationIdList
-                    For Each calendarDate In dateList
-                        For Each productSize In productSizeList
-                            For Each materialType In materialTypeIdList
-                                For Each resouceClassification In resouceList
-                                    If materialType Is Nothing Then
-                                        ' this will be the total (aggregation) for all material types (i.e. when material type is null)
-                                        lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, Nothing, productSize, resouceClassification)
-
-                                        preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
-                                        preAggregatedRight.TryGetValue(lookupKey, rightRecord)
-                                    Else
-                                        lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, materialType, productSize, resouceClassification)
-
-                                        preAggregatedLeftWithMaterialType.TryGetValue(lookupKey, leftRecord)
-                                        preAggregatedRightWithMaterialType.TryGetValue(lookupKey, rightRecord)
-                                    End If
-
-                                    If Not leftRecord Is Nothing And Not rightRecord Is Nothing Then
-                                        result.Add(leftRecord / rightRecord)
-                                    End If
-
-                                    leftRecord = Nothing
-                                    rightRecord = Nothing
-                                Next
-                            Next
-                        Next
-                    Next
-                Next
-            Else
-                For Each location In locationIdList
-                    For Each calendarDate In dateList
-                        For Each productSize In productSizeList
-                            For Each resouceClassification In resouceList
-                                lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, Nothing, productSize, resouceClassification)
-
-                                preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
-                                preAggregatedRight.TryGetValue(lookupKey, rightRecord)
-
-                                If Not leftRecord Is Nothing Or Not rightRecord Is Nothing Then
-                                    result.Add(leftRecord / rightRecord)
-                                End If
-
-                                leftRecord = Nothing
-                                rightRecord = Nothing
-                            Next
-                        Next
-                    Next
-                Next
-            End If
-
-            ' Correct parent link.
-            For Each record In result
-                record.Parent = result
-            Next
-
-            Return result
-        End Function
-
-        <Obsolete("Use PerformCalculation instead.")>
-        Public Shared Function Difference(left As CalculationResult, right As CalculationResult) As CalculationResult
-            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
-            Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
-
-            Dim leftRecord As CalculationResultRecord = Nothing
-            Dim rightRecord As CalculationResultRecord = Nothing
-            Dim result As New CalculationResult()
-
-            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left, False, True, True)
-            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right, False, True, True)
-
-            For Each location In locationIdList
-                For Each calendarDate In dateList
-                    For Each productSize In productSizeList
-                        For Each resouceClassification In resouceList
-                            Dim lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, Nothing, productSize, resouceClassification)
-
-                            preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
-                            preAggregatedRight.TryGetValue(lookupKey, rightRecord)
-
-                            If Not leftRecord Is Nothing Or Not rightRecord Is Nothing Then
-                                result.Add(CalculationResultRecord.Difference(leftRecord, rightRecord))
-                            End If
-                        Next
-                    Next
-                Next
-            Next
-
-            ' Correct parent link.
-            For Each record In result
-                record.Parent = result
-            Next
-
-            Return result
-        End Function
-
-        <Obsolete("Use PerformCalculation instead.")>
-        Public Shared Function Addition(left As CalculationResult, right As CalculationResult) As CalculationResult
-            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
-            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
-            Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
-
-            Dim leftRecord As CalculationResultRecord = Nothing
-            Dim rightRecord As CalculationResultRecord = Nothing
-            Dim result As New CalculationResult()
-
-            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left)
-            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right)
-
-            For Each material In materialTypeIdList
-                For Each location In locationIdList
-                    For Each calendarDate In dateList
-                        For Each productSize In productSizeList
-                            For Each resouceClassification In resouceList
-
-                                Dim lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
-
-                                preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
-                                preAggregatedRight.TryGetValue(lookupKey, rightRecord)
-
-                                If Not leftRecord Is Nothing Or Not rightRecord Is Nothing Then
-                                    result.Add(leftRecord + rightRecord)
-                                End If
-
-                                leftRecord = Nothing
-                                rightRecord = Nothing
-                            Next
-                        Next
-                    Next
-                Next
-            Next
-
-            ' Correct parent link.
-            For Each record In result
-                record.Parent = result
-            Next
-
-            Return result
-        End Function
-
-        <Obsolete("Use PerformCalculation instead.")>
-        Public Shared Function Subtract(left As CalculationResult, right As CalculationResult) As CalculationResult
-            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
-            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
-            Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
-
-            Dim leftRecord As CalculationResultRecord = Nothing
-            Dim rightRecord As CalculationResultRecord = Nothing
-            Dim result As New CalculationResult()
-
-            'if left or right contains boolean
-            If left.ContainsNullGrades() Or right.ContainsNullGrades() Then
-                left.AggregateByDateLocation()
-                right.AggregateByDateLocation()
-            End If
-
-            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left)
-            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right)
-
-            'combine records
-            'left.AggregateByDateLocation()
-            ' = left.AggregateRecords(True, False, True, True)
-            For Each location In locationIdList
-                For Each calendarDate In dateList
-                    For Each material In materialTypeIdList
-                        For Each productSize In productSizeList
-                            For Each resouceClassification In resouceList
-
-                                Dim lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
-
-                                preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
-                                preAggregatedRight.TryGetValue(lookupKey, rightRecord)
-
-                                If Not leftRecord Is Nothing Or Not rightRecord Is Nothing Then
-                                    result.Add(leftRecord - rightRecord)
-                                End If
-
-                                leftRecord = Nothing
-                                rightRecord = Nothing
-                            Next
-                        Next
-                    Next
-                Next
-            Next
-
-            ' Correct parent link.
-            For Each record In result
-                record.Parent = result
-            Next
-
-            Return result
         End Function
 
         ' Copy data from one row to another
@@ -981,18 +709,19 @@ Namespace Types
             Dim index = 1
 
             ' Determine what key identifying columns should go into the row key (data series key)
-            Dim potentialKeyColumns As New List(Of String)()
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_MATERIAL_TYPE)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_LOCATION_ID)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_SORT_KEY)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_ROOT_CALC_ID)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_CALCULATION_DEPTH)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_TYPE)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_TAG_ID)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_REPORT_TAG_ID)
-            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_ROOT_CALCULATION_ID)
-            potentialKeyColumns.Add("Attribute")
+            Dim potentialKeyColumns As New List(Of String) From {
+                CalculationConstants.COLUMN_NAME_PRODUCT_SIZE,
+                CalculationConstants.COLUMN_NAME_MATERIAL_TYPE,
+                CalculationConstants.COLUMN_NAME_LOCATION_ID,
+                CalculationConstants.COLUMN_NAME_SORT_KEY,
+                CalculationConstants.COLUMN_NAME_ROOT_CALC_ID,
+                CalculationConstants.COLUMN_NAME_CALCULATION_DEPTH,
+                CalculationConstants.COLUMN_NAME_TYPE,
+                CalculationConstants.COLUMN_NAME_TAG_ID,
+                CalculationConstants.COLUMN_NAME_REPORT_TAG_ID,
+                CalculationConstants.COLUMN_NAME_ROOT_CALCULATION_ID,
+                "Attribute"
+            }
 
             Dim keyColumns As New List(Of String)()
             For Each columnName In potentialKeyColumns
@@ -1031,7 +760,6 @@ Namespace Types
 
                 ' this is the earliest period encountered so far for this row key
                 If thisIsEarliestPeriodForRowKey Then
-                    earliestPeriodForThisRowKey = rowDateTime
                     earliestPeriodByRowKey(rowKey) = rowDateTime
                     earliestRowByRowKey(rowKey) = row
                     earliestIndexByRowKey(rowKey) = index
@@ -1092,17 +820,13 @@ Namespace Types
         ''' <param name="row">DataRow for which a key is to be determined</param>
         ''' <returns>the lookup key</returns>
         Private Shared Function BuildDataRowLookupByDateAndLocationStoreKey(row As DataRow) As String
-            Dim key = "{{NotDefined}}"
-
             ' build a lookup key for the row
             Dim dateFrom = DateTime.MinValue
             Dim locationId = Integer.MinValue
             DateTime.TryParse(row(CalculationConstants.COLUMN_NAME_DATE_CAL).ToString(), dateFrom)
             Int32.TryParse(row(CalculationConstants.COLUMN_NAME_LOCATION_ID).ToString(), locationId)
 
-            key = String.Format("{0:ddMMyyyy}_{1}", dateFrom, locationId)
-
-            Return key
+            Return $"{dateFrom:ddMMyyyy}_{locationId}"
         End Function
 
         ''' <summary>
@@ -1198,7 +922,6 @@ Namespace Types
                                             Optional ByVal onMaterialTypeId As Boolean = True,
                                             Optional ByVal onLocationId As Boolean = True,
                                             Optional ByVal onProductSize As Boolean = True) As String
-            Dim key = "{{Undefined}}"
 
             Dim locationId As Integer? = Nothing
             Dim materialTypeId As Integer? = Nothing
@@ -1216,9 +939,7 @@ Namespace Types
                 productSize = record.ProductSize
             End If
 
-            key = BuildRecordLookupByMainAggregationFieldsStoreKey(record.CalendarDate, locationId, materialTypeId, productSize, record.ResourceClassification)
-
-            Return key
+            Return BuildRecordLookupByMainAggregationFieldsStoreKey(record.CalendarDate, locationId, materialTypeId, productSize, record.ResourceClassification)
         End Function
 
         ''' <summary>
@@ -1229,12 +950,11 @@ Namespace Types
         ''' <param name="materialTypeId">the material type Id to be included in the lookup key</param>
         ''' <param name="productSize">the product size to be included in the lookup key</param>
         ''' <returns>string representing the lookup key</returns>
-        Private Shared Function BuildRecordLookupByMainAggregationFieldsStoreKey(calDate As Date, locationId As Integer?, materialTypeId As Integer?, productSize As String, resourceClassification As String) As String
-            Dim key = "{{Undefined}}"
-
-            key = String.Format("{0:ddMMyyyy}_{1}_{2}_{3}_{4}", calDate, locationId, materialTypeId, productSize, resourceClassification)
-
-            Return key
+        Private Shared Function BuildRecordLookupByMainAggregationFieldsStoreKey(calDate As Date, locationId As Integer?, 
+                                                                                 materialTypeId As Integer?, 
+                                                                                 productSize As String, 
+                                                                                 resourceClassification As String) As String
+            Return $"{calDate:ddMMyyyy}_{locationId}_{materialTypeId}_{productSize}_{resourceClassification}"
         End Function
 
 #End Region
@@ -1243,9 +963,9 @@ Namespace Types
 
         Public Sub AggregateByDateLocation()
             Dim fil = AggregateRecords(onMaterialTypeId:=False, onLocationId:=True, onProductSize:=True)
-            Me.Clear()
+            Clear()
             For Each thing In fil
-                Me.Add(thing)
+                Add(thing)
             Next
         End Sub
 
@@ -1263,7 +983,7 @@ Namespace Types
         ''' Deep copy of the object.
         ''' </summary>
         Public Function Clone() As CalculationResult
-            Clone = Me.CloneData()
+            Clone = CloneData()
             CloneHeaders(Clone, Me)
         End Function
 
@@ -1312,8 +1032,9 @@ Namespace Types
         ''' </summary>
         Public ReadOnly Property GetAllResults As Collection(Of CalculationResultDepth)
             Get
-                Dim list As New Collection(Of CalculationResultDepth)
-                list.Add(New CalculationResultDepth(0, Me))
+                Dim list As New Collection(Of CalculationResultDepth) From {
+                    New CalculationResultDepth(0, Me)
+                }
                 GetParentDepths(1, list)
                 Return list
             End Get
@@ -1347,10 +1068,10 @@ Namespace Types
         End Function
 
         Public Function WithProductSize(productSize As String) As CalculationResult
-            Dim resultsToRemove = Me.Where(Function(r) r.ProductSize <> productSize).ToList
+            Dim resultsToRemove = Where(Function(r) r.ProductSize <> productSize).ToList
 
             For Each result In resultsToRemove
-                Me.Remove(result)
+                Remove(result)
             Next
 
             Return Me
@@ -1395,11 +1116,11 @@ Namespace Types
         ''' <summary>
         ''' Replaces any calc id's descriptions found with the description provided.
         ''' </summary>
-        Public Sub ReplaceDescription(calcId As String, description As String)
+        Public Sub ReplaceDescription(targetCalcId As String, newDescription As String)
             Dim result As CalculationResult
 
-            For Each result In GetCalcById(calcId)
-                result.Description = description
+            For Each result In GetCalcById(targetCalcId)
+                result.Description = newDescription
             Next
         End Sub
 
@@ -1531,8 +1252,8 @@ Namespace Types
         ''' <summary>
         ''' Deletes the records and tags in the list.
         ''' </summary>
-        Private Sub DeleteRecordAndTags(records As CalculationResultRecord(),
-         deleteTags As List(Of CalculationResultTag))
+        Private Sub DeleteRecordAndTags(records As IEnumerable(Of CalculationResultRecord), 
+                                        deleteTags As IEnumerable(Of CalculationResultTag))
 
             For Each record In records
                 Remove(record)
@@ -1589,11 +1310,10 @@ Namespace Types
              Not l.HasValue And Not r.HasValue
         End Function
 
-        Public Function ToDataTable(includeParents As Boolean,
-         normalizedData As Boolean, maintainLocations As Boolean,
-         breakdownMeasureByMaterialType As Boolean,
-         excludeProductSizeBreakdown As Boolean) As DataTable
-            Return ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, excludeProductSizeBreakdown, CType(Nothing, ReportBreakdown?), False)
+        Public Function ToDataTable(includeParents As Boolean, normalizedData As Boolean, maintainLocations As Boolean, 
+                                    breakdownMeasureByMaterialType As Boolean, excludeProductSizeBreakdown As Boolean) As DataTable
+
+            Return ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, excludeProductSizeBreakdown, Nothing, False)
         End Function
 
         Public Function ToDataTable(includeParents As Boolean,
@@ -1613,17 +1333,18 @@ Namespace Types
             Dim locationId As Int32?
 
             If Not includeParents Then
-                results = New Collection(Of CalculationResultDepth)
-                results.Add(New CalculationResultDepth(0, Me))
+                results = New Collection(Of CalculationResultDepth) From {
+                    New CalculationResultDepth(0, Me)
+                }
             Else
                 results = GetAllResults()
             End If
 
             Dim groupByList = New HashSet(Of String) From {
-                    {"ResourceClassification"},
-                    {"ProductSize"},
-                    {"CalendarDate"}
-                    }
+                {"ResourceClassification"},
+                {"ProductSize"},
+                {"CalendarDate"}
+            }
 
             If maintainLocations Then
                 groupByList.Add("LocationId")
@@ -1632,11 +1353,11 @@ Namespace Types
             Dim dateLocationGroup = From dl In AggregateRecords(groupByList, aggregateToDateBreakdown)
                                     Group By calDate = dl.CalendarDate, location = dl.LocationId Into Group
                                     Order By calDate, location
-                                    Select New With {.calendarDate = calDate, .locationId = location}
+                                    Select New With {.CalendarDate = calDate, .LocationId = location}
 
             For Each dateLocation In dateLocationGroup
-                calendarDate = dateLocation.calendarDate
-                locationId = dateLocation.locationId
+                calendarDate = dateLocation.CalendarDate
+                locationId = dateLocation.LocationId
 
                 For Each result In results
                     If breakdownFactorByMaterialType AndAlso CalcId.Contains("Factor") Then
@@ -1689,15 +1410,15 @@ Namespace Types
                 Return
             End If
 
-            For Each calenderDate In Me.CalendarDateCollection
-                For Each locationId In Me.LocationIdCollection
-                    For Each materialTypeId In Me.MaterialTypeIdCollection
-                        For Each productSize In Me.ProductSizeCollection
-
-                            Dim rows = Me.Where(Function(r) r.CalendarDate = r.CalendarDate AndAlso
-                                                    r.LocationId.ToString = locationId.ToString AndAlso
+            For Each calenderDate In CalendarDateCollection
+                For Each locationId In LocationIdCollection
+                    For Each materialTypeId In MaterialTypeIdCollection
+                        For Each productSize In ProductSizeCollection
+                            ' ReSharper disable AccessToForEachVariableInClosure
+                            Dim rows = Where(Function(r) r.LocationId.ToString = locationId.ToString AndAlso
                                                     r.MaterialTypeId.ToString = materialTypeId.ToString AndAlso
                                                     r.ProductSize = productSize)
+                            ' ReSharper restore AccessToForEachVariableInClosure
 
                             If rows.Count = 0 Then Continue For
                             Dim totalsRow = rows.Sum
@@ -1710,29 +1431,28 @@ Namespace Types
                                 ' To test this just check a location with no RC data (so that 100 % of the data is under unknown %)
                                 totalsRow.ResourceClassification = Nothing
 
-                                Me.Add(totalsRow)
+                                Add(totalsRow)
                             End If
                         Next
                     Next
                 Next
             Next
-
         End Sub
-
 
         ''' <summary>
         ''' Created an equivalent calculation result that has been aggregated using options the perform the minimum amount of aggregation
         ''' </summary>
         Public Function ToAggregatedClone(applySpecialH2OGradeWeightingLogic As Boolean) As CalculationResult
             ' make a new result.. copying over property values
-            Dim cr As New CalculationResult(Me.CalculationType)
-            cr.CalcId = Me.CalcId
-            cr.TagId = Me.TagId
-            cr.Description = Me.Description
-            cr.InError = Me.InError
-            cr.ErrorMessage = Me.ErrorMessage
+            Dim cr As New CalculationResult(CalculationType) With {
+                .CalcId = CalcId,
+                .TagId = TagId,
+                .Description = Description,
+                .InError = InError,
+                .ErrorMessage = ErrorMessage
+            }
 
-            ' then get a set of aggregate records
+                ' then get a set of aggregate records
             Dim aggregatedRecords = AggregateRecords(onMaterialTypeId:=True, onLocationId:=True, onProductSize:=True, useSpecificH2OGradeWeighting:=applySpecialH2OGradeWeightingLogic)
             ' and add the aggregate records as the calculation results records for the cloned results
             For Each r In aggregatedRecords
@@ -1747,10 +1467,9 @@ Namespace Types
         ''' <summary>
         ''' Parse the rows in normalized data into a data table. To be used only from ToDataTable.
         ''' </summary>
-        Public Sub ToDataTableParseRows(records As CalculationResultRecord(),
-         table As DataTable, depth As Int32,
-         normalizedData As Boolean,
-         excludeProductSizeBreakdown As Boolean)
+        Public Sub ToDataTableParseRows(records As CalculationResultRecord(), table As DataTable, depth As Int32, 
+                                        normalizedData As Boolean, excludeProductSizeBreakdown As Boolean)
+
             Dim record As CalculationResultRecord
             Dim row As DataRow
             Dim recordTable As DataTable
@@ -1790,7 +1509,7 @@ Namespace Types
                     row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE) = productSizeObject.ToString()
 
                     If Not productSizeObject.ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL Then
-                        If Not tagIdForRow.EndsWith(productSizeObject.ToString()) Then
+                        If Not tagIdForRow.EndsWith(productSizeObject.ToString(), StringComparison.Ordinal) Then
                             tagIdForRow = tagIdForRow & productSizeObject.ToString()
                         End If
                     End If
@@ -1806,9 +1525,9 @@ Namespace Types
 
                     If Description IsNot Nothing AndAlso row.AsString("ProductSize") <> "TOTAL" Then
                         If GeometType = GeometTypeSelection.AsDropped Then
-                            row("Description") = String.Format("{0} (AD)", Description)
+                            row("Description") = $"{Description} (AD)"
                         ElseIf GeometType = GeometTypeSelection.AsShipped Then
-                            row("Description") = String.Format("{0} (AS)", Description)
+                            row("Description") = $"{Description} (AS)"
                         End If
                     End If
                 Next
@@ -1855,8 +1574,8 @@ Namespace Types
             Dim extraResultsMergedIn = False
             Dim index As Integer
             For index = 1 To ds.Tables.Count
-                Dim extraValues = ds.Tables(String.Format("Value{0}", index))
-                Dim extraGrades = ds.Tables(String.Format("Grade{0}", index))
+                Dim extraValues = ds.Tables($"Value{index}")
+                Dim extraGrades = ds.Tables($"Grade{index}")
 
                 If Not extraValues Is Nothing Then
                     extraResultsMergedIn = True
