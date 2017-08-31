@@ -303,7 +303,7 @@ Friend NotInheritable Class BlockModel
 
             'INSERT / UPDATE checks
             If syncAction = SyncImportSyncActionEnumeration.Insert Or syncAction = SyncImportSyncActionEnumeration.Update Then
-                For Each fieldName In New String() {"ModelTonnes", "BlockNumber", "LastModifiedUser", "ModelLumpPercentAsShipped", "ModelLumpPercentAsDropped"}
+                For Each fieldName In New String() {"ModelTonnes", "BlockNumber", "LastModifiedUser", "ModelLumpPercentAsShipped", "ModelLumpPercentAsDropped", "StratNum"}
                     Select Case fieldName
                         Case "ModelTonnes" 'check for <= 0.0 or NULL
                             If (sourceRow(fieldName) Is DBNull.Value OrElse Convert.ToDouble(sourceRow(fieldName)) <= 0.0) Then
@@ -329,6 +329,14 @@ Friend NotInheritable Class BlockModel
                                 If (Convert.ToDecimal(sourceRow(fieldName)) < 0.0) Or (Convert.ToDecimal(sourceRow(fieldName)) > 100) Then
                                     GeneralHelper.LogValidationError("Lump Percent As Dropped must be between 0 and 100 inclusive.", fieldName,
                                                                      syncQueueRow, importSyncValidate, importSyncValidateField)
+                                End If
+                            End If
+                        Case "StratNum"
+                            If Not sourceRow(fieldName) Is DBNull.Value Then
+                                Dim stratNum = CStr(sourceRow(fieldName))
+                                If (Not _bhpbioUtilityDal.DoesStratNumExistInStratigraphyHierarchy(stratNum)) Then
+                                    GeneralHelper.LogValidationError("StratNum does not exist", $"StratNum {stratNum} does not exist", {stratNum},
+                                    syncQueueRow, importSyncValidate, importSyncValidateField)
                                 End If
                             End If
                     End Select
@@ -701,6 +709,8 @@ Friend NotInheritable Class BlockModel
         Dim hasLumpFinesAsShipped As Boolean
         Dim hasLumpFinesAsDropped As Boolean
 
+        Dim stratNum As String = Nothing
+
         'find/insert the location hierarchy
         ProcessInsertLocation(Convert.ToString(sourceRow("Site")),
          Convert.ToString(sourceRow("Pit")), Convert.ToString(sourceRow("Bench")),
@@ -871,6 +881,11 @@ Friend NotInheritable Class BlockModel
                 _digblockDal.AddOrUpdateDigblockValue(blockCode,
                     Convert.ToDouble(sourceRow("ModelVolume")), "ModelVolume", NullValues.Int32)
             End If
+
+            If Not sourceRow("StratNum") Is DBNull.Value Then
+                _digblockDal.AddOrUpdateDigblockNotes(blockCode,
+                    Convert.ToString(sourceRow("StratNum")), "StratNum", NullValues.Int32)
+            End If
         End If
 
         'create the digblock/model block links where available
@@ -933,7 +948,7 @@ Friend NotInheritable Class BlockModel
 
         'the following fields can change: BlockNumber, GeoType, BlockedDate, BlastedDate,
         'CentroidEasting, CentroidNorthing, CentroidRL, ModelTonnes,
-        'LastModifiedUser, LastModifiedDate, Point, Grade
+        'LastModifiedUser, LastModifiedDate, Point, Grade, StratNum
 
         ProcessChangedFieldNotes("BlockNumber", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("GeoType", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
@@ -943,6 +958,7 @@ Friend NotInheritable Class BlockModel
         ProcessChangedFieldNotes("LastModifiedDate", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("ModelFilename", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("BlockExternalSystemId", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
+        ProcessChangedFieldNotes("StratNum", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
 
         If syncQueueChangedFields.Select("ChangedField = 'ModelVolume'").Length > 0 Then
             If Not sourceRow("ModelVolume") Is DBNull.Value Then
@@ -1056,13 +1072,13 @@ Friend NotInheritable Class BlockModel
 
         If syncQueueChangedFields.Select("ChangedField = '" & changedField & "'").Length > 0 Then
             If Not changedField.Equals("BlockExternalSystemId") Then
-                If sourceRow(changedField) Is DBNull.Value And Not (changedField.Equals("ModelFilename") Or changedField.Equals("ModelVolume")) Then
+                If sourceRow(changedField) Is DBNull.Value And Not (changedField.Equals("ModelFilename") Or changedField.Equals("ModelVolume") Or changedField.Equals("StratNum")) Then
                     BlockModelDal.AddOrUpdateModelBlockPartialNotes(modelBlockId, sequenceNo,
                         changedField, NullValues.String, NullValues.Int32)
                 ElseIf changedField.Equals("BlockedDate") Or changedField.Equals("BlastedDate") Or changedField.Equals("LastModifiedDate") Then
                     BlockModelDal.AddOrUpdateModelBlockPartialNotes(modelBlockId, sequenceNo,
                         changedField, Convert.ToDateTime(sourceRow(changedField)).ToString("O"), NullValues.Int32)
-                Else
+                ElseIf (Not changedField.Equals("StratNum")) Then
                     BlockModelDal.AddOrUpdateModelBlockPartialNotes(modelBlockId, sequenceNo,
                         changedField, Convert.ToString(sourceRow(changedField)), NullValues.Int32)
                 End If

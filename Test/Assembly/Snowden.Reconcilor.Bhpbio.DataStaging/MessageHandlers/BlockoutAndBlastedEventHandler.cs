@@ -37,6 +37,8 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
         private const string _QUALITY_TYPE_HEAD = "HEAD";
         private const string _ANALYTE_ULTRAFINES = "ULTRAFINES";
 
+        private const string GRADE_CONTROL_MODEL_NAME = "Grade Control";
+
         /// <summary>
         /// Constant used to define the configuration key used to specify the Product Configuration File
         /// </summary>
@@ -366,6 +368,9 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
                         string modelFileName = null;
                         modelFileName = GetModelFilename(blockOutAndBlastedEvent, modelBlock.ModelType);
 
+                        string stratNum = null;
+                        stratNum = GetStratNum(block, modelBlock.ModelType);
+
                         ExtractGradeSetsAndQualityTypes(modelBlock,
                             ref qualitySetInSituRom,
                             ref qualitySetAsDroppedLump,
@@ -396,6 +401,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
                             modelFileName,
                             lumpPercentAsShipped,
                             lumpPercentAsDropped,
+                            stratNum,
                             ref modelBlockId);
 
                         if (qualitySetInSituRom != null)
@@ -573,7 +579,22 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
 
             return modelFileName;
         }
-        
+
+        private static string GetStratNum(BlockType block, string modelType)
+        {
+            string stratNum = null;
+            if (modelType.ToUpper() == GRADE_CONTROL_MODEL_NAME.ToUpper())
+            {
+                stratNum = block.StratNum.ToString();
+                if (stratNum == "0") // Is the default for an int because we had a NULL in the XML
+                {
+                    stratNum = null;    // Set it to null so we write that to the database.
+                }
+            }
+
+            return stratNum;
+        }
+
         /// <summary>
         /// Replace point data for the specified block
         /// </summary>

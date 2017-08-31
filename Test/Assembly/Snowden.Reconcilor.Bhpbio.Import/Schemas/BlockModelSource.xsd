@@ -113,6 +113,7 @@
               <xs:element name="ModelLumpPercentAsDropped" msprop:Generator_ColumnVarNameInTable="columnModelLumpPercentAsDropped" msprop:Generator_ColumnPropNameInRow="ModelLumpPercentAsDropped" msprop:Generator_ColumnPropNameInTable="ModelLumpPercentAsDroppedColumn" msprop:Generator_UserColumnName="ModelLumpPercentAsDropped" type="xs:decimal" minOccurs="0" />
               <xs:element name="ModelVolume" msprop:Generator_ColumnVarNameInTable="columnModelVolume" msprop:Generator_ColumnPropNameInRow="ModelVolume" msprop:Generator_ColumnPropNameInTable="ModelVolumeColumn" msprop:Generator_UserColumnName="ModelVolume" type="xs:double" minOccurs="0" />
               <xs:element name="ResourceClassification" msprop:Generator_ColumnVarNameInTable="columnResourceClassification" msprop:Generator_ColumnPropNameInRow="ResourceClassification" msprop:Generator_ColumnPropNameInTable="ResourceClassificationColumn" msprop:Generator_UserColumnName="ResourceClassification" type="xs:string" minOccurs="0" />
+              <xs:element name="StratNum" msprop:Generator_ColumnVarNameInTable="columnStratNum" msprop:Generator_ColumnPropNameInRow="StratNum" msprop:Generator_ColumnPropNameInTable="StratNumColumn" msprop:Generator_UserColumnName="StratNum" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

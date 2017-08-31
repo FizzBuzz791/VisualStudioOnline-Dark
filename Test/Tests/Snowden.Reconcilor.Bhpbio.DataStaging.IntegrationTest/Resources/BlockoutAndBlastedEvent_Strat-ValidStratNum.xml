@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <BlockOutAndBlastedEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.snowden.com/Blastholes/v1.0">
-  <Timestamp xmlns="">2015-03-17T13:52:53.7642126+08:00</Timestamp>
-  <IsReblockOut xmlns="">true</IsReblockOut>
+  <Timestamp xmlns="">2015-03-16T13:52:53.76Z</Timestamp>
+  <IsReblockOut xmlns="">false</IsReblockOut>
   <SourceModelDetail xmlns="">
     <ModelFile />
     <ModelType>GRADE_CONTROL</ModelType>
@@ -35,7 +35,7 @@
       <StratNum>3430</StratNum>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
-        <Tonnes>62077.009</Tonnes>
+        <Tonnes>52077.009</Tonnes>
         <Volume>19041.94</Volume>
         <Density>0</Density>
         <OreType>HG</OreType>
@@ -553,7 +553,7 @@
         <PointNumber>73</PointNumber>
         <ToeRL>644</ToeRL>
       </PolygonPoint>
-      <ChangeState>UPDATED</ChangeState>
+      <ChangeState>ADDED</ChangeState>
     </Block>
     <Block>
       <Name>2</Name>
@@ -565,7 +565,7 @@
       <StratNum>0</StratNum>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
-        <Tonnes>22144.415</Tonnes>
+        <Tonnes>12144.415</Tonnes>
         <Volume>4859.214</Volume>
         <Density>0</Density>
         <OreType>HG</OreType>
@@ -999,7 +999,7 @@
         <PointNumber>59</PointNumber>
         <ToeRL>644</ToeRL>
       </PolygonPoint>
-      <ChangeState>UNCHANGED</ChangeState>
+      <ChangeState>ADDED</ChangeState>
     </Block>
     <Block>
       <Name>3</Name>
@@ -1011,7 +1011,7 @@
       <StratNum>0</StratNum>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
-        <Tonnes>4021.543</Tonnes>
+        <Tonnes>2021.543</Tonnes>
         <Volume>909.774</Volume>
         <Density>0</Density>
         <OreType>WS</OreType>
@@ -1211,7 +1211,7 @@
         <PointNumber>20</PointNumber>
         <ToeRL>644</ToeRL>
       </PolygonPoint>
-      <ChangeState>UPDATED</ChangeState>
+      <ChangeState>ADDED</ChangeState>
     </Block>
   </PatternDetails>
 </BlockOutAndBlastedEvent>

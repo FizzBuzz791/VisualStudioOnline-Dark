@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <BlockOutAndBlastedEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.snowden.com/Blastholes/v1.0">
-  <Timestamp xmlns="">2015-03-17T13:52:53.7642126+08:00</Timestamp>
-  <IsReblockOut xmlns="">true</IsReblockOut>
+  <Timestamp xmlns="">2015-03-16T13:52:53.76Z</Timestamp>
+  <IsReblockOut xmlns="">false</IsReblockOut>
   <SourceModelDetail xmlns="">
     <ModelFile />
     <ModelType>GRADE_CONTROL</ModelType>
@@ -10,7 +10,7 @@
     <PatternGUID>fe1743ff-4c38-f846-abc2-051de605dd90</PatternGUID>
     <PatternNumber>3151</PatternNumber>
     <Name>0209</Name>
-    <SiteId>INTEGTEST_1</SiteId>
+    <SiteId>AREAC</SiteId>
     <OrebodyId>AC</OrebodyId>
     <PitId_Log>CW</PitId_Log>
     <PitId_Phy>778</PitId_Phy>
@@ -29,13 +29,13 @@
       <Name>1</Name>
       <BlockGUID>a2443171-b363-4f88-a403-3cee9420dd4d</BlockGUID>
       <BlockNumber>0</BlockNumber>
-      <GeoType>N3</GeoType>
+      <GeoType>N2</GeoType>
       <DateBlocked>2005-08-28T00:00:00</DateBlocked>
       <Stratigraphy>N3</Stratigraphy>
-      <StratNum>3430</StratNum>
+      <StratNum>3420</StratNum>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
-        <Tonnes>62077.009</Tonnes>
+        <Tonnes>52077.009</Tonnes>
         <Volume>19041.94</Volume>
         <Density>0</Density>
         <OreType>HG</OreType>
@@ -46,47 +46,43 @@
         <GradeSet>
           <GradeSetType>IN-SITU</GradeSetType>
           <QualitySet>
-            <QualityType>ROM</QualityType>
-            <QualityTypeSplitPercentage>0</QualityTypeSplitPercentage>
+            <QualityType>HEAD</QualityType>
+            <QualityTypeSplitPercentage>100</QualityTypeSplitPercentage>
             <Analytes>
               <AnalyteName>FE</AnalyteName>
-              <Value>51.67</Value>
+              <Value>55.28</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>P</AnalyteName>
-              <Value>0.46</Value>
+              <Value>0.036</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>AL2O3</AnalyteName>
-              <Value>2.801</Value>
+              <Value>3.135</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>SIO2</AnalyteName>
-              <Value>9.42</Value>
+              <Value>10.12</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>LOI</AnalyteName>
-              <Value>0</Value>
+              <Value>7.026</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>MNO</AnalyteName>
-              <Value>0.86</Value>
-            </Analytes>
-            <Analytes>
-              <AnalyteName>MN</AnalyteName>
-              <Value>0</Value>
+              <Value>0.163</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>MGO</AnalyteName>
-              <Value>0.967</Value>
+              <Value>0.086</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>CAO</AnalyteName>
-              <Value>2.001</Value>
+              <Value>0.015</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>TIO2</AnalyteName>
-              <Value>0.098</Value>
+              <Value>0.189</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>H2O</AnalyteName>
@@ -94,11 +90,233 @@
             </Analytes>
             <Analytes>
               <AnalyteName>K2O</AnalyteName>
-              <Value>0</Value>
+              <Value>0.035</Value>
             </Analytes>
             <Analytes>
               <AnalyteName>S</AnalyteName>
-              <Value>0.3</Value>
+              <Value>0.021</Value>
+            </Analytes>
+          </QualitySet>
+        </GradeSet>
+        <GradeSet>
+          <GradeSetType>AS-DROPPED</GradeSetType>
+          <QualitySet>
+            <QualityType>LUMP</QualityType>
+            <QualityTypeSplitPercentage>53.404239654541016</QualityTypeSplitPercentage>
+            <Analytes>
+              <AnalyteName>FE</AnalyteName>
+              <Value>57.5343323</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>P</AnalyteName>
+              <Value>0.0326546505</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>AL2O3</AnalyteName>
+              <Value>2.25046659</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>SIO2</AnalyteName>
+              <Value>8.64921474</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>LOI</AnalyteName>
+              <Value>6.85777235</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>MNO</AnalyteName>
+              <Value>0.163000003</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>MGO</AnalyteName>
+              <Value>0.0860000029</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>CAO</AnalyteName>
+              <Value>0.0149999997</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>TIO2</AnalyteName>
+              <Value>0.188999996</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>H2O</AnalyteName>
+              <Value>0</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>K2O</AnalyteName>
+              <Value>0.0350000001</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>S</AnalyteName>
+              <Value>0.0209999997</Value>
+            </Analytes>
+          </QualitySet>
+          <QualitySet>
+            <QualityType>ULTRAFINES</QualityType>
+            <QualityTypeSplitPercentage>14.296470642089844</QualityTypeSplitPercentage>
+          </QualitySet>
+          <QualitySet>
+            <QualityType>FINES</QualityType>
+            <QualityTypeSplitPercentage>46.595760345458984</QualityTypeSplitPercentage>
+            <Analytes>
+              <AnalyteName>FE</AnalyteName>
+              <Value>52.69627</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>P</AnalyteName>
+              <Value>0.0398341641</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>AL2O3</AnalyteName>
+              <Value>4.14877939</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>SIO2</AnalyteName>
+              <Value>11.8056927</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>LOI</AnalyteName>
+              <Value>7.21880865</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>MNO</AnalyteName>
+              <Value>0.163000003</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>MGO</AnalyteName>
+              <Value>0.0860000029</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>CAO</AnalyteName>
+              <Value>0.0149999997</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>TIO2</AnalyteName>
+              <Value>0.188999996</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>H2O</AnalyteName>
+              <Value>0</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>K2O</AnalyteName>
+              <Value>0.0350000001</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>S</AnalyteName>
+              <Value>0.0209999997</Value>
+            </Analytes>
+          </QualitySet>
+        </GradeSet>
+        <GradeSet>
+          <GradeSetType>AS-SHIPPED</GradeSetType>
+          <QualitySet>
+            <QualityType>LUMP</QualityType>
+            <QualityTypeSplitPercentage>45.927646636962891</QualityTypeSplitPercentage>
+            <Analytes>
+              <AnalyteName>FE</AnalyteName>
+              <Value>58.3347816</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>P</AnalyteName>
+              <Value>0.0314849131</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>AL2O3</AnalyteName>
+              <Value>1.9470439</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>SIO2</AnalyteName>
+              <Value>8.11893177</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>LOI</AnalyteName>
+              <Value>6.79870892</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>MNO</AnalyteName>
+              <Value>0.163000003</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>MGO</AnalyteName>
+              <Value>0.0860000029</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>CAO</AnalyteName>
+              <Value>0.0149999997</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>TIO2</AnalyteName>
+              <Value>0.188999996</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>H2O</AnalyteName>
+              <Value>0</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>K2O</AnalyteName>
+              <Value>0.0350000001</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>S</AnalyteName>
+              <Value>0.0209999997</Value>
+            </Analytes>
+          </QualitySet>
+          <QualitySet>
+            <QualityType>ULTRAFINES</QualityType>
+            <QualityTypeSplitPercentage>14.296470642089844</QualityTypeSplitPercentage>
+          </QualitySet>
+          <QualitySet>
+            <QualityType>FINES</QualityType>
+            <QualityTypeSplitPercentage>54.072353363037109</QualityTypeSplitPercentage>
+            <Analytes>
+              <AnalyteName>FE</AnalyteName>
+              <Value>52.6853485</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>P</AnalyteName>
+              <Value>0.0398349985</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>AL2O3</AnalyteName>
+              <Value>4.14401913</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>SIO2</AnalyteName>
+              <Value>11.8196554</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>LOI</AnalyteName>
+              <Value>7.21905518</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>MNO</AnalyteName>
+              <Value>0.163000003</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>MGO</AnalyteName>
+              <Value>0.0860000029</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>CAO</AnalyteName>
+              <Value>0.0149999997</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>TIO2</AnalyteName>
+              <Value>0.188999996</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>H2O</AnalyteName>
+              <Value>0</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>K2O</AnalyteName>
+              <Value>0.0350000001</Value>
+            </Analytes>
+            <Analytes>
+              <AnalyteName>S</AnalyteName>
+              <Value>0.0209999997</Value>
             </Analytes>
           </QualitySet>
         </GradeSet>
@@ -553,7 +771,7 @@
         <PointNumber>73</PointNumber>
         <ToeRL>644</ToeRL>
       </PolygonPoint>
-      <ChangeState>UPDATED</ChangeState>
+      <ChangeState>ADDED</ChangeState>
     </Block>
     <Block>
       <Name>2</Name>
@@ -565,7 +783,7 @@
       <StratNum>0</StratNum>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
-        <Tonnes>22144.415</Tonnes>
+        <Tonnes>12144.415</Tonnes>
         <Volume>4859.214</Volume>
         <Density>0</Density>
         <OreType>HG</OreType>
@@ -999,7 +1217,7 @@
         <PointNumber>59</PointNumber>
         <ToeRL>644</ToeRL>
       </PolygonPoint>
-      <ChangeState>UNCHANGED</ChangeState>
+      <ChangeState>ADDED</ChangeState>
     </Block>
     <Block>
       <Name>3</Name>
@@ -1011,7 +1229,7 @@
       <StratNum>0</StratNum>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
-        <Tonnes>4021.543</Tonnes>
+        <Tonnes>2021.543</Tonnes>
         <Volume>909.774</Volume>
         <Density>0</Density>
         <OreType>WS</OreType>
@@ -1211,7 +1429,7 @@
         <PointNumber>20</PointNumber>
         <ToeRL>644</ToeRL>
       </PolygonPoint>
-      <ChangeState>UPDATED</ChangeState>
+      <ChangeState>ADDED</ChangeState>
     </Block>
   </PatternDetails>
 </BlockOutAndBlastedEvent>

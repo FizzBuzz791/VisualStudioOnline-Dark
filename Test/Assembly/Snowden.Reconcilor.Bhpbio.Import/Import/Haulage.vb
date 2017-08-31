@@ -37,9 +37,9 @@ Friend NotInheritable Class Haulage
         End Set
     End Property
 
-    Public Sub New()
+    Public Sub New(Optional config As ConfigurationSettings = Nothing)
         MyBase.New()
-        _settings = ConfigurationSettings.GetConfigurationSettings()
+        _settings = ConfigurationSettings.GetConfigurationSettings(config)
         ImportGroup = "Reconcilor Generics"
         ImportName = "Haulage"
         SourceSchemaName = "Haulage"
