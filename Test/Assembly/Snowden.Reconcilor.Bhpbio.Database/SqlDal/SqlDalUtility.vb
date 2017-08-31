@@ -1413,7 +1413,7 @@ endDate As Date) As DataTable Implements IUtility.GetBhpbioLocationChildrenNameW
         End Function
 
 
-        Function GetBhpbioStratigraphyHierarchyExists(stratNum As String) As Boolean Implements IUtility.GetBhpbioStratigraphyHierarchyExists
+        Function DoesStratNumExistInStratigraphyHierarchy(stratNum As String) As Boolean Implements IUtility.DoesStratNumExistInStratigraphyHierarchy
 
             With DataAccess
                 .CommandText = "dbo.DoesStratNumExistInStratigraphyHierarchy"

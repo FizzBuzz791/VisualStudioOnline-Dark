@@ -334,7 +334,7 @@ Friend NotInheritable Class BlockModel
                         Case "StratNum"
                             If Not sourceRow(fieldName) Is DBNull.Value Then
                                 Dim stratNum = CStr(sourceRow(fieldName))
-                                If (Not _bhpbioUtilityDal.GetBhpbioStratigraphyHierarchyExists(stratNum)) Then
+                                If (Not _bhpbioUtilityDal.DoesStratNumExistInStratigraphyHierarchy(stratNum)) Then
                                     GeneralHelper.LogValidationError("StratNum does not exist", $"StratNum {stratNum} does not exist", {stratNum},
                                     syncQueueRow, importSyncValidate, importSyncValidateField)
                                 End If

@@ -245,7 +245,7 @@ Namespace DalBaseObjects
         Function GetBhpbioStratigraphyHierarchyList() As DataTable
         Function GetBhpbioStratigraphyHierarchyTypeList() As DataTable
 
-        Function GetBhpbioStratigraphyHierarchyExists(stratNum As String) As Boolean
+        Function DoesStratNumExistInStratigraphyHierarchy(stratNum As String) As Boolean
 
     End Interface
 End Namespace
