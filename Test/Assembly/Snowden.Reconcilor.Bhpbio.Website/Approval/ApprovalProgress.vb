@@ -3,7 +3,7 @@ Imports System.Web.UI.WebControls
 Imports System.Web.UI
 Imports Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
 Imports Snowden.Reconcilor.Core.WebDevelopment.WebpageTemplates
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls
 

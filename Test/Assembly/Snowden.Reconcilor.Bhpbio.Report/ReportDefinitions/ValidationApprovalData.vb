@@ -4,6 +4,7 @@ Imports Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects
 Imports Snowden.Common.Database.DataAccessBaseObjects
 Imports System.Linq
 Imports Snowden.Reconcilor.Bhpbio.Report.Constants
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 
 Namespace ReportDefinitions
 

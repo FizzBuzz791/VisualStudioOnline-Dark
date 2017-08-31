@@ -7,6 +7,7 @@ Imports Snowden.Reconcilor.Bhpbio.Report
 Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 Imports System.Data.DataTableExtensions
 Imports System.Data.DataRowExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 
 <TestClass()>
 Public Class F1F2F3ReportingTests

@@ -5,6 +5,7 @@ Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
 Imports Snowden.Reconcilor.Bhpbio.Report.Enums
 Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Types
     ''' <summary>

@@ -11,6 +11,7 @@ Imports System.Web.Hosting
 Imports System.Xml
 Imports Snowden.Reconcilor.Bhpbio.Report.Calc
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinition
 
 <WebService(Namespace:="http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/")>

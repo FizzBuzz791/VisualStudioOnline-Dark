@@ -8,6 +8,7 @@ Imports System.Data
 ' these modules add LINQ methods to the datatable + datarow
 Imports System.Data.DataTableExtensions
 Imports System.Data.DataRowExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 
 Namespace ReportDefinitions
 
@@ -301,7 +302,7 @@ Namespace ReportDefinitions
                 Dim attribute As String = CStr(row("Attribute")).ToLower
                 If attribute.EndsWith("tonnes") Then Continue For
 
-                Dim newRow = row.Copy()
+                Dim newRow = GenericDataTableExtensions.Copy(row)
                 newRow("IsTonnes") = True
                 newRow("Attribute") = String.Format("{0}Tonnes", newRow("Attribute").ToString)
                 newRow("AttributeValue") = newRow("AttributeTonnes")
@@ -373,7 +374,7 @@ Namespace ReportDefinitions
             Dim rows = table.AsEnumerable.Where(Function(r) r("TagId").ToString = SourceTagId And r("Attribute").ToString.ToLower.EndsWith("tonnes")).ToList
 
             For Each row As DataRow In rows
-                Dim newRow = row.Copy()
+                Dim newRow = GenericDataTableExtensions.Copy(row)
                 newRow("ReportTagId") = DestinationReportTagId
                 table.Rows.Add(newRow)
             Next
@@ -460,7 +461,7 @@ Namespace ReportDefinitions
                 baseValue -= TagValue
             End If
 
-            Dim newRow = row.Copy()
+            Dim newRow = GenericDataTableExtensions.Copy(row)
             newRow("TagId") = "Offset"
             newRow("PresentationColor") = "Transparent"
 

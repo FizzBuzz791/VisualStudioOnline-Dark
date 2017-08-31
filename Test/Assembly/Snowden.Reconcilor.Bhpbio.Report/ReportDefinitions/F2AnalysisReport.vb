@@ -2,6 +2,7 @@
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
 Imports System.Data.DataTableExtensions
 Imports System.Runtime.CompilerServices
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.ReportHelpers
 
 Namespace ReportDefinitions

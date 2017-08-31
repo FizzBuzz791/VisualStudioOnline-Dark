@@ -204,12 +204,14 @@
     <Compile Include="ReportDefinitions\CombinationOfInterestIdentifier.vb" />
     <Compile Include="ReportDefinitions\DateBreakdownHelper.vb" />
     <Compile Include="ReportDefinitions\ErrorContributionEngine.vb" />
+    <Compile Include="Extensions\F1F2F3DataExtensions.vb" />
     <Compile Include="ReportDefinitions\F2AnalysisReport.vb" />
     <Compile Include="ReportDefinitions\DensityAnalysisReport.vb" />
     <Compile Include="ReportDefinitions\DensityReconciliationReport.vb" />
     <Compile Include="ReportDefinitions\F1F2F3GeometDataHelper.vb" />
     <Compile Include="ReportDefinitions\BlockOutSummaryReport.vb" />
     <Compile Include="ReportDefinitions\FactorsVsTimeReportResourceClassification.vb" />
+    <Compile Include="Extensions\GenericDataTableExtensions.vb" />
     <Compile Include="ReportDefinitions\IAutomaticContentSelectionMode.vb" />
     <Compile Include="ReportDefinitions\ICombinationOfInterestIdentifier.vb" />
     <Compile Include="ReportDefinitions\ResourceClassificationContributionReport.vb" />

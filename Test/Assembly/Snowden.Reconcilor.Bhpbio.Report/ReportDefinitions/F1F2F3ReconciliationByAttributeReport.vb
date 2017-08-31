@@ -1,6 +1,7 @@
 ﻿Imports Snowden.Reconcilor.Bhpbio.Report.Types
 Imports System.Text
 Imports System.Linq
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 
 Namespace ReportDefinitions
 

@@ -9,7 +9,7 @@ Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.ReconcilorControls.Inputs
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls.InputTags
 Imports Snowden.Common.Web.BaseHtmlControls
 
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
 
 Namespace Utilities
     Public Class DefaultshippingTargetList

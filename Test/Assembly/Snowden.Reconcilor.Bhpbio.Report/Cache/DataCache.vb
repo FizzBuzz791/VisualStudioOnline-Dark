@@ -4,6 +4,8 @@ Imports Snowden.Reconcilor.Bhpbio.Report.Types
 Imports System.ComponentModel
 Imports System.Threading
 Imports Snowden.Reconcilor.Bhpbio.Report.Constants
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Cache
     ''' <summary>
