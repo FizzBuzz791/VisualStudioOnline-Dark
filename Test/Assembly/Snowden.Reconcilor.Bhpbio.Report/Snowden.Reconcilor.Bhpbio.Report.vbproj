@@ -178,6 +178,7 @@
     <Compile Include="Calc\PortStockpileDelta.vb" />
     <Compile Include="Calc\PostCrusherStockpileDelta.vb" />
     <Compile Include="Calc\StockpileToCrusher.vb" />
+    <Compile Include="Constants\CalculationConstants.vb" />
     <Compile Include="Data\ApprovalData.vb" />
     <Compile Include="Data\BlockModels.vb" />
     <Compile Include="Data\DateBreakdown.vb" />
@@ -240,6 +241,7 @@
     <Compile Include="Types\CalculationResult.vb" />
     <Compile Include="Types\CalculationResultDepth.vb" />
     <Compile Include="Types\CalculationResultRecord.vb" />
+    <Compile Include="Extensions\CalculationResultRecordExtensions.vb" />
     <Compile Include="Types\CalculationResultTag.vb" />
     <Compile Include="Types\CalculationResultType.vb" />
     <Compile Include="Types\CalculationOperation.vb" />
@@ -302,6 +304,10 @@
     <None Include="ReportingClass.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Libraries\Snowden.Library\Snowden.Library.csproj">
+      <Project>{e77fb242-9622-43d0-8022-5019409f4081}</Project>
+      <Name>Snowden.Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Snowden.Reconcilor.Bhpbio.Database\Snowden.Reconcilor.Bhpbio.Database.vbproj">
       <Project>{FB0D8BFC-A134-4303-995F-90BC802C0842}</Project>
       <Name>Snowden.Reconcilor.Bhpbio.Database</Name>
@@ -312,6 +318,7 @@
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
   </PropertyGroup>

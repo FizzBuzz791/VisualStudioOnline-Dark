@@ -113,7 +113,7 @@ Namespace Calc
 
             difference = CalculationResult.Difference(modelResult, gradeControlResult)
 
-            For Each differenceDate In difference.AggregateRecords(True, False, False, False)
+            For Each differenceDate In difference.AggregateRecords(onMaterialTypeId := False, onLocationId := False, onProductSize := False)
                 Result.Tags.Add(New CalculationResultTag("TonnesDifference", differenceDate.CalendarDate, GetType(Double), ZeroIfNull(differenceDate.Tonnes)))
                 Result.Tags.Add(New CalculationResultTag("VolumeDifference", differenceDate.CalendarDate, GetType(Double), ZeroIfNull(differenceDate.Volume)))
 

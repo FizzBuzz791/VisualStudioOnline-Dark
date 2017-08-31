@@ -4,6 +4,7 @@ Imports System.Threading
 Imports System.Runtime.CompilerServices
 Imports System.Data.DataTableExtensions
 Imports Snowden.Reconcilor.Bhpbio.Report.Calc
+Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
 
 Public Class F1F2F3ReportEngine
@@ -711,7 +712,7 @@ Public Class F1F2F3ReportEngine
                         For Each column As String In New String() _
                      {"TagId", "CalcId", "Description", "Type", "CalculationDepth", "InError",
                       "ErrorMessage", "RootCalcId", "PresentationEditable", "PresentationLocked",
-                      "PresentationValid", "PresentationColor", CalculationResultRecord.ColumnNameProductSize, CalculationResultRecord.ColumnNameReportTagId}
+                      "PresentationValid", "PresentationColor", CalculationConstants.COLUMN_NAME_PRODUCT_SIZE, CalculationConstants.COLUMN_NAME_REPORT_TAG_ID}
                             resultRow(column) = currentRow(column)
                         Next
 
@@ -854,8 +855,8 @@ Public Class F1F2F3ReportEngine
 
             For Each row As DataRow In matchedRows
                 Dim rowKey As String = row.Item(COLUMN_TAG_ID).ToString()
-                Dim productSize = row.Item(CalculationResultRecord.ColumnNameProductSize).ToString()
-                Dim resourceClassification = row.Item(CalculationResultRecord.ColumnNameResourceClassification).ToString()
+                Dim productSize = row.Item(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString()
+                Dim resourceClassification = row.Item(CalculationConstants.COLUMN_NAME_RESOURCE_CLASSIFICATION).ToString()
 
                 If productSize <> "TOTAL" AndAlso Not rowKey.EndsWith(productSize) Then
                     rowKey += productSize.ToUpper
@@ -1481,7 +1482,7 @@ Public Class F1F2F3ReportEngine
             Dim tagIdForComparison = DirectCast(row("ReportTagId"), String)
 
             Dim productSizeForRow As String = String.Empty
-            Dim productSizeObject As Object = row(CalculationResultRecord.ColumnNameProductSize)
+            Dim productSizeObject As Object = row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
 
             If (Not productSizeObject Is Nothing AndAlso Not productSizeObject Is DBNull.Value) Then
                 productSizeForRow = productSizeObject.ToString
@@ -1633,7 +1634,7 @@ Public Class F1F2F3ReportEngine
 
             ' Determine the tag Id for each row (and remove the product size suffix if there is one)
             Dim tagId As String = reportDataTable.Rows(i)("ReportTagId").ToString
-            Dim productSizeValue As Object = reportDataTable.Rows(i)(CalculationResultRecord.ColumnNameProductSize)
+            Dim productSizeValue As Object = reportDataTable.Rows(i)(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
             Dim productSize As String = String.Empty
 
             If (Not productSizeValue Is Nothing AndAlso Not productSizeValue Is DBNull.Value) Then

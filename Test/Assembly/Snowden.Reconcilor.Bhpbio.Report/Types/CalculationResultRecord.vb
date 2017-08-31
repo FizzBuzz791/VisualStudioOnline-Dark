@@ -1,4 +1,6 @@
-﻿Namespace Types
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.Constants
+
+Namespace Types
 
 
     Public Class CalculationResultRow
@@ -53,22 +55,6 @@
 
     <DebuggerDisplayAttribute("CalendarDate:{_calendarDate}, LocationId:{_locationId}, MaterialId:{_materialTypeId}, Product:{_productSize}, Tonnes:{_tonnes}")> _
     Public Class CalculationResultRecord
-
-        Public Const ColumnNameProductSize As String = "ProductSize"
-        Public Const ColumnNameMaterialType As String = "MaterialTypeId"
-        Public Const ColumnNameLocationId As String = "ParentLocationId"
-        Public Const ColumnNameDateCal As String = "CalendarDate"
-        Public Const ColumnNameDateFrom As String = "DateFrom"
-        Public Const ColumnNameDateTo As String = "DateTo"
-        Public Const ColumnNameSortKey As String = "SortKey"
-        Public Const ColumnNameRootCalcId As String = "RootCalcId"
-        Public Const ColumnNameCalculationDepth As String = "CalculationDepth"
-        Public Const ColumnNameType As String = "Type"
-        Public Const ColumnNameTagId As String = "TagId"
-        Public Const ColumnNameReportTagId As String = "ReportTagId"
-        Public Const ColumnNameRootCalculationId As String = "RootCalculationId"
-        Public Const ColumnNameResourceClassification As String = "ResourceClassification"
-
         ' it would be possible to get these grades from the database, but in order not to introduce a new
         ' dependency to this class, we just have them hardcoded here.
         '
@@ -196,7 +182,7 @@
 
         Public ReadOnly Property EffectiveProductSize() As String
             Get
-                Return IIf(ProductSize Is Nothing, CalculationResult.ProductSizeTotal, ProductSize).ToString
+                Return IIf(ProductSize Is Nothing, CalculationConstants.PRODUCT_SIZE_TOTAL, ProductSize).ToString
             End Get
         End Property
 
@@ -344,7 +330,7 @@
             _calendarDate = dateFrom
             _dateFrom = dateFrom
             _dateTo = dateTo
-            _productSize = CalculationResult.ProductSizeTotal
+            _productSize = CalculationConstants.PRODUCT_SIZE_TOTAL
         End Sub
 
         Public Sub New(ByVal value As DataRow, ByVal grades As IEnumerable(Of DataRow))
@@ -405,26 +391,26 @@
                 ' Gather up the listings from the data table.
                 columns = value.Table.Columns
 
-                colsExists = columns.Contains(ColumnNameDateCal) And
-                    columns.Contains(ColumnNameLocationId) And
-                    columns.Contains(ColumnNameMaterialType)
+                colsExists = columns.Contains(CalculationConstants.COLUMN_NAME_DATE_CAL) And
+                    columns.Contains(CalculationConstants.COLUMN_NAME_LOCATION_ID) And
+                    columns.Contains(CalculationConstants.COLUMN_NAME_MATERIAL_TYPE)
 
                 If colsExists Then
-                    If DateTime.TryParse(value(ColumnNameDateCal).ToString(), calDate) Then
+                    If DateTime.TryParse(value(CalculationConstants.COLUMN_NAME_DATE_CAL).ToString(), calDate) Then
                         CalendarDate = calDate
-                        DateFrom = Convert.ToDateTime(value(ColumnNameDateFrom).ToString())
-                        DateTo = Convert.ToDateTime(value(ColumnNameDateTo).ToString())
+                        DateFrom = Convert.ToDateTime(value(CalculationConstants.COLUMN_NAME_DATE_FROM).ToString())
+                        DateTo = Convert.ToDateTime(value(CalculationConstants.COLUMN_NAME_DATE_TO).ToString())
 
-                        If Int32.TryParse(value(ColumnNameLocationId).ToString(), parsedLocationId) Then
+                        If Int32.TryParse(value(CalculationConstants.COLUMN_NAME_LOCATION_ID).ToString(), parsedLocationId) Then
                             LocationId = parsedLocationId
                         End If
 
-                        If Int32.TryParse(value(ColumnNameMaterialType).ToString(), parsedMaterialTypeId) Then
+                        If Int32.TryParse(value(CalculationConstants.COLUMN_NAME_MATERIAL_TYPE).ToString(), parsedMaterialTypeId) Then
                             MaterialTypeId = parsedMaterialTypeId
                         End If
 
-                        If columns.Contains(ColumnNameProductSize) Then
-                            ProductSize = value(ColumnNameProductSize).ToString()
+                        If columns.Contains(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE) Then
+                            ProductSize = value(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString()
                         End If
 
                         Tonnes = Convert.ToDouble(value("Tonnes").ToString)
@@ -448,10 +434,10 @@
 
                             Dim gradeFiltered As IEnumerable(Of DataRow)
                             ' filter the records to only those appropriate for the value data row
-                            gradeFiltered = grades.Where(Function(g) Convert.ToDateTime(g(ColumnNameDateCal).ToString()) = CalendarDate _
-                                             And ParseNullableInt32(g(ColumnNameLocationId), LocationId) _
-                                             And ParseNullableInt32(g(ColumnNameMaterialType), MaterialTypeId) _
-                                             And SafeParseString(g, ColumnNameProductSize, CalculationResult.ProductSizeTotal, EffectiveProductSize) _
+                            gradeFiltered = grades.Where(Function(g) Convert.ToDateTime(g(CalculationConstants.COLUMN_NAME_DATE_CAL).ToString()) = CalendarDate _
+                                             And ParseNullableInt32(g(CalculationConstants.COLUMN_NAME_LOCATION_ID), LocationId) _
+                                             And ParseNullableInt32(g(CalculationConstants.COLUMN_NAME_MATERIAL_TYPE), MaterialTypeId) _
+                                             And SafeParseString(g, CalculationConstants.COLUMN_NAME_PRODUCT_SIZE, CalculationConstants.PRODUCT_SIZE_TOTAL, EffectiveProductSize) _
                                              And SafeParseString(g, "ResourceClassification", Nothing, ResourceClassification)).ToArray
 
                             For Each gradeName As String In GradeNames
@@ -880,9 +866,9 @@
             table.Columns.Add(New DataColumn("DateTo", GetType(DateTime), ""))
             table.Columns.Add(New DataColumn("LocationId", GetType(Int32), ""))
             table.Columns.Add(New DataColumn("MaterialTypeId", GetType(Int32), ""))
-            table.Columns.Add(New DataColumn(ColumnNameProductSize, GetType(String), ""))
+            table.Columns.Add(New DataColumn(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE, GetType(String), ""))
             table.Columns.Add(New DataColumn("ResourceClassification", GetType(String)))
-            table.Columns.Add(New DataColumn(ColumnNameSortKey, GetType(String), ""))
+            table.Columns.Add(New DataColumn(CalculationConstants.COLUMN_NAME_SORT_KEY, GetType(String), ""))
 
             If Not normalizedData Then
                 table.Columns.Add(New DataColumn("Tonnes", GetType(Double), ""))
@@ -938,14 +924,44 @@
             row("DateTo") = DateTo
             row("MaterialTypeId") = IIf(MaterialTypeId Is Nothing, DBNull.Value, MaterialTypeId)
             row("LocationId") = IIf(LocationId Is Nothing, DBNull.Value, LocationId)
-            row(ColumnNameProductSize) = IIf(ProductSize Is Nothing, DBNull.Value, ProductSize)
+            row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE) = IIf(ProductSize Is Nothing, DBNull.Value, ProductSize)
             row("ResourceClassification") = IIf(ResourceClassification Is Nothing, DBNull.Value, ResourceClassification)
-            row(ColumnNameSortKey) = IIf(SortKey Is Nothing, DBNull.Value, SortKey)
+            row(CalculationConstants.COLUMN_NAME_SORT_KEY) = IIf(SortKey Is Nothing, DBNull.Value, SortKey)
             Return row
         End Function
 
 #End Region
+
+        Public Overrides Function Equals(obj As Object) As Boolean
+            If obj.GetType() IsNot GetType(CalculationResultRecord) Then
+                Return False
+            Else
+                Dim comparisonObj = CType(obj, CalculationResultRecord)
+                Return Al2O3.Equals(comparisonObj.Al2O3) And
+                       CalendarDate = comparisonObj.CalendarDate And
+                       DateFrom = comparisonObj.DateFrom And
+                       DateTo = comparisonObj.DateTo And
+                       Density.Equals(comparisonObj.Density) And
+                       DodgyAggregateEnabled.Equals(comparisonObj.DodgyAggregateEnabled) And
+                       DodgyAggregateGradeTonnes.Equals(comparisonObj.DodgyAggregateGradeTonnes) And
+                       EffectiveProductSize = comparisonObj.EffectiveProductSize And
+                       Fe.Equals(comparisonObj.Fe) And
+                       H2O.Equals(comparisonObj.H2O) And
+                       H2ODropped.Equals(comparisonObj.H2ODropped) And
+                       H2OShipped.Equals(comparisonObj.H2OShipped) And
+                       LocationId.Equals(comparisonObj.LocationId) And
+                       Loi.Equals(comparisonObj.Loi) And
+                       MaterialTypeId.Equals(comparisonObj.MaterialTypeId) And
+                       P.Equals(comparisonObj.P) And
+                       Equals(Parent, comparisonObj.Parent) And 'Parent.Equals... breaks if Parent is null, this works correctly.
+                       ProductSize = comparisonObj.ProductSize And
+                       ResourceClassification = comparisonObj.ResourceClassification And
+                       SiO2.Equals(comparisonObj.SiO2) And
+                       SortKey = comparisonObj.SortKey And
+                       Tonnes.Equals(comparisonObj.Tonnes) And
+                       UltraFines.Equals(comparisonObj.UltraFines) And
+                       Volume.Equals(comparisonObj.Volume)
+            End If
+        End Function
     End Class
-
 End Namespace
-

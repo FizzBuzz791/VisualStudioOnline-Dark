@@ -3,6 +3,7 @@ Imports Snowden.Reconcilor.Bhpbio.Report.Types
 Imports Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects
 Imports Snowden.Common.Database.DataAccessBaseObjects
 Imports System.Linq
+Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 
 Namespace ReportDefinitions
 
@@ -176,7 +177,7 @@ Namespace ReportDefinitions
 
             For Each dr As DataRow In table.Select(Nothing, "ProductSizeSortExpression, OriginalPosition")
                 Dim newRow As DataRow = sortedTable.Rows.Add(dr.ItemArray)
-                If Not newRow.Item("ProductSize").ToString = CalculationResult.ProductSizeTotal Then
+                If Not newRow.Item("ProductSize").ToString = CalculationConstants.PRODUCT_SIZE_TOTAL Then
 
                     ' If CalculationDepth is 0 (ie top level) and no Material Type specified then include product size in the description
                     If (String.IsNullOrEmpty(newRow.Item("MaterialTypeId").ToString) And newRow.Item("CalculationDepth").ToString = "0") Then

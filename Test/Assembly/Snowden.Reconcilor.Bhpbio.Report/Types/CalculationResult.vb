@@ -1,26 +1,31 @@
-﻿Namespace Types
+﻿Imports System.Collections.ObjectModel
+Imports System.Text
+Imports Snowden.Library.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Constants
+Imports Snowden.Reconcilor.Bhpbio.Report.Data
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+
+Namespace Types
+    Public Enum CalculationType
+        Addition
+        Subtraction
+        Division
+        Difference
+        Ratio
+    End Enum
+
     ''' <summary>
     ''' Contains the result of a given calculation.
     ''' Also supplies shared functions for the conversion between datatables and calculationResult.
     ''' </summary>
     ''' <remarks>CalculationResult will contain one to many CalculationDate</remarks>
-    <DebuggerDisplayAttribute("CalcId:{_calcId}, TagId:{_tagId}, Records: {Count}")> _
-    Public Class CalculationResult
-        Inherits ObjectModel.Collection(Of CalculationResultRecord)
-        Implements IDisposable
-
-        Public Const ProductSizeTotal As String = "TOTAL"
+    <DebuggerDisplay("CalcId:{_calcId}, TagId:{_tagId}, Records: {Count}")> _
+    Public Class CalculationResult : Inherits Collection(Of CalculationResultRecord) : Implements IDisposable
 
 #Region "Properties"
         Private _disposed As Boolean
-        Private _tagId As String
-        Private _calcId As String
-        Private _description As String
-        Private _inError As Boolean
-        Private _errorMessage As String
-        Private _parentResults As New ObjectModel.Collection(Of CalculationResult)
-        Private _calculationType As CalculationResultType
-        Private _tags As New ObjectModel.Collection(Of CalculationResultTag)
+        Private _parentResults As New Collection(Of CalculationResult)
+        Private _tags As New Collection(Of CalculationResultTag)
 
         Public Property GeometType As GeometTypeSelection = GeometTypeSelection.NA
 
@@ -39,21 +44,13 @@
             End Get
         End Property
 
-
-        Public Property CalcId() As String
-            Get
-                Return _calcId
-            End Get
-            Set(ByVal value As String)
-                _calcId = value
-            End Set
-        End Property
+        Public Property CalcId As String
 
         ''' <summary>
         ''' Remove any result rows that are ResourceClassification related
         ''' </summary>
         Public Sub RemoveResourceClassificationRows()
-            Dim index As Integer = 0
+            Dim index = 0
             Dim rowIndexesToRemove = New List(Of Integer)
             For Each dr In Me
                 If Not String.IsNullOrEmpty(dr.ResourceClassification) Then
@@ -63,258 +60,38 @@
                 index = index + 1
             Next
 
-            For Each i As Integer In rowIndexesToRemove
-                Me.RemoveAt(i)
+            For Each i In rowIndexesToRemove
+                RemoveAt(i)
             Next
         End Sub
 
-        Public Property TagId() As String
-            Get
-                Return _tagId
-            End Get
-            Set(ByVal value As String)
-                _tagId = value
-            End Set
-        End Property
+        Public Property TagId As String
 
-        Public Property CalculationType() As CalculationResultType
-            Get
-                Return _calculationType
-            End Get
-            Set(ByVal value As CalculationResultType)
-                _calculationType = value
-            End Set
-        End Property
+        Public Property CalculationType As CalculationResultType
 
-        Public ReadOnly Property ParentResults() As ObjectModel.Collection(Of CalculationResult)
+        Public ReadOnly Property ParentResults As Collection(Of CalculationResult)
             Get
                 Return _parentResults
             End Get
         End Property
 
-        Public Property Description() As String
-            Get
-                Return _description
-            End Get
-            Set(ByVal value As String)
-                _description = value
-            End Set
-        End Property
+        Public Property Description As String
 
-        Public Property InError() As Boolean
-            Get
-                Return _inError
-            End Get
-            Set(ByVal value As Boolean)
-                _inError = value
-            End Set
-        End Property
+        Public Property InError As Boolean
 
-        Public Property ErrorMessage() As String
-            Get
-                Return _errorMessage
-            End Get
-            Set(ByVal value As String)
-                _errorMessage = value
-            End Set
-        End Property
+        Public Property ErrorMessage As String
 
-#Region "Result Collections"
-        Public ReadOnly Property CalendarDateCollection() As IEnumerable(Of DateTime)
-            Get
-                Return From m In Me Group By m.CalendarDate Into Group Select CalendarDate
-            End Get
-        End Property
-
-        Public ReadOnly Property MaterialTypeIdCollection() As IEnumerable(Of Int32?)
-            Get
-                Return From m In Me Group By m.MaterialTypeId Into Group Select MaterialTypeId
-            End Get
-        End Property
-
-        Public ReadOnly Property LocationIdCollection() As IEnumerable(Of Int32?)
-            Get
-                Return From m In Me Group By m.LocationId Into Group Select LocationId
-            End Get
-        End Property
-
-        Public ReadOnly Property ProductSizeCollection() As IEnumerable(Of String)
-            Get
-                Return From m In Me Group By m.ProductSize Into Group Select ProductSize
-            End Get
-        End Property
-
-        Public ReadOnly Property ResourceClassificationCollection() As IEnumerable(Of String)
-            Get
-                Return From m In Me Group By m.ResourceClassification Into Group Select ResourceClassification
-            End Get
-        End Property
-
-        Public ReadOnly Property IncludesResourceClassificationData As Boolean
-            Get
-                Return ResourceClassificationCollection.Where(Function(r) Not String.IsNullOrEmpty(r)).Count > 0
-            End Get
-        End Property
-
-#End Region
-
-        Private Shared Function GroupedOnDateTime(ByVal used As Boolean, ByVal value As DateTime, ByVal forcedReportTimeBreakdown As ReportBreakdown?) As DateTime
-            If used Then
-                If (Not forcedReportTimeBreakdown Is Nothing) Then
-
-                    Return Data.DateBreakdown.FindStartOfBreakdownPeriod(value, forcedReportTimeBreakdown.Value)
-                Else
-                    Return value
-                End If
-            Else
-                Return Nothing
-            End If
-
-        End Function
-
-        Private Shared Function GroupedOnInt(ByVal used As Boolean, ByVal value As Int32?) As Int32?
-            If used Then
-                Return value
-            Else
-                Return Nothing
-            End If
-        End Function
-
-        Private Shared Function GroupedOnString(ByVal used As Boolean, ByVal value As String) As String
-            If used Then
-                Return value
-            Else
-                Return Nothing
-            End If
-        End Function
-
-
-        Private Shared Function GroupedOnBoolean(ByVal used As Boolean, ByVal value As Boolean?) As Boolean?
-            If used Then
-                Return value
-            Else
-                Return Nothing
-            End If
-        End Function
-
-        Public Function AggregateRecords(ByVal onDate As Boolean,
-                                            ByVal onMaterialTypeId As Boolean,
-                                            ByVal onLocationId As Boolean,
-                                            ByVal onProductSize As Boolean,
-                                            Optional ByVal useSpecificH2OGradeWeighting As Boolean = True
-                                         ) As IEnumerable(Of CalculationResultRecord)
-            Return AggregateRecords(onDate, onMaterialTypeId, onLocationId, onProductSize, CType(Nothing, ReportBreakdown?), useSpecificH2OGradeWeighting)
-        End Function
-
-
-
-        Public Function AggregateRecords(ByVal onDate As Boolean, ByVal onMaterialTypeId As Boolean,
-                                                  ByVal onLocationId As Boolean,
-                                                  ByVal onProductSize As Boolean,
-                                                  ByVal forcedReportTimeBreakdown As ReportBreakdown?,
-                                                  Optional ByVal useSpecificH2OGradeWeighting As Boolean = True) As IEnumerable(Of CalculationResultRecord)
-
-            Dim aggregatedRecords As IEnumerable(Of CalculationResultRecord)
-            Dim arrayList = ToArray()
-            Dim onResourceClassification = True
-
-            'note - this only appears to support Tonnes based aggregations... not sure what a ratio record would do??
-
-            ' Dodgy Aggregate tonnes is used here for aggregation, as it will either
-            ' equal tonnes if dodgy aggregate is turned off, or equal the absolute sum tonnes that we want to aggregate by.
-            ' See Calculation.vb Sub Calculate Answer for description of Dodgy Aggregate.
-            '
-            ' Note that the counts for the moisture (And Density) grades are done differently! When weighting the other grades a missing
-            ' value counts the same as a zero, unless the Fe is missing as well, for H2O the weighting is based whether
-            ' the grade is present for each individual record. This is required because some calculations don't have these 
-            ' grades
-            aggregatedRecords = (From t In arrayList
-                                 Group By CalendarDate = GroupedOnDateTime(onDate, t.CalendarDate, forcedReportTimeBreakdown),
-                                    LocationId = GroupedOnInt(onLocationId, t.LocationId),
-                                    MaterialType = GroupedOnInt(onMaterialTypeId, t.MaterialTypeId),
-                                    ProductSize = t.ProductSize,
-                                    ResourceClassification = GroupedOnString(onResourceClassification, t.ResourceClassification)
-                                 Into Tonnes = Sum(t.Tonnes),
-                                    Volume = Sum(t.Volume),
-                                    DodgyAggregateGradeTonnes = Sum(t.DodgyAggregateGradeTonnes),
-                                    H2OGradeTonnes = Sum(Convert.ToDouble(IIf(t.H2O Is Nothing, 0.0, t.DodgyAggregateGradeTonnes))),
-                                    UltrafinesGradeTonnes = Sum(Convert.ToDouble(IIf(t.UltraFines Is Nothing, 0.0, t.DodgyAggregateGradeTonnes))),
-                                    DateFrom = Min(t.DateFrom),
-                                    DateTo = Max(t.DateTo),
-                                    DodgyAggregateEnabled = Max(t.DodgyAggregateEnabled),
-                                    Fe = Sum(t.DodgyAggregateGradeTonnes * t.Fe), FeCnt = Sum(Convert.ToInt32(IIf(t.Fe Is Nothing, 0, 1))),
-                                    P = Sum(t.DodgyAggregateGradeTonnes * t.P), PCnt = Sum(Convert.ToInt32(IIf(t.Fe Is Nothing, 0, 1))),
-                                    SiO2 = Sum(t.DodgyAggregateGradeTonnes * t.SiO2), SiO2Cnt = Sum(Convert.ToInt32(IIf(t.Fe Is Nothing, 0, 1))),
-                                    Al2O3 = Sum(t.DodgyAggregateGradeTonnes * t.Al2O3), Al2O3Cnt = Sum(Convert.ToInt32(IIf(t.Fe Is Nothing, 0, 1))),
-                                    LOI = Sum(t.DodgyAggregateGradeTonnes * t.Loi), LOICnt = Sum(Convert.ToInt32(IIf(t.Fe Is Nothing, 0, 1))),
-                                    Ultrafines = Sum(t.DodgyAggregateGradeTonnes * t.UltraFines), UltrafinesCnt = Sum(Convert.ToInt32(IIf(t.UltraFines Is Nothing, 0, 1))),
-                                    Density = Sum(t.DodgyAggregateGradeTonnes * t.Density), DensityCnt = Sum(Convert.ToInt32(IIf(t.Density Is Nothing, 0, 1))),
-                                    H2O = Sum(t.DodgyAggregateGradeTonnes * t.H2O), H2OCnt = Sum(Convert.ToInt32(IIf(t.H2O Is Nothing, 0, 1))),
-                                    H2ODropped = Sum(t.DodgyAggregateGradeTonnes * t.H2ODropped), H2ODroppedCnt = Sum(Convert.ToInt32(IIf(t.H2O Is Nothing, 0, 1))),
-                                    H2OShipped = Sum(t.DodgyAggregateGradeTonnes * t.H2OShipped), H2OShippedCnt = Sum(Convert.ToInt32(IIf(t.H2O Is Nothing, 0, 1)))
-                                 Order By CalendarDate
-                                 Select New CalculationResultRecord(Nothing) With {
-                                    .CalendarDate = CalendarDate, .MaterialTypeId = MaterialType,
-                                    .LocationId = LocationId, .DateFrom = DateFrom, .DateTo = DateTo,
-                                    .ProductSize = ProductSize,
-                                    .ResourceClassification = ResourceClassification,
-                                    .Tonnes = Tonnes,
-                                    .Volume = Volume,
-                                    .DodgyAggregateGradeTonnes = DodgyAggregateGradeTonnes,
-                                    .DodgyAggregateEnabled = DodgyAggregateEnabled,
-                                    .Fe = MassWeight(Fe, DodgyAggregateGradeTonnes, FeCnt),
-                                    .P = MassWeight(P, DodgyAggregateGradeTonnes, PCnt),
-                                    .SiO2 = MassWeight(SiO2, DodgyAggregateGradeTonnes, SiO2Cnt),
-                                    .Al2O3 = MassWeight(Al2O3, DodgyAggregateGradeTonnes, Al2O3Cnt),
-                                    .Loi = MassWeight(LOI, DodgyAggregateGradeTonnes, LOICnt),
-                                    .Density = MassWeight(Density, DodgyAggregateGradeTonnes, DensityCnt),
-                                    .UltraFines = MassWeight(Ultrafines, UltrafinesGradeTonnes, UltrafinesCnt),
-                                    .H2O = MassWeight(H2O, DirectCast(IIf(useSpecificH2OGradeWeighting, H2OGradeTonnes, DodgyAggregateGradeTonnes), Double), H2OCnt),
-                                    .H2ODropped = MassWeight(H2ODropped, DirectCast(IIf(useSpecificH2OGradeWeighting, H2OGradeTonnes, DodgyAggregateGradeTonnes), Double), H2ODroppedCnt),
-                                    .H2OShipped = MassWeight(H2OShipped, DirectCast(IIf(useSpecificH2OGradeWeighting, H2OGradeTonnes, DodgyAggregateGradeTonnes), Double), H2OShippedCnt)
-                                })
-
-            If onProductSize = False Then
-                aggregatedRecords = aggregatedRecords.Where(Function(r) r.ProductSize.ToUpper = ProductSizeTotal)
-            End If
-
-            Return aggregatedRecords
-        End Function
-
-
-        'Public Function AggregateFilterRecords(ByVal onMaterialTypeId As Boolean, _
-        ' ByVal onLocationId As Boolean, ByVal onProductSize As Boolean, ByVal dateFilter As DateTime, ByVal locationIdFilter As Int32?) As IEnumerable(Of CalculationResultRecord)
-        '    Return AggregateFilterRecords(onMaterialTypeId, onLocationId, onProductSize, dateFilter, locationIdFilter, CType(Nothing, ReportBreakdown?))
-        'End Function
-
-        Public Function AggregateFilterRecords(ByVal onMaterialTypeId As Boolean,
-         ByVal onLocationId As Boolean,
-         ByVal onProductSize As Boolean,
-         ByVal dateFilter As DateTime,
-         ByVal locationIdFilter As Int32?,
-         ByVal aggregateToDateBreakdown As ReportBreakdown?) As IEnumerable(Of CalculationResultRecord)
-
-            Dim aggregatedRecords = AggregateRecords(True, onMaterialTypeId, onLocationId, onProductSize, aggregateToDateBreakdown)
-
-            Dim filteredRecords As IEnumerable(Of CalculationResultRecord)
-            filteredRecords = aggregatedRecords.Where(Function(t) t.CalendarDate = dateFilter _
-                                                          And NullableIntEqual(t.LocationId, locationIdFilter))
-
-            Return filteredRecords
-        End Function
-
-
-        Public ReadOnly Property AggregatedDateLocationMaterial(ByVal calDate As DateTime,
-         ByVal location As Int32?, ByVal materialTypeId As Int32?, ByVal productSize As String) As CalculationResultRecord
+        Public ReadOnly Property AggregatedDateLocationMaterial(calDate As DateTime,
+                                                                location As Int32?, materialTypeId As Int32?, productSize As String) As CalculationResultRecord
             Get
                 Dim aggregatedFilteredRecords As IEnumerable(Of CalculationResultRecord)
                 Dim aggregatedRecord As CalculationResultRecord = Nothing
 
-                aggregatedFilteredRecords = From t In AggregateRecords(True, True, True, True)
+                aggregatedFilteredRecords = From t In AggregateRecords(onMaterialTypeId:=True, onLocationId:=True, onProductSize:=True)
                                             Where t.CalendarDate = calDate _
-                                                And NullableIntEqual(location, t.LocationId) _
-                                                And NullableIntEqual(materialTypeId, t.MaterialTypeId) _
-                                                And productSize = t.ProductSize
+                                                  And NullableIntEqual(location, t.LocationId) _
+                                                  And NullableIntEqual(materialTypeId, t.MaterialTypeId) _
+                                                  And productSize = t.ProductSize
                                             Select t
 
                 If aggregatedFilteredRecords.Count < 1 Then
@@ -333,28 +110,17 @@
             End Get
         End Property
 
-        Private Shared Function MassWeight(ByVal gradeTonnes As Double?, ByVal totalTonnes As Double?, ByVal count As Int32) As Double?
-            MassWeight = Nothing
-            If count > 0 AndAlso Not gradeTonnes Is Nothing AndAlso Not totalTonnes Is Nothing Then
-                If totalTonnes <> 0 Then
-                    MassWeight = gradeTonnes / totalTonnes
-                Else
-                    MassWeight = 0
-                End If
-            End If
-        End Function
-
-        Public ReadOnly Property AggregatedDateLocation(ByVal calDate As DateTime, ByVal location As Int32?, ByVal productSize As String) As CalculationResultRecord
+        Public ReadOnly Property AggregatedDateLocation(calDate As DateTime, location As Int32?, productSize As String) As CalculationResultRecord
             Get
                 Dim aggregatedFilteredRecords As IEnumerable(Of CalculationResultRecord)
                 Dim aggregatedRecord As CalculationResultRecord = Nothing
-                Dim aggregatedRecords As IEnumerable(Of CalculationResultRecord) = AggregateRecords(True, False, True, True)
+                Dim aggregatedRecords = AggregateRecords(onMaterialTypeId:=False, onLocationId:=True, onProductSize:=True)
 
                 aggregatedFilteredRecords = From t In aggregatedRecords
-                                            Where (t.CalendarDate = calDate) _
-                                            And ((location.HasValue And t.LocationId.HasValue AndAlso location.Value = t.LocationId.Value) _
-                                                 Or (Not location.HasValue And Not t.LocationId.HasValue)) _
-                                            And (productSize = t.ProductSize)
+                                            Where t.CalendarDate = calDate _
+                                                  And location.HasValue And t.LocationId.HasValue AndAlso location.Value = t.LocationId.Value _
+                                                  Or Not location.HasValue And Not t.LocationId.HasValue _
+                                                     And productSize = t.ProductSize
                                             Select t
 
                 If aggregatedFilteredRecords.Count < 1 Then
@@ -373,45 +139,270 @@
             End Get
         End Property
 
-        Public ReadOnly Property Tags() As ObjectModel.Collection(Of CalculationResultTag)
+        Public ReadOnly Property Tags As Collection(Of CalculationResultTag)
             Get
                 Return _tags
             End Get
         End Property
+
+#Region "Result Collections"
+        Public ReadOnly Property CalendarDateCollection As IEnumerable(Of DateTime)
+            Get
+                Return From m In Me Group By m.CalendarDate Into Group Select CalendarDate
+            End Get
+        End Property
+
+        Public ReadOnly Property MaterialTypeIdCollection As IEnumerable(Of Int32?)
+            Get
+                Return From m In Me Group By m.MaterialTypeId Into Group Select MaterialTypeId
+            End Get
+        End Property
+
+        Public ReadOnly Property LocationIdCollection As IEnumerable(Of Int32?)
+            Get
+                Return From m In Me Group By m.LocationId Into Group Select LocationId
+            End Get
+        End Property
+
+        Public ReadOnly Property ProductSizeCollection As IEnumerable(Of String)
+            Get
+                Return From m In Me Group By m.ProductSize Into Group Select ProductSize
+            End Get
+        End Property
+
+        Public ReadOnly Property ResourceClassificationCollection As IEnumerable(Of String)
+            Get
+                Return From m In Me Group By m.ResourceClassification Into Group Select ResourceClassification
+            End Get
+        End Property
+
+        Public ReadOnly Property IncludesResourceClassificationData As Boolean
+            Get
+                Return ResourceClassificationCollection.Where(Function(r) Not String.IsNullOrEmpty(r)).Count > 0
+            End Get
+        End Property
+#End Region
+
 #End Region
 
 #Region "Constructors"
+        <Obsolete("Use New(CalculationResultType) instead.")>
         Public Sub New()
             CalculationType = CalculationResultType.Tonnes
         End Sub
 
-        Public Sub New(ByVal resultType As CalculationResultType)
+        Public Sub New(resultType As CalculationResultType)
             CalculationType = resultType
         End Sub
 
         ''' <summary>
         ''' Creates and fills out the structure the the calculations.
         ''' </summary>
-        Public Sub New(ByVal valueRows As DataRow(), ByVal gradeRows As DataRow())
+        Public Sub New(valueRows As DataRow(), gradeRows As DataRow())
             Me.New(valueRows, gradeRows, Nothing, Nothing, Nothing)
         End Sub
 
         ''' <summary>
         ''' Creates and fills out the structure the the calculations with dates.
         ''' </summary>
-        Public Sub New(ByVal valueRows As DataRow(), ByVal gradeRows As DataRow(),
-         ByVal startDate As DateTime, ByVal endDate As DateTime, ByVal interval As Types.ReportBreakdown)
-            Me.New()
+        Public Sub New(valueRows As DataRow(), gradeRows As DataRow(),
+                       startDate As DateTime, endDate As DateTime, interval As ReportBreakdown)
+            Me.New(CalculationResultType.Tonnes)
             MergeInRows(valueRows, gradeRows, startDate, endDate, interval)
         End Sub
+#End Region
+
+        Private Shared Function GroupedOnDateTime(used As Boolean, value As DateTime, forcedReportTimeBreakdown As ReportBreakdown?) As DateTime
+            If used Then
+                If Not forcedReportTimeBreakdown Is Nothing Then
+
+                    Return DateBreakdown.FindStartOfBreakdownPeriod(value, forcedReportTimeBreakdown.Value)
+                Else
+                    Return value
+                End If
+            Else
+                Return Nothing
+            End If
+
+        End Function
+
+        Private Shared Function GroupedOnInt(used As Boolean, value As Int32?) As Int32?
+            If used Then
+                Return value
+            Else
+                Return Nothing
+            End If
+        End Function
+
+        Private Shared Function GroupedOnString(used As Boolean, value As String) As String
+            If used Then
+                Return value
+            Else
+                Return Nothing
+            End If
+        End Function
+
+        Public Function AggregateRecords(Optional onMaterialTypeId As Boolean = False, Optional onLocationId As Boolean = False,
+                                         Optional onProductSize As Boolean = False,
+                                         Optional ByVal useSpecificH2OGradeWeighting As Boolean = True) _
+                                         As IEnumerable(Of CalculationResultRecord)
+
+            Dim groupByList = New HashSet(Of String) From {
+                {"ResourceClassification"},
+                {"CalendarDate"}
+            }
+
+            If onMaterialTypeId Then
+                groupByList.Add("MaterialTypeId")
+            End If
+
+            If onLocationId Then
+                groupByList.Add("LocationId")
+            End If
+
+            If onProductSize Then
+                groupByList.Add("ProductSize")
+            End If
+
+            Return AggregateRecords(groupByList, Nothing, useSpecificH2OGradeWeighting)
+        End Function
+
+        Public Function AggregateRecords(groupByList As ICollection(Of String), forcedReportTimeBreakdown As ReportBreakdown?,
+                                                  Optional ByVal useSpecificH2OGradeWeighting As Boolean = True) _
+                                                  As IEnumerable(Of CalculationResultRecord)
+
+            Dim aggregatedRecords As IEnumerable(Of CalculationResultRecord)
+            Dim arrayList = ToArray()
+
+            'note - this only appears to support Tonnes based aggregations... not sure what a ratio record would do??
+
+            ' Dodgy Aggregate tonnes is used here for aggregation, as it will either
+            ' equal tonnes if dodgy aggregate is turned off, or equal the absolute sum tonnes that we want to aggregate by.
+            ' See Calculation.vb Sub Calculate Answer for description of Dodgy Aggregate.
+            '
+            ' Note that the counts for the moisture (And Density) grades are done differently! When weighting the other grades a missing
+            ' value counts the same as a zero, unless the Fe is missing as well, for H2O the weighting is based whether
+            ' the grade is present for each individual record. This is required because some calculations don't have these 
+            ' grades
+            aggregatedRecords = arrayList.GroupBy(Function(t) New With {
+                Key .Resourceclassification = GroupedOnString(groupByList.Contains("ResourceClassification"), t.ResourceClassification),
+                Key .ProductSize = t.ProductSize,
+                Key .CalendarDate = GroupedOnDateTime(groupByList.Contains("CalendarDate"), t.CalendarDate, forcedReportTimeBreakdown),
+                Key .MaterialTypeId = GroupedOnInt(groupByList.Contains("MaterialTypeId"), t.MaterialTypeId),
+                Key .LocationId = GroupedOnInt(groupByList.Contains("LocationId"), t.LocationId)
+            }).OrderBy(Function(g) g.Key.CalendarDate).Select(Function(g) New With {
+                .ResourceClassification = g.Key.Resourceclassification,
+                .ProductSize = g.Key.ProductSize,
+                .CalendarDate = g.Key.CalendarDate,
+                .MaterialType = g.Key.MaterialTypeId,
+                .LocationId = g.Key.LocationId,
+                .Tonnes = g.Sum(Function(t) t.Tonnes),
+                .Volume = g.Sum(Function(t) t.Volume),
+                .DodgyAggregateGradeTonnes = g.Sum(Function(t) t.DodgyAggregateGradeTonnes),
+                .H2OGradeTonnes = g.Sum(Function(t) Convert.ToDouble(IIf(t.H2O Is Nothing, 0.0, t.DodgyAggregateGradeTonnes))),
+                .UltrafinesGradeTonnes = g.Sum(Function(t) Convert.ToDouble(IIf(t.UltraFines Is Nothing, 0.0, t.DodgyAggregateGradeTonnes))),
+                .DateFrom = g.Min(Function(t) t.DateFrom),
+                .DateTo = g.Max(Function(t) t.DateTo),
+                .DodgyAggregateEnabled = g.Max(Function(t) t.DodgyAggregateEnabled),
+                .Fe = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.Fe),
+                .FeCnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.Fe Is Nothing, 0, 1))),
+                .P = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.P),
+                .PCnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.P Is Nothing, 0, 1))),
+                .SiO2 = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.SiO2),
+                .SiO2Cnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.SiO2 Is Nothing, 0, 1))),
+                .Al2O3 = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.Al2O3),
+                .Al2O3Cnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.Al2O3 Is Nothing, 0, 1))),
+                .Loi = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.Loi),
+                .LoiCnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.Loi Is Nothing, 0, 1))),
+                .Ultrafines = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.UltraFines),
+                .UltrafinesCnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.UltraFines Is Nothing, 0, 1))),
+                .Density = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.Density),
+                .DensityCnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.Density Is Nothing, 0, 1))),
+                .H2O = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.H2O),
+                .H2OCnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.H2O Is Nothing, 0, 1))),
+                .H2ODropped = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.H2ODropped),
+                .H2ODroppedCnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.H2O Is Nothing, 0, 1))),
+                .H2OShipped = g.Sum(Function(t) t.DodgyAggregateGradeTonnes * t.H2OShipped),
+                .H2OShippedCnt = g.Sum(Function(t) Convert.ToInt32(IIf(t.H2O Is Nothing, 0, 1)))
+            }).Select(Function(t) New CalculationResultRecord(Nothing) With {
+                .CalendarDate = t.CalendarDate,
+                .MaterialTypeId = t.MaterialType,
+                .LocationId = t.LocationId,
+                .DateFrom = t.DateFrom,
+                .DateTo = t.DateTo,
+                .ProductSize = t.ProductSize,
+                .ResourceClassification = t.ResourceClassification,
+                .Tonnes = t.Tonnes,
+                .Volume = t.Volume,
+                .DodgyAggregateGradeTonnes = t.DodgyAggregateGradeTonnes,
+                .DodgyAggregateEnabled = t.DodgyAggregateEnabled,
+                .Fe = MassWeight(t.Fe, t.DodgyAggregateGradeTonnes, t.FeCnt),
+                .P = MassWeight(t.P, t.DodgyAggregateGradeTonnes, t.PCnt),
+                .SiO2 = MassWeight(t.SiO2, t.DodgyAggregateGradeTonnes, t.SiO2Cnt),
+                .Al2O3 = MassWeight(t.Al2O3, t.DodgyAggregateGradeTonnes, t.Al2O3Cnt),
+                .Loi = MassWeight(t.Loi, t.DodgyAggregateGradeTonnes, t.LoiCnt),
+                .Density = MassWeight(t.Density, t.DodgyAggregateGradeTonnes, t.DensityCnt),
+                .UltraFines = MassWeight(t.Ultrafines, t.DodgyAggregateGradeTonnes, t.UltrafinesCnt),
+                .H2O = MassWeight(t.H2O, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OCnt),
+                .H2ODropped = MassWeight(t.H2ODropped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2ODroppedCnt),
+                .H2OShipped = MassWeight(t.H2OShipped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OShippedCnt)
+            })
+
+            If groupByList.Contains("ProductSize") = False Then
+                aggregatedRecords = aggregatedRecords.Where(Function(r) r.ProductSize.ToUpper = CalculationConstants.PRODUCT_SIZE_TOTAL)
+            End If
+
+            Return aggregatedRecords
+        End Function
+
+        Public Function AggregateFilterRecords(onMaterialTypeId As Boolean, onLocationId As Boolean, onProductSize As Boolean,
+                                               dateFilter As DateTime, locationIdFilter As Int32?,
+                                               aggregateToDateBreakdown As ReportBreakdown?) As IEnumerable(Of CalculationResultRecord)
+
+            Dim groupByList = New HashSet(Of String) From {
+                    {"ResourceClassification"},
+                    {"CalendarDate"}
+                    }
+
+            If onMaterialTypeId Then
+                groupByList.Add("MaterialTypeId")
+            End If
+
+            If onLocationId Then
+                groupByList.Add("LocationId")
+            End If
+
+            If onProductSize Then
+                groupByList.Add("ProductSize")
+            End If
+
+            Dim aggregatedRecords = AggregateRecords(groupByList, aggregateToDateBreakdown)
+
+            Dim filteredRecords As IEnumerable(Of CalculationResultRecord)
+            filteredRecords = aggregatedRecords.Where(Function(t) t.CalendarDate = dateFilter _
+                                                          And NullableIntEqual(t.LocationId, locationIdFilter))
+
+            Return filteredRecords
+        End Function
+
+        Private Shared Function MassWeight(gradeTonnes As Double?, totalTonnes As Double?, count As Int32) As Double?
+            MassWeight = Nothing
+            If count > 0 AndAlso Not gradeTonnes Is Nothing AndAlso Not totalTonnes Is Nothing Then
+                If totalTonnes <> 0 Then
+                    MassWeight = gradeTonnes / totalTonnes
+                Else
+                    MassWeight = 0
+                End If
+            End If
+        End Function
 
         ''' <summary>
         ''' Add's the rows into the calculation result.
         ''' </summary>
-        Public Sub MergeInRows(ByVal tableSet As DataSet,
-         ByVal startDate As DateTime?, ByVal endDate As DateTime?, ByVal interval As Types.ReportBreakdown?)
-            Dim values As DataTable = tableSet.Tables("Value")
-            Dim grades As DataTable = tableSet.Tables("Grade")
+        Public Sub MergeInRows(tableSet As DataSet,
+         startDate As DateTime?, endDate As DateTime?, interval As ReportBreakdown?)
+            Dim values = tableSet.Tables("Value")
+            Dim grades = tableSet.Tables("Grade")
 
             If values Is Nothing Then
                 Throw New ArgumentException("Data set must contain the Values table.")
@@ -427,8 +418,8 @@
         ''' <summary>
         ''' Add's the rows into the calculation result.
         ''' </summary>
-        Public Sub MergeInRows(ByVal valueRows As DataRow(), ByVal gradeRows As DataRow(),
-         ByVal startDate As DateTime?, ByVal endDate As DateTime?, ByVal interval As Types.ReportBreakdown?)
+        Public Sub MergeInRows(valueRows As DataRow(), gradeRows As DataRow(),
+         startDate As DateTime?, endDate As DateTime?, interval As ReportBreakdown?)
             Dim row As DataRow
             Dim record As CalculationResultRecord
             Dim existing As CalculationResultRecord
@@ -436,12 +427,12 @@
 
             ' organise the gradeRows by date and location... 
             ' ...this prevents the lookup operations required by the merge getting exponentially more costly as the time span covered by the report increases
-            Dim gradeRowStore As Dictionary(Of String, List(Of DataRow)) = BuildDataRowLookupByDateAndLocationStore(gradeRows)
+            Dim gradeRowStore = BuildDataRowLookupByDateAndLocationStore(gradeRows)
 
             'add in the row provided
             For Each row In valueRows
                 ' build a lookup key for the row
-                Dim key As String = BuildDataRowLookupByDateAndLocationStoreKey(row)
+                Dim key = BuildDataRowLookupByDateAndLocationStoreKey(row)
 
                 ' try to obtain matching grade rows
                 Dim rowListForKey As List(Of DataRow) = Nothing
@@ -463,9 +454,9 @@
                     existingRecordFound = False
                     For Each existing In Me
                         If existing.DateFrom = record.DateFrom And existing.DateTo = record.DateTo _
-                         And ((existing.LocationId Is Nothing And record.LocationId Is Nothing) OrElse (existing.LocationId = record.LocationId)) _
-                         And ((existing.MaterialTypeId Is Nothing And record.MaterialTypeId Is Nothing) OrElse (existing.MaterialTypeId = record.MaterialTypeId)) _
-                         And ((existing.ProductSize Is Nothing And record.ProductSize Is Nothing) OrElse (existing.ProductSize = record.ProductSize)) _
+                         And existing.LocationId Is Nothing And record.LocationId Is Nothing OrElse existing.LocationId = record.LocationId _
+                         And existing.MaterialTypeId Is Nothing And record.MaterialTypeId Is Nothing OrElse existing.MaterialTypeId = record.MaterialTypeId _
+                         And existing.ProductSize Is Nothing And record.ProductSize Is Nothing OrElse existing.ProductSize = record.ProductSize _
                          And existing.CalendarDate = record.CalendarDate Then
                             existingRecordFound = True
                             Exit For
@@ -482,15 +473,15 @@
         ''' <summary>
         ''' Returns blank records for the dates.
         ''' </summary>
-        Private Function GetRecordsForPeriod(ByVal startDate As DateTime, ByVal endDate As DateTime,
-         ByVal dateBreakdown As Types.ReportBreakdown) As Generic.List(Of CalculationResultRecord)
-            Dim list As New Generic.List(Of CalculationResultRecord)
-            Dim currentDate As DateTime = startDate
+        Private Function GetRecordsForPeriod(startDate As DateTime, endDate As DateTime,
+         dateBreakdown As ReportBreakdown) As List(Of CalculationResultRecord)
+            Dim list As New List(Of CalculationResultRecord)
+            Dim currentDate = startDate
             Dim endPeriodDate As DateTime
             Dim nextDate As DateTime
             Dim interval As DateInterval
             Dim intervalStep As Integer
-            Dim runRange As Boolean = False
+            Dim runRange = False
 
             If dateBreakdown = ReportBreakdown.Monthly Then
                 runRange = True
@@ -520,7 +511,6 @@
 
             Return list
         End Function
-#End Region
 
 #Region "Destructors "
         Public Sub Dispose() Implements IDisposable.Dispose
@@ -528,12 +518,12 @@
             GC.SuppressFinalize(Me)
         End Sub
 
-        Protected Overridable Sub Dispose(ByVal disposing As Boolean)
-            If (Not _disposed) Then
-                If (disposing) Then
+        Protected Overridable Sub Dispose(disposing As Boolean)
+            If Not _disposed Then
+                If disposing Then
                     'Clean up managed Resources ie: Objects
 
-                    If (Not _parentResults Is Nothing) Then
+                    If Not _parentResults Is Nothing Then
                         For Each result In _parentResults
                             result.Dispose()
                         Next
@@ -554,26 +544,105 @@
 #End Region
 
 #Region "Operations"
-        Public Shared Function ApplyRatio(ByVal left As CalculationResult, ByVal right As CalculationResult) As CalculationResult
-            Dim dateList As IEnumerable(Of Date) = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim materialTypeIdList As IEnumerable(Of Int32?) = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
-            Dim locationIdList As IEnumerable(Of Int32?) = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList As IEnumerable(Of String) = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
+        Public Shared Function PerformCalculation(left As CalculationResult, right As CalculationResult,
+                                                  calculationType As CalculationType,
+                                                  Optional breakdownFactorByMaterialType As Boolean = False,
+                                                  Optional calcId As String = "Unknown") As CalculationResult
+
+            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct().ToList()
+            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
+            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct().ToList()
+            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct().ToList()
+            Dim resourceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct().ToList()
+
+            Dim result As New CalculationResult(CalculationResultType.Tonnes)
+            Dim leftRecord As CalculationResultRecord = Nothing
+            Dim rightRecord As CalculationResultRecord = Nothing
+
+            Dim byMaterialType = False
+
+            If breakdownFactorByMaterialType AndAlso calcId.Contains("Factor") Then
+                byMaterialType = True
+            End If
+
+            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left, byMaterialType)
+            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right, byMaterialType)
+
+            ' Order is important, the lookup key will get built in this order.
+            Dim combined = New List(Of IEnumerable(Of String)) From {
+                dateList.Select(Function(i) i.ToString("ddMMyyyy")),
+                locationIdList.Select(Function(i) i?.ToString()),
+                productSizeList.Select(Function(i) i?.ToString()),
+                resourceList.Select(Function(i) i?.ToString())
+            }
+
+            If breakdownFactorByMaterialType Or calculationType = CalculationType.Difference Then
+                If byMaterialType Then
+                    ' Insert after locationIdList and before productSizeList
+                    combined.Insert(2, materialTypeIdList.Select(Function(i) i?.ToString()))
+                Else
+                    combined.Insert(2, New List(Of String) From {Nothing}) ' Empty list so the key still gets built correctly
+                End If
+            Else
+                combined.Insert(2, materialTypeIdList.Select(Function(i) i?.ToString()))
+            End If
+
+            Dim keys = combined.CartesianProduct().ToList()
+            For Each key In keys
+                Dim lookupKey = String.Join("_", key.ToArray())
+
+                preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
+                preAggregatedRight.TryGetValue(lookupKey, rightRecord)
+
+                If leftRecord IsNot Nothing Or rightRecord IsNot Nothing Then
+                    Select Case calculationType
+                        Case CalculationType.Addition
+                            result.Add(leftRecord + rightRecord)
+                        Case CalculationType.Subtraction
+                            result.Add(leftRecord - rightRecord)
+                        Case CalculationType.Division
+                            result.Add(leftRecord / rightRecord)
+                        Case CalculationType.Difference
+                            result.Add(CalculationResultRecord.Difference(leftRecord, rightRecord))
+                        Case CalculationType.Ratio
+                            result.Add(leftRecord * rightRecord)
+                    End Select
+                End If
+
+                leftRecord = Nothing
+                rightRecord = Nothing
+            Next
+
+            ' Correct parent link.
+            For Each record In result
+                record.Parent = result
+            Next
+
+            Return result
+
+        End Function
+
+        <Obsolete("Use PerformCalculation instead.")>
+        Public Shared Function ApplyRatio(left As CalculationResult, right As CalculationResult) As CalculationResult
+            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
+            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
+            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
+            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
             Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
 
             Dim leftRecord As CalculationResultRecord = Nothing
             Dim rightRecord As CalculationResultRecord = Nothing
             Dim result As New CalculationResult()
 
-            Dim preAggregatedLeft As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(left)
-            Dim preAggregatedRight As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(right)
+            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left)
+            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right)
 
             For Each material In materialTypeIdList
                 For Each location In locationIdList
                     For Each calendarDate In dateList
                         For Each productSize In productSizeList
                             For Each resouceClassification In resouceList
-                                Dim lookupKey As String = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
+                                Dim lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
 
                                 preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
                                 preAggregatedRight.TryGetValue(lookupKey, rightRecord)
@@ -595,17 +664,18 @@
                 record.Parent = result
             Next
 
-            CalculationResult.CloneHeaders(result, left)
+            CloneHeaders(result, left)
 
             Return result
         End Function
 
-        Public Shared Function Divide(ByVal left As CalculationResult, ByVal right As CalculationResult, ByVal breakdownFactorByMaterialType As Boolean, ByVal calcId As String) As CalculationResult
+        <Obsolete("Use PerformCalculation instead.")>
+        Public Shared Function Divide(left As CalculationResult, right As CalculationResult, breakdownFactorByMaterialType As Boolean, calcId As String) As CalculationResult
 
-            Dim dateList As IEnumerable(Of Date) = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim locationIdList As IEnumerable(Of Int32?) = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList As IEnumerable(Of String) = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
-            Dim materialTypeIdList As IEnumerable(Of Int32?) = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
+            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
+            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
+            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
+            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
             Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
 
             Dim result As New CalculationResult()
@@ -613,14 +683,14 @@
             Dim rightRecord As CalculationResultRecord = Nothing
             Dim lookupKey As String
 
-            Dim byMaterialType As Boolean = False
+            Dim byMaterialType = False
 
             If breakdownFactorByMaterialType AndAlso calcId.Contains("Factor") Then
                 byMaterialType = True
             End If
 
-            Dim preAggregatedLeft As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(left, False, True, True)
-            Dim preAggregatedRight As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(right, False, True, True)
+            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left, False, True, True)
+            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right, False, True, True)
 
             Dim preAggregatedLeftWithMaterialType As Dictionary(Of String, CalculationResultRecord) = Nothing
             Dim preAggregatedRightWithMaterialType As Dictionary(Of String, CalculationResultRecord) = Nothing
@@ -691,24 +761,25 @@
             Return result
         End Function
 
-        Public Shared Function Difference(ByVal left As CalculationResult, ByVal right As CalculationResult) As CalculationResult
-            Dim dateList As IEnumerable(Of Date) = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim locationIdList As IEnumerable(Of Int32?) = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList As IEnumerable(Of String) = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
+        <Obsolete("Use PerformCalculation instead.")>
+        Public Shared Function Difference(left As CalculationResult, right As CalculationResult) As CalculationResult
+            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
+            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
+            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
             Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
 
             Dim leftRecord As CalculationResultRecord = Nothing
             Dim rightRecord As CalculationResultRecord = Nothing
             Dim result As New CalculationResult()
 
-            Dim preAggregatedLeft As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(left, False, True, True)
-            Dim preAggregatedRight As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(right, False, True, True)
+            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left, False, True, True)
+            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right, False, True, True)
 
             For Each location In locationIdList
                 For Each calendarDate In dateList
                     For Each productSize In productSizeList
                         For Each resouceClassification In resouceList
-                            Dim lookupKey As String = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, Nothing, productSize, resouceClassification)
+                            Dim lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, Nothing, productSize, resouceClassification)
 
                             preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
                             preAggregatedRight.TryGetValue(lookupKey, rightRecord)
@@ -729,19 +800,20 @@
             Return result
         End Function
 
-        Public Shared Function Addition(ByVal left As CalculationResult, ByVal right As CalculationResult) As CalculationResult
-            Dim dateList As IEnumerable(Of Date) = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim materialTypeIdList As IEnumerable(Of Int32?) = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
-            Dim locationIdList As IEnumerable(Of Int32?) = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList As IEnumerable(Of String) = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
+        <Obsolete("Use PerformCalculation instead.")>
+        Public Shared Function Addition(left As CalculationResult, right As CalculationResult) As CalculationResult
+            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
+            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
+            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
+            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
             Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
 
             Dim leftRecord As CalculationResultRecord = Nothing
             Dim rightRecord As CalculationResultRecord = Nothing
             Dim result As New CalculationResult()
 
-            Dim preAggregatedLeft As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(left)
-            Dim preAggregatedRight As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(right)
+            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left)
+            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right)
 
             For Each material In materialTypeIdList
                 For Each location In locationIdList
@@ -749,7 +821,7 @@
                         For Each productSize In productSizeList
                             For Each resouceClassification In resouceList
 
-                                Dim lookupKey As String = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
+                                Dim lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
 
                                 preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
                                 preAggregatedRight.TryGetValue(lookupKey, rightRecord)
@@ -774,11 +846,12 @@
             Return result
         End Function
 
-        Public Shared Function Subtract(ByVal left As CalculationResult, ByVal right As CalculationResult) As CalculationResult
-            Dim dateList As IEnumerable(Of Date) = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
-            Dim materialTypeIdList As IEnumerable(Of Int32?) = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
-            Dim locationIdList As IEnumerable(Of Int32?) = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
-            Dim productSizeList As IEnumerable(Of String) = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
+        <Obsolete("Use PerformCalculation instead.")>
+        Public Shared Function Subtract(left As CalculationResult, right As CalculationResult) As CalculationResult
+            Dim dateList = left.CalendarDateCollection.Union(right.CalendarDateCollection).Distinct()
+            Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct()
+            Dim locationIdList = left.LocationIdCollection.Union(right.LocationIdCollection).Distinct()
+            Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct()
             Dim resouceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct()
 
             Dim leftRecord As CalculationResultRecord = Nothing
@@ -791,8 +864,8 @@
                 right.AggregateByDateLocation()
             End If
 
-            Dim preAggregatedLeft As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(left)
-            Dim preAggregatedRight As Dictionary(Of String, CalculationResultRecord) = BuildRecordLookupByMainAggregationFieldsStore(right)
+            Dim preAggregatedLeft = BuildRecordLookupByMainAggregationFieldsStore(left)
+            Dim preAggregatedRight = BuildRecordLookupByMainAggregationFieldsStore(right)
 
             'combine records
             'left.AggregateByDateLocation()
@@ -803,7 +876,7 @@
                         For Each productSize In productSizeList
                             For Each resouceClassification In resouceList
 
-                                Dim lookupKey As String = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
+                                Dim lookupKey = BuildRecordLookupByMainAggregationFieldsStoreKey(calendarDate, location, material, productSize, resouceClassification)
 
                                 preAggregatedLeft.TryGetValue(lookupKey, leftRecord)
                                 preAggregatedRight.TryGetValue(lookupKey, rightRecord)
@@ -830,30 +903,30 @@
 
         ' Copy data from one row to another
         ' The flags provided to this function allow copying selectively such that identifying information, time information, values, or other columns can be copied independantly
-        Public Shared Sub CopyDataRow(ByRef fromDataRow As DataRow, ByRef toDataRow As DataRow, ByVal includeIdentifyingColumns As Boolean, ByVal includeTimeBasedColumns As Boolean, ByVal includeValueColums As Boolean, ByVal includeOtherColumns As Boolean)
+        Public Shared Sub CopyDataRow(ByRef fromDataRow As DataRow, ByRef toDataRow As DataRow, includeIdentifyingColumns As Boolean, includeTimeBasedColumns As Boolean, includeValueColums As Boolean, includeOtherColumns As Boolean)
 
             Dim identifyingColumnNames As New HashSet(Of String)()
             Dim timeBasedColumnNames As New HashSet(Of String)()
             Dim valueColumnNames As New HashSet(Of String)()
 
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameProductSize)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameMaterialType)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameLocationId)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameSortKey)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameRootCalcId)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameCalculationDepth)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameType)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameTagId)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameReportTagId)
-            identifyingColumnNames.Add(CalculationResultRecord.ColumnNameRootCalculationId)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_MATERIAL_TYPE)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_LOCATION_ID)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_SORT_KEY)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_ROOT_CALC_ID)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_CALCULATION_DEPTH)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_TYPE)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_TAG_ID)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_REPORT_TAG_ID)
+            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_ROOT_CALCULATION_ID)
             identifyingColumnNames.Add("Attribute")
 
-            timeBasedColumnNames.Add(CalculationResultRecord.ColumnNameDateCal)
-            timeBasedColumnNames.Add(CalculationResultRecord.ColumnNameDateFrom)
-            timeBasedColumnNames.Add(CalculationResultRecord.ColumnNameDateTo)
+            timeBasedColumnNames.Add(CalculationConstants.COLUMN_NAME_DATE_CAL)
+            timeBasedColumnNames.Add(CalculationConstants.COLUMN_NAME_DATE_FROM)
+            timeBasedColumnNames.Add(CalculationConstants.COLUMN_NAME_DATE_TO)
             timeBasedColumnNames.Add("DateText")
 
-            For Each gradeName As String In CalculationResultRecord.GradeNames
+            For Each gradeName In CalculationResultRecord.GradeNames
                 valueColumnNames.Add(gradeName)
                 valueColumnNames.Add(gradeName + "Difference")
             Next
@@ -869,7 +942,7 @@
 
             For Each column As DataColumn In fromDataRow.Table.Columns
                 ' Default to include (if including other columns)
-                Dim include As Boolean = includeOtherColumns
+                Dim include = includeOtherColumns
 
                 ' override if in either the identifying, time-based on value column sets
                 If identifyingColumnNames.Contains(column.ColumnName) Then
@@ -905,41 +978,41 @@
             Dim earliestIndexByRowKey As New Dictionary(Of String, Integer)()
 
             ' an index variable for row counting ... this is neccessary for determining the positions at which rows are to be inserted
-            Dim index As Integer = 1
+            Dim index = 1
 
             ' Determine what key identifying columns should go into the row key (data series key)
             Dim potentialKeyColumns As New List(Of String)()
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameProductSize)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameMaterialType)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameLocationId)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameSortKey)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameRootCalcId)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameCalculationDepth)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameType)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameTagId)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameReportTagId)
-            potentialKeyColumns.Add(CalculationResultRecord.ColumnNameRootCalculationId)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_MATERIAL_TYPE)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_LOCATION_ID)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_SORT_KEY)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_ROOT_CALC_ID)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_CALCULATION_DEPTH)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_TYPE)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_TAG_ID)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_REPORT_TAG_ID)
+            potentialKeyColumns.Add(CalculationConstants.COLUMN_NAME_ROOT_CALCULATION_ID)
             potentialKeyColumns.Add("Attribute")
 
             Dim keyColumns As New List(Of String)()
-            For Each columnName As String In potentialKeyColumns
+            For Each columnName In potentialKeyColumns
                 If data.Columns.Contains(columnName) Then
                     keyColumns.Add(columnName)
                 End If
             Next
             ' iterate through the data table and obtain the earliest reporting period
             For Each row As DataRow In data.Rows
-                Dim rowKeyBuilder As New System.Text.StringBuilder()
+                Dim rowKeyBuilder As New StringBuilder()
 
-                For Each columnName As String In keyColumns
-                    If (Not (row(columnName) Is Nothing OrElse row(columnName) Is DBNull.Value)) Then
+                For Each columnName In keyColumns
+                    If Not (row(columnName) Is Nothing OrElse row(columnName) Is DBNull.Value) Then
                         rowKeyBuilder.Append(row(columnName).ToString())
                         rowKeyBuilder.Append("__")
                     End If
                 Next
 
-                Dim rowKey As String = rowKeyBuilder.ToString()
-                Dim rowDateTime As DateTime = CDate(row("CalendarDate"))
+                Dim rowKey = rowKeyBuilder.ToString()
+                Dim rowDateTime = CDate(row("CalendarDate"))
 
                 periods.Add(rowDateTime) '  Try to add to the periods HashSet, this will only actuall add where the DateTime is not already stored...  (this is as quick as doing a lookup and then an add.. which is what happens internally to the HashSet anyway)
 
@@ -949,7 +1022,7 @@
 
                 ' work out whether this is the earliest period seen for this particular key
                 Dim earliestPeriodForThisRowKey As Date
-                Dim thisIsEarliestPeriodForRowKey As Boolean = True
+                Dim thisIsEarliestPeriodForRowKey = True
                 If earliestPeriodByRowKey.TryGetValue(rowKey, earliestPeriodForThisRowKey) Then
                     If earliestPeriodForThisRowKey < rowDateTime Then
                         thisIsEarliestPeriodForRowKey = False
@@ -969,16 +1042,16 @@
 
             ' keep track of a row modified... with each row we add it is neccessary increment this offset so that any future 
             ' adds are at an index position that takes this add into accout
-            Dim rowPositionModifier As Integer = 0
+            Dim rowPositionModifier = 0
 
             ' create an ordered set of period
             Dim orderedPeriods As New List(Of Date)(periods.OrderBy(Function(d) d))
 
             ' iterate through all rowKeys
-            For Each rowKeyDatePair As KeyValuePair(Of String, Date) In earliestPeriodByRowKey
+            For Each rowKeyDatePair In earliestPeriodByRowKey
 
                 ' iterate through all ordered periods while the period is earlier than the earliest period already in the data for this row key
-                For Each period As Date In orderedPeriods
+                For Each period In orderedPeriods
                     If period >= rowKeyDatePair.Value Then
                         ' nothing more to date... the rowKey (series) already has data
                         Exit For
@@ -987,17 +1060,17 @@
                     ' otherwise a record must be generated for this rowkey and date
 
                     ' grab the earliest row of this type... 
-                    Dim earliestDataRowForRowKey As DataRow = earliestRowByRowKey(rowKeyDatePair.Key)
-                    Dim earliestDataRowIndex As Integer = earliestIndexByRowKey(rowKeyDatePair.Key)
+                    Dim earliestDataRowForRowKey = earliestRowByRowKey(rowKeyDatePair.Key)
+                    Dim earliestDataRowIndex = earliestIndexByRowKey(rowKeyDatePair.Key)
 
                     ' make a row for the new record
-                    Dim newDataRow As DataRow = earliestDataRowForRowKey.Table.NewRow()
+                    Dim newDataRow = earliestDataRowForRowKey.Table.NewRow()
 
                     Dim rowToClonePeriodInformationFrom = firstRecordPerPeriod(period)
                     ' Copy time based columns from the row associated with the data point for which the rowKey (series) has no value
-                    CalculationResult.CopyDataRow(rowToClonePeriodInformationFrom, newDataRow, includeIdentifyingColumns:=False, includeTimeBasedColumns:=True, includeValueColums:=False, includeOtherColumns:=False)
+                    CopyDataRow(rowToClonePeriodInformationFrom, newDataRow, includeIdentifyingColumns:=False, includeTimeBasedColumns:=True, includeValueColums:=False, includeOtherColumns:=False)
                     ' Copy identifying and OTHER columns (excluding values and time-based information) from the earliest row for this data set
-                    CalculationResult.CopyDataRow(earliestDataRowForRowKey, newDataRow, includeIdentifyingColumns:=True, includeTimeBasedColumns:=False, includeValueColums:=False, includeOtherColumns:=True)
+                    CopyDataRow(earliestDataRowForRowKey, newDataRow, includeIdentifyingColumns:=True, includeTimeBasedColumns:=False, includeValueColums:=False, includeOtherColumns:=True)
 
                     ' insert the copied row
                     earliestDataRowForRowKey.Table.Rows.InsertAt(newDataRow, (earliestDataRowIndex - 1) + rowPositionModifier)
@@ -1018,14 +1091,14 @@
         ''' </summary>
         ''' <param name="row">DataRow for which a key is to be determined</param>
         ''' <returns>the lookup key</returns>
-        Private Shared Function BuildDataRowLookupByDateAndLocationStoreKey(ByVal row As DataRow) As String
-            Dim key As String = "{{NotDefined}}"
+        Private Shared Function BuildDataRowLookupByDateAndLocationStoreKey(row As DataRow) As String
+            Dim key = "{{NotDefined}}"
 
             ' build a lookup key for the row
-            Dim dateFrom As DateTime = DateTime.MinValue
-            Dim locationId As Integer = Integer.MinValue
-            DateTime.TryParse(row(CalculationResultRecord.ColumnNameDateCal).ToString(), dateFrom)
-            Int32.TryParse(row(CalculationResultRecord.ColumnNameLocationId).ToString(), locationId)
+            Dim dateFrom = DateTime.MinValue
+            Dim locationId = Integer.MinValue
+            DateTime.TryParse(row(CalculationConstants.COLUMN_NAME_DATE_CAL).ToString(), dateFrom)
+            Int32.TryParse(row(CalculationConstants.COLUMN_NAME_LOCATION_ID).ToString(), locationId)
 
             key = String.Format("{0:ddMMyyyy}_{1}", dateFrom, locationId)
 
@@ -1037,7 +1110,7 @@
         ''' </summary>
         ''' <param name="dataRows">The data rows on which to build a lookup store</param>
         ''' <returns>A structure that supports lookup based on dateFrom_locationId keys</returns>
-        Private Shared Function BuildDataRowLookupByDateAndLocationStore(ByVal dataRows As DataRow()) As Dictionary(Of String, List(Of DataRow))
+        Private Shared Function BuildDataRowLookupByDateAndLocationStore(dataRows As DataRow()) As Dictionary(Of String, List(Of DataRow))
             Dim gradeRowStore As New Dictionary(Of String, List(Of DataRow))
 
             ' organise the gradeRows by date and location... 
@@ -1045,11 +1118,11 @@
             If Not dataRows Is Nothing Then
                 If dataRows.Length > 0 Then
                     ' ensure the required columns are present..
-                    If (dataRows(0).Table.Columns.Contains(CalculationResultRecord.ColumnNameDateCal) _
-                        AndAlso dataRows(0).Table.Columns.Contains(CalculationResultRecord.ColumnNameLocationId)) Then
+                    If dataRows(0).Table.Columns.Contains(CalculationConstants.COLUMN_NAME_DATE_CAL) _
+                        AndAlso dataRows(0).Table.Columns.Contains(CalculationConstants.COLUMN_NAME_LOCATION_ID) Then
 
                         For Each row In dataRows
-                            Dim key As String = BuildDataRowLookupByDateAndLocationStoreKey(row)
+                            Dim key = BuildDataRowLookupByDateAndLocationStoreKey(row)
 
                             Dim rowListForKey As List(Of DataRow) = Nothing
 
@@ -1079,18 +1152,18 @@
         ''' <param name="onLocationId">if true, location id will be part of the lookup key</param>
         ''' <param name="onProductSize">if true, product size will be part of the lookup key</param>
         ''' <returns>the dictionary data structure to be used for lookup</returns>
-        Private Shared Function BuildRecordLookupByMainAggregationFieldsStore(ByVal result As CalculationResult,
+        Private Shared Function BuildRecordLookupByMainAggregationFieldsStore(result As CalculationResult,
                                             Optional ByVal onMaterialTypeId As Boolean = True,
                                             Optional ByVal onLocationId As Boolean = True,
                                             Optional ByVal onProductSize As Boolean = True) As Dictionary(Of String, CalculationResultRecord)
             ' pre-aggregate to avoid aggregation on each loop
-            Dim preAggregated As List(Of CalculationResultRecord) = result.AggregateRecords(True, onMaterialTypeId, onLocationId, onProductSize).ToList()
+            Dim preAggregated = result.AggregateRecords(onMaterialTypeId:=onMaterialTypeId, onLocationId:=onLocationId, onProductSize:=onProductSize).ToList()
             Dim store As New Dictionary(Of String, CalculationResultRecord)
 
             For Each record In preAggregated
 
 
-                Dim key As String = BuildRecordLookupByMainAggregationFieldsStoreKey(record, onMaterialTypeId, onLocationId, onProductSize)
+                Dim key = BuildRecordLookupByMainAggregationFieldsStoreKey(record, onMaterialTypeId, onLocationId, onProductSize)
 
                 Dim existingRecord As CalculationResultRecord = Nothing
 
@@ -1121,11 +1194,11 @@
         ''' <param name="onLocationId">if true, location id will be part of the lookup key</param>
         ''' <param name="onProductSize">if true, product size will be part of the lookup key</param>
         ''' <returns>string representing the lookup key</returns>
-        Private Shared Function BuildRecordLookupByMainAggregationFieldsStoreKey(ByVal record As CalculationResultRecord,
+        Private Shared Function BuildRecordLookupByMainAggregationFieldsStoreKey(record As CalculationResultRecord,
                                             Optional ByVal onMaterialTypeId As Boolean = True,
                                             Optional ByVal onLocationId As Boolean = True,
                                             Optional ByVal onProductSize As Boolean = True) As String
-            Dim key As String = "{{Undefined}}"
+            Dim key = "{{Undefined}}"
 
             Dim locationId As Integer? = Nothing
             Dim materialTypeId As Integer? = Nothing
@@ -1156,8 +1229,8 @@
         ''' <param name="materialTypeId">the material type Id to be included in the lookup key</param>
         ''' <param name="productSize">the product size to be included in the lookup key</param>
         ''' <returns>string representing the lookup key</returns>
-        Private Shared Function BuildRecordLookupByMainAggregationFieldsStoreKey(ByVal calDate As Date, ByVal locationId As Integer?, ByVal materialTypeId As Integer?, ByVal productSize As String, ByVal resourceClassification As String) As String
-            Dim key As String = "{{Undefined}}"
+        Private Shared Function BuildRecordLookupByMainAggregationFieldsStoreKey(calDate As Date, locationId As Integer?, materialTypeId As Integer?, productSize As String, resourceClassification As String) As String
+            Dim key = "{{Undefined}}"
 
             key = String.Format("{0:ddMMyyyy}_{1}_{2}_{3}_{4}", calDate, locationId, materialTypeId, productSize, resourceClassification)
 
@@ -1169,7 +1242,7 @@
 #Region "Class Functions"
 
         Public Sub AggregateByDateLocation()
-            Dim fil As IEnumerable(Of CalculationResultRecord) = AggregateRecords(True, False, True, True)
+            Dim fil = AggregateRecords(onMaterialTypeId:=False, onLocationId:=True, onProductSize:=True)
             Me.Clear()
             For Each thing In fil
                 Me.Add(thing)
@@ -1177,9 +1250,9 @@
         End Sub
 
         Public Function ContainsNullGrades() As Boolean
-            Dim hasNull As Boolean = False
+            Dim hasNull = False
             For Each thing In Me
-                If (thing.Fe Is Nothing) AndAlso (Not thing.Tonnes Is Nothing AndAlso thing.Tonnes <> 0) Then
+                If thing.Fe Is Nothing AndAlso Not thing.Tonnes Is Nothing AndAlso thing.Tonnes <> 0 Then
                     hasNull = True
                 End If
             Next
@@ -1200,7 +1273,7 @@
         Public Function CloneData() As CalculationResult
             Dim record As CalculationResultRecord
             Dim tag As CalculationResultTag
-            CloneData = New CalculationResult()
+            CloneData = New CalculationResult(CalculationResultType.Tonnes)
             For Each record In Me
                 CloneData.Add(record.Clone(CloneData))
             Next
@@ -1209,7 +1282,7 @@
             Next
         End Function
 
-        Public Shared Sub CloneHeaders(ByVal dest As CalculationResult, ByVal source As CalculationResult)
+        Public Shared Sub CloneHeaders(dest As CalculationResult, source As CalculationResult)
             dest.TagId = source.TagId
             dest.CalcId = source.CalcId
             dest.InError = source.InError
@@ -1219,7 +1292,7 @@
         ''' <summary>
         ''' Returns a calculation set of all calculation results, including parents used in this result.
         ''' </summary>
-        Public ReadOnly Property GetAllCalculations() As CalculationSet
+        Public ReadOnly Property GetAllCalculations As CalculationSet
             Get
                 Dim calcSet As New CalculationSet()
                 Dim parent As CalculationResult
@@ -1237,9 +1310,9 @@
         ''' <summary>
         ''' Returns a list of parents and their depths in this result, including the root result.
         ''' </summary>
-        Public ReadOnly Property GetAllResults() As ObjectModel.Collection(Of CalculationResultDepth)
+        Public ReadOnly Property GetAllResults As Collection(Of CalculationResultDepth)
             Get
-                Dim list As New ObjectModel.Collection(Of CalculationResultDepth)
+                Dim list As New Collection(Of CalculationResultDepth)
                 list.Add(New CalculationResultDepth(0, Me))
                 GetParentDepths(1, list)
                 Return list
@@ -1249,9 +1322,9 @@
         ''' <summary>
         ''' Returns a list of parents and their depths in this result.
         ''' </summary>
-        Public ReadOnly Property GetParents() As ObjectModel.Collection(Of CalculationResultDepth)
+        Public ReadOnly Property GetParents As Collection(Of CalculationResultDepth)
             Get
-                Dim list As New ObjectModel.Collection(Of CalculationResultDepth)
+                Dim list As New Collection(Of CalculationResultDepth)
                 GetParentDepths(1, list)
                 Return list
             End Get
@@ -1260,7 +1333,7 @@
         ''' <summary>
         ''' To be used only by GetParents().
         ''' </summary>
-        Public Sub GetParentDepths(ByVal depth As Integer, ByVal list As ObjectModel.Collection(Of CalculationResultDepth))
+        Public Sub GetParentDepths(depth As Integer, list As Collection(Of CalculationResultDepth))
             Dim parent As CalculationResult
             For Each parent In ParentResults
                 list.Add(New CalculationResultDepth(depth, parent))
@@ -1269,11 +1342,11 @@
         End Sub
 
         Public Function RemoveAllParents() As CalculationResult
-            _parentResults = New ObjectModel.Collection(Of CalculationResult)
+            _parentResults = New Collection(Of CalculationResult)
             Return Me
         End Function
 
-        Public Function WithProductSize(ByVal productSize As String) As CalculationResult
+        Public Function WithProductSize(productSize As String) As CalculationResult
             Dim resultsToRemove = Me.Where(Function(r) r.ProductSize <> productSize).ToList
 
             For Each result In resultsToRemove
@@ -1286,8 +1359,8 @@
         ''' <summary>
         ''' Returns the first result matching the calc id.
         ''' </summary>
-        Public Function GetFirstCalcId(ByVal requestedCalcId As String) As CalculationResult
-            Dim calcSet As CalculationSet = GetAllCalculations()
+        Public Function GetFirstCalcId(requestedCalcId As String) As CalculationResult
+            Dim calcSet = GetAllCalculations()
             Dim result As CalculationResult
             Dim matchedResult As CalculationResult = Nothing
 
@@ -1305,8 +1378,8 @@
         ''' <summary>
         ''' Returns a Calculation set of all items matching that calc id.
         ''' </summary>
-        Public Function GetCalcById(ByVal requestedCalcId As String) As CalculationSet
-            Dim calcSet As CalculationSet = GetAllCalculations()
+        Public Function GetCalcById(requestedCalcId As String) As CalculationSet
+            Dim calcSet = GetAllCalculations()
             Dim returnSet As New CalculationSet
             Dim result As CalculationResult
 
@@ -1322,7 +1395,7 @@
         ''' <summary>
         ''' Replaces any calc id's descriptions found with the description provided.
         ''' </summary>
-        Public Sub ReplaceDescription(ByVal calcId As String, ByVal description As String)
+        Public Sub ReplaceDescription(calcId As String, description As String)
             Dim result As CalculationResult
 
             For Each result In GetCalcById(calcId)
@@ -1333,9 +1406,9 @@
         ''' <summary>
         ''' Prefix's this calclulation and all the parents Tag id with the string provided.
         ''' </summary>
-        Public Sub PrefixTagId(ByVal prefixed As String)
+        Public Sub PrefixTagId(prefixed As String)
             Dim result As CalculationResult
-            Dim tagSet As CalculationSet = GetAllCalculations()
+            Dim tagSet = GetAllCalculations()
 
             For Each result In tagSet
                 result.TagId = prefixed & result.TagId
@@ -1345,8 +1418,8 @@
         ''' <summary>
         ''' Returns a copy of the result containing all records belonging to the supplied material type.
         ''' </summary>
-        Public Function GetMaterialTypeResult(ByVal materialTypeId As Int32?) As CalculationResult
-            Dim materialResult As CalculationResult = Clone()
+        Public Function GetMaterialTypeResult(materialTypeId As Int32?) As CalculationResult
+            Dim materialResult = Clone()
             Dim record As CalculationResultRecord
             ' delete all records which are not of the given materialTypeId
             For Each record In materialResult.ToArray()
@@ -1360,7 +1433,7 @@
         ''' <summary>
         ''' Change all records to the newly supplied material type.
         ''' </summary>
-        Public Sub UpdateMaterialType(ByVal newMaterialTypeId As Int32?)
+        Public Sub UpdateMaterialType(newMaterialTypeId As Int32?)
             Dim record As CalculationResultRecord
             Dim result As CalculationResult
             ' Update each record.
@@ -1374,7 +1447,7 @@
         ''' <summary>
         ''' Change any records of the old material type to the newly supplied material type.
         ''' </summary>
-        Public Sub UpdateMaterialType(ByVal oldMaterialTypeId As Int32?, ByVal newMaterialTypeId As Int32?)
+        Public Sub UpdateMaterialType(oldMaterialTypeId As Int32?, newMaterialTypeId As Int32?)
             Dim record As CalculationResultRecord
             Dim result As CalculationResult
             ' Update each record.
@@ -1390,11 +1463,11 @@
         ''' <summary>
         ''' Strips out all the dates between the range.
         ''' </summary>
-        Public Sub StripDateRange(ByVal startDate As DateTime, ByVal endDate As DateTime,
-         ByVal parseParents As Boolean)
+        Public Sub StripDateRange(startDate As DateTime, endDate As DateTime,
+         parseParents As Boolean)
             Dim parentResult As CalculationResult
             Dim deleteRecords As CalculationResultRecord()
-            Dim deleteTags As New Generic.List(Of CalculationResultTag)
+            Dim deleteTags As New List(Of CalculationResultTag)
             Dim tag As CalculationResultTag
             Dim deleteableTags As New List(Of DateTime?)
 
@@ -1432,10 +1505,10 @@
         ''' </summary>
         ''' <param name="calendarDate">Keep all records relating to this date.</param>
         ''' <remarks>Used to get a subset of the data.</remarks>
-        Public Sub StripDateExcept(ByVal calendarDate As DateTime)
+        Public Sub StripDateExcept(calendarDate As DateTime)
             Dim parentResult As CalculationResult
             Dim deleteRecords As CalculationResultRecord()
-            Dim deleteTags As New Generic.List(Of CalculationResultTag)
+            Dim deleteTags As New List(Of CalculationResultTag)
             Dim tag As CalculationResultTag
 
             deleteRecords = (From rec In ToArray()
@@ -1458,8 +1531,8 @@
         ''' <summary>
         ''' Deletes the records and tags in the list.
         ''' </summary>
-        Private Sub DeleteRecordAndTags(ByVal records As CalculationResultRecord(),
-         ByVal deleteTags As Generic.List(Of CalculationResultTag))
+        Private Sub DeleteRecordAndTags(records As CalculationResultRecord(),
+         deleteTags As List(Of CalculationResultTag))
 
             For Each record In records
                 Remove(record)
@@ -1498,55 +1571,65 @@
 
             ' Add required columns
             table.Columns.Add(New DataColumn("TagId", GetType(String), ""))
-            table.Columns.Add(New DataColumn(CalculationResultRecord.ColumnNameReportTagId, GetType(String), ""))
+            table.Columns.Add(New DataColumn(CalculationConstants.COLUMN_NAME_REPORT_TAG_ID, GetType(String), ""))
             table.Columns.Add(New DataColumn("CalcId", GetType(String), ""))
             table.Columns.Add(New DataColumn("Description", GetType(String), ""))
             table.Columns.Add(New DataColumn("Type", GetType(CalculationResultType), ""))
             table.Columns.Add(New DataColumn("CalculationDepth", GetType(Int32), ""))
             table.Columns.Add(New DataColumn("InError", GetType(Boolean), ""))
             table.Columns.Add(New DataColumn("ErrorMessage", GetType(String), ""))
-            table.Columns.Add(New DataColumn(CalculationResultRecord.ColumnNameProductSize, GetType(String), ""))
-            table.Columns.Add(New DataColumn(CalculationResultRecord.ColumnNameSortKey, GetType(String), ""))
+            table.Columns.Add(New DataColumn(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE, GetType(String), ""))
+            table.Columns.Add(New DataColumn(CalculationConstants.COLUMN_NAME_SORT_KEY, GetType(String), ""))
 
             Return table
         End Function
 
-        Private Shared Function NullableIntEqual(ByVal l As Int32?, ByVal r As Int32?) As Boolean
-            Return (l.HasValue AndAlso r.HasValue AndAlso l.Value = r.Value) Or
-             (Not l.HasValue And Not r.HasValue)
+        Private Shared Function NullableIntEqual(l As Int32?, r As Int32?) As Boolean
+            Return l.HasValue AndAlso r.HasValue AndAlso l.Value = r.Value Or
+             Not l.HasValue And Not r.HasValue
         End Function
 
-        Public Function ToDataTable(ByVal includeParents As Boolean,
-         ByVal normalizedData As Boolean, ByVal maintainLocations As Boolean,
-         ByVal breakdownMeasureByMaterialType As Boolean,
-         ByVal excludeProductSizeBreakdown As Boolean) As DataTable
+        Public Function ToDataTable(includeParents As Boolean,
+         normalizedData As Boolean, maintainLocations As Boolean,
+         breakdownMeasureByMaterialType As Boolean,
+         excludeProductSizeBreakdown As Boolean) As DataTable
             Return ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, excludeProductSizeBreakdown, CType(Nothing, ReportBreakdown?), False)
         End Function
 
-        Public Function ToDataTable(ByVal includeParents As Boolean,
-            ByVal normalizedData As Boolean, ByVal maintainLocations As Boolean,
-            ByVal breakdownMeasureByMaterialType As Boolean,
-            ByVal excludeProductSizeBreakdown As Boolean,
-            ByVal aggregateToDateBreakdown As ReportBreakdown?,
-            ByVal breakdownFactorByMaterialType As Boolean) As DataTable
+        Public Function ToDataTable(includeParents As Boolean,
+            normalizedData As Boolean, maintainLocations As Boolean,
+            breakdownMeasureByMaterialType As Boolean,
+            excludeProductSizeBreakdown As Boolean,
+            aggregateToDateBreakdown As ReportBreakdown?,
+            breakdownFactorByMaterialType As Boolean) As DataTable
 
             'TODO: Use ByVal parameters As Types.DataRequest to get non parsed dates. 
             Dim table = GetDataTableStub()
             Dim result As CalculationResultDepth
-            Dim results As ObjectModel.Collection(Of CalculationResultDepth)
+            Dim results As Collection(Of CalculationResultDepth)
             Dim aggregatedRecords As CalculationResultRecord()
             Dim materialRecords As CalculationResultRecord() = Nothing
             Dim calendarDate As DateTime
             Dim locationId As Int32?
 
             If Not includeParents Then
-                results = New ObjectModel.Collection(Of CalculationResultDepth)
+                results = New Collection(Of CalculationResultDepth)
                 results.Add(New CalculationResultDepth(0, Me))
             Else
                 results = GetAllResults()
             End If
 
-            Dim dateLocationGroup = From dl In AggregateRecords(True, False, maintainLocations, True, aggregateToDateBreakdown)
+            Dim groupByList = New HashSet(Of String) From {
+                    {"ResourceClassification"},
+                    {"ProductSize"},
+                    {"CalendarDate"}
+                    }
+
+            If maintainLocations Then
+                groupByList.Add("LocationId")
+            End If
+
+            Dim dateLocationGroup = From dl In AggregateRecords(groupByList, aggregateToDateBreakdown)
                                     Group By calDate = dl.CalendarDate, location = dl.LocationId Into Group
                                     Order By calDate, location
                                     Select New With {.calendarDate = calDate, .locationId = location}
@@ -1640,7 +1723,7 @@
         ''' <summary>
         ''' Created an equivalent calculation result that has been aggregated using options the perform the minimum amount of aggregation
         ''' </summary>
-        Public Function ToAggregatedClone(ByVal applySpecialH2OGradeWeightingLogic As Boolean) As CalculationResult
+        Public Function ToAggregatedClone(applySpecialH2OGradeWeightingLogic As Boolean) As CalculationResult
             ' make a new result.. copying over property values
             Dim cr As New CalculationResult(Me.CalculationType)
             cr.CalcId = Me.CalcId
@@ -1650,9 +1733,9 @@
             cr.ErrorMessage = Me.ErrorMessage
 
             ' then get a set of aggregate records
-            Dim aggregatedRecords As IEnumerable(Of CalculationResultRecord) = AggregateRecords(onDate:=True, onMaterialTypeId:=True, onLocationId:=True, onProductSize:=True, useSpecificH2OGradeWeighting:=applySpecialH2OGradeWeightingLogic)
+            Dim aggregatedRecords = AggregateRecords(onMaterialTypeId:=True, onLocationId:=True, onProductSize:=True, useSpecificH2OGradeWeighting:=applySpecialH2OGradeWeightingLogic)
             ' and add the aggregate records as the calculation results records for the cloned results
-            For Each r As CalculationResultRecord In aggregatedRecords
+            For Each r In aggregatedRecords
                 ' reset the dodgy aggregate tonnes back to the tonnes value.. this is neccessary to address issues around stockpile deltas
                 r.DodgyAggregateGradeTonnes = r.Tonnes
                 cr.Add(r)
@@ -1664,10 +1747,10 @@
         ''' <summary>
         ''' Parse the rows in normalized data into a data table. To be used only from ToDataTable.
         ''' </summary>
-        Public Sub ToDataTableParseRows(ByVal records As CalculationResultRecord(),
-         ByVal table As DataTable, ByVal depth As Int32,
-         ByVal normalizedData As Boolean,
-         ByVal excludeProductSizeBreakdown As Boolean)
+        Public Sub ToDataTableParseRows(records As CalculationResultRecord(),
+         table As DataTable, depth As Int32,
+         normalizedData As Boolean,
+         excludeProductSizeBreakdown As Boolean)
             Dim record As CalculationResultRecord
             Dim row As DataRow
             Dim recordTable As DataTable
@@ -1684,7 +1767,7 @@
 
                 For Each record In records
                     ' unless excluding this row
-                    If (Not excludeProductSizeBreakdown Or record.ProductSize Is Nothing Or record.ProductSize = ProductSizeTotal) Then
+                    If Not excludeProductSizeBreakdown Or record.ProductSize Is Nothing Or record.ProductSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                         ' transform it and then add to the location table
                         recordTable = record.ToDataTable(normalizedData)
                         CalculationResultTag.AddTagsToRecord(Tags, recordTable, record)
@@ -1694,20 +1777,20 @@
 
                 For Each row In locationTable.Rows
 
-                    Dim tagIdForRow As String = TagId
-                    Dim reportTagIdForRow As String = TagId
+                    Dim tagIdForRow = TagId
+                    Dim reportTagIdForRow = TagId
 
                     ' modify the TagId to represent the product size if needed for this row
                     ' the original tagId is retained in the ReportTagId column
-                    Dim productSizeObject As Object = row(CalculationResultRecord.ColumnNameProductSize)
+                    Dim productSizeObject = row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
                     If productSizeObject Is Nothing OrElse String.IsNullOrEmpty(productSizeObject.ToString) Then
-                        productSizeObject = CalculationResult.ProductSizeTotal
+                        productSizeObject = CalculationConstants.PRODUCT_SIZE_TOTAL
                     End If
 
-                    row(CalculationResultRecord.ColumnNameProductSize) = productSizeObject.ToString()
+                    row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE) = productSizeObject.ToString()
 
-                    If (Not productSizeObject.ToString() = ProductSizeTotal) Then
-                        If (Not tagIdForRow.EndsWith(productSizeObject.ToString())) Then
+                    If Not productSizeObject.ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL Then
+                        If Not tagIdForRow.EndsWith(productSizeObject.ToString()) Then
                             tagIdForRow = tagIdForRow & productSizeObject.ToString()
                         End If
                     End If
@@ -1738,24 +1821,24 @@
 
 #Region "ToCalculationResult Overloaded"
 
-        Public Shared Function ToCalculationResult(ByVal ds As DataSet) As CalculationResult
+        Public Shared Function ToCalculationResult(ds As DataSet) As CalculationResult
             Return ToCalculationResult(ds, Nothing, Nothing, Nothing)
         End Function
 
-        Public Shared Function ToCalculationResult(ByVal values As DataRow(), ByVal grades As DataRow()) As CalculationResult
+        Public Shared Function ToCalculationResult(values As DataRow(), grades As DataRow()) As CalculationResult
             Return ToCalculationResult(values, grades, Nothing, Nothing, Nothing)
         End Function
 
-        Public Shared Function ToCalculationResult(ByVal rows As DataRow()) As CalculationResult
+        Public Shared Function ToCalculationResult(rows As DataRow()) As CalculationResult
             Return ToCalculationResult(rows, Nothing, Nothing, Nothing, Nothing)
         End Function
 
-        Public Shared Function ToCalculationResult(ByVal ds As DataSet,
-         ByVal startDate As DateTime, ByVal endDate As DateTime,
-         ByVal interval As ReportBreakdown, Optional ByVal filterQuery As String = Nothing) As CalculationResult
+        Public Shared Function ToCalculationResult(ds As DataSet,
+         startDate As DateTime, endDate As DateTime,
+         interval As ReportBreakdown, Optional ByVal filterQuery As String = Nothing) As CalculationResult
             Dim result As CalculationResult
-            Dim values As DataTable = ds.Tables("Value")
-            Dim grades As DataTable = ds.Tables("Grade")
+            Dim values = ds.Tables("Value")
+            Dim grades = ds.Tables("Grade")
 
             If values Is Nothing Then
                 Throw New ArgumentException("Data set must contain the Values table.")
@@ -1769,11 +1852,11 @@
 
             ' now that the calculationresult has been created, check whether the dataset has other tables with data to be added in
             ' ... this is used in product type based reporting where the results of multiple hubs are merged in transparently
-            Dim extraResultsMergedIn As Boolean = False
+            Dim extraResultsMergedIn = False
             Dim index As Integer
             For index = 1 To ds.Tables.Count
-                Dim extraValues As DataTable = ds.Tables(String.Format("Value{0}", index))
-                Dim extraGrades As DataTable = ds.Tables(String.Format("Grade{0}", index))
+                Dim extraValues = ds.Tables(String.Format("Value{0}", index))
+                Dim extraGrades = ds.Tables(String.Format("Grade{0}", index))
 
                 If Not extraValues Is Nothing Then
                     extraResultsMergedIn = True
@@ -1785,14 +1868,14 @@
                 End If
             Next
 
-            If (extraResultsMergedIn) Then
+            If extraResultsMergedIn Then
                 ' the results should be aggregated as the data from multiple tables has been added in to the one set of results
                 ' when aggregating in this way, do not apply special H2O Grade Weighting logic (ignoring 0 values) as the database procedures would not have done so 
                 ' if the results were retrieved directly at the parent location level
 
                 ' first make the dodgy aggregate tonnes are positive for the aggregation (for grade weighting)
-                For Each resultRow As CalculationResultRecord In result
-                    If (Not resultRow.DodgyAggregateGradeTonnes Is Nothing) Then
+                For Each resultRow In result
+                    If Not resultRow.DodgyAggregateGradeTonnes Is Nothing Then
                         resultRow.DodgyAggregateGradeTonnes = Math.Abs(resultRow.DodgyAggregateGradeTonnes.Value)
                     End If
                 Next
@@ -1806,35 +1889,12 @@
         ''' Primary function to convert data rows to the report object model. Often used on Database calls to format into calculation model.
         ''' </summary>
         Public Shared Function ToCalculationResult(
-         ByVal valueRows As DataRow(), ByVal gradeRows As DataRow(),
-         ByVal startDate As DateTime, ByVal endDate As DateTime,
-         ByVal interval As ReportBreakdown) As CalculationResult
+         valueRows As DataRow(), gradeRows As DataRow(),
+         startDate As DateTime, endDate As DateTime,
+         interval As ReportBreakdown) As CalculationResult
             Return New CalculationResult(valueRows, gradeRows, startDate, endDate, interval)
         End Function
 #End Region
 
     End Class
-
-    Module CalculationResultRecordExtensions
-        <Runtime.CompilerServices.Extension()>
-        Public Function Sum(calculationResults As IEnumerable(Of CalculationResultRecord)) As CalculationResultRecord
-            Dim i = 0
-            Dim totalResult As CalculationResultRecord = Nothing
-
-            For Each row In calculationResults
-                If Not row.Tonnes.HasValue Then Continue For
-
-                If i = 0 Then
-                    totalResult = calculationResults.First.Clone
-                Else
-                    totalResult += row
-                End If
-
-                i += 1
-            Next
-
-            Return totalResult
-        End Function
-    End Module
-
 End Namespace
