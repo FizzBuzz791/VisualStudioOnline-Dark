@@ -3,17 +3,10 @@ Imports System.Text
 Imports Snowden.Library.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
+Imports Snowden.Reconcilor.Bhpbio.Report.Enums
 Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 
 Namespace Types
-    Public Enum CalculationType
-        Addition
-        Subtraction
-        Division
-        Difference
-        Ratio
-    End Enum
-
     ''' <summary>
     ''' Contains the result of a given calculation.
     ''' Also supplies shared functions for the conversion between datatables and calculationResult.
@@ -186,11 +179,6 @@ Namespace Types
 #End Region
 
 #Region "Constructors"
-        <Obsolete("Use New(CalculationResultType) instead.")>
-        Public Sub New()
-            CalculationType = CalculationResultType.Tonnes
-        End Sub
-
         Public Sub New(resultType As CalculationResultType)
             CalculationType = resultType
         End Sub
@@ -247,29 +235,30 @@ Namespace Types
                                          Optional ByVal useSpecificH2OGradeWeighting As Boolean = True) _
                                          As IEnumerable(Of CalculationResultRecord)
 
-            Dim groupByList = New HashSet(Of String) From {
-                {"ResourceClassification"},
-                {"CalendarDate"}
+            Dim groupByList = New HashSet(Of GroupingColumn) From {
+                {GroupingColumn.ResourceClassification},
+                {GroupingColumn.CalendarDate}
             }
 
             If onMaterialTypeId Then
-                groupByList.Add("MaterialTypeId")
+                groupByList.Add(GroupingColumn.MaterialType)
             End If
 
             If onLocationId Then
-                groupByList.Add("LocationId")
+                groupByList.Add(Groupingcolumn.Location)
             End If
 
             If onProductSize Then
-                groupByList.Add("ProductSize")
+                groupByList.Add(GroupingColumn.ProductSize)
             End If
 
             Return AggregateRecords(groupByList, Nothing, useSpecificH2OGradeWeighting)
         End Function
 
-        Public Function AggregateRecords(groupByList As ICollection(Of String), forcedReportTimeBreakdown As ReportBreakdown?,
-                                                  Optional ByVal useSpecificH2OGradeWeighting As Boolean = True) _
-                                                  As IEnumerable(Of CalculationResultRecord)
+        Public Function AggregateRecords(groupByList As ICollection(Of GroupingColumn), 
+                                         forcedReportTimeBreakdown As ReportBreakdown?, 
+                                         Optional ByVal useSpecificH2OGradeWeighting As Boolean = True) _
+                                         As IEnumerable(Of CalculationResultRecord)
 
             Dim aggregatedRecords As IEnumerable(Of CalculationResultRecord)
             Dim arrayList = ToArray()
@@ -285,11 +274,11 @@ Namespace Types
             ' the grade is present for each individual record. This is required because some calculations don't have these 
             ' grades
             aggregatedRecords = arrayList.GroupBy(Function(t) New With {
-                Key .Resourceclassification = GroupedOnString(groupByList.Contains("ResourceClassification"), t.ResourceClassification),
+                Key .Resourceclassification = GroupedOnString(groupByList.Contains(GroupingColumn.ResourceClassification), t.ResourceClassification),
                 Key .ProductSize = t.ProductSize,
-                Key .CalendarDate = GroupedOnDateTime(groupByList.Contains("CalendarDate"), t.CalendarDate, forcedReportTimeBreakdown),
-                Key .MaterialTypeId = GroupedOnInt(groupByList.Contains("MaterialTypeId"), t.MaterialTypeId),
-                Key .LocationId = GroupedOnInt(groupByList.Contains("LocationId"), t.LocationId)
+                Key .CalendarDate = GroupedOnDateTime(groupByList.Contains(GroupingColumn.CalendarDate), t.CalendarDate, forcedReportTimeBreakdown),
+                Key .MaterialTypeId = GroupedOnInt(groupByList.Contains(GroupingColumn.MaterialType), t.MaterialTypeId),
+                Key .LocationId = GroupedOnInt(groupByList.Contains(GroupingColumn.Location), t.LocationId)
             }).OrderBy(Function(g) g.Key.CalendarDate).Select(Function(g) New With {
                 .ResourceClassification = g.Key.Resourceclassification,
                 .ProductSize = g.Key.ProductSize,
@@ -348,32 +337,29 @@ Namespace Types
                 .H2OShipped = MassWeight(t.H2OShipped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OShippedCnt)
             })
 
-            If groupByList.Contains("ProductSize") = False Then
+            If groupByList.Contains(GroupingColumn.ProductSize) = False Then
                 aggregatedRecords = aggregatedRecords.Where(Function(r) r.ProductSize.ToUpper = CalculationConstants.PRODUCT_SIZE_TOTAL)
             End If
 
             Return aggregatedRecords
         End Function
 
-        Public Function AggregateFilterRecords(onMaterialTypeId As Boolean, onLocationId As Boolean, onProductSize As Boolean,
-                                               dateFilter As DateTime, locationIdFilter As Int32?,
-                                               aggregateToDateBreakdown As ReportBreakdown?) As IEnumerable(Of CalculationResultRecord)
+        Public Function AggregateFilterRecords(onMaterialTypeId As Boolean, onLocationId As Boolean, dateFilter As DateTime, 
+                                               locationIdFilter As Int32?, aggregateToDateBreakdown As ReportBreakdown?) _
+                                               As IEnumerable(Of CalculationResultRecord)
 
-            Dim groupByList = New HashSet(Of String) From {
-                    {"ResourceClassification"},
-                    {"CalendarDate"}
-                    }
+            Dim groupByList = New HashSet(Of GroupingColumn) From {
+                {GroupingColumn.ResourceClassification},
+                {GroupingColumn.CalendarDate},
+                {GroupingColumn.ProductSize}
+            }
 
             If onMaterialTypeId Then
-                groupByList.Add("MaterialTypeId")
+                groupByList.Add(GroupingColumn.MaterialType)
             End If
 
             If onLocationId Then
-                groupByList.Add("LocationId")
-            End If
-
-            If onProductSize Then
-                groupByList.Add("ProductSize")
+                groupByList.Add(GroupingColumn.Location)
             End If
 
             Dim aggregatedRecords = AggregateRecords(groupByList, aggregateToDateBreakdown)
@@ -630,8 +616,11 @@ Namespace Types
         End Function
 
         ' Copy data from one row to another
-        ' The flags provided to this function allow copying selectively such that identifying information, time information, values, or other columns can be copied independantly
-        Public Shared Sub CopyDataRow(ByRef fromDataRow As DataRow, ByRef toDataRow As DataRow, includeIdentifyingColumns As Boolean, includeTimeBasedColumns As Boolean, includeValueColums As Boolean, includeOtherColumns As Boolean)
+        ' The flags provided to this function allow copying selectively such that identifying information, time information, 
+        ' values, or other columns can be copied independantly
+        Public Shared Sub CopyDataRow(ByRef fromDataRow As DataRow, ByRef toDataRow As DataRow, 
+                                      includeIdentifyingColumns As Boolean, includeTimeBasedColumns As Boolean, 
+                                      includeValueColums As Boolean, includeOtherColumns As Boolean)
 
             Dim identifyingColumnNames As New HashSet(Of String)()
             Dim timeBasedColumnNames As New HashSet(Of String)()
@@ -1316,12 +1305,9 @@ Namespace Types
             Return ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, excludeProductSizeBreakdown, Nothing, False)
         End Function
 
-        Public Function ToDataTable(includeParents As Boolean,
-            normalizedData As Boolean, maintainLocations As Boolean,
-            breakdownMeasureByMaterialType As Boolean,
-            excludeProductSizeBreakdown As Boolean,
-            aggregateToDateBreakdown As ReportBreakdown?,
-            breakdownFactorByMaterialType As Boolean) As DataTable
+        Public Function ToDataTable(includeParents As Boolean, normalizedData As Boolean, maintainLocations As Boolean, 
+                                    breakdownMeasureByMaterialType As Boolean, excludeProductSizeBreakdown As Boolean, 
+                                    aggregateToDateBreakdown As ReportBreakdown?, breakdownFactorByMaterialType As Boolean) As DataTable
 
             'TODO: Use ByVal parameters As Types.DataRequest to get non parsed dates. 
             Dim table = GetDataTableStub()
@@ -1340,14 +1326,14 @@ Namespace Types
                 results = GetAllResults()
             End If
 
-            Dim groupByList = New HashSet(Of String) From {
-                {"ResourceClassification"},
-                {"ProductSize"},
-                {"CalendarDate"}
+            Dim groupByList = New HashSet(Of GroupingColumn) From {
+                {GroupingColumn.ResourceClassification},
+                {GroupingColumn.ProductSize},
+                {GroupingColumn.CalendarDate}
             }
 
             If maintainLocations Then
-                groupByList.Add("LocationId")
+                groupByList.Add(GroupingColumn.Location)
             End If
 
             Dim dateLocationGroup = From dl In AggregateRecords(groupByList, aggregateToDateBreakdown)
@@ -1364,7 +1350,7 @@ Namespace Types
                         ' it is assumed that the record with MaterialType = null is the aggregated factor record: see the Divide method
                         aggregatedRecords = result.Result.Where(Function(t) t.MaterialTypeId Is Nothing).ToArray()
                     Else
-                        aggregatedRecords = result.Result.AggregateFilterRecords(False, maintainLocations, True, calendarDate, locationId, aggregateToDateBreakdown).ToArray()
+                        aggregatedRecords = result.Result.AggregateFilterRecords(False, maintainLocations, calendarDate, locationId, aggregateToDateBreakdown).ToArray()
                     End If
 
                     If aggregatedRecords.Count = 0 Then
@@ -1374,7 +1360,7 @@ Namespace Types
                     End If
 
                     If breakdownMeasureByMaterialType Then
-                        materialRecords = result.Result.AggregateFilterRecords(True, maintainLocations, True, calendarDate, locationId, aggregateToDateBreakdown).ToArray()
+                        materialRecords = result.Result.AggregateFilterRecords(True, maintainLocations, calendarDate, locationId, aggregateToDateBreakdown).ToArray()
                         materialRecords = materialRecords.Where(Function(t) Not t.MaterialTypeId Is Nothing).ToArray()
                     End If
 
@@ -1410,14 +1396,15 @@ Namespace Types
                 Return
             End If
 
-            For Each calenderDate In CalendarDateCollection
+            For Each calendarDate In CalendarDateCollection
                 For Each locationId In LocationIdCollection
                     For Each materialTypeId In MaterialTypeIdCollection
                         For Each productSize In ProductSizeCollection
                             ' ReSharper disable AccessToForEachVariableInClosure
-                            Dim rows = Where(Function(r) r.LocationId.ToString = locationId.ToString AndAlso
-                                                    r.MaterialTypeId.ToString = materialTypeId.ToString AndAlso
-                                                    r.ProductSize = productSize)
+                            Dim rows = Where(Function(r) r.CalendarDate = calendarDate AndAlso 
+                                                 r.LocationId.ToString = locationId.ToString AndAlso
+                                                 r.MaterialTypeId.ToString = materialTypeId.ToString AndAlso
+                                                 r.ProductSize = productSize)
                             ' ReSharper restore AccessToForEachVariableInClosure
 
                             If rows.Count = 0 Then Continue For

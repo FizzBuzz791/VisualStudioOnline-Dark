@@ -80,7 +80,7 @@ Namespace ReportDefinitions
 
             ' recalculate the factor values as required
             ' this is neccessary because the aggregation step (built in as part of ToDateTable() above will have invalidated the factors
-            F1F2F3ReportEngine.RecalculateF1F2F3FactorsByCalculationIdLookup(table)
+            F1F2F3ReportEngine.RecalculateF1F2F3FactorsForUnpivotedTable(table, False)
 
             Dim locationNames As DataTable = session.DalUtility.GetBhpbioLocationChildrenNameWithOverride(locationId, startDate, endDate)
             Dim currentLocationId As String

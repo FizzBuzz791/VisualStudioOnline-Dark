@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using NUnit.Framework;
 using Snowden.Reconcilor.Bhpbio.Report.Constants;
+using Snowden.Reconcilor.Bhpbio.Report.Enums;
 using Snowden.Reconcilor.Bhpbio.Report.Types;
 
 namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types

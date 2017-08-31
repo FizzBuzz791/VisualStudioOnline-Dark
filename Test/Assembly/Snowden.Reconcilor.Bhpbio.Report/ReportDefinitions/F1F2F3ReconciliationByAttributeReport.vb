@@ -429,14 +429,7 @@ Namespace ReportDefinitions
 
             ' Recalculate F1F2F3 factors post aggregation as per other reports
             ' This is neccessary because the aggregation step (built in as part of ToDateTable() above will have invalidated the factors
-            '
-            ' If it is a Factor v Time report, then we should use the new style recacluation method, otherwise we use the old one, to stop
-            ' regressions sneaking into the current reports
-            If isFactorVsTimeReport Or session.IncludeGeometData Then
-                F1F2F3ReportEngine.RecalculateF1F2F3FactorsForUnpivotedTable(table, False)
-            Else
-                F1F2F3ReportEngine.RecalculateF1F2F3FactorsByCalculationIdLookup(table)
-            End If
+            F1F2F3ReportEngine.RecalculateF1F2F3FactorsForUnpivotedTable(table, False)
 
 
             Data.GradeProperties.AddGradePrecisionToNormalizedTable(session, table)

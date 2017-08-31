@@ -191,6 +191,7 @@
     <Compile Include="Data\ReportDisplayParameter.vb" />
     <Compile Include="Cache\DataCache.vb" />
     <Compile Include="Data\ResourceClassifcation.vb" />
+    <Compile Include="Enums\GroupingColumn.vb" />
     <Compile Include="ReportDefinitions\AttributeHelper.vb" />
     <Compile Include="ReportDefinitions\AutomaticContentSelectionMode.vb" />
     <Compile Include="ReportDefinitions\AutomaticContentSelectionModeBase.vb" />
@@ -263,10 +264,9 @@
     </Compile>
     <Compile Include="Types\CalculationSet.vb" />
     <Compile Include="Types\CalculationStep.vb" />
+    <Compile Include="Enums\CalculationType.vb" />
     <Compile Include="Types\CombinationOfInterest.vb" />
     <Compile Include="Types\DataRequest.vb" />
-    <Compile Include="Types\CalendarDateList.vb" />
-    <Compile Include="Types\IdList.vb" />
     <Compile Include="Types\Location.vb" />
     <Compile Include="Types\LocationGroup.vb" />
     <Compile Include="Types\ReportBreakdown.vb" />
