@@ -14,14 +14,14 @@ using System.Reflection;
 namespace Snowden.Reconcilor.Bhpbio.ImportTests
 {
     [TestFixture]
-    public class StratigraphyImportTests
+    public class WeatheringImportTests
     {
         MessageHandlerConfiguration _config;
 
-        private const string VALID_STRAT_GUID = "a2443171-b363-4f88-a403-3cee9420dd4d";
+        private const string VALID_GUID = "a2443171-b363-4f88-a403-3cee9420dd4d";
         private const string VALID_STRAT_DIGBLOCK = "CW-0641-3151-1";
 
-        private const string INVALID_STRAT_GUID = "b2443171-b363-4f88-a403-3cee9420dd4d";
+        private const string INVALID_GUID = "b2443171-b363-4f88-a403-3cee9420dd4d";
         private const string INVALID_STRAT_DIGBLOCK = "CW-0641-3151-2";
 
         private DatabaseConfiguration _dbConfig;
@@ -32,10 +32,11 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
             _config = StagingDataSetupHelper.BuildMessageHandlerConfiguration();
             _dbConfig = StagingTestsHelper.GetDatabaseConfiguration(_config);
         }
+
         [Test]
-        public void Does_A_Valid_StratNum_Message_Get_Processed()
+        public void Does_A_Valid_Weathering_Message_Get_Processed()
         {
-            string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-StratNum.xml";
+            string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-Weathering.xml";
             List<string> arguments = new List<string>();
 
             arguments.Add("/ImportName:Blocks");
@@ -44,26 +45,26 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
             arguments.Add(@"@Pit:CW");
             arguments.Add(@"@Bench:0641");
 
-            bool doesStratNumExist = DoesStratNumExist(_config, "3430");
-            Assert.That(doesStratNumExist, Is.True);
+            bool doesWeatheringExist = DoesWeatheringExist(_config, 1);
+            Assert.That(doesWeatheringExist, Is.True);
 
-            RemoveExistingRecord(VALID_STRAT_DIGBLOCK, VALID_STRAT_GUID, _config, arguments);
+            RemoveExistingRecord(VALID_STRAT_DIGBLOCK, VALID_GUID, _config, arguments);
 
-            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_STRAT_GUID);
+            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_GUID);
 
             RunImportEngineBlockModel(arguments.AsReadOnly());
 
-            var digBlockId = GetDigBlockId(_config, VALID_STRAT_GUID);
+            var digBlockId = GetDigBlockId(_config, VALID_GUID);
             Assert.That(digBlockId, Is.Not.Null);
             Assert.That(digBlockId, Is.EqualTo(VALID_STRAT_DIGBLOCK));
 
-            var stratNum = GetStratNum(_config, digBlockId);
+            var Weathering = GetWeathering(_config, digBlockId);
 
-            Assert.That(stratNum, Is.EqualTo("3430"));
+            Assert.That(Weathering, Is.EqualTo(1));
         }
 
         [Test]
-        public void Does_A_Null_StratNum_Message_Get_Processed()
+        public void Does_A_Null_Weathering_Message_Get_Processed()
         {
             string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-Null-Values.xml";
             List<string> arguments = new List<string>();
@@ -74,28 +75,28 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
             arguments.Add(@"@Pit:CW");
             arguments.Add(@"@Bench:0641");
 
-            bool doesStratNumExist = DoesStratNumExist(_config, "3430");
-            Assert.That(doesStratNumExist, Is.True);
+            bool doesWeatheringExist = DoesWeatheringExist(_config, 1);
+            Assert.That(doesWeatheringExist, Is.True);
 
-            RemoveExistingRecord(VALID_STRAT_DIGBLOCK, VALID_STRAT_GUID, _config, arguments);
+            RemoveExistingRecord(VALID_STRAT_DIGBLOCK, VALID_GUID, _config, arguments);
 
-            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_STRAT_GUID);
+            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_GUID);
 
             RunImportEngineBlockModel(arguments.AsReadOnly());
 
-            var digBlockId = GetDigBlockId(_config, VALID_STRAT_GUID);
+            var digBlockId = GetDigBlockId(_config, VALID_GUID);
             Assert.That(digBlockId, Is.Not.Null);
             Assert.That(digBlockId, Is.EqualTo(VALID_STRAT_DIGBLOCK));
 
-            var stratNum = GetStratNum(_config, digBlockId);
+            var Weathering = GetWeathering(_config, digBlockId);
 
-            Assert.That(stratNum, Is.Null);
+            Assert.That(Weathering, Is.Null);
         }
 
         [Test]
-        public void Does_A_Valid_StratNum_Message_Update_Get_Processed()
+        public void Does_A_Valid_Weathering_Message_Update_Get_Processed()
         {
-            string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-StratNum.xml";
+            string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-Weathering.xml";
             List<string> arguments = new List<string>();
 
             arguments.Add("/ImportName:Blocks");
@@ -104,39 +105,39 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
             arguments.Add(@"@Pit:CW");
             arguments.Add(@"@Bench:0641");
 
-            bool doesStratNumExist = DoesStratNumExist(_config, "3430");
-            Assert.That(doesStratNumExist, Is.True);
+            bool doesWeatheringExist = DoesWeatheringExist(_config, 1);
+            Assert.That(doesWeatheringExist, Is.True);
 
-            doesStratNumExist = DoesStratNumExist(_config, "3420");
-            Assert.That(doesStratNumExist, Is.True);
+            doesWeatheringExist = DoesWeatheringExist(_config, 2);
+            Assert.That(doesWeatheringExist, Is.True);
 
-            RemoveExistingRecord(VALID_STRAT_DIGBLOCK, VALID_STRAT_GUID, _config, arguments);
+            RemoveExistingRecord(VALID_STRAT_DIGBLOCK, VALID_GUID, _config, arguments);
 
             // Add existing
-            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_STRAT_GUID);
+            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_GUID);
 
             RunImportEngineBlockModel(arguments.AsReadOnly());
 
-            var digBlockId = GetDigBlockId(_config, VALID_STRAT_GUID);
+            var digBlockId = GetDigBlockId(_config, VALID_GUID);
             Assert.That(digBlockId, Is.Not.Null);
             Assert.That(digBlockId, Is.EqualTo(VALID_STRAT_DIGBLOCK));
 
             // Now update to from 3430 to 3420
-            resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-StratNum-Update-Value.xml";
+            resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-Weathering-Update-Value.xml";
 
-            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_STRAT_GUID);
+            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_GUID);
 
             RunImportEngineBlockModel(arguments.AsReadOnly());
 
-            var stratNum = GetStratNum(_config, digBlockId);
+            var Weathering = GetWeathering(_config, digBlockId);
 
-            Assert.That(stratNum, Is.EqualTo("3420"));
+            Assert.That(Weathering, Is.EqualTo(2));
         }
 
         [Test]
-        public void Does_A_Null_StratNum_Message_Update_Get_Processed()
+        public void Does_A_Null_Weathering_Message_Update_Get_Processed()
         {
-            string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-StratNum.xml";
+            string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-Weathering.xml";
             List<string> arguments = new List<string>();
 
             arguments.Add("/ImportName:Blocks");
@@ -145,36 +146,36 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
             arguments.Add(@"@Pit:CW");
             arguments.Add(@"@Bench:0641");
 
-            bool doesStratNumExist = DoesStratNumExist(_config, "3430");
-            Assert.That(doesStratNumExist, Is.True);
+            bool doesWeatheringExist = DoesWeatheringExist(_config, 1);
+            Assert.That(doesWeatheringExist, Is.True);
 
-            RemoveExistingRecord(VALID_STRAT_DIGBLOCK, VALID_STRAT_GUID, _config, arguments);
+            RemoveExistingRecord(VALID_STRAT_DIGBLOCK, VALID_GUID, _config, arguments);
 
             // Add existing
-            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_STRAT_GUID);
+            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_GUID);
 
             RunImportEngineBlockModel(arguments.AsReadOnly());
 
-            var digBlockId = GetDigBlockId(_config, VALID_STRAT_GUID);
+            var digBlockId = GetDigBlockId(_config, VALID_GUID);
             Assert.That(digBlockId, Is.Not.Null);
             Assert.That(digBlockId, Is.EqualTo(VALID_STRAT_DIGBLOCK));
 
             // Now update to from 3430 to NULL
             resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Valid-Null-Values.xml";
 
-            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_STRAT_GUID);
+            PopulateStagingData(_config, resource, this.GetType().Assembly, VALID_GUID);
 
             RunImportEngineBlockModel(arguments.AsReadOnly());
 
-            var stratNum = GetStratNum(_config, digBlockId);
+            var Weathering = GetWeathering(_config, digBlockId);
 
-            Assert.That(stratNum, Is.Null);
+            Assert.That(Weathering, Is.Null);
         }
 
         [Test]
-        public void Does_An_Invalid_StratNum_Message_Raise_A_Validation_Error()
+        public void Does_An_Invalid_Weathering_Message_Raise_A_Validation_Error()
         {
-            string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Invalid-StratNum.xml";
+            string resource = "Snowden.Reconcilor.Bhpbio.ImportTests.Resources.Staging-Import-Invalid-Weathering.xml";
             var checkDatesAfter = DateTime.Now;
             List<string> arguments = new List<string>();
 
@@ -184,20 +185,20 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
             arguments.Add(@"@Pit:CW");
             arguments.Add(@"@Bench:0641");
 
-            string expectedStratNum = "1111";
-            var exists = DoesStratNumExist(_config, expectedStratNum);
+            int expectedWeathering = 99;
+            var exists = DoesWeatheringExist(_config, expectedWeathering);
             Assert.That(exists, Is.False);
 
-            RemoveExistingRecord(INVALID_STRAT_DIGBLOCK, INVALID_STRAT_GUID, _config, arguments);
+            RemoveExistingRecord(INVALID_STRAT_DIGBLOCK, INVALID_GUID, _config, arguments);
 
-            PopulateStagingData(_config, resource, this.GetType().Assembly, INVALID_STRAT_GUID);
+            PopulateStagingData(_config, resource, this.GetType().Assembly, INVALID_GUID);
 
             RunImportEngineBlockModel(arguments.AsReadOnly());
 
-            var digBlockId = GetDigBlockId(_config, INVALID_STRAT_GUID);
+            var digBlockId = GetDigBlockId(_config, INVALID_GUID);
             Assert.That(digBlockId, Is.Null);
 
-            bool validationMessagesExist = CheckValidationMessageExists(_config, expectedStratNum, INVALID_STRAT_GUID, checkDatesAfter);
+            bool validationMessagesExist = CheckValidationMessageExists(_config, expectedWeathering, INVALID_GUID, checkDatesAfter);
 
             Assert.That(validationMessagesExist, Is.True);
 
@@ -213,19 +214,18 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
 
             StagingDataSetupHelper.UpdateStagingBlockModelLastModifiedDate(_config, stagingBlockId.Value);
         }
-
-        private void AssertStratNumExists(string blockGuid, string expectedStratNum)
+        private void AssertWeatheringExists(string blockGuid, int weathering)
         {
             var blockId = GetStagingBlockId(_config, blockGuid);
 
-            Assert.That (blockId, Is.Not.Null);
+            Assert.That(blockId, Is.Not.Null);
             Assert.That(blockId.HasValue, Is.True);
 
             var dataTable = GetStagingBhpbioStageBlockModels(_config, blockId.Value);
 
             Assert.That(dataTable.Rows.Count, Is.EqualTo(1));
 
-            Assert.That(dataTable.Rows[0]["StratNum"], Is.EqualTo(expectedStratNum));
+            Assert.That(dataTable.Rows[0]["Weathering"], Is.EqualTo(weathering));
         }
 
 
@@ -239,9 +239,9 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
             return StagingTestsHelper.GetStagingBhpbioStageBlockModels(config, blockId);
         }
 
-        private bool DoesStratNumExist(MessageHandlerConfiguration config, string expectedStratNum)
+        private bool DoesWeatheringExist(MessageHandlerConfiguration config, int weathering)
         {
-            return StagingTestsHelper.DoesStratNumExist(config, expectedStratNum);
+            return StagingTestsHelper.DoesWeatheringExist(config, weathering);
         }
 
         private String GetDigBlockId(MessageHandlerConfiguration config, string guid)
@@ -255,16 +255,17 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests
             Assert.That(returnCode, Is.EqualTo(0));
         }
 
-        private string GetStratNum(MessageHandlerConfiguration config, string digBlockId)
+        private int? GetWeathering(MessageHandlerConfiguration config, string digBlockId)
         {
-            return StagingDataSetupHelper.GetStratNum(config, digBlockId);
+            return StagingDataSetupHelper.GetWeathering(config, digBlockId);
         }
 
-        private bool CheckValidationMessageExists(MessageHandlerConfiguration config, string expectedStratNum, string digblock, DateTime checkDatesAfter)
+        private bool CheckValidationMessageExists(MessageHandlerConfiguration config, int expectedWeathering, string digblock, DateTime checkDatesAfter)
         {
-            string userMessage = "StratNum does not exist";
-            string internalMessage = $"StratNum {expectedStratNum} does not exist";
-            return StagingDataSetupHelper.CheckValidationMessageExists(config, expectedStratNum, digblock, checkDatesAfter, userMessage, internalMessage);
+            string weatheringString = expectedWeathering.ToString();
+            string userMessage = "Weathering does not exist";
+            string internalMessage = $"Weathering {expectedWeathering} does not exist";
+            return StagingDataSetupHelper.CheckValidationMessageExists(config, weatheringString, digblock, checkDatesAfter, userMessage, internalMessage);
         }
 
         private static void ClearIntegrationTestStageBlocks(MessageHandlerConfiguration config, List<string> guids)

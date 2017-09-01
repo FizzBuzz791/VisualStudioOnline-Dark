@@ -269,6 +269,7 @@ Friend NotInheritable Class ReconBlockInsertUpdate
                                                                     LumpPercentAsShipped,
                                                                     LumpPercentAsDropped,
                                                                     Nothing,
+                                                                    Nothing,
                                                                     modelBlockId)
 
                             If (Not modelBlockId Is Nothing) Then

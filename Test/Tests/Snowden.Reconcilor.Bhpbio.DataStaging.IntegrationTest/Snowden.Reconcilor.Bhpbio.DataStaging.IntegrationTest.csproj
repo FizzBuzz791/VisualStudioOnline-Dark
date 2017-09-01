@@ -137,6 +137,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-MissingWeathering.xml" />
+    <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-ValidWeathering.xml" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

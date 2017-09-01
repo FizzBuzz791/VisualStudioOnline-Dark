@@ -140,6 +140,53 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests.Helpers
             return stratNum;
         }
 
+        internal static int? GetWeathering(MessageHandlerConfiguration config, string digblockId)
+        {
+            int? weathering = null;
+            string connectionString = BuildConnectionString(config);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    var sql = @"SELECT	Notes
+                                FROM	[dbo].[DigblockNotes]
+                                WHERE	[Digblock_Field_Id] = 'Weathering'
+                                and		Digblock_Id = @Digblock_Id";
+
+                    var command = conn.CreateCommand();
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = sql;
+
+                    command.Parameters.AddWithValue("@Digblock_Id", digblockId);
+
+                    var returnValue = command.ExecuteScalar();
+
+                    if (returnValue != null)
+                    {
+                        int value;
+                        if (int.TryParse(returnValue.ToString(), out value))
+                        {
+                            weathering = value;
+                        }
+                    }
+
+                    conn.Close();
+                }
+                finally
+                {
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+
+            return weathering;
+        }
+
         public static void UpdateStagingBlockModelLastModifiedDate(MessageHandlerConfiguration config, int blockId)
         {
             string connectionString = BuildConnectionString(config);
@@ -175,12 +222,12 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests.Helpers
             }
         }
 
-        internal static bool CheckValidationMessageExists(MessageHandlerConfiguration config, string expectedStratNum, string guid, DateTime checkDatesAfter)
+        internal static bool CheckValidationMessageExists(MessageHandlerConfiguration config, string expectedStratNum, string guid, DateTime checkDatesAfter, string userMessage, string internalMessage)
         {
             int count = 0;
             string connectionString = BuildConnectionString(config);
             string xmlPath = $@"BlockModelSource/BlastModelBlockWithPointAndGrade/BlockExternalSystemId[.=""{guid}""]";
-            string internalMessage = $"StratNum {expectedStratNum} does not exist";
+            
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -196,13 +243,14 @@ namespace Snowden.Reconcilor.Bhpbio.ImportTests.Helpers
                                 and     (ImportSyncQueue.LastProcessedDateTime >= @CheckDatesAfter or
                                         ImportSyncQueue.InitialComparedDateTime >= @CheckDatesAfter)
                                 and     IsCurrent = 1
-                                and     ImportSyncValidate.UserMessage = 'StratNum does not exist'
+                                and     ImportSyncValidate.UserMessage = @UserMessage
                                 and     ImportSyncValidate.InternalMessage = @InternalMessage";
 
                     var command = conn.CreateCommand();
                     command.CommandType = System.Data.CommandType.Text;
                     command.CommandText = sql;
 
+                    command.Parameters.AddWithValue("@UserMessage", userMessage);
                     command.Parameters.AddWithValue("@InternalMessage", internalMessage);
                     command.Parameters.AddWithValue("@CheckDatesAfter", checkDatesAfter);
 

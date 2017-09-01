@@ -11,7 +11,7 @@ Public Module ModMain
     Public Function SetupAndRunImportFromTestHarness(commandLineArgs As ReadOnlyCollection(Of String), importTypes As ImportTypeEnum) As Integer
         Dim config = ConfigurationSettings.BuildConfigurationSettings("reconcilor", "reconc!l0r", "D"c)
 
-        SetupAndRunImport(commandLineArgs, My.Resources.ResourceManager, config, importTypes)
+        Return SetupAndRunImport(commandLineArgs, My.Resources.ResourceManager, config, importTypes)
     End Function
 
     Private Function SetupAndRunImport(commandLineArgs As ReadOnlyCollection(Of String), resourceManager As ResourceManager, Optional config As ConfigurationSettings = Nothing, Optional importTypes As ImportTypeEnum = ImportTypeEnum.All) As Integer
