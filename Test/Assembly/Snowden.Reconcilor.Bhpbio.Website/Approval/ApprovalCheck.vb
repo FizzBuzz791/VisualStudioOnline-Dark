@@ -240,7 +240,7 @@ Namespace Approval
 
             Dim tableContainsProductSizeAndTypeInformation = False
 
-            If table.Columns.Contains(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE) And table.Columns.Contains("Type") Then
+            If table.Columns.Contains(ColumnNames.PRODUCT_SIZE) And table.Columns.Contains("Type") Then
                 tableContainsProductSizeAndTypeInformation = True
             End If
 
@@ -258,7 +258,7 @@ Namespace Approval
 
                     ' approval is only value for TOTAL product size, LUMP and FINES ratios, or LUMP and FINES Geology model
                     approvedValid = (approvedValid And (rowType = 0 OrElse
-                                                        row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL) OrElse
+                                                        row(ColumnNames.PRODUCT_SIZE).ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL) OrElse
                                                         row("CalcId").ToString() = ModelGeology.CalculationId)
                 End If
 

@@ -112,8 +112,8 @@ Namespace Data
                     rowTagIdObject = row(tagIdColumn)
                 End If
 
-                If (table.Columns.Contains(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)) Then
-                    productSizeObject = row.Item(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
+                If (table.Columns.Contains(ColumnNames.PRODUCT_SIZE)) Then
+                    productSizeObject = row.Item(ColumnNames.PRODUCT_SIZE)
                 End If
 
                 If (Not rowTagIdObject Is Nothing And Not rowTagIdObject Is DBNull.Value) Then

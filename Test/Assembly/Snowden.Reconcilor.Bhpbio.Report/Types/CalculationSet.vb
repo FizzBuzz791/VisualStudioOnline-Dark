@@ -371,11 +371,11 @@ Namespace Types
             For i As Int32 = reportDataTable.Rows.Count - 1 To 0 Step -1
                 Dim row As DataRow = reportDataTable.Rows(i)
 
-                Dim productSizeValue As String = row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString()
+                Dim productSizeValue As String = row(ColumnNames.PRODUCT_SIZE).ToString()
 
                 If (Not String.IsNullOrEmpty(productSizeValue) AndAlso Not productSizeValue = CalculationConstants.PRODUCT_SIZE_TOTAL) Then
                     ' This is a breakdown row.. check if it is before the cutover
-                    Dim rowDateTimeObject As Object = row(CalculationConstants.COLUMN_NAME_DATE_FROM)
+                    Dim rowDateTimeObject As Object = row(ColumnNames.DATE_FROM)
                     Dim rowDateTime As DateTime
 
                     If (Not rowDateTimeObject Is Nothing AndAlso Not rowDateTimeObject Is DBNull.Value) Then

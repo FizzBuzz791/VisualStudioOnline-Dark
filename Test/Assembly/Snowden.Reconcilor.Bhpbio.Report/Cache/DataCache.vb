@@ -284,15 +284,15 @@ Namespace Cache
         End Sub
 
         Private Sub ResetLocationIds(ByRef table As DataTable, locationId As Integer, overWriteNull As Boolean)
-            If (table.Columns.Contains(CalculationConstants.COLUMN_NAME_LOCATION_ID)) Then
+            If (table.Columns.Contains(ColumnNames.PARENT_LOCATION_ID)) Then
                 ' replace any Location Id values that represent the hub itself, to the upper WAIO level.. this allows later aggregation
                 For Each dr As DataRow In table.Rows
-                    Dim rowLocationId = dr(CalculationConstants.COLUMN_NAME_LOCATION_ID)
+                    Dim rowLocationId = dr(ColumnNames.PARENT_LOCATION_ID)
 
                     If overWriteNull Then
-                        dr(CalculationConstants.COLUMN_NAME_LOCATION_ID) = locationId
-                    ElseIf Not overWriteNull And dr.HasValue(CalculationConstants.COLUMN_NAME_LOCATION_ID) Then
-                        dr(CalculationConstants.COLUMN_NAME_LOCATION_ID) = locationId
+                        dr(ColumnNames.PARENT_LOCATION_ID) = locationId
+                    ElseIf Not overWriteNull And dr.HasValue(ColumnNames.PARENT_LOCATION_ID) Then
+                        dr(ColumnNames.PARENT_LOCATION_ID) = locationId
                     End If
 
                 Next

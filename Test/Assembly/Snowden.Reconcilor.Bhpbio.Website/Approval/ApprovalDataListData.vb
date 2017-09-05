@@ -342,12 +342,12 @@ Namespace Approval
                                     For i = presentationTable.Rows.Count - 1 To 0 Step -1
                                         row = presentationTable.Rows(i)
 
-                                        If (row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString = productSizeToProcess And
-                                            row(CalculationConstants.COLUMN_NAME_ROOT_CALC_ID).ToString = rootCalcIdToProcess And
+                                        If (row(ColumnNames.PRODUCT_SIZE).ToString = productSizeToProcess And
+                                            row(ColumnNames.ROOT_CALC_ID).ToString = rootCalcIdToProcess And
                                             row("LocationId").ToString = locationIdToProcess) Then
 
                                             ' increment the calculation depth of the row
-                                            row(CalculationConstants.COLUMN_NAME_CALCULATION_DEPTH) = Convert.ToInt32(row("CalculationDepth")) + 1
+                                            row(ColumnNames.CALCULATION_DEPTH) = Convert.ToInt32(row("CalculationDepth")) + 1
 
                                             ' copy the row to the temporary table for the later reinsertion at a different position
                                             Dim copiedRow As DataRow = tempTableForMove.NewRow()
@@ -364,8 +364,8 @@ Namespace Approval
                                     ' Find the insert position.. and reinsert the rows
                                     For i = 0 To presentationTable.Rows.Count - 1 Step 1
                                         row = presentationTable.Rows(i)
-                                        If (row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString = CalculationConstants.PRODUCT_SIZE_TOTAL And
-                                            row(CalculationConstants.COLUMN_NAME_ROOT_CALC_ID).ToString = rootCalcIdToProcess And
+                                        If (row(ColumnNames.PRODUCT_SIZE).ToString = CalculationConstants.PRODUCT_SIZE_TOTAL And
+                                            row(ColumnNames.ROOT_CALC_ID).ToString = rootCalcIdToProcess And
                                             row("LocationId").ToString = locationIdToProcess) Then
 
                                             ' This is the row after which the rows should be inserted
@@ -406,10 +406,10 @@ Namespace Approval
 
                         ' Add space when going from a ratio to a non ratio row
                         If rowType <> 0 And previousRowType = 0 AndAlso
-                            (previousRow(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL) Then
+                            (previousRow(ColumnNames.PRODUCT_SIZE).ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL) Then
                             needBlankRow = True
                         ElseIf previousRow("LocationId").ToString() = row("LocationId").ToString() _
-                            AndAlso (previousRow(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL) _
+                            AndAlso (previousRow(ColumnNames.PRODUCT_SIZE).ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL) _
                             AndAlso (previousRow("RootCalcId").ToString() <> row("RootCalcId").ToString()) Then
                             needBlankRow = True
                         End If
@@ -422,7 +422,7 @@ Namespace Approval
 
                         If needBlankRow Then
                             Dim dataRow As DataRow = CreateBlankRow(presentationTable)
-                            dataRow(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE) = row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
+                            dataRow(ColumnNames.PRODUCT_SIZE) = row(ColumnNames.PRODUCT_SIZE)
                             presentationTable.Rows.InsertAt(dataRow, i + 1)
                         End If
                     End If
@@ -627,7 +627,7 @@ Namespace Approval
 
                 Dim effectiveNodeLevel As Int32 = nodeLevel
 
-                Dim productSize As String = row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString
+                Dim productSize As String = row(ColumnNames.PRODUCT_SIZE).ToString
                 If Not productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                     effectiveNodeLevel = effectiveNodeLevel + 1
                 End If
@@ -892,7 +892,7 @@ Namespace Approval
                 End If
 
                 If calculationDepth <= 1 Then
-                    If columnName = "Description" AndAlso Not row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString = CalculationConstants.PRODUCT_SIZE_TOTAL Then
+                    If columnName = "Description" AndAlso Not row(ColumnNames.PRODUCT_SIZE).ToString = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                         padding = RepeatString("&nbsp;&nbsp;", calculationDepth + 1)
                     End If
 

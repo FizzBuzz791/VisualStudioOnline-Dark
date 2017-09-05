@@ -627,21 +627,21 @@ Namespace Types
             Dim timeBasedColumnNames As New HashSet(Of String)()
             Dim valueColumnNames As New HashSet(Of String)()
 
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_MATERIAL_TYPE)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_LOCATION_ID)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_SORT_KEY)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_ROOT_CALC_ID)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_CALCULATION_DEPTH)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_TYPE)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_TAG_ID)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_REPORT_TAG_ID)
-            identifyingColumnNames.Add(CalculationConstants.COLUMN_NAME_ROOT_CALCULATION_ID)
+            identifyingColumnNames.Add(ColumnNames.PRODUCT_SIZE)
+            identifyingColumnNames.Add(ColumnNames.MATERIAL_TYPE_ID)
+            identifyingColumnNames.Add(ColumnNames.PARENT_LOCATION_ID)
+            identifyingColumnNames.Add(ColumnNames.SORT_KEY)
+            identifyingColumnNames.Add(ColumnNames.ROOT_CALC_ID)
+            identifyingColumnNames.Add(ColumnNames.CALCULATION_DEPTH)
+            identifyingColumnNames.Add(ColumnNames.TYPE)
+            identifyingColumnNames.Add(ColumnNames.TAG_ID)
+            identifyingColumnNames.Add(ColumnNames.REPORT_TAG_ID)
+            identifyingColumnNames.Add(ColumnNames.ROOT_CALCULATION_ID)
             identifyingColumnNames.Add("Attribute")
 
-            timeBasedColumnNames.Add(CalculationConstants.COLUMN_NAME_DATE_CAL)
-            timeBasedColumnNames.Add(CalculationConstants.COLUMN_NAME_DATE_FROM)
-            timeBasedColumnNames.Add(CalculationConstants.COLUMN_NAME_DATE_TO)
+            timeBasedColumnNames.Add(ColumnNames.DATE_CAL)
+            timeBasedColumnNames.Add(ColumnNames.DATE_FROM)
+            timeBasedColumnNames.Add(ColumnNames.DATE_TO)
             timeBasedColumnNames.Add("DateText")
 
             For Each gradeName In CalculationResultRecord.GradeNames
@@ -700,16 +700,16 @@ Namespace Types
 
             ' Determine what key identifying columns should go into the row key (data series key)
             Dim potentialKeyColumns As New List(Of String) From {
-                CalculationConstants.COLUMN_NAME_PRODUCT_SIZE,
-                CalculationConstants.COLUMN_NAME_MATERIAL_TYPE,
-                CalculationConstants.COLUMN_NAME_LOCATION_ID,
-                CalculationConstants.COLUMN_NAME_SORT_KEY,
-                CalculationConstants.COLUMN_NAME_ROOT_CALC_ID,
-                CalculationConstants.COLUMN_NAME_CALCULATION_DEPTH,
-                CalculationConstants.COLUMN_NAME_TYPE,
-                CalculationConstants.COLUMN_NAME_TAG_ID,
-                CalculationConstants.COLUMN_NAME_REPORT_TAG_ID,
-                CalculationConstants.COLUMN_NAME_ROOT_CALCULATION_ID,
+                ColumnNames.PRODUCT_SIZE,
+                ColumnNames.MATERIAL_TYPE_ID,
+                ColumnNames.PARENT_LOCATION_ID,
+                ColumnNames.SORT_KEY,
+                ColumnNames.ROOT_CALC_ID,
+                ColumnNames.CALCULATION_DEPTH,
+                ColumnNames.TYPE,
+                ColumnNames.TAG_ID,
+                ColumnNames.REPORT_TAG_ID,
+                ColumnNames.ROOT_CALCULATION_ID,
                 "Attribute"
             }
 
@@ -813,8 +813,8 @@ Namespace Types
             ' build a lookup key for the row
             Dim dateFrom = DateTime.MinValue
             Dim locationId = Integer.MinValue
-            DateTime.TryParse(row(CalculationConstants.COLUMN_NAME_DATE_CAL).ToString(), dateFrom)
-            Int32.TryParse(row(CalculationConstants.COLUMN_NAME_LOCATION_ID).ToString(), locationId)
+            DateTime.TryParse(row(ColumnNames.DATE_CAL).ToString(), dateFrom)
+            Int32.TryParse(row(ColumnNames.PARENT_LOCATION_ID).ToString(), locationId)
 
             Return $"{dateFrom:ddMMyyyy}_{locationId}"
         End Function
@@ -832,8 +832,8 @@ Namespace Types
             If Not dataRows Is Nothing Then
                 If dataRows.Length > 0 Then
                     ' ensure the required columns are present..
-                    If dataRows(0).Table.Columns.Contains(CalculationConstants.COLUMN_NAME_DATE_CAL) _
-                        AndAlso dataRows(0).Table.Columns.Contains(CalculationConstants.COLUMN_NAME_LOCATION_ID) Then
+                    If dataRows(0).Table.Columns.Contains(ColumnNames.DATE_CAL) _
+                        AndAlso dataRows(0).Table.Columns.Contains(ColumnNames.PARENT_LOCATION_ID) Then
 
                         For Each row In dataRows
                             Dim key = BuildDataRowLookupByDateAndLocationStoreKey(row)
@@ -1282,15 +1282,15 @@ Namespace Types
 
             ' Add required columns
             table.Columns.Add(New DataColumn("TagId", GetType(String), ""))
-            table.Columns.Add(New DataColumn(CalculationConstants.COLUMN_NAME_REPORT_TAG_ID, GetType(String), ""))
+            table.Columns.Add(New DataColumn(ColumnNames.REPORT_TAG_ID, GetType(String), ""))
             table.Columns.Add(New DataColumn("CalcId", GetType(String), ""))
             table.Columns.Add(New DataColumn("Description", GetType(String), ""))
             table.Columns.Add(New DataColumn("Type", GetType(CalculationResultType), ""))
             table.Columns.Add(New DataColumn("CalculationDepth", GetType(Int32), ""))
             table.Columns.Add(New DataColumn("InError", GetType(Boolean), ""))
             table.Columns.Add(New DataColumn("ErrorMessage", GetType(String), ""))
-            table.Columns.Add(New DataColumn(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE, GetType(String), ""))
-            table.Columns.Add(New DataColumn(CalculationConstants.COLUMN_NAME_SORT_KEY, GetType(String), ""))
+            table.Columns.Add(New DataColumn(ColumnNames.PRODUCT_SIZE, GetType(String), ""))
+            table.Columns.Add(New DataColumn(ColumnNames.SORT_KEY, GetType(String), ""))
 
             Return table
         End Function
@@ -1489,12 +1489,12 @@ Namespace Types
 
                     ' modify the TagId to represent the product size if needed for this row
                     ' the original tagId is retained in the ReportTagId column
-                    Dim productSizeObject = row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
+                    Dim productSizeObject = row(ColumnNames.PRODUCT_SIZE)
                     If productSizeObject Is Nothing OrElse String.IsNullOrEmpty(productSizeObject.ToString) Then
                         productSizeObject = CalculationConstants.PRODUCT_SIZE_TOTAL
                     End If
 
-                    row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE) = productSizeObject.ToString()
+                    row(ColumnNames.PRODUCT_SIZE) = productSizeObject.ToString()
 
                     If Not productSizeObject.ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                         If Not tagIdForRow.EndsWith(productSizeObject.ToString(), StringComparison.Ordinal) Then

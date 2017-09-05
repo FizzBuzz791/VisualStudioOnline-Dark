@@ -1,5 +1,5 @@
 ﻿Imports System.Runtime.CompilerServices
-Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
+Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 Namespace Extensions
@@ -25,24 +25,25 @@ Namespace Extensions
 
         <Extension>
         Public Sub RecalculateAttributeDifference(resultRow As DataRow, ByRef firstRow As DataRow, ByRef secondRow As DataRow, attributeName As String)
-            If resultRow Is Nothing OrElse firstRow Is Nothing OrElse secondRow Is Nothing Then
-                Return
-            End If
+            If resultRow IsNot Nothing AndAlso 
+                firstRow IsNot Nothing AndAlso 
+                secondRow IsNot Nothing AndAlso
+                firstRow.HasColumn(attributeName) AndAlso 
+                secondRow.HasColumn(attributeName) AndAlso
+                resultRow.HasColumn($"{attributeName}Difference") Then
 
-            If Not firstRow.HasColumn(attributeName) OrElse Not secondRow.HasColumn(attributeName) Then
-                Return
+                resultRow($"{attributeName}Difference") = GetAttributeDifference(firstRow, secondRow, attributeName)
             End If
-
-            If Not resultRow.HasColumn(attributeName + "Difference") Then
-                Return
-            End If
-
-            resultRow(attributeName + "Difference") = GetAttributeDifference(firstRow, secondRow, attributeName)
         End Sub
 
         Public Function GetAttributeDifference(ByRef firstRow As DataRow, ByRef secondRow As DataRow, attributeName As String) As Double
-            If firstRow Is Nothing Then Throw New ArgumentNullException("firstRow")
-            If secondRow Is Nothing Then Throw New ArgumentNullException("secondRow")
+            If firstRow Is Nothing Then
+                Throw New ArgumentNullException("firstRow")
+            End If
+
+            If secondRow Is Nothing Then
+                Throw New ArgumentNullException("secondRow")
+            End If
 
             If Not firstRow.HasValue(attributeName) AndAlso secondRow.HasValue(attributeName) Then
                 Return 0.0 - secondRow.AsDbl(attributeName)
@@ -70,7 +71,9 @@ Namespace Extensions
             If topRow Is Nothing OrElse bottomRow Is Nothing Then
                 resultRow("AttributeValue") = 0.0
             ElseIf topRow("Attribute").ToString <> bottomRow("Attribute").ToString Then
-                Throw New Exception(String.Format("Cannot recalculate factor: attribute doesn't match ('{0}' and '{1}')", topRow("Attribute").ToString, bottomRow("Attribute").ToString))
+                Throw New Exception(
+                    $"Cannot recalculate factor: attribute doesn't match ('{topRow("Attribute").ToString}' and '{ _
+                                       bottomRow("Attribute").ToString}')")
             ElseIf topRow.AsDblN("AttributeValue") Is Nothing OrElse bottomRow.AsDblN("AttributeValue") Is Nothing _
                    OrElse topRow.AsDblN("AttributeValue") = 0 OrElse bottomRow.AsDblN("AttributeValue") = 0 Then
                 resultRow("AttributeValue") = 0.0
@@ -81,13 +84,21 @@ Namespace Extensions
 
         <Extension>
         Public Sub RecalculateAttributeRatio(resultRow As DataRow, ByRef firstRow As DataRow, ByRef secondRow As DataRow, attributeName As String)
-            If Not (resultRow Is Nothing OrElse firstRow Is Nothing OrElse firstRow(attributeName) Is DBNull.Value OrElse secondRow Is Nothing OrElse secondRow(attributeName) Is DBNull.Value) Then
+            If Not (resultRow Is Nothing OrElse
+                firstRow Is Nothing OrElse
+                firstRow(attributeName) Is DBNull.Value OrElse 
+                secondRow Is Nothing OrElse 
+                secondRow(attributeName) Is DBNull.Value) Then
+
                 resultRow(attributeName) = GetAttributeRatio(firstRow, secondRow, attributeName)
             End If
         End Sub
 
         Public Function GetAttributeRatio(ByRef firstRow As DataRow, ByRef secondRow As DataRow, attributeName As String) As Double
-            If firstRow.Table.Columns.Contains(attributeName) AndAlso secondRow.Table.Columns.Contains(attributeName) AndAlso Math.Abs(secondRow.AsDbl(attributeName) - 0) > Double.Epsilon Then
+            If firstRow.Table.Columns.Contains(attributeName) AndAlso 
+                secondRow.Table.Columns.Contains(attributeName) AndAlso 
+                Math.Abs(secondRow.AsDbl(attributeName) - 0) > Double.Epsilon Then
+
                 Return firstRow.AsDbl(attributeName) / secondRow.AsDbl(attributeName)
             Else
                 Return Nothing
@@ -98,75 +109,88 @@ Namespace Extensions
         ' give a reference row, this will return all the other grades/attributes that match that rows. This only works on the unpivoted tables
         <Extension>
         Public Function GetCorrespondingRowsUnpivoted(ByRef rows As IEnumerable(Of DataRow), referenceRow As DataRow) As IEnumerable(Of DataRow)
-            If rows Is Nothing Or rows.Count = 0 Then Return rows
+            If rows Is Nothing Or rows.Count = 0 Then
+                Return rows
+            End If
 
             Return rows.Where(Function(r) _
-                                 r.AsDate("DateFrom") = referenceRow.AsDate("DateFrom") AndAlso
-                                 r.AsInt("LocationId") = referenceRow.AsInt("LocationId") AndAlso
-                                 r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                 r("ProductSize").ToString = referenceRow("ProductSize").ToString AndAlso
-                                 r("ReportTagId").ToString = referenceRow("ReportTagId").ToString AndAlso
-                                 ((Not referenceRow.HasColumn("ResourceClassification")) OrElse r("ResourceClassification").ToString = referenceRow("ResourceClassification").ToString)
+                                 r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
+                                 r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
+                                 r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                 r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
+                                 r(ColumnNames.REPORT_TAG_ID).ToString = referenceRow(ColumnNames.REPORT_TAG_ID).ToString AndAlso
+                                 Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
                               ).ToList
         End Function
 
         <Extension>
         Public Function GetCorrespondingRowsForGroupUnpivoted(ByRef rows As IEnumerable(Of DataRow), referenceRow As DataRow) As IEnumerable(Of DataRow)
-            If rows Is Nothing Or rows.Count = 0 Then Return rows
+            If rows Is Nothing Or rows.Count = 0 Then
+                Return rows
+            End If
 
             Return rows.Where(Function(r) _
-                                 r.AsDate("DateFrom") = referenceRow.AsDate("DateFrom") AndAlso
-                                 r.AsInt("LocationId") = referenceRow.AsInt("LocationId") AndAlso
-                                 r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                 r("ProductSize").ToString = referenceRow("ProductSize").ToString AndAlso
-                                 ((Not referenceRow.HasColumn("ResourceClassification")) OrElse r("ResourceClassification").ToString = referenceRow("ResourceClassification").ToString)
+                                 r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
+                                 r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
+                                 r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                 r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNAmes.PRODUCT_SIZE).ToString AndAlso
+                                 Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
                               ).ToList
         End Function
 
         ' returns the matching rows across all resource classifications that match the passed in row
         <Extension>
         Public Function GetCorrespondingRowsForResourceClassificationsUnpivoted(ByRef rows As IEnumerable(Of DataRow), referenceRow As DataRow) As IEnumerable(Of DataRow)
-            If rows Is Nothing Or rows.Count = 0 Then Return rows
+            If rows Is Nothing Or rows.Count = 0 Then
+                Return rows
+            End If
 
             Return rows.Where(Function(r) _
-                                 r.AsDate("DateFrom") = referenceRow.AsDate("DateFrom") AndAlso
-                                 r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                 r("ProductSize").ToString = referenceRow("ProductSize").ToString AndAlso
-                                 r("ReportTagId").ToString = referenceRow("ReportTagId").ToString AndAlso
+                                 r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
+                                 r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                 r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
+                                 r(ColumnNames.REPORT_TAG_ID).ToString = referenceRow(ColumnNames.REPORT_TAG_ID).ToString AndAlso
                                  r("Attribute").ToString = referenceRow("Attribute").ToString AndAlso
-                                 r("LocationId").ToString = referenceRow("LocationId").ToString AndAlso
-                                 Not String.IsNullOrEmpty(r("ResourceClassification").ToString)
+                                 r(ColumnNames.LOCATION_ID).ToString = referenceRow(ColumnNames.LOCATION_ID).ToString AndAlso
+                                 Not String.IsNullOrEmpty(r(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                               ).ToList
         End Function
 
         ' returns the matching rows across all resource classifications that match the passed in row
         <Extension>
         Public Function GetCorrespondingRowsForResourceClassifications(ByRef rows As IEnumerable(Of DataRow), referenceRow As DataRow) As IEnumerable(Of DataRow)
-            If rows Is Nothing Or rows.Count = 0 Then Return rows
+            If rows Is Nothing Or rows.Count = 0 Then
+                Return rows
+            End If
 
             Return rows.Where(Function(r) _
-                                 r.AsDate("DateFrom") = referenceRow.AsDate("DateFrom") AndAlso
-                                 r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                 r("ProductSize").ToString = referenceRow("ProductSize").ToString AndAlso
-                                 r("ReportTagId").ToString = referenceRow("ReportTagId").ToString AndAlso
-                                 r("LocationId").ToString = referenceRow("LocationId").ToString AndAlso
-                                 Not String.IsNullOrEmpty(r("ResourceClassification").ToString)
+                                 r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
+                                 r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                 r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
+                                 r(ColumnNames.REPORT_TAG_ID).ToString = referenceRow(ColumnNames.REPORT_TAG_ID).ToString AndAlso
+                                 r(ColumnNames.LOCATION_ID).ToString = referenceRow(ColumnNames.LOCATION_ID).ToString AndAlso
+                                 Not String.IsNullOrEmpty(r(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                               ).ToList
         End Function
 
         ' returns the matching rows across all locations that match the passed in row
         <Extension>
         Public Function GetCorrespondingRowsForLocationsUnpivoted(ByRef rows As IEnumerable(Of DataRow), referenceRow As DataRow, Optional ByVal parentLocationId As Integer = 0) As IEnumerable(Of DataRow)
-            If rows Is Nothing Or rows.Count = 0 Then Return rows
+            If rows Is Nothing Or rows.Count = 0 Then
+                Return rows
+            End If
 
             Return rows.Where(Function(r) _
-                                 r.AsDate("DateFrom") = referenceRow.AsDate("DateFrom") AndAlso
-                                 r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                 r("ProductSize").ToString = referenceRow("ProductSize").ToString AndAlso
-                                 r("ReportTagId").ToString = referenceRow("ReportTagId").ToString AndAlso
+                                 r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
+                                 r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                 r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
+                                 r(ColumnNames.REPORT_TAG_ID).ToString = referenceRow(ColumnNames.REPORT_TAG_ID).ToString AndAlso
                                  r("Attribute").ToString = referenceRow("Attribute").ToString AndAlso
-                                 r("LocationId").ToString <> parentLocationId.ToString AndAlso
-                                 ((Not referenceRow.HasColumn("ResourceClassification")) OrElse r("ResourceClassification").ToString = referenceRow("ResourceClassification").ToString)
+                                 r(ColumnNames.LOCATION_ID).ToString <> parentLocationId.ToString AndAlso
+                                 Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
                               ).ToList
         End Function
 
@@ -174,17 +198,18 @@ Namespace Extensions
         Public Function GetCorrespondingRowUnpivoted(ByRef rows As IEnumerable(Of DataRow), referenceRow As DataRow, reportTagId As String) As DataRow
             ' throw an exception if it finds more than one row. If it finds none, just return Nothing
             Dim matches = rows.Where(Function(r) _
-                                        r.AsDate("DateFrom") = referenceRow.AsDate("DateFrom") AndAlso
-                                        r.AsInt("LocationId") = referenceRow.AsInt("LocationId") AndAlso
-                                        r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                        r("ProductSize").ToString = referenceRow("ProductSize").ToString AndAlso
+                                        r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
+                                        r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
+                                        r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                        r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
                                         r("Attribute").ToString = referenceRow("Attribute").ToString AndAlso
-                                        r("ReportTagId").ToString = reportTagId AndAlso
-                                        ((Not referenceRow.HasColumn("ResourceClassification")) OrElse r("ResourceClassification").ToString = referenceRow("ResourceClassification").ToString)
+                                        r(ColumnNames.REPORT_TAG_ID).ToString = reportTagId AndAlso
+                                        Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
                                      ).ToList
 
             If matches.Count > 1 Then
-                Throw New DataException(String.Format("Mulitple matches found for DataRow TagId: {0}", reportTagId))
+                Throw New DataException($"Mulitple matches found for DataRow {ColumnNames.TAG_ID}: {reportTagId}")
             Else
                 Return matches.FirstOrDefault
             End If
@@ -195,45 +220,49 @@ Namespace Extensions
         Public Function GetCorrespondingRow(ByRef rows As IEnumerable(Of DataRow), tagId As String, referenceRow As DataRow) As DataRow
             ' throw an exception if it finds more than one row. If it finds none, just return Nothing
             Dim matches = rows.Where(Function(r) _
-                                        r.AsDate("DateFrom") = referenceRow.AsDate("DateFrom") AndAlso
-                                        r.AsInt("LocationId") = referenceRow.AsInt("LocationId") AndAlso
-                                        r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                        r("ProductSize").ToString = referenceRow("ProductSize").ToString AndAlso
-                                        r("TagId").ToString = tagId AndAlso
-                                        ((Not referenceRow.HasColumn("ResourceClassification")) OrElse r("ResourceClassification").ToString = referenceRow("ResourceClassification").ToString)
+                                        r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
+                                        r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
+                                        r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                        r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
+                                        r(ColumnNames.TAG_ID).ToString = tagId AndAlso
+                                        Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
                                      ).ToList
 
             If matches.Count > 1 Then
-                Throw New DataException(String.Format("Mulitple matches found for DataRow TagId: {0}", tagId))
+                Throw New DataException($"Mulitple matches found for DataRow {ColumnNames.TAG_ID}: {tagId}")
             Else
                 Return matches.FirstOrDefault
             End If
         End Function
 
         <Extension>
-        Public Function GetCorrespondingRowWithReportTagId(ByRef rows As IEnumerable(Of DataRow), reportTagId As String, referenceRow As DataRow, Optional ByVal ignoreDateFrom As Boolean = False, Optional ByVal overrideDateFromToMatch As Nullable(Of DateTime) = Nothing) As DataRow
+        Public Function GetCorrespondingRowWithReportTagId(ByRef rows As IEnumerable(Of DataRow), reportTagId As String, 
+                                                           referenceRow As DataRow, Optional ByVal ignoreDateFrom As Boolean = False, 
+                                                           Optional ByVal overrideDateFromToMatch As Date? = Nothing) As DataRow
             ' throw an exception if it finds more than one row. If it finds none, just return Nothing
             Dim matchDateFrom = DateTime.Now
 
-            If (Not ignoreDateFrom) Then
-                If (overrideDateFromToMatch.HasValue) Then
+            If Not ignoreDateFrom Then
+                If overrideDateFromToMatch.HasValue Then
                     matchDateFrom = overrideDateFromToMatch.Value
                 Else
-                    matchDateFrom = referenceRow.AsDate("DateFrom")
+                    matchDateFrom = referenceRow.AsDate(ColumnNames.DATE_FROM)
                 End If
             End If
 
             Dim matches = rows.Where(Function(r) _
-                                        (ignoreDateFrom OrElse r.AsDate("DateFrom") = matchDateFrom) AndAlso
-                                        r.AsInt("LocationId") = referenceRow.AsInt("LocationId") AndAlso
-                                        r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                        r("ProductSize").ToString = referenceRow("ProductSize").ToString AndAlso
-                                        r("ReportTagId").ToString = reportTagId AndAlso
-                                        ((Not referenceRow.HasColumn("ResourceClassification")) OrElse r("ResourceClassification").ToString = referenceRow("ResourceClassification").ToString)
+                                        ignoreDateFrom OrElse r.AsDate(ColumnNames.DATE_FROM) = matchDateFrom AndAlso
+                                        r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
+                                        r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                        r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
+                                        r(ColumnNames.REPORT_TAG_ID).ToString = reportTagId AndAlso
+                                        Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
                                      ).ToList
 
             If matches.Count > 1 Then
-                Throw New DataException(String.Format("Mulitple matches found for DataRow TagId: {0}", reportTagId))
+                Throw New DataException($"Mulitple matches found for DataRow TagId: {reportTagId}")
             Else
                 Return matches.FirstOrDefault
             End If
@@ -250,26 +279,27 @@ Namespace Extensions
         ' It would be good to do this in a generic way with the method above, but can't quite think how this would work?
         <Extension>
         Public Function GetCorrespondingRowWithProductSize(ByRef rows As IEnumerable(Of DataRow), productSize As String, referenceRow As DataRow) As DataRow
-            Dim reportTagId = referenceRow.AsString("ReportTagId")
+            Dim reportTagId = referenceRow.AsString(ColumnNames.REPORT_TAG_ID)
 
-            If productSize = "TOTAL" Then
-                If reportTagId.EndsWith("_AS") OrElse reportTagId.EndsWith("_AD") Then
+            If productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
+                If reportTagId.EndsWith("_AS", StringComparison.Ordinal) OrElse reportTagId.EndsWith("_AD", StringComparison.Ordinal) Then
                     reportTagId = reportTagId.Substring(0, reportTagId.Length - "_AS".Length)
                 End If
             End If
 
             ' throw an exception if it finds more than one row. If it finds none, just return Nothing
             Dim matches = rows.Where(Function(r) _
-                                        r.AsDate("DateFrom") = referenceRow.AsDate("DateFrom") AndAlso
-                                        r.AsInt("LocationId") = referenceRow.AsInt("LocationId") AndAlso
-                                        r.AsInt("MaterialTypeId") = referenceRow.AsInt("MaterialTypeId") AndAlso
-                                        r("ProductSize").ToString = productSize AndAlso
-                                        r("ReportTagId").ToString = reportTagId AndAlso
-                                        ((Not referenceRow.HasColumn("ResourceClassification")) OrElse r("ResourceClassification").ToString = referenceRow("ResourceClassification").ToString)
+                                        r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
+                                        r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
+                                        r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
+                                        r(ColumnNames.PRODUCT_SIZE).ToString = productSize AndAlso
+                                        r(ColumnNames.REPORT_TAG_ID).ToString = reportTagId AndAlso
+                                        Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
                                      ).ToList
 
             If matches.Count > 1 Then
-                Throw New DataException(String.Format("Mulitple matches found for DataRow TagId: {0}", referenceRow("TagId")))
+                Throw New DataException($"Mulitple matches found for DataRow {ColumnNames.TAG_ID}: {referenceRow(ColumnNames.TAG_ID)}")
             Else
                 Return matches.FirstOrDefault
             End If
@@ -286,8 +316,8 @@ Namespace Extensions
         ' row is a factor or not. Type = 0 means it is a factor, Type = 1 means it is just a normal value
         <Extension>
         Public Function IsFactorRow(ByRef row As DataRow) As Boolean
-            If row.Table.Columns.Contains("Type") Then
-                Return row.AsInt("Type") = 0
+            If row.Table.Columns.Contains(ColumnNames.TYPE) Then
+                Return row.AsInt(ColumnNames.TYPE) = 0
             Else
                 Return False
             End If
@@ -295,8 +325,8 @@ Namespace Extensions
 
         <Extension>
         Public Function IsGeometRow(ByRef row As DataRow) As Boolean
-            If row.Table.Columns.Contains("ProductSize") Then
-                Return row.AsString("ProductSize") = "GEOMET"
+            If row.Table.Columns.Contains(ColumnNames.PRODUCT_SIZE) Then
+                Return row.AsString(ColumnNames.PRODUCT_SIZE) = CalculationConstants.PRODUCT_SIZE_GEOMET
             Else
                 Return False
             End If
@@ -332,25 +362,28 @@ Namespace Extensions
 
         <Extension>
         Public Function WithProductSize(ByRef rows As IEnumerable(Of DataRow), productSize As String) As IEnumerable(Of DataRow)
-            Const columnName = "ProductSize"
-            If rows.Count = 0 Then Return rows
+            If rows.Count = 0 Then
+                Return rows
+            End If
 
             If productSize Is Nothing Then
                 Throw New ArgumentNullException("productSize")
             End If
 
-            If Not rows.First.Table.Columns.Contains(columnName) Then
-                Throw New Exception(String.Format("Could not filter, DataTable doesn't contain '{0}' column", columnName))
+            If Not rows.First.Table.Columns.Contains(ColumnNames.PRODUCT_SIZE) Then
+                Throw New Exception($"Could not filter, DataTable doesn't contain '{ColumnNames.PRODUCT_SIZE}' column")
             End If
 
-            Return rows.Where(Function(r) r.AsString(columnName).ToUpper = productSize.ToUpper)
+            Return rows.Where(Function(r) r.AsString(ColumnNames.PRODUCT_SIZE).ToUpper = productSize.ToUpper)
         End Function
 
         ' makes a copy of a set of rows, and returns a list of them
         ' They will already be added to the DataTable
         <Extension>
         Public Function CloneFactorRows(ByRef rows As IEnumerable(Of DataRow), Optional ByVal withValues As Boolean = False) As List(Of DataRow)
-            If rows.Count = 0 Then Return rows.ToList
+            If rows.Count = 0 Then
+                Return rows.ToList
+            End If
 
             Dim table = rows.First.Table
             Dim newRows As New List(Of DataRow)
@@ -358,7 +391,7 @@ Namespace Extensions
             For Each row In rows
                 Dim newRow As DataRow
                 If withValues Then
-                    newRow = GenericDataTableExtensions.Copy(row)
+                    newRow = row.Copy()
                 Else
                     newRow = row.CloneFactorRow(False)
                 End If
@@ -377,7 +410,7 @@ Namespace Extensions
         ' current table
         <Extension>
         Public Function CloneFactorRow(ByRef row As DataRow, Optional ByVal addToTable As Boolean = True) As DataRow
-            Dim newRow = GenericDataTableExtensions.Copy(row)
+            Dim newRow = row.Copy()
             newRow.ClearValues()
 
             If addToTable Then
@@ -397,12 +430,12 @@ Namespace Extensions
         End Sub
 
         Public Function AttributeNames(Optional ByVal tonnesAsWell As Boolean = False) As String()
-            Dim gradeNames As List(Of String) = CalculationResultRecord.GradeNames.ToList
+            Dim gradeNames = CalculationResultRecord.GradeNames.ToList
             Dim attributes = New List(Of String)(gradeNames)
 
             ' for the purposes of this method, attributes are all the grades, plus the grade difference tags
-            For Each gradeName As String In gradeNames
-                attributes.Add(gradeName + "Difference")
+            For Each gradeName In gradeNames
+                attributes.Add($"{gradeName}Difference")
             Next
 
             If tonnesAsWell Then
@@ -420,18 +453,18 @@ Namespace Extensions
             ' first the meta data
             ' then the actual values
             Dim result = New CalculationResultRow() With {
-                    .ReportTagId = row.AsString("ReportTagId"),
-                    .CalcId = row.AsString("CalcId"),
-                    .Description = row.AsString("Description"),
-                    .DateFrom = row.AsDate("DateFrom"),
-                    .DateTo = row.AsDate("DateTo"),
-                    .CalendarDate = row.AsDate("CalendarDate"),
-                    .LocationId = row.AsInt("LocationId"),
-                    .MaterialTypeId = row.AsInt("MaterialTypeId"),
-                    .ProductSize = row.AsString("ProductSize"),
-                    .Tonnes = row.AsDblN("Tonnes"),
-                    .Volume = row.AsDblN("Volume")
-                    }
+                .ReportTagId = row.AsString(ColumnNames.REPORT_TAG_ID),
+                .CalcId = row.AsString("CalcId"),
+                .Description = row.AsString("Description"),
+                .DateFrom = row.AsDate(ColumnNames.DATE_FROM),
+                .DateTo = row.AsDate(ColumnNames.DATE_TO),
+                .CalendarDate = row.AsDate(ColumnNames.DATE_CAL),
+                .LocationId = row.AsInt(ColumnNames.LOCATION_ID),
+                .MaterialTypeId = row.AsInt(ColumnNames.MATERIAL_TYPE_ID),
+                .ProductSize = row.AsString(ColumnNames.PRODUCT_SIZE),
+                .Tonnes = row.AsDblN("Tonnes"),
+                .Volume = row.AsDblN("Volume")
+            }
 
             ' always use the grades list - this makes it easy to handle when we add new grades
             For Each grade In CalculationResultRecord.GradeNames
@@ -460,11 +493,11 @@ Namespace Extensions
 
         <Extension>
         Public Function GenerateTagId(ByRef row As DataRow) As String
-            Dim productSize = row.AsString("ProductSize")
-            If (productSize Is Nothing OrElse productSize = "TOTAL") Then
-                Return row.AsString("ReportTagId")
+            Dim productSize = row.AsString(ColumnNames.PRODUCT_SIZE)
+            If productSize Is Nothing OrElse productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
+                Return row.AsString(ColumnNames.REPORT_TAG_ID)
             Else
-                Return row.AsString("ReportTagId") + productSize
+                Return $"{row.AsString(ColumnNames.REPORT_TAG_ID)}{productSize}"
             End If
         End Function
     End Module

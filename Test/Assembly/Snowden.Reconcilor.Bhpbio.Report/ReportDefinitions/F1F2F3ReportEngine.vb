@@ -1,6 +1,7 @@
 ﻿
 Imports System.Threading
 Imports Snowden.Common.Database.DataAccessBaseObjects
+Imports Snowden.Library.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.Calc
 Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
@@ -10,8 +11,6 @@ Imports Snowden.Reconcilor.Bhpbio.Report.Types
 Namespace ReportDefinitions
 
     Public Class F1F2F3ReportEngine
-        Public Const COLUMN_TAG_ID As String = "TagId"
-
 #Region "Private Methods"
 
         ''' <summary>
@@ -808,7 +807,7 @@ Namespace ReportDefinitions
                             For Each column In New String() _
                                 {"TagId", "CalcId", "Description", "Type", "CalculationDepth", "InError",
                                  "ErrorMessage", "RootCalcId", "PresentationEditable", "PresentationLocked",
-                                 "PresentationValid", "PresentationColor", CalculationConstants.COLUMN_NAME_PRODUCT_SIZE, CalculationConstants.COLUMN_NAME_REPORT_TAG_ID}
+                                 "PresentationValid", "PresentationColor", ColumnNames.PRODUCT_SIZE, ColumnNames.REPORT_TAG_ID}
                                 resultRow(column) = currentRow(column)
                             Next
 
@@ -921,61 +920,15 @@ Namespace ReportDefinitions
                                                       Optional ByVal includeFactorPrefixOnCalcIds As Boolean = True, 
                                                       Optional ByVal locationId As Integer? = Nothing) As DataTable
 
-            Const AD_SUFFIX = "ADForTonnes"
             Dim rowIndexByTagDictionary = New Dictionary(Of String, DataRow)
             Dim productSizes = New HashSet(Of String)
             Dim calendarDates = New HashSet(Of Date)
             Dim resourceClassifications = New HashSet(Of String)
 
-            Dim f0Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F0", ""))
-            Dim f05Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F05", ""))
-            Dim f1Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F1", ""))
-            Dim f15Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F15", ""))
-            Dim f2Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F2", ""))
-            Dim f25Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F25", ""))
-            Dim f3Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F3", ""))
-            Dim rfstmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFSTM", ""))
-            Dim rfmmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFMM", ""))
-            Dim rfgmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFGM", ""))
-
-            Dim recoveryFactorDensityPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFD", ""))
-            Dim recoveryFactorMoisturePrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFM", ""))
-            Dim f2DensityPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F2Density", ""))
-
-
             ' Create a dictionary of rows by TagId and Product size
-            If Not resultTable Is Nothing Then
+            If resultTable IsNot Nothing Then
                 Dim matchedRows = resultTable.AsEnumerable
-
-                If locationId.HasValue Then
-                    matchedRows = matchedRows.Where(Function(r) r.AsInt("LocationId") = locationId.Value)
-                End If
-
-                For Each row In matchedRows
-                    Dim rowKey = row.Item(COLUMN_TAG_ID).ToString()
-                    Dim productSize = row.Item(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE).ToString()
-                    Dim resourceClassification = row.Item(CalculationConstants.COLUMN_NAME_RESOURCE_CLASSIFICATION).ToString()
-
-                    If productSize <> "TOTAL" AndAlso Not rowKey.EndsWith(productSize, StringComparison.Ordinal) Then
-                        rowKey += productSize.ToUpper
-                    End If
-
-                    If Not String.IsNullOrEmpty(resourceClassification) Then
-                        rowKey = $"{rowKey}_{resourceClassification.ToUpper}"
-                    End If
-
-                    If groupOnCalendarDate Then
-                        calendarDates.Add(CDate(row.Item("CalendarDate")))
-                        rowKey = $"{rowKey}_{row.Item("CalendarDate"):yyyyMMdd}"
-                    End If
-
-                    ' Add each row by TagId to a dictionary by TagId
-                    rowIndexByTagDictionary.Add(rowKey, row)
-
-                    ' Determine the list of product sizes and resource classifications seen
-                    productSizes.Add(productSize)
-                    resourceClassifications.Add(resourceClassification)
-                Next
+                PopulateLookups(locationId, matchedRows, groupOnCalendarDate, calendarDates, rowIndexByTagDictionary, productSizes, resourceClassifications)
             End If
 
             If Not groupOnCalendarDate Then
@@ -985,241 +938,21 @@ Namespace ReportDefinitions
 
             ' Iterate each calendar date in the set
             For Each calendarDate In calendarDates
-
                 Dim calendarDateRowKeySuffix = String.Empty
                 If groupOnCalendarDate Then
                     calendarDateRowKeySuffix = $"_{calendarDate:yyyyMMdd}"
                 End If
 
-                ' Iterate for each ProductSize in the set
-                For Each productSize In productSizes
-                    For Each resourceClassification In resourceClassifications
+                Dim combined = New List(Of IEnumerable(Of String)) From {
+                    productSizes, 
+                    resourceClassifications
+                }
 
-                        Dim resourceClassificationTagSuffix = String.Empty
-
-                        If Not String.IsNullOrEmpty(resourceClassification) Then
-                            resourceClassificationTagSuffix = $"_{resourceClassification.ToUpper()}"
-                        End If
-
-                        Dim dataRowF1GradeControl As DataRow = Nothing
-                        Dim dataRowF1MiningModel As DataRow = Nothing
-                        Dim dataRowF1Factor As DataRow = Nothing
-
-                        Dim dataRowF15GradeControlSTGM As DataRow = Nothing
-                        Dim dataRowF15ShortTermGeology As DataRow = Nothing
-                        Dim dataRowF15Factor As DataRow = Nothing
-
-                        ' note that the F2 GC is only available in special cases, most of the time
-                        ' the F1 GC is used to recalculate the F2
-                        Dim dataRowF2GradeControl As DataRow = Nothing
-                        Dim dataRowF2MineProductionExpitEquivalent As DataRow = Nothing
-                        Dim dataRowF2Factor As DataRow = Nothing
-
-                        Dim dataRowF25Factor As DataRow = Nothing
-                        Dim dataRowF25FactorMiningModelOreForRailEquivalent As DataRow = Nothing
-                        Dim dataRowF25OreForRail As DataRow = Nothing
-
-                        Dim dataRowF3OreShipped As DataRow = Nothing
-                        Dim dataRowF3MiningModelShippingEquivalent As DataRow = Nothing
-                        Dim dataRowF3Factor As DataRow = Nothing
-
-                        Dim dataRowRFDActualMined As DataRow = Nothing
-                        Dim dataRowRFDMiningModel As DataRow = Nothing
-                        Dim dataRowRFDFactor As DataRow = Nothing
-
-                        Dim dataRowRFMMineProductionActuals As DataRow = Nothing
-                        Dim dataRowRFMMiningModel As DataRow = Nothing
-                        Dim dataRowRFMFactor As DataRow = Nothing
-                        Dim dataRowF0Factor As DataRow = Nothing
-                        Dim dataRowF05Factor As DataRow = Nothing
-
-                        Dim dataRowF2DensityActualMined As DataRow = Nothing
-                        Dim dataRowF2DensityGradeControl As DataRow = Nothing
-                        Dim dataRowF2DensityFactor As DataRow = Nothing
-
-                        Dim dataRowRFGM As DataRow = Nothing
-                        Dim dataRowRFMM As DataRow = Nothing
-                        Dim dataRowRFSTM As DataRow = Nothing
-                        Dim dataRowRFGMMineProductionExpitEquivalent As DataRow = Nothing
-                        Dim dataRowRFMMMineProductionExpitEquivalent As DataRow = Nothing
-                        Dim dataRowRFSTMMineProductionExpitEquivalent As DataRow = Nothing
-                        Dim dataRowRFGMGeologyModel As DataRow = Nothing
-                        Dim dataRowRFMMMiningModel As DataRow = Nothing
-                        Dim dataRowRFSTMShortTermGeology As DataRow = Nothing
-
-
-                        Dim dataRowF0GeologyModel As DataRow = Nothing
-                        Dim dataRowF0MiningModel As DataRow = Nothing
-
-                        Dim dataRowF05GeologyModel As DataRow = Nothing
-                        Dim dataRowF05GradeControlModel As DataRow = Nothing
-
-                        ' the product size 'TOTAL' is not used as a suffix, so will need to exclude it from our matching
-                        If productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
-                            productSize = String.Empty
-                        End If
-
-                        ' F1
-                        rowIndexByTagDictionary.TryGetValue(f1Prefix & ModelGradeControl.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF1GradeControl)
-                        rowIndexByTagDictionary.TryGetValue(f1Prefix & ModelMining.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF1MiningModel)
-                        rowIndexByTagDictionary.TryGetValue(F1.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF1Factor)
-
-                        ' F0
-                        rowIndexByTagDictionary.TryGetValue(F0.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF0Factor)
-                        rowIndexByTagDictionary.TryGetValue(f0Prefix & ModelGeology.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF0GeologyModel)
-                        rowIndexByTagDictionary.TryGetValue(f0Prefix & ModelMining.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF0MiningModel)
-                        dataRowF0Factor.RecalculateRatios(dataRowF0MiningModel, dataRowF0GeologyModel)
-
-                        'F0.5
-                        rowIndexByTagDictionary.TryGetValue(F05.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF05Factor)
-                        rowIndexByTagDictionary.TryGetValue(f05Prefix & ModelGeology.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF05GeologyModel)
-                        rowIndexByTagDictionary.TryGetValue(f05Prefix & ModelGradeControl.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF05GradeControlModel)
-                        dataRowF05Factor.RecalculateRatios(dataRowF05GradeControlModel, dataRowF05GeologyModel)
-
-                        ' F1.5
-                        rowIndexByTagDictionary.TryGetValue(f15Prefix & ModelGradeControlSTGM.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF15GradeControlSTGM)
-                        rowIndexByTagDictionary.TryGetValue(f15Prefix & ModelShortTermGeology.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF15ShortTermGeology)
-                        rowIndexByTagDictionary.TryGetValue(F15.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowF15Factor)
-
-                        ' now we have enough to recalculate F0, F0.5, F1 and F1.5
-
-                        dataRowF1Factor.RecalculateRatios(dataRowF1GradeControl, dataRowF1MiningModel)
-                        dataRowF15Factor.RecalculateRatios(dataRowF15GradeControlSTGM, dataRowF15ShortTermGeology)
-                        dataRowF1Factor.RecalculateDifferences(dataRowF1GradeControl, dataRowF1MiningModel)
-                        dataRowF15Factor.RecalculateDifferences(dataRowF15GradeControlSTGM, dataRowF15ShortTermGeology)
-
-                        ' Anything beyond F15 is only relevant when not reporting by resource classification
-                        If String.IsNullOrEmpty(resourceClassification) Then
-
-                            ' F2
-                            rowIndexByTagDictionary.TryGetValue(f2Prefix & ModelGradeControl.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF2GradeControl)
-                            rowIndexByTagDictionary.TryGetValue(f2Prefix & MineProductionExpitEquivalent.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF2MineProductionExpitEquivalent)
-                            rowIndexByTagDictionary.TryGetValue(F2.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF2Factor)
-
-                            ' F2.5
-                            rowIndexByTagDictionary.TryGetValue(f25Prefix & MiningModelOreForRailEquivalent.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF25FactorMiningModelOreForRailEquivalent)
-                            rowIndexByTagDictionary.TryGetValue(f25Prefix & OreForRail.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF25OreForRail)
-                            rowIndexByTagDictionary.TryGetValue(F25.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF25Factor)
-
-                            ' F3
-                            rowIndexByTagDictionary.TryGetValue(f3Prefix & PortOreShipped.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF3OreShipped)
-                            rowIndexByTagDictionary.TryGetValue(F3.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF3Factor)
-
-                            ' F3 has a special case for GEOMET - it will use the AD Adjusted version if it exists. We would actually like to use this in
-                            ' general for all the Factors, but can't work out a nice way to do this
-                            If productSize = "GEOMET" Then
-                                rowIndexByTagDictionary.TryGetValue(f3Prefix & MiningModelShippingEquivalent.CalculationId & AD_SUFFIX & productSize & calendarDateRowKeySuffix, dataRowF3MiningModelShippingEquivalent)
-
-                                ' we tried at first with to get the ad-adjusted version, but if that doesn't exist, then we fall back to the normal one
-                                If dataRowF3MiningModelShippingEquivalent Is Nothing Then
-                                    rowIndexByTagDictionary.TryGetValue(f3Prefix & MiningModelShippingEquivalent.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF3MiningModelShippingEquivalent)
-                                End If
-                            Else
-                                rowIndexByTagDictionary.TryGetValue(f3Prefix & MiningModelShippingEquivalent.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF3MiningModelShippingEquivalent)
-                            End If
-
-                            ' RecoveryFactorDensity
-                            rowIndexByTagDictionary.TryGetValue(recoveryFactorDensityPrefix & ActualMined.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFDActualMined)
-                            rowIndexByTagDictionary.TryGetValue(recoveryFactorDensityPrefix & ModelMining.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFDMiningModel)
-                            rowIndexByTagDictionary.TryGetValue(RecoveryFactorDensity.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFDFactor)
-
-                            ' RecoveryFactorMoisture
-                            rowIndexByTagDictionary.TryGetValue(recoveryFactorMoisturePrefix & MineProductionActuals.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFMMineProductionActuals)
-                            rowIndexByTagDictionary.TryGetValue(recoveryFactorMoisturePrefix & ModelMining.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFMMiningModel)
-                            rowIndexByTagDictionary.TryGetValue(RecoveryFactorMoisture.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFMFactor)
-
-                            ' F2-Density
-                            rowIndexByTagDictionary.TryGetValue(f2DensityPrefix & ActualMined.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF2DensityActualMined)
-                            rowIndexByTagDictionary.TryGetValue(f2DensityPrefix & ModelGradeControl.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF2DensityGradeControl)
-                            rowIndexByTagDictionary.TryGetValue(F2Density.CalculationId & productSize & calendarDateRowKeySuffix, dataRowF2DensityFactor)
-
-                            'RF Factors
-
-                            'RFGM
-                            rowIndexByTagDictionary.TryGetValue(rfgmPrefix & MineProductionExpitEquivalent.CalculationId & productSize & resourceClassification, dataRowRFGMMineProductionExpitEquivalent)
-                            rowIndexByTagDictionary.TryGetValue(rfmmPrefix & ModelGradeControlSTGM.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowRFGMGeologyModel)
-
-                            If dataRowRFGMGeologyModel Is Nothing Then
-                                rowIndexByTagDictionary.TryGetValue(ModelGeology.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowRFGMGeologyModel)
-                            End If
-
-                            If dataRowRFGMMineProductionExpitEquivalent Is Nothing Then
-                                dataRowRFGMMineProductionExpitEquivalent = dataRowF2MineProductionExpitEquivalent
-                            End If
-
-                            rowIndexByTagDictionary.TryGetValue(RFGM.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFGM)
-
-                            'RFMM
-                            rowIndexByTagDictionary.TryGetValue(rfmmPrefix & MineProductionExpitEquivalent.CalculationId & productSize & resourceClassification, dataRowRFMMMineProductionExpitEquivalent)
-                            rowIndexByTagDictionary.TryGetValue(rfmmPrefix & ModelMining.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowRFMMMiningModel)
-
-                            If dataRowRFMMMiningModel Is Nothing Then
-                                rowIndexByTagDictionary.TryGetValue(f1Prefix & ModelMining.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowRFMMMiningModel)
-                            End If
-
-                            If dataRowRFMMMineProductionExpitEquivalent Is Nothing Then
-                                dataRowRFMMMineProductionExpitEquivalent = dataRowF2MineProductionExpitEquivalent
-                            End If
-
-                            rowIndexByTagDictionary.TryGetValue(RFMM.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFMM)
-
-                            'RFSTM
-                            rowIndexByTagDictionary.TryGetValue(rfstmPrefix & MineProductionExpitEquivalent.CalculationId & productSize & resourceClassification, dataRowRFSTMMineProductionExpitEquivalent)
-                            rowIndexByTagDictionary.TryGetValue(rfstmPrefix & ModelShortTermGeology.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowRFSTMShortTermGeology)
-
-                            If dataRowRFSTMShortTermGeology Is Nothing Then
-                                rowIndexByTagDictionary.TryGetValue(f15Prefix & ModelShortTermGeology.CalculationId & productSize & resourceClassificationTagSuffix & calendarDateRowKeySuffix, dataRowRFSTMShortTermGeology)
-                            End If
-
-                            If dataRowRFSTMMineProductionExpitEquivalent Is Nothing Then
-                                dataRowRFSTMMineProductionExpitEquivalent = dataRowF2MineProductionExpitEquivalent
-                            End If
-
-                            rowIndexByTagDictionary.TryGetValue(RFSTM.CalculationId & productSize & calendarDateRowKeySuffix, dataRowRFSTM)
-
-                            ' now we have all the data, actually go ahead and re-calculate all the remaining factors
-
-                            ' with F2 we want to use the F2 specific Grade control in some cases
-                            If productSize = "GEOMET" AndAlso dataRowF2GradeControl IsNot Nothing Then
-                                dataRowF2Factor.RecalculateRatios(dataRowF2MineProductionExpitEquivalent, dataRowF2GradeControl)
-                                dataRowF2Factor.RecalculateDifferences(dataRowF2MineProductionExpitEquivalent, dataRowF2GradeControl)
-                            ElseIf dataRowF1GradeControl Is Nothing AndAlso dataRowF2GradeControl IsNot Nothing Then
-                                ' if the table has *only* the F2 and its sub calculations, then the recalc will fail silently, because it
-                                ' will default to using the F1 GC. In this case we will use the F2. This could maybe be merged with the
-                                ' GEOMET case above, but don't have the time to test this in detail
-                                dataRowF2Factor.RecalculateRatios(dataRowF2MineProductionExpitEquivalent, dataRowF2GradeControl)
-                                dataRowF2Factor.RecalculateDifferences(dataRowF2MineProductionExpitEquivalent, dataRowF2GradeControl)
-                            Else
-                                dataRowF2Factor.RecalculateRatios(dataRowF2MineProductionExpitEquivalent, dataRowF1GradeControl)
-                                dataRowF2Factor.RecalculateDifferences(dataRowF2MineProductionExpitEquivalent, dataRowF1GradeControl)
-                            End If
-
-                            dataRowF25Factor.RecalculateRatios(dataRowF25OreForRail, dataRowF25FactorMiningModelOreForRailEquivalent)
-                            dataRowF3Factor.RecalculateRatios(dataRowF3OreShipped, dataRowF3MiningModelShippingEquivalent)
-
-                            dataRowRFDFactor.RecalculateRatios(dataRowRFDActualMined, dataRowRFDMiningModel)
-                            dataRowRFMFactor.RecalculateRatios(dataRowRFMMineProductionActuals, dataRowRFMMiningModel)
-                            dataRowF2DensityFactor.RecalculateRatios(dataRowF2DensityActualMined, dataRowF2DensityGradeControl)
-                            dataRowF25Factor.RecalculateDifferences(dataRowF25OreForRail, dataRowF25FactorMiningModelOreForRailEquivalent)
-                            dataRowF3Factor.RecalculateDifferences(dataRowF3OreShipped, dataRowF3MiningModelShippingEquivalent)
-
-                            dataRowRFDFactor.RecalculateDifferences(dataRowRFDActualMined, dataRowRFDMiningModel)
-                            dataRowRFMFactor.RecalculateDifferences(dataRowRFMMineProductionActuals, dataRowRFMMiningModel)
-                            dataRowF2DensityFactor.RecalculateDifferences(dataRowF2DensityActualMined, dataRowF2DensityGradeControl)
-                        End If
-
-                        If Not dataRowRFGM Is Nothing Then
-                            dataRowRFGM.RecalculateRatios(dataRowRFGMMineProductionExpitEquivalent, dataRowRFGMGeologyModel)
-                        End If
-
-                        If Not dataRowRFMM Is Nothing Then
-                            dataRowRFMM.RecalculateRatios(dataRowRFMMMineProductionExpitEquivalent, dataRowF1MiningModel)
-                        End If
-
-                        If Not dataRowRFSTM Is Nothing Then
-                            dataRowRFSTM.RecalculateRatios(dataRowRFSTMMineProductionExpitEquivalent, dataRowRFSTMShortTermGeology)
-                        End If
-                    Next
+                For Each grouping In combined.CartesianProduct()
+                    Dim productSize = grouping(0)
+                    Dim resourceClassification = grouping(1)
+                    RecalculateRows(resourceClassification, productSize, rowIndexByTagDictionary, includeFactorPrefixOnCalcIds, 
+                                    calendarDateRowKeySuffix)
                 Next
             Next
 
@@ -1228,6 +961,249 @@ Namespace ReportDefinitions
 
             Return resultTable
         End Function
+
+        Private Shared Sub PopulateLookups(locationId As Integer?, matchedRows As EnumerableRowCollection(Of DataRow), 
+                                           groupOnCalendarDate As Boolean, calendarDates As HashSet(Of Date), 
+                                           rowIndexByTagDictionary As IDictionary(Of String,DataRow), 
+                                           productSizes As HashSet(Of String), resourceClassifications As HashSet(Of String))
+
+            If locationId.HasValue Then
+                matchedRows = matchedRows.Where(Function(r) r.AsInt(ColumnNames.LOCATION_ID) = locationId.Value)
+            End If
+
+            For Each row In matchedRows
+                Dim rowKey = row.Item(ColumnNames.TAG_ID).ToString()
+                Dim productSize = row.Item(ColumnNames.PRODUCT_SIZE).ToString()
+                Dim resourceClassification = row.Item(ColumnNames.RESOURCE_CLASSIFICATION).ToString()
+
+                If productSize <> CalculationConstants.PRODUCT_SIZE_TOTAL AndAlso Not rowKey.EndsWith(productSize, StringComparison.Ordinal) Then
+                    rowKey += productSize.ToUpper
+                End If
+
+                If Not String.IsNullOrEmpty(resourceClassification) Then
+                    rowKey = $"{rowKey}_{resourceClassification.ToUpper}"
+                End If
+
+                If groupOnCalendarDate Then
+                    calendarDates.Add(CDate(row.Item(ColumnNames.DATE_CAL)))
+                    rowKey = $"{rowKey}_{row.Item(ColumnNames.DATE_CAL):yyyyMMdd}"
+                End If
+
+                ' Add each row by TagId to a dictionary by TagId
+                rowIndexByTagDictionary.Add(rowKey, row)
+
+                ' Determine the list of product sizes and resource classifications seen
+                productSizes.Add(productSize)
+                resourceClassifications.Add(resourceClassification)
+            Next
+        End Sub
+
+        Private Shared Sub RecalculateRows(resourceClassification As String, productSize As String, 
+                                           rowIndexByTagDictionary As IDictionary(Of String,DataRow), 
+                                           includeFactorPrefixOnCalcIds As Boolean, calendarDateRowKeySuffix As String)
+
+            ' the product size 'TOTAL' is not used as a suffix, so will need to exclude it from our matching
+            If productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
+                productSize = String.Empty
+            End If
+
+            Dim resourceClassificationTagSuffix = String.Empty
+            If Not String.IsNullOrEmpty(resourceClassification) Then
+                resourceClassificationTagSuffix = $"_{resourceClassification.ToUpper()}"
+            End If
+
+            Dim fullSuffix = $"{productSize}{resourceClassificationTagSuffix}{calendarDateRowKeySuffix}"
+
+            ' F0
+            Dim dataRowF0Factor As DataRow = Nothing
+            Dim dataRowF0GeologyModel As DataRow = Nothing
+            Dim dataRowF0MiningModel As DataRow = Nothing
+            Dim f0Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F0", ""))
+            rowIndexByTagDictionary.TryGetValue(F0.CalculationId & fullSuffix, dataRowF0Factor)
+            rowIndexByTagDictionary.TryGetValue(f0Prefix & ModelGeology.CalculationId & fullSuffix, dataRowF0GeologyModel)
+            rowIndexByTagDictionary.TryGetValue(f0Prefix & ModelMining.CalculationId & fullSuffix, dataRowF0MiningModel)
+            dataRowF0Factor.RecalculateRatios(dataRowF0MiningModel, dataRowF0GeologyModel)
+
+            'F0.5
+            Dim dataRowF05Factor As DataRow = Nothing
+            Dim dataRowF05GeologyModel As DataRow = Nothing
+            Dim dataRowF05GradeControlModel As DataRow = Nothing
+            Dim f05Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F05", ""))
+            rowIndexByTagDictionary.TryGetValue(F05.CalculationId & fullSuffix, dataRowF05Factor)
+            rowIndexByTagDictionary.TryGetValue(f05Prefix & ModelGeology.CalculationId & fullSuffix, dataRowF05GeologyModel)
+            rowIndexByTagDictionary.TryGetValue(f05Prefix & ModelGradeControl.CalculationId & fullSuffix, dataRowF05GradeControlModel)
+            dataRowF05Factor.RecalculateRatios(dataRowF05GradeControlModel, dataRowF05GeologyModel)
+
+            ' F1
+            Dim dataRowF1GradeControl As DataRow = Nothing
+            Dim dataRowF1MiningModel As DataRow = Nothing
+            Dim dataRowF1Factor As DataRow = Nothing
+            Dim f1Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F1", ""))
+            rowIndexByTagDictionary.TryGetValue(f1Prefix & ModelGradeControl.CalculationId & fullSuffix, dataRowF1GradeControl)
+            rowIndexByTagDictionary.TryGetValue(f1Prefix & ModelMining.CalculationId & fullSuffix, dataRowF1MiningModel)
+            rowIndexByTagDictionary.TryGetValue(F1.CalculationId & fullSuffix, dataRowF1Factor)
+            dataRowF1Factor.RecalculateRatios(dataRowF1GradeControl, dataRowF1MiningModel)
+            dataRowF1Factor.RecalculateDifferences(dataRowF1GradeControl, dataRowF1MiningModel)
+
+            ' F1.5
+            Dim dataRowF15GradeControlSTGM As DataRow = Nothing
+            Dim dataRowF15ShortTermGeology As DataRow = Nothing
+            Dim dataRowF15Factor As DataRow = Nothing
+            Dim f15Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F15", ""))
+            rowIndexByTagDictionary.TryGetValue(f15Prefix & ModelGradeControlSTGM.CalculationId & fullSuffix, dataRowF15GradeControlSTGM)
+            rowIndexByTagDictionary.TryGetValue(f15Prefix & ModelShortTermGeology.CalculationId & fullSuffix, dataRowF15ShortTermGeology)
+            rowIndexByTagDictionary.TryGetValue(F15.CalculationId & fullSuffix, dataRowF15Factor)
+            dataRowF15Factor.RecalculateRatios(dataRowF15GradeControlSTGM, dataRowF15ShortTermGeology)
+            dataRowF15Factor.RecalculateDifferences(dataRowF15GradeControlSTGM, dataRowF15ShortTermGeology)
+
+            ' Anything beyond F15 is only relevant when not reporting by resource classification
+            If String.IsNullOrEmpty(resourceClassification) Then
+                Dim productCalendarSuffix = $"{productSize}{calendarDateRowKeySuffix}"
+
+                ' F2
+                Dim dataRowF2GradeControl As DataRow = Nothing
+                Dim dataRowF2MineProductionExpitEquivalent As DataRow = Nothing
+                Dim dataRowF2Factor As DataRow = Nothing
+                Dim f2Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F2", ""))
+                rowIndexByTagDictionary.TryGetValue(f2Prefix & ModelGradeControl.CalculationId & productCalendarSuffix, dataRowF2GradeControl)
+                rowIndexByTagDictionary.TryGetValue(f2Prefix & MineProductionExpitEquivalent.CalculationId & productCalendarSuffix, dataRowF2MineProductionExpitEquivalent)
+                rowIndexByTagDictionary.TryGetValue(F2.CalculationId & productCalendarSuffix, dataRowF2Factor)
+
+                ' with F2 we want to use the F2 specific Grade control in some cases
+                If productSize = CalculationConstants.PRODUCT_SIZE_GEOMET AndAlso dataRowF2GradeControl IsNot Nothing Then
+                    dataRowF2Factor.RecalculateRatios(dataRowF2MineProductionExpitEquivalent, dataRowF2GradeControl)
+                    dataRowF2Factor.RecalculateDifferences(dataRowF2MineProductionExpitEquivalent, dataRowF2GradeControl)
+                ElseIf dataRowF1GradeControl Is Nothing AndAlso dataRowF2GradeControl IsNot Nothing Then
+                    ' if the table has *only* the F2 and its sub calculations, then the recalc will fail silently, because it
+                    ' will default to using the F1 GC. In this case we will use the F2. This could maybe be merged with the
+                    ' GEOMET case above, but don't have the time to test this in detail
+                    dataRowF2Factor.RecalculateRatios(dataRowF2MineProductionExpitEquivalent, dataRowF2GradeControl)
+                    dataRowF2Factor.RecalculateDifferences(dataRowF2MineProductionExpitEquivalent, dataRowF2GradeControl)
+                Else
+                    dataRowF2Factor.RecalculateRatios(dataRowF2MineProductionExpitEquivalent, dataRowF1GradeControl)
+                    dataRowF2Factor.RecalculateDifferences(dataRowF2MineProductionExpitEquivalent, dataRowF1GradeControl)
+                End If
+
+                ' F2.5
+                Dim dataRowF25Factor As DataRow = Nothing
+                Dim dataRowF25FactorMiningModelOreForRailEquivalent As DataRow = Nothing
+                Dim dataRowF25OreForRail As DataRow = Nothing
+                Dim f25Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F25", ""))
+                rowIndexByTagDictionary.TryGetValue(f25Prefix & MiningModelOreForRailEquivalent.CalculationId & productCalendarSuffix, dataRowF25FactorMiningModelOreForRailEquivalent)
+                rowIndexByTagDictionary.TryGetValue(f25Prefix & OreForRail.CalculationId & productCalendarSuffix, dataRowF25OreForRail)
+                rowIndexByTagDictionary.TryGetValue(F25.CalculationId & productCalendarSuffix, dataRowF25Factor)
+                dataRowF25Factor.RecalculateRatios(dataRowF25OreForRail, dataRowF25FactorMiningModelOreForRailEquivalent)
+                dataRowF25Factor.RecalculateDifferences(dataRowF25OreForRail, dataRowF25FactorMiningModelOreForRailEquivalent)
+
+                ' F3
+                Dim dataRowF3OreShipped As DataRow = Nothing
+                Dim dataRowF3Factor As DataRow = Nothing
+                Dim f3Prefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F3", ""))
+                rowIndexByTagDictionary.TryGetValue(f3Prefix & PortOreShipped.CalculationId & productCalendarSuffix, dataRowF3OreShipped)
+                rowIndexByTagDictionary.TryGetValue(F3.CalculationId & productCalendarSuffix, dataRowF3Factor)
+
+                ' Default to the normal one
+                Dim dataRowF3MiningModelShippingEquivalent As DataRow = Nothing
+                rowIndexByTagDictionary.TryGetValue(f3Prefix & MiningModelShippingEquivalent.CalculationId & productCalendarSuffix, dataRowF3MiningModelShippingEquivalent)
+                If productSize = CalculationConstants.PRODUCT_SIZE_GEOMET Then
+                    ' F3 has a special case for GEOMET - it will use the AD Adjusted version if it exists. We would actually like to use this in
+                    ' general for all the Factors, but can't work out a nice way to do this
+                    rowIndexByTagDictionary.TryGetValue(f3Prefix & MiningModelShippingEquivalent.CalculationId & "ADForTonnes" & productCalendarSuffix, dataRowF3MiningModelShippingEquivalent)
+                End If
+                dataRowF3Factor.RecalculateRatios(dataRowF3OreShipped, dataRowF3MiningModelShippingEquivalent)
+                dataRowF3Factor.RecalculateDifferences(dataRowF3OreShipped, dataRowF3MiningModelShippingEquivalent)
+
+                ' RecoveryFactorDensity
+                Dim dataRowRFDActualMined As DataRow = Nothing
+                Dim dataRowRFDMiningModel As DataRow = Nothing
+                Dim dataRowRFDFactor As DataRow = Nothing
+                Dim recoveryFactorDensityPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFD", ""))
+                rowIndexByTagDictionary.TryGetValue(recoveryFactorDensityPrefix & ActualMined.CalculationId & productCalendarSuffix, dataRowRFDActualMined)
+                rowIndexByTagDictionary.TryGetValue(recoveryFactorDensityPrefix & ModelMining.CalculationId & productCalendarSuffix, dataRowRFDMiningModel)
+                rowIndexByTagDictionary.TryGetValue(RecoveryFactorDensity.CalculationId & productCalendarSuffix, dataRowRFDFactor)
+                dataRowRFDFactor.RecalculateDifferences(dataRowRFDActualMined, dataRowRFDMiningModel)
+
+                ' RecoveryFactorMoisture
+                Dim dataRowRFMMineProductionActuals As DataRow = Nothing
+                Dim dataRowRFMMiningModel As DataRow = Nothing
+                Dim dataRowRFMFactor As DataRow = Nothing
+                Dim recoveryFactorMoisturePrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFM", ""))
+                rowIndexByTagDictionary.TryGetValue(recoveryFactorMoisturePrefix & MineProductionActuals.CalculationId & productCalendarSuffix, dataRowRFMMineProductionActuals)
+                rowIndexByTagDictionary.TryGetValue(recoveryFactorMoisturePrefix & ModelMining.CalculationId & productCalendarSuffix, dataRowRFMMiningModel)
+                rowIndexByTagDictionary.TryGetValue(RecoveryFactorMoisture.CalculationId & productCalendarSuffix, dataRowRFMFactor)
+                dataRowRFMFactor.RecalculateRatios(dataRowRFMMineProductionActuals, dataRowRFMMiningModel)
+                dataRowRFMFactor.RecalculateDifferences(dataRowRFMMineProductionActuals, dataRowRFMMiningModel)
+
+                ' F2-Density
+                Dim dataRowF2DensityActualMined As DataRow = Nothing
+                Dim dataRowF2DensityGradeControl As DataRow = Nothing
+                Dim dataRowF2DensityFactor As DataRow = Nothing
+                Dim f2DensityPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "F2Density", ""))
+                rowIndexByTagDictionary.TryGetValue(f2DensityPrefix & ActualMined.CalculationId & productCalendarSuffix, dataRowF2DensityActualMined)
+                rowIndexByTagDictionary.TryGetValue(f2DensityPrefix & ModelGradeControl.CalculationId & productCalendarSuffix, dataRowF2DensityGradeControl)
+                rowIndexByTagDictionary.TryGetValue(F2Density.CalculationId & productCalendarSuffix, dataRowF2DensityFactor)
+                dataRowF2DensityFactor.RecalculateRatios(dataRowF2DensityActualMined, dataRowF2DensityGradeControl)
+                dataRowF2DensityFactor.RecalculateDifferences(dataRowF2DensityActualMined, dataRowF2DensityGradeControl)
+
+                'RF Factors
+                'RFGM
+                Dim dataRowRFGM As DataRow = Nothing
+                Dim dataRowRFGMMineProductionExpitEquivalent As DataRow = Nothing
+                Dim dataRowRFGMGeologyModel As DataRow = Nothing
+                Dim rfgmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFGM", ""))
+                rowIndexByTagDictionary.TryGetValue(rfgmPrefix & MineProductionExpitEquivalent.CalculationId & productSize, dataRowRFGMMineProductionExpitEquivalent)
+                rowIndexByTagDictionary.TryGetValue(rfgmPrefix & ModelGradeControlSTGM.CalculationId & fullSuffix, dataRowRFGMGeologyModel)
+
+                If dataRowRFGMGeologyModel Is Nothing Then
+                    rowIndexByTagDictionary.TryGetValue(ModelGeology.CalculationId & fullSuffix, dataRowRFGMGeologyModel)
+                End If
+
+                If dataRowRFGMMineProductionExpitEquivalent Is Nothing Then
+                    dataRowRFGMMineProductionExpitEquivalent = dataRowF2MineProductionExpitEquivalent
+                End If
+
+                rowIndexByTagDictionary.TryGetValue(RFGM.CalculationId & productCalendarSuffix, dataRowRFGM)
+                dataRowRFGM.RecalculateRatios(dataRowRFGMMineProductionExpitEquivalent, dataRowRFGMGeologyModel)
+
+                'RFMM
+                Dim dataRowRFMM As DataRow = Nothing
+                Dim dataRowRFMMMiningModel As DataRow = Nothing
+                Dim rfmmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFMM", ""))
+                Dim dataRowRFMMMineProductionExpitEquivalent As DataRow = Nothing
+                rowIndexByTagDictionary.TryGetValue(rfmmPrefix & MineProductionExpitEquivalent.CalculationId & productSize, dataRowRFMMMineProductionExpitEquivalent)
+                rowIndexByTagDictionary.TryGetValue(rfmmPrefix & ModelMining.CalculationId & fullSuffix, dataRowRFMMMiningModel)
+
+                If dataRowRFMMMiningModel Is Nothing Then
+                    rowIndexByTagDictionary.TryGetValue(f1Prefix & ModelMining.CalculationId & fullSuffix, dataRowRFMMMiningModel)
+                End If
+
+                If dataRowRFMMMineProductionExpitEquivalent Is Nothing Then
+                    dataRowRFMMMineProductionExpitEquivalent = dataRowF2MineProductionExpitEquivalent
+                End If
+
+                rowIndexByTagDictionary.TryGetValue(RFMM.CalculationId & productCalendarSuffix, dataRowRFMM)
+                dataRowRFMM.RecalculateRatios(dataRowRFMMMineProductionExpitEquivalent, dataRowRFMMMiningModel)
+
+                'RFSTM
+                Dim dataRowRFSTM As DataRow = Nothing
+                Dim dataRowRFSTMMineProductionExpitEquivalent As DataRow = Nothing
+                Dim dataRowRFSTMShortTermGeology As DataRow = Nothing
+                Dim rfstmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFSTM", ""))
+                rowIndexByTagDictionary.TryGetValue(rfstmPrefix & MineProductionExpitEquivalent.CalculationId & productSize, dataRowRFSTMMineProductionExpitEquivalent)
+                rowIndexByTagDictionary.TryGetValue(rfstmPrefix & ModelShortTermGeology.CalculationId & fullSuffix, dataRowRFSTMShortTermGeology)
+
+                If dataRowRFSTMShortTermGeology Is Nothing Then
+                    rowIndexByTagDictionary.TryGetValue(f15Prefix & ModelShortTermGeology.CalculationId & fullSuffix, dataRowRFSTMShortTermGeology)
+                End If
+
+                If dataRowRFSTMMineProductionExpitEquivalent Is Nothing Then
+                    dataRowRFSTMMineProductionExpitEquivalent = dataRowF2MineProductionExpitEquivalent
+                End If
+
+                rowIndexByTagDictionary.TryGetValue(RFSTM.CalculationId & productCalendarSuffix, dataRowRFSTM)
+                dataRowRFSTM.RecalculateRatios(dataRowRFSTMMineProductionExpitEquivalent, dataRowRFSTMShortTermGeology)
+            End If
+        End Sub
 
         ' Returns a list of the factors in the system, along with the components used to recalculate them
         Public Shared Function GetFactorComponentList(useCalculationPrefixes As Boolean) As Dictionary(Of String, String())
@@ -1381,7 +1357,7 @@ Namespace ReportDefinitions
                 Dim tagIdForComparison = DirectCast(row("ReportTagId"), String)
 
                 Dim productSizeForRow = String.Empty
-                Dim productSizeObject = row(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
+                Dim productSizeObject = row(ColumnNames.PRODUCT_SIZE)
 
                 If Not productSizeObject Is Nothing AndAlso Not productSizeObject Is DBNull.Value Then
                     productSizeForRow = productSizeObject.ToString
@@ -1442,9 +1418,9 @@ Namespace ReportDefinitions
             Dim isPivotedTable = Not table.Columns.Contains("AttributeValue")
             Dim attributesToCopy = New String() {"Density", "Volume"}
 
-            For Each row In table.AsEnumerable.Where(Function(r) r("ReportTagId").ToString.StartsWith("F2Density", StringComparison.Ordinal)).ToList()
+            For Each row In table.AsEnumerable.Where(Function(r) r(ColumnNames.REPORT_TAG_ID).ToString.StartsWith("F2Density", StringComparison.Ordinal)).ToList()
                 Dim tagId As String
-                Select Case row("TagId").ToString()
+                Select Case row(ColumnNames.TAG_ID).ToString()
                     Case "F2DensityActualMined" : tagId = "F2MineProductionExpitEqulivent"
                     Case "F2DensityFactor" : tagId = "F2Factor"
                     Case Else : tagId = Nothing
@@ -1527,7 +1503,7 @@ Namespace ReportDefinitions
             For i = reportDataTable.Rows.Count - 1 To 0 Step -1
                 ' Determine the tag Id for each row (and remove the product size suffix if there is one)
                 Dim tagId = reportDataTable.Rows(i)("ReportTagId").ToString
-                Dim productSizeValue = reportDataTable.Rows(i)(CalculationConstants.COLUMN_NAME_PRODUCT_SIZE)
+                Dim productSizeValue = reportDataTable.Rows(i)(ColumnNames.PRODUCT_SIZE)
                 Dim productSize = String.Empty
 
                 If Not productSizeValue Is Nothing AndAlso Not productSizeValue Is DBNull.Value Then
@@ -2307,7 +2283,6 @@ Namespace ReportDefinitions
             Return reportDataTable
         End Function
 
-
         Public Shared Sub FixModelNames(ByRef table As DataTable)
             FixModelNames(table, "Model")
             FixModelNames(table, "ModelTag")
@@ -2326,6 +2301,7 @@ Namespace ReportDefinitions
                 End If
             Next
         End Sub
+
         Public Shared Function AddResourceClassificationDescriptions(table As DataTable) As DataTable
             If Not table.Columns.Contains("ResourceClassificationDescription") Then
                 table.Columns.Add("ResourceClassificationDescription", GetType(String))
