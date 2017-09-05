@@ -472,6 +472,9 @@
     <None Include="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyList.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyTypeList.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0006_Add_StratNum_to_DigblockField.sql" />
+    <None Include="UtilityScripts\Deployment\4.1.0.0\Strat and Weathering\Import Historical Strat and Weathering Data.sql" />
+    <None Include="UtilityScripts\Deployment\4.1.0.0\Strat and Weathering\BlastholesImport.xml" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0007_Add_StratNum_and_Weathering_to_BhpbioSummaryEntry.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
@@ -609,6 +612,8 @@
     <Folder Include="Upgrade\4.0\4.0.7.0" />
     <Folder Include="Upgrade\4.1" />
     <Folder Include="Upgrade\4.1\4.1.0.0" />
+    <Folder Include="UtilityScripts\Deployment\4.1.0.0" />
+    <Folder Include="UtilityScripts\Deployment\4.1.0.0\Strat and Weathering" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\Tables\Staging.StageBlock.sql" />
