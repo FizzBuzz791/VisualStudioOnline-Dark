@@ -687,6 +687,7 @@ Namespace SqlDal
                 .Add("@iOverrideChildLocationType", CommandDataType.VarChar, CommandDirection.Input, 250, dataOptions.OverrideChildLocationType)
                 .Add("@iGeometType", CommandDataType.VarChar, CommandDirection.Input, 63, dataOptions.GeometType)
                 .Add("@iIncludeStrat", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeStratigraphy)
+                .Add("@iIncludeWeathering", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeWeathering)
             End With
 
             AddDataInclusionParameters(includeLiveData, includeApprovedData)
@@ -882,6 +883,7 @@ Namespace SqlDal
         Public Property OverrideChildLocationType As String = Nothing
         Public Property GeometType As String
         Public Property IncludeStratigraphy As Boolean = False
+        Public Property IncludeWeathering As Boolean = False
     End Class
 
     Public Module StringExtensions

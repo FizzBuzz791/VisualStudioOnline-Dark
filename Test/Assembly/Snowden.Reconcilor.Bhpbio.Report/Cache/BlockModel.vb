@@ -61,7 +61,8 @@ Namespace Cache
                     .OverrideChildLocationType = Session.OverrideModelDataLocationTypeBreakdown,
                     .UseRemainingMaterialAtDateFrom = Session.ForwardModelFactorCalculation,
                     .GeometType = GeometTypeString,
-                    .IncludeStratigraphy = Session.IncludeStratigraphy
+                    .IncludeStratigraphy = Session.IncludeStratigraphy,
+                    .IncludeWeathering = Session.IncludeWeathering
                 }
 
                 Return Session.DalReport.GetBhpbioReportDataBlockModel(startDate, endDate,

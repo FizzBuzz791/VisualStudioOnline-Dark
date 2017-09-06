@@ -807,6 +807,10 @@ Namespace Types
         Public Property GetModelDesignDataByBlockoutDate As Boolean = False
 
         Public Property IncludeStratigraphy As Boolean = False
+
+        Public Property IncludeWeathering As Boolean = False
+
+
 #End Region
 
 #Region "Constructors"

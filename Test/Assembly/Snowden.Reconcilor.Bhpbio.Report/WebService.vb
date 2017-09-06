@@ -342,6 +342,7 @@ Public Class WebService
             reportSession.Context = GetReportContext(liveApprovedContext)
             reportSession.RethrowCalculationSetErrors = True
             reportSession.IncludeStratigraphy = contextSelection.IndexOf("Stratigraphy", StringComparison.Ordinal) >= 0
+            reportSession.IncludeWeathering = contextSelection.IndexOf("Weathering", StringComparison.Ordinal) >= 0
 
             Dim attributeList = GetAttributeListFromString(attributes)
             Dim contextSelectionList = contextSelection.Split(","c).Select(Function(a) a.Trim).Where(Function(a) Not String.IsNullOrEmpty(a))
