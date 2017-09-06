@@ -1,33 +1,17 @@
 ﻿Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
-Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Types
-
-
-    Public Class CalculationResultRow
-        Inherits CalculationResultRecord
-
+    Public Class CalculationResultRow : Inherits CalculationResultRecord
         Public Sub New()
             MyBase.New()
         End Sub
 
-        Private _reportTagId As String
-        Private _calcId As String
-        Private _description As String
+        Public Property CalcId As String
 
-        Public Property CalcId() As String
+        Public ReadOnly Property TagId As String
             Get
-                Return _calcId
-            End Get
-            Set(ByVal value As String)
-                _calcId = value
-            End Set
-        End Property
-
-        Public ReadOnly Property TagId() As String
-            Get
-                If ProductSize IsNot Nothing And ProductSize.ToUpper <> "TOTAL" Then
+                If ProductSize IsNot Nothing And ProductSize.ToUpper <> CalculationConstants.PRODUCT_SIZE_TOTAL Then
                     Return ReportTagId + ProductSize
                 Else
                     Return ReportTagId
@@ -35,27 +19,12 @@ Namespace Types
             End Get
         End Property
 
-        Public Property ReportTagId() As String
-            Get
-                Return _reportTagId
-            End Get
-            Set(ByVal value As String)
-                _reportTagId = value
-            End Set
-        End Property
+        Public Property ReportTagId As String
 
-        Public Property Description() As String
-            Get
-                Return _description
-            End Get
-            Set(ByVal value As String)
-                _description = value
-            End Set
-        End Property
-
+        Public Property Description As String
     End Class
 
-    <DebuggerDisplayAttribute("CalendarDate:{_calendarDate}, LocationId:{_locationId}, MaterialId:{_materialTypeId}, Product:{_productSize}, Tonnes:{_tonnes}")> _
+    <DebuggerDisplay("CalendarDate:{_calendarDate}, LocationId:{_locationId}, MaterialId:{_materialTypeId}, Product:{_productSize}, Tonnes:{_tonnes}")> _
     Public Class CalculationResultRecord
         ' it would be possible to get these grades from the database, but in order not to introduce a new
         ' dependency to this class, we just have them hardcoded here.
@@ -83,263 +52,90 @@ Namespace Types
         End Function
 
 #Region "Properties"
-        Private _parent As CalculationResult
-        Private _calendarDate As DateTime
-        Private _dateFrom As DateTime
-        Private _dateTo As DateTime
-        Private _locationId As Int32?
-        Private _materialTypeId As Int32?
-        Private _tonnes As Double?
-        Private _volume As Double? = Nothing
-        Private _fe As Double?
-        Private _p As Double?
-        Private _siO2 As Double?
-        Private _al2O3 As Double?
-        Private _loi As Double?
-        Private _density As Double?
-        Private _h2O As Double?
-        Private _h2ODropped As Double?
-        Private _h2OShipped As Double?
-        Private _ultraFines As Double?
-
-        Private _productSize As String
-        Private _sortKey As String
 
         'Dodgy aggregate fields for use
         ' See Calculation.vb Sub Calculate Answer for description of Dodgy Aggregate.
-        Private _dodgyAggregateGradeTonnes As Double?
-        Private _dodgyAggregateEnabled As Boolean?
 
-        Public Property Parent() As CalculationResult
-            Get
-                Return _parent
-            End Get
-            Set(ByVal value As CalculationResult)
-                _parent = value
-            End Set
-        End Property
+        Public Property Parent As CalculationResult
 
-        Public Property CalendarDate() As DateTime
-            Get
-                Return _calendarDate
-            End Get
-            Set(ByVal value As DateTime)
-                _calendarDate = value
-            End Set
-        End Property
+        Public Property CalendarDate As DateTime
 
-        Public Property DateFrom() As DateTime
-            Get
-                Return _dateFrom
-            End Get
-            Set(ByVal value As DateTime)
-                _dateFrom = value
-            End Set
-        End Property
+        Public Property DateFrom As DateTime
 
-        Public Property DateTo() As DateTime
-            Get
-                Return _dateTo
-            End Get
-            Set(ByVal value As DateTime)
-                _dateTo = value
-            End Set
-        End Property
+        Public Property DateTo As DateTime
 
-        Public Property LocationId() As Int32?
-            Get
-                Return _locationId
-            End Get
-            Set(ByVal value As Int32?)
-                _locationId = value
-            End Set
-        End Property
+        Public Property LocationId As Int32?
 
-        Public Property MaterialTypeId() As Int32?
-            Get
-                Return _materialTypeId
-            End Get
-            Set(ByVal value As Int32?)
-                _materialTypeId = value
-            End Set
-        End Property
+        Public Property MaterialTypeId As Int32?
 
-        Public Property ProductSize() As String
-            Get
-                Return _productSize
-            End Get
-            Set(ByVal value As String)
-                _productSize = value
-            End Set
-        End Property
+        Public Property ProductSize As String
 
-        Public Property SortKey() As String
-            Get
-                Return _sortKey
-            End Get
-            Set(ByVal value As String)
-                _sortKey = value
-            End Set
-        End Property
+        Public Property SortKey As String
 
-        Public ReadOnly Property EffectiveProductSize() As String
+        Public ReadOnly Property EffectiveProductSize As String
             Get
                 Return IIf(ProductSize Is Nothing, CalculationConstants.PRODUCT_SIZE_TOTAL, ProductSize).ToString
             End Get
         End Property
 
-        Public Property Tonnes() As Double?
-            Get
-                Return _tonnes
-            End Get
-            Set(ByVal value As Double?)
-                _tonnes = value
-            End Set
-        End Property
+        Public Property Tonnes As Double?
 
-        Public Property Volume() As Double?
-            Get
-                Return _volume
-            End Get
-            Set(ByVal value As Double?)
-                _volume = value
-            End Set
-        End Property
+        Public Property Volume As Double? = Nothing
 
         Public Property ResourceClassification As String = Nothing
 
-        Public Property DodgyAggregateGradeTonnes() As Double?
-            Get
-                Return _dodgyAggregateGradeTonnes
-            End Get
-            Set(ByVal value As Double?)
-                _dodgyAggregateGradeTonnes = value
-            End Set
-        End Property
+        Public Property DodgyAggregateGradeTonnes As Double?
 
-        Public Property DodgyAggregateEnabled() As Boolean?
-            Get
-                Return _dodgyAggregateEnabled
-            End Get
-            Set(ByVal value As Boolean?)
-                _dodgyAggregateEnabled = value
-            End Set
-        End Property
+        Public Property DodgyAggregateEnabled As Boolean?
 
-        Property Fe() As Double?
-            Get
-                Return _fe
-            End Get
-            Set(ByVal value As Double?)
-                _fe = value
-            End Set
-        End Property
+        Public Property Fe As Double?
 
-        Property P() As Double?
-            Get
-                Return _p
-            End Get
-            Set(ByVal value As Double?)
-                _p = value
-            End Set
-        End Property
+        Public Property P As Double?
 
-        Property SiO2() As Double?
-            Get
-                Return _siO2
-            End Get
-            Set(ByVal value As Double?)
-                _siO2 = value
-            End Set
-        End Property
+        Public Property SiO2 As Double?
 
-        Property Al2O3() As Double?
-            Get
-                Return _al2O3
-            End Get
-            Set(ByVal value As Double?)
-                _al2O3 = value
-            End Set
-        End Property
+        Public Property Al2O3 As Double?
 
-        Property Loi() As Double?
-            Get
-                Return _loi
-            End Get
-            Set(ByVal value As Double?)
-                _loi = value
-            End Set
-        End Property
+        Public Property Loi As Double?
 
-        Property Density() As Double?
-            Get
-                Return _density
-            End Get
-            Set(ByVal value As Double?)
-                _density = value
-            End Set
-        End Property
+        Public Property Density As Double?
 
-        Public Property H2O() As Double?
-            Get
-                Return _h2O
-            End Get
-            Set(ByVal value As Double?)
-                _h2O = value
-            End Set
-        End Property
+        Public Property H2O As Double?
 
-        Public Property H2ODropped() As Double?
-            Get
-                Return _h2ODropped
-            End Get
-            Set(ByVal value As Double?)
-                _h2ODropped = value
-            End Set
-        End Property
+        Public Property H2ODropped As Double?
 
-        Public Property H2OShipped() As Double?
-            Get
-                Return _h2OShipped
-            End Get
-            Set(ByVal value As Double?)
-                _h2OShipped = value
-            End Set
-        End Property
+        Public Property H2OShipped As Double?
 
-        Public Property UltraFines() As Double?
-            Get
-                Return _ultraFines
-            End Get
-            Set(ByVal value As Double?)
-                _ultraFines = value
-            End Set
-        End Property
+        Public Property UltraFines As Double?
+
+        Public Property StratNum As String
+
+        Public Property Weathering As Integer?
 #End Region
 
 #Region "Constructors"
 
         Public Sub New()
-            _parent = Nothing
+            Parent = Nothing
         End Sub
 
-        Public Sub New(ByVal parent As CalculationResult)
-            _parent = parent
+        Public Sub New(parent As CalculationResult)
+            Me.Parent = parent
         End Sub
 
-        Public Sub New(ByVal parent As CalculationResult, ByVal dateFrom As DateTime, ByVal dateTo As DateTime)
+        Public Sub New(parent As CalculationResult, dateFrom As DateTime, dateTo As DateTime)
             Me.New(parent)
-            _calendarDate = dateFrom
-            _dateFrom = dateFrom
-            _dateTo = dateTo
-            _productSize = CalculationConstants.PRODUCT_SIZE_TOTAL
+            CalendarDate = dateFrom
+            Me.DateFrom = dateFrom
+            Me.DateTo = dateTo
+            ProductSize = CalculationConstants.PRODUCT_SIZE_TOTAL
         End Sub
 
-        Public Sub New(ByVal value As DataRow, ByVal grades As IEnumerable(Of DataRow))
+        Public Sub New(value As DataRow, grades As IEnumerable(Of DataRow))
             Merge(value, grades)
         End Sub
 
-        Public Sub New(ByVal parent As CalculationResult, ByVal value As DataRow, ByVal grades As IEnumerable(Of DataRow))
+        Public Sub New(parent As CalculationResult, value As DataRow, grades As IEnumerable(Of DataRow))
             Me.New(parent)
             Merge(value, grades)
         End Sub
@@ -351,37 +147,37 @@ Namespace Types
         ' we could do this by using reflection to get the grades by the property name
         ' but it would be less reliable, and much slower. The calculation methods in this
         ' class get called a lot, so speed is actually important here
-        Public Function GetGrade(ByVal gradeName As String) As Double?
+        Public Function GetGrade(gradeName As String) As Double?
             Select Case gradeName.ToLower
-                Case "fe" : Return Me.Fe
-                Case "p" : Return Me.P
-                Case "sio2" : Return Me.SiO2
-                Case "al2o3" : Return Me.Al2O3
-                Case "loi" : Return Me.Loi
-                Case "density" : Return Me.Density
-                Case "h2o" : Return Me.H2O
-                Case "h2o-as-dropped" : Return Me.H2ODropped
-                Case "h2o-as-shipped" : Return Me.H2OShipped
-                Case "ultrafines" : Return Me.UltraFines
+                Case "fe" : Return Fe
+                Case "p" : Return P
+                Case "sio2" : Return SiO2
+                Case "al2o3" : Return Al2O3
+                Case "loi" : Return Loi
+                Case "density" : Return Density
+                Case "h2o" : Return H2O
+                Case "h2o-as-dropped" : Return H2ODropped
+                Case "h2o-as-shipped" : Return H2OShipped
+                Case "ultrafines" : Return UltraFines
             End Select
         End Function
 
-        Public Sub SetGrade(ByVal gradeName As String, ByVal value As Double?)
+        Public Sub SetGrade(gradeName As String, value As Double?)
             Select Case gradeName.ToLower
-                Case "fe" : Me.Fe = value
-                Case "p" : Me.P = value
-                Case "sio2" : Me.SiO2 = value
-                Case "al2o3" : Me.Al2O3 = value
-                Case "loi" : Me.Loi = value
-                Case "density" : Me.Density = value
-                Case "h2o" : Me.H2O = value
-                Case "h2o-as-dropped" : Me.H2ODropped = value
-                Case "h2o-as-shipped" : Me.H2OShipped = value
-                Case "ultrafines" : Me.UltraFines = value
+                Case "fe" : Fe = value
+                Case "p" : P = value
+                Case "sio2" : SiO2 = value
+                Case "al2o3" : Al2O3 = value
+                Case "loi" : Loi = value
+                Case "density" : Density = value
+                Case "h2o" : H2O = value
+                Case "h2o-as-dropped" : H2ODropped = value
+                Case "h2o-as-shipped" : H2OShipped = value
+                Case "ultrafines" : UltraFines = value
             End Select
         End Sub
 
-        Public Sub Merge(ByVal value As DataRow, ByVal grades As IEnumerable(Of DataRow))
+        Public Sub Merge(value As DataRow, grades As IEnumerable(Of DataRow))
             'Dim dates As New Dictionary(Of DateTime, DataRow)
             Dim columns As DataColumnCollection
             Dim colsExists As Boolean
@@ -423,8 +219,8 @@ Namespace Types
                             Volume = Nothing
                         End If
 
-                        If value.HasColumn("ResourceClassification") AndAlso value.HasValue("ResourceClassification") Then
-                            ResourceClassification = value.AsString("ResourceClassification")
+                        If value.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) AndAlso value.HasValue(ColumnNames.RESOURCE_CLASSIFICATION) Then
+                            ResourceClassification = value.AsString(ColumnNames.RESOURCE_CLASSIFICATION)
                         End If
 
                         ' Set the intial value of the dodgy aggregate to the tonnes value
@@ -440,10 +236,10 @@ Namespace Types
                                              And ParseNullableInt32(g(ColumnNames.PARENT_LOCATION_ID), LocationId) _
                                              And ParseNullableInt32(g(ColumnNames.MATERIAL_TYPE_ID), MaterialTypeId) _
                                              And SafeParseString(g, ColumnNames.PRODUCT_SIZE, CalculationConstants.PRODUCT_SIZE_TOTAL, EffectiveProductSize) _
-                                             And SafeParseString(g, "ResourceClassification", Nothing, ResourceClassification)).ToArray
+                                             And SafeParseString(g, ColumnNames.RESOURCE_CLASSIFICATION, Nothing, ResourceClassification)).ToArray
 
-                            For Each gradeName As String In GradeNames
-                                Me.SetGrade(gradeName, GetGradeValue(gradeName, gradeFiltered))
+                            For Each gradeName In GradeNames
+                                SetGrade(gradeName, GetGradeValue(gradeName, gradeFiltered))
                             Next
                         Else
                             NullOutGrades()
@@ -456,7 +252,7 @@ Namespace Types
             End If
         End Sub
 
-        Private Shared Function SafeParseString(ByRef dataRow As DataRow, ByVal columnName As String, ByVal defaultWhenNothingOrEmpty As String, ByVal right As String) As Boolean
+        Private Shared Function SafeParseString(ByRef dataRow As DataRow, columnName As String, defaultWhenNothingOrEmpty As String, right As String) As Boolean
             SafeParseString = False
 
             Dim leftValue As String = Nothing
@@ -478,7 +274,7 @@ Namespace Types
             End If
         End Function
 
-        Private Shared Function ParseNullableInt32(ByVal left As Object, ByVal right As Int32?) As Boolean
+        Private Shared Function ParseNullableInt32(left As Object, right As Int32?) As Boolean
             Dim number As Int32
             ParseNullableInt32 = False
             If Int32.TryParse(left.ToString(), number) Then
@@ -495,7 +291,7 @@ Namespace Types
         ''' </summary>
         ''' <param name="gradeName">Name of the grade to obtain the value for</param>
         ''' <param name="gradeFiltered">All relevant rows, pre-filtered but may contain multiple rows..one per grade</param>
-        Private Function GetGradeValue(ByVal gradeName As String, ByVal gradeFiltered As IEnumerable(Of DataRow)) As Double?
+        Private Shared Function GetGradeValue(gradeName As String, gradeFiltered As IEnumerable(Of DataRow)) As Double?
             Dim valueParsed As Double
             Dim returnValue As Double? = Nothing
             Dim row As DataRow
@@ -521,7 +317,7 @@ Namespace Types
         Public Sub CalculateDensity()
             ' Note that density is calculated as Volume / Tonnes (m3/t) it has to be this way so that it aggregates properly
             ' later on, when the data is displayed, the value is inverted to the more traditional units
-            If Me.Tonnes <> 0 Then
+            If Tonnes <> 0 Then
                 Density = Volume / Tonnes
             Else
                 Density = Nothing
@@ -531,16 +327,16 @@ Namespace Types
         ' This will recalculate the density based off the volume and tonnes. The difference beween this and the CalculateDensity function
         ' is that this method will only replace the value if it can calculate something - it will never replace the density with a null
         Public Sub RecalculateDensity()
-            If Not Me.Tonnes Is Nothing AndAlso Not Me.Volume Is Nothing AndAlso Me.Tonnes <> 0 AndAlso Me.Volume <> 0 Then
-                Me.CalculateDensity()
+            If Not Tonnes Is Nothing AndAlso Not Volume Is Nothing AndAlso Tonnes <> 0 AndAlso Volume <> 0 Then
+                CalculateDensity()
             End If
         End Sub
 
-        Public Shared Operator *(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
+        Public Shared Operator *(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
             Return Multiply(left, right)
         End Operator
 
-        Public Shared Function Multiply(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
+        Public Shared Function Multiply(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
             Dim result As New CalculationResultRecord(Nothing)
             If Not left Is Nothing And Not right Is Nothing Then
                 If left.CalendarDate = right.CalendarDate Then
@@ -569,10 +365,16 @@ Namespace Types
                     ' See Calculation.vb Sub Calculate Answer for description of Dodgy Aggregate.
                     result.DodgyAggregateGradeTonnes = result.Tonnes
 
-                    For Each gradeName As String In GradeNames
+                    For Each gradeName In GradeNames
                         result.SetGrade(gradeName, left.GetGrade(gradeName) * right.GetGrade(gradeName))
                     Next
 
+                End If
+                If left.StratNum = right.StratNum Then
+                    result.StratNum = left.StratNum
+                End If
+                If left.Weathering = right.Weathering Then
+                    result.Weathering = left.Weathering
                 End If
             ElseIf Not right Is Nothing Then
                 result = right.Clone()
@@ -583,11 +385,11 @@ Namespace Types
             Return result
         End Function
 
-        Public Shared Operator /(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
+        Public Shared Operator /(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
             Return Divide(left, right)
         End Operator
 
-        Public Shared Function Divide(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
+        Public Shared Function Divide(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
             Dim result As New CalculationResultRecord(Nothing)
             If Not left Is Nothing And Not right Is Nothing Then
                 If left.CalendarDate = right.CalendarDate Then
@@ -624,9 +426,17 @@ Namespace Types
                     ' See Calculation.vb Sub Calculate Answer for description of Dodgy Aggregate.
                     result.DodgyAggregateGradeTonnes = result.Tonnes
 
-                    For Each gradeName As String In GradeNames
+                    For Each gradeName In GradeNames
                         result.SetGrade(gradeName, RatioGrade(left.GetGrade(gradeName), right.GetGrade(gradeName)))
                     Next
+                End If
+
+                If left.StratNum = right.StratNum Then
+                    result.StratNum = left.StratNum
+                End If
+
+                If left.Weathering = right.Weathering Then
+                    result.Weathering = left.Weathering
                 End If
             ElseIf Not right Is Nothing Then
                 result = right.Clone()
@@ -648,13 +458,13 @@ Namespace Types
         ''' <summary>
         ''' Gets the ratio of a grade
         ''' </summary>
-        Public Shared Function RatioGrade(ByVal leftGrade As Double?, ByVal rightGrade As Double?) As Double?
+        Public Shared Function RatioGrade(leftGrade As Double?, rightGrade As Double?) As Double?
             Dim result As Double?
             If Not leftGrade.HasValue Then
                 result = Nothing
             ElseIf Not rightGrade.HasValue Then
                 result = Nothing
-            ElseIf rightGrade.Value = 0 Then
+            ElseIf Math.Abs(rightGrade.Value - 0) < Double.Epsilon Then
                 result = 0
             Else
                 result = leftGrade / rightGrade
@@ -662,12 +472,12 @@ Namespace Types
             Return result
         End Function
 
-        Public Shared Operator +(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
+        Public Shared Operator +(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
             Return Add(left, right)
         End Operator
 
-        Public Shared Function Add(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
-            Dim result As CalculationResultRecord = NewRecord(left, right)
+        Public Shared Function Add(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
+            Dim result = NewRecord(left, right)
             Dim additionTonnes As Double?
             Dim leftTonnes As Double?
             Dim rightTonnes As Double?
@@ -689,9 +499,9 @@ Namespace Types
                     result.DodgyAggregateEnabled = False
                 End If
                 additionTonnes = leftTonnes + rightTonnes
-                If additionTonnes.HasValue AndAlso additionTonnes.Value <> 0 Then
-                    For Each gradeName As String In GradeNames
-                        Dim v As Double? = AssignGradeIfNotNull(((left.GetGrade(gradeName) * leftTonnes) + (right.GetGrade(gradeName) * rightTonnes)) / additionTonnes, left.GetGrade(gradeName), right.GetGrade(gradeName))
+                If additionTonnes.HasValue AndAlso Math.Abs(additionTonnes.Value - 0) > Double.Epsilon Then
+                    For Each gradeName In GradeNames
+                        Dim v = AssignGradeIfNotNull(((left.GetGrade(gradeName) * leftTonnes) + (right.GetGrade(gradeName) * rightTonnes)) / additionTonnes, left.GetGrade(gradeName), right.GetGrade(gradeName))
                         result.SetGrade(gradeName, v)
                     Next
                 End If
@@ -704,12 +514,12 @@ Namespace Types
             Return result
         End Function
 
-        Public Shared Operator -(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
+        Public Shared Operator -(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
             Return Subtract(left, right)
         End Operator
 
-        Public Shared Function Subtract(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
-            Dim result As CalculationResultRecord = NewRecord(left, right)
+        Public Shared Function Subtract(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
+            Dim result = NewRecord(left, right)
             Dim additionTonnes As Double?
             Dim leftTonnes As Double?
             Dim rightTonnes As Double?
@@ -731,9 +541,9 @@ Namespace Types
                     result.DodgyAggregateEnabled = False
                 End If
                 additionTonnes = leftTonnes + rightTonnes
-                If additionTonnes.HasValue AndAlso additionTonnes.Value <> 0 Then
-                    For Each gradeName As String In GradeNames
-                        Dim v As Double? = AssignGradeIfNotNull(((left.GetGrade(gradeName) * leftTonnes) + (right.GetGrade(gradeName) * rightTonnes)) / additionTonnes, left.GetGrade(gradeName), right.GetGrade(gradeName))
+                If additionTonnes.HasValue AndAlso Math.Abs(additionTonnes.Value - 0) > Double.Epsilon Then
+                    For Each gradeName In GradeNames
+                        Dim v = AssignGradeIfNotNull(((left.GetGrade(gradeName) * leftTonnes) + (right.GetGrade(gradeName) * rightTonnes)) / additionTonnes, left.GetGrade(gradeName), right.GetGrade(gradeName))
                         result.SetGrade(gradeName, v)
                     Next
                 End If
@@ -748,8 +558,8 @@ Namespace Types
             Return result
         End Function
 
-        Private Shared Function AssignGradeIfNotNull(ByVal gradeValue As Double?,
-         ByVal leftGradeValue As Double?, ByVal rightGradeValue As Double?) As Double?
+        Private Shared Function AssignGradeIfNotNull(gradeValue As Double?,
+         leftGradeValue As Double?, rightGradeValue As Double?) As Double?
             If gradeValue Is Nothing Then
                 If Not rightGradeValue Is Nothing Then
                     AssignGradeIfNotNull = rightGradeValue
@@ -761,8 +571,8 @@ Namespace Types
             End If
         End Function
 
-        Public Shared Function Difference(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
-            Dim result As CalculationResultRecord = NewRecord(left, right)
+        Public Shared Function Difference(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
+            Dim result = NewRecord(left, right)
             If Not left Is Nothing And Not right Is Nothing Then
                 result.Tonnes = left.Tonnes - right.Tonnes
                 result.Volume = left.Volume - right.Volume
@@ -771,7 +581,7 @@ Namespace Types
                 ' See Calculation.vb Sub Calculate Answer for description of Dodgy Aggregate.
                 result.DodgyAggregateGradeTonnes = result.Tonnes
 
-                For Each gradeName As String In GradeNames
+                For Each gradeName In GradeNames
                     result.SetGrade(gradeName, left.GetGrade(gradeName) - right.GetGrade(gradeName))
                 Next
             ElseIf Not right Is Nothing Then
@@ -783,7 +593,7 @@ Namespace Types
             Return result
         End Function
 
-        Private Shared Function NewRecord(ByVal left As CalculationResultRecord, ByVal right As CalculationResultRecord) As CalculationResultRecord
+        Private Shared Function NewRecord(left As CalculationResultRecord, right As CalculationResultRecord) As CalculationResultRecord
             Dim result As New CalculationResultRecord(Nothing)
             If Not left Is Nothing And Not right Is Nothing Then
                 If left.CalendarDate = right.CalendarDate Then
@@ -807,6 +617,12 @@ Namespace Types
                 If left.ResourceClassification = right.ResourceClassification Then
                     result.ResourceClassification = left.ResourceClassification
                 End If
+                If left.StratNum = right.StratNum Then
+                    result.StratNum = left.StratNum
+                End If
+                If left.Weathering = right.Weathering Then
+                    result.Weathering = left.Weathering
+                End If
             End If
 
             Return result
@@ -818,14 +634,15 @@ Namespace Types
             Clone = Clone(Nothing)
         End Function
 
-        Public Function Clone(ByVal parent As CalculationResult) As CalculationResultRecord
-            Clone = New CalculationResultRecord(parent)
-            Clone.Tonnes = Tonnes
-            Clone.Volume = Volume
-            Clone.DodgyAggregateGradeTonnes = DodgyAggregateGradeTonnes
+        Public Function Clone(calcResultParent As CalculationResult) As CalculationResultRecord
+            Clone = New CalculationResultRecord(calcResultParent) With {
+                .Tonnes = Tonnes,
+                .Volume = Volume,
+                .DodgyAggregateGradeTonnes = DodgyAggregateGradeTonnes
+            }
 
-            For Each gradeName As String In GradeNames
-                Clone.SetGrade(gradeName, Me.GetGrade(gradeName))
+            For Each gradeName In GradeNames
+                Clone.SetGrade(gradeName, GetGrade(gradeName))
             Next
 
             Clone.CalendarDate = CalendarDate
@@ -836,61 +653,62 @@ Namespace Types
             Clone.ProductSize = ProductSize
             Clone.SortKey = SortKey
             Clone.ResourceClassification = ResourceClassification
-
+            Clone.StratNum = StratNum
+            Clone.Weathering = Weathering
         End Function
 
         Public Sub NullOutGrades()
-            For Each gradeName As String In GradeNames
-                Me.SetGrade(gradeName, Nothing)
+            For Each gradeName In GradeNames
+                SetGrade(gradeName, Nothing)
             Next
         End Sub
 
         Public Sub ZeroOutGrades()
-            For Each gradeName As String In GradeNames
-                Me.SetGrade(gradeName, 0.0)
+            For Each gradeName In GradeNames
+                SetGrade(gradeName, 0.0)
             Next
         End Sub
 
         Public Sub ZeroOutNullGrades()
-
-            For Each gradeName As String In GradeNames
-                If Me.GetGrade(gradeName) Is Nothing Then
-                    Me.SetGrade(gradeName, 0.0)
+            For Each gradeName In GradeNames
+                If GetGrade(gradeName) Is Nothing Then
+                    SetGrade(gradeName, 0.0)
                 End If
             Next
-
         End Sub
 
-        Public Function ToDataTable(ByVal normalizedData As Boolean) As DataTable
+        Public Function ToDataTable(normalizedData As Boolean) As DataTable
             Dim table As New DataTable()
-            table.Columns.Add(New DataColumn("CalendarDate", GetType(DateTime), ""))
-            table.Columns.Add(New DataColumn("DateFrom", GetType(DateTime), ""))
-            table.Columns.Add(New DataColumn("DateTo", GetType(DateTime), ""))
-            table.Columns.Add(New DataColumn("LocationId", GetType(Int32), ""))
-            table.Columns.Add(New DataColumn("MaterialTypeId", GetType(Int32), ""))
-            table.Columns.Add(New DataColumn(ColumnNames.PRODUCT_SIZE, GetType(String), ""))
-            table.Columns.Add(New DataColumn("ResourceClassification", GetType(String)))
-            table.Columns.Add(New DataColumn(ColumnNames.SORT_KEY, GetType(String), ""))
+            table.Columns.Add(New DataColumn(ColumnNames.DATE_CAL, GetType(DateTime)))
+            table.Columns.Add(New DataColumn(ColumnNames.DATE_FROM, GetType(DateTime)))
+            table.Columns.Add(New DataColumn(ColumnNames.DATE_TO, GetType(DateTime)))
+            table.Columns.Add(New DataColumn(ColumnNames.LOCATION_ID, GetType(Int32)))
+            table.Columns.Add(New DataColumn(ColumnNames.MATERIAL_TYPE_ID, GetType(Int32)))
+            table.Columns.Add(New DataColumn(ColumnNames.PRODUCT_SIZE, GetType(String)))
+            table.Columns.Add(New DataColumn(ColumnNames.RESOURCE_CLASSIFICATION, GetType(String)))
+            table.Columns.Add(New DataColumn(ColumnNames.SORT_KEY, GetType(String)))
+            table.Columns.Add(New DataColumn(ColumnNames.STRAT_NUM, GetType(String)))
+            table.Columns.Add(New DataColumn(ColumnNames.WEATHERING, GetType(Integer)))
 
             If Not normalizedData Then
-                table.Columns.Add(New DataColumn("Tonnes", GetType(Double), ""))
-                table.Columns.Add(New DataColumn("Volume", GetType(Double), ""))
-                table.Columns.Add(New DataColumn("DodgyAggregateGradeTonnes", GetType(Double), ""))
+                table.Columns.Add(New DataColumn("Tonnes", GetType(Double)))
+                table.Columns.Add(New DataColumn("Volume", GetType(Double)))
+                table.Columns.Add(New DataColumn("DodgyAggregateGradeTonnes", GetType(Double)))
 
-                For Each gradeName As String In GradeNames
-                    table.Columns.Add(New DataColumn(gradeName, GetType(Double), ""))
+                For Each gradeName In GradeNames
+                    table.Columns.Add(New DataColumn(gradeName, GetType(Double)))
                 Next
 
                 table.Rows.Add(AddDenormalizedRow(table))
             Else
-                table.Columns.Add(New DataColumn("Attribute", GetType(String), ""))
-                table.Columns.Add(New DataColumn("AttributeValue", GetType(Double), ""))
+                table.Columns.Add(New DataColumn("Attribute", GetType(String)))
+                table.Columns.Add(New DataColumn("AttributeValue", GetType(Double)))
 
                 table.Rows.Add(AddNormalizedRow("Tonnes", Tonnes, table))
                 table.Rows.Add(AddNormalizedRow("Volume", Volume, table))
                 table.Rows.Add(AddNormalizedRow("DodgyAggregateGradeTonnes", DodgyAggregateGradeTonnes, table))
 
-                For Each gradeName As String In GradeNames
+                For Each gradeName In GradeNames
                     table.Rows.Add(AddNormalizedRow(gradeName, GetGrade(gradeName), table))
                 Next
             End If
@@ -898,37 +716,38 @@ Namespace Types
             Return table
         End Function
 
-        Private Function AddNormalizedRow(ByVal gradeName As String, ByVal gradeValue As Double?,
-         ByVal table As DataTable) As DataRow
-            Dim row As DataRow = AddBaseRow(table)
+        Private Function AddNormalizedRow(gradeName As String, gradeValue As Double?, table As DataTable) As DataRow
+            Dim row = AddBaseRow(table)
             row("Attribute") = gradeName
             row("AttributeValue") = IIf(gradeValue Is Nothing, DBNull.Value, gradeValue)
             Return row
         End Function
 
-        Private Function AddDenormalizedRow(ByVal table As DataTable) As DataRow
-            Dim row As DataRow = AddBaseRow(table)
+        Private Function AddDenormalizedRow(table As DataTable) As DataRow
+            Dim row = AddBaseRow(table)
             row("Tonnes") = IIf(Tonnes Is Nothing, DBNull.Value, Tonnes)
             row("Volume") = IIf(Volume Is Nothing, DBNull.Value, Volume)
             row("DodgyAggregateGradeTonnes") = IIf(DodgyAggregateGradeTonnes Is Nothing, DBNull.Value, DodgyAggregateGradeTonnes)
 
-            For Each gradeName As String In GradeNames
-                row(gradeName) = IIf(Me.GetGrade(gradeName) Is Nothing, DBNull.Value, Me.GetGrade(gradeName))
+            For Each gradeName In GradeNames
+                row(gradeName) = IIf(GetGrade(gradeName) Is Nothing, DBNull.Value, GetGrade(gradeName))
             Next
 
             Return row
         End Function
 
-        Private Function AddBaseRow(ByVal table As DataTable) As DataRow
-            Dim row As DataRow = table.NewRow()
-            row("CalendarDate") = CalendarDate
-            row("DateFrom") = DateFrom
-            row("DateTo") = DateTo
-            row("MaterialTypeId") = IIf(MaterialTypeId Is Nothing, DBNull.Value, MaterialTypeId)
-            row("LocationId") = IIf(LocationId Is Nothing, DBNull.Value, LocationId)
+        Private Function AddBaseRow(table As DataTable) As DataRow
+            Dim row = table.NewRow()
+            row(ColumnNames.DATE_CAL) = CalendarDate
+            row(ColumnNames.DATE_FROM) = DateFrom
+            row(ColumnNames.DATE_TO) = DateTo
+            row(ColumnNames.MATERIAL_TYPE_ID) = IIf(MaterialTypeId Is Nothing, DBNull.Value, MaterialTypeId)
+            row(ColumnNames.LOCATION_ID) = IIf(LocationId Is Nothing, DBNull.Value, LocationId)
             row(ColumnNames.PRODUCT_SIZE) = IIf(ProductSize Is Nothing, DBNull.Value, ProductSize)
-            row("ResourceClassification") = IIf(ResourceClassification Is Nothing, DBNull.Value, ResourceClassification)
+            row(ColumnNames.RESOURCE_CLASSIFICATION) = IIf(ResourceClassification Is Nothing, DBNull.Value, ResourceClassification)
             row(ColumnNames.SORT_KEY) = IIf(SortKey Is Nothing, DBNull.Value, SortKey)
+            row(ColumnNames.STRAT_NUM) = IIf(String.IsNullOrEmpty(StratNum), DBNull.Value, StratNum)
+            row(ColumnNames.WEATHERING) = IIf(Weathering Is Nothing, DBNull.Value, Weathering)
             Return row
         End Function
 
@@ -962,7 +781,9 @@ Namespace Types
                        SortKey = comparisonObj.SortKey And
                        Tonnes.Equals(comparisonObj.Tonnes) And
                        UltraFines.Equals(comparisonObj.UltraFines) And
-                       Volume.Equals(comparisonObj.Volume)
+                       Volume.Equals(comparisonObj.Volume) And
+                       StratNum = comparisonObj.StratNum And
+                       Weathering.Equals(comparisonObj.Weathering)
             End If
         End Function
     End Class

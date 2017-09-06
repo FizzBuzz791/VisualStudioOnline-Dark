@@ -239,11 +239,15 @@ Namespace Types
                 End If
 
                 If Not table Is Nothing Then
-                    table.Merge(result.ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType,
-                        Not reportSession.IncludeProductSizeBreakdown, aggregateToDateBreakdown, breakdownFactorByMaterialType))
+                    table.Merge(result.ToDataTable(includeParents, normalizedData, maintainLocations, 
+                                                   breakdownMeasureByMaterialType, Not reportSession.IncludeProductSizeBreakdown, 
+                                                   aggregateToDateBreakdown, breakdownFactorByMaterialType, 
+                                                   reportSession.IncludeStratigraphy, reportSession.IncludeWeathering))
                 Else
-                    table = result.ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType,
-                        Not reportSession.IncludeProductSizeBreakdown, aggregateToDateBreakdown, breakdownFactorByMaterialType)
+                    table = result.ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, 
+                                               Not reportSession.IncludeProductSizeBreakdown, aggregateToDateBreakdown, 
+                                               breakdownFactorByMaterialType, reportSession.IncludeStratigraphy, 
+                                               reportSession.IncludeWeathering)
                 End If
             Next
 
@@ -306,10 +310,16 @@ Namespace Types
                 End If
 
                 If Not reportSession.DateBreakdown Is Nothing Then
-                    partialResult = result.ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, _
-                        Not reportSession.IncludeProductSizeBreakdown, reportSession.DateBreakdown, False)
+                    partialResult = result.ToDataTable(includeParents, normalizedData, maintainLocations, 
+                                                       breakdownMeasureByMaterialType, 
+                                                       Not reportSession.IncludeProductSizeBreakdown, 
+                                                       reportSession.DateBreakdown, False, reportSession.IncludeStratigraphy, 
+                                                       reportSession.IncludeWeathering)
                 Else
-                    partialResult = result.ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, Not reportSession.IncludeProductSizeBreakdown)
+                    partialResult = result.ToDataTable(includeParents, normalizedData, maintainLocations, 
+                                                       breakdownMeasureByMaterialType, 
+                                                       Not reportSession.IncludeProductSizeBreakdown, 
+                                                       reportSession.IncludeStratigraphy, reportSession.IncludeWeathering)
                 End If
 
                 If Not table Is Nothing Then

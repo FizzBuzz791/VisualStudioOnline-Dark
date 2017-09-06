@@ -5,5 +5,7 @@
         MaterialType
         Location
         ProductSize
+        Stratigraphy
+        Weathering
     End Enum
 End NameSpace

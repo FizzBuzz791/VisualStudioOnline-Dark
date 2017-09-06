@@ -5,7 +5,6 @@ Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
 Imports Snowden.Reconcilor.Bhpbio.Report.Enums
 Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
-Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Types
     ''' <summary>
@@ -232,7 +231,8 @@ Namespace Types
         End Function
 
         Public Function AggregateRecords(Optional onMaterialTypeId As Boolean = False, Optional onLocationId As Boolean = False,
-                                         Optional onProductSize As Boolean = False,
+                                         Optional onProductSize As Boolean = False, Optional onStratigraphy As Boolean = False,
+                                         Optional onWeathering As Boolean = False,
                                          Optional ByVal useSpecificH2OGradeWeighting As Boolean = True) _
                                          As IEnumerable(Of CalculationResultRecord)
 
@@ -251,6 +251,14 @@ Namespace Types
 
             If onProductSize Then
                 groupByList.Add(GroupingColumn.ProductSize)
+            End If
+
+            If onStratigraphy Then
+                groupByList.Add(GroupingColumn.Stratigraphy)
+            End If
+
+            If onWeathering Then
+                groupByList.Add(GroupingColumn.Weathering)
             End If
 
             Return AggregateRecords(groupByList, Nothing, useSpecificH2OGradeWeighting)
@@ -279,13 +287,17 @@ Namespace Types
                 Key .ProductSize = t.ProductSize,
                 Key .CalendarDate = GroupedOnDateTime(groupByList.Contains(GroupingColumn.CalendarDate), t.CalendarDate, forcedReportTimeBreakdown),
                 Key .MaterialTypeId = GroupedOnInt(groupByList.Contains(GroupingColumn.MaterialType), t.MaterialTypeId),
-                Key .LocationId = GroupedOnInt(groupByList.Contains(GroupingColumn.Location), t.LocationId)
+                Key .LocationId = GroupedOnInt(groupByList.Contains(GroupingColumn.Location), t.LocationId),
+                Key .StratNum = GroupedOnString(groupByList.Contains(GroupingColumn.Stratigraphy), t.StratNum),
+                Key .Weathering = GroupedOnInt(groupByList.Contains(GroupingColumn.Weathering), t.Weathering)
             }).OrderBy(Function(g) g.Key.CalendarDate).Select(Function(g) New With {
                 .ResourceClassification = g.Key.Resourceclassification,
                 .ProductSize = g.Key.ProductSize,
                 .CalendarDate = g.Key.CalendarDate,
                 .MaterialType = g.Key.MaterialTypeId,
                 .LocationId = g.Key.LocationId,
+                .StratNum = g.Key.StratNum,
+                .Weathering = g.Key.Weathering,
                 .Tonnes = g.Sum(Function(t) t.Tonnes),
                 .Volume = g.Sum(Function(t) t.Volume),
                 .DodgyAggregateGradeTonnes = g.Sum(Function(t) t.DodgyAggregateGradeTonnes),
@@ -335,7 +347,9 @@ Namespace Types
                 .UltraFines = MassWeight(t.Ultrafines, t.DodgyAggregateGradeTonnes, t.UltrafinesCnt),
                 .H2O = MassWeight(t.H2O, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OCnt),
                 .H2ODropped = MassWeight(t.H2ODropped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2ODroppedCnt),
-                .H2OShipped = MassWeight(t.H2OShipped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OShippedCnt)
+                .H2OShipped = MassWeight(t.H2OShipped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OShippedCnt),
+                .StratNum = t.StratNum,
+                .Weathering = t.Weathering
             })
 
             If groupByList.Contains(GroupingColumn.ProductSize) = False Then
@@ -346,7 +360,8 @@ Namespace Types
         End Function
 
         Public Function AggregateFilterRecords(onMaterialTypeId As Boolean, onLocationId As Boolean, dateFilter As DateTime, 
-                                               locationIdFilter As Int32?, aggregateToDateBreakdown As ReportBreakdown?) _
+                                               locationIdFilter As Int32?, aggregateToDateBreakdown As ReportBreakdown?, 
+                                               onStratigraphy As Boolean, onWeathering As Boolean) _
                                                As IEnumerable(Of CalculationResultRecord)
 
             Dim groupByList = New HashSet(Of GroupingColumn) From {
@@ -361,6 +376,14 @@ Namespace Types
 
             If onLocationId Then
                 groupByList.Add(GroupingColumn.Location)
+            End If
+
+            If onStratigraphy Then
+                groupByList.Add(GroupingColumn.Stratigraphy)
+            End If
+
+            If onWeathering Then
+                groupByList.Add(GroupingColumn.Weathering)
             End If
 
             Dim aggregatedRecords = AggregateRecords(groupByList, aggregateToDateBreakdown)
@@ -1301,14 +1324,17 @@ Namespace Types
         End Function
 
         Public Function ToDataTable(includeParents As Boolean, normalizedData As Boolean, maintainLocations As Boolean, 
-                                    breakdownMeasureByMaterialType As Boolean, excludeProductSizeBreakdown As Boolean) As DataTable
+                                    breakdownMeasureByMaterialType As Boolean, excludeProductSizeBreakdown As Boolean,
+                                    breakdownByStratigraphy As Boolean, breakdownByWeathering As Boolean) As DataTable
 
-            Return ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, excludeProductSizeBreakdown, Nothing, False)
+            Return ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, 
+                               excludeProductSizeBreakdown, Nothing, False, breakdownByStratigraphy, breakdownByWeathering)
         End Function
 
         Public Function ToDataTable(includeParents As Boolean, normalizedData As Boolean, maintainLocations As Boolean, 
                                     breakdownMeasureByMaterialType As Boolean, excludeProductSizeBreakdown As Boolean, 
-                                    aggregateToDateBreakdown As ReportBreakdown?, breakdownFactorByMaterialType As Boolean) As DataTable
+                                    aggregateToDateBreakdown As ReportBreakdown?, breakdownFactorByMaterialType As Boolean, 
+                                    breakdownByStratigraphy As Boolean, breakdownByWeathering As Boolean) As DataTable
 
             'TODO: Use ByVal parameters As Types.DataRequest to get non parsed dates. 
             Dim table = GetDataTableStub()
@@ -1337,6 +1363,14 @@ Namespace Types
                 groupByList.Add(GroupingColumn.Location)
             End If
 
+            If breakdownByStratigraphy Then
+                groupByList.Add(GroupingColumn.Stratigraphy)
+            End If
+
+            If breakdownByWeathering Then
+                groupByList.Add(GroupingColumn.Weathering)
+            End If
+
             Dim dateLocationGroup = From dl In AggregateRecords(groupByList, aggregateToDateBreakdown)
                                     Group By calDate = dl.CalendarDate, location = dl.LocationId Into Group
                                     Order By calDate, location
@@ -1351,7 +1385,10 @@ Namespace Types
                         ' it is assumed that the record with MaterialType = null is the aggregated factor record: see the Divide method
                         aggregatedRecords = result.Result.Where(Function(t) t.MaterialTypeId Is Nothing).ToArray()
                     Else
-                        aggregatedRecords = result.Result.AggregateFilterRecords(False, maintainLocations, calendarDate, locationId, aggregateToDateBreakdown).ToArray()
+                        aggregatedRecords = result.Result.AggregateFilterRecords(False, maintainLocations, calendarDate, 
+                                                                                 locationId, aggregateToDateBreakdown, 
+                                                                                 breakdownByStratigraphy, 
+                                                                                 breakdownByWeathering).ToArray()
                     End If
 
                     If aggregatedRecords.Count = 0 Then
@@ -1361,7 +1398,9 @@ Namespace Types
                     End If
 
                     If breakdownMeasureByMaterialType Then
-                        materialRecords = result.Result.AggregateFilterRecords(True, maintainLocations, calendarDate, locationId, aggregateToDateBreakdown).ToArray()
+                        materialRecords = result.Result.AggregateFilterRecords(True, maintainLocations, calendarDate, locationId,
+                                                                               aggregateToDateBreakdown, breakdownByStratigraphy,
+                                                                               breakdownByWeathering).ToArray()
                         materialRecords = materialRecords.Where(Function(t) Not t.MaterialTypeId Is Nothing).ToArray()
                     End If
 

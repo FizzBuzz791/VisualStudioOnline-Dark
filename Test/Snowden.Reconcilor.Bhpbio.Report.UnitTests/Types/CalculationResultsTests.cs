@@ -73,6 +73,40 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
             Assert.That(calculationResultRecords.First(), Is.EqualTo(expectedAggregatedRecords.First()));
         }
 
+        [Test]
+        public void AggregatesResultsCorrectlyForStratigraphyGrouping()
+        {
+            // Arrange
+            IEnumerable<CalculationResultRecord> expectedAggregatedRecords =
+                GenerateExpectedResultForGrouping(t => t.StratNum).ToList();
+
+            // Act
+            IEnumerable<CalculationResultRecord> result = _sut.AggregateRecords(false, false, false, true);
+            IEnumerable<CalculationResultRecord> calculationResultRecords =
+                result as IList<CalculationResultRecord> ?? result.ToList();
+
+            // Assert
+            Assert.That(calculationResultRecords.Count(), Is.EqualTo(expectedAggregatedRecords.Count()));
+            Assert.That(calculationResultRecords.First(), Is.EqualTo(expectedAggregatedRecords.First()));
+        }
+
+        [Test]
+        public void AggregatesResultsCorrectlyForWeatheringGrouping()
+        {
+            // Arrange
+            IEnumerable<CalculationResultRecord> expectedAggregatedRecords =
+                GenerateExpectedResultForGrouping(t => t.Weathering).ToList();
+
+            // Act
+            IEnumerable<CalculationResultRecord> result = _sut.AggregateRecords(false, false, false, false, true);
+            IEnumerable<CalculationResultRecord> calculationResultRecords =
+                result as IList<CalculationResultRecord> ?? result.ToList();
+
+            // Assert
+            Assert.That(calculationResultRecords.Count(), Is.EqualTo(expectedAggregatedRecords.Count()));
+            Assert.That(calculationResultRecords.First(), Is.EqualTo(expectedAggregatedRecords.First()));
+        }
+
         [TestCase(CalculationType.Addition)]
         [TestCase(CalculationType.Subtraction)]
         [TestCase(CalculationType.Division)]
@@ -146,36 +180,44 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
             DateTime dateFromTwo = new DateTime(2017, 2, 2);
             DateTime dateToOne = new DateTime(2017, 3, 3);
             DateTime dateToTwo = new DateTime(2017, 4, 4);
-            const double tonnesOne = 100;
-            const double tonnesTwo = 2;
-            const double volumeOne = 3;
-            const double volumeTwo = 4;
-            const double dodgyAggregateGradeTonnesOne = 5;
-            const double dodgyAggregateGradeTonnesTwo = 6;
-            const bool dodgyAggregateEnabledOne = true;
-            const bool dodgyAggregateEnabledTwo = false;
-            const double feOne = 7;
-            const double feTwo = 8;
-            const double pOne = 9;
-            const double pTwo = 10;
-            const double sio2One = 11;
-            const double sio2Two = 12;
-            const double al2O3One = 13;
-            const double al2O3Two = 14;
-            const double loiOne = 15;
-            const double loiTwo = 16;
-            const double densityOne = 17;
-            const double densityTwo = 18;
-            const double ultrafinesOne = 19;
-            const double ultrafinesTwo = 20;
-            const double h2OOne = 21;
-            const double h2OTwo = 22;
-            const double h2ODroppedOne = 23;
-            const double h2ODroppedTwo = 24;
-            const double h2OShippedOne = 25;
-            const double h2OShippedTwo = 26;
-            const int locationOne = 27;
-            const int locationTwo = 28;
+            const double TONNES_ONE = 100;
+            const double TONNES_TWO = 2;
+            const double VOLUME_ONE = 3;
+            const double VOLUME_TWO = 4;
+            const double DODGY_AGGREGATE_GRADE_TONNES_ONE = 5;
+            const double DODGY_AGGREGATE_GRADE_TONNES_TWO = 6;
+            const bool DODGY_AGGREGATE_ENABLED_ONE = true;
+            const bool DODGY_AGGREGATE_ENABLED_TWO = false;
+            const double FE_ONE = 7;
+            const double FE_TWO = 8;
+            const double P_ONE = 9;
+            const double P_TWO = 10;
+            const double SIO2_ONE = 11;
+            const double SIO2_TWO = 12;
+            // ReSharper disable InconsistentNaming
+            const double AL2O3_ONE = 13;
+            const double AL2O3_TWO = 14;
+            // ReSharper restore InconsistentNaming
+            const double LOI_ONE = 15;
+            const double LOI_TWO = 16;
+            const double DENSITY_ONE = 17;
+            const double DENSITY_TWO = 18;
+            const double ULTRAFINES_ONE = 19;
+            const double ULTRAFINES_TWO = 20;
+            // ReSharper disable InconsistentNaming
+            const double H2O_ONE = 21;
+            const double H2O_TWO = 22;
+            const double H2O_DROPPED_ONE = 23;
+            const double H2O_DROPPED_TWO = 24;
+            const double H2O_SHIPPED_ONE = 25;
+            const double H2O_SHIPPED_TWO = 26;
+            // ReSharper restore InconsistentNaming
+            const int LOCATION_ONE = 27;
+            const int LOCATION_TWO = 28;
+            const string STRATNUM_ONE = "1234";
+            const string STRATNUM_TWO = "5678";
+            const int WEATHERING_ONE = 29;
+            const int WEATHERING_TWO = 30;
 
             _sut.Add(new CalculationResultRecord
             {
@@ -184,21 +226,23 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                 DateTo = dateToOne,
                 ResourceClassification = "Unclass",
                 ProductSize = CalculationConstants.PRODUCT_SIZE_TOTAL,
-                Tonnes = tonnesOne,
-                Volume = volumeOne,
-                DodgyAggregateGradeTonnes = dodgyAggregateGradeTonnesOne,
-                DodgyAggregateEnabled = dodgyAggregateEnabledOne,
-                Fe = feOne,
-                P = pOne,
-                SiO2 = sio2One,
-                Al2O3 = al2O3One,
-                Loi = loiOne,
-                Density = densityOne,
-                UltraFines = ultrafinesOne,
-                H2O = h2OOne,
-                H2ODropped = h2ODroppedOne,
-                H2OShipped = h2OShippedOne,
-                LocationId = locationOne
+                Tonnes = TONNES_ONE,
+                Volume = VOLUME_ONE,
+                DodgyAggregateGradeTonnes = DODGY_AGGREGATE_GRADE_TONNES_ONE,
+                DodgyAggregateEnabled = DODGY_AGGREGATE_ENABLED_ONE,
+                Fe = FE_ONE,
+                P = P_ONE,
+                SiO2 = SIO2_ONE,
+                Al2O3 = AL2O3_ONE,
+                Loi = LOI_ONE,
+                Density = DENSITY_ONE,
+                UltraFines = ULTRAFINES_ONE,
+                H2O = H2O_ONE,
+                H2ODropped = H2O_DROPPED_ONE,
+                H2OShipped = H2O_SHIPPED_ONE,
+                LocationId = LOCATION_ONE,
+                StratNum = STRATNUM_ONE,
+                Weathering = WEATHERING_ONE
             });
             _sut.Add(new CalculationResultRecord
             {
@@ -207,21 +251,23 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                 DateTo = dateToTwo,
                 ResourceClassification = "Unclass",
                 ProductSize = CalculationConstants.PRODUCT_SIZE_TOTAL,
-                Tonnes = tonnesTwo,
-                Volume = volumeTwo,
-                DodgyAggregateGradeTonnes = dodgyAggregateGradeTonnesTwo,
-                DodgyAggregateEnabled = dodgyAggregateEnabledTwo,
-                Fe = feTwo,
-                P = pTwo,
-                SiO2 = sio2Two,
-                Al2O3 = al2O3Two,
-                Loi = loiTwo,
-                Density = densityTwo,
-                UltraFines = ultrafinesTwo,
-                H2O = h2OTwo,
-                H2ODropped = h2ODroppedTwo,
-                H2OShipped = h2OShippedTwo,
-                LocationId = locationTwo
+                Tonnes = TONNES_TWO,
+                Volume = VOLUME_TWO,
+                DodgyAggregateGradeTonnes = DODGY_AGGREGATE_GRADE_TONNES_TWO,
+                DodgyAggregateEnabled = DODGY_AGGREGATE_ENABLED_TWO,
+                Fe = FE_TWO,
+                P = P_TWO,
+                SiO2 = SIO2_TWO,
+                Al2O3 = AL2O3_TWO,
+                Loi = LOI_TWO,
+                Density = DENSITY_TWO,
+                UltraFines = ULTRAFINES_TWO,
+                H2O = H2O_TWO,
+                H2ODropped = H2O_DROPPED_TWO,
+                H2OShipped = H2O_SHIPPED_TWO,
+                LocationId = LOCATION_TWO,
+                StratNum = STRATNUM_TWO,
+                Weathering = WEATHERING_TWO
             });
         }
 
@@ -237,6 +283,8 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                     CalendarDate = grouping.Key.CalendarDate,
                     MaterialTypeId = propInfo.Name == nameof(CalculationResultRecord.MaterialTypeId) ? (int?)(object)grouping.Key.compiled(grouping.First()) : null,
                     LocationId = propInfo.Name == nameof(CalculationResultRecord.LocationId) ? (int?)(object)grouping.Key.compiled(grouping.First()) : null,
+                    StratNum = propInfo.Name == nameof(CalculationResultRecord.StratNum) ? (string)(object)grouping.Key.compiled(grouping.First()) : null,
+                    Weathering = propInfo.Name == nameof(CalculationResultRecord.Weathering) ? (int?)(object)grouping.Key.compiled(grouping.First()) : null,
                     DateFrom = grouping.Min(t => t.DateFrom),
                     DateTo = grouping.Max(t => t.DateTo),
                     ResourceClassification = grouping.First().ResourceClassification,
