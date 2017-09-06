@@ -7,7 +7,7 @@ Public Module IntegrationTestsHelper
     Public Function GetConnectionString(ByVal databaseConfigurationName As String, ByVal databaseUserName As String) As String
 
         ' Read the product configuration based on the file path in the configuration file
-        Dim productConfiguration As New pc.ConfigurationManager("../../../../ProductConfiguration.xml")
+        Dim productConfiguration As New pc.ConfigurationManager("../../../ProductConfiguration.xml")
         ' open the configuration
         productConfiguration.Open()
 

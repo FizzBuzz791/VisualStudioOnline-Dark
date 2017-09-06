@@ -1,4 +1,6 @@
-﻿Namespace Data
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
+
+Namespace Data
     Public NotInheritable Class ResourceClassifcation
         Public Shared Property ResourceClassificationFields() As String() = New String() {
                 "ResourceClassification1",

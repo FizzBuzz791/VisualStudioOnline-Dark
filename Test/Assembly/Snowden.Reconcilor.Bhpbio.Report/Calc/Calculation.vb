@@ -1,4 +1,5 @@
-﻿Imports Snowden.Reconcilor.Bhpbio.Report.Types
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.Enums
+Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 Namespace Calc
 
@@ -9,7 +10,7 @@ Namespace Calc
 
 #Region "Properties"
         Private _session As Types.ReportSession
-        Private _result As New CalculationResult()
+        Private _result As New CalculationResult(CalculationResultType.Tonnes)
         Private _calculations As New ObjectModel.Collection(Of CalculationOperation)
         Private _disposed As Boolean
         Private _canLoadHistoricData As Boolean
@@ -181,7 +182,7 @@ Namespace Calc
                 result = Types.CalculationResult.ToCalculationResult(cache.RetrieveData(),
                  Session.RequestParameter.StartDate, Session.RequestParameter.EndDate, Session.RequestParameter.DateBreakdown)
             Catch ex As Exception
-                result = New CalculationResult()
+                result = New CalculationResult(CalculationResultType.Tonnes)
                 result.InError = True
                 result.ErrorMessage = ex.Message
             End Try
@@ -229,7 +230,7 @@ Namespace Calc
                 ProcessTags()
             Catch ex As Exception
                 If Result Is Nothing Then
-                    _result = New CalculationResult()
+                    _result = New CalculationResult(CalculationResultType.Tonnes)
                 End If
                 Result.InError = True
                 Result.ErrorMessage = ex.Message
@@ -280,13 +281,11 @@ Namespace Calc
                         End If
                     Next
                 ElseIf operation.CalcStep = CalculationStep.Addition Then
-                    _result = CalculationResult.Addition(Result, operation.Calculation)
+                    _result = CalculationResult.PerformCalculation(Result, operation.Calculation, CalculationType.Addition)
                 ElseIf operation.CalcStep = CalculationStep.Subtract Then
-                    _result = CalculationResult.Subtract(Result, operation.Calculation)
-                ElseIf operation.CalcStep = CalculationStep.Divide Then
-                    _result = CalculationResult.Divide(Result, operation.Calculation, BreakdownFactorByMaterialType, CalcId)
-                ElseIf operation.CalcStep = CalculationStep.Ratio Then
-                    _result = CalculationResult.Divide(Result, operation.Calculation, BreakdownFactorByMaterialType, CalcId)
+                    _result = CalculationResult.PerformCalculation(Result, operation.Calculation, CalculationType.Subtraction)
+                ElseIf operation.CalcStep = CalculationStep.Divide Or operation.CalcStep = CalculationStep.Ratio Then
+                    _result = CalculationResult.PerformCalculation(Result, operation.Calculation, CalculationType.Division, BreakdownFactorByMaterialType, CalcId)
                 ElseIf operation.CalcStep = CalculationStep.AggregateDateLocation Then
                     _result.AggregateByDateLocation()
                 ElseIf operation.CalcStep = CalculationStep.BeginDodgyTonnesAggregation Then

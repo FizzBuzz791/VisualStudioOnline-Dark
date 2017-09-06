@@ -1,4 +1,5 @@
-﻿Imports Snowden.Reconcilor.Bhpbio.Report.Types
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.Enums
+Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 Namespace Calc
 
@@ -83,9 +84,9 @@ Namespace Calc
 
             SetPresentation()
 
-            difference = CalculationResult.Difference(oreForRailResult, miningModelOreForRailEquivalentResult)
+            difference = CalculationResult.PerformCalculation(oreForRailResult, miningModelOreForRailEquivalentResult, CalculationType.Difference)
 
-            For Each differenceDate In difference.AggregateRecords(True, False, False, False)
+            For Each differenceDate In difference.AggregateRecords(onMaterialTypeId := False, onLocationId := False, onProductSize := False)
                 Result.Tags.Add(New CalculationResultTag("TonnesDifference", differenceDate.CalendarDate, GetType(Double), ZeroIfNull(differenceDate.Tonnes)))
 
                 For Each gradeName As String In CalculationResultRecord.GradeNames

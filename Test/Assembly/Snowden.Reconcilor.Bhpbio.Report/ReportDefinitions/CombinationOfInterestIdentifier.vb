@@ -1,4 +1,6 @@
 ﻿Imports Snowden.Reconcilor.Bhpbio.Report
+Imports Snowden.Reconcilor.Bhpbio.Report.Constants
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
@@ -37,7 +39,7 @@ Public Class CombinationOfInterestIdentifier
         If (dateBreakdown = ReportBreakdown.Monthly) Then
             ' monthly is the only breakdown that can possibly have outliers... for other breakdowns there is no need to attempt a lookup
 
-            Dim outlierDataTable = _session.DalApproval.GetBhpbioOutliersForLocation(Nothing, periodStart, endDate, locationId, CalculationResult.ProductSizeTotal, Nothing, 0D, includeDirectSubLocations:=False, includeAllSubLocations:=False, excludeTotalMaterialDuplicates:=False, includeAllPoints:=False)
+            Dim outlierDataTable = _session.DalApproval.GetBhpbioOutliersForLocation(Nothing, periodStart, endDate, locationId, CalculationConstants.PRODUCT_SIZE_TOTAL, Nothing, 0D, includeDirectSubLocations:=False, includeAllSubLocations:=False, excludeTotalMaterialDuplicates:=False, includeAllPoints:=False)
 
             If (Not outlierDataTable Is Nothing) Then
 
@@ -98,7 +100,7 @@ Public Class CombinationOfInterestIdentifier
         F1F2F3ReportEngine.RecalculateF1F2F3Factors(table)
 
         ' find the table row that equates to this factor
-        Dim factorRow = table.Select(String.Format("CalcId = '{0}' And ProductSize = '{1}' And MaterialTypeId IS NULL", factorCalculationId, CalculationResult.ProductSizeTotal)).FirstOrDefault()
+        Dim factorRow = table.Select(String.Format("CalcId = '{0}' And ProductSize = '{1}' And MaterialTypeId IS NULL", factorCalculationId, CalculationConstants.PRODUCT_SIZE_TOTAL)).FirstOrDefault()
 
         If (Not (factorRow Is Nothing)) Then
 
@@ -178,7 +180,7 @@ Public Class CombinationOfInterestIdentifier
         ' iterate through each analyte
         For Each analyte In analyteList
             ' get the contributing locations order by the absolute factor error contribution percent
-            Dim contributingRows = data.Select(String.Format("CalcId = '{0}' And LocationId <> {1} And ProductSize = '{2}' AND MaterialTypeId IS NULL AND Attribute = '{3}' AND NOT FactorErrorContributionPct IS NULL AND NOT LocationId IS NULL", factorCalculationId, locationId, CalculationResult.ProductSizeTotal, analyte)).ToList()
+            Dim contributingRows = data.Select(String.Format("CalcId = '{0}' And LocationId <> {1} And ProductSize = '{2}' AND MaterialTypeId IS NULL AND Attribute = '{3}' AND NOT FactorErrorContributionPct IS NULL AND NOT LocationId IS NULL", factorCalculationId, locationId, CalculationConstants.PRODUCT_SIZE_TOTAL, analyte)).ToList()
 
             Dim contributorCount As Integer = 0
 

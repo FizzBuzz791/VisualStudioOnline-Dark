@@ -10,6 +10,7 @@ Imports System.Web.UI.WebControls
 Imports System.Text
 Imports Snowden.Common.Web.BaseHtmlControls.WebpageControls
 Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 Imports Location = Snowden.Reconcilor.Bhpbio.Report.Data.Location
 Imports ReportingServicesReport2005 = Snowden.Reconcilor.Core.WebDevelopment.Reports.ReportingServicesReport2005
 Imports Snowden.Reconcilor.Bhpbio.Website.Extensibility
@@ -1356,7 +1357,7 @@ Namespace Reports
                 ' we need to treat undersize and oversize as a special case and get the attribute_id through the
                 ' report engine. This will have to be refactored later on
                 If attributeId <= -100 Then
-                    attributeId = Convert.ToInt16(Bhpbio.Report.F1F2F3ReportEngine.GetAttributeId(value.Value))
+                    attributeId = Convert.ToInt16(F1F2F3ReportEngine.GetAttributeId(value.Value))
                 End If
 
                 Dim includeAttribute As Boolean = Not _attributesToExcludeUnlessExplicitlyAdded.Contains(value.Value)

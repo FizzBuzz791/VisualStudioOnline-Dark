@@ -6,7 +6,7 @@ Imports System.Web.UI
 Imports System.Web.UI.HtmlControls
 Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
 Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.ReconcilorControls.Inputs
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
 Imports System.Data.SqlClient
 
 Namespace Utilities

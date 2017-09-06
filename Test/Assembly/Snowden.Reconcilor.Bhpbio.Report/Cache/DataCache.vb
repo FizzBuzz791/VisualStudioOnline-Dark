@@ -3,6 +3,9 @@ Imports Snowden.Common.Database.DataAccessBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 Imports System.ComponentModel
 Imports System.Threading
+Imports Snowden.Reconcilor.Bhpbio.Report.Constants
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Cache
     ''' <summary>
@@ -281,15 +284,15 @@ Namespace Cache
         End Sub
 
         Private Sub ResetLocationIds(ByRef table As DataTable, locationId As Integer, overWriteNull As Boolean)
-            If (table.Columns.Contains(CalculationResultRecord.ColumnNameLocationId)) Then
+            If (table.Columns.Contains(ColumnNames.PARENT_LOCATION_ID)) Then
                 ' replace any Location Id values that represent the hub itself, to the upper WAIO level.. this allows later aggregation
                 For Each dr As DataRow In table.Rows
-                    Dim rowLocationId = dr(CalculationResultRecord.ColumnNameLocationId)
+                    Dim rowLocationId = dr(ColumnNames.PARENT_LOCATION_ID)
 
                     If overWriteNull Then
-                        dr(CalculationResultRecord.ColumnNameLocationId) = locationId
-                    ElseIf Not overWriteNull And dr.HasValue(CalculationResultRecord.ColumnNameLocationId) Then
-                        dr(CalculationResultRecord.ColumnNameLocationId) = locationId
+                        dr(ColumnNames.PARENT_LOCATION_ID) = locationId
+                    ElseIf Not overWriteNull And dr.HasValue(ColumnNames.PARENT_LOCATION_ID) Then
+                        dr(ColumnNames.PARENT_LOCATION_ID) = locationId
                     End If
 
                 Next

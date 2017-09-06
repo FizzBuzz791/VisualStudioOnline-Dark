@@ -9,7 +9,7 @@ Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls
 ' VS2015 says these are not needed, but I'm pretty sure they are... I think it doesn't
 ' know the difference between a namespace and module import
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
 
 Namespace Digblocks
     Public Class DigblockDetails

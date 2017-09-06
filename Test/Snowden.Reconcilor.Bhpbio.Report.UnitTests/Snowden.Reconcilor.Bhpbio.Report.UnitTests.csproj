@@ -56,10 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mocks\ReporterMock.cs" />
+    <Compile Include="ReportDefinitions\F1F2F3ReportEngineTests.cs" />
     <Compile Include="ReportHelpers\HaulageReporterTests.cs" />
     <Compile Include="ReportHelpers\ReporterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportHelpers\SampleStationReporterTests.cs" />
+    <Compile Include="Types\CalculationResultsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

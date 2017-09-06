@@ -3,7 +3,7 @@ Imports ReconcilorControls = Snowden.Reconcilor.Core.WebDevelopment.ReconcilorCo
 Imports System.Drawing
 Imports Snowden.Common.Database.DataAccessBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
 
 Namespace ReportDefinitions
 

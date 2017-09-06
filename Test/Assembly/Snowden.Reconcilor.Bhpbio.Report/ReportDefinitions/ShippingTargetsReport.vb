@@ -8,6 +8,7 @@ Imports System.Data
 ' these modules add LINQ methods to the datatable + datarow
 Imports System.Data.DataTableExtensions
 Imports System.Data.DataRowExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 
 Namespace ReportDefinitions
 

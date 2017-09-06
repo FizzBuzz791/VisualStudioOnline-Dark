@@ -11,7 +11,9 @@ Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
 Imports Snowden.Consulting.DataSeries.DataAccess
 Imports Snowden.Consulting.DataSeries.DataAccess.DataTypes
 Imports Snowden.Reconcilor.Bhpbio.Report.Calc
+Imports Snowden.Reconcilor.Bhpbio.Report.Constants
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Website.Extensibility
 
 Namespace Approval
@@ -328,24 +330,24 @@ Namespace Approval
 
                 ' Reposition lump and fines breakdowns
                 ' but only do this if the TOTAL product size has been seen
-                If productSizesSeen.Contains(CalculationResult.ProductSizeTotal) Then
+                If productSizesSeen.Contains(CalculationConstants.PRODUCT_SIZE_TOTAL) Then
                     For Each productSizeToProcess As String In productSizesSeen
                         For Each rootCalcIdToProcess As String In rootCalcIdsSeen
                             For Each locationIdToProcess As String In locationIdsSeen
 
-                                If Not String.IsNullOrEmpty(productSizeToProcess) And Not productSizeToProcess = CalculationResult.ProductSizeTotal Then
+                                If Not String.IsNullOrEmpty(productSizeToProcess) And Not productSizeToProcess = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                                     Dim tempTableForMove As DataTable = presentationTable.Clone
 
                                     ' iterate through the set.. for all rows matching this criteria.. remove them
                                     For i = presentationTable.Rows.Count - 1 To 0 Step -1
                                         row = presentationTable.Rows(i)
 
-                                        If (row(CalculationResultRecord.ColumnNameProductSize).ToString = productSizeToProcess And
-                                            row(CalculationResultRecord.ColumnNameRootCalcId).ToString = rootCalcIdToProcess And
+                                        If (row(ColumnNames.PRODUCT_SIZE).ToString = productSizeToProcess And
+                                            row(ColumnNames.ROOT_CALC_ID).ToString = rootCalcIdToProcess And
                                             row("LocationId").ToString = locationIdToProcess) Then
 
                                             ' increment the calculation depth of the row
-                                            row(CalculationResultRecord.ColumnNameCalculationDepth) = Convert.ToInt32(row("CalculationDepth")) + 1
+                                            row(ColumnNames.CALCULATION_DEPTH) = Convert.ToInt32(row("CalculationDepth")) + 1
 
                                             ' copy the row to the temporary table for the later reinsertion at a different position
                                             Dim copiedRow As DataRow = tempTableForMove.NewRow()
@@ -362,8 +364,8 @@ Namespace Approval
                                     ' Find the insert position.. and reinsert the rows
                                     For i = 0 To presentationTable.Rows.Count - 1 Step 1
                                         row = presentationTable.Rows(i)
-                                        If (row(CalculationResultRecord.ColumnNameProductSize).ToString = CalculationResult.ProductSizeTotal And
-                                            row(CalculationResultRecord.ColumnNameRootCalcId).ToString = rootCalcIdToProcess And
+                                        If (row(ColumnNames.PRODUCT_SIZE).ToString = CalculationConstants.PRODUCT_SIZE_TOTAL And
+                                            row(ColumnNames.ROOT_CALC_ID).ToString = rootCalcIdToProcess And
                                             row("LocationId").ToString = locationIdToProcess) Then
 
                                             ' This is the row after which the rows should be inserted
@@ -404,10 +406,10 @@ Namespace Approval
 
                         ' Add space when going from a ratio to a non ratio row
                         If rowType <> 0 And previousRowType = 0 AndAlso
-                            (previousRow(CalculationResultRecord.ColumnNameProductSize).ToString() = CalculationResult.ProductSizeTotal) Then
+                            (previousRow(ColumnNames.PRODUCT_SIZE).ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL) Then
                             needBlankRow = True
                         ElseIf previousRow("LocationId").ToString() = row("LocationId").ToString() _
-                            AndAlso (previousRow(CalculationResultRecord.ColumnNameProductSize).ToString() = CalculationResult.ProductSizeTotal) _
+                            AndAlso (previousRow(ColumnNames.PRODUCT_SIZE).ToString() = CalculationConstants.PRODUCT_SIZE_TOTAL) _
                             AndAlso (previousRow("RootCalcId").ToString() <> row("RootCalcId").ToString()) Then
                             needBlankRow = True
                         End If
@@ -420,7 +422,7 @@ Namespace Approval
 
                         If needBlankRow Then
                             Dim dataRow As DataRow = CreateBlankRow(presentationTable)
-                            dataRow(CalculationResultRecord.ColumnNameProductSize) = row(CalculationResultRecord.ColumnNameProductSize)
+                            dataRow(ColumnNames.PRODUCT_SIZE) = row(ColumnNames.PRODUCT_SIZE)
                             presentationTable.Rows.InsertAt(dataRow, i + 1)
                         End If
                     End If
@@ -483,7 +485,7 @@ Namespace Approval
         End Function
 
         ''' <summary>
-        ''' Loop through all rows to determine Calc Block Top,Mid,Parent & Bottom.
+        ''' Loop through all rows to determine Calc Block Top,Mid,Parent and Bottom.
         ''' </summary>
         ''' <param name="table"></param>
         Private Sub DetermineLocationCalcBlocks(table As DataTable)
@@ -625,13 +627,13 @@ Namespace Approval
 
                 Dim effectiveNodeLevel As Int32 = nodeLevel
 
-                Dim productSize As String = row(CalculationResultRecord.ColumnNameProductSize).ToString
-                If Not productSize = CalculationResult.ProductSizeTotal Then
+                Dim productSize As String = row(ColumnNames.PRODUCT_SIZE).ToString
+                If Not productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                     effectiveNodeLevel = effectiveNodeLevel + 1
                 End If
 
                 Dim spacerBlock As String = defaultSpacerBlock
-                If Not productSize = CalculationResult.ProductSizeTotal AndAlso Not String.IsNullOrEmpty(parentNodeRowId) Then
+                If Not productSize = CalculationConstants.PRODUCT_SIZE_TOTAL AndAlso Not String.IsNullOrEmpty(parentNodeRowId) Then
                     spacerBlock = lumpFinesSpacerBlockAtChildLevels
                 End If
 
@@ -643,7 +645,7 @@ Namespace Approval
 
                 ' Get expandable
                 If locationExpandable Then
-                    If rowType = 0 AndAlso Not productSize = CalculationResult.ProductSizeTotal Then
+                    If rowType = 0 AndAlso Not productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                         ' Lump and Fines ratio nodes are always expandable
                         expandable = True
                     ElseIf Not Boolean.TryParse(row("LocationExpandable").ToString(), expandable) Then
@@ -668,7 +670,7 @@ Namespace Approval
                     End If
                 Else
                     If Not String.IsNullOrEmpty(lastExpandableNodeId) Then
-                        If Not productSize = CalculationResult.ProductSizeTotal AndAlso Not String.IsNullOrEmpty(parentNodeRowId) Then
+                        If Not productSize = CalculationConstants.PRODUCT_SIZE_TOTAL AndAlso Not String.IsNullOrEmpty(parentNodeRowId) Then
                             If lastExpandableNodeId.StartsWith(parentNodeRowId) Then
                                 effectiveParentNodeId = lastExpandableNodeId
                             Else
@@ -682,7 +684,7 @@ Namespace Approval
                 End If
 
                 ' Obtain the Node Row Id
-                If Not childLocations AndAlso (productSize = CalculationResult.ProductSizeTotal OrElse String.IsNullOrEmpty(effectiveParentNodeId)) Then
+                If Not childLocations AndAlso (productSize = CalculationConstants.PRODUCT_SIZE_TOTAL OrElse String.IsNullOrEmpty(effectiveParentNodeId)) Then
                     nodeRowId = String.Format("Node_{0}_{1}_R{2}", locationId, productSize, rowIdIncrementer.ToString())
                 Else
                     nodeRowId = String.Format("{0}~{1}_R{2}", effectiveParentNodeId, productSize, rowIdIncrementer.ToString())
@@ -699,7 +701,7 @@ Namespace Approval
                     ElseIf row("CalcBlockBot").ToString().ToLower() = "true" Then
                         Dim productSizeForCalcBlock As String = productSize
 
-                        If productSize = CalculationResult.ProductSizeTotal Then
+                        If productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                             productSizeForCalcBlock = String.Empty
                         End If
 
@@ -714,7 +716,7 @@ Namespace Approval
                 End If
                 row("nodeRowId") = nodeRowId
 
-                If row("CalcId").ToString = ModelGeology.CalculationId AndAlso Not productSize = CalculationResult.ProductSizeTotal Then
+                If row("CalcId").ToString = ModelGeology.CalculationId AndAlso Not productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                     expandable = False
                 End If
 
@@ -728,7 +730,7 @@ Namespace Approval
                     If childLocations Then
                         row("Description") = defaultSpacerBlock & row("Description").ToString()
                     End If
-                    If Not productSize = CalculationResult.ProductSizeTotal Then
+                    If Not productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                         row("Description") = row("Description").ToString() & String.Format("<script>ApprovalCollapseNodeRow('{0}');</script>", nodeRowId)
                     End If
                 Else
@@ -890,7 +892,7 @@ Namespace Approval
                 End If
 
                 If calculationDepth <= 1 Then
-                    If columnName = "Description" AndAlso Not row(CalculationResultRecord.ColumnNameProductSize).ToString = CalculationResult.ProductSizeTotal Then
+                    If columnName = "Description" AndAlso Not row(ColumnNames.PRODUCT_SIZE).ToString = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                         padding = RepeatString("&nbsp;&nbsp;", calculationDepth + 1)
                     End If
 
@@ -911,7 +913,7 @@ Namespace Approval
                 ElseIf columnName = "Description" AndAlso calculationDepth > 1 Then
                     Dim spaces As String = RepeatString("&nbsp;&nbsp;&nbsp;&nbsp;", calculationDepth - 1)
                     returnValue = spaces & returnValue
-                    If calculationDepth = 2 AndAlso Not productSize = CalculationResult.ProductSizeTotal Then
+                    If calculationDepth = 2 AndAlso Not productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
                         returnValue = "<font color=blue>" & returnValue & "</font>"
                     End If
                 ElseIf columnName = "Description" AndAlso calculationDepth = 3 Then
