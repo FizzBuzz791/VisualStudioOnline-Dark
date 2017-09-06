@@ -1,5 +1,5 @@
 ﻿IF OBJECT_ID('dbo.GetBhpbioReportDataBlockModel') IS NOT NULL
-     DROP PROCEDURE dbo.GetBhpbioReportDataBlockModel
+	DROP PROCEDURE dbo.GetBhpbioReportDataBlockModel
 GO 
   
 CREATE PROCEDURE dbo.GetBhpbioReportDataBlockModel
@@ -18,7 +18,8 @@ CREATE PROCEDURE dbo.GetBhpbioReportDataBlockModel
 	@iIncludeResourceClassification Bit = 0,
 	@iUseRemainingMaterialAtDateFrom BIT = 0,
 	@iOverrideChildLocationType VARCHAR(31) = NULL,
-	@iGeometType Varchar(63) = 'As-Shipped'
+	@iGeometType Varchar(63) = 'As-Shipped',
+	@iIncludeStrat Bit = 0
 )
 WITH ENCRYPTION
 AS 
@@ -44,7 +45,8 @@ BEGIN
 		ProductSize VARCHAR(5) NULL,
 		ResourceClassification VARCHAR(32) NULL,
 		Tonnes FLOAT NOT NULL,
-		Volume FLOAT NULL
+		Volume FLOAT NULL,
+		Strat VARCHAR(7) NULL
 	)
 	
 	CREATE TABLE #GradesTable
@@ -60,7 +62,8 @@ BEGIN
 		GradeValue FLOAT NOT NULL,
 		ProductSize VARCHAR(5) NULL,
 		ResourceClassification VARCHAR(32) NULL,
-		Tonnes FLOAT NOT NULL
+		Tonnes FLOAT NOT NULL,
+		Strat VARCHAR(7) NULL
 	)
 	
 	CREATE TABLE #productsize
@@ -83,6 +86,9 @@ BEGIN
 		Tonnes FLOAT,
 		Volume FLOAT,
 	)
+
+	/* This has been added due to Strat & Weathering support. Speed is atrocious without this. */
+	CREATE NONCLUSTERED INDEX IX_SummaryEntryId ON #BlockWithSummary (SummaryEntryId)
 
 	INSERT INTO #productsize VALUES ('FINES')
 	INSERT INTO #productsize VALUES ('LUMP')
@@ -128,7 +134,7 @@ BEGIN
 		AND bm.Is_Default = 1
 
 	DECLARE @currentBlockModelName VARCHAR(31)
-  			
+			
 	BEGIN TRY
 	
 		OPEN curBlockModelCursor
@@ -591,22 +597,30 @@ BEGIN
 					ProductSize,
 					ResourceClassification,
 					Tonnes,
-					Volume
+					Volume,
+					Strat
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, 
 					MM.CalendarDate, MM.DateFrom, MM.DateTo, MM.MaterialTypeId,
 					MM.ParentLocationId, MM.ProductSize,
 					MM.ResourceClassification,
 					SUM(MM.Tonnes) AS Tonnes,
-					SUM(MM.Volume) AS Volume
+					SUM(MM.Volume) AS Volume,
+					DBNStrat.Notes AS Strat
 				FROM #ModelMovement AS MM
-					INNER JOIN dbo.BlockModel AS BM
-						ON (BM.Block_Model_Id = MM.BlockModelId)
+				INNER JOIN dbo.BlockModel AS BM
+					ON BM.Block_Model_Id = MM.BlockModelId
+				INNER JOIN dbo.ModelBlock MB
+					ON MB.Model_Block_Id = MM.ModelBlockId
+				INNER JOIN dbo.Digblock DB
+					ON DB.Digblock_Id = MB.Code
+				LEFT JOIN DigblockNotes DBNStrat 
+					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = 'StratNum' AND @iIncludeStrat = 1
 				GROUP BY MM.CalendarDate, MM.DateFrom, MM.DateTo, 
 					MM.MaterialTypeId, MM.ParentLocationId, 
 					MM.BlockModelId, BM.Name, 
 					MM.ResourceClassification,
-					MM.ProductSize					
+					MM.ProductSize, DBNStrat.Notes					
 				
 				UNION
 				
@@ -616,13 +630,20 @@ BEGIN
 					MM.ParentLocationId, 'TOTAL' As ProductSize, 
 					MM.ResourceClassification, 
 					SUM(MM.Tonnes) AS Tonnes,
-					SUM(MM.Volume) AS Volume
+					SUM(MM.Volume) AS Volume,
+					DBNStrat.Notes AS Strat
 				FROM #ModelMovement AS MM
-					INNER JOIN dbo.BlockModel AS BM
-						ON (BM.Block_Model_Id = MM.BlockModelId)
+				INNER JOIN dbo.BlockModel AS BM
+					ON BM.Block_Model_Id = MM.BlockModelId
+				INNER JOIN dbo.ModelBlock MB
+					ON MB.Model_Block_Id = MM.ModelBlockId
+				INNER JOIN dbo.Digblock DB
+					ON DB.Digblock_Id = MB.Code
+				LEFT JOIN DigblockNotes DBNStrat 
+					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = 'StratNum' AND @iIncludeStrat = 1
 				GROUP BY MM.CalendarDate, MM.DateFrom, MM.DateTo, 
 					MM.MaterialTypeId, MM.ParentLocationId, MM.BlockModelId, 
-					BM.Name, MM.ResourceClassification
+					BM.Name, MM.ResourceClassification, DBNStrat.Notes
 				
 				-- now that the total has been calculated, clear out the volume for LUMP and FINES as these should not be output
 				UPDATE #TonnesTable SET Volume = NULL WHERE NOT ProductSize = 'TOTAL'
@@ -641,7 +662,8 @@ BEGIN
 					GradeValue,
 					ProductSize,
 					ResourceClassification,
-					Tonnes
+					Tonnes,
+					Strat
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, MM.CalendarDate, MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MM.ParentLocationId, G.Grade_Id,
 					CASE WHEN SUM(MM.Tonnes) = 0
@@ -658,29 +680,36 @@ BEGIN
 					END As GradeValue, 
 					MM.ProductSize,
 					MM.ResourceClassification,
-					SUM(MM.Tonnes)
+					SUM(MM.Tonnes),
+					DBNStrat.Notes AS Strat
 				FROM #ModelMovement AS MM
-					INNER JOIN dbo.BlockModel AS BM
-						ON (BM.Block_Model_Id = MM.BlockModelId)
-					INNER JOIN dbo.ModelBlockPartial AS MBP
-						ON (MBP.Model_Block_Id = MM.ModelBlockId
-							AND MBP.Sequence_No = MM.SequenceNo)
-					CROSS JOIN Grade g
-					LEFT JOIN dbo.ModelBlockPartialGrade AS MBPG
-						ON (MBP.Model_Block_Id = MBPG.Model_Block_Id
-							AND MBP.Sequence_No = MBPG.Sequence_No)
-							AND MBPG.Grade_Id = g.Grade_Id
-					LEFT JOIN dbo.BhpbioBlastBlockLumpFinesGrade LFG
-						ON (LFG.ModelBlockId = MM.ModelBlockId
-							AND MBP.Sequence_No = LFG.SequenceNo
-							AND g.Grade_Id = LFG.GradeId)
-							AND MM.ProductSize IN ('LUMP','FINES')
-							AND LFG.GeometType = @iGeometType
+				INNER JOIN dbo.BlockModel AS BM
+					ON (BM.Block_Model_Id = MM.BlockModelId)
+				INNER JOIN dbo.ModelBlockPartial AS MBP
+					ON (MBP.Model_Block_Id = MM.ModelBlockId
+						AND MBP.Sequence_No = MM.SequenceNo)
+				CROSS JOIN Grade g
+				LEFT JOIN dbo.ModelBlockPartialGrade AS MBPG
+					ON (MBP.Model_Block_Id = MBPG.Model_Block_Id
+						AND MBP.Sequence_No = MBPG.Sequence_No)
+						AND MBPG.Grade_Id = g.Grade_Id
+				LEFT JOIN dbo.BhpbioBlastBlockLumpFinesGrade LFG
+					ON (LFG.ModelBlockId = MM.ModelBlockId
+						AND MBP.Sequence_No = LFG.SequenceNo
+						AND g.Grade_Id = LFG.GradeId)
+						AND MM.ProductSize IN ('LUMP','FINES')
+						AND LFG.GeometType = @iGeometType
+				INNER JOIN dbo.ModelBlock MB
+					ON MB.Model_Block_Id = MBP.Model_Block_Id
+				INNER JOIN dbo.Digblock DB
+					ON DB.Digblock_Id = MB.Code
+				LEFT JOIN DigblockNotes DBNStrat 
+					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = 'StratNum' AND @iIncludeStrat = 1
 				WHERE ((NOT MBPG.Grade_Id IS NULL) OR (NOT LFG.GradeId IS NULL)) -- include where there is some kind of grade (total, lump or fines)
 				GROUP BY MM.BlockModelId, BM.Name, MM.CalendarDate, 
 					MM.ParentLocationId, MM.DateFrom, MM.DateTo, 
 					MM.MaterialTypeId, G.Grade_Id, MM.ProductSize,
-					MM.ResourceClassification
+					MM.ResourceClassification, DBNStrat.Notes
 				
 				---- insert total grades
 				INSERT INTO #GradesTable
@@ -696,7 +725,8 @@ BEGIN
 					GradeValue,
 					ProductSize,
 					ResourceClassification,
-					Tonnes
+					Tonnes,
+					Strat
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, MM.CalendarDate, MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MM.ParentLocationId, MBPG.Grade_Id,
 					CASE WHEN SUM(MM.Tonnes) = 0
@@ -707,35 +737,42 @@ BEGIN
 					END As GradeValue, 
 					'TOTAL',
 					MM.ResourceClassification,
-					SUM(MM.Tonnes)
+					SUM(MM.Tonnes),
+					DBNStrat.Notes AS Strat
 				FROM #ModelMovement AS MM
-					INNER JOIN dbo.BlockModel AS BM
-						ON (BM.Block_Model_Id = MM.BlockModelId)
-					INNER JOIN dbo.ModelBlockPartial AS MBP
-						ON (MBP.Model_Block_Id = MM.ModelBlockId
-							AND MBP.Sequence_No = MM.SequenceNo)
-					INNER JOIN dbo.ModelBlockPartialGrade AS MBPG
-						ON (MBP.Model_Block_Id = MBPG.Model_Block_Id
-							AND MBP.Sequence_No = MBPG.Sequence_No)
+				INNER JOIN dbo.BlockModel AS BM
+					ON (BM.Block_Model_Id = MM.BlockModelId)
+				INNER JOIN dbo.ModelBlockPartial AS MBP
+					ON (MBP.Model_Block_Id = MM.ModelBlockId
+						AND MBP.Sequence_No = MM.SequenceNo)
+				INNER JOIN dbo.ModelBlockPartialGrade AS MBPG
+					ON (MBP.Model_Block_Id = MBPG.Model_Block_Id
+						AND MBP.Sequence_No = MBPG.Sequence_No)
+				INNER JOIN dbo.ModelBlock MB
+					ON MB.Model_Block_Id = MBP.Model_Block_Id
+				INNER JOIN dbo.Digblock DB
+					ON DB.Digblock_Id = MB.Code
+				LEFT JOIN DigblockNotes DBNStrat 
+					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = 'StratNum' AND @iIncludeStrat = 1
 				GROUP BY MM.BlockModelId, BM.Name, MM.CalendarDate, MM.ParentLocationId, 
 					MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MBPG.Grade_Id,
-					MM.ResourceClassification					
+					MM.ResourceClassification, DBNStrat.Notes
 
 			END
 			
 			IF @iIncludeApprovedData  = 1
-            BEGIN
+			BEGIN
 
 				DELETE FROM #partialRCPercentages 
 				DELETE FROM #blockRCPercentages 
 
 				DECLARE @summaryEntryTypeId INT
-                DECLARE @rcPercentageSummaryEntryTypeId INT -- summary entry type used to obtain resource classification percentages
-    
-                SELECT @summaryEntryTypeId = bset.SummaryEntryTypeId
-                FROM dbo.BhpbioSummaryEntryType bset
-                WHERE bset.Name = REPLACE(@currentBlockModelName,' ','') + 'ModelMovement'
-                      AND bset.AssociatedBlockModelId = @BlockModelId
+				DECLARE @rcPercentageSummaryEntryTypeId INT -- summary entry type used to obtain resource classification percentages
+	
+				SELECT @summaryEntryTypeId = bset.SummaryEntryTypeId
+				FROM dbo.BhpbioSummaryEntryType bset
+				WHERE bset.Name = REPLACE(@currentBlockModelName,' ','') + 'ModelMovement'
+					AND bset.AssociatedBlockModelId = @BlockModelId
 
 
 				IF @iIncludeResourceClassification = 1
@@ -888,17 +925,17 @@ BEGIN
 					bse.Tonnes,
 					bse.Volume
 				FROM #BlockLocation AS RM
-                      INNER JOIN dbo.BhpbioSummaryEntry AS bse
-                            ON bse.SummaryId = RM.SummaryId
-                            AND bse.LocationId = RM.BlockLocationId
-                            AND bse.SummaryEntryTypeId = @summaryEntryTypeId
-                            AND (@iIncludeLumpFines = 1 OR ISNULL(bse.ProductSize,'TOTAL') = 'TOTAL')
-							AND bse.GeometType in ('NA', @iGeometType)
-					  INNER JOIN dbo.GetMaterialsByCategory(@MaterialCategory) AS MC ON MC.MaterialTypeId = bse.MaterialTypeId
-                      INNER JOIN dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B                            
-                            ON RM.DateFrom = b.DateFrom
-                      LEFT JOIN dbo.GetBhpbioReportHighGrade() AS BRHG
-                            ON (BRHG.MaterialTypeId = MC.RootMaterialTypeId)
+				INNER JOIN dbo.BhpbioSummaryEntry AS bse
+					ON bse.SummaryId = RM.SummaryId
+						AND bse.LocationId = RM.BlockLocationId
+						AND bse.SummaryEntryTypeId = @summaryEntryTypeId
+						AND (@iIncludeLumpFines = 1 OR ISNULL(bse.ProductSize,'TOTAL') = 'TOTAL')
+						AND bse.GeometType in ('NA', @iGeometType)
+				INNER JOIN dbo.GetMaterialsByCategory(@MaterialCategory) AS MC ON MC.MaterialTypeId = bse.MaterialTypeId
+				INNER JOIN dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1 /* do not include data before start date */) AS B                            
+					ON RM.DateFrom = b.DateFrom
+				 LEFT JOIN dbo.GetBhpbioReportHighGrade() AS BRHG
+					ON (BRHG.MaterialTypeId = MC.RootMaterialTypeId)
 				
 				IF @rcPercentageSummaryEntryTypeId = @summaryEntryTypeId
 				BEGIN
@@ -917,7 +954,8 @@ BEGIN
 						  ProductSize,
 						  ResourceClassification,
 						  Tonnes,
-						  Volume
+						  Volume,
+						  Strat
 					)
 					SELECT @BlockModelId AS BlockModelId, @currentBlockModelName AS ModelName, bws.CalendarDate AS CalendarDate,
 						bws.DateFrom, bws.DateTo, bws.MaterialTypeId,
@@ -925,36 +963,41 @@ BEGIN
 						bws.ProductSize,
 						IsNull(per.ResourceClassification,'') AS ResourceClassification,
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
-						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume
+						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
+						BSE.StratNum
 					FROM #BlockWithSummary bws
-						  LEFT JOIN #partialRCPercentages per
-								ON per.LocationId = bws.LocationId 
-									AND per.MaterialTypeId = bws.UnderlyingMaterialTypeId
-									AND per.DateFrom = bws.DateFrom
-									AND per.DateTo = bws.DateTo
+					LEFT JOIN #partialRCPercentages per
+						ON per.LocationId = bws.LocationId 
+							AND per.MaterialTypeId = bws.UnderlyingMaterialTypeId
+							AND per.DateFrom = bws.DateFrom
+							AND per.DateTo = bws.DateTo
+					LEFT JOIN dbo.BhpbioSummaryEntry BSE
+						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND @iIncludeStrat = 1
 					WHERE (@iIncludeResourceClassification = 0 OR NOT per.ResourceClassification IS NULL)
 					GROUP BY bws.CalendarDate, bws.DateFrom, bws.DateTo, bws.MaterialTypeId,
 						bws.ParentLocationId,
 						bws.ProductSize,
-						per.ResourceClassification
+						per.ResourceClassification,
+						BSE.StratNum
 
 				-- Retrieve Grades
 				INSERT INTO #GradesTable
-                (
-                      BlockModelId,
-                      BlockModelName,
-                      CalendarDate,
-                      DateFrom,
-                      DateTo,
-                      ParentLocationId,
-                      MaterialTypeId,
-                      GradeId,
-                      GradeValue,
-                      ProductSize,
-                      ResourceClassification,
-                      Tonnes
-                )
-                SELECT @BlockModelId AS BlockModelId, 
+				(
+					BlockModelId,
+					BlockModelName,
+					CalendarDate,
+					DateFrom,
+					DateTo,
+					ParentLocationId,
+					MaterialTypeId,
+					GradeId,
+					GradeValue,
+					ProductSize,
+					ResourceClassification,
+					Tonnes,
+					Strat
+				)
+				SELECT @BlockModelId AS BlockModelId, 
 					@currentBlockModelName AS ModelName, 
 					bws.CalendarDate AS CalendarDate, bws.DateFrom, bws.DateTo, 
 					bws.ParentLocationId, 
@@ -966,24 +1009,28 @@ BEGIN
 						ELSE 0 END As GradeValue, -- NOTE: Tonnes will also be 0 meaning the 0 grade value won't have a dilution effect
 					bws.ProductSize,
 					per.ResourceClassification AS ResourceClassification,
-					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes
-                FROM #BlockWithSummary bws
-                      INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
-                            ON bseg.SummaryEntryId = bws.SummaryEntryId
-					  LEFT JOIN #partialRCPercentages per
-							ON per.LocationId = bws.LocationId 
-								AND per.MaterialTypeId = bws.UnderlyingMaterialTypeId
-								AND per.DateFrom = bws.DateFrom
-								AND per.DateTo = bws.DateTo
-								AND per.IsBackFilledFromBlock = 0 -- for consistency with previous version, do not include partial resclass values back-calculated from the overall block ResClass
+					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
+					BSE.StratNum
+				FROM #BlockWithSummary bws
+				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
+					ON bseg.SummaryEntryId = bws.SummaryEntryId
+				LEFT JOIN #partialRCPercentages per
+					ON per.LocationId = bws.LocationId 
+						AND per.MaterialTypeId = bws.UnderlyingMaterialTypeId
+						AND per.DateFrom = bws.DateFrom
+						AND per.DateTo = bws.DateTo
+						AND per.IsBackFilledFromBlock = 0 -- for consistency with previous version, do not include partial resclass values back-calculated from the overall block ResClass
+				LEFT JOIN dbo.BhpbioSummaryEntry BSE
+					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND @iIncludeStrat = 1
 			   WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
-               GROUP BY bws.CalendarDate, 
-                bws.ParentLocationId, 
-                bws.DateFrom, bws.DateTo, 
-                bws.MaterialTypeID,--MT.Material_Type_Id, 
-                bseg.GradeId, 
-                bws.ProductSize,
-                per.ResourceClassification
+			   GROUP BY bws.CalendarDate, 
+					bws.ParentLocationId, 
+					bws.DateFrom, bws.DateTo, 
+					bws.MaterialTypeID,--MT.Material_Type_Id, 
+					bseg.GradeId, 
+					bws.ProductSize,
+					per.ResourceClassification,
+					BSE.StratNum
 
 				END
 				ELSE
@@ -1003,7 +1050,8 @@ BEGIN
 						  ProductSize,
 						  ResourceClassification,
 						  Tonnes,
-						  Volume
+						  Volume,
+						  Strat
 					)
 					 SELECT @BlockModelId AS BlockModelId, @currentBlockModelName AS ModelName, bws.CalendarDate AS CalendarDate,
 						bws.DateFrom, bws.DateTo, bws.MaterialTypeId,
@@ -1011,35 +1059,40 @@ BEGIN
 						bws.ProductSize,
 						IsNull(per.ResourceClassification,'') AS ResourceClassification,
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
-						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume
+						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
+						BSE.StratNum
 					FROM #BlockWithSummary AS bws
-						  LEFT JOIN #blockRCPercentages per
-								ON per.LocationId = bws.LocationId 
-									AND per.DateFrom = bws.DateFrom
-									AND per.DateTo = bws.DateTo
+					LEFT JOIN #blockRCPercentages per
+						ON per.LocationId = bws.LocationId 
+							AND per.DateFrom = bws.DateFrom
+							AND per.DateTo = bws.DateTo
+					LEFT JOIN dbo.BhpbioSummaryEntry BSE
+						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND @iIncludeStrat = 1
 					WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
 					GROUP BY bws.CalendarDate, bws.DateFrom, bws.DateTo, bws.MaterialTypeId,
 						bws.ParentLocationId,
 						bws.ProductSize,
-						per.ResourceClassification
+						per.ResourceClassification,
+						BSE.StratNum
 
 				-- Retrieve Grades
 				INSERT INTO #GradesTable
-                (
-                      BlockModelId,
-                      BlockModelName,
-                      CalendarDate,
-                      DateFrom,
-                      DateTo,
-                      ParentLocationId,
-                      MaterialTypeId,
-                      GradeId,
-                      GradeValue,
-                      ProductSize,
-                      ResourceClassification,
-                      Tonnes
-                )
-                SELECT @BlockModelId AS BlockModelId, 
+				(
+					BlockModelId,
+					BlockModelName,
+					CalendarDate,
+					DateFrom,
+					DateTo,
+					ParentLocationId,
+					MaterialTypeId,
+					GradeId,
+					GradeValue,
+					ProductSize,
+					ResourceClassification,
+					Tonnes,
+					Strat
+				)
+				SELECT @BlockModelId AS BlockModelId, 
 					@currentBlockModelName AS ModelName, 
 					bws.CalendarDate AS CalendarDate, bws.DateFrom, bws.DateTo, 
 					bws.ParentLocationId, 
@@ -1051,22 +1104,26 @@ BEGIN
 						ELSE 0 END As GradeValue, -- NOTE: Tonnes will also be 0 meaning the 0 grade value won't have a dilution effect
 					bws.ProductSize,
 					per.ResourceClassification AS ResourceClassification,
-					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes
-                FROM #BlockWithSummary bws
-                      INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
-                            ON bseg.SummaryEntryId = bws.SummaryEntryId
-					  LEFT JOIN #blockRCPercentages per
-							ON per.LocationId = bws.LocationId 
-								AND per.DateFrom = bws.DateFrom
-								AND per.DateTo = bws.DateTo
-				   WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
-				   GROUP BY bws.CalendarDate, 
+					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
+					BSE.StratNum
+				FROM #BlockWithSummary bws
+				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
+					ON bseg.SummaryEntryId = bws.SummaryEntryId
+				LEFT JOIN #blockRCPercentages per
+					ON per.LocationId = bws.LocationId 
+						AND per.DateFrom = bws.DateFrom
+						AND per.DateTo = bws.DateTo
+				LEFT JOIN dbo.BhpbioSummaryEntry BSE
+					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND @iIncludeStrat = 1
+				WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
+				GROUP BY bws.CalendarDate, 
 					bws.ParentLocationId, 
 					bws.DateFrom, bws.DateTo, 
 					bws.MaterialTypeID,--MT.Material_Type_Id, 
 					bseg.GradeId, 
 					bws.ProductSize,
-					per.ResourceClassification
+					per.ResourceClassification,
+					BSE.StratNum
 				END
 			END
 
@@ -1167,7 +1224,8 @@ BEGIN
 			t.ParentLocationId, 
 			t.ProductSize, t.ResourceClassification,
 			Sum(t.Tonnes) as Tonnes,
-			Sum(t.Volume) as Volume
+			Sum(t.Volume) as Volume,
+			t.Strat
 		FROM #TonnesTable t
 			LEFT JOIN dbo.GetBhpbioReportHighGrade() AS BRHG 
 				ON BRHG.MaterialTypeId = t.MaterialTypeId
@@ -1175,7 +1233,7 @@ BEGIN
 		GROUP BY t.CalendarDate, t.DateFrom, t.DateTo, 
 			t.MaterialTypeId, BRHG.MaterialTypeId, t.ParentLocationId, 
 			t.BlockModelId, t.BlockModelName, 
-			t.ProductSize, t.ResourceClassification
+			t.ProductSize, t.ResourceClassification, t.Strat
 
 		-- output combined grades
 		SELECT gt.BlockModelId, gt.BlockModelName AS ModelName, gt.CalendarDate, 
@@ -1185,7 +1243,8 @@ BEGIN
 			g.Grade_Name As GradeName,
 			CASE WHEN SUM(gt.Tonnes) = 0
 			THEN 0
-			ELSE SUM(gt.Tonnes * gt.GradeValue) / SUM(gt.Tonnes) END As GradeValue, gt.ProductSize
+			ELSE SUM(gt.Tonnes * gt.GradeValue) / SUM(gt.Tonnes) END As GradeValue, gt.ProductSize,
+			gt.Strat
 		FROM #GradesTable AS gt
 			INNER JOIN dbo.Grade g
 				ON (g.Grade_Id = gt.GradeId)
@@ -1195,7 +1254,7 @@ BEGIN
 		GROUP BY gt.BlockModelId, gt.BlockModelName, gt.CalendarDate, 
 			gt.ParentLocationId, gt.DateFrom, gt.DateTo, 
 			gt.MaterialTypeId, BRHG.MaterialTypeId, g.Grade_Name, 
-			gt.ProductSize, gt.ResourceClassification
+			gt.ProductSize, gt.ResourceClassification, gt.Strat
 
 		CLOSE curBlockModelCursor
 		DEALLOCATE curBlockModelCursor
@@ -1231,22 +1290,17 @@ GRANT EXECUTE ON dbo.GetBhpbioReportDataBlockModel TO BhpbioGenericManager
 GO
 
 /*
+
 EXEC dbo.GetBhpbioReportDataBlockModel
-	@iDateFrom = '1-apr-2008',
-	@iDateTo = '1-jun-2009',
+	@iDateFrom = '2015-01-01',
+	@iDateTo = '2015-01-31',
 	@iDateBreakdown = 'MONTH',
-	@iLocationId = 1,
-	@iLocationBreakdown = 'ChildLocations',
-	@iBlockModelName = NULL,
-	@iIncludeLiveData = 1,
-	@iIncludeApprovedData = 1
-EXEC dbo.GetBhpbioReportDataBlockModel
-	@iDateFrom = '2013-01-01',
-	@iDateTo = '2013-01-31',
-	@iDateBreakdown = 'MONTH',
-	@iLocationId = 2,
-	@iChildLocations = 3,
-	@iBlockModelName = ,
+	@iLocationId = 7,
+	@iChildLocations = 0,
+	@iBlockModelName = 'Grade Control',
 	@iIncludeLiveData = 0,
-	@iIncludeApprovedData = 01
+	@iIncludeApprovedData = 1,
+	@iIncludeStrat = 1,
+	@iIncludeLumpFines = 0
+
 */

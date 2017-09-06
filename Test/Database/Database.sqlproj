@@ -1839,7 +1839,7 @@
     <None Include="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0005_Modify_Staging_StageBlockModel.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
-    <Build Include="Schema\Procedures\dbo.DoesStratNumExistInStratigraphyHierarchy.sql" />
+    <None Include="Schema\Procedures\dbo.DoesStratNumExistInStratigraphyHierarchy.sql" />
   </ItemGroup>
   <PropertyGroup>
     <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>
