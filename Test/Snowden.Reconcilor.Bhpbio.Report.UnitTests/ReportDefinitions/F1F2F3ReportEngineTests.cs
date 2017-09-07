@@ -182,6 +182,8 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportDefinitions
             _resultsTable.Columns.Add("H2O-As-ShippedDifference");
             _resultsTable.Columns.Add("UltrafinesDifference");
             _resultsTable.Columns.Add("DateText");
+            _resultsTable.Columns.Add(ColumnNames.STRAT_NUM);
+            _resultsTable.Columns.Add(ColumnNames.WEATHERING);
         }
 
         /// <summary>
@@ -195,6 +197,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportDefinitions
         {
             DataRow targetFactor = _resultsTable.NewRow();
             targetFactor[ColumnNames.TAG_ID] = calcIdOne;
+            targetFactor[ColumnNames.DATE_CAL] = DateTime.Today;
             targetFactor[ColumnNames.PRODUCT_SIZE] = productSize;
             targetFactor[ColumnNames.RESOURCE_CLASSIFICATION] = string.Empty;
             targetFactor["Tonnes"] = 21.71428; // Taken from real data
@@ -203,6 +206,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportDefinitions
             // This is used to recalculate the factor.
             DataRow rowTwo = _resultsTable.NewRow();
             rowTwo[ColumnNames.TAG_ID] = calcIdTwo;
+            rowTwo[ColumnNames.DATE_CAL] = DateTime.Today;
             rowTwo[ColumnNames.PRODUCT_SIZE] = productSize;
             rowTwo[ColumnNames.RESOURCE_CLASSIFICATION] = string.Empty;
             rowTwo["Tonnes"] = 7371516.13201; // Taken from real data
@@ -211,6 +215,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportDefinitions
             // This is used to recalculate the factor.
             DataRow rowThree = _resultsTable.NewRow();
             rowThree[ColumnNames.TAG_ID] = calcIdThree;
+            rowThree[ColumnNames.DATE_CAL] = DateTime.Today;
             rowThree[ColumnNames.PRODUCT_SIZE] = productSize;
             rowThree[ColumnNames.RESOURCE_CLASSIFICATION] = string.Empty;
             rowThree["Tonnes"] = 7766238.49068; // Taken from real data
