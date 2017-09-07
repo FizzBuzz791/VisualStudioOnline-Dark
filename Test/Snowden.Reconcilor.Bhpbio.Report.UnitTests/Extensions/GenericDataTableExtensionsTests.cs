@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Extensions
 {
     [TestFixture]
-    public class GenericDataTableExtensions
+    public class GenericDataTableExtensionsTests
     {
         private DataRow _sut;
 
