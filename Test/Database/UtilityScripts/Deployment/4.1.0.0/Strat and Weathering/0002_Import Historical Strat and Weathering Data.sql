@@ -123,15 +123,15 @@ UPDATE	#StratWeatheringImportFile
 SELECT	*
 FROM	#StratWeatheringImportFile
 
-INSERT INTO [Staging].[Tmp_StratWeatheringImportFile]
+INSERT INTO [Staging].[Tmp_StratWeatheringImport]
            ([SITE] ,[PIT], [BENCH], [PATTERN], [BLOCK_NAME], [STRATIGRAPHY], [GEOMET_STRATNUM], [GEOMET_WEATHERING], [BLOCK_GUID], [GUID],
 			[DIGBLOCK_ID], [DIGBLOCK_FOUND], [STRATNUM_FOUND], [WEATHERING_FOUND])
 SELECT		[SITE], [PIT], [BENCH] ,[PATTERN], [BLOCK_NAME], [STRATIGRAPHY], [GEOMET_STRATNUM], [GEOMET_WEATHERING], [BLOCK_GUID], [GUID],
            [DIGBLOCK_ID], [DIGBLOCK_FOUND], [STRATNUM_FOUND], [WEATHERING_FOUND]
 FROM		#StratWeatheringImportFile
 WHERE		NOT EXISTS (select	1 
-						FROM	[Staging].[Tmp_StratWeatheringImportFile]
-						WHERE	[Staging].[Tmp_StratWeatheringImportFile].[DIGBLOCK_ID] = #StratWeatheringImportFile.[DIGBLOCK_ID])
+						FROM	[Staging].[Tmp_StratWeatheringImport]
+						WHERE	[Staging].[Tmp_StratWeatheringImport].[DIGBLOCK_ID] = #StratWeatheringImportFile.[DIGBLOCK_ID])
 
 
 
