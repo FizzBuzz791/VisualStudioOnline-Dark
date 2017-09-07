@@ -242,11 +242,11 @@ Namespace Types
                     table.Merge(result.ToDataTable(includeParents, normalizedData, maintainLocations, 
                                                    breakdownMeasureByMaterialType, Not reportSession.IncludeProductSizeBreakdown, 
                                                    aggregateToDateBreakdown, breakdownFactorByMaterialType, 
-                                                   reportSession.IncludeStratigraphy, reportSession.IncludeWeathering))
+                                                   reportSession.LowestStratigraphyLevel > 0, reportSession.IncludeWeathering))
                 Else
                     table = result.ToDataTable(includeParents, normalizedData, maintainLocations, breakdownMeasureByMaterialType, 
                                                Not reportSession.IncludeProductSizeBreakdown, aggregateToDateBreakdown, 
-                                               breakdownFactorByMaterialType, reportSession.IncludeStratigraphy, 
+                                               breakdownFactorByMaterialType, reportSession.LowestStratigraphyLevel > 0, 
                                                reportSession.IncludeWeathering)
                 End If
             Next
@@ -313,13 +313,15 @@ Namespace Types
                     partialResult = result.ToDataTable(includeParents, normalizedData, maintainLocations, 
                                                        breakdownMeasureByMaterialType, 
                                                        Not reportSession.IncludeProductSizeBreakdown, 
-                                                       reportSession.DateBreakdown, False, reportSession.IncludeStratigraphy, 
+                                                       reportSession.DateBreakdown, False, 
+                                                       reportSession.LowestStratigraphyLevel > 0, 
                                                        reportSession.IncludeWeathering)
                 Else
                     partialResult = result.ToDataTable(includeParents, normalizedData, maintainLocations, 
                                                        breakdownMeasureByMaterialType, 
                                                        Not reportSession.IncludeProductSizeBreakdown, 
-                                                       reportSession.IncludeStratigraphy, reportSession.IncludeWeathering)
+                                                       reportSession.LowestStratigraphyLevel > 0, 
+                                                       reportSession.IncludeWeathering)
                 End If
 
                 If Not table Is Nothing Then

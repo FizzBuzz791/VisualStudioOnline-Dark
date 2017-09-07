@@ -61,7 +61,7 @@ Namespace Cache
                     .OverrideChildLocationType = Session.OverrideModelDataLocationTypeBreakdown,
                     .UseRemainingMaterialAtDateFrom = Session.ForwardModelFactorCalculation,
                     .GeometType = GeometTypeString,
-                    .IncludeStratigraphy = Session.IncludeStratigraphy,
+                    .LowestStratigraphyLevel = Session.LowestStratigraphyLevel,
                     .IncludeWeathering = Session.IncludeWeathering
                 }
 

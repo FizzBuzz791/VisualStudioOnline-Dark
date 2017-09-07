@@ -19,7 +19,7 @@ CREATE PROCEDURE dbo.GetBhpbioReportDataBlockModel
 	@iUseRemainingMaterialAtDateFrom BIT = 0,
 	@iOverrideChildLocationType VARCHAR(31) = NULL,
 	@iGeometType Varchar(63) = 'As-Shipped',
-	@iIncludeStrat Bit = 0,
+	@iLowestStratLevel Int = 0, -- 0 is equivalent to no stratigraphy grouping
 	@iIncludeWeathering Bit = 0
 )
 WITH ENCRYPTION
@@ -619,11 +619,15 @@ BEGIN
 				INNER JOIN dbo.BlockModel AS BM
 					ON BM.Block_Model_Id = MM.BlockModelId
 				INNER JOIN dbo.ModelBlock MB
-					ON MB.Model_Block_Id = MM.ModelBlockId AND (@iIncludeStrat = 1 OR @iIncludeWeathering = 1)
+					ON MB.Model_Block_Id = MM.ModelBlockId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 				INNER JOIN dbo.Digblock DB
 					ON DB.Digblock_Id = MB.Code
 				LEFT JOIN DigblockNotes DBNStrat 
-					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iIncludeStrat = 1
+					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
+				LEFT JOIN BhpbioStratigraphyHierarchy BSH
+					ON BSH.StratNum = DBNStrat.Notes
+				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
+					ON BSHT.Id = BSH.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 				LEFT JOIN DigblockNotes DBNWeathering
 					ON DBNWeathering.Digblock_Id = DB.Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
 				GROUP BY MM.CalendarDate, MM.DateFrom, MM.DateTo, 
@@ -647,11 +651,15 @@ BEGIN
 				INNER JOIN dbo.BlockModel AS BM
 					ON BM.Block_Model_Id = MM.BlockModelId
 				INNER JOIN dbo.ModelBlock MB
-					ON MB.Model_Block_Id = MM.ModelBlockId AND (@iIncludeStrat = 1 OR @iIncludeWeathering = 1)
+					ON MB.Model_Block_Id = MM.ModelBlockId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 				INNER JOIN dbo.Digblock DB
 					ON DB.Digblock_Id = MB.Code
 				LEFT JOIN DigblockNotes DBNStrat 
-					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iIncludeStrat = 1
+					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
+				LEFT JOIN BhpbioStratigraphyHierarchy BSH
+					ON BSH.StratNum = DBNStrat.Notes
+				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
+					ON BSHT.Id = BSH.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 				LEFT JOIN DigblockNotes DBNWeathering
 					ON DBNWeathering.Digblock_Id = DB.Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
 				GROUP BY MM.CalendarDate, MM.DateFrom, MM.DateTo, 
@@ -715,11 +723,15 @@ BEGIN
 						AND MM.ProductSize IN ('LUMP','FINES')
 						AND LFG.GeometType = @iGeometType
 				INNER JOIN dbo.ModelBlock MB
-					ON MB.Model_Block_Id = MBP.Model_Block_Id AND (@iIncludeStrat = 1 OR @iIncludeWeathering = 1)
+					ON MB.Model_Block_Id = MBP.Model_Block_Id AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 				INNER JOIN dbo.Digblock DB
 					ON DB.Digblock_Id = MB.Code
 				LEFT JOIN DigblockNotes DBNStrat 
-					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iIncludeStrat = 1
+					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
+				LEFT JOIN BhpbioStratigraphyHierarchy BSH
+					ON BSH.StratNum = DBNStrat.Notes
+				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
+					ON BSHT.Id = BSH.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 				LEFT JOIN DigblockNotes DBNWeathering
 					ON DBNWeathering.Digblock_Id = DB.Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
 				WHERE ((NOT MBPG.Grade_Id IS NULL) OR (NOT LFG.GradeId IS NULL)) -- include where there is some kind of grade (total, lump or fines)
@@ -768,11 +780,15 @@ BEGIN
 					ON (MBP.Model_Block_Id = MBPG.Model_Block_Id
 						AND MBP.Sequence_No = MBPG.Sequence_No)
 				INNER JOIN dbo.ModelBlock MB
-					ON MB.Model_Block_Id = MBP.Model_Block_Id AND (@iIncludeStrat = 1 OR @iIncludeWeathering = 1)
+					ON MB.Model_Block_Id = MBP.Model_Block_Id AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 				INNER JOIN dbo.Digblock DB
 					ON DB.Digblock_Id = MB.Code
 				LEFT JOIN DigblockNotes DBNStrat 
-					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iIncludeStrat = 1
+					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
+				LEFT JOIN BhpbioStratigraphyHierarchy BSH
+					ON BSH.StratNum = DBNStrat.Notes
+				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
+					ON BSHT.Id = BSH.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 				LEFT JOIN DigblockNotes DBNWeathering
 					ON DBNWeathering.Digblock_Id = DB.Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
 				GROUP BY MM.BlockModelId, BM.Name, MM.CalendarDate, MM.ParentLocationId, 
@@ -985,7 +1001,7 @@ BEGIN
 						IsNull(per.ResourceClassification,'') AS ResourceClassification,
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
-						BSE.StratNum, 
+						BSH.StratNum, 
 						BSE.Weathering
 					FROM #BlockWithSummary bws
 					LEFT JOIN #partialRCPercentages per
@@ -994,13 +1010,17 @@ BEGIN
 							AND per.DateFrom = bws.DateFrom
 							AND per.DateTo = bws.DateTo
 					LEFT JOIN dbo.BhpbioSummaryEntry BSE
-						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iIncludeStrat = 1 OR @iIncludeWeathering = 1)
+						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
+					LEFT JOIN BhpbioStratigraphyHierarchy BSH
+						ON BSH.StratNum = BSE.StratNum
+					LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
+						ON BSHT.Id = BSH.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 					WHERE (@iIncludeResourceClassification = 0 OR NOT per.ResourceClassification IS NULL)
 					GROUP BY bws.CalendarDate, bws.DateFrom, bws.DateTo, bws.MaterialTypeId,
 						bws.ParentLocationId,
 						bws.ProductSize,
 						per.ResourceClassification,
-						BSE.StratNum, 
+						BSH.StratNum, 
 						BSE.Weathering
 
 				-- Retrieve Grades
@@ -1034,7 +1054,7 @@ BEGIN
 					bws.ProductSize,
 					per.ResourceClassification AS ResourceClassification,
 					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
-					BSE.StratNum,
+					BSH.StratNum,
 					BSE.Weathering
 				FROM #BlockWithSummary bws
 				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
@@ -1046,7 +1066,11 @@ BEGIN
 						AND per.DateTo = bws.DateTo
 						AND per.IsBackFilledFromBlock = 0 -- for consistency with previous version, do not include partial resclass values back-calculated from the overall block ResClass
 				LEFT JOIN dbo.BhpbioSummaryEntry BSE
-					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iIncludeStrat = 1 OR @iIncludeWeathering = 1)
+					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
+				LEFT JOIN BhpbioStratigraphyHierarchy BSH
+					ON BSH.StratNum = BSE.StratNum
+				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
+					ON BSHT.Id = BSH.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 			   WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
 			   GROUP BY bws.CalendarDate, 
 					bws.ParentLocationId, 
@@ -1055,7 +1079,7 @@ BEGIN
 					bseg.GradeId, 
 					bws.ProductSize,
 					per.ResourceClassification,
-					BSE.StratNum,
+					BSH.StratNum,
 					BSE.Weathering
 
 				END
@@ -1087,7 +1111,7 @@ BEGIN
 						IsNull(per.ResourceClassification,'') AS ResourceClassification,
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
-						BSE.StratNum,
+						BSH.StratNum,
 						BSE.Weathering
 					FROM #BlockWithSummary AS bws
 					LEFT JOIN #blockRCPercentages per
@@ -1095,13 +1119,17 @@ BEGIN
 							AND per.DateFrom = bws.DateFrom
 							AND per.DateTo = bws.DateTo
 					LEFT JOIN dbo.BhpbioSummaryEntry BSE
-						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iIncludeStrat = 1 OR @iIncludeWeathering = 1)
+						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
+					LEFT JOIN BhpbioStratigraphyHierarchy BSH
+						ON BSH.StratNum = BSE.StratNum
+					LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
+						ON BSHT.Id = BSH.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 					WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
 					GROUP BY bws.CalendarDate, bws.DateFrom, bws.DateTo, bws.MaterialTypeId,
 						bws.ParentLocationId,
 						bws.ProductSize,
 						per.ResourceClassification,
-						BSE.StratNum,
+						BSH.StratNum,
 						BSE.Weathering
 
 				-- Retrieve Grades
@@ -1135,7 +1163,7 @@ BEGIN
 					bws.ProductSize,
 					per.ResourceClassification AS ResourceClassification,
 					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
-					BSE.StratNum,
+					BSH.StratNum,
 					BSE.Weathering
 				FROM #BlockWithSummary bws
 				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
@@ -1145,7 +1173,11 @@ BEGIN
 						AND per.DateFrom = bws.DateFrom
 						AND per.DateTo = bws.DateTo
 				LEFT JOIN dbo.BhpbioSummaryEntry BSE
-					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iIncludeStrat = 1 OR @iIncludeWeathering = 1)
+					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
+				LEFT JOIN BhpbioStratigraphyHierarchy BSH
+					ON BSH.StratNum = BSE.StratNum
+				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
+					ON BSHT.Id = BSH.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 				WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
 				GROUP BY bws.CalendarDate, 
 					bws.ParentLocationId, 
@@ -1154,7 +1186,7 @@ BEGIN
 					bseg.GradeId, 
 					bws.ProductSize,
 					per.ResourceClassification,
-					BSE.StratNum,
+					BSH.StratNum,
 					BSE.Weathering
 				END
 			END
@@ -1334,7 +1366,7 @@ EXEC dbo.GetBhpbioReportDataBlockModel
 	@iBlockModelName = 'Grade Control',
 	@iIncludeLiveData = 0,
 	@iIncludeApprovedData = 1,
-	@iIncludeStrat = 1,
+	@iLowestStratLevel = 1, -- Use 0 to turn off.
 	@iIncludeLumpFines = 0
 
 */

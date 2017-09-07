@@ -806,7 +806,7 @@ Namespace Types
         ''' </summary>
         Public Property GetModelDesignDataByBlockoutDate As Boolean = False
 
-        Public Property IncludeStratigraphy As Boolean = False
+        Public Property LowestStratigraphyLevel As Integer = 0
 
         Public Property IncludeWeathering As Boolean = False
 

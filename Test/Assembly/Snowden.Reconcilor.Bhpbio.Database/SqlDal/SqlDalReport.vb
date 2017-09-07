@@ -686,7 +686,7 @@ Namespace SqlDal
                 .Add("@iUseRemainingMaterialAtDateFrom", CommandDataType.Bit, CommandDirection.Input, dataOptions.UseRemainingMaterialAtDateFrom)
                 .Add("@iOverrideChildLocationType", CommandDataType.VarChar, CommandDirection.Input, 250, dataOptions.OverrideChildLocationType)
                 .Add("@iGeometType", CommandDataType.VarChar, CommandDirection.Input, 63, dataOptions.GeometType)
-                .Add("@iIncludeStrat", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeStratigraphy)
+                .Add("@iLowestStratLevel", CommandDataType.Int, CommandDirection.Input, dataOptions.LowestStratigraphyLevel)
                 .Add("@iIncludeWeathering", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeWeathering)
             End With
 
@@ -882,7 +882,7 @@ Namespace SqlDal
         Public Property UseRemainingMaterialAtDateFrom As Boolean = False
         Public Property OverrideChildLocationType As String = Nothing
         Public Property GeometType As String
-        Public Property IncludeStratigraphy As Boolean = False
+        Public Property LowestStratigraphyLevel As Integer = 0
         Public Property IncludeWeathering As Boolean = False
     End Class
 
