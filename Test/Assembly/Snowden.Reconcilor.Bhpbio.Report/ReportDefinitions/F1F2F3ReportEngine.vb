@@ -1509,13 +1509,14 @@ Namespace ReportDefinitions
                     Dim density As Single
 
                     ' If we are processing all rows, or this is the density attribute row
-                    If Not checkAttributeNameColumn OrElse 
-                        Not row("Attribute") Is DBNull.Value AndAlso 
+                    ' ReSharper disable RedundantParentheses - because it's incorrectly identifying the OrElse braces as redundant.
+                    If (Not checkAttributeNameColumn OrElse
+                        Not row("Attribute") Is DBNull.Value AndAlso
                         Not row("Attribute") Is Nothing AndAlso
-                        row("Attribute").ToString() = "Density" AndAlso
-                        Not row(densityValueColumnName) Is DBNull.Value AndAlso
-                        Not row(densityValueColumnName) Is Nothing Then
-
+                        row("Attribute").ToString() = "Density") AndAlso
+                       (Not row(densityValueColumnName) Is DBNull.Value AndAlso
+                        Not row(densityValueColumnName) Is Nothing) Then
+                    ' ReSharper restore RedundantParentheses
                         density = CType(row(densityValueColumnName), Single)
                         If Math.Abs(density - 0) > Double.Epsilon Then
                             ' invert the value

@@ -65,7 +65,6 @@ Namespace Extensions
             Next
         End Sub
 
-
         <Extension>
         Public Sub RecalculateAttributeRatioUnpivoted(resultRow As DataRow, ByRef topRow As DataRow, ByRef bottomRow As DataRow)
             If topRow Is Nothing OrElse bottomRow Is Nothing Then
@@ -105,23 +104,27 @@ Namespace Extensions
             End If
         End Function
 
-
-        ' give a reference row, this will return all the other grades/attributes that match that rows. This only works on the unpivoted tables
+        ''' <summary>
+        ''' Finds all matching grades/attributes for a given reference row.<para />
+        ''' WARNING: This only works on unpivoted rows.
+        ''' </summary>
         <Extension>
         Public Function GetCorrespondingRowsUnpivoted(ByRef rows As IEnumerable(Of DataRow), referenceRow As DataRow) As IEnumerable(Of DataRow)
             If rows Is Nothing Or rows.Count = 0 Then
                 Return rows
             End If
 
+            ' ReSharper disable RedundantParentheses
             Return rows.Where(Function(r) _
                                  r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
                                  r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
                                  r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
                                  r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
                                  r(ColumnNames.REPORT_TAG_ID).ToString = referenceRow(ColumnNames.REPORT_TAG_ID).ToString AndAlso
-                                 Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
-                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
+                                 (Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                               ).ToList
+            ' ReSharper restore RedundantParentheses
         End Function
 
         <Extension>
@@ -130,14 +133,16 @@ Namespace Extensions
                 Return rows
             End If
 
+            ' ReSharper disable RedundantParentheses - because it's incorrectly identifying the OrElse braces as redundant.
             Return rows.Where(Function(r) _
                                  r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
                                  r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
                                  r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
                                  r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNAmes.PRODUCT_SIZE).ToString AndAlso
-                                 Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
-                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
+                                 (Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                               ).ToList
+            ' ReSharper restore RedundantParentheses
         End Function
 
         ' returns the matching rows across all resource classifications that match the passed in row
@@ -182,21 +187,24 @@ Namespace Extensions
                 Return rows
             End If
 
+            ' ReSharper disable RedundantParentheses - because it's incorrectly identifying the OrElse braces as redundant.
             Return rows.Where(Function(r) _
                                  r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
                                  r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
                                  r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
                                  r(ColumnNames.REPORT_TAG_ID).ToString = referenceRow(ColumnNames.REPORT_TAG_ID).ToString AndAlso
                                  r("Attribute").ToString = referenceRow("Attribute").ToString AndAlso
-                                 r(ColumnNames.LOCATION_ID).ToString <> parentLocationId.ToString AndAlso
-                                 Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
-                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
+                                 r(ColumnNames.LOCATION_ID).ToString <> parentLocationId.ToString AndAlso 
+                                 (Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                 r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                               ).ToList
+            ' ReSharper restore RedundantParentheses
         End Function
 
         <Extension>
         Public Function GetCorrespondingRowUnpivoted(ByRef rows As IEnumerable(Of DataRow), referenceRow As DataRow, reportTagId As String) As DataRow
             ' throw an exception if it finds more than one row. If it finds none, just return Nothing
+            ' ReSharper disable RedundantParentheses - because it's incorrectly identifying the OrElse braces as redundant.
             Dim matches = rows.Where(Function(r) _
                                         r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
                                         r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
@@ -204,9 +212,10 @@ Namespace Extensions
                                         r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
                                         r("Attribute").ToString = referenceRow("Attribute").ToString AndAlso
                                         r(ColumnNames.REPORT_TAG_ID).ToString = reportTagId AndAlso
-                                        Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
-                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
+                                        (Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                                      ).ToList
+            ' ReSharper restore RedundantParentheses
 
             If matches.Count > 1 Then
                 Throw New DataException($"Mulitple matches found for DataRow {ColumnNames.TAG_ID}: {reportTagId}")
@@ -219,15 +228,17 @@ Namespace Extensions
         <Extension>
         Public Function GetCorrespondingRow(ByRef rows As IEnumerable(Of DataRow), tagId As String, referenceRow As DataRow) As DataRow
             ' throw an exception if it finds more than one row. If it finds none, just return Nothing
+            ' ReSharper disable RedundantParentheses - because it's incorrectly identifying the OrElse braces as redundant.
             Dim matches = rows.Where(Function(r) _
                                         r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
                                         r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
                                         r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
                                         r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
                                         r(ColumnNames.TAG_ID).ToString = tagId AndAlso
-                                        Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
-                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
+                                        (Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                                      ).ToList
+            ' ReSharper restore RedundantParentheses
 
             If matches.Count > 1 Then
                 Throw New DataException($"Mulitple matches found for DataRow {ColumnNames.TAG_ID}: {tagId}")
@@ -251,15 +262,17 @@ Namespace Extensions
                 End If
             End If
 
+            ' ReSharper disable RedundantParentheses  - because it's incorrectly identifying the OrElse braces as redundant.
             Dim matches = rows.Where(Function(r) _
                                         ignoreDateFrom OrElse r.AsDate(ColumnNames.DATE_FROM) = matchDateFrom AndAlso
                                         r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
                                         r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
                                         r(ColumnNames.PRODUCT_SIZE).ToString = referenceRow(ColumnNames.PRODUCT_SIZE).ToString AndAlso
                                         r(ColumnNames.REPORT_TAG_ID).ToString = reportTagId AndAlso
-                                        Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
-                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
+                                        (Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                                      ).ToList
+            ' ReSharper restore RedundantParentheses
 
             If matches.Count > 1 Then
                 Throw New DataException($"Mulitple matches found for DataRow TagId: {reportTagId}")
@@ -288,15 +301,17 @@ Namespace Extensions
             End If
 
             ' throw an exception if it finds more than one row. If it finds none, just return Nothing
+            ' ReSharper disable RedundantParentheses - because it's incorrectly identifying the OrElse braces as redundant.
             Dim matches = rows.Where(Function(r) _
                                         r.AsDate(ColumnNames.DATE_FROM) = referenceRow.AsDate(ColumnNames.DATE_FROM) AndAlso
                                         r.AsInt(ColumnNames.LOCATION_ID) = referenceRow.AsInt(ColumnNames.LOCATION_ID) AndAlso
                                         r.AsInt(ColumnNames.MATERIAL_TYPE_ID) = referenceRow.AsInt(ColumnNames.MATERIAL_TYPE_ID) AndAlso
                                         r(ColumnNames.PRODUCT_SIZE).ToString = productSize AndAlso
                                         r(ColumnNames.REPORT_TAG_ID).ToString = reportTagId AndAlso
-                                        Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
-                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString
+                                        (Not referenceRow.HasColumn(ColumnNames.RESOURCE_CLASSIFICATION) OrElse 
+                                        r(ColumnNames.RESOURCE_CLASSIFICATION).ToString = referenceRow(ColumnNames.RESOURCE_CLASSIFICATION).ToString)
                                      ).ToList
+            ' ReSharper restore RedundantParentheses
 
             If matches.Count > 1 Then
                 Throw New DataException($"Mulitple matches found for DataRow {ColumnNames.TAG_ID}: {referenceRow(ColumnNames.TAG_ID)}")
