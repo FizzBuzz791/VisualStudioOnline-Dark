@@ -137,6 +137,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging
             this.PolygonPoint = new List<MiningPointType>();
             this.ModelBlock = new List<ModelBlockType>();
         }
+        public int? Weathering { get; set; }
     }
 
     public partial class PatternDetailsType

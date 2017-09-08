@@ -63,6 +63,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Helpers
 
             return dbConfig.GenerateSqlClientConnectionString(productUserName);
         }
+
         public static DatabaseConfiguration GetDatabaseConfiguration(MessageHandlerConfiguration configuration)
         { 
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
@@ -193,8 +194,8 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Helpers
                     conn.Open();
 
                     String sql = @"SELECT	count(1)
-                                    FROM[dbo].[BhpbioStratigraphyHierarchy]
-                                    WHERE StratNum = @StratNum";
+                                   FROM[dbo].[BhpbioStratigraphyHierarchy]
+                                   WHERE StratNum = @StratNum";
 
                     var command = conn.CreateCommand();
 
@@ -222,6 +223,48 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.IntegrationTest.Helpers
             }
 
             return (stratNumCount.Equals(1));
+        }
+        public static bool DoesWeatheringExist(MessageHandlerConfiguration config, int expectedWeatheringDisplayValue)
+        {
+            string connectionString = BuildConnectionString(config);
+
+            int weatheringCount = 0;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    String sql = @"SELECT	count(1)
+                                   FROM[dbo].[BhpbioWeathering]
+                                   WHERE DisplayValue = @DisplayValue";
+
+                    var command = conn.CreateCommand();
+
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@DisplayValue", expectedWeatheringDisplayValue);
+
+                    var returnValue = command.ExecuteScalar();
+
+                    if (returnValue != null)
+                    {
+                        weatheringCount = (int)returnValue;
+                    }
+
+                    conn.Close();
+
+                }
+                finally
+                {
+                    if (conn.State.Equals(ConnectionState.Open))
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+
+            return (weatheringCount.Equals(1));
         }
     }
 }

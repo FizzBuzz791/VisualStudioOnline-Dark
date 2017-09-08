@@ -472,6 +472,7 @@
     <None Include="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyList.sql" />
     <None Include="Schema\Procedures\dbo.GetBhpbioStratigraphyHierarchyTypeList.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0006_Add_StratNum_to_DigblockField.sql" />
+    <None Include="Upgrade\4.1\4.1.0.0\_0007_Add_Weathering_to_DigblockField.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
@@ -1840,6 +1841,7 @@
     <None Include="Upgrade\4.1\4.1.0.0\_0005_Modify_Staging_StageBlockModel.sql" />
     <None Include="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
     <Build Include="Schema\Procedures\dbo.DoesStratNumExistInStratigraphyHierarchy.sql" />
+    <Build Include="Schema\Procedures\dbo.DoesWeatheringValueExistInWeathering.sql" />
   </ItemGroup>
   <PropertyGroup>
     <CustomBeforeMicrosoftCommonTargets>$(SolutionDir)\DependencyPaths.targets</CustomBeforeMicrosoftCommonTargets>

@@ -4,8 +4,8 @@ GO
 
 CREATE PROCEDURE Staging.GetBhpbioStagingModelBlocks
 (
-	@iSite VARCHAR(9),
-	@iPit VARCHAR(10),
+	@iSite VARCHAR(31),
+	@iPit VARCHAR(31),
 	@iBench VARCHAR(4)
 )
 AS
@@ -36,6 +36,7 @@ BEGIN
 			m.LastModifiedUser, 
 			m.LastModifiedDate,
 			m.StratNum,
+			m.Weathering,
 			(
 				SELECT p.Number,
 					p.Easting, p.Northing, p.RL

@@ -371,6 +371,9 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
                         string stratNum = null;
                         stratNum = GetStratNum(block, modelBlock.ModelType);
 
+                        int? weathering = null;
+                        weathering = GetWeathering(block, modelBlock.ModelType);
+
                         ExtractGradeSetsAndQualityTypes(modelBlock,
                             ref qualitySetInSituRom,
                             ref qualitySetAsDroppedLump,
@@ -402,6 +405,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
                             lumpPercentAsShipped,
                             lumpPercentAsDropped,
                             stratNum,
+                            weathering,
                             ref modelBlockId);
 
                         if (qualitySetInSituRom != null)
@@ -593,6 +597,24 @@ namespace Snowden.Reconcilor.Bhpbio.DataStaging.MessageHandlers
             }
 
             return stratNum;
+        }
+
+        private int? GetWeathering(BlockType block, string modelType)
+        {
+            int? weathering = null;
+            if (modelType.ToUpper() == GRADE_CONTROL_MODEL_NAME.ToUpper())
+            {
+                if (block.Weathering != null)
+                {
+                    int value;
+                    if (int.TryParse(block.Weathering.ToString(), out value))
+                    {
+                        weathering = value;
+                    }
+                }
+            }
+
+            return weathering;
         }
 
         /// <summary>
