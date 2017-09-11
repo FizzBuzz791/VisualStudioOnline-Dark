@@ -297,6 +297,7 @@ Namespace Types
                 .MaterialType = g.Key.MaterialTypeId,
                 .LocationId = g.Key.LocationId,
                 .StratNum = g.Key.StratNum,
+                .StratLevel = g.Max(Function(t) t.StratLevel),
                 .Weathering = g.Key.Weathering,
                 .Tonnes = g.Sum(Function(t) t.Tonnes),
                 .Volume = g.Sum(Function(t) t.Volume),
@@ -349,6 +350,7 @@ Namespace Types
                 .H2ODropped = MassWeight(t.H2ODropped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2ODroppedCnt),
                 .H2OShipped = MassWeight(t.H2OShipped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OShippedCnt),
                 .StratNum = t.StratNum,
+                .StratLevel = t.StratLevel,
                 .Weathering = t.Weathering
             })
 

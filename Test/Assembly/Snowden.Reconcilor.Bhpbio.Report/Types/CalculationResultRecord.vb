@@ -110,6 +110,8 @@ Namespace Types
 
         Public Property StratNum As String
 
+        Public Property StratLevel As String
+
         Public Property Weathering As Integer?
 #End Region
 
@@ -373,6 +375,9 @@ Namespace Types
                 If left.StratNum = right.StratNum Then
                     result.StratNum = left.StratNum
                 End If
+                If left.StratLevel = right.StratLevel Then
+                    result.StratLevel = left.StratLevel
+                End If
                 If left.Weathering = right.Weathering Then
                     result.Weathering = left.Weathering
                 End If
@@ -433,6 +438,10 @@ Namespace Types
 
                 If left.StratNum = right.StratNum Then
                     result.StratNum = left.StratNum
+                End If
+
+                If left.StratLevel = right.StratLevel Then
+                    result.StratLevel = left.StratLevel
                 End If
 
                 If left.Weathering = right.Weathering Then
@@ -620,6 +629,9 @@ Namespace Types
                 If left.StratNum = right.StratNum Then
                     result.StratNum = left.StratNum
                 End If
+                If left.StratLevel = right.StratLevel Then
+                    result.StratLevel = left.StratLevel
+                End If
                 If left.Weathering = right.Weathering Then
                     result.Weathering = left.Weathering
                 End If
@@ -654,6 +666,7 @@ Namespace Types
             Clone.SortKey = SortKey
             Clone.ResourceClassification = ResourceClassification
             Clone.StratNum = StratNum
+            Clone.StratLevel = StratLevel
             Clone.Weathering = Weathering
         End Function
 
@@ -688,6 +701,7 @@ Namespace Types
             table.Columns.Add(New DataColumn(ColumnNames.RESOURCE_CLASSIFICATION, GetType(String)))
             table.Columns.Add(New DataColumn(ColumnNames.SORT_KEY, GetType(String)))
             table.Columns.Add(New DataColumn(ColumnNames.STRAT_NUM, GetType(String)))
+            table.Columns.Add(New DataColumn(ColumnNames.STRAT_LEVEL, GetType(String)))
             table.Columns.Add(New DataColumn(ColumnNames.WEATHERING, GetType(Integer)))
 
             If Not normalizedData Then
@@ -747,6 +761,7 @@ Namespace Types
             row(ColumnNames.RESOURCE_CLASSIFICATION) = IIf(ResourceClassification Is Nothing, DBNull.Value, ResourceClassification)
             row(ColumnNames.SORT_KEY) = IIf(SortKey Is Nothing, DBNull.Value, SortKey)
             row(ColumnNames.STRAT_NUM) = IIf(String.IsNullOrEmpty(StratNum), DBNull.Value, StratNum)
+            row(ColumnNames.STRAT_LEVEL) = IIf(String.IsNullOrEmpty(StratLevel), DBNull.Value, StratLevel)
             row(ColumnNames.WEATHERING) = IIf(Weathering Is Nothing, DBNull.Value, Weathering)
             Return row
         End Function
@@ -783,6 +798,7 @@ Namespace Types
                        UltraFines.Equals(comparisonObj.UltraFines) And
                        Volume.Equals(comparisonObj.Volume) And
                        StratNum = comparisonObj.StratNum And
+                       StratLevel = comparisonObj.StratLevel And
                        Weathering.Equals(comparisonObj.Weathering)
             End If
         End Function

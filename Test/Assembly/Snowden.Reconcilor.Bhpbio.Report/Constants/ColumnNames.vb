@@ -45,7 +45,8 @@
         ' H2O-As-ShippedDifference
         ' UltrafinesDifference
         ' DateText
-        Public Const STRAT_NUM = "StratNum"
+        Public Const STRAT_NUM = "Strat"
+        Public Const STRAT_LEVEL = "StratLevel"
         Public Const WEATHERING = "Weathering"
 
         ' Not sure where these fit in
