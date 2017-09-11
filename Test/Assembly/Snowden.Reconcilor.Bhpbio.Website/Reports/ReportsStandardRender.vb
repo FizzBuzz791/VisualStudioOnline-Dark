@@ -1525,6 +1525,7 @@ Namespace Reports
                 contexts.Add("HaulageContext", "Haulage Context")
                 contexts.Add("SampleCoverage", "Sample Coverage")
                 contexts.Add("SampleRatio", "Tonnes/Sample")
+                contexts.Add("Stratigraphy", "Stratigraphy Context")
             Else
                 contexts.Add("ResourceClassification", "Resource Classification")
             End If
