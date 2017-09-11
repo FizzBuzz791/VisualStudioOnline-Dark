@@ -21,6 +21,8 @@ CREATE TABLE [Staging].[StageBlockModel](
 	[ModelFilename] [varchar](200) NULL,
 	[LumpPercentAsDropped] [decimal](7, 4) NULL,
 	[LumpPercentAsShipped] [decimal](7, 4) NULL,
+	[StratNum] varchar(7) NULL,
+	[Weathering] int NULL
 CONSTRAINT [PK_StageBlockModel] PRIMARY KEY NONCLUSTERED 
 (
 	[BlockModelId] ASC

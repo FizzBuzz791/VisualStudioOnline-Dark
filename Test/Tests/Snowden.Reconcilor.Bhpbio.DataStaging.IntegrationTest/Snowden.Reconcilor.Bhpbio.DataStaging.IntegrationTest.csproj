@@ -66,6 +66,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Helpers\StagingTestsHelper.cs" />
     <Compile Include="MessageHandlers\BlockoutAndBlastedEventHandlerFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +88,10 @@
     <ProjectReference Include="..\..\Assembly\Snowden.Reconcilor.Bhpbio.DataStaging\Snowden.Reconcilor.Bhpbio.DataStaging.csproj">
       <Project>{57bbd096-7ed4-45bd-8142-84142c65368d}</Project>
       <Name>Snowden.Reconcilor.Bhpbio.DataStaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Snowden.Reconcilor.Bhpbio.Import\Snowden.Reconcilor.Bhpbio.Import.vbproj">
+      <Project>{C982CEA3-6991-42C8-880E-0BBA8CD6A77A}</Project>
+      <Name>Snowden.Reconcilor.Bhpbio.Import</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +128,18 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-ValidStratNum.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-MissingStratNum.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-MissingWeathering.xml" />
+    <EmbeddedResource Include="Resources\BlockoutAndBlastedEvent_Strat-ValidWeathering.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

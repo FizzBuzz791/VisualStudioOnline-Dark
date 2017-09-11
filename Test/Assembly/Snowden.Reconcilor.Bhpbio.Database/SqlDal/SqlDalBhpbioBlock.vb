@@ -447,8 +447,8 @@ Namespace SqlDal
         ''' <param name="modelBlockId">reference parameter set to the id of the model block record on add</param>
         Public Sub AddBhpbioStageBlockModel(modelType As String, blockId As Integer, materialCode As String, volume As Double, tonnes As Double,
             density As Double, lastModifiedUserName As String, lastModifiedDateTime As DateTime, modelFileName As String,
-            lumpPercentAsShipped As Nullable(Of Decimal), lumpPercentAsDropped As Nullable(Of Decimal),
-            ByRef modelBlockId As Nullable(Of Integer)) Implements IBhpbioBlock.AddBhpbioStageBlockModel
+            lumpPercentAsShipped As Nullable(Of Decimal), lumpPercentAsDropped As Nullable(Of Decimal), stratNum As String,
+            weathering As Integer?, ByRef modelBlockId As Nullable(Of Integer)) Implements IBhpbioBlock.AddBhpbioStageBlockModel
 
             Dim outId As DataAccessParameter
 
@@ -457,24 +457,26 @@ Namespace SqlDal
                 .CommandType = CommandObjectType.StoredProcedure
 
                 With .ParameterCollection
-                .Clear()
-                .Add("@iBlockId", CommandDataType.Int, CommandDirection.Input, blockId)
-                .Add("@iModelName", CommandDataType.VarChar, CommandDirection.Input, 31, modelType)
+                    .Clear()
+                    .Add("@iBlockId", CommandDataType.Int, CommandDirection.Input, blockId)
+                    .Add("@iModelName", CommandDataType.VarChar, CommandDirection.Input, 31, modelType)
 
-                .Add("@iMaterialTypeName", CommandDataType.VarChar, CommandDirection.Input, 15, materialCode)
-                .Add("@iVolume", CommandDataType.Float, CommandDirection.Input, volume)
-                .Add("@iTonnes", CommandDataType.Float, CommandDirection.Input, tonnes)
-                .Add("@iDensity", CommandDataType.Float, CommandDirection.Input, density)
+                    .Add("@iMaterialTypeName", CommandDataType.VarChar, CommandDirection.Input, 15, materialCode)
+                    .Add("@iVolume", CommandDataType.Float, CommandDirection.Input, volume)
+                    .Add("@iTonnes", CommandDataType.Float, CommandDirection.Input, tonnes)
+                    .Add("@iDensity", CommandDataType.Float, CommandDirection.Input, density)
 
-                .Add("@iLastModifiedUsername", CommandDataType.VarChar, CommandDirection.Input, 50, lastModifiedUserName)
-                .Add("@iLastModifiedDateTime", CommandDataType.DateTime, CommandDirection.Input, lastModifiedDateTime)
+                    .Add("@iLastModifiedUsername", CommandDataType.VarChar, CommandDirection.Input, 50, lastModifiedUserName)
+                    .Add("@iLastModifiedDateTime", CommandDataType.DateTime, CommandDirection.Input, lastModifiedDateTime)
 
-                .Add("@iLumpPercentAsShipped", CommandDataType.Decimal, CommandDirection.Input, lumpPercentAsShipped)
-                .Add("@iLumpPercentAsDropped", CommandDataType.Decimal, CommandDirection.Input, lumpPercentAsDropped)
+                    .Add("@iLumpPercentAsShipped", CommandDataType.Decimal, CommandDirection.Input, lumpPercentAsShipped)
+                    .Add("@iLumpPercentAsDropped", CommandDataType.Decimal, CommandDirection.Input, lumpPercentAsDropped)
 
-                .Add("@iModelFilename", CommandDataType.VarChar, CommandDirection.Input, 200, modelFileName)
+                    .Add("@iModelFilename", CommandDataType.VarChar, CommandDirection.Input, 200, modelFileName)
+                    .Add("@iStratNum", CommandDataType.VarChar, CommandDirection.Input, stratNum)
+                    .Add("@iWeathering", CommandDataType.Int, CommandDirection.Input, weathering)
 
-                outId = .Add("@oModelBlockId", CommandDataType.Int, CommandDirection.Output, NullValues.Int32)
+                    outId = .Add("@oModelBlockId", CommandDataType.Int, CommandDirection.Output, NullValues.Int32)
                 End With
 
                 .ExecuteNonQuery()

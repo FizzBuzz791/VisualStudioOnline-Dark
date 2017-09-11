@@ -15,6 +15,8 @@ CREATE PROCEDURE Staging.AddBhpbioStageBlockModel
 	@iLumpPercentAsDropped DECIMAL(7,4),
 	@iLumpPercentAsShipped DECIMAL(7,4),
 	@iModelFilename VARCHAR(200),
+	@iStratNum VARCHAR(7),
+	@iWeathering int,
 	@oModelBlockId INTEGER OUT
 )
 WITH ENCRYPTION
@@ -26,8 +28,8 @@ BEGIN
 	BEGIN TRY
 		-- add the Block Point
 		INSERT INTO Staging.StageBlockModel
-			(BlockId, BlockModelName, MaterialTypeName, OpeningVolume, OpeningTonnes, OpeningDensity, LastModifiedUser, LastModifiedDate, ModelFilename, LumpPercentAsDropped, LumpPercentAsShipped)
-		VALUES(@iBlockId, @iModelName, @iMaterialTypeName, @iVolume, @iTonnes, @iDensity, @iLastModifiedUsername, @iLastModifiedDateTime, @iModelFilename, @iLumpPercentAsDropped, @iLumpPercentAsShipped)
+			(BlockId, BlockModelName, MaterialTypeName, OpeningVolume, OpeningTonnes, OpeningDensity, LastModifiedUser, LastModifiedDate, ModelFilename, LumpPercentAsDropped, LumpPercentAsShipped, StratNum, Weathering)
+		VALUES(@iBlockId, @iModelName, @iMaterialTypeName, @iVolume, @iTonnes, @iDensity, @iLastModifiedUsername, @iLastModifiedDateTime, @iModelFilename, @iLumpPercentAsDropped, @iLumpPercentAsShipped, @iStratNum, @iWeathering)
 		
 		SET @oModelBlockId = Scope_Identity()
 

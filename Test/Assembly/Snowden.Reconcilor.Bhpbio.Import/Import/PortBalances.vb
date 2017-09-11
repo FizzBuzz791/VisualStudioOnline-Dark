@@ -31,13 +31,13 @@ Friend NotInheritable Class PortBalances
         End Get
     End Property
 
-    Public Sub New()
+    Public Sub New(Optional config As ConfigurationSettings = Nothing)
         MyBase.New()
         ImportGroup = "Reconcilor Generics"
         ImportName = "PortBalance"
         SourceSchemaName = "PortBalance"
         CanGenerateSourceSchema = False
-        _settings = ConfigurationSettings.GetConfigurationSettings()
+        _settings = ConfigurationSettings.GetConfigurationSettings(config)
     End Sub
 
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)

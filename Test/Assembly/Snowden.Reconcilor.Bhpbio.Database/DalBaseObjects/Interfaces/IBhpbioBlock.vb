@@ -145,7 +145,7 @@ Namespace DalBaseObjects
         ''' <param name="lumpPercentAsShipped">the percentage of lump material</param>
         ''' <param name="lumpPercentAsDropped">the percentage of lump material</param>
         ''' <param name="modelBlockId">reference parameter set to the id of the model block record on add</param>
-        Sub AddBhpbioStageBlockModel(ByVal modelType As String, ByVal blockId As Integer, ByVal materialCode As String, ByVal volume As Double, ByVal tonnes As Double, ByVal density As Double, ByVal lastModifiedUserName As String, ByVal lastModifiedDateTime As DateTime, ByVal modelFileName As String, ByVal lumpPercentAsShipped As Nullable(Of Decimal), ByVal lumpPercentAsDropped As Nullable(Of Decimal), ByRef modelBlockId As Nullable(Of Integer))
+        Sub AddBhpbioStageBlockModel(ByVal modelType As String, ByVal blockId As Integer, ByVal materialCode As String, ByVal volume As Double, ByVal tonnes As Double, ByVal density As Double, ByVal lastModifiedUserName As String, ByVal lastModifiedDateTime As DateTime, ByVal modelFileName As String, ByVal lumpPercentAsShipped As Nullable(Of Decimal), ByVal lumpPercentAsDropped As Nullable(Of Decimal), stratNum As String, weathering As Integer?, ByRef modelBlockId As Nullable(Of Integer))
 
         ''' <summary>
         ''' Delete all model blocks (and associated grades) associated with the specified Block and model type

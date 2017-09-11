@@ -26,7 +26,9 @@ SELECT
 	m.[LastModifiedDate],
 	m.[ModelFilename],
 	m.LumpPercentAsDropped,
-	m.LumpPercentAsShipped
+	m.LumpPercentAsShipped,
+	m.StratNum,
+	m.Weathering
 FROM [Staging].[StageBlockModel] m
 	INNER JOIN Staging.StageBlock b ON b.BlockId = m.BlockId
 

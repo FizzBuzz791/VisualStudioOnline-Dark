@@ -146,6 +146,7 @@
     <Compile Include="..\Version.vb">
       <Link>Version.vb</Link>
     </Compile>
+    <Compile Include="ImportTypeEnum.vb" />
     <Compile Include="Helpers\CodeTranslationHelper.vb" />
     <Compile Include="Helpers\DataTypesExtensions.vb" />
     <Compile Include="Helpers\GeneralHelper.vb" />

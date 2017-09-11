@@ -303,7 +303,7 @@ Friend NotInheritable Class BlockModel
 
             'INSERT / UPDATE checks
             If syncAction = SyncImportSyncActionEnumeration.Insert Or syncAction = SyncImportSyncActionEnumeration.Update Then
-                For Each fieldName In New String() {"ModelTonnes", "BlockNumber", "LastModifiedUser", "ModelLumpPercentAsShipped", "ModelLumpPercentAsDropped"}
+                For Each fieldName In New String() {"ModelTonnes", "BlockNumber", "LastModifiedUser", "ModelLumpPercentAsShipped", "ModelLumpPercentAsDropped", "StratNum", "Weathering"}
                     Select Case fieldName
                         Case "ModelTonnes" 'check for <= 0.0 or NULL
                             If (sourceRow(fieldName) Is DBNull.Value OrElse Convert.ToDouble(sourceRow(fieldName)) <= 0.0) Then
@@ -329,6 +329,22 @@ Friend NotInheritable Class BlockModel
                                 If (Convert.ToDecimal(sourceRow(fieldName)) < 0.0) Or (Convert.ToDecimal(sourceRow(fieldName)) > 100) Then
                                     GeneralHelper.LogValidationError("Lump Percent As Dropped must be between 0 and 100 inclusive.", fieldName,
                                                                      syncQueueRow, importSyncValidate, importSyncValidateField)
+                                End If
+                            End If
+                        Case "StratNum"
+                            If Not sourceRow(fieldName) Is DBNull.Value Then
+                                Dim stratNum = CStr(sourceRow(fieldName))
+                                If (Not _bhpbioUtilityDal.DoesStratNumExistInStratigraphyHierarchy(stratNum)) Then
+                                    GeneralHelper.LogValidationError("StratNum does not exist", $"StratNum {stratNum} does not exist", {stratNum},
+                                    syncQueueRow, importSyncValidate, importSyncValidateField)
+                                End If
+                            End If
+                        Case "Weathering"
+                            If Not sourceRow(fieldName) Is DBNull.Value Then
+                                Dim weathering = CInt(sourceRow(fieldName))
+                                If (Not _bhpbioUtilityDal.DoesWeatheringValueExistInWeathering(weathering)) Then
+                                    GeneralHelper.LogValidationError("Weathering does not exist", $"Weathering {weathering} does not exist", {weathering.ToString()},
+                                    syncQueueRow, importSyncValidate, importSyncValidateField)
                                 End If
                             End If
                     End Select
@@ -871,6 +887,16 @@ Friend NotInheritable Class BlockModel
                 _digblockDal.AddOrUpdateDigblockValue(blockCode,
                     Convert.ToDouble(sourceRow("ModelVolume")), "ModelVolume", NullValues.Int32)
             End If
+
+            If Not sourceRow("StratNum") Is DBNull.Value Then
+                _digblockDal.AddOrUpdateDigblockNotes(blockCode,
+                    Convert.ToString(sourceRow("StratNum")), "StratNum", NullValues.Int32)
+            End If
+
+            If Not sourceRow("Weathering") Is DBNull.Value Then
+                _digblockDal.AddOrUpdateDigblockNotes(blockCode,
+                    Convert.ToString(sourceRow("Weathering")), "Weathering", NullValues.Int32)
+            End If
         End If
 
         'create the digblock/model block links where available
@@ -933,7 +959,7 @@ Friend NotInheritable Class BlockModel
 
         'the following fields can change: BlockNumber, GeoType, BlockedDate, BlastedDate,
         'CentroidEasting, CentroidNorthing, CentroidRL, ModelTonnes,
-        'LastModifiedUser, LastModifiedDate, Point, Grade
+        'LastModifiedUser, LastModifiedDate, Point, Grade, StratNum
 
         ProcessChangedFieldNotes("BlockNumber", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("GeoType", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
@@ -943,6 +969,8 @@ Friend NotInheritable Class BlockModel
         ProcessChangedFieldNotes("LastModifiedDate", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("ModelFilename", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
         ProcessChangedFieldNotes("BlockExternalSystemId", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
+        ProcessChangedFieldNotes("StratNum", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
+        ProcessChangedFieldNotes("Weathering", syncQueueChangedFields, modelBlockId, sequenceNo, sourceRow, digblock, digblockId)
 
         If syncQueueChangedFields.Select("ChangedField = 'ModelVolume'").Length > 0 Then
             If Not sourceRow("ModelVolume") Is DBNull.Value Then
@@ -1054,15 +1082,18 @@ Friend NotInheritable Class BlockModel
     Private Sub ProcessChangedFieldNotes(changedField As String, syncQueueChangedFields As DataTable, modelBlockId As Integer, sequenceNo As Integer,
         sourceRow As DataRow, digblock As Boolean, digblockId As String)
 
+        Dim modelBlockIgnoreListWhenNull As List(Of String) = New List(Of String)() From {"ModelFilename", "ModelVolume", "StratNum", "Weathering"}
+        Dim modelBlockIgnoreList As List(Of String) = New List(Of String)() From {"StratNum", "Weathering"}
+
         If syncQueueChangedFields.Select("ChangedField = '" & changedField & "'").Length > 0 Then
             If Not changedField.Equals("BlockExternalSystemId") Then
-                If sourceRow(changedField) Is DBNull.Value And Not (changedField.Equals("ModelFilename") Or changedField.Equals("ModelVolume")) Then
+                If sourceRow(changedField) Is DBNull.Value And Not (modelBlockIgnoreListWhenNull.Contains(changedField)) Then
                     BlockModelDal.AddOrUpdateModelBlockPartialNotes(modelBlockId, sequenceNo,
                         changedField, NullValues.String, NullValues.Int32)
                 ElseIf changedField.Equals("BlockedDate") Or changedField.Equals("BlastedDate") Or changedField.Equals("LastModifiedDate") Then
                     BlockModelDal.AddOrUpdateModelBlockPartialNotes(modelBlockId, sequenceNo,
                         changedField, Convert.ToDateTime(sourceRow(changedField)).ToString("O"), NullValues.Int32)
-                Else
+                ElseIf (Not modelBlockIgnoreList.Contains(changedField)) Then
                     BlockModelDal.AddOrUpdateModelBlockPartialNotes(modelBlockId, sequenceNo,
                         changedField, Convert.ToString(sourceRow(changedField)), NullValues.Int32)
                 End If
