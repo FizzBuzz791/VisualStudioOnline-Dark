@@ -448,7 +448,7 @@ Namespace SqlDal
         Public Sub AddBhpbioStageBlockModel(modelType As String, blockId As Integer, materialCode As String, volume As Double, tonnes As Double,
             density As Double, lastModifiedUserName As String, lastModifiedDateTime As DateTime, modelFileName As String,
             lumpPercentAsShipped As Nullable(Of Decimal), lumpPercentAsDropped As Nullable(Of Decimal), stratNum As String,
-            ByRef modelBlockId As Nullable(Of Integer)) Implements IBhpbioBlock.AddBhpbioStageBlockModel
+            weathering As Integer?, ByRef modelBlockId As Nullable(Of Integer)) Implements IBhpbioBlock.AddBhpbioStageBlockModel
 
             Dim outId As DataAccessParameter
 
@@ -474,6 +474,7 @@ Namespace SqlDal
 
                     .Add("@iModelFilename", CommandDataType.VarChar, CommandDirection.Input, 200, modelFileName)
                     .Add("@iStratNum", CommandDataType.VarChar, CommandDirection.Input, stratNum)
+                    .Add("@iWeathering", CommandDataType.Int, CommandDirection.Input, weathering)
 
                     outId = .Add("@oModelBlockId", CommandDataType.Int, CommandDirection.Output, NullValues.Int32)
                 End With
