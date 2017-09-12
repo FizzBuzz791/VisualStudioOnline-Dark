@@ -336,6 +336,8 @@ Partial Public Class BlockModelSource
         
         Private columnStratNum As Global.System.Data.DataColumn
         
+        Private columnWeathering As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -588,6 +590,14 @@ Partial Public Class BlockModelSource
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property WeatheringColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWeathering
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -651,9 +661,10 @@ Partial Public Class BlockModelSource
                     ByVal ModelLumpPercentAsDropped As Decimal,  _
                     ByVal ModelVolume As Double,  _
                     ByVal ResourceClassification As String,  _
-                    ByVal StratNum As String) As BlastModelBlockWithPointAndGradeRow
+                    ByVal StratNum As String,  _
+                    ByVal Weathering As Integer) As BlastModelBlockWithPointAndGradeRow
             Dim rowBlastModelBlockWithPointAndGradeRow As BlastModelBlockWithPointAndGradeRow = CType(Me.NewRow,BlastModelBlockWithPointAndGradeRow)
-            Dim columnValuesArray() As Object = New Object() {Site, Orebody, Pit, Bench, PatternNumber, BlockName, ModelName, ModelOreType, BlockExternalSystemId, ModelFilename, BlockNumber, GeoType, BlockedDate, BlastedDate, CentroidEasting, CentroidNorthing, CentroidRL, ModelTonnes, LastModifiedUser, LastModifiedDate, Point, Grade, ModelLumpPercentAsShipped, ModelLumpPercentAsDropped, ModelVolume, ResourceClassification, StratNum}
+            Dim columnValuesArray() As Object = New Object() {Site, Orebody, Pit, Bench, PatternNumber, BlockName, ModelName, ModelOreType, BlockExternalSystemId, ModelFilename, BlockNumber, GeoType, BlockedDate, BlastedDate, CentroidEasting, CentroidNorthing, CentroidRL, ModelTonnes, LastModifiedUser, LastModifiedDate, Point, Grade, ModelLumpPercentAsShipped, ModelLumpPercentAsDropped, ModelVolume, ResourceClassification, StratNum, Weathering}
             rowBlastModelBlockWithPointAndGradeRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowBlastModelBlockWithPointAndGradeRow)
             Return rowBlastModelBlockWithPointAndGradeRow
@@ -709,6 +720,7 @@ Partial Public Class BlockModelSource
             Me.columnModelVolume = MyBase.Columns("ModelVolume")
             Me.columnResourceClassification = MyBase.Columns("ResourceClassification")
             Me.columnStratNum = MyBase.Columns("StratNum")
+            Me.columnWeathering = MyBase.Columns("Weathering")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -768,6 +780,8 @@ Partial Public Class BlockModelSource
             MyBase.Columns.Add(Me.columnResourceClassification)
             Me.columnStratNum = New Global.System.Data.DataColumn("StratNum", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnStratNum)
+            Me.columnWeathering = New Global.System.Data.DataColumn("Weathering", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWeathering)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnSite, Me.columnOrebody, Me.columnPit, Me.columnBench, Me.columnPatternNumber, Me.columnBlockName, Me.columnModelName, Me.columnModelOreType}, true))
             Me.columnSite.AllowDBNull = false
             Me.columnSite.MaxLength = 9
@@ -1324,6 +1338,22 @@ Partial Public Class BlockModelSource
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Weathering() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableBlastModelBlockWithPointAndGrade.WeatheringColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Weathering' in table 'BlastModelBlockWithPointAndGrade' is "& _ 
+                            "DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableBlastModelBlockWithPointAndGrade.WeatheringColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsBlockExternalSystemIdNull() As Boolean
             Return Me.IsNull(Me.tableBlastModelBlockWithPointAndGrade.BlockExternalSystemIdColumn)
         End Function
@@ -1536,6 +1566,18 @@ Partial Public Class BlockModelSource
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetStratNumNull()
             Me(Me.tableBlastModelBlockWithPointAndGrade.StratNumColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsWeatheringNull() As Boolean
+            Return Me.IsNull(Me.tableBlastModelBlockWithPointAndGrade.WeatheringColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetWeatheringNull()
+            Me(Me.tableBlastModelBlockWithPointAndGrade.WeatheringColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

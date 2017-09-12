@@ -27,12 +27,11 @@
     <JVOwner />
     <Block>
       <Name>1</Name>
-      <BlockGUID>b2443171-b363-4f88-a403-3cee9420dd4d</BlockGUID>
+      <BlockGUID>a2443171-b363-4f88-a403-3cee9420dd4d</BlockGUID>
       <BlockNumber>0</BlockNumber>
       <GeoType>N3</GeoType>
       <DateBlocked>2005-08-28T00:00:00</DateBlocked>
-      <Stratigraphy>N3</Stratigraphy>
-      <StratNum>1111</StratNum>
+      <Weathering>1</Weathering>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
         <Tonnes>52077.009</Tonnes>
@@ -779,8 +778,6 @@
       <BlockNumber>0</BlockNumber>
       <GeoType>WA1</GeoType>
       <DateBlocked>2005-08-28T00:00:00</DateBlocked>
-      <Stratigraphy>WA1</Stratigraphy>
-      <StratNum>0</StratNum>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
         <Tonnes>12144.415</Tonnes>
@@ -1225,8 +1222,6 @@
       <BlockNumber>0</BlockNumber>
       <GeoType>WS</GeoType>
       <DateBlocked>2005-08-28T00:00:00</DateBlocked>
-      <Stratigraphy>SZ</Stratigraphy>
-      <StratNum>0</StratNum>
       <ModelBlock>
         <ModelType>GRADE CONTROL</ModelType>
         <Tonnes>2021.543</Tonnes>

@@ -1,7 +1,7 @@
 ﻿-- this directory must contain the csv, and the xml schema definition
 -- 'Resource Classification Migration.xml', the name of the csv doesn't
 -- matter, but make sure that its the only csv in the directory
-DECLARE @directory varchar(256) = 'C:\temp\'
+DECLARE @directory varchar(256) = 'C:\temp\'	-- Find out what this should be when running on a server cluster
 
 -- Load data from CSV files into [Staging].[StratNumImport] table
 DECLARE @sql varchar(max)

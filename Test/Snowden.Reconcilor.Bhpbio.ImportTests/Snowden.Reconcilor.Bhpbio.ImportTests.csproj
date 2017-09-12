@@ -79,6 +79,7 @@
     <Compile Include="Helpers\StagingDataSetupHelper.cs" />
     <Compile Include="StratigraphyImportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeatheringImportTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Assembly\Snowden.Reconcilor.Bhpbio.DataStaging\Snowden.Reconcilor.Bhpbio.DataStaging.csproj">
@@ -107,7 +108,14 @@
     <EmbeddedResource Include="Resources\Staging-Import-Valid-StratNum-Update-Value.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Staging-Import-Valid-StratNum-Null-Value.xml" />
+    <EmbeddedResource Include="Resources\Staging-Import-Valid-Null-Values.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Staging-Import-Invalid-Weathering.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Staging-Import-Valid-Weathering.xml" />
+    <EmbeddedResource Include="Resources\Staging-Import-Valid-Weathering-Update-Value.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

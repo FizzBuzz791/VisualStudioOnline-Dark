@@ -10,6 +10,7 @@ declare @weatheringString varchar(1023)
 declare @stratNumNode XML
 declare @weatheringNode XML
 declare @ImportSyncRowId int
+declare @returnedErrorMessage nvarchar(4000)
 
 
 --No point processing records where the digblock won't resolve - mark it as processed
@@ -35,6 +36,7 @@ UPDATE Staging.Tmp_StratWeatheringImport
 	SET	[Processed] = 1,
 		[PROCESSED_DATETIME] = GetDate()
 WHERE	[DIGBLOCK_FOUND] = 0
+AND		PROCESSED = 0
 
 DECLARE  CUR_DIGBLOCKS CURSOR  FOR
 SELECT	TOP 1 
@@ -48,6 +50,7 @@ SELECT	TOP 1
 		[IMPORT_SYNC_ROW_ID]
 FROM	Staging.Tmp_StratWeatheringImport
 WHERE	[PROCESSED] = 0
+ORDER BY [SITE], [DIGBLOCK_ID]
 
 OPEN CUR_DIGBLOCKS;
 
@@ -97,9 +100,10 @@ BEGIN
 		
 		IF (@StratNumFound = 1 or @weatheringFound = 1)	--Only do something if there is a reason to do the update. i.e. Strat and/or Weathering need updating
 		BEGIN
+			PRINT '[BhpbioSummaryEntry]'
 			UPDATE [dbo].[BhpbioSummaryEntry]
-				SET [dbo].[BhpbioSummaryEntry].StratNum = Staging.Tmp_StratWeatheringImport.GEOMET_STRATNUM,
-					[dbo].[BhpbioSummaryEntry].Weathering = Staging.Tmp_StratWeatheringImport.GEOMET_WEATHERING
+				SET [dbo].[BhpbioSummaryEntry].StratNum = CASE WHEN @StratNumFound = 0 THEN NULL ELSE Staging.Tmp_StratWeatheringImport.GEOMET_STRATNUM END,
+					[dbo].[BhpbioSummaryEntry].Weathering = CASE WHEN @weatheringFound = 0 THEN NULL ELSE Staging.Tmp_StratWeatheringImport.GEOMET_WEATHERING END
 			FROM	Staging.Tmp_StratWeatheringImport inner join [dbo].[DigblockLocation]
 						ON [dbo].[DigblockLocation].Digblock_Id = Staging.Tmp_StratWeatheringImport.DIGBLOCK_ID AND Location_Type_Id = 7
 					INNER JOIN [dbo].[BhpbioSummaryEntry] on [dbo].[BhpbioSummaryEntry].[LocationId] = [dbo].[DigblockLocation].[Location_Id]
@@ -108,6 +112,7 @@ BEGIN
 			WHERE	Staging.Tmp_StratWeatheringImport.DIGBLOCK_ID =  @digblockId
 		END
 
+	PRINT 'Set Processed = 1'
 	Update	Staging.Tmp_StratWeatheringImport
 	Set		[PROCESSED] = 1,
 			[PROCESSED_DATETIME] = GetDate()
@@ -118,18 +123,21 @@ BEGIN
 
 END TRY
 BEGIN CATCH
+	SET @returnedErrorMessage = ERROR_MESSAGE()
 	WHILE (@@TRANCOUNT > 0)
 	BEGIN
 		ROLLBACK TRANSACTION
 	END
 
+	BEGIN TRANSACTION
 	Update Staging.Tmp_StratWeatheringImport
 	Set [Processed] = 1,
 		[PROCESSED_DATETIME] = GetDate(),
-		[ERROR_MESSAGE] = [ERROR_MESSAGE] + ', ' + ERROR_MESSAGE()
+		[ERROR_MESSAGE] = [ERROR_MESSAGE] + ', ' + @returnedErrorMessage
 	Where Digblock_Id = @digblockId
+	COMMIT TRANSACTION
 
-	print ERROR_MESSAGE()
+	print @returnedErrorMessage
 END CATCH 
 		
 
