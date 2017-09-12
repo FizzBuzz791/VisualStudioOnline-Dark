@@ -1525,22 +1525,44 @@ Namespace Reports
                 contexts.Add("HaulageContext", "Haulage Context")
                 contexts.Add("SampleCoverage", "Sample Coverage")
                 contexts.Add("SampleRatio", "Tonnes/Sample")
-                contexts.Add("Stratigraphy", "Stratigraphy Context")
                 contexts.Add("Weathering", "Weathering Context")
             Else
                 contexts.Add("ResourceClassification", "Resource Classification")
             End If
 
-            For Each value As KeyValuePair(Of String, String) In contexts
+            For Each value In contexts
                 Dim contextOption = New InputCheckBox With {
-                    .ID = "chkContext_" & value.Key,
-                    .Text = " " & value.Value
+                    .ID = $"chkContext_{value.Key}",
+                    .Text = $" {value.Value}"
                 }
 
-                Dim contextOptionCell As TableCell = control.AddCellInNewRow
+                Dim contextOptionCell = control.AddCellInNewRow
                 contextOptionCell.Controls.Add(contextOption)
                 contextOptionCell.ID = value.Key
             Next
+
+            Dim stratigraphyOption = New SelectBox With {
+                .ID = "cmbStrat"
+            }
+
+            With stratigraphyOption
+                With .Items
+                    .Insert(0, New ListItem("None", "0") With {
+                        .Selected = True
+                    })
+                    .Insert(1, New ListItem("Group", "1"))
+                    .Insert(2, New ListItem("Formation", "2"))
+                    .Insert(3, New ListItem("Member", "3"))
+                End With
+
+                .SelectedIndex = 0
+            End With
+
+            Dim stratCell = control.AddCellInNewRow()
+            stratCell.Controls.Add(New LiteralControl("Stratigraphy: "))
+            stratCell = control.AddCell()
+            stratCell.Controls.Add(stratigraphyOption)
+            stratCell.ID = "cmbStratCell"
 
             parameter.Control = control
             Return control

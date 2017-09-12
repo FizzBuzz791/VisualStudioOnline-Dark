@@ -892,11 +892,16 @@ Namespace Types
         ''' <param name="onProductSize">if true, product size will be part of the lookup key</param>
         ''' <returns>the dictionary data structure to be used for lookup</returns>
         Private Shared Function BuildRecordLookupByMainAggregationFieldsStore(result As CalculationResult,
-                                            Optional ByVal onMaterialTypeId As Boolean = True,
-                                            Optional ByVal onLocationId As Boolean = True,
-                                            Optional ByVal onProductSize As Boolean = True) As Dictionary(Of String, CalculationResultRecord)
+                                                                              Optional ByVal onMaterialTypeId As Boolean = True,
+                                                                              Optional ByVal onLocationId As Boolean = True,
+                                                                              Optional ByVal onProductSize As Boolean = True, 
+                                                                              Optional ByVal onStratigraphy As Boolean = True,
+                                                                              Optional ByVal onWeathering As Boolean = True) _
+                                                                              As Dictionary(Of String, CalculationResultRecord)
             ' pre-aggregate to avoid aggregation on each loop
-            Dim preAggregated = result.AggregateRecords(onMaterialTypeId:=onMaterialTypeId, onLocationId:=onLocationId, onProductSize:=onProductSize).ToList()
+            Dim preAggregated = result.AggregateRecords(onMaterialTypeId := onMaterialTypeId, onLocationId := onLocationId, 
+                                                        onProductSize := onProductSize, onStratigraphy := onStratigraphy, 
+                                                        onWeathering := onWeathering).ToList()
             Dim store As New Dictionary(Of String, CalculationResultRecord)
 
             For Each record In preAggregated

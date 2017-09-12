@@ -225,6 +225,18 @@ Namespace Types
                             ResourceClassification = value.AsString(ColumnNames.RESOURCE_CLASSIFICATION)
                         End If
 
+                        If value.HasColumn(ColumnNames.STRAT_NUM) AndAlso value.HasValue(ColumnNames.STRAT_NUM) Then
+                            StratNum = value.AsString(ColumnNames.STRAT_NUM)
+                        End If
+
+                        If value.HasColumn(ColumnNames.STRAT_LEVEL) AndAlso value.HasValue(ColumnNames.STRAT_LEVEL) Then
+                            StratLevel = value.AsString(ColumnNames.STRAT_LEVEL)
+                        End If
+
+                        If value.HasColumn(ColumnNames.WEATHERING) Then
+                            Weathering = value.AsIntN(ColumnNames.WEATHERING)
+                        End If
+
                         ' Set the intial value of the dodgy aggregate to the tonnes value
                         ' See Calculation.vb Sub Calculate Answer for description of Dodgy Aggregate.
                         DodgyAggregateGradeTonnes = Tonnes

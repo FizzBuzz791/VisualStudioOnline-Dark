@@ -562,7 +562,7 @@ function ValidateFactorAnalysisContextReport() {
     var result = true;
     var attributeSelectionIsValid = EnsureAtleastOneCheckboxIsSelected(attributePrefix);
     var monthSelectionIsValid = BhpbioValidateReportLocationAndDateOnly();
-    var contextSelectionIsValid = EnsureContextSelectionIsValid()
+    var contextSelectionIsValid = EnsureContextSelectionIsValid();
 
     if (!attributeSelectionIsValid) {
         alert('Please select at least one Attribute');
@@ -579,7 +579,7 @@ function ValidateFactorAnalysisContextReport() {
 
 function EnsureContextSelectionIsValid() {
     // Context selection is valid only if Tonnes/Sample is selected in isolation (or not selected at all)
-    var contextSelectionIsValid = false;
+    var contextSelectionIsValid;
 
     var tonnesPerSampleIsSelected = $("#chkContext_SampleRatio").is(":checked");
     if (tonnesPerSampleIsSelected) {
@@ -588,6 +588,9 @@ function EnsureContextSelectionIsValid() {
                 contextSelectionIsValid = !($("#" + v.name).is(":checked"));
             }
         });
+
+        // Ensure stratigraphy option is set to None
+        contextSelectionIsValid = $("#cmbStrat option:selected").val() === "0";
     } else {
         contextSelectionIsValid = true;
     }

@@ -255,6 +255,8 @@ Namespace Reports
             End Get
         End Property
 
+        Public Property LowestStratigraphyLevel As Integer = 0
+
 #End Region
 
         Protected Overrides Sub RetrieveRequestData()
@@ -650,6 +652,11 @@ Namespace Reports
                                 End If
                             End If
 
+                            ' Stratigraphy Selection
+                            If key.Contains("cmbStrat") Then
+                                LowestStratigraphyLevel = RequestAsInt32("cmbStrat")
+                            End If
+
                             'Grades
                             If ((key.Contains("chkGrade_"))) Then
                                 Dim gradeID As String
@@ -938,6 +945,10 @@ Namespace Reports
                     Else
                         SetParameterValue("ContextSelection", "")
                     End If
+                End If
+
+                If Report.Parameters.ContainsKey(NameOf(LowestStratigraphyLevel)) Then
+                    SetParameterValue(NameOf(LowestStratigraphyLevel), LowestStratigraphyLevel.ToString())
                 End If
 
                 ' have the dates been set yet? if not assume it is the standard case with the date
