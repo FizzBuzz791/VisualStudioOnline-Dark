@@ -5,7 +5,7 @@
 	[StratigraphyHierarchyType_Id] INT NOT NULL, 
 	[Stratigraphy] varchar(50) NOT NULL,
 	[Description] VARCHAR(255) NOT NULL, 
-	[StratNum] VARCHAR(7) NULL, 
+	[StratNum] VARCHAR(7) NOT NULL, 
 	[Colour] VARCHAR(25) NOT NULL,
 	[SortOrder] INT NOT NULL, 
 	CONSTRAINT [PK_BhpbioStratigraphyHierarchy] PRIMARY KEY CLUSTERED

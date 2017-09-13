@@ -22,9 +22,10 @@ CREATE UNIQUE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyType
 ON [dbo].[BhpbioStratigraphyHierarchyType]([Level])
 GO
 
-INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Formation', 1)
-INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Member', 2)
-INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Strat Unit', 3)
+INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Group', 1)
+INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Formation', 2)
+INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Member', 3)
+INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Strat Unit', 4)
 
 CREATE TABLE [dbo].[BhpbioStratigraphyHierarchy]
 (
@@ -33,7 +34,7 @@ CREATE TABLE [dbo].[BhpbioStratigraphyHierarchy]
 	[StratigraphyHierarchyType_Id] INT NOT NULL, 
 	[Stratigraphy] varchar(50) NOT NULL,
 	[Description] VARCHAR(255) NOT NULL, 
-	[StratNum] VARCHAR(7) NULL, 
+	[StratNum] VARCHAR(7) NOT NULL, 
 	[Colour] VARCHAR(25) NOT NULL,
 	[SortOrder] INT NOT NULL, 
 	CONSTRAINT [PK_BhpbioStratigraphyHierarchy] PRIMARY KEY CLUSTERED
