@@ -1748,9 +1748,37 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Note: Sample station reliability is determined from the number of assays returned for the sample station used to derive the Mine Production Actual grades. Sample station reliability also reflects the overall reliability of the assay process.</Value>
+                    <Value>Note: </Value>
                     <Style>
                       <FontStyle>Italic</FontStyle>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>‘Sample Station Reliability’ is the ratio of </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>‘Tonnes whose grades are informed by samples (and associated assays) derived from a sample station / total tonnes passed through that sample station’</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>.  ‘Sample Station Reliability’ therefore reflects the efficiency of the entire chain of custody for each sample – ‘Sample taken’ ‘Sample delivered to lab’ ‘Sample analysed’ ‘Assay posted to MQ2’. For example, if a sample station is working correctly but none of its samples were delivered to the lab, then it’s reliability will be shown as ‘0.00%’.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1758,9 +1786,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>25.03715cm</Top>
+            <Top>24.9cm</Top>
             <Left>0.33919cm</Left>
-            <Height>1.44cm</Height>
+            <Height>1.64797cm</Height>
             <Width>18.50023cm</Width>
             <ZIndex>3</ZIndex>
             <Visibility>
