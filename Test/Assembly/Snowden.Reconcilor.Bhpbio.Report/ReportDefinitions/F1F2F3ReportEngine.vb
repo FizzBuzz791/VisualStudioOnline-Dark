@@ -1029,7 +1029,7 @@ Namespace ReportDefinitions
             End If
 
             Dim calendarDateSuffix = String.Empty
-            If Not String.IsNullOrEmpty(calendarDateSuffix) Then
+            If Not String.IsNullOrEmpty(calendarDate) Then
                 calendarDateSuffix = $"_{calendarDate}"
             End If
 

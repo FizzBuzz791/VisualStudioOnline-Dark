@@ -47,6 +47,7 @@
         ' DateText
         Public Const STRAT_NUM = "Strat"
         Public Const STRAT_LEVEL = "StratLevel"
+        Public Const STRAT_LEVEL_NAME = "StratLevelName"
         Public Const WEATHERING = "Weathering"
 
         ' Not sure where these fit in

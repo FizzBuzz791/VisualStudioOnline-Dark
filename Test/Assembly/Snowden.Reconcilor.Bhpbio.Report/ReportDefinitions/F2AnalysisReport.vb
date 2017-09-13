@@ -114,6 +114,28 @@ Namespace ReportDefinitions
                 F1F2F3ReportEngine.FilterTableByAttributeList(table, attributeList)
             End If
 
+            If session.LowestStratigraphyLevel > 0 Then
+                Dim stratigraphyReporter AS IStratigraphyReporter = New StratigraphyReporter(session.LowestStratigraphyLevel)
+                If factorId.StartsWith("F1", StringComparison.Ordinal) Then
+                    stratigraphyReporter.AddStratigraphyContextDataForF1OrF15(table, locationId, dateFrom, dateTo, 
+                                                                              dateBreakdown)
+                Else 
+                    stratigraphyReporter.AddStratigraphyContextDataForF2OrF3(table, locationId, dateFrom, dateTo,
+                                                                             dateBreakdown)
+                End If
+            End If
+
+            If contextList.Contains("Weathering") Then
+                Dim weatheringReporter AS IWeatheringReporter = New WeatheringReporter
+                If factorId.StartsWith("F1", StringComparison.Ordinal) Then
+                    weatheringReporter.AddWeatheringContextDataForF1OrF15(table, locationId, dateFrom, dateTo, 
+                                                                          dateBreakdown)
+                Else                      
+                    weatheringReporter.AddWeatheringContextDataForF2OrF3(table, locationId, dateFrom, dateTo, 
+                                                                         dateBreakdown)
+                End If
+            End If
+
             AddShortFactorDescriptions(table)
             NormalizeGroupingLabels(table)
 

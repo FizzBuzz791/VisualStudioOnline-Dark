@@ -966,7 +966,8 @@
 		Fields!ContextCategory.Value = "HaulageContext", "H",
 		Fields!ContextCategory.Value = "DepletionContext", "M",
 		Fields!ContextCategory.Value = "SampleCoverage", "SC",
-    	Fields!ContextCategory.Value = "SampleRatio", "T/S",
+		Fields!ContextCategory.Value = "SampleRatio", "T/S",
+		Fields!ContextCategory.Value = "Stratigraphy", "ST",
 		True, Fields!ContextCategory.Value
 	),
 	Switch(
@@ -974,7 +975,8 @@
 		Fields!ContextCategory.Value = "HaulageContext", "Hauled From",
 		Fields!ContextCategory.Value = "DepletionContext", "Mined",
 		Fields!ContextCategory.Value = "SampleCoverage", "Sample Coverage",
-    	Fields!ContextCategory.Value = "SampleRatio", "Tonnes/Sample",
+		Fields!ContextCategory.Value = "SampleRatio", "Tonnes/Sample",
+		Fields!ContextCategory.Value = "Stratigraphy", "Stratigraphy",
 		True, Fields!ContextCategory.Value
 	)
 )</Label>

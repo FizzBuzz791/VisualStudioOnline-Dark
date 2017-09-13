@@ -30,7 +30,7 @@ Namespace ReportHelpers
         ''' <summary>
         ''' Convert a context row to a factor row (a.k.a. standard row) and add to the master table.
         ''' </summary>
-        ''' <param name="dataRow">Row to convert.</param>
+        ''' <param name="sourceRow">Row to convert.</param>
         ''' <param name="masterTable">Table to add converted row to.</param>
         ''' <param name="presentationColor">Color to display on the report. If null or empty, LocationName will be converted to
         '''                                 a color.</param>
@@ -39,7 +39,7 @@ Namespace ReportHelpers
         ''' <param name="locationType">Location Type to assign.</param>
         ''' <param name="contextCategory">Category of the context.</param>
         ''' <param name="contextGroupingLabel">Label for the context grouping.</param>
-        Public Sub AddContextRowAsNonFactorRow(dataRow As DataRow, ByRef masterTable As DataTable, presentationColor As String,
+        Public Sub AddContextRowAsNonFactorRow(sourceRow As DataRow, ByRef masterTable As DataTable, presentationColor As String,
                                                tonnes As Double, contextGrouping As String, locationType As String,
                                                contextCategory As String, contextGroupingLabel As String,
                                                locationName As String) _
@@ -57,12 +57,12 @@ Namespace ReportHelpers
                 row = masterTable.NewRow()
             End If
 
-            row("CalendarDate") = dataRow("DateFrom")
-            row("DateFrom") = dataRow("DateFrom")
-            row("DateTo") = dataRow("DateTo")
-            row("DateText") = CType(dataRow("DateFrom"), DateTime).ToString("MMMM-yy") ' .AsDate breaks Re# *only* here. NFI why.
+            row("CalendarDate") = sourceRow("DateFrom")
+            row("DateFrom") = sourceRow("DateFrom")
+            row("DateTo") = sourceRow("DateTo")
+            row("DateText") = CType(sourceRow("DateFrom"), DateTime).ToString("MMMM-yy") ' .AsDate breaks Re# *only* here. NFI why.
 
-            row("LocationId") = dataRow("LocationId")
+            row("LocationId") = sourceRow("LocationId")
             row("LocationName") = locationName
             row("LocationType") = locationType
 
@@ -72,12 +72,24 @@ Namespace ReportHelpers
             row("PresentationColor") = IIf(String.IsNullOrEmpty(presentationColor), row.AsString("LocationName").AsColor, presentationColor)
             row("LocationColor") = DBNull.Value
 
-            row("Attribute") = dataRow("Grade_Name")
+            If sourceRow.HasColumn("Grade_Name") Then
+                row("Attribute") = sourceRow("Grade_Name")
+            Else
+                row("Attribute") = sourceRow("Attribute")
+            End If
             row("AttributeValue") = 0.0
 
             row("Type") = 1 ' this means a non-factor row
             row("Tonnes") = tonnes
-            row("FactorGradeValueBottom") = dataRow("Grade_Value")
+            If sourceRow.HasColumn("Grade_Value") Then
+                row("FactorGradeValueBottom") = sourceRow("Grade_Value")
+            Else
+                If sourceRow.AsString("Attribute") = "Tonnes" Then
+                    row("FactorGradeValueBottom") = 100
+                Else
+                    row("FactorGradeValueBottom") = sourceRow("AttributeValue")
+                End If
+            End If
             row("FactorTonnesBottom") = tonnes
 
             If row.AsString("ContextCategory") = "HaulageContext" AndAlso row.AsString("ContextGroupingLabel").Length > 5 Then

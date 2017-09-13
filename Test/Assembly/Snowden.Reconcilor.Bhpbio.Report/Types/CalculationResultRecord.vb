@@ -110,7 +110,9 @@ Namespace Types
 
         Public Property StratNum As String
 
-        Public Property StratLevel As String
+        Public Property StratLevel As Integer?
+
+        Public Property StratLevelName As String
 
         Public Property Weathering As Integer?
 #End Region
@@ -229,8 +231,12 @@ Namespace Types
                             StratNum = value.AsString(ColumnNames.STRAT_NUM)
                         End If
 
-                        If value.HasColumn(ColumnNames.STRAT_LEVEL) AndAlso value.HasValue(ColumnNames.STRAT_LEVEL) Then
-                            StratLevel = value.AsString(ColumnNames.STRAT_LEVEL)
+                        If value.HasColumn(ColumnNames.STRAT_LEVEL) Then
+                            StratLevel = value.AsIntN(ColumnNames.STRAT_LEVEL)
+                        End If
+
+                        If value.HasColumn(ColumnNames.STRAT_LEVEL_NAME) AndAlso value.HasValue(ColumnNames.STRAT_LEVEL_NAME) Then
+                            StratLevelName = value.AsString(ColumnNames.STRAT_LEVEL_NAME)
                         End If
 
                         If value.HasColumn(ColumnNames.WEATHERING) Then
@@ -390,6 +396,9 @@ Namespace Types
                 If left.StratLevel = right.StratLevel Then
                     result.StratLevel = left.StratLevel
                 End If
+                If left.StratLevelName = right.StratLevelName Then
+                    result.StratLevelName = left.StratLevelName
+                End If
                 If left.Weathering = right.Weathering Then
                     result.Weathering = left.Weathering
                 End If
@@ -454,6 +463,10 @@ Namespace Types
 
                 If left.StratLevel = right.StratLevel Then
                     result.StratLevel = left.StratLevel
+                End If
+
+                If left.StratLevelName = right.StratLevelName Then
+                    result.StratLevelName = left.StratLevelName
                 End If
 
                 If left.Weathering = right.Weathering Then
@@ -644,6 +657,9 @@ Namespace Types
                 If left.StratLevel = right.StratLevel Then
                     result.StratLevel = left.StratLevel
                 End If
+                If left.StratLevelName = right.StratLevelName Then
+                    result.StratLevelName = left.StratLevelName
+                End If
                 If left.Weathering = right.Weathering Then
                     result.Weathering = left.Weathering
                 End If
@@ -679,6 +695,7 @@ Namespace Types
             Clone.ResourceClassification = ResourceClassification
             Clone.StratNum = StratNum
             Clone.StratLevel = StratLevel
+            Clone.StratLevelName = StratLevelName
             Clone.Weathering = Weathering
         End Function
 
@@ -713,7 +730,8 @@ Namespace Types
             table.Columns.Add(New DataColumn(ColumnNames.RESOURCE_CLASSIFICATION, GetType(String)))
             table.Columns.Add(New DataColumn(ColumnNames.SORT_KEY, GetType(String)))
             table.Columns.Add(New DataColumn(ColumnNames.STRAT_NUM, GetType(String)))
-            table.Columns.Add(New DataColumn(ColumnNames.STRAT_LEVEL, GetType(String)))
+            table.Columns.Add(New DataColumn(ColumnNames.STRAT_LEVEL, GetType(Integer)))
+            table.Columns.Add(New DataColumn(ColumnNames.STRAT_LEVEL_NAME, GetType(String)))
             table.Columns.Add(New DataColumn(ColumnNames.WEATHERING, GetType(Integer)))
 
             If Not normalizedData Then
@@ -773,7 +791,8 @@ Namespace Types
             row(ColumnNames.RESOURCE_CLASSIFICATION) = IIf(ResourceClassification Is Nothing, DBNull.Value, ResourceClassification)
             row(ColumnNames.SORT_KEY) = IIf(SortKey Is Nothing, DBNull.Value, SortKey)
             row(ColumnNames.STRAT_NUM) = IIf(String.IsNullOrEmpty(StratNum), DBNull.Value, StratNum)
-            row(ColumnNames.STRAT_LEVEL) = IIf(String.IsNullOrEmpty(StratLevel), DBNull.Value, StratLevel)
+            row(ColumnNames.STRAT_LEVEL) = IIf(StratLevel Is Nothing, DBNull.Value, StratLevel)
+            row(ColumnNames.STRAT_LEVEL_NAME) = IIf(String.IsNullOrEmpty(StratLevelName), DBNull.Value, StratLevelName)
             row(ColumnNames.WEATHERING) = IIf(Weathering Is Nothing, DBNull.Value, Weathering)
             Return row
         End Function
@@ -810,7 +829,8 @@ Namespace Types
                        UltraFines.Equals(comparisonObj.UltraFines) And
                        Volume.Equals(comparisonObj.Volume) And
                        StratNum = comparisonObj.StratNum And
-                       StratLevel = comparisonObj.StratLevel And
+                       StratLevel.Equals(comparisonObj.StratLevel) And
+                       StratLevelName = comparisonObj.StratLevelName And
                        Weathering.Equals(comparisonObj.Weathering)
             End If
         End Function

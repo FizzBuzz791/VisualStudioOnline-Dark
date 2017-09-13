@@ -125,6 +125,8 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                     LocationId = 27,
                     ProductSize = CalculationConstants.PRODUCT_SIZE_TOTAL,
                     ResourceClassification = "Unclass",
+                    StratNum = "1234",
+                    Weathering = 29,
                     // Records above this line are intentionally the same so that calculations actually match and get processed.
                     Tonnes = 2,
                     Volume = 6,

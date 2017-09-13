@@ -50,7 +50,8 @@ BEGIN
 		Tonnes FLOAT NOT NULL,
 		Volume FLOAT NULL,
 		Strat VARCHAR(7) NULL,
-		StratLevel VARCHAR(20) NULL,
+		StratLevel INT NULL,
+		StratLevelName VARCHAR(20) NULL,
 		Weathering INT NULL
 	)
 	
@@ -69,7 +70,8 @@ BEGIN
 		ResourceClassification VARCHAR(32) NULL,
 		Tonnes FLOAT NOT NULL,
 		Strat VARCHAR(7) NULL,
-		StratLevel VARCHAR(20) NULL,
+		StratLevel INT NULL,
+		StratLevelName VARCHAR(20) NULL,
 		Weathering INT NULL
 	)
 	
@@ -629,6 +631,7 @@ BEGIN
 					Volume,
 					Strat,
 					StratLevel,
+					StratLevelName,
 					Weathering
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, 
@@ -638,7 +641,8 @@ BEGIN
 					SUM(MM.Tonnes) AS Tonnes,
 					SUM(MM.Volume) AS Volume,
 					BSH2.StratNum AS Strat,
-					MAX(BSHT.Type) AS StratLevel,
+					MAX(BSHT.Level) AS StratLevel,
+					MAX(BSHT.Type) AS StratLevelName,
 					DBNWeathering.Notes AS Weathering
 				FROM #ModelMovement AS MM
 				INNER JOIN dbo.BlockModel AS BM
@@ -679,7 +683,8 @@ BEGIN
 					SUM(MM.Tonnes) AS Tonnes,
 					SUM(MM.Volume) AS Volume,
 					BSH2.StratNum AS Strat,
-					MAX(BSHT.Type) AS StratLevel,
+					MAX(BSHT.Level) AS StratLevel,
+					MAX(BSHT.Type) AS StratLevelName,
 					DBNWeathering.Notes AS Weathering
 				FROM #ModelMovement AS MM
 				INNER JOIN dbo.BlockModel AS BM
@@ -728,6 +733,7 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
+					StratLevelName,
 					Weathering
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, MM.CalendarDate, MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MM.ParentLocationId, G.Grade_Id,
@@ -747,7 +753,8 @@ BEGIN
 					MM.ResourceClassification,
 					SUM(MM.Tonnes),
 					BSH2.StratNum AS Strat,
-					MAX(BSHT.Type) AS StratLevel,
+					MAX(BSHT.Level) AS StratLevel,
+					MAX(BSHT.Type) AS StratLevelName,
 					DBNWeathering.Notes AS Weathering
 				FROM #ModelMovement AS MM
 				INNER JOIN dbo.BlockModel AS BM
@@ -809,6 +816,7 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
+					StratLevelName,
 					Weathering
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, MM.CalendarDate, MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MM.ParentLocationId, MBPG.Grade_Id,
@@ -822,7 +830,8 @@ BEGIN
 					MM.ResourceClassification,
 					SUM(MM.Tonnes),
 					BSH2.StratNum AS Strat,
-					MAX(BSHT.Type) AS StratLevel,
+					MAX(BSHT.Level) AS StratLevel,
+					MAX(BSHT.Type) AS StratLevelName,
 					DBNWeathering.Notes AS Weathering
 				FROM #ModelMovement AS MM
 				INNER JOIN dbo.BlockModel AS BM
@@ -1055,6 +1064,7 @@ BEGIN
 						  Volume,
 						  Strat,
 						  StratLevel,
+						  StratLevelName,
 						  Weathering
 					)
 					SELECT @BlockModelId AS BlockModelId, @currentBlockModelName AS ModelName, bws.CalendarDate AS CalendarDate,
@@ -1065,6 +1075,7 @@ BEGIN
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
 						BSH2.StratNum, 
+						MAX(BSHT.Level),
 						MAX(BSHT.Type),
 						BSE.Weathering
 					FROM #BlockWithSummary bws
@@ -1110,6 +1121,7 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
+					StratLevelName,
 					Weathering
 				)
 				SELECT @BlockModelId AS BlockModelId, 
@@ -1126,6 +1138,7 @@ BEGIN
 					per.ResourceClassification AS ResourceClassification,
 					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 					BSH2.StratNum,
+					MAX(BSHT.Level),
 					MAX(BSHT.Type),
 					BSE.Weathering
 				FROM #BlockWithSummary bws
@@ -1181,6 +1194,7 @@ BEGIN
 						Volume,
 						Strat,
 						StratLevel,
+						StratLevelName,
 						Weathering
 					)
 					SELECT @BlockModelId AS BlockModelId, @currentBlockModelName AS ModelName, bws.CalendarDate AS CalendarDate,
@@ -1191,6 +1205,7 @@ BEGIN
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
 						BSH2.StratNum,
+						MAX(BSHT.Level),
 						MAX(BSHT.Type),
 						BSE.Weathering
 					FROM #BlockWithSummary AS bws
@@ -1235,6 +1250,7 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
+					StratLevelName,
 					Weathering
 				)
 				SELECT @BlockModelId AS BlockModelId, 
@@ -1251,6 +1267,7 @@ BEGIN
 					per.ResourceClassification AS ResourceClassification,
 					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 					BSH2.StratNum,
+					MAX(BSHT.Level),
 					MAX(BSHT.Type),
 					BSE.Weathering
 				FROM #BlockWithSummary bws
@@ -1385,6 +1402,7 @@ BEGIN
 			Sum(t.Volume) as Volume,
 			t.Strat,
 			MAX(t.StratLevel) AS StratLevel,
+			MAX(t.StratLevelName) AS StratLevelName,
 			t.Weathering
 		FROM #TonnesTable t
 			LEFT JOIN dbo.GetBhpbioReportHighGrade() AS BRHG 
@@ -1406,6 +1424,7 @@ BEGIN
 			ELSE SUM(gt.Tonnes * gt.GradeValue) / SUM(gt.Tonnes) END As GradeValue, gt.ProductSize,
 			gt.Strat,
 			MAX(gt.StratLevel) AS StratLevel,
+			MAX(gt.StratLevelName) AS StratLevelName,
 			gt.Weathering
 		FROM #GradesTable AS gt
 			INNER JOIN dbo.Grade g

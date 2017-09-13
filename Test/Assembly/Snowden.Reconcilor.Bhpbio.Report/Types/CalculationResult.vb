@@ -169,6 +169,18 @@ Namespace Types
             End Get
         End Property
 
+        Public Readonly Property StratigraphyCollection As IEnumerable(Of String)
+            Get
+                Return From m In Me Group By m.StratNum Into Group Select StratNum
+            End Get
+        End Property
+
+        Public Readonly Property WeatheringCollection As IEnumerable(Of Int32?)
+            Get
+                Return From m In Me Group By m.Weathering Into Group Select Weathering
+            End Get
+        End Property
+
         Public ReadOnly Property IncludesResourceClassificationData As Boolean
             Get
                 Return ResourceClassificationCollection.Where(Function(r) Not String.IsNullOrEmpty(r)).Count > 0
@@ -282,6 +294,7 @@ Namespace Types
             ' value counts the same as a zero, unless the Fe is missing as well, for H2O the weighting is based whether
             ' the grade is present for each individual record. This is required because some calculations don't have these 
             ' grades
+
             aggregatedRecords = arrayList.GroupBy(Function(t) New With {
                 Key .Resourceclassification = GroupedOnString(groupByList.Contains(GroupingColumn.ResourceClassification), t.ResourceClassification),
                 Key .ProductSize = t.ProductSize,
@@ -298,6 +311,7 @@ Namespace Types
                 .LocationId = g.Key.LocationId,
                 .StratNum = g.Key.StratNum,
                 .StratLevel = g.Max(Function(t) t.StratLevel),
+                .StratLevelName = g.Max(Function(t) t.StratLevelName),
                 .Weathering = g.Key.Weathering,
                 .Tonnes = g.Sum(Function(t) t.Tonnes),
                 .Volume = g.Sum(Function(t) t.Volume),
@@ -351,6 +365,7 @@ Namespace Types
                 .H2OShipped = MassWeight(t.H2OShipped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OShippedCnt),
                 .StratNum = t.StratNum,
                 .StratLevel = t.StratLevel,
+                .StratLevelName = t.StratLevelName, 
                 .Weathering = t.Weathering
             })
 
@@ -566,6 +581,8 @@ Namespace Types
             Dim productSizeList = left.ProductSizeCollection.Union(right.ProductSizeCollection).Distinct().ToList()
             Dim materialTypeIdList = left.MaterialTypeIdCollection.Union(right.MaterialTypeIdCollection).Distinct().ToList()
             Dim resourceList = left.ResourceClassificationCollection.Union(right.ResourceClassificationCollection).Distinct().ToList()
+            Dim stratigraphyList = left.StratigraphyCollection.Union(right.StratigraphyCollection).Distinct().ToList()
+            Dim weatheringList = left.WeatheringCollection.Union(right.WeatheringCollection).Distinct.ToList()
 
             Dim result As New CalculationResult(CalculationResultType.Tonnes)
             Dim leftRecord As CalculationResultRecord = Nothing
@@ -592,7 +609,9 @@ Namespace Types
                 dateList.Select(Function(i) i.ToString("ddMMyyyy")),
                 locationIdList.Select(Function(i) i?.ToString()),
                 productSizeList.Select(Function(i) i?.ToString()),
-                resourceList.Select(Function(i) i?.ToString())
+                resourceList.Select(Function(i) i?.ToString()),
+                stratigraphyList,
+                weatheringList.Select(Function(i) i?.ToString())
             }
 
             If breakdownFactorByMaterialType Or calculationType = CalculationType.Difference Then
@@ -907,7 +926,8 @@ Namespace Types
             For Each record In preAggregated
 
 
-                Dim key = BuildRecordLookupByMainAggregationFieldsStoreKey(record, onMaterialTypeId, onLocationId, onProductSize)
+                Dim key = BuildRecordLookupKey(record, onMaterialTypeId, onLocationId, onProductSize, onStratigraphy, 
+                                               onWeathering)
 
                 Dim existingRecord As CalculationResultRecord = Nothing
 
@@ -938,14 +958,19 @@ Namespace Types
         ''' <param name="onLocationId">if true, location id will be part of the lookup key</param>
         ''' <param name="onProductSize">if true, product size will be part of the lookup key</param>
         ''' <returns>string representing the lookup key</returns>
-        Private Shared Function BuildRecordLookupByMainAggregationFieldsStoreKey(record As CalculationResultRecord,
-                                            Optional ByVal onMaterialTypeId As Boolean = True,
-                                            Optional ByVal onLocationId As Boolean = True,
-                                            Optional ByVal onProductSize As Boolean = True) As String
+        Private Shared Function BuildRecordLookupKey(record As CalculationResultRecord, 
+                                                     Optional ByVal onMaterialTypeId As Boolean = True, 
+                                                     Optional ByVal onLocationId As Boolean = True, 
+                                                     Optional ByVal onProductSize As Boolean = True, 
+                                                     Optional ByVal onStratigraphy As Boolean = True, 
+                                                     Optional ByVal onWeathering As Boolean = True) _
+                                                     As String
 
             Dim locationId As Integer? = Nothing
             Dim materialTypeId As Integer? = Nothing
             Dim productSize As String = Nothing
+            Dim stratigraphy As String = Nothing
+            Dim weathering As Integer? = Nothing
 
             If onMaterialTypeId Then
                 materialTypeId = record.MaterialTypeId
@@ -959,7 +984,16 @@ Namespace Types
                 productSize = record.ProductSize
             End If
 
-            Return BuildRecordLookupByMainAggregationFieldsStoreKey(record.CalendarDate, locationId, materialTypeId, productSize, record.ResourceClassification)
+            If onStratigraphy Then
+                stratigraphy = record.StratNum
+            End If
+
+            If onWeathering Then
+                weathering = record.Weathering
+            End If
+
+            Return BuildRecordLookupKey(record.CalendarDate, locationId, materialTypeId, productSize, 
+                                        record.ResourceClassification, stratigraphy, weathering)
         End Function
 
         ''' <summary>
@@ -969,12 +1003,13 @@ Namespace Types
         ''' <param name="locationId">the Location Id to be included in the lookup key</param>
         ''' <param name="materialTypeId">the material type Id to be included in the lookup key</param>
         ''' <param name="productSize">the product size to be included in the lookup key</param>
+        ''' <param name="stratigraphy">the stratigraphy to be included in the lookup key</param>
+        ''' <param name="weathering">the weathering to be included in the lookup key</param>
         ''' <returns>string representing the lookup key</returns>
-        Private Shared Function BuildRecordLookupByMainAggregationFieldsStoreKey(calDate As Date, locationId As Integer?, 
-                                                                                 materialTypeId As Integer?, 
-                                                                                 productSize As String, 
-                                                                                 resourceClassification As String) As String
-            Return $"{calDate:ddMMyyyy}_{locationId}_{materialTypeId}_{productSize}_{resourceClassification}"
+        Private Shared Function BuildRecordLookupKey(calDate As Date, locationId As Integer?, materialTypeId As Integer?, 
+                                                     productSize As String, resourceClassification As String, 
+                                                     stratigraphy As String, weathering As Integer?) As String
+            Return $"{calDate:ddMMyyyy}_{locationId}_{materialTypeId}_{productSize}_{resourceClassification}_{stratigraphy}_{weathering}"
         End Function
 
 #End Region
