@@ -1,4 +1,5 @@
-﻿Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace ReportHelpers
     Public MustInherit Class Reporter

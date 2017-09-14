@@ -5,6 +5,8 @@ Imports Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls
 Imports Snowden.Reconcilor.Bhpbio.Report
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Utilities
     Public Class StratigraphyHierarchy

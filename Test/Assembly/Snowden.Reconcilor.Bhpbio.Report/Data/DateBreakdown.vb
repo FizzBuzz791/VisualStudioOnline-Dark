@@ -1,5 +1,7 @@
 ﻿Imports System.Web.UI
 Imports System.Web.UI.WebControls
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 

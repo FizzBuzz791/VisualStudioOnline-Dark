@@ -4,7 +4,7 @@ Imports Snowden.Common.Web.BaseHtmlControls
 Imports Snowden.Common.Database.DataAccessBaseObjects
 Imports System.Web
 Imports System.Web.UI
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
 
 
 Namespace Utilities

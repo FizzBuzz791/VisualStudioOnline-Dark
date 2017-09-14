@@ -8,6 +8,8 @@ Imports Snowden.Reconcilor.Bhpbio.Report
 Imports Snowden.Common.Web.BaseHtmlControls.Tags
 Imports Snowden.Common.Web.BaseHtmlControls.WebpageControls
 Imports System.Text
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Approval
     Public Class ApprovalFactorList

@@ -1,5 +1,7 @@
 ﻿Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
 Imports Snowden.Common.Database.DataAccessBaseObjects
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Types
 

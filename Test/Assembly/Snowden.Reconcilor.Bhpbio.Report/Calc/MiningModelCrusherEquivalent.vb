@@ -1,4 +1,5 @@
-﻿Imports Snowden.Reconcilor.Bhpbio.Report.Types
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.Enums
+Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 Namespace Calc
     Public NotInheritable Class MiningModelCrusherEquivalent
@@ -53,11 +54,11 @@ Namespace Calc
             ' Apply the Bene Ratio to make Bene Feed into Bene Prod.
             beneRatio.UpdateMaterialType(beneProdId)
             miningModel.UpdateMaterialType(beneFeedId, beneProdId)
-            miningModel = CalculationResult.ApplyRatio(miningModel, beneRatio)
+            miningModel = CalculationResult.PerformCalculation(miningModel, beneRatio, CalculationType.Ratio)
             exPitToOreStockpileMovements.UpdateMaterialType(beneFeedId, beneProdId)
-            exPitToOreStockpileMovements = CalculationResult.ApplyRatio(exPitToOreStockpileMovements, beneRatio)
+            exPitToOreStockpileMovements = CalculationResult.PerformCalculation(exPitToOreStockpileMovements, beneRatio, CalculationType.Ratio)
             stockpileToCrusherMovements.UpdateMaterialType(beneFeedId, beneProdId)
-            stockpileToCrusherMovements = CalculationResult.ApplyRatio(stockpileToCrusherMovements, beneRatio)
+            stockpileToCrusherMovements = CalculationResult.PerformCalculation(stockpileToCrusherMovements, beneRatio, CalculationType.Ratio)
 
             If beneRatio.Count > 0 Then
                 ' if we actually have a bene ratio, we would like to show it, but only when there is data
