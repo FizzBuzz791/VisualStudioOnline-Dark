@@ -8,7 +8,7 @@ Imports System.Data
 Imports System.Data.DataTableExtensions
 Imports System.Data.DataRowExtensions
 Imports System.Runtime.CompilerServices
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
 
 Namespace ReportDefinitions
     Public Class F1F2F3OverviewReconciliationReport

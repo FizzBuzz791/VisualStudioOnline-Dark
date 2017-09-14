@@ -1,4 +1,5 @@
-﻿Imports Snowden.Reconcilor.Bhpbio.Report.Types
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.Enums
+Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 Namespace Calc
     Public NotInheritable Class F15
@@ -111,9 +112,9 @@ Namespace Calc
 
             SetPresentation()
 
-            difference = CalculationResult.Difference(modelResult, gradeControlResult)
+            difference = CalculationResult.PerformCalculation(modelResult, gradeControlResult, CalculationType.Difference)
 
-            For Each differenceDate In difference.AggregateRecords(True, False, False, False)
+            For Each differenceDate In difference.AggregateRecords(onMaterialTypeId := False, onLocationId := False, onProductSize := False)
                 Result.Tags.Add(New CalculationResultTag("TonnesDifference", differenceDate.CalendarDate, GetType(Double), ZeroIfNull(differenceDate.Tonnes)))
                 Result.Tags.Add(New CalculationResultTag("VolumeDifference", differenceDate.CalendarDate, GetType(Double), ZeroIfNull(differenceDate.Volume)))
 

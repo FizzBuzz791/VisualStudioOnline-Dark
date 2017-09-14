@@ -1,6 +1,8 @@
 ﻿Imports NullValues = Snowden.Common.Database.DataAccessBaseObjects.NullValues
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 Imports System.Text
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace Data
     Public NotInheritable Class ReportDisplayParameter

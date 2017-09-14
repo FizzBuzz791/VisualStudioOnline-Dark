@@ -1,4 +1,5 @@
-﻿Imports Snowden.Reconcilor.Bhpbio.Report.Types
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 
 Namespace ReportDefinitions

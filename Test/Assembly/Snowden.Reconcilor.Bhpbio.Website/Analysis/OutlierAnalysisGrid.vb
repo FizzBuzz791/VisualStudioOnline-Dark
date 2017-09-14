@@ -1,8 +1,9 @@
 ﻿Imports Snowden.Common.Web.BaseHtmlControls.Tags
 Imports Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 Imports Snowden.Reconcilor.Core.WebDevelopment.ReconcilorControls
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
 
 Namespace Analysis
     Public Class OutlierAnalysisGrid
@@ -201,7 +202,7 @@ Namespace Analysis
                 cellValue = (cellValue / 1000)
             End If
 
-            Dim formatString = Report.F1F2F3ReportEngine.GetAttributeValueFormat(attributeName, SeriesIsFactor(seriesTypeId))
+            Dim formatString = F1F2F3ReportEngine.GetAttributeValueFormat(attributeName, SeriesIsFactor(seriesTypeId))
 
             If seriesTypeId.Contains("Ratio") Or seriesTypeId.Contains("HaulageToOreVsNonOre") Then
                 ' Ratios are special cases not handled through the normal methods

@@ -2,8 +2,8 @@
 Imports Snowden.Common.Web.BaseHtmlControls
 Imports OfficeOpenXml
 Imports Snowden.Reconcilor.Bhpbio.WebDevelopment.ReconcilorControls.FilterBoxes.Analysis
-Imports Snowden.Reconcilor.Bhpbio.Report.GenericDataTableExtensions
-Imports Snowden.Reconcilor.Bhpbio.Report.F1F2F3DataExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.GenericDataTableExtensions
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions.F1F2F3DataExtensions
 
 Namespace Reports
     Public Class GetReconciliationDataExportReport

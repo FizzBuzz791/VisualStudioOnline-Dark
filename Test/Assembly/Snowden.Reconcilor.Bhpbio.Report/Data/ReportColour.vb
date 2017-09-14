@@ -1,5 +1,8 @@
 ﻿Imports Snowden.Common.Database.DataAccessBaseObjects
 Imports Snowden.Reconcilor.Bhpbio.Database.DalBaseObjects
+Imports Snowden.Reconcilor.Bhpbio.Report.Constants
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
 Namespace Data
@@ -109,8 +112,8 @@ Namespace Data
                     rowTagIdObject = row(tagIdColumn)
                 End If
 
-                If (table.Columns.Contains(CalculationResultRecord.ColumnNameProductSize)) Then
-                    productSizeObject = row.Item(CalculationResultRecord.ColumnNameProductSize)
+                If (table.Columns.Contains(ColumnNames.PRODUCT_SIZE)) Then
+                    productSizeObject = row.Item(ColumnNames.PRODUCT_SIZE)
                 End If
 
                 If (Not rowTagIdObject Is Nothing And Not rowTagIdObject Is DBNull.Value) Then

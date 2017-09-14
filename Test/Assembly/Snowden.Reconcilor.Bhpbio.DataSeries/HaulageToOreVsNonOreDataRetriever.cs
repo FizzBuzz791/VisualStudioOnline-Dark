@@ -9,6 +9,7 @@ using Snowden.Reconcilor.Bhpbio.Database.SqlDal;
 using System.Data;
 using System.ComponentModel;
 using System.Threading;
+using Snowden.Reconcilor.Bhpbio.Report.Constants;
 
 namespace Snowden.Reconcilor.Bhpbio.DataSeries
 {
@@ -215,7 +216,7 @@ namespace Snowden.Reconcilor.Bhpbio.DataSeries
                                             {
                                                 new Attribute<string>() { Name="LocationType", Value=locationType },
                                                 new Attribute<Int32>() { Name="LocationId", Value=locationId },
-                                                new Attribute<string>() {Name="ProductSize", Value=Report.Types.CalculationResult.ProductSizeTotal }
+                                                new Attribute<string>() {Name="ProductSize", Value=CalculationConstants.PRODUCT_SIZE_TOTAL }
                                             }
                                 };
 

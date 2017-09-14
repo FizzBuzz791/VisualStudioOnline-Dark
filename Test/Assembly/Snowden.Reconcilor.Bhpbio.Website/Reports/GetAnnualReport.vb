@@ -6,6 +6,7 @@ Imports OfficeOpenXml.Style
 Imports Snowden.Reconcilor.Bhpbio.Database.SqlDal
 Imports Snowden.Reconcilor.Bhpbio.Report
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 

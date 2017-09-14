@@ -9,6 +9,7 @@ Imports Snowden.Reconcilor.Core.WebDevelopment.WebpageTemplates
 Imports ReconcilorFunctions = Snowden.Reconcilor.Core.WebDevelopment.ReconcilorFunctions
 Imports Snowden.Reconcilor.Core
 Imports Snowden.Reconcilor.Bhpbio.Report
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 Imports Snowden.Reconcilor.Bhpbio.Report.Types
 
