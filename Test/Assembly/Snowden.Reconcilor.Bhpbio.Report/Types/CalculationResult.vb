@@ -656,8 +656,11 @@ Namespace Types
                 record.Parent = result
             Next
 
-            Return result
+            If calculationType = CalculationType.Ratio Then
+                CloneHeaders(result, left) ' Make sure we didn't lose any data, like CalcId's!
+            End If
 
+            Return result
         End Function
 
         ' Copy data from one row to another

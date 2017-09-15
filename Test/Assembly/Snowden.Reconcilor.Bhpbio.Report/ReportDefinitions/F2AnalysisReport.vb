@@ -121,7 +121,9 @@ Namespace ReportDefinitions
                                                                               dateBreakdown)
                 Else 
                     stratigraphyReporter.AddStratigraphyContextDataForF2OrF3(table, locationId, dateFrom, dateTo,
-                                                                             dateBreakdown)
+                                                                             dateBreakdown, session.DalReport, False, 
+                                                                             session.ShouldIncludeLiveData, 
+                                                                             session.ShouldIncludeApprovedData, attributeList)
                 End If
             End If
 

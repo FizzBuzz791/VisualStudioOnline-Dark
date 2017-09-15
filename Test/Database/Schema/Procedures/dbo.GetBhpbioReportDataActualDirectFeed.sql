@@ -10,7 +10,8 @@ CREATE PROCEDURE dbo.GetBhpbioReportDataActualDirectFeed
 	@iLocationId INT,
 	@iChildLocations BIT,
 	@iIncludeLiveData BIT,
-	@iIncludeApprovedData BIT
+	@iIncludeApprovedData BIT,
+	@iLowestStratLevel INT = 0 -- Default to 0 to prevent Stratigraphy grouping/reporting
 )
 WITH ENCRYPTION
 AS 
@@ -27,7 +28,10 @@ BEGIN
 		ProductSize VARCHAR(5) NULL,
 		LocationId INT NULL,
 		Attribute INT NULL,
-		Value FLOAT NULL
+		Value FLOAT NULL,
+		StratNum VARCHAR(7) NULL,
+		StratLevel INT NULL,
+		StratLevelName VARCHAR(15) NULL
 	)
 	
 	SET NOCOUNT ON 
@@ -50,18 +54,18 @@ BEGIN
 	BEGIN TRY
 	
 		INSERT INTO @DirectFeed
-			(CalendarDate, DateFrom, DateTo, MaterialTypeId, ProductSize, LocationId, Attribute, Value)
-		SELECT X.CalendarDate, X.DateFrom, X.DateTo, X.DesignationMaterialTypeId, X.ProductSize, X.LocationId, X.Attribute, X.Value
-		FROM dbo.GetBhpbioReportActualX(@iDateFrom, @iDateTo, @iDateBreakdown, @iLocationId, @iChildLocations) AS X
+			(CalendarDate, DateFrom, DateTo, MaterialTypeId, ProductSize, LocationId, Attribute, Value, StratNum, StratLevel, StratLevelName)
+		SELECT X.CalendarDate, X.DateFrom, X.DateTo, X.DesignationMaterialTypeId, X.ProductSize, X.LocationId, X.Attribute, X.Value, X.StratNum, X.StratLevel, X.StratLevelName
+		FROM dbo.GetBhpbioReportActualX(@iDateFrom, @iDateTo, @iDateBreakdown, @iLocationId, @iChildLocations, @iLowestStratLevel) AS X
 			INNER JOIN dbo.GetBhpbioReportHighGrade() AS hg
 				ON (X.DesignationMaterialTypeId = hg.MaterialTypeId)
 			
-		SELECT CalendarDate, LocationId AS ParentLocationId, DateFrom, DateTo, MaterialTypeId, ProductSize, Value AS Tonnes
+		SELECT CalendarDate, LocationId AS ParentLocationId, DateFrom, DateTo, MaterialTypeId, ProductSize, Value AS Tonnes, StratNum AS Strat, StratLevel, StratLevelName
 		FROM @DirectFeed
 		WHERE Attribute = 0
 		
 		SELECT CalendarDate, LocationId AS ParentLocationId, Attribute As GradeId,
-			MaterialTypeId, ETS.ProductSize, G.Grade_Name As GradeName, ISNULL(Value, 0.0) As GradeValue
+			MaterialTypeId, ETS.ProductSize, G.Grade_Name As GradeName, ISNULL(Value, 0.0) As GradeValue, ETS.StratNum AS Strat, ETS.StratLevel, ETS.StratLevelName	
 		FROM @DirectFeed AS ETS
 			INNER JOIN dbo.Grade AS G
 				ON (ETS.Attribute = G.Grade_Id)

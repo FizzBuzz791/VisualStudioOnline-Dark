@@ -1,4 +1,5 @@
-﻿Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
+﻿Imports Snowden.Reconcilor.Bhpbio.Report.Constants
+Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.ReportDefinitions
 
 Namespace ReportHelpers
@@ -62,7 +63,11 @@ Namespace ReportHelpers
             row("DateTo") = sourceRow("DateTo")
             row("DateText") = CType(sourceRow("DateFrom"), DateTime).ToString("MMMM-yy") ' .AsDate breaks Re# *only* here. NFI why.
 
-            row("LocationId") = sourceRow("LocationId")
+            If sourceRow.HasColumn(ColumnNames.LOCATION_ID) Then
+                row(ColumnNames.LOCATION_ID) = sourceRow(ColumnNames.LOCATION_ID)
+            Else
+                row(ColumnNames.LOCATION_ID) = sourceRow(ColumnNames.PARENT_LOCATION_ID)
+            End If
             row("LocationName") = locationName
             row("LocationType") = locationType
 
