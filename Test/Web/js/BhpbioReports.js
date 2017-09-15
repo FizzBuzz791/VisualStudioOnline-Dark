@@ -569,8 +569,8 @@ function ValidateFactorAnalysisContextReport() {
         result = false;
     } else if (!monthSelectionIsValid) {
         result = false;
-    } else if (!contextSelectionIsValid) {
-        alert("Please ensure Tonnes/Sample is selected in isolation");
+    } else if (contextSelectionIsValid.length > 0) {
+        alert(contextSelectionIsValid);
         result = false;
     }
 
@@ -580,22 +580,33 @@ function ValidateFactorAnalysisContextReport() {
 function EnsureContextSelectionIsValid() {
     // Context selection is valid only if Tonnes/Sample is selected in isolation (or not selected at all)
     var contextSelectionIsValid;
+    var message = "";
 
-    var tonnesPerSampleIsSelected = $("#chkContext_SampleRatio").is(":checked");
-    if (tonnesPerSampleIsSelected) {
+    if ($("#chkContext_SampleRatio").is(":checked")) {
         $('input[name^=chkContext_]').each(function(k, v) {
             if (v.name !== "chkContext_SampleRatio") {
                 contextSelectionIsValid = !($("#" + v.name).is(":checked"));
             }
         });
 
-        // Ensure stratigraphy option is set to None
-        contextSelectionIsValid = $("#cmbStrat option:selected").val() === "0";
+        // Ensure nothing is selected for Stratigraphy context (technically, checking the checkbox value would be enough...)
+        contextSelectionIsValid = contextSelectionIsValid && $("input[name=StratigraphyContext]:checked").val() === undefined;
+        if (!contextSelectionIsValid) {
+            message = "Please ensure Tonnes/Sample is selected in isolation";
+        }
     } else {
         contextSelectionIsValid = true;
+        if ($("input[name=chkStratigraphy]").is(":checked")) {
+            // The checkbox can be checked and then the user might forget or miss the radio, so add this check to prevent confusion.
+            contextSelectionIsValid = $("input[name=StratigraphyContext]:checked").val() !== undefined;
+        }
+
+        if (!contextSelectionIsValid) {
+            message = "Please ensure a Stratigraphy Type is selected";
+        }
     }
 
-    return contextSelectionIsValid;
+    return message;
 }
 
 function ValidateBhpbioFactorsVsTimeResourceClassificationReport()
@@ -3104,6 +3115,7 @@ function BhpbioValidateF1F2F3ReconciliationComparison(historicalStartDate, syste
 
     return success;
 }
+
 function RenderBhpbioAnnualReport(systemStartDate) {
 
     var validInput = BhpbioValidateYearlyReconciliationReport(systemStartDate)
@@ -3114,4 +3126,18 @@ function RenderBhpbioAnnualReport(systemStartDate) {
     }
 
     return validInput;
+}
+
+function ShowHideStratigraphyOptions() {
+    var stratCheck = $("#chkStratigraphy").is(":checked");
+
+    $("input[id^=radioStratContext_]").each(function (k, v) {
+        var id = v.id.replace("radioStratContext_", "");
+        if (stratCheck) {
+            $("#" + id)[0].parentElement.style.display = "block";
+        } else {
+            $("#" + id)[0].parentElement.style.display = "none";
+            $("#" + id).find("input").removeAttr("checked");
+        }
+    });
 }

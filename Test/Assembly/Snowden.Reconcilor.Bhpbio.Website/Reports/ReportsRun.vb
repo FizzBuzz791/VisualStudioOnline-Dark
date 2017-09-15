@@ -653,8 +653,8 @@ Namespace Reports
                             End If
 
                             ' Stratigraphy Selection
-                            If key.Contains("cmbStrat") Then
-                                LowestStratigraphyLevel = RequestAsInt32("cmbStrat")
+                            If key.Equals("StratigraphyContext") Then
+                                LowestStratigraphyLevel = RequestAsInt32("StratigraphyContext")
                             End If
 
                             'Grades

@@ -1541,29 +1541,36 @@ Namespace Reports
                 contextOptionCell.ID = value.Key
             Next
 
-            Dim stratigraphyOption = New SelectBox With {
-                .ID = "cmbStrat"
+            Dim stratigraphyContextCheckbox = New InputCheckBox With {
+                .ID = "chkStratigraphy",
+                .Text = " Stratigraphy" ' The space is important or it doesn't line up with everything else.
+            }
+            stratigraphyContextCheckbox.Attributes.Add("onclick", "ShowHideStratigraphyOptions()")
+
+            Dim stratigraphyContextCell = control.AddCellInNewRow
+            stratigraphyContextCell.Controls.Add(stratigraphyContextCheckbox)
+            stratigraphyContextCell.ID = "chkStratCell"
+
+            Dim stratContexts = New List(Of String) From {
+                {"Group"},
+                {"Formation"},
+                {"Member"}
             }
 
-            With stratigraphyOption
-                With .Items
-                    .Insert(0, New ListItem("None", "0") With {
-                        .Selected = True
-                    })
-                    .Insert(1, New ListItem("Group", "1"))
-                    .Insert(2, New ListItem("Formation", "2"))
-                    .Insert(3, New ListItem("Member", "3"))
-                End With
-
-                .SelectedIndex = 0
-            End With
-
-            Dim stratCell = control.AddCellInNewRow()
-            stratCell.Controls.Add(New LiteralControl("Stratigraphy: "))
-            stratCell = control.AddCell()
-            stratCell.Controls.Add(stratigraphyOption)
-            stratCell.ID = "cmbStratCell"
-
+            For Each value In stratContexts
+                Dim stratContextOptionCell = control.AddCellInNewRow
+                stratContextOptionCell.Controls.Add(New LiteralControl("&nbsp;&nbsp;&nbsp;")) ' "indent" the radio buttons
+                stratContextOptionCell = control.AddCell
+                stratContextOptionCell.Controls.Add(New InputRadio With {
+                    .ID = $"radioStratContext_{value}",
+                    .Text = value,
+                    .GroupName = "StratigraphyContext",
+                    .Value = (stratContexts.IndexOf(value) + 1).ToString ' +1 since it's 0 based and Levels are 1 based.
+                })
+                stratContextOptionCell.ID = value
+                CType(stratContextOptionCell.Parent, TableRow).Style.Add("display", "none")
+            Next
+            
             parameter.Control = control
             Return control
         End Function
