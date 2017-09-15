@@ -18,7 +18,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
         [SetUp]
         public void Setup()
         {
-            _sut = new CalculationResult(CalculationResultType.Tonnes);
+            _sut = new CalculationResult(CalculationResultType.Tonnes) {CalcId = "CalcIdGoesHere"};
             GenerateRecordsForTest();
         }
 
@@ -134,6 +134,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                     DodgyAggregateGradeTonnes = 10
                 }
             };
+            secondTerm.CalcId = "XYZ"; // Just to make sure PerformCalculation grabs the correct CalcId
         
             IEnumerable<CalculationResultRecord> aggregatedRecords = _sut.AggregateRecords(breakdownFactorByMaterialType, true, true);
             CalculationResultRecord testAggregateRecord = aggregatedRecords.First();
@@ -170,6 +171,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                     CalculationResultRecord ratioRecords = CalculationResultRecord.Multiply(testAggregateRecord, testAggregatedTerm);
                     Assert.That(result.First().Tonnes, Is.EqualTo(ratioRecords.Tonnes));
                     Assert.That(result.First().Fe, Is.EqualTo(ratioRecords.Fe));
+                    Assert.That(result.CalcId, Is.EqualTo("CalcIdGoesHere"));
                     break;
             }
         }
