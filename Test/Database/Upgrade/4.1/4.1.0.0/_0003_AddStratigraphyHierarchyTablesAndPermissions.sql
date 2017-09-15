@@ -22,9 +22,10 @@ CREATE UNIQUE NONCLUSTERED INDEX idx_BhpbioStratigraphyHierarchyType
 ON [dbo].[BhpbioStratigraphyHierarchyType]([Level])
 GO
 
-INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Formation', 1)
-INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Member', 2)
-INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Strat Unit', 3)
+INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Group', 1)
+INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Formation', 2)
+INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Member', 3)
+INSERT INTO [dbo].[BhpbioStratigraphyHierarchyType] ([Type], [Level]) VALUES ('Strat Unit', 4)
 
 CREATE TABLE [dbo].[BhpbioStratigraphyHierarchy]
 (
