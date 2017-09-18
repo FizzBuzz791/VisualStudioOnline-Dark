@@ -154,7 +154,9 @@ Namespace ReportDefinitions
                                                                           dateFrom, dateTo, attributeList, locationId)
                 Else                      
                     weatheringReporter.AddWeatheringContextDataForF2OrF3(table, locationId, dateFrom, dateTo, 
-                                                                         dateBreakdown)
+                                                                         dateBreakdown, session.DalReport, False, 
+                                                                         session.ShouldIncludeLiveData, 
+                                                                         session.ShouldIncludeApprovedData, attributeList)
                 End If
             End If
         End Sub

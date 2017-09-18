@@ -11,7 +11,8 @@ CREATE PROCEDURE dbo.GetBhpbioReportDataActualDirectFeed
 	@iChildLocations BIT,
 	@iIncludeLiveData BIT,
 	@iIncludeApprovedData BIT,
-	@iLowestStratLevel INT = 0 -- Default to 0 to prevent Stratigraphy grouping/reporting
+	@iLowestStratLevel INT = 0, -- Default to 0 to prevent Stratigraphy grouping/reporting
+	@iIncludeWeathering BIT = 0
 )
 WITH ENCRYPTION
 AS 
@@ -31,7 +32,8 @@ BEGIN
 		Value FLOAT NULL,
 		StratNum VARCHAR(7) NULL,
 		StratLevel INT NULL,
-		StratLevelName VARCHAR(15) NULL
+		StratLevelName VARCHAR(15) NULL,
+		Weathering VARCHAR(1) NULL
 	)
 	
 	SET NOCOUNT ON 
@@ -54,18 +56,18 @@ BEGIN
 	BEGIN TRY
 	
 		INSERT INTO @DirectFeed
-			(CalendarDate, DateFrom, DateTo, MaterialTypeId, ProductSize, LocationId, Attribute, Value, StratNum, StratLevel, StratLevelName)
-		SELECT X.CalendarDate, X.DateFrom, X.DateTo, X.DesignationMaterialTypeId, X.ProductSize, X.LocationId, X.Attribute, X.Value, X.StratNum, X.StratLevel, X.StratLevelName
-		FROM dbo.GetBhpbioReportActualX(@iDateFrom, @iDateTo, @iDateBreakdown, @iLocationId, @iChildLocations, @iLowestStratLevel) AS X
+			(CalendarDate, DateFrom, DateTo, MaterialTypeId, ProductSize, LocationId, Attribute, Value, StratNum, StratLevel, StratLevelName, Weathering)
+		SELECT X.CalendarDate, X.DateFrom, X.DateTo, X.DesignationMaterialTypeId, X.ProductSize, X.LocationId, X.Attribute, X.Value, X.StratNum, X.StratLevel, X.StratLevelName, X.Weathering
+		FROM dbo.GetBhpbioReportActualX(@iDateFrom, @iDateTo, @iDateBreakdown, @iLocationId, @iChildLocations, @iLowestStratLevel, @iIncludeWeathering) AS X
 			INNER JOIN dbo.GetBhpbioReportHighGrade() AS hg
 				ON (X.DesignationMaterialTypeId = hg.MaterialTypeId)
 			
-		SELECT CalendarDate, LocationId AS ParentLocationId, DateFrom, DateTo, MaterialTypeId, ProductSize, Value AS Tonnes, StratNum AS Strat, StratLevel, StratLevelName
+		SELECT CalendarDate, LocationId AS ParentLocationId, DateFrom, DateTo, MaterialTypeId, ProductSize, Value AS Tonnes, StratNum AS Strat, StratLevel, StratLevelName, Weathering
 		FROM @DirectFeed
 		WHERE Attribute = 0
 		
 		SELECT CalendarDate, LocationId AS ParentLocationId, Attribute As GradeId,
-			MaterialTypeId, ETS.ProductSize, G.Grade_Name As GradeName, ISNULL(Value, 0.0) As GradeValue, ETS.StratNum AS Strat, ETS.StratLevel, ETS.StratLevelName	
+			MaterialTypeId, ETS.ProductSize, G.Grade_Name As GradeName, ISNULL(Value, 0.0) As GradeValue, ETS.StratNum AS Strat, ETS.StratLevel, ETS.StratLevelName, ETS.Weathering	
 		FROM @DirectFeed AS ETS
 			INNER JOIN dbo.Grade AS G
 				ON (ETS.Attribute = G.Grade_Id)

@@ -541,13 +541,19 @@ Namespace SqlDal
         Public Function GetBhpbioReportDataActualDirectFeed(startDate As Date, endDate As Date, dateBreakdown As String, 
                                                             locationId As Int32, childLocations As Boolean, 
                                                             includeLiveData As Boolean, includeApprovedData As Boolean,
-                                                            Optional lowestStratLevel As Integer = 0) As DataSet _
+                                                            Optional lowestStratLevel As Integer = 0,
+                                                            Optional includeWeathering As Boolean = False) As DataSet _
                                                             Implements ISqlDalReport.GetBhpbioReportDataActualDirectFeed
 
             DataAccess.CommandText = "dbo.GetBhpbioReportDataActualDirectFeed"
             SetupBhpbioReportDataProperties(startDate, endDate, dateBreakdown, locationId, childLocations)
             AddDataInclusionParameters(includeLiveData, includeApprovedData)
-            DataAccess.ParameterCollection.Add("@iLowestStratLevel", CommandDataType.Int, CommandDirection.Input, lowestStratLevel)
+
+            With DataAccess.ParameterCollection
+                .Add("@iLowestStratLevel", CommandDataType.Int, CommandDirection.Input, lowestStratLevel)
+                .Add("@iIncludeWeathering", CommandDataType.Int, CommandDirection.Input, includeWeathering)
+            End With
+
             Return GetBhpbioReportDataSet()
         End Function
 

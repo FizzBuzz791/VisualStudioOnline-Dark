@@ -102,11 +102,11 @@ Namespace ReportHelpers
             contextData.Merge(gradesData)
 
             For Each row In contextData.Rows.Cast (Of DataRow).Where(
-                    Function(r)
-                        Return r.AsInt(ColumnNames.STRAT_LEVEL) = LowestStratigraphyLevel _
-                            And attributeList.Contains(r.AsString("Grade_Name")) _
-                            And r.AsString(ColumnNames.PRODUCT_SIZE) = CalculationConstants.PRODUCT_SIZE_TOTAL
-                    End Function)
+                Function(r)
+                    Return r.AsInt(ColumnNames.STRAT_LEVEL) = LowestStratigraphyLevel _
+                        And attributeList.Contains(r.AsString("Grade_Name")) _
+                        And r.AsString(ColumnNames.PRODUCT_SIZE) = CalculationConstants.PRODUCT_SIZE_TOTAL
+                End Function)
 
                 AddContextRowAsNonFactorRow(row, masterTable, String.Empty, row.AsDbl("Tonnes"), 
                                             row.AsString(ColumnNames.STRAT_NUM), "Stratigraphy", "Stratigraphy", 
