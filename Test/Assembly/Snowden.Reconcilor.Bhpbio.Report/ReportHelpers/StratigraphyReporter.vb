@@ -28,7 +28,7 @@ Namespace ReportHelpers
             End Function).ToList()
 
             For Each stratRow In stratigraphyRows
-                AddContextRowAsNonFactorRow(stratRow, masterTable, String.Empty, stratRow.AsDbl("AttributeValue"),
+                AddContextRowAsNonFactorRow(stratRow, masterTable, String.Empty, stratRow.AsDbl("Tonnes"),
                                             stratRow.AsString(ColumnNames.STRAT_NUM), "Stratigraphy", "Stratigraphy",
                                             stratRow.AsString(ColumnNames.STRAT_NUM), 
                                             stratRow.AsString(ColumnNames.STRAT_NUM))

@@ -57,7 +57,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
             // Assert
             Assert.That(_masterTable.Rows.Count, Is.EqualTo(2)); // 1 Factor row becomes 1 Factor row, 1 Non-Factor (a.k.a Strat) row.
             Assert.That(_masterTable.Rows.Cast<DataRow>().Last()["ContextCategory"], Is.EqualTo("Stratigraphy"));
-            Assert.That(_masterTable.Rows.Cast<DataRow>().First()["AttributeValue"], Is.EqualTo(_masterTable.Rows.Cast<DataRow>().Last()["Tonnes"]));
+            Assert.That(_masterTable.Rows.Cast<DataRow>().First()["Tonnes"], Is.EqualTo(_masterTable.Rows.Cast<DataRow>().Last()["Tonnes"]));
             Assert.That(_masterTable.Rows.Cast<DataRow>().First()[ColumnNames.STRAT_NUM], Is.EqualTo(_masterTable.Rows.Cast<DataRow>().Last()["ContextGrouping"]));
         }
 
@@ -69,7 +69,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
             testRow[ColumnNames.STRAT_LEVEL] = 3;
             testRow[ColumnNames.STRAT_LEVEL_NAME] = "Member";
             testRow["CalcId"] = ModelGradeControl.CalculationId;
-            testRow["AttributeValue"] = 1234;
+            testRow["Tonnes"] = 1234;
             _masterTable.Rows.Add(testRow);
 
             _sut = new StratigraphyReporter(3);

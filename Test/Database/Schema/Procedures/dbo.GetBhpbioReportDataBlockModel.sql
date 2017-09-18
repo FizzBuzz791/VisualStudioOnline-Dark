@@ -654,11 +654,11 @@ BEGIN
 				LEFT JOIN DigblockNotes DBNStrat 
 					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = DBNStrat.Notes
+					ON BSH1.StratNum = DBNStrat.Notes AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 				LEFT JOIN DigblockNotes DBNWeathering
@@ -696,11 +696,11 @@ BEGIN
 				LEFT JOIN DigblockNotes DBNStrat 
 					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = DBNStrat.Notes
+					ON BSH1.StratNum = DBNStrat.Notes AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 				LEFT JOIN DigblockNotes DBNWeathering
@@ -780,11 +780,11 @@ BEGIN
 				LEFT JOIN DigblockNotes DBNStrat 
 					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = DBNStrat.Notes
+					ON BSH1.StratNum = DBNStrat.Notes AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 				LEFT JOIN DigblockNotes DBNWeathering
@@ -849,11 +849,11 @@ BEGIN
 				LEFT JOIN DigblockNotes DBNStrat 
 					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = DBNStrat.Notes
+					ON BSH1.StratNum = DBNStrat.Notes AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 				LEFT JOIN DigblockNotes DBNWeathering
@@ -1077,7 +1077,7 @@ BEGIN
 						BSH2.StratNum, 
 						MAX(BSHT.Level),
 						MAX(BSHT.Type),
-						BSE.Weathering
+						CASE @iIncludeWeathering WHEN 1 THEN BSE.Weathering ELSE NULL END
 					FROM #BlockWithSummary bws
 					LEFT JOIN #partialRCPercentages per
 						ON per.LocationId = bws.LocationId 
@@ -1087,11 +1087,11 @@ BEGIN
 					LEFT JOIN dbo.BhpbioSummaryEntry BSE
 						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 					LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-						ON BSH1.StratNum = BSE.StratNum
+						ON BSH1.StratNum = BSE.StratNum AND @iLowestStratLevel > 0
 					LEFT JOIN #FlatStratTable FST
-						ON FST.StratId = BSH1.Id
+						ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 					LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-						ON BSH2.Id = FST.GroupId
+						ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 					LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 						ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 					WHERE (@iIncludeResourceClassification = 0 OR NOT per.ResourceClassification IS NULL)
@@ -1140,7 +1140,7 @@ BEGIN
 					BSH2.StratNum,
 					MAX(BSHT.Level),
 					MAX(BSHT.Type),
-					BSE.Weathering
+					CASE @iIncludeWeathering WHEN 1 THEN BSE.Weathering ELSE NULL END
 				FROM #BlockWithSummary bws
 				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
 					ON bseg.SummaryEntryId = bws.SummaryEntryId
@@ -1153,11 +1153,11 @@ BEGIN
 				LEFT JOIN dbo.BhpbioSummaryEntry BSE
 					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = BSE.StratNum
+					ON BSH1.StratNum = BSE.StratNum AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 			   	WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
@@ -1207,7 +1207,7 @@ BEGIN
 						BSH2.StratNum,
 						MAX(BSHT.Level),
 						MAX(BSHT.Type),
-						BSE.Weathering
+						CASE @iIncludeWeathering WHEN 1 THEN BSE.Weathering ELSE NULL END
 					FROM #BlockWithSummary AS bws
 					LEFT JOIN #blockRCPercentages per
 						ON per.LocationId = bws.LocationId 
@@ -1216,11 +1216,11 @@ BEGIN
 					LEFT JOIN dbo.BhpbioSummaryEntry BSE
 						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 					LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-						ON BSH1.StratNum = BSE.StratNum
+						ON BSH1.StratNum = BSE.StratNum AND @iLowestStratLevel > 0
 					LEFT JOIN #FlatStratTable FST
-						ON FST.StratId = BSH1.Id
+						ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 					LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-						ON BSH2.Id = FST.GroupId
+						ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 					LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 						ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 					WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL)) 
@@ -1269,7 +1269,7 @@ BEGIN
 					BSH2.StratNum,
 					MAX(BSHT.Level),
 					MAX(BSHT.Type),
-					BSE.Weathering
+					CASE @iIncludeWeathering WHEN 1 THEN BSE.Weathering ELSE NULL END
 				FROM #BlockWithSummary bws
 				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
 					ON bseg.SummaryEntryId = bws.SummaryEntryId
@@ -1280,11 +1280,11 @@ BEGIN
 				LEFT JOIN dbo.BhpbioSummaryEntry BSE
 					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = BSE.StratNum
+					ON BSH1.StratNum = BSE.StratNum AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
 				WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))

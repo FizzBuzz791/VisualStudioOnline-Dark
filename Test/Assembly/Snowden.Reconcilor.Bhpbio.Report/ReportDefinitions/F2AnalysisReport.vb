@@ -1,7 +1,6 @@
 ﻿Imports Snowden.Reconcilor.Bhpbio.Report.Types
 Imports Snowden.Reconcilor.Bhpbio.Report.Data
 Imports System.Data.DataTableExtensions
-Imports System.Runtime.CompilerServices
 Imports Snowden.Reconcilor.Bhpbio.Report.Extensions
 Imports Snowden.Reconcilor.Bhpbio.Report.ReportHelpers
 
@@ -10,10 +9,27 @@ Namespace ReportDefinitions
     Public Class F2AnalysisReport
         Inherits ReportBase
 
-        Public Shared Function GetData(session As ReportSession, locationId As Integer,
-                                       dateBreakdown As ReportBreakdown, dateFrom As DateTime, dateTo As DateTime,
-                                       factorId As String, attributeList As String(),
+        Public Shared Function GetData(session As ReportSession, locationId As Integer, dateBreakdown As ReportBreakdown, 
+                                       dateFrom As DateTime, dateTo As DateTime, factorId As String, attributeList As String(),
                                        contextList As String()) As DataTable
+
+            Dim table = PrepareTable(factorId, session, locationId, contextList, dateBreakdown, dateFrom, dateTo, attributeList)
+            AddContextData(factorId, session, locationId, contextList, dateBreakdown, dateFrom, dateTo, table, attributeList)
+
+            AddShortFactorDescriptions(table)
+            NormalizeGroupingLabels(table)
+
+            ' in some cases we can end up with incorrect date ranges on the RC data. Not sure the root causes of this,
+            ' if we should just remove the data, or somehow fix it higher up the chain? But for now will just remove this
+            ' data, as I can't reproduce it in the dev env to do a proper investigation
+            table.AsEnumerable.Where(Function(r) r.AsDate("DateFrom") <> r.AsDate("CalendarDate")).DeleteRows()
+
+            Return table
+        End Function
+
+        Public Shared Function PrepareTable(factorId As String, session As ReportSession, locationId As Integer, 
+                                             contextList As String(), dateBreakdown As ReportBreakdown, dateFrom As Date, 
+                                             dateTo As Date, attributeList As String()) As DataTable
 
             Dim factorList = (New String() {factorId}).ToList
             Dim locationTypeName = session.GetLocationTypeName(locationId).ToUpper()
@@ -29,17 +45,15 @@ Namespace ReportDefinitions
                 canLoadSublocations = False
             End If
 
-            If contextList.Contains("ResourceClassification") Then
-                If factorId <> "F1Factor" AndAlso factorId <> "F15Factor" Then
-                    factorList.Add("F1Factor")
-                End If
+            If contextList.Contains("ResourceClassification") AndAlso factorId <> "F1Factor" AndAlso factorId <> "F15Factor" Then
+                factorList.Add("F1Factor")
             End If
 
             Dim tableOptions = New DataTableOptions With {
                 .DateBreakdown = dateBreakdown,
                 .IncludeSourceCalculations = True,
                 .GroupByLocationId = False
-            }
+            } 
 
             session.IncludeProductSizeBreakdown = False
             session.IncludeResourceClassification = contextList.Contains("ResourceClassification")
@@ -62,19 +76,6 @@ Namespace ReportDefinitions
             calculationsRequiredList.AddRange(factorComponents(factorId).Select(Function(s) factorPrefix + s))
             table.AsEnumerable.Where(Function(r) Not calculationsRequiredList.Contains(r.AsString("ReportTagId"))).DeleteRows()
 
-            ' set some default fields that will be needed when adding context information
-            table.AsEnumerable.SetFieldIfNull("ResourceClassification", "ResourceClassificationTotal")
-            table.Columns.AddIfNeeded("ContextCategory", GetType(String)).SetDefault("Factor")
-            table.Columns.AddIfNeeded("ContextGrouping", GetType(String)).SetDefault("None")
-            table.Columns.AddIfNeeded("ContextGroupingLabel", GetType(String)).SetDefault("-")
-
-            ' add ResClass data
-            If contextList.Contains("ResourceClassification") Then
-                F1F2F3ReportEngine.AddResourceClassificationDescriptions(table)
-                F1F2F3ReportEngine.AddResourceClassificationColor(table, columnName:="ResclassColor")
-                AddResourceClassificationContext(table)
-            End If
-
             ' unpivot and add standard attribute flags
             F1F2F3ReportEngine.UnpivotDataTable(table, maintainTonnes:=True)
             F1F2F3ReportEngine.FilterTableByAttributeList(table, attributeList)
@@ -84,6 +85,25 @@ Namespace ReportDefinitions
             ' recalculate the factor grade and tonnes values from the factor
             AddBottomFactorTonnes(table)
             AddBottomFactorGradeValue(table)
+
+            Return table
+        End Function
+
+        Private Shared Sub AddContextData(factorId As String, session As ReportSession, locationId As Integer, 
+                                          contextList As String(), dateBreakdown As ReportBreakdown, dateFrom As Date, 
+                                          dateTo As Date, table As DataTable, attributeList As String())
+
+            ' set some default fields that will be needed when adding context information
+            table.AsEnumerable.SetFieldIfNull("ResourceClassification", "ResourceClassificationTotal")
+            table.Columns.AddIfNeeded("ContextCategory", GetType(String)).SetDefault("Factor")
+            table.Columns.AddIfNeeded("ContextGrouping", GetType(String)).SetDefault("None")
+            table.Columns.AddIfNeeded("ContextGroupingLabel", GetType(String)).SetDefault("-")
+
+            If contextList.Contains("ResourceClassification") Then
+                F1F2F3ReportEngine.AddResourceClassificationDescriptions(table)
+                F1F2F3ReportEngine.AddResourceClassificationColor(table, columnName:="ResclassColor")
+                AddResourceClassificationContext(table)
+            End If
 
             If contextList.Contains("HaulageContext") Then
                 ReportColour.AddLocationColor(session, table)
@@ -130,26 +150,16 @@ Namespace ReportDefinitions
             If contextList.Contains("Weathering") Then
                 Dim weatheringReporter AS IWeatheringReporter = New WeatheringReporter
                 If factorId.StartsWith("F1", StringComparison.Ordinal) Then
-                    weatheringReporter.AddWeatheringContextDataForF1OrF15(table, locationId, dateFrom, dateTo, 
-                                                                          dateBreakdown)
+                    weatheringReporter.AddWeatheringContextDataForF1OrF15(table, factorId, session, contextList, dateBreakdown, 
+                                                                          dateFrom, dateTo, attributeList, locationId)
                 Else                      
                     weatheringReporter.AddWeatheringContextDataForF2OrF3(table, locationId, dateFrom, dateTo, 
                                                                          dateBreakdown)
                 End If
             End If
+        End Sub
 
-            AddShortFactorDescriptions(table)
-            NormalizeGroupingLabels(table)
-
-            ' in some cases we can end up with incorrect date ranges on the RC data. Not sure the root causes of this,
-            ' if we should just remove the data, or somehow fix it higher up the chain? But for now will just remove this
-            ' data, as I can't reproduce it in the dev env to do a proper investigation
-            table.AsEnumerable.Where(Function(r) r.AsDate("DateFrom") <> r.AsDate("CalendarDate")).DeleteRows()
-
-            Return table
-        End Function
-
-        Public Shared Function AddResourceClassificationContext(table As DataTable) As DataTable
+        Private Shared Sub AddResourceClassificationContext(table As DataTable)
             table.Columns.AddIfNeeded("ContextCategory", GetType(String))
             table.Columns.AddIfNeeded("ContextGrouping", GetType(String))
 
@@ -160,31 +170,27 @@ Namespace ReportDefinitions
                     row("PresentationColor") = row.AsString("ResclassColor")
                 End If
             Next
+        End Sub
 
-            Return table
-        End Function
-
-        Public Shared Function AddBottomFactorTonnes(table As DataTable) As DataTable
+        Private Shared Sub AddBottomFactorTonnes(table As DataTable)
             If Not table.Columns.Contains("AttributeDifference") Then
                 AddAttributeDifference(table)
             End If
 
             table.Columns.AddIfNeeded("FactorTonnesBottom", GetType(Double))
             table.AsEnumerable.FactorRows.SetField("FactorTonnesBottom", Function(r) r.AsDblN("TonnesDifference") / (r.AsDblN("Tonnes") - 1))
-            Return table
-        End Function
+        End Sub
 
-        Public Shared Function AddBottomFactorGradeValue(table As DataTable) As DataTable
+        Private Shared Sub AddBottomFactorGradeValue(table As DataTable)
             If Not table.Columns.Contains("AttributeDifference") Then
                 AddAttributeDifference(table)
             End If
 
             table.Columns.AddIfNeeded("FactorGradeValueBottom", GetType(Double))
             table.AsEnumerable.FactorRows.SetField("FactorGradeValueBottom", Function(r) ErrorContributionEngine.GetFactorGradeValue(r, r.AsString("Attribute")))
-            Return table
-        End Function
+        End Sub
 
-        Public Shared Function AddAttributeDifference(table As DataTable) As DataTable
+        Private Shared Sub AddAttributeDifference(table As DataTable)
             If Not table.IsUnpivotedTable Then
                 Throw New ArgumentException("An unpivoted factor DataTable Is required", "table")
             End If
@@ -194,11 +200,9 @@ Namespace ReportDefinitions
             For Each row As DataRow In table.Rows
                 row("AttributeDifference") = row(row.AsString("Attribute") + "Difference")
             Next
+        End Sub
 
-            Return table
-        End Function
-
-        Public Shared Function AddShortFactorDescriptions(table As DataTable) As DataTable
+        Private Shared Sub AddShortFactorDescriptions(table As DataTable)
             table.Columns.AddIfNeeded("ShortDescription", GetType(String))
 
             For Each row As DataRow In table.Rows
@@ -212,24 +216,19 @@ Namespace ReportDefinitions
                 End Select
 
             Next
+        End Sub
 
-            Return table
-        End Function
-
-        ' if the label is above a certain length, then we replace the spaces with line breaks so that it wraps properly
-        Public Shared Function NormalizeGroupingLabels(table As DataTable) As DataTable
+        Private Shared Sub NormalizeGroupingLabels(table As DataTable)
+            ' If the label is above a certain length, then we replace the spaces with line breaks so that it wraps properly
             For Each row As DataRow In table.Rows
                 Dim contextGroupingLabel = row.AsString("ContextGroupingLabel")
                 If contextGroupingLabel.Length > 8 Then
                     row("ContextGroupingLabel") = contextGroupingLabel.Replace(" ", vbCrLf)
                 End If
             Next
+        End Sub
 
-            Return table
-        End Function
-
-
-        Public Shared Function AddCalculationColors(session As ReportSession, table As DataTable) As DataTable
+        Private Shared Sub AddCalculationColors(session As ReportSession, table As DataTable)
             Dim colourList = ReportColour.GetColourList(session)
             table.Columns.AddIfNeeded("PresentationColor", GetType(String))
 
@@ -245,15 +244,6 @@ Namespace ReportDefinitions
                     row("PresentationColor") = "Gray"
                 End If
             Next
-
-            Return table
-        End Function
+        End Sub
     End Class
-
-    Module LocalExtensions
-        <Extension>
-        Function RandomItem(rows As IEnumerable(Of DataRow)) As DataRow
-            Return rows(Convert.ToInt32(Rnd() * rows.Count))
-        End Function
-    End Module
 End Namespace

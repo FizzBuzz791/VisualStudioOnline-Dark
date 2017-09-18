@@ -345,7 +345,7 @@ Public Class WebService
             reportSession.Context = GetReportContext(liveApprovedContext)
             reportSession.RethrowCalculationSetErrors = True
             reportSession.LowestStratigraphyLevel = lowestStratigraphyLevel
-            reportSession.IncludeWeathering = contextSelection.IndexOf("Weathering", StringComparison.Ordinal) >= 0
+            reportSession.IncludeWeathering = False ' Weathering breakdown is done later.
 
             Dim attributeList = GetAttributeListFromString(attributes)
             Dim contextSelectionList = contextSelection.Split(","c).Select(Function(a) a.Trim).Where(Function(a) Not String.IsNullOrEmpty(a))

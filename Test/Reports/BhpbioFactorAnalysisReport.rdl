@@ -968,6 +968,7 @@
 		Fields!ContextCategory.Value = "SampleCoverage", "SC",
 		Fields!ContextCategory.Value = "SampleRatio", "T/S",
 		Fields!ContextCategory.Value = "Stratigraphy", "ST",
+		Fields!ContextCategory.Value = "Weathering", "W",
 		True, Fields!ContextCategory.Value
 	),
 	Switch(
@@ -977,6 +978,7 @@
 		Fields!ContextCategory.Value = "SampleCoverage", "Sample Coverage",
 		Fields!ContextCategory.Value = "SampleRatio", "Tonnes/Sample",
 		Fields!ContextCategory.Value = "Stratigraphy", "Stratigraphy",
+		Fields!ContextCategory.Value = "Weathering", "Weathering",
 		True, Fields!ContextCategory.Value
 	)
 )</Label>
