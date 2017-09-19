@@ -57,6 +57,7 @@ Namespace ReportHelpers
                                                                               dateBreakdown.ToParameterString(), locationId, 
                                                                               includeChildLocations, includeLiveData, 
                                                                               includeApprovedData)
+            Const SP_TO_CRUSHER_COLOR = "#CCCCCC"
             Dim contextData As New DataTable
 
             Dim tonnesData = xWeatheringData.Tables(0)
@@ -71,6 +72,7 @@ Namespace ReportHelpers
             zTonnes.Columns.Add("Grade_Name", GetType(String)).SetDefault("Tonnes")
             zTonnes.Columns.Add("Grade_Value", GetType(Double)).SetDefault(100)
             zTonnes.Columns.Add(ColumnNames.WEATHERING, GetType(String)).SetDefault("SP to Crusher")
+            zTonnes.Columns.Add(ColumnNames.WEATHERING_COLOR, GetType(String)).SetDefault(SP_TO_CRUSHER_COLOR)
             tonnesData.Merge(zTonnes)
             contextData.Merge(tonnesData)
 
@@ -88,6 +90,7 @@ Namespace ReportHelpers
             zGrades.Columns.Add(ColumnNames.DATE_FROM, GetType(DateTime))
             zGrades.Columns.Add(ColumnNames.DATE_TO, GetType(DateTime))
             zGrades.Columns.Add(ColumnNames.WEATHERING, GetType(String)).SetDefault("SP to Crusher")
+            zGrades.Columns.Add(ColumnNames.WEATHERING_COLOR, GetType(String)).SetDefault(SP_TO_CRUSHER_COLOR)
             gradesData.Merge(zGrades)
 
             ' Need to do a bit of data massaging to get the tonnes sorted without messing with the stored proc results directly.

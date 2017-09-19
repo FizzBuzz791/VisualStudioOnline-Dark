@@ -52,6 +52,7 @@ Namespace ReportHelpers
                                                                               includeChildLocations, includeLiveData, 
                                                                               includeApprovedData)
 
+            Const SP_TO_CRUSHER_COLOR = "#CCCCCC"
             Dim contextData As New DataTable
 
             Dim tonnesData = xStratData.Tables(0)
@@ -66,6 +67,7 @@ Namespace ReportHelpers
             zTonnes.Columns.Add("Grade_Name", GetType(String)).SetDefault("Tonnes")
             zTonnes.Columns.Add("Grade_Value", GetType(Double)).SetDefault(100)
             zTonnes.Columns.Add(ColumnNames.STRAT_NUM, GetType(String)).SetDefault("SP to Crusher")
+            zTonnes.Columns.Add(ColumnNames.STRAT_COLOR, GetType(String)).SetDefault(SP_TO_CRUSHER_COLOR)
             zTonnes.Columns.Add(ColumnNames.STRAT_LEVEL, GetType(Integer)).SetDefault(LowestStratigraphyLevel)
             tonnesData.Merge(zTonnes)
             contextData.Merge(tonnesData)
@@ -84,6 +86,7 @@ Namespace ReportHelpers
             zGrades.Columns.Add(ColumnNames.DATE_FROM, GetType(DateTime))
             zGrades.Columns.Add(ColumnNames.DATE_TO, GetType(DateTime))
             zGrades.Columns.Add(ColumnNames.STRAT_NUM, GetType(String)).SetDefault("SP to Crusher")
+            zGrades.Columns.Add(ColumnNames.STRAT_COLOR, GetType(String)).SetDefault(SP_TO_CRUSHER_COLOR)
             zGrades.Columns.Add(ColumnNames.STRAT_LEVEL, GetType(Integer)).SetDefault(LowestStratigraphyLevel)
             gradesData.Merge(zGrades)
 
