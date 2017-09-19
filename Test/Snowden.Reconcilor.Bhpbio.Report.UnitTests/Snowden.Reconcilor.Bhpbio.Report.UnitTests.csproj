@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\GenericDataTableExtensionsTests.cs" />
+    <Compile Include="Extensions\F1F2F3DataExtensionsTests.cs" />
     <Compile Include="Mocks\ReporterMock.cs" />
     <Compile Include="ReportDefinitions\F1F2F3ReportEngineTests.cs" />
     <Compile Include="ReportHelpers\HaulageReporterTests.cs" />

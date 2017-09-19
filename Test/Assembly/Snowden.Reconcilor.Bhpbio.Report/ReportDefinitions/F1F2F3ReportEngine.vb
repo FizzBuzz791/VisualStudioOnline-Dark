@@ -924,11 +924,14 @@ Namespace ReportDefinitions
             Dim productSizes = New HashSet(Of String)
             Dim calendarDates = New HashSet(Of Date)
             Dim resourceClassifications = New HashSet(Of String)
+            Dim stratigraphies = New HashSet(Of String)
+            Dim weatherings = New HashSet(Of String)
 
             ' Create a dictionary of rows by TagId and Product size
             If resultTable IsNot Nothing Then
                 Dim matchedRows = resultTable.AsEnumerable
-                PopulateLookups(locationId, matchedRows, groupOnCalendarDate, calendarDates, rowIndexByTagDictionary, productSizes, resourceClassifications)
+                PopulateLookups(locationId, matchedRows, groupOnCalendarDate, calendarDates, rowIndexByTagDictionary, 
+                                productSizes, resourceClassifications, stratigraphies, weatherings)
             End If
 
             If Not groupOnCalendarDate Then
@@ -936,24 +939,22 @@ Namespace ReportDefinitions
                 calendarDates.Add(Date.MinValue)
             End If
 
-            ' Iterate each calendar date in the set
-            For Each calendarDate In calendarDates
-                Dim calendarDateRowKeySuffix = String.Empty
-                If groupOnCalendarDate Then
-                    calendarDateRowKeySuffix = $"_{calendarDate:yyyyMMdd}"
-                End If
+            Dim combined = New List(Of IEnumerable(Of String)) From {
+                productSizes, 
+                resourceClassifications,
+                calendarDates.Select(Function(c) $"{(IIf(groupOnCalendarDate, $"{c:yyyyMMdd}", String.Empty))}"),
+                stratigraphies,
+                weatherings
+            }
 
-                Dim combined = New List(Of IEnumerable(Of String)) From {
-                    productSizes, 
-                    resourceClassifications
-                }
-
-                For Each grouping In combined.CartesianProduct()
-                    Dim productSize = grouping(0)
-                    Dim resourceClassification = grouping(1)
-                    RecalculateRows(resourceClassification, productSize, rowIndexByTagDictionary, includeFactorPrefixOnCalcIds, 
-                                    calendarDateRowKeySuffix)
-                Next
+            For Each grouping In combined.CartesianProduct()
+                Dim productSize = grouping(0)
+                Dim resourceClassification = grouping(1)
+                Dim calendarDateRowKeySuffix = grouping(2)
+                Dim stratigraphy = grouping(3)
+                Dim weathering = grouping(4)
+                RecalculateRows(resourceClassification, productSize, rowIndexByTagDictionary, includeFactorPrefixOnCalcIds, 
+                                calendarDateRowKeySuffix, stratigraphy, weathering)
             Next
 
             FixF2Density(resultTable)
@@ -965,16 +966,20 @@ Namespace ReportDefinitions
         Private Shared Sub PopulateLookups(locationId As Integer?, matchedRows As EnumerableRowCollection(Of DataRow), 
                                            groupOnCalendarDate As Boolean, calendarDates As HashSet(Of Date), 
                                            rowIndexByTagDictionary As IDictionary(Of String,DataRow), 
-                                           productSizes As HashSet(Of String), resourceClassifications As HashSet(Of String))
+                                           productSizes As HashSet(Of String), resourceClassifications As HashSet(Of String),
+                                           stratigraphies As HashSet(Of String), weatherings As HashSet(Of String))
 
             If locationId.HasValue Then
                 matchedRows = matchedRows.Where(Function(r) r.AsInt(ColumnNames.LOCATION_ID) = locationId.Value)
             End If
 
             For Each row In matchedRows
-                Dim rowKey = row.Item(ColumnNames.TAG_ID).ToString()
-                Dim productSize = row.Item(ColumnNames.PRODUCT_SIZE).ToString()
-                Dim resourceClassification = row.Item(ColumnNames.RESOURCE_CLASSIFICATION).ToString()
+                Dim rowKey = row.AsString(ColumnNames.TAG_ID)
+                Dim calendarDate = row.AsDate(ColumnNames.DATE_CAL)
+                Dim productSize = row.AsString(ColumnNames.PRODUCT_SIZE)
+                Dim resourceClassification = row.AsString(ColumnNames.RESOURCE_CLASSIFICATION)
+                Dim stratigraphy = row.AsString(ColumnNames.STRAT_NUM)
+                Dim weathering = row.AsIntN(ColumnNames.WEATHERING)
 
                 If productSize <> CalculationConstants.PRODUCT_SIZE_TOTAL AndAlso Not rowKey.EndsWith(productSize, StringComparison.Ordinal) Then
                     rowKey += productSize.ToUpper
@@ -985,22 +990,33 @@ Namespace ReportDefinitions
                 End If
 
                 If groupOnCalendarDate Then
-                    calendarDates.Add(CDate(row.Item(ColumnNames.DATE_CAL)))
-                    rowKey = $"{rowKey}_{row.Item(ColumnNames.DATE_CAL):yyyyMMdd}"
+                    rowKey = $"{rowKey}_{calendarDate:yyyyMMdd}"
+                End If
+
+                If Not String.IsNullOrEmpty(stratigraphy) Then
+                    rowKey = $"{rowKey}_{stratigraphy}"
+                End If
+
+                If weathering IsNot Nothing Then
+                    rowKey = $"{rowKey}_{weathering}"
                 End If
 
                 ' Add each row by TagId to a dictionary by TagId
                 rowIndexByTagDictionary.Add(rowKey, row)
 
-                ' Determine the list of product sizes and resource classifications seen
+                ' Determine the list of groupings seen
+                calendarDates.Add(calendarDate)
                 productSizes.Add(productSize)
                 resourceClassifications.Add(resourceClassification)
+                stratigraphies.Add(stratigraphy)
+                weatherings.Add(weathering.ToString())
             Next
         End Sub
 
         Private Shared Sub RecalculateRows(resourceClassification As String, productSize As String, 
                                            rowIndexByTagDictionary As IDictionary(Of String,DataRow), 
-                                           includeFactorPrefixOnCalcIds As Boolean, calendarDateRowKeySuffix As String)
+                                           includeFactorPrefixOnCalcIds As Boolean, calendarDate As String,
+                                           stratigraphy As String, weathering As String)
 
             ' the product size 'TOTAL' is not used as a suffix, so will need to exclude it from our matching
             If productSize = CalculationConstants.PRODUCT_SIZE_TOTAL Then
@@ -1012,7 +1028,22 @@ Namespace ReportDefinitions
                 resourceClassificationTagSuffix = $"_{resourceClassification.ToUpper()}"
             End If
 
-            Dim fullSuffix = $"{productSize}{resourceClassificationTagSuffix}{calendarDateRowKeySuffix}"
+            Dim calendarDateSuffix = String.Empty
+            If Not String.IsNullOrEmpty(calendarDateSuffix) Then
+                calendarDateSuffix = $"_{calendarDate}"
+            End If
+
+            Dim stratigraphySuffix = String.Empty
+            If Not String.IsNullOrEmpty(stratigraphy) Then
+                stratigraphySuffix = $"_{stratigraphy}"
+            End If
+
+            Dim weatheringSuffix = String.Empty
+            If Not String.IsNullOrEmpty(weathering) Then
+                weatheringSuffix = $"_{weathering}"
+            End If
+
+            Dim fullSuffix = $"{productSize}{resourceClassificationTagSuffix}{calendarDateSuffix}{stratigraphySuffix}{weatheringSuffix}"
 
             ' F0
             Dim dataRowF0Factor As DataRow = Nothing
@@ -1058,7 +1089,7 @@ Namespace ReportDefinitions
 
             ' Anything beyond F15 is only relevant when not reporting by resource classification
             If String.IsNullOrEmpty(resourceClassification) Then
-                Dim productCalendarSuffix = $"{productSize}{calendarDateRowKeySuffix}"
+                Dim productCalendarSuffix = $"{productSize}{calendarDate}"
 
                 ' F2
                 Dim dataRowF2GradeControl As DataRow = Nothing
@@ -1478,13 +1509,14 @@ Namespace ReportDefinitions
                     Dim density As Single
 
                     ' If we are processing all rows, or this is the density attribute row
-                    If Not checkAttributeNameColumn OrElse 
-                        Not row("Attribute") Is DBNull.Value AndAlso 
+                    ' ReSharper disable RedundantParentheses - because it's incorrectly identifying the OrElse braces as redundant.
+                    If (Not checkAttributeNameColumn OrElse
+                        Not row("Attribute") Is DBNull.Value AndAlso
                         Not row("Attribute") Is Nothing AndAlso
-                        row("Attribute").ToString() = "Density" AndAlso
-                        Not row(densityValueColumnName) Is DBNull.Value AndAlso
-                        Not row(densityValueColumnName) Is Nothing Then
-
+                        row("Attribute").ToString() = "Density") AndAlso
+                       (Not row(densityValueColumnName) Is DBNull.Value AndAlso
+                        Not row(densityValueColumnName) Is Nothing) Then
+                    ' ReSharper restore RedundantParentheses
                         density = CType(row(densityValueColumnName), Single)
                         If Math.Abs(density - 0) > Double.Epsilon Then
                             ' invert the value

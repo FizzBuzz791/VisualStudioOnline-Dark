@@ -8,7 +8,10 @@ Namespace Extensions
         ' converts a filtered set of rows into their own datatable
         <Extension>
         Public Function ToDataTable(rows As IEnumerable(Of DataRow)) As DataTable
-            If rows.Count = 0 Then Return Nothing
+            If rows.Count = 0 Then
+                Return Nothing
+            End If
+
             Dim table = rows.First.Table
             Dim result = table.Clone()
 
@@ -55,7 +58,7 @@ Namespace Extensions
         <Extension>
         Public Function SortBy(ByRef table As DataTable, columnName As String) As DataTable
             If Not table.Columns.Contains(columnName) Then
-                Throw New Exception(String.Format("Cannot sort table be '{0}' - column does not exist", columnName))
+                Throw New Exception($"Cannot sort table by '{columnName}' - column does not exist")
             End If
 
             table.DefaultView.Sort = columnName
@@ -83,7 +86,6 @@ Namespace Extensions
         End Function
         <Extension>
         Public Function SetFieldValue(ByRef rows As IEnumerable(Of DataRow), columnName As String, value As Object) As IEnumerable(Of DataRow)
-
             For Each row In rows
                 If value Is Nothing Then
                     row(columnName) = DBNull.Value
@@ -150,10 +152,16 @@ Namespace Extensions
             End If
         End Function
 
+        ''' <summary>
+        ''' Get the row value as a Double.
+        ''' </summary>
+        ''' <param name="row"></param>
+        ''' <param name="columnName"></param>
+        ''' <returns>Row value as a Double. WARNING: Will return 0 if row value is DBNull or NaN.</returns>
         <Extension>
         Public Function AsDbl(ByRef row As DataRow, columnName As String) As Double
             If IsDBNull(row(columnName)) Then
-                Return Nothing
+                Return Nothing ' VB.Net sucks, this shouldn't be possible as the return type isn't nullable. This actually returns 0 in this scenario.
             Else
                 Return CType(row(columnName), Double).RemoveNaNs()
             End If
@@ -161,23 +169,44 @@ Namespace Extensions
 
         <Extension>
         Public Function AsDate(ByRef row As DataRow, columnName As String) As Date
-            Return CType(row(columnName), Date)
+            If IsDBNull(row(columnName)) Then
+                Return DateTime.MinValue
+            Else
+                Return CType(row(columnName), Date)
+            End If
         End Function
 
         <Extension>
         Public Function AsBool(ByRef row As DataRow, columnName As String) As Boolean
-            If IsDBNull(row(columnName)) Then Return False
-            Return CType(row(columnName), Boolean)
+            If IsDBNull(row(columnName)) Then
+                Return False
+            Else
+                Return CType(row(columnName), Boolean)
+            End If
+        End Function
+
+        ''' <summary>
+        ''' Get the row value as an Integer.
+        ''' </summary>
+        ''' <param name="row"></param>
+        ''' <param name="columnName"></param>
+        ''' <returns>Row value as an integer. WARNING: Will return 0 if row value is DBNull.</returns>
+        <Extension>
+        Public Function AsInt(ByRef row As DataRow, columnName As String) As Integer
+            If IsDBNull(row(columnName)) Then
+                Return Nothing ' VB.Net sucks, this shouldn't be possible as the return type isn't nullable. This actually returns 0 in this scenario.
+            Else
+                Return CType(row(columnName), Integer)
+            End If
         End Function
 
         <Extension>
-        Public Function AsInt(ByRef row As DataRow, columnName As String) As Integer
+        Public Function AsIntN(ByRef row As DataRow, columnName As String) As Integer?
             If IsDBNull(row(columnName)) Then
                 Return Nothing
             Else
                 Return CType(row(columnName), Integer)
             End If
-
         End Function
 
         <Extension>
@@ -187,8 +216,6 @@ Namespace Extensions
             Else
                 Return CType(row(columnName), String)
             End If
-
         End Function
-
     End Module
 End NameSpace

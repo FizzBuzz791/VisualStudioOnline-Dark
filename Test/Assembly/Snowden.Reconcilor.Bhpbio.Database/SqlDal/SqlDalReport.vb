@@ -664,19 +664,11 @@ Namespace SqlDal
 
         End Function
 
-
-        'Optional ByVal includeLumpAndFines As Boolean = True,
-        'Optional ByVal highGradeOnly As Boolean = True,
-        'Optional ByVal includeResourceClassification As Boolean = False,
-        'Optional ByVal useRemainingMaterialAtDateFrom As Boolean = False,
-        'Optional ByVal overrideChildLocationType As String = Nothing
-
-        Public Function GetBhpbioReportDataBlockModel(ByVal startDate As Date,
-         ByVal endDate As Date, ByVal dateBreakdown As String, ByVal locationId As Int32,
-         ByVal childLocations As Boolean, ByVal includeModelDataForInactiveLocations As Boolean, ByVal modelName As String,
-         ByVal includeLiveData As Boolean, ByVal includeApprovedData As Boolean,
-         dataOptions As ReportDataBlockModelOptions
-         ) As System.Data.DataSet
+        Public Function GetBhpbioReportDataBlockModel(startDate As Date, endDate As Date, dateBreakdown As String, 
+                                                      locationId As Int32, childLocations As Boolean, 
+                                                      includeModelDataForInactiveLocations As Boolean, modelName As String, 
+                                                      includeLiveData As Boolean, includeApprovedData As Boolean, 
+                                                      dataOptions As ReportDataBlockModelOptions) As DataSet
 
             DataAccess.CommandText = "dbo.GetBhpbioReportDataBlockModel"
             If modelName Is Nothing Then
@@ -684,21 +676,23 @@ Namespace SqlDal
             End If
 
             SetupBhpbioReportDataProperties(startDate, endDate, dateBreakdown, locationId, childLocations)
-            DataAccess.ParameterCollection.Add("@iBlockModelName", CommandDataType.VarChar, CommandDirection.Input, 250, modelName)
-            DataAccess.ParameterCollection.Add("@iIncludeInactiveChildLocations", CommandDataType.Bit, CommandDirection.Input, includeModelDataForInactiveLocations)
 
-            DataAccess.ParameterCollection.Add("@iIncludeLumpFines", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeLumpAndFines)
-            DataAccess.ParameterCollection.Add("@iHighGradeOnly", CommandDataType.Bit, CommandDirection.Input, dataOptions.HighGradeOnly)
-            DataAccess.ParameterCollection.Add("@iIncludeResourceClassification", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeResourceClassification)
-            DataAccess.ParameterCollection.Add("@iUseRemainingMaterialAtDateFrom", CommandDataType.Bit, CommandDirection.Input, dataOptions.UseRemainingMaterialAtDateFrom)
-            DataAccess.ParameterCollection.Add("@iOverrideChildLocationType", CommandDataType.VarChar, CommandDirection.Input, 250, dataOptions.OverrideChildLocationType)
-            DataAccess.ParameterCollection.Add("@iGeometType", CommandDataType.VarChar, CommandDirection.Input, 63, dataOptions.GeometType)
+            With DataAccess.ParameterCollection
+                .Add("@iBlockModelName", CommandDataType.VarChar, CommandDirection.Input, 250, modelName)
+                .Add("@iIncludeInactiveChildLocations", CommandDataType.Bit, CommandDirection.Input, includeModelDataForInactiveLocations)
+                .Add("@iIncludeLumpFines", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeLumpAndFines)
+                .Add("@iHighGradeOnly", CommandDataType.Bit, CommandDirection.Input, dataOptions.HighGradeOnly)
+                .Add("@iIncludeResourceClassification", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeResourceClassification)
+                .Add("@iUseRemainingMaterialAtDateFrom", CommandDataType.Bit, CommandDirection.Input, dataOptions.UseRemainingMaterialAtDateFrom)
+                .Add("@iOverrideChildLocationType", CommandDataType.VarChar, CommandDirection.Input, 250, dataOptions.OverrideChildLocationType)
+                .Add("@iGeometType", CommandDataType.VarChar, CommandDirection.Input, 63, dataOptions.GeometType)
+                .Add("@iLowestStratLevel", CommandDataType.Int, CommandDirection.Input, dataOptions.LowestStratigraphyLevel)
+                .Add("@iIncludeWeathering", CommandDataType.Bit, CommandDirection.Input, dataOptions.IncludeWeathering)
+            End With
 
             AddDataInclusionParameters(includeLiveData, includeApprovedData)
 
-
             Return GetBhpbioReportDataSet()
-
         End Function
 
         ''' <summary>
@@ -888,6 +882,8 @@ Namespace SqlDal
         Public Property UseRemainingMaterialAtDateFrom As Boolean = False
         Public Property OverrideChildLocationType As String = Nothing
         Public Property GeometType As String
+        Public Property LowestStratigraphyLevel As Integer = 0
+        Public Property IncludeWeathering As Boolean = False
     End Class
 
     Public Module StringExtensions

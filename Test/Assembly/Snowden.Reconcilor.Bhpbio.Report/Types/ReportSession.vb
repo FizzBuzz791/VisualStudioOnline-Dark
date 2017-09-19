@@ -805,6 +805,12 @@ Namespace Types
         ''' date, not by depletion month. This is used by the Reconciliation Risk Blockout Summary Report
         ''' </summary>
         Public Property GetModelDesignDataByBlockoutDate As Boolean = False
+
+        Public Property LowestStratigraphyLevel As Integer = 0
+
+        Public Property IncludeWeathering As Boolean = False
+
+
 #End Region
 
 #Region "Constructors"

@@ -336,12 +336,16 @@ Public Class WebService
     End Function
 
     <WebMethod>
-    Public Function GetF2AnalysisReportData(locationId As Integer, dateBreakdown As String, dateFrom As DateTime, dateTo As DateTime, factor As String,
-                                            attributes As String, contextSelection As String, liveApprovedContext As String) As DataTable
+    Public Function GetF2AnalysisReportData(locationId As Integer, dateBreakdown As String, dateFrom As DateTime, 
+                                            dateTo As DateTime, factor As String, attributes As String, 
+                                            contextSelection As String, liveApprovedContext As String, 
+                                            lowestStratigraphyLevel As Integer) As DataTable
 
         Using reportSession As ReportSession = CreateReportSession()
             reportSession.Context = GetReportContext(liveApprovedContext)
             reportSession.RethrowCalculationSetErrors = True
+            reportSession.LowestStratigraphyLevel = lowestStratigraphyLevel
+            reportSession.IncludeWeathering = contextSelection.IndexOf("Weathering", StringComparison.Ordinal) >= 0
 
             Dim attributeList = GetAttributeListFromString(attributes)
             Dim contextSelectionList = contextSelection.Split(","c).Select(Function(a) a.Trim).Where(Function(a) Not String.IsNullOrEmpty(a))
