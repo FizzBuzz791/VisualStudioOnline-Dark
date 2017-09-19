@@ -24,10 +24,21 @@ Namespace ReportHelpers
                     Return 3
                 End If
             ElseIf {"Stratigraphy", "Weathering"}.Contains(row.AsString("LocationType")) Then
-                If row.AsString("ContextGrouping") = "SP to Crusher" Then
+                Dim contextGrouping = row.AsString("ContextGrouping")
+                If contextGrouping = "SP to Crusher"
+                    Return 50
+                ElseIf contextGrouping = "Undef" Then
+                    Return 5
+                ElseIf contextGrouping = "H-Cap" Then
+                    Return 4
+                ElseIf contextGrouping = "Silcrete" Then
+                    Return 3
+                ElseIf contextGrouping = "Trans" Then
                     Return 2
-                Else 
+                ElseIf contextGrouping = "Fresh" Then
                     Return 1
+                Else 
+                    Return 1 ' This "else" branch covers the Stratigraphy "ordering".
                 End If
             Else
                 Return 50

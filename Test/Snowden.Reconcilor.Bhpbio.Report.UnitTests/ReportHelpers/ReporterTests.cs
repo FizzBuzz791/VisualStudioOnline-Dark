@@ -28,9 +28,13 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
         [TestCase("SampleCoverage", "SampledPercentage", 6)]
         [TestCase("", "", 50)]
         [TestCase("Stratigraphy", "Stratigraphy", 1)]
-        [TestCase("Stratigraphy", "SP to Crusher", 2)]
-        [TestCase("Weathering", "Weathering", 1)]
-        [TestCase("Weathering", "SP to Crusher", 2)]
+        [TestCase("Stratigraphy", "SP to Crusher", 50)]
+        [TestCase("Weathering", "Fresh", 1)]
+        [TestCase("Weathering", "Trans", 2)]
+        [TestCase("Weathering", "Silcrete", 3)]
+        [TestCase("Weathering", "H-Cap", 4)]
+        [TestCase("Weathering", "Undef", 5)]
+        [TestCase("Weathering", "SP to Crusher", 50)]
         public void GetContextGroupingOrder_ReturnsTheCorrectOrder(string locationType, string contextGrouping, int expectedOrder)
         {
             // Arrange
