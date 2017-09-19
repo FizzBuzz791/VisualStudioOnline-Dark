@@ -28,9 +28,9 @@ Namespace ReportHelpers
             End Function).ToList()
 
             For Each stratRow In stratigraphyRows
-                AddContextRowAsNonFactorRow(stratRow, masterTable, String.Empty, stratRow.AsDbl("Tonnes"),
-                                            stratRow.AsString(ColumnNames.STRAT_NUM), "Stratigraphy", "Stratigraphy",
-                                            stratRow.AsString(ColumnNames.STRAT_NUM), 
+                AddContextRowAsNonFactorRow(stratRow, masterTable, stratRow.AsString(ColumnNames.STRAT_COLOR), 
+                                            stratRow.AsDbl("Tonnes"), stratRow.AsString(ColumnNames.STRAT_NUM), 
+                                            "Stratigraphy", "Stratigraphy", stratRow.AsString(ColumnNames.STRAT_NUM), 
                                             stratRow.AsString(ColumnNames.STRAT_NUM))
             Next
         End Sub
@@ -108,7 +108,7 @@ Namespace ReportHelpers
                         And r.AsString(ColumnNames.PRODUCT_SIZE) = CalculationConstants.PRODUCT_SIZE_TOTAL
                 End Function)
 
-                AddContextRowAsNonFactorRow(row, masterTable, String.Empty, row.AsDbl("Tonnes"), 
+                AddContextRowAsNonFactorRow(row, masterTable, row.AsString(ColumnNames.STRAT_COLOR), row.AsDbl("Tonnes"), 
                                             row.AsString(ColumnNames.STRAT_NUM), "Stratigraphy", "Stratigraphy", 
                                             row.AsString(ColumnNames.STRAT_NUM), row.AsString(ColumnNames.STRAT_NUM))
             Next

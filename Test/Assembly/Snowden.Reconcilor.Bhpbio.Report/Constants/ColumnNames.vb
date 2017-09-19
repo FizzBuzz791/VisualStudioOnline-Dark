@@ -47,7 +47,7 @@
         ' DateText
         Public Const STRAT_NUM = "Strat"
         Public Const STRAT_LEVEL = "StratLevel"
-        Public Const STRAT_LEVEL_NAME = "StratLevelName"
+        Public Const STRAT_COLOR = "StratColor"
         Public Const WEATHERING = "Weathering"
         Public Const WEATHERING_COLOR = "WeatheringColor"
 

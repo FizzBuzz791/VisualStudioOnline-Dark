@@ -49,9 +49,9 @@ BEGIN
 		ResourceClassification VARCHAR(32) NULL,
 		Tonnes FLOAT NOT NULL,
 		Volume FLOAT NULL,
-		Strat VARCHAR(7) NULL,
+		Strat VARCHAR(50) NULL,
 		StratLevel INT NULL,
-		StratLevelName VARCHAR(20) NULL,
+		StratColor VARCHAR(25) NULL,
 		Weathering VARCHAR(100) NULL,
 		WeatheringColor VARCHAR(25) NULL
 	)
@@ -70,9 +70,9 @@ BEGIN
 		ProductSize VARCHAR(5) NULL,
 		ResourceClassification VARCHAR(32) NULL,
 		Tonnes FLOAT NOT NULL,
-		Strat VARCHAR(7) NULL,
+		Strat VARCHAR(50) NULL,
 		StratLevel INT NULL,
-		StratLevelName VARCHAR(20) NULL,
+		StratColor VARCHAR(25) NULL,
 		Weathering VARCHAR(100) NULL,
 		WeatheringColor VARCHAR(25) NULL
 	)
@@ -631,7 +631,7 @@ BEGIN
 					Volume,
 					Strat,
 					StratLevel,
-					StratLevelName,
+					StratColor,
 					Weathering,
 					WeatheringColor
 				)
@@ -641,9 +641,9 @@ BEGIN
 					MM.ResourceClassification,
 					SUM(MM.Tonnes) AS Tonnes,
 					SUM(MM.Volume) AS Volume,
-					BSH2.StratNum AS Strat,
+					BSH2.Stratigraphy AS Strat,
 					MAX(BSHT.Level) AS StratLevel,
-					MAX(BSHT.Type) AS StratLevelName,
+					MAX(BSH2.Colour) AS StratColor,
 					W.Description AS Weathering,
 					MAX(W.Colour) AS WeatheringColor
 				FROM #ModelMovement AS MM
@@ -674,7 +674,7 @@ BEGIN
 					MM.BlockModelId, BM.Name, 
 					MM.ResourceClassification,
 					MM.ProductSize, 
-					BSH2.StratNum, -- The "grouping" stratigraphy
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
 					W.Description
 				
 				UNION
@@ -686,9 +686,9 @@ BEGIN
 					MM.ResourceClassification, 
 					SUM(MM.Tonnes) AS Tonnes,
 					SUM(MM.Volume) AS Volume,
-					BSH2.StratNum AS Strat,
+					BSH2.Stratigraphy AS Strat,
 					MAX(BSHT.Level) AS StratLevel,
-					MAX(BSHT.Type) AS StratLevelName,
+					MAX(BSH2.Colour) AS StratColor,
 					W.Description AS Weathering,
 					MAX(W.Colour) AS WeatheringColor
 				FROM #ModelMovement AS MM
@@ -717,7 +717,7 @@ BEGIN
 				GROUP BY MM.CalendarDate, MM.DateFrom, MM.DateTo, 
 					MM.MaterialTypeId, MM.ParentLocationId, MM.BlockModelId, 
 					BM.Name, MM.ResourceClassification, 
-					BSH2.StratNum, -- The "grouping" stratigraphy
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
 					W.Description
 				
 				-- now that the total has been calculated, clear out the volume for LUMP and FINES as these should not be output
@@ -740,7 +740,7 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
-					StratLevelName,
+					StratColor,
 					Weathering,
 					WeatheringColor
 				)
@@ -760,9 +760,9 @@ BEGIN
 					MM.ProductSize,
 					MM.ResourceClassification,
 					SUM(MM.Tonnes),
-					BSH2.StratNum AS Strat,
+					BSH2.Stratigraphy AS Strat,
 					MAX(BSHT.Level) AS StratLevel,
-					MAX(BSHT.Type) AS StratLevelName,
+					MAX(BSH2.Colour) AS StratColor,
 					W.Description AS Weathering,
 					MAX(W.Colour) AS WeatheringColor
 				FROM #ModelMovement AS MM
@@ -807,7 +807,7 @@ BEGIN
 					MM.ParentLocationId, MM.DateFrom, MM.DateTo, 
 					MM.MaterialTypeId, G.Grade_Id, MM.ProductSize,
 					MM.ResourceClassification, 
-					BSH2.StratNum, -- The "grouping" stratigraphy
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
 					W.Description
 				
 				---- insert total grades
@@ -827,7 +827,7 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
-					StratLevelName,
+					StratColor,
 					Weathering,
 					WeatheringColor
 				)
@@ -841,9 +841,9 @@ BEGIN
 					'TOTAL',
 					MM.ResourceClassification,
 					SUM(MM.Tonnes),
-					BSH2.StratNum AS Strat,
+					BSH2.Stratigraphy AS Strat,
 					MAX(BSHT.Level) AS StratLevel,
-					MAX(BSHT.Type) AS StratLevelName,
+					MAX(BSH2.Colour) AS StratColor,
 					W.Description AS Weathering,
 					MAX(W.Colour) AS WeatheringColor
 				FROM #ModelMovement AS MM
@@ -878,7 +878,7 @@ BEGIN
 				GROUP BY MM.BlockModelId, BM.Name, MM.CalendarDate, MM.ParentLocationId, 
 					MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MBPG.Grade_Id,
 					MM.ResourceClassification, 
-					BSH2.StratNum, -- The "grouping" stratigraphy
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
 					W.Description
 			END
 			
@@ -1079,7 +1079,7 @@ BEGIN
 						  Volume,
 						  Strat,
 						  StratLevel,
-						  StratLevelName,
+						  StratColor,
 						  Weathering,
 						  WeatheringColor
 					)
@@ -1090,9 +1090,9 @@ BEGIN
 						IsNull(per.ResourceClassification,'') AS ResourceClassification,
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
-						BSH2.StratNum, 
+						BSH2.Stratigraphy, 
 						MAX(BSHT.Level),
-						MAX(BSHT.Type),
+						MAX(BSH2.Colour),
 						CASE @iIncludeWeathering WHEN 1 THEN W.Description ELSE NULL END,
 						CASE @iIncludeWeathering WHEN 1 THEN MAX(W.Colour) ELSE NULL END
 					FROM #BlockWithSummary bws
@@ -1120,7 +1120,7 @@ BEGIN
 						bws.ParentLocationId,
 						bws.ProductSize,
 						per.ResourceClassification,
-						BSH2.StratNum, 
+						BSH2.Stratigraphy, 
 						W.Description
 	
 				-- Retrieve Grades
@@ -1140,7 +1140,7 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
-					StratLevelName,
+					StratColor,
 					Weathering,
 					WeatheringColor
 				)
@@ -1157,9 +1157,9 @@ BEGIN
 					bws.ProductSize,
 					per.ResourceClassification AS ResourceClassification,
 					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
-					BSH2.StratNum,
+					BSH2.Stratigraphy,
 					MAX(BSHT.Level),
-					MAX(BSHT.Type),
+					MAX(BSH2.Colour),
 					CASE @iIncludeWeathering WHEN 1 THEN W.Description ELSE NULL END,
 					CASE @iIncludeWeathering WHEN 1 THEN MAX(W.Colour) ELSE NULL END
 				FROM #BlockWithSummary bws
@@ -1193,7 +1193,7 @@ BEGIN
 					bseg.GradeId, 
 					bws.ProductSize,
 					per.ResourceClassification,
-					BSH2.StratNum,
+					BSH2.Stratigraphy,
 					W.Description
 	
 				END
@@ -1217,7 +1217,7 @@ BEGIN
 						Volume,
 						Strat,
 						StratLevel,
-						StratLevelName,
+						StratColor,
 						Weathering,
 						WeatheringColor
 					)
@@ -1228,9 +1228,9 @@ BEGIN
 						IsNull(per.ResourceClassification,'') AS ResourceClassification,
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
-						BSH2.StratNum,
+						BSH2.Stratigraphy,
 						MAX(BSHT.Level),
-						MAX(BSHT.Type),
+						MAX(BSH2.Colour),
 						CASE @iIncludeWeathering WHEN 1 THEN W.Description ELSE NULL END,
 						CASE @iIncludeWeathering WHEN 1 THEN MAX(W.Colour) ELSE NULL END
 					FROM #BlockWithSummary AS bws
@@ -1257,7 +1257,7 @@ BEGIN
 						bws.ParentLocationId,
 						bws.ProductSize,
 						per.ResourceClassification,
-						BSH2.StratNum, -- The "grouping" stratigraphy
+						BSH2.Stratigraphy, -- The "grouping" stratigraphy
 						W.Description
 	
 				-- Retrieve Grades
@@ -1277,7 +1277,7 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
-					StratLevelName,
+					StratColor,
 					Weathering,
 					WeatheringColor
 				)
@@ -1294,9 +1294,9 @@ BEGIN
 					bws.ProductSize,
 					per.ResourceClassification AS ResourceClassification,
 					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
-					BSH2.StratNum,
+					BSH2.Stratigraphy,
 					MAX(BSHT.Level),
-					MAX(BSHT.Type),
+					MAX(BSH2.Colour),
 					CASE @iIncludeWeathering WHEN 1 THEN W.Description ELSE NULL END,
 					CASE @iIncludeWeathering WHEN 1 THEN MAX(W.Colour) ELSE NULL END
 				FROM #BlockWithSummary bws
@@ -1328,7 +1328,7 @@ BEGIN
 					bseg.GradeId, 
 					bws.ProductSize,
 					per.ResourceClassification,
-					BSH2.StratNum, -- The "grouping" stratigraphy
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
 					W.Description
 				END
 			END
@@ -1433,7 +1433,7 @@ BEGIN
 			Sum(t.Volume) as Volume,
 			t.Strat,
 			MAX(t.StratLevel) AS StratLevel,
-			MAX(t.StratLevelName) AS StratLevelName,
+			MAX(t.StratColor) AS StratColor,
 			t.Weathering,
 			MAX(t.WeatheringColor) AS WeatheringColor
 		FROM #TonnesTable t
@@ -1456,7 +1456,7 @@ BEGIN
 			ELSE SUM(gt.Tonnes * gt.GradeValue) / SUM(gt.Tonnes) END As GradeValue, gt.ProductSize,
 			gt.Strat,
 			MAX(gt.StratLevel) AS StratLevel,
-			MAX(gt.StratLevelName) AS StratLevelName,
+			MAX(gt.StratColor) AS StratColor,
 			gt.Weathering,
 			MAX(gt.WeatheringColor) AS WeatheringColor
 		FROM #GradesTable AS gt

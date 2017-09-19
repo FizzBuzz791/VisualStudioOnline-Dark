@@ -40,7 +40,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
             _masterTable.Columns.Add("FactorTonnesBottom");
             _masterTable.Columns.Add(ColumnNames.STRAT_NUM);
             _masterTable.Columns.Add(ColumnNames.STRAT_LEVEL);
-            _masterTable.Columns.Add(ColumnNames.STRAT_LEVEL_NAME);
+            _masterTable.Columns.Add(ColumnNames.STRAT_COLOR);
             _masterTable.Columns.Add("CalcId");
         }
 
@@ -67,7 +67,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
             testRow[ColumnNames.DATE_FROM] = DateTime.MaxValue;
             testRow[ColumnNames.STRAT_NUM] = "5610";
             testRow[ColumnNames.STRAT_LEVEL] = 3;
-            testRow[ColumnNames.STRAT_LEVEL_NAME] = "Member";
+            testRow[ColumnNames.STRAT_COLOR] = "Member";
             testRow["CalcId"] = ModelGradeControl.CalculationId;
             testRow["Tonnes"] = 1234;
             _masterTable.Rows.Add(testRow);

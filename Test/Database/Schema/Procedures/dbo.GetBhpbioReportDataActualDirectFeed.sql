@@ -30,9 +30,9 @@ BEGIN
 		LocationId INT NULL,
 		Attribute INT NULL,
 		Value FLOAT NULL,
-		StratNum VARCHAR(7) NULL,
+		StratCode VARCHAR(50) NULL,
 		StratLevel INT NULL,
-		StratLevelName VARCHAR(15) NULL,
+		StratColor VARCHAR(15) NULL,
 		Weathering VARCHAR(100) NULL,
 		WeatheringColor VARCHAR(25) NULL
 	)
@@ -57,18 +57,18 @@ BEGIN
 	BEGIN TRY
 	
 		INSERT INTO @DirectFeed
-			(CalendarDate, DateFrom, DateTo, MaterialTypeId, ProductSize, LocationId, Attribute, Value, StratNum, StratLevel, StratLevelName, Weathering, WeatheringColor)
-		SELECT X.CalendarDate, X.DateFrom, X.DateTo, X.DesignationMaterialTypeId, X.ProductSize, X.LocationId, X.Attribute, X.Value, X.StratNum, X.StratLevel, X.StratLevelName, X.Weathering, X.WeatheringColor
+			(CalendarDate, DateFrom, DateTo, MaterialTypeId, ProductSize, LocationId, Attribute, Value, StratCode, StratLevel, StratColor, Weathering, WeatheringColor)
+		SELECT X.CalendarDate, X.DateFrom, X.DateTo, X.DesignationMaterialTypeId, X.ProductSize, X.LocationId, X.Attribute, X.Value, X.StratCode, X.StratLevel, X.StratColor, X.Weathering, X.WeatheringColor
 		FROM dbo.GetBhpbioReportActualX(@iDateFrom, @iDateTo, @iDateBreakdown, @iLocationId, @iChildLocations, @iLowestStratLevel, @iIncludeWeathering) AS X
 			INNER JOIN dbo.GetBhpbioReportHighGrade() AS hg
 				ON (X.DesignationMaterialTypeId = hg.MaterialTypeId)
 			
-		SELECT CalendarDate, LocationId AS ParentLocationId, DateFrom, DateTo, MaterialTypeId, ProductSize, Value AS Tonnes, StratNum AS Strat, StratLevel, StratLevelName, Weathering, WeatheringColor
+		SELECT CalendarDate, LocationId AS ParentLocationId, DateFrom, DateTo, MaterialTypeId, ProductSize, Value AS Tonnes, StratCode AS Strat, StratLevel, StratColor, Weathering, WeatheringColor
 		FROM @DirectFeed
 		WHERE Attribute = 0
 		
 		SELECT CalendarDate, LocationId AS ParentLocationId, Attribute As GradeId,
-			MaterialTypeId, ETS.ProductSize, G.Grade_Name As GradeName, ISNULL(Value, 0.0) As GradeValue, ETS.StratNum AS Strat, ETS.StratLevel, ETS.StratLevelName, ETS.Weathering, ETS.WeatheringColor
+			MaterialTypeId, ETS.ProductSize, G.Grade_Name As GradeName, ISNULL(Value, 0.0) As GradeValue, ETS.StratCode AS Strat, ETS.StratLevel, ETS.StratColor, ETS.Weathering, ETS.WeatheringColor
 		FROM @DirectFeed AS ETS
 			INNER JOIN dbo.Grade AS G
 				ON (ETS.Attribute = G.Grade_Id)
