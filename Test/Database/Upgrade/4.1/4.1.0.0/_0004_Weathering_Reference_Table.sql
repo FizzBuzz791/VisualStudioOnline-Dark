@@ -21,9 +21,9 @@ GO
 INSERT INTO [dbo].[SecurityOption] VALUES ('REC', 'UTILITIES_WEATHERING', 'Utilities', 'Access to Weathering Reference Screen', 99)
 INSERT INTO [dbo].[SecurityRoleOption] VALUES ('REC_VIEW', 'REC', 'UTILITIES_WEATHERING')
 GO
-INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Undefined', -9, 'Grey')
-INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Fresh (UNALTERED)', 0, 'SandyBrown')
-INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Transition (Transition/SEMICAP)', 1, 'Chocolate')
-INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Weathered - HARDCAP', 2, 'SaddleBrown')
-INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Ferricrete-Silicate (Carapace/Ferricrete)', 3, 'PeachPuff')
+INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Undef', -9, '#BEBEBE')
+INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Fresh', 0, '#8EB2E2')
+INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Trans', 1, '#FDD4B6')
+INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('H-Cap', 2, '#E36C08')
+INSERT INTO [dbo].[BhpbioWeathering] ([Description], [DisplayValue], [Colour]) VALUES ('Silcrete', 3, '#FFF2CC')
 GO
