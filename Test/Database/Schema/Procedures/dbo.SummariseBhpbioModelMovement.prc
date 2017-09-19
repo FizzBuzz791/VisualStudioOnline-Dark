@@ -122,7 +122,9 @@ BEGIN
 			Tonnes,
 			Volume,
 			ModelFilename,
-			GeometType
+			GeometType,
+			StratNum,
+			Weathering
 		)
 		SELECT	@summaryId,
 				@summaryEntryTypeId,
@@ -146,7 +148,9 @@ BEGIN
 				CASE
 					WHEN defaultlf.ProductSize = 'TOTAL' Then 'NA'
 					ELSE ISNull(blocklf.GeometType, gt.GeometType)
-				END as GeometType
+				END as GeometType,
+				dbnStratNum.Notes as StratNum,
+				cast(dbnWeathering.Notes as integer) as Weathering
 		FROM @MinedBlastBlock AS mbb
 			INNER JOIN [dbo].[GetBhpbioReportModelBlockLocations](@BlockModelId) mbl
 				ON mbl.Location_Id = mbb.BlockLocationId
@@ -174,10 +178,16 @@ BEGIN
 				AND mbp.Sequence_No = blocklf.SequenceNo
 				AND gt.GeometType = blocklf.GeometType
 				AND gt.ProductSize <> 'TOTAL'
+			LEFT JOIN dbo.DigblockNotes dbnStratNum
+				ON (mb.Code = dbnStratNum.Digblock_Id
+					AND dbnStratNum.Digblock_Field_Id = 'StratNum')
+			LEFT JOIN dbo.DigblockNotes dbnWeathering
+				ON (mb.Code = dbnWeathering.Digblock_Id
+					AND dbnWeathering.Digblock_Field_Id = 'Weathering')
 		WHERE	mbp.Tonnes > 0 
 				AND mbb.MinedPercentage > 0
 				AND mb.Block_Model_Id = @effectiveBlockModelId
-		GROUP BY mbb.BlockLocationId, mbp.Material_Type_Id, defaultlf.ProductSize, blocklf.GeometType, gt.GeometType
+		GROUP BY mbb.BlockLocationId, mbp.Material_Type_Id, defaultlf.ProductSize, blocklf.GeometType, gt.GeometType, dbnStratNum.Notes, cast(dbnWeathering.Notes as integer)
 		
 		-- Calculate the grades
 		-- this uses the same data as that for the tonnage above but joins the grade values from the block model
