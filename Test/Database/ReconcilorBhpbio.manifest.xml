@@ -1201,7 +1201,8 @@
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0004_Weathering_Reference_Table.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0005_Modify_Staging_StageBlockModel.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0006_Add_StratNum_to_DigblockField.sql" />
-    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0007_Add_Weathering_to_DigblockField.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0007_Add_StratNum_and_Weathering_to_BhpbioSummaryEntry.sql" />
+    <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0008_Add_Weathering_to_DigblockField.sql" />
     <Script Type="Upgrade" Path="Upgrade\4.1\4.1.0.0\_0099_Update Version Number.sql" />
   </Upgrade>
 

@@ -14,6 +14,8 @@ CREATE TABLE dbo.BhpbioSummaryEntry
 	Volume FLOAT NULL,	
 	ModelFilename VARCHAR(200) NULL,
 	[GeometType] [varchar](15) NOT NULL DEFAULT ('NA'),
+	[StratNum] varchar(7) NULL,
+	[Weathering] int null,
 
 	CONSTRAINT PK_BhpbioSummaryEntry
 		PRIMARY KEY NONCLUSTERED (SummaryEntryId),
