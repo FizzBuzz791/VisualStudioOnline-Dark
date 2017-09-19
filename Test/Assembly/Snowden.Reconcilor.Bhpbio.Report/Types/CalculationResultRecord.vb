@@ -114,7 +114,9 @@ Namespace Types
 
         Public Property StratLevelName As String
 
-        Public Property Weathering As Integer?
+        Public Property Weathering As String
+
+        Public Property WeatheringColor As String
 #End Region
 
 #Region "Constructors"
@@ -239,8 +241,12 @@ Namespace Types
                             StratLevelName = value.AsString(ColumnNames.STRAT_LEVEL_NAME)
                         End If
 
-                        If value.HasColumn(ColumnNames.WEATHERING) Then
-                            Weathering = value.AsIntN(ColumnNames.WEATHERING)
+                        If value.HasColumn(ColumnNames.WEATHERING) AndAlso value.HasValue(ColumnNames.WEATHERING) Then
+                            Weathering = value.AsString(ColumnNames.WEATHERING)
+                        End If
+
+                        If value.HasColumn(ColumnNames.WEATHERING_COLOR) AndAlso value.HasValue(ColumnNames.WEATHERING_COLOR) Then
+                            WeatheringColor = value.AsString(ColumnNames.WEATHERING_COLOR)
                         End If
 
                         ' Set the intial value of the dodgy aggregate to the tonnes value
@@ -402,6 +408,9 @@ Namespace Types
                 If left.Weathering = right.Weathering Then
                     result.Weathering = left.Weathering
                 End If
+                If left.WeatheringColor = right.WeatheringColor Then
+                    result.WeatheringColor = left.WeatheringColor
+                End If
             ElseIf Not right Is Nothing Then
                 result = right.Clone()
             ElseIf Not left Is Nothing Then
@@ -471,6 +480,10 @@ Namespace Types
 
                 If left.Weathering = right.Weathering Then
                     result.Weathering = left.Weathering
+                End If
+
+                If left.WeatheringColor = right.WeatheringColor Then
+                    result.WeatheringColor = left.WeatheringColor
                 End If
             ElseIf Not right Is Nothing Then
                 result = right.Clone()
@@ -663,6 +676,9 @@ Namespace Types
                 If left.Weathering = right.Weathering Then
                     result.Weathering = left.Weathering
                 End If
+                If left.WeatheringColor = right.WeatheringColor Then
+                    result.WeatheringColor = left.WeatheringColor
+                End If
             End If
 
             Return result
@@ -697,6 +713,7 @@ Namespace Types
             Clone.StratLevel = StratLevel
             Clone.StratLevelName = StratLevelName
             Clone.Weathering = Weathering
+            Clone.WeatheringColor = WeatheringColor
         End Function
 
         Public Sub NullOutGrades()
@@ -732,7 +749,8 @@ Namespace Types
             table.Columns.Add(New DataColumn(ColumnNames.STRAT_NUM, GetType(String)))
             table.Columns.Add(New DataColumn(ColumnNames.STRAT_LEVEL, GetType(Integer)))
             table.Columns.Add(New DataColumn(ColumnNames.STRAT_LEVEL_NAME, GetType(String)))
-            table.Columns.Add(New DataColumn(ColumnNames.WEATHERING, GetType(Integer)))
+            table.Columns.Add(New DataColumn(ColumnNames.WEATHERING, GetType(String)))
+            table.Columns.Add(New DataColumn(ColumnNames.WEATHERING_COLOR, GetType(String)))
 
             If Not normalizedData Then
                 table.Columns.Add(New DataColumn("Tonnes", GetType(Double)))
@@ -793,7 +811,8 @@ Namespace Types
             row(ColumnNames.STRAT_NUM) = IIf(String.IsNullOrEmpty(StratNum), DBNull.Value, StratNum)
             row(ColumnNames.STRAT_LEVEL) = IIf(StratLevel Is Nothing, DBNull.Value, StratLevel)
             row(ColumnNames.STRAT_LEVEL_NAME) = IIf(String.IsNullOrEmpty(StratLevelName), DBNull.Value, StratLevelName)
-            row(ColumnNames.WEATHERING) = IIf(Weathering Is Nothing, DBNull.Value, Weathering)
+            row(ColumnNames.WEATHERING) = IIf(String.IsNullOrEmpty(Weathering), DBNull.Value, Weathering)
+            row(ColumnNames.WEATHERING_COLOR) = IIf(String.IsNullOrEmpty(WeatheringColor), DBNull.Value, WeatheringColor)
             Return row
         End Function
 
@@ -831,7 +850,8 @@ Namespace Types
                        StratNum = comparisonObj.StratNum And
                        StratLevel.Equals(comparisonObj.StratLevel) And
                        StratLevelName = comparisonObj.StratLevelName And
-                       Weathering.Equals(comparisonObj.Weathering)
+                       Weathering = comparisonObj.Weathering And 
+                       WeatheringColor = comparisonObj.WeatheringColor
             End If
         End Function
     End Class

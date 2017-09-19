@@ -27,7 +27,8 @@ RETURNS @X TABLE
 	StratNum VARCHAR(7) NULL,
 	StratLevel INT NULL,
 	StratLevelName VARCHAR(15) NULL,
-	Weathering VARCHAR(1) NULL
+	Weathering VARCHAR(100) NULL,
+	WeatheringColor VARCHAR(25) NULL
 )
 WITH ENCRYPTION
 AS
@@ -46,7 +47,8 @@ BEGIN
 		StratNum VARCHAR(7) NULL,
 		StratLevel INT NULL,
 		StratLevelName VARCHAR(15) NULL,
-		Weathering VARCHAR(1) NULL
+		Weathering VARCHAR(100) NULL,
+		WeatheringColor VARCHAR(25) NULL
 	)
 	-- 'y' - pit to pre-crusher stockpiles
 	-- the material types must be reported accurately
@@ -64,7 +66,8 @@ BEGIN
 		StratNum VARCHAR(7) NULL,
 		StratLevel INT NULL,
 		StratLevelName VARCHAR(15) NULL,
-		Weathering VARCHAR(1) NULL
+		Weathering VARCHAR(100) NULL,
+		WeatheringColor VARCHAR(25) NULL
 	)
 	
 	DECLARE @Location TABLE
@@ -94,8 +97,6 @@ BEGIN
 	INSERT INTO @FlatStratTable
 	SELECT CTE.*
 	FROM CTE
-	INNER JOIN BhpbioStratigraphyHierarchy S ON S.Id = CTE.UltimateParent
-	INNER JOIN BhpbioStratigraphyHierarchyType T ON T.Id = S.StratigraphyHierarchyType_Id
 	ORDER BY UltimateParent, CTE.Id -- Not sure if this is strictly necessary, can't hurt though
 	
 	DECLARE @DigblockNoteField_Strat VARCHAR(31) = 'StratId'
@@ -123,11 +124,11 @@ BEGIN
 	-- retrieve the list of Haulage Records to be used in the calculations
 	INSERT INTO @Haulage
 		(CalendarDate, DateFrom, DateTo, HaulageId, ParentLocationId, ProductSize, Tonnes, DesignationMaterialTypeId, 
-		StratNum, StratLevel, StratLevelName, Weathering)
+		StratNum, StratLevel, StratLevelName, Weathering, WeatheringColor)
 	SELECT DISTINCT rd.CalendarDate, rd.DateFrom, rd.DateTo, h.Haulage_Id, l.ParentLocationId, defaultlf.ProductSize, 
 		ISNULL(haulagelf.[Percent], defaultlf.[Percent]) * h.Tonnes,
 		CASE WHEN W.Weightometer_Id IS NOT NULL THEN @BeneFeedMaterialTypeId ELSE @HighGradeMaterialTypeId END,
-		BSH2.StratNum, BSHT.Level, BSHT.Type, DBNWeathering.Notes
+		BSH2.StratNum, BSHT.Level, BSHT.Type, BW.Description, BW.Colour
 	FROM dbo.GetBhpbioReportBreakdown(@iDateBreakdown, @iDateFrom, @iDateTo, 1) AS rd
 	INNER JOIN dbo.Haulage AS h
 		ON (h.Haulage_Date BETWEEN rd.DateFrom AND rd.DateTo)
@@ -160,6 +161,8 @@ BEGIN
 		ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 	LEFT JOIN dbo.DigblockNotes DBNWeathering
 		ON DBNWeathering.Digblock_Id = H.Source_Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
+	LEFT JOIN dbo.BhpbioWeathering BW
+		ON BW.Id = DBNWeathering.Notes AND @iIncludeWeathering = 1
 	WHERE h.Haulage_State_Id IN ('N', 'A')
 		-- don't include lump/fines portion if zero percent
 		AND ISNULL(haulagelf.[Percent], defaultlf.[Percent]) > 0
@@ -173,9 +176,9 @@ BEGIN
 	-- return the TONNES values for individual lump and fines
 	INSERT INTO @XIntermediate
 		(CalendarDate, DateFrom, DateTo, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value, 
-		StratNum, StratLevel, StratLevelName, Weathering)
+		StratNum, StratLevel, StratLevelName, Weathering, WeatheringColor)
 	SELECT CalendarDate, DateFrom, DateTo, DesignationMaterialTypeId, ProductSize, ParentLocationId, 0, SUM(Tonnes), 
-		StratNum, MAX(StratLevel), MAX(StratLevelName), Weathering
+		StratNum, MAX(StratLevel), MAX(StratLevelName), Weathering, MAX(WeatheringColor)
 	FROM @Haulage
 	GROUP BY CalendarDate, DateFrom, DateTo, DesignationMaterialTypeId, ParentLocationId, ProductSize, StratNum, Weathering
 
@@ -196,10 +199,10 @@ BEGIN
 	-- return the GRADES values for individual lump and fines
 	INSERT INTO @XIntermediate
 		(CalendarDate, DateFrom, DateTo, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value, AssociatedTonnes, 
-		StratNum, StratLevel, StratLevelName, Weathering)
+		StratNum, StratLevel, StratLevelName, Weathering, WeatheringColor)
 	SELECT h.CalendarDate, h.DateFrom, h.DateTo, h.DesignationMaterialTypeId, h.ProductSize, h.ParentLocationId,
 		g.Grade_Id, SUM(h.Tonnes * ISNULL(LFG.GradeValue, hg.Grade_Value)) / NULLIF(SUM(h.Tonnes), 0.0), SUM(h.Tonnes), 
-		h.StratNum, MAX(h.StratLevel), MAX(h.StratLevelName), h.Weathering
+		h.StratNum, MAX(h.StratLevel), MAX(h.StratLevelName), h.Weathering, MAX(h.WeatheringColor)
 	FROM @Haulage AS h
 		-- add the grades
 		CROSS JOIN dbo.Grade AS g
@@ -213,24 +216,23 @@ BEGIN
 	GROUP BY h.CalendarDate, h.DateFrom, h.DateTo, g.Grade_Id, h.DesignationMaterialTypeId, h.ParentLocationId, h.ProductSize, h.StratNum, h.Weathering
 	OPTION (RECOMPILE)
 
-		-- insert tonnes into the combined table
+	-- insert tonnes into the combined table
 	INSERT INTO @X
-		(CalendarDate, DateFrom, DateTo, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value, StratNum, StratLevel, StratLevelName, Weathering)
+		(CalendarDate, DateFrom, DateTo, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value, StratNum, StratLevel, StratLevelName, Weathering, WeatheringColor)
 	SELECT yi.CalendarDate, yi.DateFrom, yi.DateTo, yi.DesignationMaterialTypeId, yi.ProductSize,
-		yi.LocationId, yi.Attribute, SUM(yi.Value), yi.StratNum, MAX(yi.StratLevel), MAX(yi.StratLevelName), yi.Weathering
+		yi.LocationId, yi.Attribute, SUM(yi.Value), yi.StratNum, MAX(yi.StratLevel), MAX(yi.StratLevelName), yi.Weathering, MAX(yi.WeatheringColor)
 	FROM @XIntermediate AS yi
 	WHERE yi.Attribute = 0
 	GROUP BY  yi.CalendarDate, yi.DateFrom, yi.DateTo, yi.DesignationMaterialTypeId, yi.LocationId, yi.Attribute, yi.ProductSize, yi.StratNum, yi.Weathering
 	
 	-- insert grades into the combined table
 	INSERT INTO @X
-		(CalendarDate, DateFrom, DateTo, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value, StratNum, StratLevel, StratLevelName, Weathering)
+		(CalendarDate, DateFrom, DateTo, DesignationMaterialTypeId, ProductSize, LocationId, Attribute, Value, StratNum, StratLevel, StratLevelName, Weathering, WeatheringColor)
 	SELECT yi.CalendarDate, yi.DateFrom, yi.DateTo, yi.DesignationMaterialTypeId, yi.ProductSize,
-		yi.LocationId, yi.Attribute, SUM(yi.Value * yi.AssociatedTonnes) / SUM(yi.AssociatedTonnes), yi.StratNum, MAX(yi.StratLevel), MAX(yi.StratLevelName), yi.Weathering
+		yi.LocationId, yi.Attribute, SUM(yi.Value * yi.AssociatedTonnes) / SUM(yi.AssociatedTonnes), yi.StratNum, MAX(yi.StratLevel), MAX(yi.StratLevelName), yi.Weathering, MAX(yi.WeatheringColor)
 	FROM @XIntermediate AS yi
 	WHERE yi.Attribute > 0
 	GROUP BY  yi.CalendarDate, yi.DateFrom, yi.DateTo, yi.DesignationMaterialTypeId, yi.LocationId, yi.Attribute, yi.ProductSize, yi.StratNum, yi.Weathering
-	
 	
 	RETURN
 END

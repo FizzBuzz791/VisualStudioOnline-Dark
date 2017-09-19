@@ -979,7 +979,7 @@ Namespace ReportDefinitions
                 Dim productSize = row.AsString(ColumnNames.PRODUCT_SIZE)
                 Dim resourceClassification = row.AsString(ColumnNames.RESOURCE_CLASSIFICATION)
                 Dim stratigraphy = row.AsString(ColumnNames.STRAT_NUM)
-                Dim weathering = row.AsIntN(ColumnNames.WEATHERING)
+                Dim weathering = row.AsString(ColumnNames.WEATHERING)
 
                 If productSize <> CalculationConstants.PRODUCT_SIZE_TOTAL AndAlso Not rowKey.EndsWith(productSize, StringComparison.Ordinal) Then
                     rowKey += productSize.ToUpper
@@ -1009,7 +1009,7 @@ Namespace ReportDefinitions
                 productSizes.Add(productSize)
                 resourceClassifications.Add(resourceClassification)
                 stratigraphies.Add(stratigraphy)
-                weatherings.Add(weathering.ToString())
+                weatherings.Add(weathering)
             Next
         End Sub
 

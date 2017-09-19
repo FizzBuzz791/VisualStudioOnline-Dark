@@ -175,7 +175,7 @@ Namespace Types
             End Get
         End Property
 
-        Public Readonly Property WeatheringCollection As IEnumerable(Of Int32?)
+        Public Readonly Property WeatheringCollection As IEnumerable(Of String)
             Get
                 Return From m In Me Group By m.Weathering Into Group Select Weathering
             End Get
@@ -302,7 +302,7 @@ Namespace Types
                 Key .MaterialTypeId = GroupedOnInt(groupByList.Contains(GroupingColumn.MaterialType), t.MaterialTypeId),
                 Key .LocationId = GroupedOnInt(groupByList.Contains(GroupingColumn.Location), t.LocationId),
                 Key .StratNum = GroupedOnString(groupByList.Contains(GroupingColumn.Stratigraphy), t.StratNum),
-                Key .Weathering = GroupedOnInt(groupByList.Contains(GroupingColumn.Weathering), t.Weathering)
+                Key .Weathering = GroupedOnString(groupByList.Contains(GroupingColumn.Weathering), t.Weathering)
             }).OrderBy(Function(g) g.Key.CalendarDate).Select(Function(g) New With {
                 .ResourceClassification = g.Key.Resourceclassification,
                 .ProductSize = g.Key.ProductSize,
@@ -313,6 +313,7 @@ Namespace Types
                 .StratLevel = g.Max(Function(t) t.StratLevel),
                 .StratLevelName = g.Max(Function(t) t.StratLevelName),
                 .Weathering = g.Key.Weathering,
+                .WeatheringColor = g.Max(Function(t) t.WeatheringColor),
                 .Tonnes = g.Sum(Function(t) t.Tonnes),
                 .Volume = g.Sum(Function(t) t.Volume),
                 .DodgyAggregateGradeTonnes = g.Sum(Function(t) t.DodgyAggregateGradeTonnes),
@@ -366,7 +367,8 @@ Namespace Types
                 .StratNum = t.StratNum,
                 .StratLevel = t.StratLevel,
                 .StratLevelName = t.StratLevelName, 
-                .Weathering = t.Weathering
+                .Weathering = t.Weathering,
+                .WeatheringColor = t.WeatheringColor
             })
 
             If groupByList.Contains(GroupingColumn.ProductSize) = False Then
@@ -973,7 +975,7 @@ Namespace Types
             Dim materialTypeId As Integer? = Nothing
             Dim productSize As String = Nothing
             Dim stratigraphy As String = Nothing
-            Dim weathering As Integer? = Nothing
+            Dim weathering As String = Nothing
 
             If onMaterialTypeId Then
                 materialTypeId = record.MaterialTypeId
@@ -1011,7 +1013,7 @@ Namespace Types
         ''' <returns>string representing the lookup key</returns>
         Private Shared Function BuildRecordLookupKey(calDate As Date, locationId As Integer?, materialTypeId As Integer?, 
                                                      productSize As String, resourceClassification As String, 
-                                                     stratigraphy As String, weathering As Integer?) As String
+                                                     stratigraphy As String, weathering As String) As String
             Return $"{calDate:ddMMyyyy}_{locationId}_{materialTypeId}_{productSize}_{resourceClassification}_{stratigraphy}_{weathering}"
         End Function
 

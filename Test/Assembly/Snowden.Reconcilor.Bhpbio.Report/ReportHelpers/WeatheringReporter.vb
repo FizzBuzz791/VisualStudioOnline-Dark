@@ -26,15 +26,15 @@ Namespace ReportHelpers
                 ' ReSharper disable RedundantParentheses
                 Return (r.AsString("CalcId") = ModelGradeControl.CalculationId Or 
                         r.AsString("CalcId") = ModelGradeControlSTGM.CalculationId) And 
-                        r.AsIntN(ColumnNames.WEATHERING) IsNot Nothing
+                        r.AsString(ColumnNames.WEATHERING) IsNot Nothing
                 ' ReSharper restore RedundantParentheses
             End Function).ToList()
 
             ' Data is fixed, now add in the weathering context rows.
             For Each weatheringRow In weatheringRows
-                AddContextRowAsNonFactorRow(weatheringRow, masterTable, String.Empty, weatheringRow.AsDbl("Tonnes"),
-                                            weatheringRow.AsString(ColumnNames.WEATHERING), "Weathering", "Weathering",
-                                            weatheringRow.AsString(ColumnNames.WEATHERING), 
+                AddContextRowAsNonFactorRow(weatheringRow, masterTable, weatheringRow.AsString(ColumnNames.WEATHERING_COLOR), 
+                                            weatheringRow.AsDbl("Tonnes"), weatheringRow.AsString(ColumnNames.WEATHERING), 
+                                            "Weathering", "Weathering", weatheringRow.AsString(ColumnNames.WEATHERING), 
                                             weatheringRow.AsString(ColumnNames.WEATHERING))
             Next
         End Sub
@@ -110,7 +110,7 @@ Namespace ReportHelpers
                         And r.AsString(ColumnNames.PRODUCT_SIZE) = CalculationConstants.PRODUCT_SIZE_TOTAL
                 End Function)
 
-                AddContextRowAsNonFactorRow(row, masterTable, String.Empty, row.AsDbl("Tonnes"), 
+                AddContextRowAsNonFactorRow(row, masterTable, row.AsString(ColumnNames.WEATHERING_COLOR), row.AsDbl("Tonnes"), 
                                             row.AsString(ColumnNames.WEATHERING), "Weathering", "Weathering",
                                             row.AsString(ColumnNames.WEATHERING), row.AsString(ColumnNames.WEATHERING))
             Next
