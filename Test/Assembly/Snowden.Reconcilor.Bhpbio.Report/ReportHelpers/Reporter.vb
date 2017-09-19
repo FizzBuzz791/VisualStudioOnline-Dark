@@ -23,6 +23,12 @@ Namespace ReportHelpers
                 Else
                     Return 3
                 End If
+            ElseIf {"Stratigraphy", "Weathering"}.Contains(row.AsString("LocationType")) Then
+                If row.AsString("ContextGrouping") = "SP to Crusher" Then
+                    Return 2
+                Else 
+                    Return 1
+                End If
             Else
                 Return 50
             End If

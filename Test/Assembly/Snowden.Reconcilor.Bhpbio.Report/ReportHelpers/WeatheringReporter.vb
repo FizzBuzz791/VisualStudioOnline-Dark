@@ -114,6 +114,10 @@ Namespace ReportHelpers
                                             row.AsString(ColumnNames.WEATHERING), "Weathering", "Weathering",
                                             row.AsString(ColumnNames.WEATHERING), row.AsString(ColumnNames.WEATHERING))
             Next
+
+            masterTable.Columns.AddIfNeeded("ContextGroupingOrder", GetType(Integer)).SetDefault(0)
+            Dim stratRows = masterTable.AsEnumerable.Where(Function(r) r.AsString("ContextCategory") = "Weathering")
+            stratRows.AsEnumerable.SetField("ContextGroupingOrder", Function(r) GetContextGroupingOrder(r))
         End Sub
     End Class
 End NameSpace
