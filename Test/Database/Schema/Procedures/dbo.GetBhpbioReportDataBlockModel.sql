@@ -33,7 +33,7 @@ BEGIN
 	DECLARE @MaterialCategory VARCHAR(31)
 	SET @MaterialCategory = 'Designation'
 	
-	DECLARE @DigblockNoteField_Strat VARCHAR(31) = 'StratId'
+	DECLARE @DigblockNoteField_Strat VARCHAR(31) = 'StratNum'
 	DECLARE @DigblockNoteField_Weathering VARCHAR(31) = 'Weathering'
 	
 	CREATE TABLE #TonnesTable
@@ -49,9 +49,11 @@ BEGIN
 		ResourceClassification VARCHAR(32) NULL,
 		Tonnes FLOAT NOT NULL,
 		Volume FLOAT NULL,
-		Strat VARCHAR(7) NULL,
-		StratLevel VARCHAR(20) NULL,
-		Weathering INT NULL
+		Strat VARCHAR(50) NULL,
+		StratLevel INT NULL,
+		StratColor VARCHAR(25) NULL,
+		Weathering VARCHAR(100) NULL,
+		WeatheringColor VARCHAR(25) NULL
 	)
 	
 	CREATE TABLE #GradesTable
@@ -68,9 +70,11 @@ BEGIN
 		ProductSize VARCHAR(5) NULL,
 		ResourceClassification VARCHAR(32) NULL,
 		Tonnes FLOAT NOT NULL,
-		Strat VARCHAR(7) NULL,
-		StratLevel VARCHAR(20) NULL,
-		Weathering INT NULL
+		Strat VARCHAR(50) NULL,
+		StratLevel INT NULL,
+		StratColor VARCHAR(25) NULL,
+		Weathering VARCHAR(100) NULL,
+		WeatheringColor VARCHAR(25) NULL
 	)
 	
 	CREATE TABLE #productsize
@@ -115,8 +119,6 @@ BEGIN
 	INSERT INTO #FlatStratTable
 	SELECT CTE.*
 	FROM CTE
-	INNER JOIN BhpbioStratigraphyHierarchy S ON S.Id = CTE.UltimateParent
-	INNER JOIN BhpbioStratigraphyHierarchyType T ON T.Id = S.StratigraphyHierarchyType_Id
 	ORDER BY UltimateParent, CTE.Id -- Not sure if this is strictly necessary, can't hurt though
 	
 	INSERT INTO #productsize VALUES ('FINES')
@@ -629,7 +631,9 @@ BEGIN
 					Volume,
 					Strat,
 					StratLevel,
-					Weathering
+					StratColor,
+					Weathering,
+					WeatheringColor
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, 
 					MM.CalendarDate, MM.DateFrom, MM.DateTo, MM.MaterialTypeId,
@@ -637,9 +641,11 @@ BEGIN
 					MM.ResourceClassification,
 					SUM(MM.Tonnes) AS Tonnes,
 					SUM(MM.Volume) AS Volume,
-					BSH2.StratNum AS Strat,
-					MAX(BSHT.Type) AS StratLevel,
-					DBNWeathering.Notes AS Weathering
+					BSH2.Stratigraphy AS Strat,
+					MAX(BSHT.Level) AS StratLevel,
+					MAX(BSH2.Colour) AS StratColor,
+					W.Description AS Weathering,
+					MAX(W.Colour) AS WeatheringColor
 				FROM #ModelMovement AS MM
 				INNER JOIN dbo.BlockModel AS BM
 					ON BM.Block_Model_Id = MM.BlockModelId
@@ -650,15 +656,17 @@ BEGIN
 				LEFT JOIN DigblockNotes DBNStrat 
 					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = DBNStrat.Notes
+					ON BSH1.StratNum = DBNStrat.Notes AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 				LEFT JOIN DigblockNotes DBNWeathering
 					ON DBNWeathering.Digblock_Id = DB.Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
+				LEFT JOIN BhpbioWeathering W
+					ON W.Id = DBNWeathering.Notes AND @iIncludeWeathering = 1
 				WHERE ((@iLowestStratLevel > 0 AND BSHT.Level <= @iLowestStratLevel) 
 					OR (@iLowestStratLevel = 0 AND BSHT.Level IS NULL))
 				GROUP BY MM.CalendarDate, MM.DateFrom, MM.DateTo, 
@@ -666,8 +674,8 @@ BEGIN
 					MM.BlockModelId, BM.Name, 
 					MM.ResourceClassification,
 					MM.ProductSize, 
-					BSH2.StratNum, -- The "grouping" stratigraphy
-					DBNWeathering.Notes
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
+					W.Description
 				
 				UNION
 				
@@ -678,9 +686,11 @@ BEGIN
 					MM.ResourceClassification, 
 					SUM(MM.Tonnes) AS Tonnes,
 					SUM(MM.Volume) AS Volume,
-					BSH2.StratNum AS Strat,
-					MAX(BSHT.Type) AS StratLevel,
-					DBNWeathering.Notes AS Weathering
+					BSH2.Stratigraphy AS Strat,
+					MAX(BSHT.Level) AS StratLevel,
+					MAX(BSH2.Colour) AS StratColor,
+					W.Description AS Weathering,
+					MAX(W.Colour) AS WeatheringColor
 				FROM #ModelMovement AS MM
 				INNER JOIN dbo.BlockModel AS BM
 					ON BM.Block_Model_Id = MM.BlockModelId
@@ -691,22 +701,24 @@ BEGIN
 				LEFT JOIN DigblockNotes DBNStrat 
 					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = DBNStrat.Notes
+					ON BSH1.StratNum = DBNStrat.Notes AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 				LEFT JOIN DigblockNotes DBNWeathering
 					ON DBNWeathering.Digblock_Id = DB.Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
+				LEFT JOIN BhpbioWeathering W
+					ON W.Id = DBNWeathering.Notes AND @iIncludeWeathering = 1
 				WHERE ((@iLowestStratLevel > 0 AND BSHT.Level <= @iLowestStratLevel) 
 					OR (@iLowestStratLevel = 0 AND BSHT.Level IS NULL))
 				GROUP BY MM.CalendarDate, MM.DateFrom, MM.DateTo, 
 					MM.MaterialTypeId, MM.ParentLocationId, MM.BlockModelId, 
 					BM.Name, MM.ResourceClassification, 
-					BSH2.StratNum, -- The "grouping" stratigraphy
-					DBNWeathering.Notes
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
+					W.Description
 				
 				-- now that the total has been calculated, clear out the volume for LUMP and FINES as these should not be output
 				UPDATE #TonnesTable SET Volume = NULL WHERE NOT ProductSize = 'TOTAL'
@@ -728,7 +740,9 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
-					Weathering
+					StratColor,
+					Weathering,
+					WeatheringColor
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, MM.CalendarDate, MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MM.ParentLocationId, G.Grade_Id,
 					CASE WHEN SUM(MM.Tonnes) = 0
@@ -746,9 +760,11 @@ BEGIN
 					MM.ProductSize,
 					MM.ResourceClassification,
 					SUM(MM.Tonnes),
-					BSH2.StratNum AS Strat,
-					MAX(BSHT.Type) AS StratLevel,
-					DBNWeathering.Notes AS Weathering
+					BSH2.Stratigraphy AS Strat,
+					MAX(BSHT.Level) AS StratLevel,
+					MAX(BSH2.Colour) AS StratColor,
+					W.Description AS Weathering,
+					MAX(W.Colour) AS WeatheringColor
 				FROM #ModelMovement AS MM
 				INNER JOIN dbo.BlockModel AS BM
 					ON (BM.Block_Model_Id = MM.BlockModelId)
@@ -773,15 +789,17 @@ BEGIN
 				LEFT JOIN DigblockNotes DBNStrat 
 					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = DBNStrat.Notes
+					ON BSH1.StratNum = DBNStrat.Notes AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 				LEFT JOIN DigblockNotes DBNWeathering
 					ON DBNWeathering.Digblock_Id = DB.Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
+				LEFT JOIN BhpbioWeathering W
+					ON W.Id = DBNWeathering.Notes AND @iIncludeWeathering = 1
 				WHERE ((NOT MBPG.Grade_Id IS NULL) OR (NOT LFG.GradeId IS NULL)) -- include where there is some kind of grade (total, lump or fines)
 					AND ((@iLowestStratLevel > 0 AND BSHT.Level <= @iLowestStratLevel) 
 						OR (@iLowestStratLevel = 0 AND BSHT.Level IS NULL))
@@ -789,8 +807,8 @@ BEGIN
 					MM.ParentLocationId, MM.DateFrom, MM.DateTo, 
 					MM.MaterialTypeId, G.Grade_Id, MM.ProductSize,
 					MM.ResourceClassification, 
-					BSH2.StratNum, -- The "grouping" stratigraphy
-					DBNWeathering.Notes
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
+					W.Description
 				
 				---- insert total grades
 				INSERT INTO #GradesTable
@@ -809,7 +827,9 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
-					Weathering
+					StratColor,
+					Weathering,
+					WeatheringColor
 				)
 				SELECT MM.BlockModelId, BM.Name AS ModelName, MM.CalendarDate, MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MM.ParentLocationId, MBPG.Grade_Id,
 					CASE WHEN SUM(MM.Tonnes) = 0
@@ -821,9 +841,11 @@ BEGIN
 					'TOTAL',
 					MM.ResourceClassification,
 					SUM(MM.Tonnes),
-					BSH2.StratNum AS Strat,
-					MAX(BSHT.Type) AS StratLevel,
-					DBNWeathering.Notes AS Weathering
+					BSH2.Stratigraphy AS Strat,
+					MAX(BSHT.Level) AS StratLevel,
+					MAX(BSH2.Colour) AS StratColor,
+					W.Description AS Weathering,
+					MAX(W.Colour) AS WeatheringColor
 				FROM #ModelMovement AS MM
 				INNER JOIN dbo.BlockModel AS BM
 					ON (BM.Block_Model_Id = MM.BlockModelId)
@@ -840,22 +862,24 @@ BEGIN
 				LEFT JOIN DigblockNotes DBNStrat 
 					ON DBNStrat.Digblock_Id = DB.Digblock_Id AND DBNStrat.Digblock_Field_Id = @DigblockNoteField_Strat AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = DBNStrat.Notes
+					ON BSH1.StratNum = DBNStrat.Notes AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
 				LEFT JOIN DigblockNotes DBNWeathering
 					ON DBNWeathering.Digblock_Id = DB.Digblock_Id AND DBNWeathering.Digblock_Field_Id = @DigblockNoteField_Weathering AND @iIncludeWeathering = 1
+				LEFT JOIN BhpbioWeathering W
+					ON W.Id = DBNWeathering.Notes AND @iIncludeWeathering = 1
 				WHERE ((@iLowestStratLevel > 0 AND BSHT.Level <= @iLowestStratLevel) 
 					OR (@iLowestStratLevel = 0 AND BSHT.Level IS NULL))
 				GROUP BY MM.BlockModelId, BM.Name, MM.CalendarDate, MM.ParentLocationId, 
 					MM.DateFrom, MM.DateTo, MM.MaterialTypeId, MBPG.Grade_Id,
 					MM.ResourceClassification, 
-					BSH2.StratNum, -- The "grouping" stratigraphy
-					DBNWeathering.Notes
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
+					W.Description
 			END
 			
 			IF @iIncludeApprovedData  = 1
@@ -1055,7 +1079,9 @@ BEGIN
 						  Volume,
 						  Strat,
 						  StratLevel,
-						  Weathering
+						  StratColor,
+						  Weathering,
+						  WeatheringColor
 					)
 					SELECT @BlockModelId AS BlockModelId, @currentBlockModelName AS ModelName, bws.CalendarDate AS CalendarDate,
 						bws.DateFrom, bws.DateTo, bws.MaterialTypeId,
@@ -1064,9 +1090,11 @@ BEGIN
 						IsNull(per.ResourceClassification,'') AS ResourceClassification,
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
-						BSH2.StratNum, 
-						MAX(BSHT.Type),
-						BSE.Weathering
+						BSH2.Stratigraphy, 
+						MAX(BSHT.Level),
+						MAX(BSH2.Colour),
+						CASE @iIncludeWeathering WHEN 1 THEN W.Description ELSE NULL END,
+						CASE @iIncludeWeathering WHEN 1 THEN MAX(W.Colour) ELSE NULL END
 					FROM #BlockWithSummary bws
 					LEFT JOIN #partialRCPercentages per
 						ON per.LocationId = bws.LocationId 
@@ -1076,13 +1104,15 @@ BEGIN
 					LEFT JOIN dbo.BhpbioSummaryEntry BSE
 						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 					LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-						ON BSH1.StratNum = BSE.StratNum
+						ON BSH1.StratNum = BSE.StratNum AND @iLowestStratLevel > 0
 					LEFT JOIN #FlatStratTable FST
-						ON FST.StratId = BSH1.Id
+						ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 					LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-						ON BSH2.Id = FST.GroupId
+						ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 					LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 						ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
+					LEFT JOIN BhpbioWeathering W
+						ON W.Id = BSE.Weathering AND @iIncludeWeathering = 1
 					WHERE (@iIncludeResourceClassification = 0 OR NOT per.ResourceClassification IS NULL)
 						AND ((@iLowestStratLevel > 0 AND BSHT.Level <= @iLowestStratLevel) 
 							OR (@iLowestStratLevel = 0 AND BSHT.Level IS NULL))
@@ -1090,8 +1120,8 @@ BEGIN
 						bws.ParentLocationId,
 						bws.ProductSize,
 						per.ResourceClassification,
-						BSH2.StratNum, 
-						BSE.Weathering
+						BSH2.Stratigraphy, 
+						W.Description
 	
 				-- Retrieve Grades
 				INSERT INTO #GradesTable
@@ -1110,7 +1140,9 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
-					Weathering
+					StratColor,
+					Weathering,
+					WeatheringColor
 				)
 				SELECT @BlockModelId AS BlockModelId, 
 					@currentBlockModelName AS ModelName, 
@@ -1125,9 +1157,11 @@ BEGIN
 					bws.ProductSize,
 					per.ResourceClassification AS ResourceClassification,
 					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
-					BSH2.StratNum,
-					MAX(BSHT.Type),
-					BSE.Weathering
+					BSH2.Stratigraphy,
+					MAX(BSHT.Level),
+					MAX(BSH2.Colour),
+					CASE @iIncludeWeathering WHEN 1 THEN W.Description ELSE NULL END,
+					CASE @iIncludeWeathering WHEN 1 THEN MAX(W.Colour) ELSE NULL END
 				FROM #BlockWithSummary bws
 				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
 					ON bseg.SummaryEntryId = bws.SummaryEntryId
@@ -1140,13 +1174,15 @@ BEGIN
 				LEFT JOIN dbo.BhpbioSummaryEntry BSE
 					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = BSE.StratNum
+					ON BSH1.StratNum = BSE.StratNum AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND (BSHT.Level <= @iLowestStratLevel OR @iLowestStratLevel = 0)
+				LEFT JOIN BhpbioWeathering W
+					ON W.Id = BSE.Weathering AND @iIncludeWeathering = 1
 			   	WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
 			   		AND ((@iLowestStratLevel > 0 AND BSHT.Level <= @iLowestStratLevel) 
 						OR (@iLowestStratLevel = 0 AND BSHT.Level IS NULL))
@@ -1157,8 +1193,8 @@ BEGIN
 					bseg.GradeId, 
 					bws.ProductSize,
 					per.ResourceClassification,
-					BSH2.StratNum,
-					BSE.Weathering
+					BSH2.Stratigraphy,
+					W.Description
 	
 				END
 				ELSE
@@ -1181,7 +1217,9 @@ BEGIN
 						Volume,
 						Strat,
 						StratLevel,
-						Weathering
+						StratColor,
+						Weathering,
+						WeatheringColor
 					)
 					SELECT @BlockModelId AS BlockModelId, @currentBlockModelName AS ModelName, bws.CalendarDate AS CalendarDate,
 						bws.DateFrom, bws.DateTo, bws.MaterialTypeId,
@@ -1190,9 +1228,11 @@ BEGIN
 						IsNull(per.ResourceClassification,'') AS ResourceClassification,
 						SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
 						SUM(bws.Volume * IsNull(per.Percentage / 100, 1)) as Volume,
-						BSH2.StratNum,
-						MAX(BSHT.Type),
-						BSE.Weathering
+						BSH2.Stratigraphy,
+						MAX(BSHT.Level),
+						MAX(BSH2.Colour),
+						CASE @iIncludeWeathering WHEN 1 THEN W.Description ELSE NULL END,
+						CASE @iIncludeWeathering WHEN 1 THEN MAX(W.Colour) ELSE NULL END
 					FROM #BlockWithSummary AS bws
 					LEFT JOIN #blockRCPercentages per
 						ON per.LocationId = bws.LocationId 
@@ -1201,13 +1241,15 @@ BEGIN
 					LEFT JOIN dbo.BhpbioSummaryEntry BSE
 						ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 					LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-						ON BSH1.StratNum = BSE.StratNum
+						ON BSH1.StratNum = BSE.StratNum AND @iLowestStratLevel > 0
 					LEFT JOIN #FlatStratTable FST
-						ON FST.StratId = BSH1.Id
+						ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 					LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-						ON BSH2.Id = FST.GroupId
+						ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 					LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 						ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
+					LEFT JOIN BhpbioWeathering W
+						ON W.Id = BSE.Weathering AND @iIncludeWeathering = 1
 					WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL)) 
 						AND ((@iLowestStratLevel > 0 AND BSHT.Level <= @iLowestStratLevel) 
 							OR (@iLowestStratLevel = 0 AND BSHT.Level IS NULL))
@@ -1215,8 +1257,8 @@ BEGIN
 						bws.ParentLocationId,
 						bws.ProductSize,
 						per.ResourceClassification,
-						BSH2.StratNum, -- The "grouping" stratigraphy
-						BSE.Weathering
+						BSH2.Stratigraphy, -- The "grouping" stratigraphy
+						W.Description
 	
 				-- Retrieve Grades
 				INSERT INTO #GradesTable
@@ -1235,7 +1277,9 @@ BEGIN
 					Tonnes,
 					Strat,
 					StratLevel,
-					Weathering
+					StratColor,
+					Weathering,
+					WeatheringColor
 				)
 				SELECT @BlockModelId AS BlockModelId, 
 					@currentBlockModelName AS ModelName, 
@@ -1250,9 +1294,11 @@ BEGIN
 					bws.ProductSize,
 					per.ResourceClassification AS ResourceClassification,
 					SUM(bws.Tonnes * IsNull(per.Percentage / 100, 1)) AS Tonnes,
-					BSH2.StratNum,
-					MAX(BSHT.Type),
-					BSE.Weathering
+					BSH2.Stratigraphy,
+					MAX(BSHT.Level),
+					MAX(BSH2.Colour),
+					CASE @iIncludeWeathering WHEN 1 THEN W.Description ELSE NULL END,
+					CASE @iIncludeWeathering WHEN 1 THEN MAX(W.Colour) ELSE NULL END
 				FROM #BlockWithSummary bws
 				INNER JOIN dbo.BhpbioSummaryEntryGrade AS bseg
 					ON bseg.SummaryEntryId = bws.SummaryEntryId
@@ -1263,13 +1309,15 @@ BEGIN
 				LEFT JOIN dbo.BhpbioSummaryEntry BSE
 					ON BSE.SummaryEntryId = BWS.SummaryEntryId AND (@iLowestStratLevel > 0 OR @iIncludeWeathering = 1)
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH1 -- Used to pull out StratNum or whatever we finally decide to display.
-					ON BSH1.StratNum = BSE.StratNum
+					ON BSH1.StratNum = BSE.StratNum AND @iLowestStratLevel > 0
 				LEFT JOIN #FlatStratTable FST
-					ON FST.StratId = BSH1.Id
+					ON FST.StratId = BSH1.Id AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchy BSH2 -- Used to filter to only the relevant Groupings.
-					ON BSH2.Id = FST.GroupId
+					ON BSH2.Id = FST.GroupId AND @iLowestStratLevel > 0
 				LEFT JOIN BhpbioStratigraphyHierarchyType BSHT
 					ON BSHT.Id = BSH2.StratigraphyHierarchyType_Id AND BSHT.Level <= @iLowestStratLevel
+				LEFT JOIN BhpbioWeathering W
+					ON W.Id = BSE.Weathering AND @iIncludeWeathering = 1
 				WHERE (@iIncludeResourceClassification = 0 OR NOT (per.ResourceClassification IS NULL))
 					AND ((@iLowestStratLevel > 0 AND BSHT.Level <= @iLowestStratLevel) 
 						OR (@iLowestStratLevel = 0 AND BSHT.Level IS NULL))
@@ -1280,8 +1328,8 @@ BEGIN
 					bseg.GradeId, 
 					bws.ProductSize,
 					per.ResourceClassification,
-					BSH2.StratNum, -- The "grouping" stratigraphy
-					BSE.Weathering
+					BSH2.Stratigraphy, -- The "grouping" stratigraphy
+					W.Description
 				END
 			END
 	
@@ -1385,7 +1433,9 @@ BEGIN
 			Sum(t.Volume) as Volume,
 			t.Strat,
 			MAX(t.StratLevel) AS StratLevel,
-			t.Weathering
+			MAX(t.StratColor) AS StratColor,
+			t.Weathering,
+			MAX(t.WeatheringColor) AS WeatheringColor
 		FROM #TonnesTable t
 			LEFT JOIN dbo.GetBhpbioReportHighGrade() AS BRHG 
 				ON BRHG.MaterialTypeId = t.MaterialTypeId
@@ -1406,7 +1456,9 @@ BEGIN
 			ELSE SUM(gt.Tonnes * gt.GradeValue) / SUM(gt.Tonnes) END As GradeValue, gt.ProductSize,
 			gt.Strat,
 			MAX(gt.StratLevel) AS StratLevel,
-			gt.Weathering
+			MAX(gt.StratColor) AS StratColor,
+			gt.Weathering,
+			MAX(gt.WeatheringColor) AS WeatheringColor
 		FROM #GradesTable AS gt
 			INNER JOIN dbo.Grade g
 				ON (g.Grade_Id = gt.GradeId)

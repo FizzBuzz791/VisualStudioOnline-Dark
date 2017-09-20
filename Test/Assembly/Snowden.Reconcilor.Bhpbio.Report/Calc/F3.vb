@@ -28,6 +28,11 @@ Namespace Calc
         End Property
 
         Protected Overrides Sub SetupOperation()
+            Dim lowestStratLevel = Session.LowestStratigraphyLevel
+            If lowestStratLevel > 0 Then
+                Session.LowestStratigraphyLevel = 0 ' Can't actually report F3 by Strat like we do for F1 & F1.5 so disable it here.
+            End If
+
             Dim oreShippedResult As CalculationResult = Calculation.Create(CalcType.PortOreShipped, Session, Me).Calculate()
             Dim miningModelShippingEquivalentResult As CalculationResult = Calculation.Create(CalcType.MiningModelShippingEquivalent, Session, Me).Calculate()
 
@@ -36,6 +41,10 @@ Namespace Calc
 
             Calculations.Add(New CalculationOperation(CalculationStep.Assign, oreShippedResult))
             Calculations.Add(New CalculationOperation(CalculationStep.Divide, miningModelShippingEquivalentResult))
+
+            If lowestStratLevel > 0 Then
+                Session.LowestStratigraphyLevel = lowestStratLevel ' Re-enable strat reporting.
+            End If
         End Sub
 
         Protected Sub SetPresentation()

@@ -979,7 +979,7 @@ Namespace ReportDefinitions
                 Dim productSize = row.AsString(ColumnNames.PRODUCT_SIZE)
                 Dim resourceClassification = row.AsString(ColumnNames.RESOURCE_CLASSIFICATION)
                 Dim stratigraphy = row.AsString(ColumnNames.STRAT_NUM)
-                Dim weathering = row.AsIntN(ColumnNames.WEATHERING)
+                Dim weathering = row.AsString(ColumnNames.WEATHERING)
 
                 If productSize <> CalculationConstants.PRODUCT_SIZE_TOTAL AndAlso Not rowKey.EndsWith(productSize, StringComparison.Ordinal) Then
                     rowKey += productSize.ToUpper
@@ -1009,7 +1009,7 @@ Namespace ReportDefinitions
                 productSizes.Add(productSize)
                 resourceClassifications.Add(resourceClassification)
                 stratigraphies.Add(stratigraphy)
-                weatherings.Add(weathering.ToString())
+                weatherings.Add(weathering)
             Next
         End Sub
 
@@ -1029,7 +1029,7 @@ Namespace ReportDefinitions
             End If
 
             Dim calendarDateSuffix = String.Empty
-            If Not String.IsNullOrEmpty(calendarDateSuffix) Then
+            If Not String.IsNullOrEmpty(calendarDate) Then
                 calendarDateSuffix = $"_{calendarDate}"
             End If
 
@@ -1089,7 +1089,7 @@ Namespace ReportDefinitions
 
             ' Anything beyond F15 is only relevant when not reporting by resource classification
             If String.IsNullOrEmpty(resourceClassification) Then
-                Dim productCalendarSuffix = $"{productSize}{calendarDate}"
+                Dim productCalendarSuffix = $"{productSize}{calendarDate}{stratigraphy}{weathering}"
 
                 ' F2
                 Dim dataRowF2GradeControl As DataRow = Nothing
@@ -1177,12 +1177,14 @@ Namespace ReportDefinitions
                 dataRowF2DensityFactor.RecalculateDifferences(dataRowF2DensityActualMined, dataRowF2DensityGradeControl)
 
                 'RF Factors
+                Dim productSuffix = $"{productSize}{stratigraphy}{weathering}"
+
                 'RFGM
                 Dim dataRowRFGM As DataRow = Nothing
                 Dim dataRowRFGMMineProductionExpitEquivalent As DataRow = Nothing
                 Dim dataRowRFGMGeologyModel As DataRow = Nothing
                 Dim rfgmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFGM", ""))
-                rowIndexByTagDictionary.TryGetValue(rfgmPrefix & MineProductionExpitEquivalent.CalculationId & productSize, dataRowRFGMMineProductionExpitEquivalent)
+                rowIndexByTagDictionary.TryGetValue(rfgmPrefix & MineProductionExpitEquivalent.CalculationId & productSuffix, dataRowRFGMMineProductionExpitEquivalent)
                 rowIndexByTagDictionary.TryGetValue(rfgmPrefix & ModelGradeControlSTGM.CalculationId & fullSuffix, dataRowRFGMGeologyModel)
 
                 If dataRowRFGMGeologyModel Is Nothing Then
@@ -1201,7 +1203,7 @@ Namespace ReportDefinitions
                 Dim dataRowRFMMMiningModel As DataRow = Nothing
                 Dim rfmmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFMM", ""))
                 Dim dataRowRFMMMineProductionExpitEquivalent As DataRow = Nothing
-                rowIndexByTagDictionary.TryGetValue(rfmmPrefix & MineProductionExpitEquivalent.CalculationId & productSize, dataRowRFMMMineProductionExpitEquivalent)
+                rowIndexByTagDictionary.TryGetValue(rfmmPrefix & MineProductionExpitEquivalent.CalculationId & productSuffix, dataRowRFMMMineProductionExpitEquivalent)
                 rowIndexByTagDictionary.TryGetValue(rfmmPrefix & ModelMining.CalculationId & fullSuffix, dataRowRFMMMiningModel)
 
                 If dataRowRFMMMiningModel Is Nothing Then
@@ -1220,7 +1222,7 @@ Namespace ReportDefinitions
                 Dim dataRowRFSTMMineProductionExpitEquivalent As DataRow = Nothing
                 Dim dataRowRFSTMShortTermGeology As DataRow = Nothing
                 Dim rfstmPrefix = CStr(IIf(includeFactorPrefixOnCalcIds, "RFSTM", ""))
-                rowIndexByTagDictionary.TryGetValue(rfstmPrefix & MineProductionExpitEquivalent.CalculationId & productSize, dataRowRFSTMMineProductionExpitEquivalent)
+                rowIndexByTagDictionary.TryGetValue(rfstmPrefix & MineProductionExpitEquivalent.CalculationId & productSuffix, dataRowRFSTMMineProductionExpitEquivalent)
                 rowIndexByTagDictionary.TryGetValue(rfstmPrefix & ModelShortTermGeology.CalculationId & fullSuffix, dataRowRFSTMShortTermGeology)
 
                 If dataRowRFSTMShortTermGeology Is Nothing Then

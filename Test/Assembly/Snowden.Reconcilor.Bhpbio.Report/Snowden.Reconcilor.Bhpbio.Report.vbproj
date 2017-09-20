@@ -180,6 +180,7 @@
     <Compile Include="Calc\StockpileToCrusher.vb" />
     <Compile Include="Constants\CalculationConstants.vb" />
     <Compile Include="Constants\ColumnNames.vb" />
+    <Compile Include="Constants\ContextConstants.vb" />
     <Compile Include="Data\ApprovalData.vb" />
     <Compile Include="Data\BlockModels.vb" />
     <Compile Include="Data\DateBreakdown.vb" />
@@ -224,6 +225,8 @@
     <Compile Include="ReportHelpers\IHaulageReporter.vb" />
     <Compile Include="ReportHelpers\IReporter.vb" />
     <Compile Include="ReportHelpers\ISampleStationReporter.vb" />
+    <Compile Include="ReportHelpers\IStratigraphyReporter.vb" />
+    <Compile Include="ReportHelpers\IWeatheringReporter.vb" />
     <Compile Include="ReportHelpers\Reporter.vb" />
     <Compile Include="ReportDefinitions\ShippingTargetsReport.vb" />
     <Compile Include="ReportDefinitions\SupplyChainMonitoringReport.vb" />
@@ -241,6 +244,8 @@
     <Compile Include="ReportDefinitions\ReportBase.vb" />
     <Compile Include="ReportDefinitions\ValidationApprovalData.vb" />
     <Compile Include="ReportHelpers\SampleStationReporter.vb" />
+    <Compile Include="ReportHelpers\StratigraphyReporter.vb" />
+    <Compile Include="ReportHelpers\WeatheringReporter.vb" />
     <Compile Include="Types\AutomaticContentSelectionModeFactorEnum.vb" />
     <Compile Include="Types\CalculationResult.vb" />
     <Compile Include="Types\CalculationResultDepth.vb" />

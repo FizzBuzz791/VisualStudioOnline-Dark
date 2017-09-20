@@ -47,7 +47,9 @@
         ' DateText
         Public Const STRAT_NUM = "Strat"
         Public Const STRAT_LEVEL = "StratLevel"
+        Public Const STRAT_COLOR = "StratColor"
         Public Const WEATHERING = "Weathering"
+        Public Const WEATHERING_COLOR = "WeatheringColor"
 
         ' Not sure where these fit in
         Public Const CALCULATION_DEPTH As String = "CalculationDepth"

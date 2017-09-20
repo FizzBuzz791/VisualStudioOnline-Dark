@@ -538,17 +538,23 @@ Namespace SqlDal
             Return GetBhpbioReportDataSet()
         End Function
 
-        Public Function GetBhpbioReportDataActualDirectFeed(ByVal startDate As Date,
-            ByVal endDate As Date, ByVal dateBreakdown As String, ByVal locationId As Int32,
-            ByVal childLocations As Boolean,
-            ByVal includeLiveData As Boolean, ByVal includeApprovedData As Boolean) As System.Data.DataSet
+        Public Function GetBhpbioReportDataActualDirectFeed(startDate As Date, endDate As Date, dateBreakdown As String, 
+                                                            locationId As Int32, childLocations As Boolean, 
+                                                            includeLiveData As Boolean, includeApprovedData As Boolean,
+                                                            Optional lowestStratLevel As Integer = 0,
+                                                            Optional includeWeathering As Boolean = False) As DataSet _
+                                                            Implements ISqlDalReport.GetBhpbioReportDataActualDirectFeed
 
             DataAccess.CommandText = "dbo.GetBhpbioReportDataActualDirectFeed"
             SetupBhpbioReportDataProperties(startDate, endDate, dateBreakdown, locationId, childLocations)
             AddDataInclusionParameters(includeLiveData, includeApprovedData)
 
-            Return GetBhpbioReportDataSet()
+            With DataAccess.ParameterCollection
+                .Add("@iLowestStratLevel", CommandDataType.Int, CommandDirection.Input, lowestStratLevel)
+                .Add("@iIncludeWeathering", CommandDataType.Int, CommandDirection.Input, includeWeathering)
+            End With
 
+            Return GetBhpbioReportDataSet()
         End Function
 
         Public Function GetBhpbioReportDataOreForRail(ByVal startDate As Date, ByVal endDate As Date,
@@ -586,10 +592,11 @@ Namespace SqlDal
             Return GetBhpbioReportDataSet()
         End Function
 
-        Public Function GetBhpbioReportDataActualStockpileToCrusher(ByVal startDate As Date,
-         ByVal endDate As Date, ByVal dateBreakdown As String, ByVal locationId As Int32,
-         ByVal childLocations As Boolean,
-         ByVal includeLiveData As Boolean, ByVal includeApprovedData As Boolean) As System.Data.DataSet
+        Public Function GetBhpbioReportDataActualStockpileToCrusher(startDate As Date, endDate As Date, dateBreakdown As String, 
+                                                                    locationId As Int32, childLocations As Boolean, 
+                                                                    includeLiveData As Boolean, includeApprovedData As Boolean) _
+                                                                    As DataSet _
+                                                                    Implements ISqlDalReport.GetBhpbioReportDataActualStockpileToCrusher
 
             DataAccess.CommandText = "dbo.GetBhpbioReportDataActualStockpileToCrusher"
             SetupBhpbioReportDataProperties(startDate, endDate, dateBreakdown, locationId, childLocations)

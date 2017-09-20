@@ -125,6 +125,8 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                     LocationId = 27,
                     ProductSize = CalculationConstants.PRODUCT_SIZE_TOTAL,
                     ResourceClassification = "Unclass",
+                    StratNum = "1234",
+                    Weathering = "Fresh",
                     // Records above this line are intentionally the same so that calculations actually match and get processed.
                     Tonnes = 2,
                     Volume = 6,
@@ -132,6 +134,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                     DodgyAggregateGradeTonnes = 10
                 }
             };
+            secondTerm.CalcId = "XYZ"; // Just to make sure PerformCalculation grabs the correct CalcId
         
             IEnumerable<CalculationResultRecord> aggregatedRecords = _sut.AggregateRecords(breakdownFactorByMaterialType, true, true);
             CalculationResultRecord testAggregateRecord = aggregatedRecords.First();
@@ -168,6 +171,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                     CalculationResultRecord ratioRecords = CalculationResultRecord.Multiply(testAggregateRecord, testAggregatedTerm);
                     Assert.That(result.First().Tonnes, Is.EqualTo(ratioRecords.Tonnes));
                     Assert.That(result.First().Fe, Is.EqualTo(ratioRecords.Fe));
+                    Assert.That(result.CalcId, Is.EqualTo("CalcIdGoesHere"));
                     break;
             }
         }
@@ -216,8 +220,10 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
             const int LOCATION_TWO = 28;
             const string STRATNUM_ONE = "1234";
             const string STRATNUM_TWO = "5678";
-            const int WEATHERING_ONE = 29;
-            const int WEATHERING_TWO = 30;
+            const string WEATHERING_ONE = "Fresh";
+            const string WEATHERING_TWO = "Transition";
+
+            _sut.CalcId = "CalcIdGoesHere";
 
             _sut.Add(new CalculationResultRecord
             {
@@ -284,7 +290,7 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.Types
                     MaterialTypeId = propInfo.Name == nameof(CalculationResultRecord.MaterialTypeId) ? (int?)(object)grouping.Key.compiled(grouping.First()) : null,
                     LocationId = propInfo.Name == nameof(CalculationResultRecord.LocationId) ? (int?)(object)grouping.Key.compiled(grouping.First()) : null,
                     StratNum = propInfo.Name == nameof(CalculationResultRecord.StratNum) ? (string)(object)grouping.Key.compiled(grouping.First()) : null,
-                    Weathering = propInfo.Name == nameof(CalculationResultRecord.Weathering) ? (int?)(object)grouping.Key.compiled(grouping.First()) : null,
+                    Weathering = propInfo.Name == nameof(CalculationResultRecord.Weathering) ? (string)(object)grouping.Key.compiled(grouping.First()) : null,
                     DateFrom = grouping.Min(t => t.DateFrom),
                     DateTo = grouping.Max(t => t.DateTo),
                     ResourceClassification = grouping.First().ResourceClassification,

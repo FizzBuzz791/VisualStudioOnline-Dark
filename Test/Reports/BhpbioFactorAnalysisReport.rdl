@@ -112,6 +112,10 @@
             <Value>=Parameters!ReportContext.Value</Value>
             <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
+          <QueryParameter Name="lowestStratigraphyLevel">
+            <Value>=Parameters!LowestStratigraphyLevel.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
         </QueryParameters>
         <CommandText>&lt;Query&gt;
 	    &lt;SoapAction&gt;http://www.reconcilor.com.au/ReconcilorBHPBIO/Reporting/2008/11/GetF2AnalysisReportData&lt;/SoapAction&gt;
@@ -962,7 +966,9 @@
 		Fields!ContextCategory.Value = "HaulageContext", "H",
 		Fields!ContextCategory.Value = "DepletionContext", "M",
 		Fields!ContextCategory.Value = "SampleCoverage", "SC",
-    	Fields!ContextCategory.Value = "SampleRatio", "T/S",
+		Fields!ContextCategory.Value = "SampleRatio", "T/S",
+		Fields!ContextCategory.Value = "Stratigraphy", "ST",
+		Fields!ContextCategory.Value = "Weathering", "W",
 		True, Fields!ContextCategory.Value
 	),
 	Switch(
@@ -970,7 +976,9 @@
 		Fields!ContextCategory.Value = "HaulageContext", "Hauled From",
 		Fields!ContextCategory.Value = "DepletionContext", "Mined",
 		Fields!ContextCategory.Value = "SampleCoverage", "Sample Coverage",
-    	Fields!ContextCategory.Value = "SampleRatio", "Tonnes/Sample",
+		Fields!ContextCategory.Value = "SampleRatio", "Tonnes/Sample",
+		Fields!ContextCategory.Value = "Stratigraphy", "Stratigraphy",
+		Fields!ContextCategory.Value = "Weathering", "Weathering",
 		True, Fields!ContextCategory.Value
 	)
 )</Label>
@@ -2175,11 +2183,15 @@
         </ParameterValues>
       </ValidValues>
     </ReportParameter>
+    <ReportParameter Name="LowestStratigraphyLevel">
+      <DataType>Integer</DataType>
+      <Prompt>hidefield</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>6</NumberOfRows>
+      <NumberOfRows>7</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -2240,6 +2252,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>5</RowIndex>
           <ParameterName>ReportContext</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>LowestStratigraphyLevel</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

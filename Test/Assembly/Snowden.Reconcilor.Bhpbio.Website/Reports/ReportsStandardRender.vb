@@ -1525,21 +1525,52 @@ Namespace Reports
                 contexts.Add("HaulageContext", "Haulage Context")
                 contexts.Add("SampleCoverage", "Sample Coverage")
                 contexts.Add("SampleRatio", "Tonnes/Sample")
+                contexts.Add("Weathering", "Weathering Context")
             Else
                 contexts.Add("ResourceClassification", "Resource Classification")
             End If
 
-            For Each value As KeyValuePair(Of String, String) In contexts
+            For Each value In contexts
                 Dim contextOption = New InputCheckBox With {
-                    .ID = "chkContext_" & value.Key,
-                    .Text = " " & value.Value
+                    .ID = $"chkContext_{value.Key}",
+                    .Text = $" {value.Value}"
                 }
 
-                Dim contextOptionCell As TableCell = control.AddCellInNewRow
+                Dim contextOptionCell = control.AddCellInNewRow
                 contextOptionCell.Controls.Add(contextOption)
                 contextOptionCell.ID = value.Key
             Next
 
+            Dim stratigraphyContextCheckbox = New InputCheckBox With {
+                .ID = "chkStratigraphy",
+                .Text = " Stratigraphy" ' The space is important or it doesn't line up with everything else.
+            }
+            stratigraphyContextCheckbox.Attributes.Add("onclick", "ShowHideStratigraphyOptions()")
+
+            Dim stratigraphyContextCell = control.AddCellInNewRow
+            stratigraphyContextCell.Controls.Add(stratigraphyContextCheckbox)
+            stratigraphyContextCell.ID = "chkStratCell"
+
+            Dim stratContexts = New List(Of String) From {
+                {"Group"},
+                {"Formation"},
+                {"Member"}
+            }
+
+            For Each value In stratContexts
+                Dim stratContextOptionCell = control.AddCellInNewRow
+                stratContextOptionCell.Controls.Add(New LiteralControl("&nbsp;&nbsp;&nbsp;")) ' "indent" the radio buttons
+                stratContextOptionCell = control.AddCell
+                stratContextOptionCell.Controls.Add(New InputRadio With {
+                    .ID = $"radioStratContext_{value}",
+                    .Text = value,
+                    .GroupName = "StratigraphyContext",
+                    .Value = (stratContexts.IndexOf(value) + 1).ToString ' +1 since it's 0 based and Levels are 1 based.
+                })
+                stratContextOptionCell.ID = value
+                CType(stratContextOptionCell.Parent, TableRow).Style.Add("display", "none")
+            Next
+            
             parameter.Control = control
             Return control
         End Function

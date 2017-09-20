@@ -27,6 +27,14 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
         [TestCase("SampleCoverage", "Unsampled", 5)]
         [TestCase("SampleCoverage", "SampledPercentage", 6)]
         [TestCase("", "", 50)]
+        [TestCase("Stratigraphy", "Stratigraphy", 1)]
+        [TestCase("Stratigraphy", "SP to Crusher", 50)]
+        [TestCase("Weathering", "Fresh", 1)]
+        [TestCase("Weathering", "Trans", 2)]
+        [TestCase("Weathering", "Silcrete", 3)]
+        [TestCase("Weathering", "H-Cap", 4)]
+        [TestCase("Weathering", "Undef", 5)]
+        [TestCase("Weathering", "SP to Crusher", 50)]
         public void GetContextGroupingOrder_ReturnsTheCorrectOrder(string locationType, string contextGrouping, int expectedOrder)
         {
             // Arrange
@@ -70,35 +78,35 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
 
             DateTime dateFrom = new DateTime(2017, 1, 1);
             DateTime dateTo = new DateTime(2017, 1, 31);
-            const int locationId = 23;
-            const string gradeName = "Tonnes";
-            const double gradeValue = 61.2351;
-            const string locationName = "Test";
-            const string locationType = "Type";
-            const string contextCategory = "Category";
-            const string contextGrouping = "Grouping";
-            const string contextGroupingLabel = "Label";
-            const int tonnes = 1234;
+            const int LOCATION_ID = 23;
+            const string GRADE_NAME = "Tonnes";
+            const double GRADE_VALUE = 61.2351;
+            const string LOCATION_NAME = "Test";
+            const string LOCATION_TYPE = "Type";
+            const string CONTEXT_CATEGORY = "Category";
+            const string CONTEXT_GROUPING = "Grouping";
+            const string CONTEXT_GROUPING_LABEL = "Label";
+            const int TONNES = 1234;
 
             DataRow expectedRow = masterTable.NewRow();
             expectedRow["CalendarDate"] = dateFrom;
             expectedRow["DateFrom"] = dateFrom;
             expectedRow["DateTo"] = dateTo;
             expectedRow["DateText"] = dateTo.ToString("MMMM-yy");
-            expectedRow["LocationId"] = locationId;
-            expectedRow["LocationName"] = locationName;
-            expectedRow["LocationType"] = locationType;
-            expectedRow["ContextCategory"] = contextCategory;
-            expectedRow["ContextGrouping"] = contextGrouping;
-            expectedRow["ContextGroupingLabel"] = contextGroupingLabel;
-            expectedRow["PresentationColor"] = locationName.AsColor();
+            expectedRow["LocationId"] = LOCATION_ID;
+            expectedRow["LocationName"] = LOCATION_NAME;
+            expectedRow["LocationType"] = LOCATION_TYPE;
+            expectedRow["ContextCategory"] = CONTEXT_CATEGORY;
+            expectedRow["ContextGrouping"] = CONTEXT_GROUPING;
+            expectedRow["ContextGroupingLabel"] = CONTEXT_GROUPING_LABEL;
+            expectedRow["PresentationColor"] = LOCATION_NAME.AsColor();
             expectedRow["LocationColor"] = DBNull.Value;
-            expectedRow["Attribute"] = gradeName;
+            expectedRow["Attribute"] = GRADE_NAME;
             expectedRow["AttributeValue"] = 0.0;
             expectedRow["Type"] = 1;
-            expectedRow["Tonnes"] = tonnes;
-            expectedRow["FactorGradeValueBottom"] = gradeValue;
-            expectedRow["FactorTonnesBottom"] = tonnes;
+            expectedRow["Tonnes"] = TONNES;
+            expectedRow["FactorGradeValueBottom"] = GRADE_VALUE;
+            expectedRow["FactorTonnesBottom"] = TONNES;
 
             DataTable contextTable = new DataTable();
             contextTable.Columns.Add("DateFrom");
@@ -110,14 +118,14 @@ namespace Snowden.Reconcilor.Bhpbio.Report.UnitTests.ReportHelpers
             DataRow contextRow = contextTable.NewRow();
             contextRow["DateFrom"] = dateFrom;
             contextRow["DateTo"] = dateTo;
-            contextRow["LocationId"] = locationId;
-            contextRow["Grade_Name"] = gradeName;
-            contextRow["Grade_Value"] = gradeValue;
-            contextRow["LocationName"] = locationName;
+            contextRow["LocationId"] = LOCATION_ID;
+            contextRow["Grade_Name"] = GRADE_NAME;
+            contextRow["Grade_Value"] = GRADE_VALUE;
+            contextRow["LocationName"] = LOCATION_NAME;
 
             // Act
-            _sut.AddContextRowAsNonFactorRow(contextRow, ref masterTable, string.Empty, tonnes, contextGrouping, locationType,
-                contextCategory, contextGroupingLabel, locationName);
+            _sut.AddContextRowAsNonFactorRow(contextRow, ref masterTable, string.Empty, TONNES, CONTEXT_GROUPING, LOCATION_TYPE,
+                CONTEXT_CATEGORY, CONTEXT_GROUPING_LABEL, LOCATION_NAME);
 
             // Assert
             for (int i = 0; i < masterTable.Rows[0].ItemArray.Length; i++)
