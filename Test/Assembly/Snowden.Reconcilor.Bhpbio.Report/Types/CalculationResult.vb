@@ -311,7 +311,7 @@ Namespace Types
                 .LocationId = g.Key.LocationId,
                 .StratNum = g.Key.StratNum,
                 .StratLevel = g.Max(Function(t) t.StratLevel),
-                .StratLevelName = g.Max(Function(t) t.StratColor),
+                .StratColor = g.Max(Function(t) t.StratColor),
                 .Weathering = g.Key.Weathering,
                 .WeatheringColor = g.Max(Function(t) t.WeatheringColor),
                 .Tonnes = g.Sum(Function(t) t.Tonnes),
@@ -366,7 +366,7 @@ Namespace Types
                 .H2OShipped = MassWeight(t.H2OShipped, DirectCast(IIf(useSpecificH2OGradeWeighting, t.H2OGradeTonnes, t.DodgyAggregateGradeTonnes), Double), t.H2OShippedCnt),
                 .StratNum = t.StratNum,
                 .StratLevel = t.StratLevel,
-                .StratColor = t.StratLevelName, 
+                .StratColor = t.StratColor, 
                 .Weathering = t.Weathering,
                 .WeatheringColor = t.WeatheringColor
             })

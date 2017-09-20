@@ -33,7 +33,7 @@ BEGIN
 	DECLARE @MaterialCategory VARCHAR(31)
 	SET @MaterialCategory = 'Designation'
 	
-	DECLARE @DigblockNoteField_Strat VARCHAR(31) = 'StratId'
+	DECLARE @DigblockNoteField_Strat VARCHAR(31) = 'StratNum'
 	DECLARE @DigblockNoteField_Weathering VARCHAR(31) = 'Weathering'
 	
 	CREATE TABLE #TonnesTable

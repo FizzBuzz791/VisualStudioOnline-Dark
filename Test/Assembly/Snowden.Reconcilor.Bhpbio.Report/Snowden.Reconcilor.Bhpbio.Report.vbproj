@@ -180,6 +180,7 @@
     <Compile Include="Calc\StockpileToCrusher.vb" />
     <Compile Include="Constants\CalculationConstants.vb" />
     <Compile Include="Constants\ColumnNames.vb" />
+    <Compile Include="Constants\ContextConstants.vb" />
     <Compile Include="Data\ApprovalData.vb" />
     <Compile Include="Data\BlockModels.vb" />
     <Compile Include="Data\DateBreakdown.vb" />

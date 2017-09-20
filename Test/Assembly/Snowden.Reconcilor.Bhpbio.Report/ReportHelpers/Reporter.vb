@@ -25,7 +25,7 @@ Namespace ReportHelpers
                 End If
             ElseIf {"Stratigraphy", "Weathering"}.Contains(row.AsString("LocationType")) Then
                 Dim contextGrouping = row.AsString("ContextGrouping")
-                If contextGrouping = "SP to Crusher"
+                If contextGrouping = ContextConstants.SP_TO_CRUSHER
                     Return 50
                 ElseIf contextGrouping = "Undef" Then
                     Return 5
