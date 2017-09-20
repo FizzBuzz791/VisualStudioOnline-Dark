@@ -90,8 +90,8 @@
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStation.sql" />
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioSampleStationTarget.sql"/>
     <Script Type="Table" Path="Schema\Tables\dbo.BhpbioWeathering.sql" />
-    <Script Type="Table" Path="schema\tables\dbo.BhpbioStratigraphyHierarchy.sql" />
     <Script Type="Table" Path="schema\tables\dbo.BhpbioStratigraphyHierarchyType.sql" />
+    <Script Type="Table" Path="schema\tables\dbo.BhpbioStratigraphyHierarchy.sql" />
   </ScriptGroup>
   <ScriptGroup Type="Code">
     <Script Type="View" Path="Schema\Views\dbo.BhpbioImportHaulage.viw" />
