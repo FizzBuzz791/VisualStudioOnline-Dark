@@ -1,0 +1,75 @@
+.vsts-header .l1-project-selector.menu-bar.icon-only>.menu-item-container>.menu-item {
+    background-color: #0078D7; /* VSTS light blue */
+}
+
+.vsts-header .hub-list .l2-menubar>.menu-item-container>.menu-item.currently-selected,
+.vsts-header .hub-actions-menubar.l2-menubar>.menu-item,
+.pivot-view li.selected a {
+    color: #0078D7; /* VSTS light blue */
+}
+
+.vc-pullrequest-review-view .tabContent-two-pane>.with-background, 
+.vc-pullrequest-review-view .tabContent-two-pane-no-full-page-scroll>.with-background,
+.vc-pullrequest-review-view .tabContent-two-pane>.centerPane-static, 
+.vc-pullrequest-review-view .tabContent-two-pane-no-full-page-scroll>.centerPane-static,
+.filtered-list-popup .filtered-list-control.vc-git-selector,
+.hub-pivot-content,
+.clear-button-container .clear-filter-button.disabled,
+.filtered-list-search,
+.content-section,
+.bowtie input[type=text],
+.bowtie-style input[type=text],
+.bowtie-style input[type=text]:active,
+.bowtie-style input[type=text]:focus,
+.vsts-header .sub-menu,
+.identity-picker-dropdown {
+    background-color: #303030; /* Dark Grey */
+}
+
+.vsts-header table.header-table.l2 .header-row,
+.filtered-list-popup .filtered-list-control.vc-git-selector .filtered-list-tab-content .filtered-list>li.current-item.new-selection,
+.filtered-list-control.bowtie-filtered-list .filtered-list>li>.bowtie-favorite-outline {
+    background-color: #404040; /* Middle Grey */
+    color: #999;
+}
+
+.ms-FocusZone .vc-pullRequest-list-row:hover,
+.vsts-header .hub-list .l2-menubar>.menu-item.focus, 
+.vsts-header .hub-list .l2-menubar>.menu-item.hover, 
+.vsts-header .hub-list .l2-menubar>.menu-item-container>.menu-item.focus, 
+.vsts-header .hub-list .l2-menubar>.menu-item-container>.menu-item.hover,
+.filtered-list-dropdown-menu.vc-git-selector-menu:hover, 
+.filtered-list-dropdown-menu.vc-git-selector-menu.menu-opened,
+.identity-picker-dropdown>ul.items>li:hover {
+    background-color: #505050; /* Light Grey */
+}
+
+.bowtie-menus .menu.sub-menu>.menu-item-container>.menu-item.hover  /* Vanilla CSS uses !important, so this has to too. */ {
+    background-color: #505050 !important; /* Light Grey */
+}
+
+body,
+.vc-pullRequest-list-section .vc-pullrequests-list-head,
+.vc-pullRequest-list-section .pullRequest-updates .num-updates-text,
+.vc-page-title,
+.versioncontrol-pullrequest-list-view .hub-content .hub-pivot .pivot-view a,
+.menu-item,
+.bowtie-search,
+.vsts-header .hub-list .l2-menubar>.menu-item, 
+.vsts-header .hub-list .l2-menubar>.menu-item-container>.menu-item,
+.selected-item-text,
+.vsts-header .sub-menu .menu-item,
+input {
+    color: #999;
+}
+
+.vc-pullRequest-list-section .ms-List-cell a, /* Vanilla CSS uses !important, so this has to too. */
+.vc-pullRequest-list-section .ms-List-cell a:link, /* Vanilla CSS uses !important, so this has to too. */
+.vc-pullRequest-list-section .ms-List-cell a:visited /* Vanilla CSS uses !important, so this has to too. */ {
+    color: #999 !important;
+}
+
+.bowtie-brand-vsts,
+.header-row {
+    color: #FFF;
+}
