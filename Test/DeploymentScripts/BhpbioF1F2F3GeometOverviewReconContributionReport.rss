@@ -14,7 +14,7 @@
 Public Sub Main()
 	Dim overwrite As Boolean = True
 	Dim name As String = "BhpbioF1F2F3GeometOverviewReconContributionReport"
-	Dim parent As String = "/Reconcilor/BhpbioV40"
+	Dim parent As String = "/Reconcilor/Bhpbio"
 	Dim fullpath As String = parent + "/" + name
 
 	'Common CatalogItem properties
@@ -30,7 +30,7 @@ Public Sub Main()
 	props(1) = hiddenprop
 
 	Try
-		RS.CreateLinkedReport(name,parent, "/Reconcilor/BhpbioV40/BhpbioF1F2F3OverviewReconContributionBarReport", props)
+		RS.CreateLinkedReport(name,parent, "/Reconcilor/Bhpbio/BhpbioF1F2F3OverviewReconContributionBarReport", props)
 
 
 		'Set Report Parameters
@@ -93,7 +93,7 @@ Public Sub Main()
 		If e.Detail.Item("ErrorCode").InnerText = "rsItemAlreadyExists" Then
 			If overwrite Then
 				RS.DeleteItem(fullpath)
-				RS.CreateLinkedReport(name,parent, "/Reconcilor/BhpbioV40/BhpbioF1F2F3OverviewReconContributionBarReport", props)
+				RS.CreateLinkedReport(name,parent, "/Reconcilor/Bhpbio/BhpbioF1F2F3OverviewReconContributionBarReport", props)
 
 
 		'Set Report Parameters
