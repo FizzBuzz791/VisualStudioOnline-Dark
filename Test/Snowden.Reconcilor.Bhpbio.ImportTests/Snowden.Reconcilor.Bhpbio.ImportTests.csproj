@@ -57,7 +57,7 @@
       <HintPath>..\..\Libraries\Snowden.Consulting.IntegrationService\Snowden.Consulting.IntegrationService.Model.dll</HintPath>
     </Reference>
     <Reference Include="Snowden.Core.Import">
-      <HintPath>..\..\..\..\TFS\Reconcilor_Kumba\Trunk\ReleaseDLLFiles\Snowden.Core.Import.dll</HintPath>
+      <HintPath>..\..\Libraries\Snowden.Core.Import\Snowden.Core.Import.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
